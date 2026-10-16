@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subic.Life - Components</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <style>
+    /* Gallery-only layout. Components are shown in isolation, so pins, controls and
+       the sheet drop their absolute positioning here. Tokens only. */
+    body { display: block; padding: var(--space-8); background: var(--page); }
+    .gallery { max-width: 1000px; margin: 0 auto; }
+    .gallery h1 { margin: 0 0 var(--space-2); font: var(--fw-semibold) var(--fs-section)/1.2 var(--font); }
+    .gallery h2 {
+      margin: var(--space-8) 0 var(--space-3);
+      font: var(--fw-semibold) var(--fs-callout)/1.3 var(--font);
+      color: var(--text-2);
+    }
+    .label { margin: var(--space-1-5) 0 var(--space-4); font: var(--fw-medium) var(--fs-tab)/1 var(--font); color: var(--text-2); }
+    .demo {
+      position: relative;
+      overflow: hidden;
+      width: var(--size-phone-w);
+      background: var(--bg);
+      border: var(--border-w) solid var(--hairline);
+      border-radius: var(--r-control);
+    }
+    .demo--row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); padding: var(--space-3); }
+    .demo--pins { display: flex; align-items: flex-end; gap: var(--space-4); height: 88px; padding: var(--space-4); }
+    .demo--tabbar { height: 160px; }
+    .demo--pill { height: 24px; }
+    .demo--map { height: var(--size-phone-h); }
+    .demo--sheet { padding: var(--space-4) 0; }
+    .demo .c-pin { position: relative; transform: none; }
+    .demo .c-pin.is-selected { transform: scale(var(--pin-scale)); }
+    .demo .c-map-controls { position: relative; top: auto; right: auto; width: max-content; margin: var(--space-4); }
+    .demo .c-place-sheet { position: relative; left: auto; right: auto; bottom: auto; margin: var(--space-4); }
+    .demo .c-homeindicator { bottom: var(--space-2); }
+    .demo--pad { padding: var(--gutter); }
+    .demo--sheet-frame { height: 440px; padding: 0; }
+    .demo--stack { height: auto; padding: var(--gutter); }
+  </style>
+</head>
+<body>
+<main class="gallery">
+  <h1>Subic.Life components</h1>
+  <p class="label">Each component on its own. Selected and unselected states are both shown.</p>
+
+  <h2>c-statusbar</h2>
+  <div class="demo">
+    <header class="c-statusbar">
+      <span>9:41</span>
+      <span class="c-statusbar__icons">
+        <span class="material-symbols-outlined">signal_cellular_alt</span>
+        <span class="material-symbols-outlined">wifi</span>
+        <span class="material-symbols-outlined">battery_full</span>
+      </span>
+    </header>
+  </div>
+
+  <h2>c-largetitle (title + avatar)</h2>
+  <div class="demo" style="padding-top: var(--space-3);">
+    <div class="c-largetitle">
+      <h1 class="c-largetitle__title">Explore</h1>
+      <div class="c-largetitle__avatar"><img src="img/avatar.jpg" alt="Member profile"></div>
+    </div>
+  </div>
+
+  <h2>c-search</h2>
+  <div class="demo demo--row">
+    <label class="c-search" style="width: 100%;">
+      <span class="material-symbols-outlined c-search__icon">search</span>
+      <input class="c-search__input" type="text" placeholder="Search Subic Bay" aria-label="Search placeholder">
+    </label>
+  </div>
+  <div class="demo demo--row">
+    <label class="c-search" style="width: 100%;">
+      <span class="material-symbols-outlined c-search__icon">search</span>
+      <input class="c-search__input" type="text" value="Moonbay Marina" aria-label="Search with text">
+      <button class="c-search__clear" aria-label="Clear search"><span class="material-symbols-outlined">cancel</span></button>
+    </label>
+  </div>
+
+  <h2>c-chip</h2>
+  <div class="demo demo--row">
+    <button class="c-chip"><span class="material-symbols-outlined c-chip__icon">restaurant</span>Food</button>
+    <button class="c-chip is-selected"><span class="material-symbols-outlined c-chip__icon">hotel</span>Hotels</button>
+  </div>
+  <p class="label">Left: unselected (white, hairline). Right: is-selected (near-black fill, white text).</p>
+
+  <h2>c-chiprow (horizontal scroll)</h2>
+  <div class="demo" style="padding-top: var(--space-3);">
+    <div class="c-chiprow">
+      <button class="c-chip is-selected"><span class="material-symbols-outlined c-chip__icon">hotel</span>Hotels</button>
+      <button class="c-chip"><span class="material-symbols-outlined c-chip__icon">restaurant</span>Food</button>
+      <button class="c-chip"><span class="material-symbols-outlined c-chip__icon">beach_access</span>Beaches</button>
+      <button class="c-chip"><span class="material-symbols-outlined c-chip__icon">sailing</span>Water sports</button>
+      <button class="c-chip"><span class="material-symbols-outlined c-chip__icon">forest</span>Nature</button>
+      <button class="c-chip"><span class="material-symbols-outlined c-chip__icon">local_bar</span>Nightlife</button>
+    </div>
+  </div>
+  <p class="label">c-chiprow--compact (used in the Map top bar):</p>
+  <div class="demo" style="padding-top: var(--space-1);">
+    <div class="c-chiprow c-chiprow--compact">
+      <button class="c-chip is-selected"><span class="material-symbols-outlined c-chip__icon">hotel</span>Hotels</button>
+      <button class="c-chip"><span class="material-symbols-outlined c-chip__icon">restaurant</span>Food</button>
+    </div>
+  </div>
+
+  <h2>c-section-head (title + link)</h2>
+  <div class="demo" style="padding-top: var(--space-3);">
+    <div class="c-section-head">
+      <h2 class="c-section-head__title">Near you</h2>
+      <a class="c-section-head__link" href="#">Map</a>
+    </div>
+  </div>
+  
+<h2>c-carousel + c-place-card (3:4 photo card)</h2>
+  <div class="demo" style="padding: var(--space-3) 0;">
+    <div class="c-carousel">
+      <article class="c-place-card">
+        <div class="c-place-card__photo"><img src="img/card-lighthouse.jpg" alt="Lighthouse Marina Resort"></div>
+        <h3 class="c-place-card__name">Lighthouse Marina Resort</h3>
+        <p class="c-place-card__meta">Hotel · 1.2 km</p>
+        <p class="c-place-card__offer">Members 20% off</p>
+      </article>
+      <article class="c-place-card">
+        <div class="c-place-card__photo"><img src="img/card-ocean.jpg" alt="Ocean Adventure"></div>
+        <h3 class="c-place-card__name">Ocean Adventure</h3>
+        <p class="c-place-card__meta">Marine Park · 4.8 km</p>
+        <p class="c-place-card__offer">Members 15% off</p>
+      </article>
+      <article class="c-place-card">
+        <div class="c-place-card__photo"><img src="img/card-camayan.jpg" alt="Camayan Beach Resort"></div>
+        <h3 class="c-place-card__name">Camayan Beach Resort</h3>
+        <p class="c-place-card__meta">Beach Resort · 5.1 km</p>
+        <p class="c-place-card__offer">Members 10% off</p>
+      </article>
+    </div>
+  </div>
+
+  <h2>c-list-row (48 leading, title, subtitle, trailing offer / value / action / chevron)</h2>
+  <div class="demo demo--pad">
+    <div class="c-list-row">
+      <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/thumb-meat-plus.jpg" alt="Meat Plus Cafe"></div></div>
+      <div class="c-list-row__main"><p class="c-list-row__title">Meat Plus Cafe</p><p class="c-list-row__sub">Restaurant · Harbor Point · ★ 4.6</p></div>
+      <div class="c-list-row__trail"><span class="c-list-row__offer">15% off</span></div>
+    </div>
+    <div class="c-list-row">
+      <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/thumb-ramas.jpg" alt="Rama's Kitchen"></div></div>
+      <div class="c-list-row__main"><p class="c-list-row__title">Rama's Kitchen</p><p class="c-list-row__sub">Restaurant · Subic Freeport · ★ 4.8</p></div>
+      <div class="c-list-row__trail"><span class="c-list-row__offer">Free dessert</span></div>
+    </div>
+    <div class="c-list-row">
+      <div class="c-list-row__lead"><span class="material-symbols-outlined c-list-row__icon">hotel</span></div>
+      <div class="c-list-row__main"><p class="c-list-row__title">Free hotel night</p><p class="c-list-row__sub">Not used yet · Book by Oct 2027</p></div>
+      <div class="c-list-row__trail"><a class="c-list-row__action" href="#">Book</a></div>
+    </div>
+  </div>
+
+<h2>c-tabbar (5 equal tabs, active = orange)</h2>
+  <div class="demo demo--tabbar">
+    <nav class="c-tabbar">
+      <a class="c-tabbar__tab is-active" href="#"><span class="material-symbols-outlined c-tabbar__icon">explore</span>Explore</a>
+      <a class="c-tabbar__tab" href="#"><span class="material-symbols-outlined c-tabbar__icon">bookmark</span>Saved</a>
+      <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon">credit_card</span>Card</a>
+      <a class="c-tabbar__tab" href="#"><span class="material-symbols-outlined c-tabbar__icon">headset_mic</span>Concierge</a>
+      <a class="c-tabbar__tab" href="#"><span class="material-symbols-outlined c-tabbar__icon">person</span>Me</a>
+    </nav>
+  </div>
+
+  <h2>c-homeindicator</h2>
+  <div class="demo demo--pill">
+    <span class="c-homeindicator"></span>
+  </div>
+
+  <h2>c-map (background SVG)</h2>
+  <div class="demo demo--map">
+    <div class="c-map" role="img" aria-label="Map background">
+      <svg class="c-map__svg" preserveaspectratio="none" viewbox="0 0 390 844">
+<defs>
+<!-- Water pattern & gradients -->
+<lineargradient id="waterGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#C5DCEF"></stop>
+<stop offset="100%" stop-color="#BAD5EB"></stop>
+</lineargradient>
+<filter height="120%" id="cardShadow" width="120%" x="-10%" y="-10%">
+<fedropshadow dx="0" dy="2" flood-opacity="0.08" stddeviation="6"></fedropshadow>
+</filter>
+</defs>
+<!-- Base Background: Subic terrain (light warm earth/urban tint) -->
+<rect fill="#F4F3EE" height="844" width="390"></rect>
+<!-- Green Forest Nature Reserves (Ilanin Forest & Subic Jungle Hills) -->
+<!-- Redondo Mountain range edge (Top Left) -->
+<path d="M -50 -50 L 150 -50 C 130 50 90 90 20 120 C -20 135 -50 140 -50 140 Z" fill="#D7E8CE"></path>
+<text fill="#758B6D" font-size="10" font-weight="500" letter-spacing="1" x="25" y="60">REDONDO RANGE</text>
+<!-- Ilanin Forest / Camayan Reserve (South & East) -->
+<path d="M 280 200 C 310 240 370 270 420 290 L 420 860 L 120 860 C 150 780 180 730 220 680 C 260 630 260 480 250 400 C 240 330 250 250 280 200 Z" fill="#D7E8CE"></path>
+<text fill="#758B6D" font-size="10" font-weight="500" letter-spacing="1" x="285" y="470">ILANIN FOREST</text>
+<text fill="#8FA487" font-size="8.5" x="290" y="482">NATURE RESERVE</text>
+<!-- Subic Bay Water Body (Coastline) -->
+<!-- Real geography shape: Bay opening from SW entering towards Moonbay Marina & Waterfront -->
+<path d="M -50 220 
+                 C 20 220, 60 250, 90 290
+                 C 120 330, 150 360, 140 430
+                 C 130 490, 80 540, 50 600
+                 C 20 660, 20 730, -50 780 
+                 Z" fill="url(#waterGrad)"></path>
+<!-- Inner Harbor / Moonbay Marina Cove Basin -->
+<path d="M 90 290 
+                 C 110 300, 140 295, 175 315
+                 C 205 330, 230 365, 235 410
+                 C 240 455, 210 510, 160 520
+                 C 135 525, 125 500, 135 450
+                 C 142 410, 120 350, 90 290 Z" fill="url(#waterGrad)"></path>
+<!-- Subic Bay Water Label -->
+<text fill="#7A9FB8" font-size="14" font-weight="600" letter-spacing="2" x="45" y="430">SUBIC BAY</text>
+<text fill="#8FAFC4" font-size="9" letter-spacing="0.5" x="65" y="445">INNER BASIN</text>
+<!-- Marina Docks & Piers (Moonbay Marina Yacht Basin vector lines) -->
+<g stroke="#9EBED5" stroke-linecap="round" stroke-width="2.5">
+<!-- Main Pier Piercing into cove -->
+<line x1="165" x2="135" y1="360" y2="395"></line>
+<line x1="130" x2="142" y1="390" y2="400"></line>
+<line x1="138" x2="150" y1="380" y2="390"></line>
+<line x1="146" x2="158" y1="370" y2="380"></line>
+<line x1="175" x2="150" y1="375" y2="415"></line>
+<line x1="145" x2="157" y1="405" y2="417"></line>
+<line x1="153" x2="165" y1="395" y2="407"></line>
+<!-- Yacht Club breakwater -->
+<line stroke="#88AEC9" stroke-width="3" x1="150" x2="120" y1="330" y2="350"></line>
+</g>
+<text fill="#5F88A5" font-size="8.5" font-weight="600" x="148" y="325">Moonbay Marina</text>
+<!-- Subic Airport Runway (Cubi Point) vector outline -->
+<g transform="translate(190, 560) rotate(-35)">
+<rect fill="#DEDCD3" height="14" rx="2" stroke="#CDC9BD" stroke-width="1" width="130" x="0" y="0"></rect>
+<!-- Runway markings -->
+<line stroke="#FFF" stroke-dasharray="8 5" stroke-width="1.5" x1="10" x2="120" y1="7" y2="7"></line>
+<text fill="#9C9789" font-size="7.5" font-weight="600" letter-spacing="0.5" x="15" y="-4">SBFZ AIRPORT (CUBI)</text>
+</g>
+<!-- Primary Road System (Clean Apple Maps Vector aesthetic) -->
+<!-- Secondary / Local Street network (light grey / white strokes) -->
+<g stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+<line x1="160" x2="260" y1="280" y2="280"></line>
+<line x1="180" x2="180" y1="250" y2="320"></line>
+<line x1="220" x2="220" y1="260" y2="340"></line>
+<line x1="240" x2="290" y1="310" y2="330"></line>
+<line x1="175" x2="235" y1="340" y2="370"></line>
+<line x1="195" x2="245" y1="370" y2="430"></line>
+<!-- Harbor Point mall block perimeter -->
+<rect fill="#E6E3D8" height="25" rx="3" stroke="#FFFFFF" stroke-width="1.5" width="35" x="235" y="270"></rect>
+</g>
+<!-- Waterfront Road (Right along the coastline edge) -->
+<path d="M 80 280 
+                 C 105 292, 130 295, 160 310
+                 C 185 325, 205 350, 215 390
+                 C 225 435, 200 480, 165 505
+                 C 150 515, 140 535, 138 565" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="5"></path>
+<path d="M 80 280 
+                 C 105 292, 130 295, 160 310
+                 C 185 325, 205 350, 215 390
+                 C 225 435, 200 480, 165 505
+                 C 150 515, 140 535, 138 565" fill="none" stroke="#FDE5C5" stroke-linecap="round" stroke-width="3"></path>
+<!-- Rizal Highway (Major arterial connecting CBD to Tipo Expressway) -->
+<path d="M 270 180 L 255 260 L 250 340 L 260 410 L 285 490 L 320 570" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<path d="M 270 180 L 255 260 L 250 340 L 260 410 L 285 490 L 320 570" fill="none" stroke="#FEE9A7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path>
+<!-- Argonaut Highway (South to Airport & Camayan) -->
+<path d="M 260 410 C 235 440 200 480 180 520 C 160 560 170 610 190 660" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="4.5"></path>
+<path d="M 260 410 C 235 440 200 480 180 520 C 160 560 170 610 190 660" fill="none" stroke="#FDE5C5" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Street & POI Labels (Apple Maps subtle grey text typography) -->
+<text fill="#78716C" font-size="8" font-weight="500" transform="rotate(78 262 240)" x="262" y="240">Rizal Highway</text>
+<text fill="#78716C" font-size="7.5" font-weight="500" transform="rotate(32 145 342)" x="145" y="342">Waterfront Rd</text>
+<text fill="#78716C" font-size="7.5" font-weight="500" transform="rotate(55 210 475)" x="210" y="475">Argonaut Hwy</text>
+<!-- Harbor Point Mall Label -->
+<text fill="#6B7280" font-size="7" font-weight="600" x="237" y="285">Harbor Point</text>
+<circle cx="230" cy="282" fill="#9CA3AF" r="2"></circle>
+<!-- Subic Freeport Zone district boundary hint -->
+<text fill="#9CA3AF" font-size="8.5" font-weight="600" letter-spacing="1" x="210" y="215">CENTRAL BUSINESS DISTRICT</text>
+<!-- Camayan Coast hint at bottom -->
+<text fill="#6B7280" font-size="8" font-weight="500" x="100" y="740">Camayan Beach &amp; Ocean Adventure →</text>
+</svg>
+    </div>
+  </div>
+
+  <h2>c-pin (unselected and is-selected)</h2>
+  <div class="demo demo--pins">
+    <button class="c-pin"><span class="material-symbols-outlined c-pin__icon">restaurant</span>15%</button>
+    <button class="c-pin"><span class="material-symbols-outlined c-pin__icon">sailing</span>Free drink</button>
+    <button class="c-pin is-selected"><span class="material-symbols-outlined c-pin__icon">hotel</span>20%</button>
+  </div>
+  <p class="label">Left and centre: unselected (white, grey text). Right: is-selected (orange, white text, slightly larger).</p>
+
+  <h2>c-map-controls</h2>
+  <div class="demo" style="width: max-content;">
+    <div class="c-map-controls">
+      <button class="c-map-controls__btn" aria-label="Current location"><span class="material-symbols-outlined">my_location</span></button>
+      <button class="c-map-controls__btn" aria-label="Layers"><span class="material-symbols-outlined">layers</span></button>
+    </div>
+  </div>
+
+  <h2>c-place-sheet (selected place card)</h2>
+  <div class="demo demo--sheet">
+    <article class="c-place-sheet">
+      <div class="c-place-sheet__top">
+        <div class="c-place-sheet__photo"><img src="img/place-lighthouse.jpg" alt="Lighthouse Marina Resort"></div>
+        <div class="c-place-sheet__info">
+          <h2 class="c-place-sheet__name">Lighthouse Marina Resort</h2>
+          <p class="c-place-sheet__meta">Hotel · Moonbay Marina · 1.2 km · <strong>★ 4.6</strong></p>
+          <p class="c-place-sheet__offer">Members 20% off rooms and dining</p>
+          <p class="c-place-sheet__hours"><b>Open</b> · closes 23:00</p>
+        </div>
+        <button class="c-place-sheet__close" aria-label="Close"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div class="c-place-sheet__actions">
+        <button class="c-btn secondary"><span class="material-symbols-outlined">navigation</span>Directions</button>
+        <button class="c-btn primary">View place</button>
+      </div>
+      <div class="c-place-sheet__dots"><span class="is-on"></span><span></span><span></span><span></span></div>
+    </article>
+  </div>
+
+  <h2>c-btn (.primary orange, .secondary grey fill)</h2>
+  <div class="demo demo--row">
+    <button class="c-btn primary">View place</button>
+    <button class="c-btn secondary"><span class="material-symbols-outlined">navigation</span>Directions</button>
+  </div>
+
+  <h2>c-map-topbar (Map header: search, List, chips)</h2>
+  <div class="demo">
+    <div class="c-map-topbar">
+      <div class="c-map-topbar__row">
+        <label class="c-search">
+          <span class="material-symbols-outlined c-search__icon">search</span>
+          <input class="c-search__input" type="text" value="Moonbay Marina" aria-label="Search">
+          <button class="c-search__clear" aria-label="Clear search"><span class="material-symbols-outlined">cancel</span></button>
+        </label>
+        <a class="c-map-topbar__list" href="#"><span class="material-symbols-outlined">format_list_bulleted</span>List</a>
+      </div>
+      <div class="c-chiprow c-chiprow--compact">
+        <button class="c-chip is-selected"><span class="material-symbols-outlined c-chip__icon">hotel</span>Hotels</button>
+        <button class="c-chip"><span class="material-symbols-outlined c-chip__icon">restaurant</span>Food</button>
+      </div>
+    </div>
+  </div>
+
+  <h2>c-navbar (back chevron, centered title, optional right button)</h2>
+  <div class="demo">
+    <nav class="c-navbar">
+      <a class="c-navbar__back" href="#" aria-label="Back"><svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg></a>
+      <h1 class="c-navbar__title">Prestige</h1>
+      <a class="c-navbar__right" href="#" aria-label="More options"><span class="material-symbols-outlined">more_horiz</span></a>
+    </nav>
+  </div>
+  <div class="demo">
+    <nav class="c-navbar">
+      <a class="c-navbar__back is-text" href="#">Done</a>
+    </nav>
+  </div>
+
+  <h2>c-pass (.is-premium default, .is-prestige, .is-elite)</h2>
+  <div class="demo demo--pad">
+    <div class="c-pass is-premium">
+      <div class="c-pass__top">
+        <div class="c-pass__head"><span class="c-pass__brand">Subic.Life</span><span class="c-pass__tier">Premium</span></div>
+        <div class="c-pass__member"><p class="c-pass__name">Alfred Reyes</p><p class="c-pass__since">Member since 2024</p></div>
+      </div>
+      <div class="c-pass__panel">
+        <div class="c-pass__qr-link"><svg class="c-qr" viewBox="0 0 37 37" role="img" aria-label="Member QR code"><rect x="2" y="2" width="7" height="7"/><rect class="c-qr__light" x="3" y="3" width="5" height="5"/><rect x="4" y="4" width="3" height="3"/><rect x="28" y="2" width="7" height="7"/><rect class="c-qr__light" x="29" y="3" width="5" height="5"/><rect x="30" y="4" width="3" height="3"/><rect x="2" y="28" width="7" height="7"/><rect class="c-qr__light" x="3" y="29" width="5" height="5"/><rect x="4" y="30" width="3" height="3"/><rect x="10" y="5" width="1" height="1"/><rect x="12" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/><rect x="16" y="5" width="1" height="1"/><rect x="18" y="5" width="1" height="1"/><rect x="20" y="5" width="1" height="1"/><rect x="22" y="5" width="1" height="1"/><rect x="24" y="5" width="1" height="1"/><rect x="26" y="5" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="5" y="14" width="1" height="1"/><rect x="5" y="16" width="1" height="1"/><rect x="5" y="18" width="1" height="1"/><rect x="5" y="20" width="1" height="1"/><rect x="5" y="22" width="1" height="1"/><rect x="5" y="24" width="1" height="1"/><rect x="5" y="26" width="1" height="1"/><rect x="22" y="22" width="5" height="5"/><rect class="c-qr__light" x="23" y="23" width="3" height="3"/><rect x="24" y="24" width="1" height="1"/><rect x="11" y="2" width="1" height="1"/><rect x="13" y="3" width="2" height="1"/><rect x="17" y="2" width="1" height="2"/><rect x="21" y="3" width="2" height="1"/><rect x="25" y="2" width="1" height="1"/><rect x="10" y="8" width="2" height="1"/><rect x="14" y="7" width="1" height="2"/><rect x="17" y="8" width="3" height="1"/><rect x="23" y="7" width="1" height="1"/><rect x="25" y="8" width="2" height="1"/><rect x="2" y="11" width="2" height="1"/><rect x="8" y="11" width="1" height="2"/><rect x="11" y="11" width="1" height="1"/><rect x="13" y="10" width="2" height="2"/><rect x="18" y="11" width="2" height="1"/><rect x="22" y="10" width="1" height="2"/><rect x="28" y="11" width="2" height="1"/><rect x="32" y="10" width="1" height="2"/><rect x="34" y="11" width="1" height="1"/><rect x="1" y="14" width="2" height="1"/><rect x="7" y="13" width="2" height="1"/><rect x="10" y="14" width="1" height="2"/><rect x="13" y="13" width="2" height="1"/><rect x="16" y="14" width="1" height="1"/><rect x="20" y="13" width="1" height="2"/><rect x="24" y="14" width="2" height="1"/><rect x="29" y="13" width="1" height="1"/><rect x="33" y="14" width="2" height="1"/><rect x="2" y="17" width="1" height="2"/><rect x="8" y="16" width="1" height="1"/><rect x="11" y="17" width="2" height="1"/><rect x="15" y="16" width="1" height="3"/><rect x="18" y="17" width="2" height="1"/><rect x="22" y="16" width="2" height="1"/><rect x="27" y="17" width="1" height="2"/><rect x="30" y="16" width="2" height="1"/><rect x="34" y="17" width="1" height="2"/><rect x="3" y="20" width="1" height="1"/><rect x="7" y="20" width="2" height="1"/><rect x="10" y="21" width="2" height="1"/><rect x="14" y="20" width="1" height="2"/><rect x="17" y="21" width="2" height="1"/><rect x="20" y="20" width="1" height="1"/><rect x="29" y="20" width="2" height="1"/><rect x="33" y="21" width="1" height="1"/><rect x="2" y="23" width="2" height="1"/><rect x="8" y="24" width="1" height="1"/><rect x="11" y="23" width="1" height="2"/><rect x="14" y="24" width="2" height="1"/><rect x="18" y="23" width="1" height="1"/><rect x="29" y="24" width="1" height="2"/><rect x="32" y="23" width="2" height="1"/><rect x="10" y="27" width="1" height="2"/><rect x="13" y="26" width="2" height="1"/><rect x="17" y="27" width="2" height="1"/><rect x="22" y="28" width="1" height="1"/><rect x="25" y="27" width="2" height="1"/><rect x="30" y="27" width="1" height="2"/><rect x="34" y="27" width="1" height="1"/><rect x="11" y="30" width="2" height="1"/><rect x="15" y="29" width="1" height="2"/><rect x="18" y="31" width="3" height="1"/><rect x="23" y="30" width="1" height="2"/><rect x="26" y="30" width="2" height="1"/><rect x="31" y="31" width="2" height="1"/><rect x="10" y="33" width="1" height="2"/><rect x="13" y="33" width="3" height="1"/><rect x="18" y="34" width="1" height="1"/><rect x="21" y="33" width="2" height="1"/><rect x="25" y="34" width="2" height="1"/><rect x="29" y="33" width="1" height="2"/><rect x="33" y="33" width="2" height="1"/></svg></div>
+        <p class="c-pass__number">0042 1187</p>
+        <p class="c-pass__refresh"><svg class="c-pass__ring" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5"/><path d="M7 1.5A5.5 5.5 0 0 1 12.5 7"/></svg>Refreshes in 0:24</p>
+      </div>
+    </div>
+  </div>
+  <div class="demo demo--pad">
+    <div class="c-pass is-prestige">
+      <div class="c-pass__top">
+        <img class="c-pass__photo" src="img/pass-subic-bay.jpg" alt="Aerial view of Subic Bay">
+        <span class="c-pass__wash" aria-hidden="true"></span>
+        <div class="c-pass__head"><span class="c-pass__brand">Subic.Life</span><span class="c-pass__tier">Prestige</span></div>
+        <div class="c-pass__member"><p class="c-pass__name">Alfred Reyes</p><p class="c-pass__since">Member since 2024</p></div>
+      </div>
+      <div class="c-pass__panel">
+        <div class="c-pass__qr-link"><svg class="c-qr" viewBox="0 0 37 37" role="img" aria-label="Member QR code"><rect x="2" y="2" width="7" height="7"/><rect class="c-qr__light" x="3" y="3" width="5" height="5"/><rect x="4" y="4" width="3" height="3"/><rect x="28" y="2" width="7" height="7"/><rect class="c-qr__light" x="29" y="3" width="5" height="5"/><rect x="30" y="4" width="3" height="3"/><rect x="2" y="28" width="7" height="7"/><rect class="c-qr__light" x="3" y="29" width="5" height="5"/><rect x="4" y="30" width="3" height="3"/><rect x="10" y="5" width="1" height="1"/><rect x="12" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/><rect x="16" y="5" width="1" height="1"/><rect x="18" y="5" width="1" height="1"/><rect x="20" y="5" width="1" height="1"/><rect x="22" y="5" width="1" height="1"/><rect x="24" y="5" width="1" height="1"/><rect x="26" y="5" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="5" y="14" width="1" height="1"/><rect x="5" y="16" width="1" height="1"/><rect x="5" y="18" width="1" height="1"/><rect x="5" y="20" width="1" height="1"/><rect x="5" y="22" width="1" height="1"/><rect x="5" y="24" width="1" height="1"/><rect x="5" y="26" width="1" height="1"/><rect x="22" y="22" width="5" height="5"/><rect class="c-qr__light" x="23" y="23" width="3" height="3"/><rect x="24" y="24" width="1" height="1"/><rect x="11" y="2" width="1" height="1"/><rect x="13" y="3" width="2" height="1"/><rect x="17" y="2" width="1" height="2"/><rect x="21" y="3" width="2" height="1"/><rect x="25" y="2" width="1" height="1"/><rect x="10" y="8" width="2" height="1"/><rect x="14" y="7" width="1" height="2"/><rect x="17" y="8" width="3" height="1"/><rect x="23" y="7" width="1" height="1"/><rect x="25" y="8" width="2" height="1"/><rect x="2" y="11" width="2" height="1"/><rect x="8" y="11" width="1" height="2"/><rect x="11" y="11" width="1" height="1"/><rect x="13" y="10" width="2" height="2"/><rect x="18" y="11" width="2" height="1"/><rect x="22" y="10" width="1" height="2"/><rect x="28" y="11" width="2" height="1"/><rect x="32" y="10" width="1" height="2"/><rect x="34" y="11" width="1" height="1"/><rect x="1" y="14" width="2" height="1"/><rect x="7" y="13" width="2" height="1"/><rect x="10" y="14" width="1" height="2"/><rect x="13" y="13" width="2" height="1"/><rect x="16" y="14" width="1" height="1"/><rect x="20" y="13" width="1" height="2"/><rect x="24" y="14" width="2" height="1"/><rect x="29" y="13" width="1" height="1"/><rect x="33" y="14" width="2" height="1"/><rect x="2" y="17" width="1" height="2"/><rect x="8" y="16" width="1" height="1"/><rect x="11" y="17" width="2" height="1"/><rect x="15" y="16" width="1" height="3"/><rect x="18" y="17" width="2" height="1"/><rect x="22" y="16" width="2" height="1"/><rect x="27" y="17" width="1" height="2"/><rect x="30" y="16" width="2" height="1"/><rect x="34" y="17" width="1" height="2"/><rect x="3" y="20" width="1" height="1"/><rect x="7" y="20" width="2" height="1"/><rect x="10" y="21" width="2" height="1"/><rect x="14" y="20" width="1" height="2"/><rect x="17" y="21" width="2" height="1"/><rect x="20" y="20" width="1" height="1"/><rect x="29" y="20" width="2" height="1"/><rect x="33" y="21" width="1" height="1"/><rect x="2" y="23" width="2" height="1"/><rect x="8" y="24" width="1" height="1"/><rect x="11" y="23" width="1" height="2"/><rect x="14" y="24" width="2" height="1"/><rect x="18" y="23" width="1" height="1"/><rect x="29" y="24" width="1" height="2"/><rect x="32" y="23" width="2" height="1"/><rect x="10" y="27" width="1" height="2"/><rect x="13" y="26" width="2" height="1"/><rect x="17" y="27" width="2" height="1"/><rect x="22" y="28" width="1" height="1"/><rect x="25" y="27" width="2" height="1"/><rect x="30" y="27" width="1" height="2"/><rect x="34" y="27" width="1" height="1"/><rect x="11" y="30" width="2" height="1"/><rect x="15" y="29" width="1" height="2"/><rect x="18" y="31" width="3" height="1"/><rect x="23" y="30" width="1" height="2"/><rect x="26" y="30" width="2" height="1"/><rect x="31" y="31" width="2" height="1"/><rect x="10" y="33" width="1" height="2"/><rect x="13" y="33" width="3" height="1"/><rect x="18" y="34" width="1" height="1"/><rect x="21" y="33" width="2" height="1"/><rect x="25" y="34" width="2" height="1"/><rect x="29" y="33" width="1" height="2"/><rect x="33" y="33" width="2" height="1"/></svg></div>
+        <p class="c-pass__number">0042 1187</p>
+        <p class="c-pass__refresh"><svg class="c-pass__ring" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5"/><path d="M7 1.5A5.5 5.5 0 0 1 12.5 7"/></svg>Refreshes in 0:24</p>
+      </div>
+    </div>
+  </div>
+  <div class="demo demo--pad">
+    <div class="c-pass is-elite">
+      <div class="c-pass__top">
+        <div class="c-pass__head"><span class="c-pass__brand">Subic.Life</span><span class="c-pass__tier">Elite</span></div>
+        <svg class="c-pass__coast" viewBox="0 0 350 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 45 C40 40, 75 58, 110 38 C145 18, 175 48, 215 32 C255 16, 290 52, 350 28" opacity="0.4" stroke-dasharray="2 3" stroke-width="1"></path><path d="M0 50 C45 42, 80 62, 120 40 C155 22, 185 54, 225 36 C265 18, 300 48, 350 32" stroke-width="1.5"></path><path d="M0 56 C50 46, 85 66, 125 46 C160 28, 190 58, 230 42 C270 26, 305 52, 350 38" opacity="0.5" stroke-width="0.75"></path></svg>
+        <div class="c-pass__member"><p class="c-pass__name">Alfred Reyes</p><p class="c-pass__since">Member since 2024</p></div>
+      </div>
+      <div class="c-pass__panel">
+        <div class="c-pass__qr-link"><svg class="c-qr" viewBox="0 0 37 37" role="img" aria-label="Member QR code"><rect x="2" y="2" width="7" height="7"/><rect class="c-qr__light" x="3" y="3" width="5" height="5"/><rect x="4" y="4" width="3" height="3"/><rect x="28" y="2" width="7" height="7"/><rect class="c-qr__light" x="29" y="3" width="5" height="5"/><rect x="30" y="4" width="3" height="3"/><rect x="2" y="28" width="7" height="7"/><rect class="c-qr__light" x="3" y="29" width="5" height="5"/><rect x="4" y="30" width="3" height="3"/><rect x="10" y="5" width="1" height="1"/><rect x="12" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/><rect x="16" y="5" width="1" height="1"/><rect x="18" y="5" width="1" height="1"/><rect x="20" y="5" width="1" height="1"/><rect x="22" y="5" width="1" height="1"/><rect x="24" y="5" width="1" height="1"/><rect x="26" y="5" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="5" y="14" width="1" height="1"/><rect x="5" y="16" width="1" height="1"/><rect x="5" y="18" width="1" height="1"/><rect x="5" y="20" width="1" height="1"/><rect x="5" y="22" width="1" height="1"/><rect x="5" y="24" width="1" height="1"/><rect x="5" y="26" width="1" height="1"/><rect x="22" y="22" width="5" height="5"/><rect class="c-qr__light" x="23" y="23" width="3" height="3"/><rect x="24" y="24" width="1" height="1"/><rect x="11" y="2" width="1" height="1"/><rect x="13" y="3" width="2" height="1"/><rect x="17" y="2" width="1" height="2"/><rect x="21" y="3" width="2" height="1"/><rect x="25" y="2" width="1" height="1"/><rect x="10" y="8" width="2" height="1"/><rect x="14" y="7" width="1" height="2"/><rect x="17" y="8" width="3" height="1"/><rect x="23" y="7" width="1" height="1"/><rect x="25" y="8" width="2" height="1"/><rect x="2" y="11" width="2" height="1"/><rect x="8" y="11" width="1" height="2"/><rect x="11" y="11" width="1" height="1"/><rect x="13" y="10" width="2" height="2"/><rect x="18" y="11" width="2" height="1"/><rect x="22" y="10" width="1" height="2"/><rect x="28" y="11" width="2" height="1"/><rect x="32" y="10" width="1" height="2"/><rect x="34" y="11" width="1" height="1"/><rect x="1" y="14" width="2" height="1"/><rect x="7" y="13" width="2" height="1"/><rect x="10" y="14" width="1" height="2"/><rect x="13" y="13" width="2" height="1"/><rect x="16" y="14" width="1" height="1"/><rect x="20" y="13" width="1" height="2"/><rect x="24" y="14" width="2" height="1"/><rect x="29" y="13" width="1" height="1"/><rect x="33" y="14" width="2" height="1"/><rect x="2" y="17" width="1" height="2"/><rect x="8" y="16" width="1" height="1"/><rect x="11" y="17" width="2" height="1"/><rect x="15" y="16" width="1" height="3"/><rect x="18" y="17" width="2" height="1"/><rect x="22" y="16" width="2" height="1"/><rect x="27" y="17" width="1" height="2"/><rect x="30" y="16" width="2" height="1"/><rect x="34" y="17" width="1" height="2"/><rect x="3" y="20" width="1" height="1"/><rect x="7" y="20" width="2" height="1"/><rect x="10" y="21" width="2" height="1"/><rect x="14" y="20" width="1" height="2"/><rect x="17" y="21" width="2" height="1"/><rect x="20" y="20" width="1" height="1"/><rect x="29" y="20" width="2" height="1"/><rect x="33" y="21" width="1" height="1"/><rect x="2" y="23" width="2" height="1"/><rect x="8" y="24" width="1" height="1"/><rect x="11" y="23" width="1" height="2"/><rect x="14" y="24" width="2" height="1"/><rect x="18" y="23" width="1" height="1"/><rect x="29" y="24" width="1" height="2"/><rect x="32" y="23" width="2" height="1"/><rect x="10" y="27" width="1" height="2"/><rect x="13" y="26" width="2" height="1"/><rect x="17" y="27" width="2" height="1"/><rect x="22" y="28" width="1" height="1"/><rect x="25" y="27" width="2" height="1"/><rect x="30" y="27" width="1" height="2"/><rect x="34" y="27" width="1" height="1"/><rect x="11" y="30" width="2" height="1"/><rect x="15" y="29" width="1" height="2"/><rect x="18" y="31" width="3" height="1"/><rect x="23" y="30" width="1" height="2"/><rect x="26" y="30" width="2" height="1"/><rect x="31" y="31" width="2" height="1"/><rect x="10" y="33" width="1" height="2"/><rect x="13" y="33" width="3" height="1"/><rect x="18" y="34" width="1" height="1"/><rect x="21" y="33" width="2" height="1"/><rect x="25" y="34" width="2" height="1"/><rect x="29" y="33" width="1" height="2"/><rect x="33" y="33" width="2" height="1"/></svg></div>
+        <p class="c-pass__number">0042 1187</p>
+        <p class="c-pass__refresh"><svg class="c-pass__ring" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5.5"/><path d="M7 1.5A5.5 5.5 0 0 1 12.5 7"/></svg>Refreshes in 0:24</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>c-qr (normal 150, .is-large 300; static pattern)</h2>
+  <div class="demo demo--row">
+    <svg class="c-qr" viewBox="0 0 37 37" role="img" aria-label="Member QR code"><rect x="2" y="2" width="7" height="7"/><rect class="c-qr__light" x="3" y="3" width="5" height="5"/><rect x="4" y="4" width="3" height="3"/><rect x="28" y="2" width="7" height="7"/><rect class="c-qr__light" x="29" y="3" width="5" height="5"/><rect x="30" y="4" width="3" height="3"/><rect x="2" y="28" width="7" height="7"/><rect class="c-qr__light" x="3" y="29" width="5" height="5"/><rect x="4" y="30" width="3" height="3"/><rect x="10" y="5" width="1" height="1"/><rect x="12" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/><rect x="16" y="5" width="1" height="1"/><rect x="18" y="5" width="1" height="1"/><rect x="20" y="5" width="1" height="1"/><rect x="22" y="5" width="1" height="1"/><rect x="24" y="5" width="1" height="1"/><rect x="26" y="5" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="5" y="14" width="1" height="1"/><rect x="5" y="16" width="1" height="1"/><rect x="5" y="18" width="1" height="1"/><rect x="5" y="20" width="1" height="1"/><rect x="5" y="22" width="1" height="1"/><rect x="5" y="24" width="1" height="1"/><rect x="5" y="26" width="1" height="1"/><rect x="22" y="22" width="5" height="5"/><rect class="c-qr__light" x="23" y="23" width="3" height="3"/><rect x="24" y="24" width="1" height="1"/><rect x="11" y="2" width="1" height="1"/><rect x="13" y="3" width="2" height="1"/><rect x="17" y="2" width="1" height="2"/><rect x="21" y="3" width="2" height="1"/><rect x="25" y="2" width="1" height="1"/><rect x="10" y="8" width="2" height="1"/><rect x="14" y="7" width="1" height="2"/><rect x="17" y="8" width="3" height="1"/><rect x="23" y="7" width="1" height="1"/><rect x="25" y="8" width="2" height="1"/><rect x="2" y="11" width="2" height="1"/><rect x="8" y="11" width="1" height="2"/><rect x="11" y="11" width="1" height="1"/><rect x="13" y="10" width="2" height="2"/><rect x="18" y="11" width="2" height="1"/><rect x="22" y="10" width="1" height="2"/><rect x="28" y="11" width="2" height="1"/><rect x="32" y="10" width="1" height="2"/><rect x="34" y="11" width="1" height="1"/><rect x="1" y="14" width="2" height="1"/><rect x="7" y="13" width="2" height="1"/><rect x="10" y="14" width="1" height="2"/><rect x="13" y="13" width="2" height="1"/><rect x="16" y="14" width="1" height="1"/><rect x="20" y="13" width="1" height="2"/><rect x="24" y="14" width="2" height="1"/><rect x="29" y="13" width="1" height="1"/><rect x="33" y="14" width="2" height="1"/><rect x="2" y="17" width="1" height="2"/><rect x="8" y="16" width="1" height="1"/><rect x="11" y="17" width="2" height="1"/><rect x="15" y="16" width="1" height="3"/><rect x="18" y="17" width="2" height="1"/><rect x="22" y="16" width="2" height="1"/><rect x="27" y="17" width="1" height="2"/><rect x="30" y="16" width="2" height="1"/><rect x="34" y="17" width="1" height="2"/><rect x="3" y="20" width="1" height="1"/><rect x="7" y="20" width="2" height="1"/><rect x="10" y="21" width="2" height="1"/><rect x="14" y="20" width="1" height="2"/><rect x="17" y="21" width="2" height="1"/><rect x="20" y="20" width="1" height="1"/><rect x="29" y="20" width="2" height="1"/><rect x="33" y="21" width="1" height="1"/><rect x="2" y="23" width="2" height="1"/><rect x="8" y="24" width="1" height="1"/><rect x="11" y="23" width="1" height="2"/><rect x="14" y="24" width="2" height="1"/><rect x="18" y="23" width="1" height="1"/><rect x="29" y="24" width="1" height="2"/><rect x="32" y="23" width="2" height="1"/><rect x="10" y="27" width="1" height="2"/><rect x="13" y="26" width="2" height="1"/><rect x="17" y="27" width="2" height="1"/><rect x="22" y="28" width="1" height="1"/><rect x="25" y="27" width="2" height="1"/><rect x="30" y="27" width="1" height="2"/><rect x="34" y="27" width="1" height="1"/><rect x="11" y="30" width="2" height="1"/><rect x="15" y="29" width="1" height="2"/><rect x="18" y="31" width="3" height="1"/><rect x="23" y="30" width="1" height="2"/><rect x="26" y="30" width="2" height="1"/><rect x="31" y="31" width="2" height="1"/><rect x="10" y="33" width="1" height="2"/><rect x="13" y="33" width="3" height="1"/><rect x="18" y="34" width="1" height="1"/><rect x="21" y="33" width="2" height="1"/><rect x="25" y="34" width="2" height="1"/><rect x="29" y="33" width="1" height="2"/><rect x="33" y="33" width="2" height="1"/></svg>
+    <svg class="c-qr is-large" viewBox="0 0 37 37" role="img" aria-label="Member QR code"><rect x="2" y="2" width="7" height="7"/><rect class="c-qr__light" x="3" y="3" width="5" height="5"/><rect x="4" y="4" width="3" height="3"/><rect x="28" y="2" width="7" height="7"/><rect class="c-qr__light" x="29" y="3" width="5" height="5"/><rect x="30" y="4" width="3" height="3"/><rect x="2" y="28" width="7" height="7"/><rect class="c-qr__light" x="3" y="29" width="5" height="5"/><rect x="4" y="30" width="3" height="3"/><rect x="10" y="5" width="1" height="1"/><rect x="12" y="5" width="1" height="1"/><rect x="14" y="5" width="1" height="1"/><rect x="16" y="5" width="1" height="1"/><rect x="18" y="5" width="1" height="1"/><rect x="20" y="5" width="1" height="1"/><rect x="22" y="5" width="1" height="1"/><rect x="24" y="5" width="1" height="1"/><rect x="26" y="5" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="5" y="14" width="1" height="1"/><rect x="5" y="16" width="1" height="1"/><rect x="5" y="18" width="1" height="1"/><rect x="5" y="20" width="1" height="1"/><rect x="5" y="22" width="1" height="1"/><rect x="5" y="24" width="1" height="1"/><rect x="5" y="26" width="1" height="1"/><rect x="22" y="22" width="5" height="5"/><rect class="c-qr__light" x="23" y="23" width="3" height="3"/><rect x="24" y="24" width="1" height="1"/><rect x="11" y="2" width="1" height="1"/><rect x="13" y="3" width="2" height="1"/><rect x="17" y="2" width="1" height="2"/><rect x="21" y="3" width="2" height="1"/><rect x="25" y="2" width="1" height="1"/><rect x="10" y="8" width="2" height="1"/><rect x="14" y="7" width="1" height="2"/><rect x="17" y="8" width="3" height="1"/><rect x="23" y="7" width="1" height="1"/><rect x="25" y="8" width="2" height="1"/><rect x="2" y="11" width="2" height="1"/><rect x="8" y="11" width="1" height="2"/><rect x="11" y="11" width="1" height="1"/><rect x="13" y="10" width="2" height="2"/><rect x="18" y="11" width="2" height="1"/><rect x="22" y="10" width="1" height="2"/><rect x="28" y="11" width="2" height="1"/><rect x="32" y="10" width="1" height="2"/><rect x="34" y="11" width="1" height="1"/><rect x="1" y="14" width="2" height="1"/><rect x="7" y="13" width="2" height="1"/><rect x="10" y="14" width="1" height="2"/><rect x="13" y="13" width="2" height="1"/><rect x="16" y="14" width="1" height="1"/><rect x="20" y="13" width="1" height="2"/><rect x="24" y="14" width="2" height="1"/><rect x="29" y="13" width="1" height="1"/><rect x="33" y="14" width="2" height="1"/><rect x="2" y="17" width="1" height="2"/><rect x="8" y="16" width="1" height="1"/><rect x="11" y="17" width="2" height="1"/><rect x="15" y="16" width="1" height="3"/><rect x="18" y="17" width="2" height="1"/><rect x="22" y="16" width="2" height="1"/><rect x="27" y="17" width="1" height="2"/><rect x="30" y="16" width="2" height="1"/><rect x="34" y="17" width="1" height="2"/><rect x="3" y="20" width="1" height="1"/><rect x="7" y="20" width="2" height="1"/><rect x="10" y="21" width="2" height="1"/><rect x="14" y="20" width="1" height="2"/><rect x="17" y="21" width="2" height="1"/><rect x="20" y="20" width="1" height="1"/><rect x="29" y="20" width="2" height="1"/><rect x="33" y="21" width="1" height="1"/><rect x="2" y="23" width="2" height="1"/><rect x="8" y="24" width="1" height="1"/><rect x="11" y="23" width="1" height="2"/><rect x="14" y="24" width="2" height="1"/><rect x="18" y="23" width="1" height="1"/><rect x="29" y="24" width="1" height="2"/><rect x="32" y="23" width="2" height="1"/><rect x="10" y="27" width="1" height="2"/><rect x="13" y="26" width="2" height="1"/><rect x="17" y="27" width="2" height="1"/><rect x="22" y="28" width="1" height="1"/><rect x="25" y="27" width="2" height="1"/><rect x="30" y="27" width="1" height="2"/><rect x="34" y="27" width="1" height="1"/><rect x="11" y="30" width="2" height="1"/><rect x="15" y="29" width="1" height="2"/><rect x="18" y="31" width="3" height="1"/><rect x="23" y="30" width="1" height="2"/><rect x="26" y="30" width="2" height="1"/><rect x="31" y="31" width="2" height="1"/><rect x="10" y="33" width="1" height="2"/><rect x="13" y="33" width="3" height="1"/><rect x="18" y="34" width="1" height="1"/><rect x="21" y="33" width="2" height="1"/><rect x="25" y="34" width="2" height="1"/><rect x="29" y="33" width="1" height="2"/><rect x="33" y="33" width="2" height="1"/></svg>
+  </div>
+
+  <h2>c-pass-stack (3 passes, 56px offsets, 180px tall)</h2>
+  <div class="demo demo--stack">
+    <div class="c-pass-stack">
+      <div class="c-pass-stack__pass"><div class="c-pass-stack__row"><span class="c-pass-stack__brand">Subic.Life</span><span class="c-pass-stack__tier">Premium</span></div></div>
+      <div class="c-pass-stack__pass is-prestige"><img class="c-pass-stack__photo" src="img/pass-subic-bay.jpg" alt=""><span class="c-pass-stack__wash" aria-hidden="true"></span><div class="c-pass-stack__row"><span class="c-pass-stack__brand">Subic.Life</span><span class="c-pass-stack__tier">Prestige</span></div></div>
+      <div class="c-pass-stack__pass is-elite"><div class="c-pass-stack__row"><span class="c-pass-stack__brand">Subic.Life</span><span class="c-pass-stack__tier">Elite</span></div></div>
+    </div>
+  </div>
+
+  <h2>c-pass-mini + c-pass-summary</h2>
+  <div class="demo demo--pad">
+    <div class="c-pass-summary">
+      <div class="c-pass-mini is-prestige"><img class="c-pass-mini__photo" src="img/pass-subic-bay.jpg" alt=""><span class="c-pass-mini__wash" aria-hidden="true"></span><span class="c-pass-mini__brand">Subic.Life</span><span class="c-pass-mini__tier">Prestige</span></div>
+      <div class="c-pass-summary__text"><h2 class="c-pass-summary__name">Prestige</h2><p class="c-pass-summary__meta">Renews 12 Oct 2027</p></div>
+    </div>
+    <div class="u-mt-16 c-pass-mini is-elite"><span class="c-pass-mini__brand">Subic.Life</span><span class="c-pass-mini__tier">Elite</span></div>
+  </div>
+
+  <h2>c-value-row (plain, no box; .is-gold value, chevron optional)</h2>
+  <div class="demo demo--pad">
+    <a class="c-value-row" href="#"><span class="c-value-row__label">Saved this year</span><span class="c-value-row__value">₱12,450<span class="material-symbols-outlined c-value-row__chev">chevron_right</span></span></a>
+    <div class="c-value-row"><span class="c-value-row__label">Elite adds a yacht cruise and ₱1M cover</span><span class="c-value-row__value is-gold">See Elite</span></div>
+  </div>
+
+  <h2>c-wallet-btn</h2>
+  <div class="demo demo--pad">
+    <button class="c-wallet-btn" type="button"><svg class="c-wallet-btn__logo" viewBox="0 0 170 170" aria-hidden="true"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.08-7.7-7.85-12.03-14.3-6.09-9.14-10.9-19.78-14.42-31.91-3.52-12.13-5.28-23.72-5.28-34.77 0-14.35 3.63-26.31 10.89-35.88 7.26-9.57 16.32-14.47 27.18-14.7 4.9.11 10.15 1.34 15.75 3.69 5.61 2.34 9.4 3.57 11.37 3.69 1.63 0 5.66-1.34 12.09-4.02 6.43-2.68 12.16-3.87 17.18-3.58 13.25 1.05 23.75 5.99 31.51 14.8-11.59 7.02-17.27 16.63-17.06 28.84.21 9.58 3.97 17.61 11.27 24.1 7.3 6.48 15.93 10.23 25.88 11.24-2.13 6.42-4.58 12.63-7.37 18.63zM119.22 33.15c0-7.72 2.76-14.97 8.28-21.75 5.53-6.77 12.43-10.9 20.72-12.4 1.15 7.94-1.22 15.42-7.1 22.46-5.88 7.03-12.87 11.02-20.97 11.97-.23-.08-.55-.17-.93-.28z"/></svg>Add to Apple Wallet</button>
+  </div>
+
+  <h2>c-receipt (hairlines, tabular amounts, orange discount)</h2>
+  <div class="demo demo--pad">
+    <div class="c-receipt">
+      <div class="c-receipt__row"><span>Bill</span><span class="c-receipt__amount">₱9,200</span></div>
+      <div class="c-receipt__row is-discount"><span>Prestige discount (20%)</span><span class="c-receipt__amount">−₱1,840</span></div>
+      <div class="c-receipt__row is-total"><span>You paid</span><span class="c-receipt__amount">₱7,360</span></div>
+    </div>
+  </div>
+
+  <h2>c-section-title (default, __sub, .is-title, .is-caption)</h2>
+  <div class="demo demo--pad">
+    <h2 class="c-section-title">Every visit</h2>
+    <h2 class="c-section-title is-title">One pass for all of Subic Bay</h2>
+    <p class="c-section-title__sub">Show it at 40+ hotels, restaurants and activities and save on every visit.</p>
+    <h2 class="c-section-title is-caption u-mt-16">October</h2>
+  </div>
+
+  <h2>c-barchart (thin grey bars, current month near-black)</h2>
+  <div class="demo demo--pad">
+    <div class="c-barchart">
+      <div class="c-barchart__col"><div class="c-barchart__track"><span class="c-barchart__bar" style="height: 24px"></span></div><span class="c-barchart__month">J</span></div>
+      <div class="c-barchart__col"><div class="c-barchart__track"><span class="c-barchart__bar" style="height: 40px"></span></div><span class="c-barchart__month">F</span></div>
+      <div class="c-barchart__col"><div class="c-barchart__track"><span class="c-barchart__bar" style="height: 26px"></span></div><span class="c-barchart__month">M</span></div>
+      <div class="c-barchart__col"><div class="c-barchart__track"><span class="c-barchart__bar" style="height: 56px"></span></div><span class="c-barchart__month">A</span></div>
+      <div class="c-barchart__col is-current"><div class="c-barchart__track"><span class="c-barchart__bar" style="height: 64px"></span></div><span class="c-barchart__month">O</span></div>
+    </div>
+  </div>
+
+  <h2>c-sheet (dimmed scrim, grabber, title, actions)</h2>
+  <div class="demo demo--sheet-frame">
+    <div class="c-sheet">
+      <div class="c-sheet__scrim"></div>
+      <div class="c-sheet__panel">
+        <div class="c-sheet__grabber"></div>
+        <div class="c-sheet__body">
+          <div class="c-success-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h1 class="c-sheet__title">You saved ₱1,840</h1>
+          <p class="c-sheet__sub">Lighthouse Marina Resort · Today, 7:42 PM</p>
+        </div>
+        <div class="c-sheet__actions">
+          <a class="c-btn primary" href="#">Done</a>
+          <button class="c-btn plain" type="button">Rate your visit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>c-success-icon (56px green, 28px check)</h2>
+  <div class="demo demo--pad">
+    <div class="c-success-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+  </div>
+
+  <h2>c-hero-amount</h2>
+  <div class="demo demo--pad">
+    <div class="c-hero-amount"><p class="c-hero-amount__value">₱14,290</p><p class="c-hero-amount__caption">saved in 2026 across 19 visits</p></div>
+  </div>
+
+  <h2>c-staff-id + c-progress (staff screen)</h2>
+  <div class="demo demo--pad">
+    <div class="c-staff-id"><h1 class="c-staff-id__name">Alfred Reyes</h1><p class="c-staff-id__sub">Prestige member · valid until Oct 2027</p>
+      <div class="c-staff-id__fallback"><p class="c-staff-id__code">0042 1187</p><p class="c-staff-id__help">Staff can type this number if the scan fails</p></div>
+    </div>
+    <div class="u-mt-16 c-progress"><div class="c-progress__track"><span class="c-progress__bar" style="width: 60%"></span></div><p class="c-progress__label">New code in 0:24</p></div>
+  </div>
+
+  <h2>c-btn (48px): .primary, .plain (.secondary in the map sheet)</h2>
+  <div class="demo demo--pad">
+    <button class="c-btn primary" type="button">Choose your pass</button>
+    <button class="c-btn plain u-mt-8" type="button">I already have one</button>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

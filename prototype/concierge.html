@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Subic.Life - Concierge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="components-g.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone theme-night has-wall">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+
+  <main class="screen-scroll">
+
+    <header class="c-hero">
+    <h1 class="u-sr-only">Concierge</h1>
+
+    <section class="c-mika2">
+      <div class="c-mika2__head">
+        <span class="c-mika__av" aria-hidden="true">MK</span>
+        <div class="c-mika2__who">
+          <h2 class="c-mika2__name">Mika</h2>
+          <p class="c-mika2__status">Online · replies in ~5 min</p>
+        </div>
+        <a class="c-mika2__call" href="tel:+63472520800" aria-label="Call Mika"><span class="material-symbols-outlined">call</span></a>
+      </div>
+      <a class="c-mika2__ask c-pressable" href="concierge-chat.html?topic=other">
+        <span>Ask Mika for anything</span>
+        <span class="c-ask__send" aria-hidden="true"><span class="material-symbols-outlined">arrow_upward</span></span>
+      </a>
+      <div class="c-mika2__quick">
+        <a class="c-mika2__chip" href="concierge-chat.html?topic=table"><span class="material-symbols-outlined" aria-hidden="true">restaurant</span>Dinner</a>
+        <a class="c-mika2__chip" href="concierge-chat.html?topic=transfer"><span class="material-symbols-outlined" aria-hidden="true">airport_shuttle</span>Transfer</a>
+        <a class="c-mika2__chip" href="concierge-chat.html?topic=other"><span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>Day plan</a>
+      </div>
+    </section>
+    </header>
+
+    <div class="c-surface">
+    <section class="c-trip2">
+      <div class="c-section-head">
+        <h2 class="c-section-head__title">Your trip</h2>
+        <a class="c-section-head__link" href="concierge-trip.html">Itinerary</a>
+      </div>
+      <p class="c-trip2__dates" id="trip-dates"></p>
+      <div class="u-gutter" id="trip-days"></div>
+    </section>
+
+    </div>
+  </main>
+  <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
+    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
+    <a class="c-tabbar__tab" href="explore.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
+    <a class="c-tabbar__tab is-active" href="concierge.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+  </nav>
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-g.js"></script>
+<script>
+(function () {
+  var C = window.CONCIERGE;
+
+  // The whole trip, day by day, as a timeline. Confirmed stops get a tick on their icon; only a stop
+  // Mika is still arranging is called out in words. Tapping a stop opens it.
+  var days = document.getElementById('trip-days');
+  var count = 0;
+  C.TRIP.days.forEach(function (d) {
+    var day = document.createElement('div');
+    day.className = 'c-tday';
+    day.innerHTML = '<p class="c-tday__label">' + d.label + '</p>';
+    var list = document.createElement('div');
+    list.className = 'c-tday__list';
+    d.items.forEach(function (i) {
+      var r = document.createElement('a');
+      r.className = 'c-tstop c-pressable' + (i.status ? ' is-' + i.status : '');
+      r.href = i.href;
+      r.innerHTML =
+        '<span class="c-tstop__node" data-ic="' + i.icon + '"><span class="material-symbols-outlined" aria-hidden="true">' + i.icon + '</span></span>' +
+        '<span class="c-tstop__main"><span class="c-tstop__time">' + i.time + '</span>' +
+        '<span class="c-tstop__name">' + i.title + '</span>' +
+        '<span class="c-tstop__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
+        (i.status === 'progress' ? '<span class="c-tstop__status">Mika is on it</span>' : '') +
+        '</span>' +
+        (i.photo === false ? '' : '<span class="c-tstop__thumb"><img alt="" src="' + i.img + '"></span>');
+      list.appendChild(r);
+      count++;
+    });
+    day.appendChild(list);
+    days.appendChild(day);
+  });
+  document.getElementById('trip-dates').textContent = C.TRIP.dates + ' · ' + count + ' plans';
+})();
+</script>
+<script src="app.js"></script>
+</body>
+</html>

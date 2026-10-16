@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-f.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="bff-tone" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0.14 0.14 0.20 0.30 0.45 0.55 0.62 0.90 0.98"/><feFuncG type="table" tableValues="0.31 0.31 0.38 0.50 0.62 0.70 0.75 0.86 0.95"/><feFuncB type="table" tableValues="0.37 0.37 0.44 0.55 0.66 0.72 0.75 0.80 0.90"/></feComponentTransfer></filter></svg>
+<div class="phone c-mapx is-calm">
+
+  <header class="c-statusbar c-statusbar--clear">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-fbhead">
+    <div class="c-fbhead__top"><span class="c-fbhead__word"><img class="c-fbhead__logo" src="img/logo.svg" alt="Subic.Life"></span></div>
+  </div>
+
+  <div class="c-map" role="img" aria-label="Map of Subic Bay">
+    <svg class="c-map__svg" preserveaspectratio="none" viewbox="0 0 390 844">
+<defs>
+<!-- Water pattern & gradients -->
+<lineargradient id="waterGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#C5DCEF"></stop>
+<stop offset="100%" stop-color="#BAD5EB"></stop>
+</lineargradient>
+<filter height="120%" id="cardShadow" width="120%" x="-10%" y="-10%">
+<fedropshadow dx="0" dy="2" flood-opacity="0.08" stddeviation="6"></fedropshadow>
+</filter>
+</defs>
+<!-- Base Background: Subic terrain (light warm earth/urban tint) -->
+<rect fill="#F4F3EE" height="844" width="390"></rect>
+<!-- Green Forest Nature Reserves (Ilanin Forest & Subic Jungle Hills) -->
+<!-- Redondo Mountain range edge (Top Left) -->
+<path d="M -50 -50 L 150 -50 C 130 50 90 90 20 120 C -20 135 -50 140 -50 140 Z" fill="#D7E8CE"></path>
+<text fill="#758B6D" font-size="10" font-weight="500" letter-spacing="1" x="25" y="60">REDONDO RANGE</text>
+<!-- Ilanin Forest / Camayan Reserve (South & East) -->
+<path d="M 280 200 C 310 240 370 270 420 290 L 420 860 L 120 860 C 150 780 180 730 220 680 C 260 630 260 480 250 400 C 240 330 250 250 280 200 Z" fill="#D7E8CE"></path>
+<text fill="#758B6D" font-size="10" font-weight="500" letter-spacing="1" x="285" y="470">ILANIN FOREST</text>
+<text fill="#8FA487" font-size="8.5" x="290" y="482">NATURE RESERVE</text>
+<!-- Subic Bay Water Body (Coastline) -->
+<!-- Real geography shape: Bay opening from SW entering towards Moonbay Marina & Waterfront -->
+<path d="M -50 220 
+                 C 20 220, 60 250, 90 290
+                 C 120 330, 150 360, 140 430
+                 C 130 490, 80 540, 50 600
+                 C 20 660, 20 730, -50 780 
+                 Z" fill="url(#waterGrad)"></path>
+<!-- Inner Harbor / Moonbay Marina Cove Basin -->
+<path d="M 90 290 
+                 C 110 300, 140 295, 175 315
+                 C 205 330, 230 365, 235 410
+                 C 240 455, 210 510, 160 520
+                 C 135 525, 125 500, 135 450
+                 C 142 410, 120 350, 90 290 Z" fill="url(#waterGrad)"></path>
+<!-- Subic Bay Water Label -->
+<text fill="#7A9FB8" font-size="14" font-weight="600" letter-spacing="2" x="45" y="430">SUBIC BAY</text>
+<text fill="#8FAFC4" font-size="9" letter-spacing="0.5" x="65" y="445">INNER BASIN</text>
+<!-- Marina Docks & Piers (Moonbay Marina Yacht Basin vector lines) -->
+<g stroke="#9EBED5" stroke-linecap="round" stroke-width="2.5">
+<!-- Main Pier Piercing into cove -->
+<line x1="165" x2="135" y1="360" y2="395"></line>
+<line x1="130" x2="142" y1="390" y2="400"></line>
+<line x1="138" x2="150" y1="380" y2="390"></line>
+<line x1="146" x2="158" y1="370" y2="380"></line>
+<line x1="175" x2="150" y1="375" y2="415"></line>
+<line x1="145" x2="157" y1="405" y2="417"></line>
+<line x1="153" x2="165" y1="395" y2="407"></line>
+<!-- Yacht Club breakwater -->
+<line stroke="#88AEC9" stroke-width="3" x1="150" x2="120" y1="330" y2="350"></line>
+</g>
+<text fill="#5F88A5" font-size="8.5" font-weight="600" x="148" y="325">Moonbay Marina</text>
+<!-- Subic Airport Runway (Cubi Point) vector outline -->
+<g transform="translate(190, 560) rotate(-35)">
+<rect fill="#DEDCD3" height="14" rx="2" stroke="#CDC9BD" stroke-width="1" width="130" x="0" y="0"></rect>
+<!-- Runway markings -->
+<line stroke="#FFF" stroke-dasharray="8 5" stroke-width="1.5" x1="10" x2="120" y1="7" y2="7"></line>
+<text fill="#9C9789" font-size="7.5" font-weight="600" letter-spacing="0.5" x="15" y="-4">SBFZ AIRPORT (CUBI)</text>
+</g>
+<!-- Primary Road System (Clean Apple Maps Vector aesthetic) -->
+<!-- Secondary / Local Street network (light grey / white strokes) -->
+<g stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+<line x1="160" x2="260" y1="280" y2="280"></line>
+<line x1="180" x2="180" y1="250" y2="320"></line>
+<line x1="220" x2="220" y1="260" y2="340"></line>
+<line x1="240" x2="290" y1="310" y2="330"></line>
+<line x1="175" x2="235" y1="340" y2="370"></line>
+<line x1="195" x2="245" y1="370" y2="430"></line>
+<!-- Harbor Point mall block perimeter -->
+<rect fill="#E6E3D8" height="25" rx="3" stroke="#FFFFFF" stroke-width="1.5" width="35" x="235" y="270"></rect>
+</g>
+<!-- Waterfront Road (Right along the coastline edge) -->
+<path d="M 80 280 
+                 C 105 292, 130 295, 160 310
+                 C 185 325, 205 350, 215 390
+                 C 225 435, 200 480, 165 505
+                 C 150 515, 140 535, 138 565" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="5"></path>
+<path d="M 80 280 
+                 C 105 292, 130 295, 160 310
+                 C 185 325, 205 350, 215 390
+                 C 225 435, 200 480, 165 505
+                 C 150 515, 140 535, 138 565" fill="none" stroke="#FDE5C5" stroke-linecap="round" stroke-width="3"></path>
+<!-- Rizal Highway (Major arterial connecting CBD to Tipo Expressway) -->
+<path d="M 270 180 L 255 260 L 250 340 L 260 410 L 285 490 L 320 570" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<path d="M 270 180 L 255 260 L 250 340 L 260 410 L 285 490 L 320 570" fill="none" stroke="#FEE9A7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"></path>
+<!-- Argonaut Highway (South to Airport & Camayan) -->
+<path d="M 260 410 C 235 440 200 480 180 520 C 160 560 170 610 190 660" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="4.5"></path>
+<path d="M 260 410 C 235 440 200 480 180 520 C 160 560 170 610 190 660" fill="none" stroke="#FDE5C5" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Street & POI Labels (Apple Maps subtle grey text typography) -->
+<text fill="#78716C" font-size="8" font-weight="500" transform="rotate(78 262 240)" x="262" y="240">Rizal Highway</text>
+<text fill="#78716C" font-size="7.5" font-weight="500" transform="rotate(32 145 342)" x="145" y="342">Waterfront Rd</text>
+<text fill="#78716C" font-size="7.5" font-weight="500" transform="rotate(55 210 475)" x="210" y="475">Argonaut Hwy</text>
+<!-- Harbor Point Mall Label -->
+<text fill="#6B7280" font-size="7" font-weight="600" x="237" y="285">Harbor Point</text>
+<circle cx="230" cy="282" fill="#9CA3AF" r="2"></circle>
+<!-- Subic Freeport Zone district boundary hint -->
+<text fill="#9CA3AF" font-size="8.5" font-weight="600" letter-spacing="1" x="210" y="215">CENTRAL BUSINESS DISTRICT</text>
+<!-- Camayan Coast hint at bottom -->
+<text fill="#6B7280" font-size="8" font-weight="500" x="100" y="740">Camayan Beach &amp; Ocean Adventure →</text>
+</svg>
+
+    <div id="fleaflet" class="c-fmap" role="region" aria-label="Interactive map of Subic Bay"></div>
+    <div class="c-fpins"></div>
+    <div class="c-fme" hidden aria-hidden="true"></div>
+
+    <div class="c-map-controls">
+      <button class="c-map-controls__btn" type="button" data-locate aria-label="Show my location"><span class="material-symbols-outlined">my_location</span></button>
+      <button class="c-map-controls__btn" type="button" data-layers aria-label="Change map style" aria-pressed="false"><span class="material-symbols-outlined">layers</span></button>
+    </div>
+
+    <section class="c-fcarousel" aria-label="Partners on the map">
+      <p class="c-fempty" data-empty hidden>No partners match. Try another category.</p>
+      <div class="c-fcarousel__track" data-track></div>
+    </section>
+  </div>
+
+  <section class="c-sheet c-sheet--up c-fsheet-wrap" id="fList" hidden>
+    <button class="c-sheet__scrim" type="button" data-list-close aria-label="Close list"></button>
+    <div class="c-sheet__panel c-fsheet" role="dialog" aria-modal="true" aria-labelledby="fListTitle">
+      <div class="c-sheet__grabber"></div>
+      <header class="c-fsheet__head">
+        <span></span>
+        <h2 class="c-fsheet__title" id="fListTitle">Partners nearby</h2>
+        <button class="c-fsheet__done" type="button" data-list-close>Done</button>
+      </header>
+      <ul class="c-fsheet__list" data-list>
+        <li class="c-fsheet__none" data-list-none hidden>No partners match this filter.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="c-map-topbar">
+    <div class="c-chiprow c-chiprow--compact" role="group" aria-label="Filter by category">
+      <button class="c-chip" type="button" data-cat="all"><span class="material-symbols-outlined c-chip__icon">apps</span>All</button>
+      <button class="c-chip" type="button" data-cat="hotels"><span class="material-symbols-outlined c-chip__icon">hotel</span>Hotels</button>
+      <button class="c-chip" type="button" data-cat="food"><span class="material-symbols-outlined c-chip__icon">restaurant</span>Food</button>
+      <button class="c-chip" type="button" data-cat="beaches"><span class="material-symbols-outlined c-chip__icon">beach_access</span>Beaches</button>
+      <button class="c-chip" type="button" data-cat="water-sports"><span class="material-symbols-outlined c-chip__icon">sailing</span>Water sports</button>
+      <button class="c-chip" type="button" data-cat="nature"><span class="material-symbols-outlined c-chip__icon">forest</span>Nature</button>
+      <button class="c-chip" type="button" data-cat="nightlife"><span class="material-symbols-outlined c-chip__icon">local_bar</span>Nightlife</button>
+    </div>
+  </div>
+  <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
+    <a class="c-tabbar__tab is-active" href="map.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
+    <a class="c-tabbar__tab" href="explore.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+  </nav>
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="app.js"></script>
+<script src="data-a.js"></script>
+<script src="map-data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var MD = window.MAP_DATA;
+  var stage = $('.c-map');
+  var pinLayer = $('.c-fpins');
+  var meDot = $('.c-fme');
+  var carousel = $('.c-fcarousel');
+  var phoneEl = $('.phone');
+  var track = $('[data-track]');
+  var listSheet = $('#fList');
+  var listToggle = $('[data-list-toggle]');
+  var listIcon = $('[data-list-icon]');
+  var listEl = $('[data-list]');
+  var listNone = $('[data-list-none]');
+  var locateBtn = $('[data-locate]');
+  var layersBtn = $('[data-layers]');
+  var topbar = $('.c-map-topbar');
+  var emptyNote = $('[data-empty]');
+  var TILE = {
+    light: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+    satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+  };
+  var ATTRS = {
+    light: 'Tiles &copy; <a href="https://www.esri.com">Esri</a>',
+    satellite: 'Tiles &copy; <a href="https://www.esri.com">Esri</a>'
+  };
+  var PAD_TOP_MIN = 120, PAD_BOTTOM_MIN = 260;
+
+  function km(a, b) {
+    var R = 6371, t = Math.PI / 180;
+    var dLat = (b.lat - a.lat) * t, dLng = (b.lng - a.lng) * t;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function fmtDist(k) { return k < 1 ? Math.round(k * 1000) + ' m' : k.toFixed(1) + ' km'; }
+  function dirUrl(p) { return 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng; }
+
+  // Items: partners take name, photo and offer from data-a.js; extras carry their own and link to the nearest partner page.
+  var partnerPts = MD.places.filter(function (m) { return m.partner; });
+  function nearestPartnerId(pt) {
+    var best = null, bd = Infinity;
+    partnerPts.forEach(function (m) { var d = km(pt, m); if (d < bd) { bd = d; best = m.id; } });
+    return best;
+  }
+  var items = MD.places.map(function (m) {
+    var p = m.partner ? window.PLACES[m.id] : null;
+    var icon = (window.CATEGORIES[m.cats[0]] || { icon: 'place' }).icon;
+    var discount = p ? p.discount : m.discount;
+    var it = {
+      id: m.id,
+      name: p ? p.name : m.name,
+      category: p ? p.category : m.category,
+      area: p ? p.area : m.area,
+      offer: p ? p.offer : m.offer,
+      badge: discount ? discount + '%' : 'Free',
+      tag: p ? (discount ? discount + '%' : p.offerShort) : (discount ? discount + '%' : m.offerShort),
+      photo: p ? p.thumb : m.photo,
+      href: 'place.html?p=' + (p ? m.id : nearestPartnerId(m)),
+      lat: m.lat, lng: m.lng,
+      cats: m.cats, icon: icon, partner: !!m.partner,
+      km: km(MD.you, m), hidden: false
+    };
+    it.dist = fmtDist(it.km);
+    return it;
+  });
+  var byId = {};
+  items.forEach(function (it) { byId[it.id] = it; });
+  var byDist = items.slice().sort(function (a, b) { return a.km - b.km; });
+
+  // Pins: one button per place. Default is a 32px orange circle with the category icon and a small badge.
+  // Selected becomes a dark pill with the full offer text. Built once; the filter toggles classes only.
+  byDist.forEach(function (it, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'c-fpin';
+    b.style.setProperty('--i', i);
+    b.setAttribute('aria-label', it.name + '. ' + it.offer);
+    b.innerHTML =
+      '<span class="c-fpin__dot"><span class="material-symbols-outlined" aria-hidden="true"></span></span>' +
+      '<span class="c-fpin__badge"></span>' +
+      '<span class="c-fpin__offer"><span class="material-symbols-outlined" aria-hidden="true"></span><span class="c-fpin__text"></span></span>';
+    b.querySelector('.c-fpin__dot .material-symbols-outlined').textContent = it.icon;
+    b.querySelector('.c-fpin__badge').textContent = it.badge;
+    b.querySelector('.c-fpin__offer .material-symbols-outlined').textContent = it.icon;
+    b.querySelector('.c-fpin__text').textContent = it.offer;
+    b.addEventListener('click', function () { phoneEl.classList.add('has-pick'); select(it.id, { pan: true }); });
+    pinLayer.appendChild(b);
+    it.pin = b;
+  });
+
+  // Carousel cards, Airbnb-style: big photo, offer tag, directions on the photo. Lists: nearest first.
+  byDist.forEach(function (it) {
+    var card = document.createElement('article');
+    card.className = 'c-fcard';
+    card.dataset.id = it.id;
+    card.innerHTML =
+      '<div class="c-fcard__photo"><img alt="" src="' + it.photo + '">' +
+        '<span class="c-fcard__tag"></span>' +
+        '<a class="c-fcard__dir" href="' + dirUrl(it) + '" target="_blank" rel="noopener">' +
+          '<span class="material-symbols-outlined" aria-hidden="true">directions</span></a>' +
+      '</div>' +
+      '<div class="c-fcard__info">' +
+        '<h3 class="c-fcard__name"><a class="c-fcard__link" href="' + it.href + '"></a></h3>' +
+        '<p class="c-fcard__meta"></p>' +
+        '<p class="c-fcard__offer"></p>' +
+      '</div>';
+    // Airbnb-style: the whole card opens the place (stretched link); directions sits on the photo.
+    card.querySelector('.c-fcard__link').textContent = it.name;
+    card.querySelector('.c-fcard__tag').textContent = it.tag;
+    card.querySelector('.c-fcard__offer').textContent = it.offer;
+    card.querySelector('.c-fcard__meta').textContent = it.category + ' · ' + it.area + ' · ' + it.dist;
+    card.querySelector('.c-fcard__dir').setAttribute('aria-label', 'Directions to ' + it.name);
+    track.appendChild(card);
+    it.card = card;
+
+    var row = document.createElement('li');
+    row.innerHTML =
+      '<a class="c-list-row" href="' + it.href + '">' +
+        '<span class="c-list-row__lead"><span class="c-list-row__thumb"><img alt="" src="' + it.photo + '"></span></span>' +
+        '<span class="c-list-row__main"><span class="c-list-row__title"></span><span class="c-list-row__sub"></span></span>' +
+        '<span class="c-list-row__trail"><span class="c-list-row__offer"></span>' +
+          '<span class="material-symbols-outlined c-list-row__chev" aria-hidden="true">chevron_right</span></span>' +
+      '</a>';
+    row.querySelector('.c-list-row__title').textContent = it.name;
+    row.querySelector('.c-list-row__sub').textContent = it.category + ' · ' + it.dist;
+    row.querySelector('.c-list-row__offer').textContent = it.tag;
+    listEl.insertBefore(row, listNone);
+    it.row = row;
+  });
+
+  // Projection. Live: Leaflet. No map (script blocked or tiles failed): the same Web Mercator maths, fitted to all
+  // pins inside the visible band between the top overlay and the carousel. The static SVG no longer lines up with
+  // real coordinates, so it is hidden in that case.
+  function merc(lat, lng, z) {
+    var s = 256 * Math.pow(2, z);
+    var x = (lng + 180) / 360 * s;
+    var sin = Math.sin(lat * Math.PI / 180);
+    var y = (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * s;
+    return { x: x, y: y };
+  }
+  var map = null, tiles = null, styleKey = 'light', locked = false, tileOk = 0, tileErr = 0;
+  var FB = { z: MD.zoom, cx: 0, cy: 0, vy: 0 };
+
+  function visibleBand() {
+    var top = Math.max(PAD_TOP_MIN, topbar.offsetTop + topbar.offsetHeight + 56); // 56 clears the selected offer pill, which rises above its pin
+    var bottom = Math.max(PAD_BOTTOM_MIN, stage.clientHeight - carousel.offsetTop + 16);
+    return { top: top, bottom: bottom };
+  }
+  function fitFallback() {
+    var c = merc(MD.center.lat, MD.center.lng, MD.zoom);
+    FB.z = MD.zoom; FB.cx = c.x; FB.cy = c.y; FB.vy = stage.clientHeight / 2;
+  }
+  function project(lat, lng) {
+    if (map) { var p = map.latLngToContainerPoint([lat, lng]); return [p.x, p.y]; }
+    var q = merc(lat, lng, FB.z);
+    return [stage.clientWidth / 2 + q.x - FB.cx, FB.vy + q.y - FB.cy];
+  }
+  function placePins() {
+    items.forEach(function (it) {
+      var p = project(it.lat, it.lng);
+      it.px = p[0]; it.py = p[1];
+      it.pin.style.left = p[0] + 'px';
+      it.pin.style.top = p[1] + 'px';
+    });
+    var m = project(MD.you.lat, MD.you.lng);
+    meDot.style.left = m[0] + 'px';
+    meDot.style.top = m[1] + 'px';
+    // The selected offer pill is measured in stage space. Pins it would cover are hidden (their card and list row stay).
+    var pill = null;
+    if (current && !current.hidden) {
+      var pe = current.pin.querySelector('.c-fpin__offer');
+      var pr = pe.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+      pill = { l: pr.left - sr.left, t: pr.top - sr.top, r: pr.right - sr.left, b: pr.bottom - sr.top };
+    }
+    // Declutter: a pin that would sit on a pin already shown, or under the selected pill, is hidden.
+    // Order: the selected pin, then partners, then nearest first. Filtered-out pins are handled by is-off.
+    var order = byDist.slice().sort(function (a, b) {
+      var sa = a === current ? 0 : 1, sb = b === current ? 0 : 1;
+      if (sa !== sb) return sa - sb;
+      var pa = a.partner ? 0 : 1, pb = b.partner ? 0 : 1;
+      return pa - pb;
+    });
+    var shown = [];
+    order.forEach(function (it) {
+      var cull = false;
+      if (!it.hidden && it !== current) {
+        for (var i = 0; i < shown.length; i++) {
+          if (Math.hypot(shown[i].px - it.px, shown[i].py - it.py) < 32) { cull = true; break; }
+        }
+        if (!cull && pill && it.px + 16 > pill.l && it.px - 16 < pill.r && it.py + 16 > pill.t && it.py - 16 < pill.b) cull = true;
+      }
+      if (!it.hidden && !cull) shown.push(it);
+      it.pin.classList.toggle('is-cull', cull);
+    });
+  }
+  // Keeps the attribution above the carousel.
+  function layoutBottom() {
+    var br = $('.leaflet-bottom.leaflet-right', $('#fleaflet'));
+    if (br) br.style.bottom = (stage.clientHeight - carousel.offsetTop + 8) + 'px';
+  }
+
+  function lockMap() {
+    if (locked || !map) return;
+    locked = true;
+    stage.classList.add('is-static', 'is-nomap');
+    ['dragging', 'touchZoom', 'scrollWheelZoom', 'doubleClickZoom', 'boxZoom', 'keyboard'].forEach(function (k) {
+      if (map[k]) map[k].disable();
+    });
+    layersBtn.disabled = true;
+  }
+  function setLayer(key) {
+    if (tiles) map.removeLayer(tiles);
+    stage.classList.toggle('is-street', key === 'light');
+    tiles = L.tileLayer(TILE[key], { maxZoom: 19, attribution: ATTRS[key] });
+    tiles.on('tileload', function () { tileOk++; });
+    tiles.on('tileerror', function () { tileErr++; if (!tileOk && tileErr >= 3) lockMap(); });
+    tiles.addTo(map);
+  }
+  function fitAll(animate) {
+    if (!map || locked) return;
+    var band = visibleBand();
+    map.fitBounds(L.latLngBounds(items.map(function (i) { return [i.lat, i.lng]; })), {
+      paddingTopLeft: [24, band.top], paddingBottomRight: [24, band.bottom], maxZoom: 16, animate: !!animate
+    });
+  }
+  function initMap() {
+    map = L.map('fleaflet', {
+      center: [MD.center.lat, MD.center.lng], zoom: MD.zoom,
+      minZoom: 11, maxZoom: 17, zoomSnap: 0.5, zoomControl: false, attributionControl: true
+    });
+    map.attributionControl.setPrefix(false);
+    setLayer('light');
+    setTimeout(function () { if (!tileOk) lockMap(); }, 9000);
+    map.on('move', placePins);
+    map.on('zoomstart', function () { pinLayer.classList.add('is-zooming'); });
+    map.on('zoomend', function () { pinLayer.classList.remove('is-zooming'); placePins(); });
+  }
+  // Esri attribution opens in a new tab, so the shell does not navigate the frame away.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('.leaflet-control-attribution a') : null;
+    if (a) { a.target = '_blank'; a.rel = 'noopener'; }
+  }, true);
+
+  // Selection, carousel and map move together.
+  var current = null;
+  function scrollToCard(it, instant) {
+    if (!it || it.hidden) return;
+    var pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+    var left = it.card.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft - pad;
+    track.scrollTo({ left: Math.max(0, left), behavior: instant ? 'auto' : 'smooth' });
+  }
+  function panToVisible(it) {
+    if (!map || locked) return;
+    var band = visibleBand();
+    var yv = (band.top + (stage.clientHeight - band.bottom)) / 2;
+    var z = map.getZoom();
+    var pt = map.project([it.lat, it.lng], z).subtract(L.point(0, yv - stage.clientHeight / 2));
+    map.panTo(map.unproject(pt, z), { duration: 0.5 });
+  }
+  function select(id, opts) {
+    opts = opts || {};
+    var it = byId[id];
+    if (!it || it.hidden) return;
+    current = it;
+    items.forEach(function (x) { x.pin.classList.toggle('is-selected', x === it); });
+    if (!opts.fromTrack) scrollToCard(it, !!opts.instant);
+    if (opts.pan) panToVisible(it);
+    placePins();
+  }
+
+  var syncTimer = null;
+  track.addEventListener('scroll', function () {
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(syncFromTrack, 140);
+  }, { passive: true });
+  function syncFromTrack() {
+    var pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+    var anchor = track.getBoundingClientRect().left + pad;
+    var best = null, bd = Infinity;
+    byDist.forEach(function (it) {
+      if (it.hidden) return;
+      var d = Math.abs(it.card.getBoundingClientRect().left - anchor);
+      if (d < bd) { bd = d; best = it; }
+    });
+    if (best && best !== current) select(best.id, { fromTrack: true });
+  }
+
+  // Filters: category chips and the search field narrow the pins, cards and list together.
+  var cat = 'all';
+  // Calm start: plain dots, no chip lit, no offer card. A chip shows the offers;
+  // tapping the lit chip again goes back to calm.
+  function fitVisible() {
+    if (!map || locked) return;
+    var vis = items.filter(function (i) { return !i.hidden; });
+    if (!vis.length) return;
+    var band = visibleBand();
+    map.fitBounds(L.latLngBounds(vis.map(function (i) { return [i.lat, i.lng]; })), {
+      paddingTopLeft: [40, band.top], paddingBottomRight: [40, band.bottom], maxZoom: 15, animate: true
+    });
+  }
+  function applyFilter(refit) {
+    var first = null, any = false;
+    byDist.forEach(function (it) {
+      var catOk = cat === 'all' || it.cats.indexOf(cat) >= 0;
+      it.hidden = !catOk;
+      it.pin.classList.toggle('is-off', it.hidden);
+      it.card.hidden = it.hidden;
+      it.row.hidden = it.hidden;
+      if (!it.hidden) { any = true; if (!first) first = it; }
+    });
+    emptyNote.hidden = any;
+    listNone.hidden = any;
+    if (current && current.hidden) {
+      if (first) select(first.id, { pan: true });
+      else current = null;
+    } else if (current) {
+      scrollToCard(current, true);
+    }
+    if (refit) fitVisible();
+    placePins();
+  }
+
+  $$('.c-chiprow [data-cat]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var off = chip.classList.contains('is-selected');
+      cat = off ? 'all' : chip.dataset.cat;
+      $$('.c-chiprow [data-cat]').forEach(function (c) { c.classList.toggle('is-selected', !off && c === chip); });
+      phoneEl.classList.toggle('is-calm', off);
+      if (off) phoneEl.classList.remove('has-pick');
+      applyFilter(true);
+    });
+  });
+
+  // Locate: the you-are-here dot appears and the map flies to it. Layers: street map and satellite.
+  locateBtn.addEventListener('click', function () {
+    meDot.hidden = false;
+    placePins();
+    locateBtn.classList.add('is-active');
+    if (map && !locked) map.flyTo([MD.you.lat, MD.you.lng], 15, { duration: 0.8 });
+  });
+  layersBtn.addEventListener('click', function () {
+    if (!map || locked) return;
+    styleKey = styleKey === 'light' ? 'satellite' : 'light';
+    setLayer(styleKey);
+    layersBtn.classList.toggle('is-active', styleKey === 'satellite');
+    layersBtn.setAttribute('aria-pressed', styleKey === 'satellite' ? 'true' : 'false');
+  });
+
+  // List sheet: the toggle stays above the dimmed page and flips to a map icon while the list is open.
+  function openList() {
+    listSheet.hidden = false;
+    listToggle.classList.add('is-open');
+    listToggle.setAttribute('aria-expanded', 'true');
+    listToggle.setAttribute('aria-label', 'Show map');
+    listIcon.textContent = 'map';
+  }
+  function closeList() {
+    listSheet.hidden = true;
+    listToggle.classList.remove('is-open');
+    listToggle.setAttribute('aria-expanded', 'false');
+    listToggle.setAttribute('aria-label', 'Show list');
+    listIcon.textContent = 'format_list_bulleted';
+  }
+  if (listToggle) listToggle.addEventListener('click', function () { if (listSheet.hidden) openList(); else closeList(); });
+  $$('[data-list-close]').forEach(function (b) { b.addEventListener('click', closeList); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !listSheet.hidden) closeList(); });
+
+  window.addEventListener('resize', function () {
+    if (map) { map.invalidateSize(); } else { fitFallback(); }
+    placePins();
+    layoutBottom();
+  });
+
+  // Start: all pins in view on load (live: fitBounds; no map: fitted projection). ?p= selects a place, no pan.
+  if (typeof window.L !== 'undefined') { initMap(); }
+  else { stage.classList.add('is-nomap'); fitFallback(); }
+  placePins();
+  layoutBottom();
+  applyFilter(false);
+  // No selection on a plain open, so no offer pill covers the cluster. ?p= still selects that place.
+  var start = queryParam('p');
+  if (byId[start]) select(start, { instant: true });
+})();
+</script>
+</body>
+</html>

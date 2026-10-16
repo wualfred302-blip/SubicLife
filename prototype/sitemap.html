@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subic.Life - Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <style>
+    body { display: block; min-height: 100vh; margin: 0; padding: var(--space-8) 0; background: var(--grouped); font-family: var(--font); color: var(--text); }
+    .launch { max-width: 430px; margin: 0 auto; }
+    .launch__title { margin: 0 var(--gutter) var(--space-1); font: var(--fw-bold) var(--fs-large-title)/var(--lh-tight) var(--font); letter-spacing: var(--track-tight); }
+    .launch__intro { margin: 0 var(--gutter) var(--space-2); font: var(--fw-regular) var(--fs-callout)/var(--lh-snug) var(--font); color: var(--text); }
+    .launch .c-group { margin: 0 var(--gutter); }
+    .launch .c-group__head { margin: var(--space-6) var(--gutter) var(--space-2); color: var(--text); }
+    .launch .c-group__row { min-height: 52px; padding: var(--space-2-5) var(--space-4); }
+    .launch .c-group__main { font: var(--fw-semibold) var(--fs-callout)/var(--lh-snug) var(--font); }
+    .launch .c-group__sub { font-size: var(--fs-footnote); }
+  </style>
+</head>
+<body>
+<main class="launch">
+
+  <h1 class="launch__title">Subic.Life prototype</h1>
+  <p class="launch__intro">Tap any row to open that screen at 390 by 844. Start with Onboarding, then Explore.</p>
+
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?reset=1"><span class="c-group__main">Start over (clears saved wallpaper and stories)</span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Onboarding</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=welcome.html"><span class="c-group__main">Welcome<span class="c-group__sub">Full-bleed photo, Get started or sign in</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=signup.html"><span class="c-group__main">Sign up<span class="c-group__sub">Mobile number and 6-digit code</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=signup-code.html"><span class="c-group__main">Sign up code<span class="c-group__sub">Six digit boxes and keypad</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=signin.html"><span class="c-group__main">Sign in<span class="c-group__sub">Mobile number and 6-digit code</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=signin-code.html"><span class="c-group__main">Sign in code<span class="c-group__sub">Six digit boxes and keypad</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=signup-details.html"><span class="c-group__main">Name on your card<span class="c-group__sub">First name, last name, email</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=choose-tier.html"><span class="c-group__main">Choose your pass<span class="c-group__sub">Premium, Prestige and Elite</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Explore</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=card-ready.html"><span class="c-group__main">Your card is ready<span class="c-group__sub">New card with the member name, Go to Explore</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=explore.html"><span class="c-group__main">Explore<span class="c-group__sub">Large title, search, chips, near you, popular</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=search.html"><span class="c-group__main">Search<span class="c-group__sub">Focused field, recent searches</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=category.html"><span class="c-group__main">Category<span class="c-group__sub">Water sports list with filter chips</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=place.html"><span class="c-group__main">Place<span class="c-group__sub">Lighthouse Marina Resort, member offer</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=map.html"><span class="c-group__main">Map<span class="c-group__sub">Offer pins and place card</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Booking and saved</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=book.html"><span class="c-group__main">Checkout<span class="c-group__sub">Dates, guests, room, GCash, Pay</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=book-done.html"><span class="c-group__main">Booked<span class="c-group__sub">Confirmation, code, Add to Calendar</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=saved.html"><span class="c-group__main">Saved<span class="c-group__sub">Places and offers, segmented control</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=saved-empty.html"><span class="c-group__main">Saved, empty<span class="c-group__sub">Empty state</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Pay at the counter</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=card.html"><span class="c-group__main">Card<span class="c-group__sub">Member card, Show to staff, Simulate staff scan</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=pay-request.html"><span class="c-group__main">Pay request<span class="c-group__sub">Bill sheet over the card</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=pay-faceid.html"><span class="c-group__main">Face ID<span class="c-group__sub">Approval sheet</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=pay-done.html"><span class="c-group__main">Paid<span class="c-group__sub">Success, receipt rows</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=card-receipt.html"><span class="c-group__main">Receipt sheet<span class="c-group__sub">You saved, over the dimmed card</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Staff app</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=staff-scan.html"><span class="c-group__main">Scan<span class="c-group__sub">Partner phone, viewfinder</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=staff-bill.html"><span class="c-group__main">Bill<span class="c-group__sub">Member found, keypad, Send to member</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=staff-wait.html"><span class="c-group__main">Waiting<span class="c-group__sub">Waiting for the member to approve</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=staff-paid.html"><span class="c-group__main">Paid<span class="c-group__sub">Reference number, New scan</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Concierge</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=concierge.html"><span class="c-group__main">Concierge<span class="c-group__sub">Quick actions and recent requests</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=concierge-chat.html"><span class="c-group__main">Chat with Mika<span class="c-group__sub">Booking thread with confirmation card</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=concierge-chat.html&topic=table"><span class="c-group__main">Chat, table topic<span class="c-group__sub">Opening bubble and subtitle change</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=concierge-chat.html&topic=transfer"><span class="c-group__main">Chat, transfer topic<span class="c-group__sub">Opening bubble and subtitle change</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=concierge-chat.html&topic=other"><span class="c-group__main">Chat, other topic<span class="c-group__sub">Opening bubble and subtitle change</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Me</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=me.html"><span class="c-group__main">Me<span class="c-group__sub">Profile, membership, activity, settings</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=me-bookings.html"><span class="c-group__main">Bookings<span class="c-group__sub">Upcoming and past</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=me-stories.html"><span class="c-group__main">Your stories<span class="c-group__sub">Visits to share, stories shared</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=story-new.html&p=meatplus&amp;v=Today"><span class="c-group__main">New story<span class="c-group__sub">From a verified visit</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=me-payments.html"><span class="c-group__main">Payments<span class="c-group__sub">Transactions with savings per row</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=me-payment-methods.html"><span class="c-group__main">Payment methods<span class="c-group__sub">GCash, Maya, Visa</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=me-notifications.html"><span class="c-group__main">Notifications<span class="c-group__sub">Four toggles, switch on tap</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=me-language.html"><span class="c-group__main">Language<span class="c-group__sub">Checkmark list</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=me-add-method.html"><span class="c-group__main">Add a method<span class="c-group__sub">Sheet over Payment methods</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Card variants</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=card-premium.html"><span class="c-group__main">Card (Premium)<span class="c-group__sub">Pearl card, Show to staff in orange</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=card-elite.html"><span class="c-group__main">Card (Elite)<span class="c-group__sub">Black metal card, gold foil</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=card-tiers.html"><span class="c-group__main">Membership tiers<span class="c-group__sub">Premium, Prestige and Elite at full size</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=card-staff.html"><span class="c-group__main">Show to staff<span class="c-group__sub">Full-screen QR with fallback number</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=card-benefits.html"><span class="c-group__main">Prestige benefits<span class="c-group__sub">Every visit, once a year, cover</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=card-savings.html"><span class="c-group__main">Savings<span class="c-group__sub">Year total and monthly bars</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+    <a class="c-group__row c-pressable" href="index.html?start=card-none.html"><span class="c-group__main">Not a member yet<span class="c-group__sub">Stacked passes, Choose your pass</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+  <h2 class="c-group__head">Reference</h2>
+  <div class="c-group c-group--lead">
+    <a class="c-group__row c-pressable" href="index.html?start=components.html"><span class="c-group__main">Components<span class="c-group__sub">Every component, selected and unselected</span></span><span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span></a>
+  </div>
+
+</main>
+</body>
+</html>

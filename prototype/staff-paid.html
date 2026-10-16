@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life Partner - Paid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-b.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-phone--push">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar">
+    <span></span>
+    <h1 class="c-navbar__title">Subic.Life Partner</h1>
+    <span></span>
+  </nav>
+
+  <main class="c-paid">
+    <div class="c-success-icon is-lg">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline class="c-draw" pathLength="1" points="20 6 9 17 4 12"/></svg>
+    </div>
+
+    <h1 class="c-paid__title" id="amt">Paid ₱1,920</h1>
+    <p class="c-paid__sub">Ref 7K2-90413 · Table 7</p>
+    <p class="c-paid__save">Ana Reyes · Prestige 20% off</p>
+
+    <div class="c-paid__actions">
+      <a class="c-btn primary" href="staff-scan.html">New scan</a>
+    </div>
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script>
+  (function () {
+    var pay = parseInt(new URLSearchParams(location.search).get('pay'), 10) || 1920;
+    document.getElementById('amt').textContent = 'Paid ₱' + pay.toLocaleString('en-US');
+  })();
+</script>
+</body>
+</html>

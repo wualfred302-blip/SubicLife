@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Enter the code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone theme-night c-auth has-wall">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar c-auth__nav">
+    <a data-back class="c-navbar__back" href="signin.html" aria-label="Back to mobile number">
+      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+    </a>
+    <img class="c-wordmark c-logo c-auth__mark" src="img/logo.svg" alt="Subic.Life">
+    <span></span>
+  </nav>
+
+  <div class="c-auth__head">
+    <h1 class="c-auth__title">Enter the code</h1>
+    <p class="c-auth__sub">Sent to +63 917 123 4567<a class="c-auth__edit" href="signin.html">Edit</a></p>
+  </div>
+
+  <section class="c-auth__sheet">
+    <div class="c-auth__otp" role="group" aria-label="6-digit code">
+      <span class="c-auth__cell" data-cell>4</span>
+      <span class="c-auth__cell" data-cell>8</span>
+      <span class="c-auth__cell" data-cell>2</span>
+      <span class="c-auth__cell is-active" data-cell></span>
+      <span class="c-auth__cell" data-cell></span>
+      <span class="c-auth__cell" data-cell></span>
+    </div>
+    <p class="c-auth__resend">Resend code in 0:30</p>
+    <div class="c-auth__cta">
+      <a class="c-btn primary" href="explore.html">Sign in</a>
+    </div>
+  </section>
+
+  <div class="c-auth__pad" data-keypad="code" data-start="482" aria-label="Keypad">
+    <button type="button" class="c-auth__key" data-key="1"><span class="c-auth__digit">1</span><span class="c-auth__letters"></span></button>
+    <button type="button" class="c-auth__key" data-key="2"><span class="c-auth__digit">2</span><span class="c-auth__letters">ABC</span></button>
+    <button type="button" class="c-auth__key" data-key="3"><span class="c-auth__digit">3</span><span class="c-auth__letters">DEF</span></button>
+    <button type="button" class="c-auth__key" data-key="4"><span class="c-auth__digit">4</span><span class="c-auth__letters">GHI</span></button>
+    <button type="button" class="c-auth__key" data-key="5"><span class="c-auth__digit">5</span><span class="c-auth__letters">JKL</span></button>
+    <button type="button" class="c-auth__key" data-key="6"><span class="c-auth__digit">6</span><span class="c-auth__letters">MNO</span></button>
+    <button type="button" class="c-auth__key" data-key="7"><span class="c-auth__digit">7</span><span class="c-auth__letters">PQRS</span></button>
+    <button type="button" class="c-auth__key" data-key="8"><span class="c-auth__digit">8</span><span class="c-auth__letters">TUV</span></button>
+    <button type="button" class="c-auth__key" data-key="9"><span class="c-auth__digit">9</span><span class="c-auth__letters">WXYZ</span></button>
+    <span class="c-auth__key is-blank" aria-hidden="true"></span>
+    <button type="button" class="c-auth__key" data-key="0"><span class="c-auth__digit">0</span><span class="c-auth__letters"></span></button>
+    <button type="button" class="c-auth__key is-del" data-key="del" aria-label="Delete"><span class="material-symbols-outlined" aria-hidden="true">backspace</span></button>
+  </div>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="app.js"></script>
+<script>
+(function () {
+  var pad = document.querySelector('[data-keypad]');
+  if (!pad) return;
+  var code = pad.getAttribute('data-keypad') === 'code';
+  var max = code ? 6 : 10;
+  var digits = pad.getAttribute('data-start') || '';
+  var value = document.querySelector('[data-value]');
+  var cells = document.querySelectorAll('[data-cell]');
+  function fmt(d) {
+    if (d.length <= 3) return d;
+    if (d.length <= 6) return d.slice(0, 3) + ' ' + d.slice(3);
+    return d.slice(0, 3) + ' ' + d.slice(3, 6) + ' ' + d.slice(6);
+  }
+  function render() {
+    if (code) {
+      for (var i = 0; i < cells.length; i++) {
+        cells[i].textContent = digits.charAt(i);
+        cells[i].classList.toggle('is-active', i === digits.length);
+      }
+    } else if (value) {
+      value.textContent = fmt(digits);
+    }
+  }
+  pad.addEventListener('click', function (e) {
+    var key = e.target.closest('[data-key]');
+    if (!key) return;
+    var k = key.getAttribute('data-key');
+    if (k === 'del') digits = digits.slice(0, -1);
+    else if (digits.length < max) digits += k;
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

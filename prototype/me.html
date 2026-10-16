@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone theme-night c-grouped has-wall">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-xbar" aria-hidden="true"><span class="c-xbar__title">Me</span></div>
+
+  <main class="screen-scroll">
+
+    <header class="c-hero c-profile">
+      <span class="c-profile__avatar"><img src="img/avatar.jpg" alt=""></span>
+      <h1 class="c-profile__name">Ana Reyes</h1>
+      <p class="c-profile__tier">Prestige member</p>
+      <nav class="c-actions" aria-label="Shortcuts">
+        <a class="c-action" href="me-bookings.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">event</span></span>Bookings</a>
+        <a class="c-action" href="me-payments.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">receipt_long</span></span>Payments</a>
+        <a class="c-action" href="me-stories.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">photo_library</span></span>Stories</a>
+        <a class="c-action" href="concierge-chat.html?topic=other"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">support_agent</span></span>Help</a>
+      </nav>
+    </header>
+
+    <div class="c-surface">
+
+    <h2 class="c-group__head">Membership</h2>
+    <div class="c-group c-group--lead">
+      <a class="c-group__row c-memrow c-pressable" href="card-benefits.html">
+        <span class="c-minicard" aria-hidden="true"></span>
+        <span class="c-group__main">Prestige<span class="c-group__sub">Member since 2025 · renews Mar 2027</span></span>
+        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+      </a>
+      <a class="c-group__row c-pressable" href="choose-tier.html">
+        <span class="c-group__icon c-ic--gold"><span class="material-symbols-outlined">workspace_premium</span></span>
+        <span class="c-group__main">Upgrade to Elite</span>
+        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+      </a>
+    </div>
+
+    <h2 class="c-group__head">Appearance</h2>
+    <div class="c-group c-group--lead">
+      <div class="c-group__row c-walls" role="radiogroup" aria-label="Wallpaper">
+        <span class="c-group__icon c-ic--indigo"><span class="material-symbols-outlined">wallpaper</span></span>
+        <span class="c-group__main">Wallpaper</span>
+        <span class="c-walls__opts">
+          <button class="c-walls__opt" type="button" role="radio" aria-checked="false" data-wall-opt="dusk" aria-label="Dusk"></button>
+          <button class="c-walls__opt" type="button" role="radio" aria-checked="false" data-wall-opt="lagoon" aria-label="Lagoon"></button>
+          <button class="c-walls__opt" type="button" role="radio" aria-checked="false" data-wall-opt="sunset" aria-label="Sunset"></button>
+          <button class="c-walls__opt" type="button" role="radio" aria-checked="false" data-wall-opt="day" aria-label="Daylight"></button>
+        </span>
+      </div>
+    </div>
+
+    <h2 class="c-group__head">Settings</h2>
+    <div class="c-group c-group--lead">
+      <a class="c-group__row c-pressable" href="me-notifications.html">
+        <span class="c-group__icon c-ic--red"><span class="material-symbols-outlined">notifications</span></span>
+        <span class="c-group__main">Notifications</span>
+        <span class="c-group__value">On</span>
+        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+      </a>
+      <a class="c-group__row c-pressable" href="me-payment-methods.html">
+        <span class="c-group__icon c-ic--green"><span class="material-symbols-outlined">credit_card</span></span>
+        <span class="c-group__main">Payment methods</span>
+        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+      </a>
+      <a class="c-group__row c-pressable" href="me-language.html">
+        <span class="c-group__icon c-ic--blue"><span class="material-symbols-outlined">translate</span></span>
+        <span class="c-group__main">Language</span>
+        <span class="c-group__value">English</span>
+        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+      </a>
+    </div>
+
+    <div class="c-group u-mt-32">
+      <a class="c-group__row is-center is-danger c-pressable" data-root href="welcome.html">Sign out</a>
+    </div>
+
+    </div>
+  </main>
+
+  <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
+    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
+    <a class="c-tabbar__tab" href="explore.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
+    <a class="c-tabbar__tab is-active" href="me.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+  </nav>
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>

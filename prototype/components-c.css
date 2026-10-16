@@ -1,0 +1,655 @@
+/* components-c.css - Agent C: Concierge, Me, onboarding and the launcher.
+   Loaded after components.css. Every color, size and radius comes from tokens.css via var(--...). */
+
+/* ---------- page transition ----------
+   Pushed screens carry .c-push on .phone. Their content slides in from the right over 250ms
+   (the status bar and home indicator stay put). Tab roots never animate. */
+@keyframes c-push-in {
+  from { transform: translateX(32px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+.c-push > :not(.c-statusbar):not(.c-homeindicator) {
+  animation: c-push-in 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .c-push > :not(.c-statusbar):not(.c-homeindicator) { animation: none; }
+}
+/* Pushed screens have no tab bar, so the scroll area does not reserve room for one. */
+.c-push .screen-scroll { padding-bottom: var(--space-8); }
+
+/* ---------- browser surfaces ----------
+   Selection, caret and focus ring take the brand colour instead of the browser default. */
+.phone ::selection { background: var(--accent); color: var(--bg); }
+.phone input { caret-color: var(--accent); }
+.phone :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Press feedback for plain links and buttons: iOS-style fade, not a colored flash. */
+.c-pressable:active { opacity: 0.5; }
+
+/* Numbers in tables and amounts: tabular so columns line up. */
+
+
+/* ---------- grouped screen ----------
+   Settings-style screen: the page sits on the grouped grey, rows are white inset groups. */
+.c-grouped { background: var(--grouped); }
+.c-grouped > .c-statusbar { background: var(--grouped); }
+/* Footnotes sitting on the grey: text-2 is 4.3:1 on this fill, so they take the full text colour. */
+.c-grouped .c-group__head,
+.c-grouped .c-group__sub { color: var(--text); }
+
+/* ---------- c-group ----------
+   Inset grouped list, like iOS Settings. Rows are links or static lines; a hairline sits between rows,
+   inset from the leading edge. .c-group--lead insets the hairline past a 28px icon well. */
+.c-group {
+  margin: 0 var(--gutter);
+  overflow: hidden;
+  border-radius: var(--r-media);
+  background: var(--bg);
+}
+.c-group__head {
+  margin: var(--space-6) var(--gutter) var(--space-2);
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-none) var(--font);
+  color: var(--text-2);
+}
+.c-group__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--size-row-h);
+  padding: var(--space-2) var(--space-4);
+  color: var(--text);
+  text-decoration: none;
+  font: var(--fw-regular) var(--fs-body)/var(--lh-snug) var(--font);
+}
+.c-group__row + .c-group__row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--space-4);
+  right: 0;
+  height: var(--hairline-w);
+  background: var(--hairline);
+}
+.c-group--lead .c-group__row + .c-group__row::before { left: 56px; }
+.c-group__row.is-center { justify-content: center; font-weight: var(--fw-semibold); }
+
+
+.c-group__icon {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-thumb);
+  background: var(--grouped);
+  color: var(--text);
+}
+.c-group__icon .material-symbols-outlined { font-size: var(--icon-md); }
+.c-group__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.c-group__sub {
+  margin: var(--space-half) 0 0;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+.c-group__value {
+  flex: none;
+  font: var(--fw-regular) var(--fs-body)/var(--lh-none) var(--font);
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.c-group__chev {
+  flex: none;
+  font-size: var(--icon-value-chev);
+  color: var(--inactive);
+}
+
+/* Profile header sits as the first group: avatar, name, membership line. */
+.c-profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+.c-profile__avatar {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  border: var(--hairline-w) solid var(--hairline);
+}
+.c-profile__avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.c-profile__name {
+  margin: 0;
+  font: var(--fw-bold) var(--fs-title-md)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+
+
+/* ---------- c-pill ----------
+   Status label: 22px tall, tinted fill, semibold 12px. Tints are mixed from the token colour. */
+.c-pill {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 var(--space-2);
+  border-radius: var(--r-pill);
+  font: var(--fw-semibold) var(--fs-tier)/var(--lh-none) var(--font);
+  white-space: nowrap;
+}
+.c-pill.is-confirmed { background: color-mix(in srgb, var(--success) 8%, var(--bg)); color: var(--open); }
+.c-pill.is-progress { background: color-mix(in srgb, var(--accent) 8%, var(--bg)); color: var(--accent-text); }
+.c-pill.is-neutral { background: var(--grouped); color: var(--text); }
+
+/* ---------- c-quick ----------
+   Concierge quick actions: a 2 x 2 grid of grey tiles, icon top, label bottom. */
+
+
+
+
+/* Plain link rows that use c-list-row (inside a list, not a group). */
+a.c-list-row { color: var(--text); text-decoration: none; }
+.c-amount {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-half);
+}
+
+
+/* ---------- c-chat ----------
+   Message thread: incoming grey bubbles on the left, outgoing ink bubbles on the right.
+   Same-sender bubbles stack with a 2px gap; .is-first opens a new group. */
+.c-chat {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
+  padding: var(--space-3) var(--gutter) var(--space-4);
+}
+.c-chat::-webkit-scrollbar { display: none; }
+.c-chat__stamp {
+  align-self: center;
+  margin: var(--space-2) 0 var(--space-1);
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-none) var(--font);
+  color: var(--text-2);
+}
+.c-chat__from {
+  margin: var(--space-3) 0 var(--space-1);
+  font: var(--fw-regular) var(--fs-caption)/var(--lh-none) var(--font);
+  color: var(--text-2);
+}
+.c-bubble {
+  max-width: 78%;
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--r-media);
+  font: var(--fw-regular) var(--fs-body)/var(--lh-snug) var(--font);
+}
+.c-bubble.is-in {
+  align-self: flex-start;
+  background: var(--grouped);
+  color: var(--text);
+  border-bottom-left-radius: var(--space-1);
+}
+.c-bubble.is-out {
+  align-self: flex-end;
+  background: var(--text);
+  color: var(--bg);
+  border-bottom-right-radius: var(--space-1);
+}
+.c-bubble.is-first { margin-top: var(--space-2-5); }
+
+/* In-thread confirmation card: a bordered panel with receipt rows and one primary button. */
+.c-chat-card {
+  align-self: stretch;
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  border: var(--hairline-w) solid var(--hairline);
+  border-radius: var(--r-media);
+  background: var(--bg);
+}
+.c-chat-card__title {
+  margin: 0;
+  font: var(--fw-bold) var(--fs-body)/var(--lh-tight) var(--font);
+  color: var(--text);
+}
+.c-chat-card__sub {
+  margin: var(--space-half) 0 var(--space-2);
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+.c-chat-card .c-btn { margin-top: var(--space-4); }
+
+/* Composer: plus, rounded field, send. Send stays grey until there is text to send. */
+.c-composer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2-5) var(--gutter) var(--space-7);
+  background: var(--tabbar-bg);
+  border-top: var(--hairline-w) solid var(--hairline);
+}
+.c-composer__plus {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-pill);
+  background: var(--grouped);
+  color: var(--text-2);
+}
+.c-composer__plus .material-symbols-outlined { font-size: var(--icon-md); }
+.c-composer__field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 var(--space-3);
+  border: var(--hairline-w) solid var(--dot);
+  border-radius: var(--r-pill);
+}
+.c-composer__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: var(--fw-regular) var(--fs-body)/var(--lh-none) var(--font);
+  color: var(--text);
+}
+.c-composer__input::placeholder { color: var(--text-2); }
+.c-composer__send {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: var(--on-cta);
+  cursor: pointer;
+}
+.c-composer__send:disabled { background: var(--grouped); color: var(--inactive); cursor: default; }
+.c-composer__send .material-symbols-outlined { font-size: var(--icon-md); }
+
+/* ---------- c-welcome ----------
+   Full-bleed bay photo under a flat navy wash. Status bar is clear; the wordmark sits at the top,
+   the headline and buttons at the bottom. */
+.c-welcome__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.c-welcome__wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(20 18 16 / 0.35) 0%, rgb(20 18 16 / 0) 22%),
+    linear-gradient(0deg, rgb(20 18 16 / 0.86) 0%, rgb(20 18 16 / 0.4) 38%, rgb(20 18 16 / 0) 60%);
+}
+.c-welcome__body {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-6) var(--gutter) var(--space-8);
+  color: var(--bg);
+}
+.c-welcome__mark { font-size: 22px; color: var(--bg); }
+.c-welcome__title {
+  margin: 0 0 var(--space-3);
+  font: var(--fw-bold) var(--fs-large-title)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--bg);
+}
+.c-welcome__sub {
+  margin: 0 0 var(--space-6);
+  font: var(--fw-regular) var(--fs-body)/var(--lh-snug) var(--font);
+  color: var(--bg);
+}
+.c-welcome__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5);
+}
+.c-welcome .c-btn.plain { color: var(--bg); }
+.c-welcome > .c-statusbar { background: transparent; color: var(--bg); }
+
+/* ---------- c-field and c-otp ----------
+   Phone number row with a country prefix; six single-digit code cells. */
+.c-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--size-btn-h);
+  padding: 0 var(--space-4);
+  border-radius: var(--r-control);
+  background: var(--grouped);
+}
+
+.c-field__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: var(--fw-regular) var(--fs-body)/var(--lh-none) var(--font);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.c-field__input::placeholder { color: var(--text-2); }
+
+
+
+
+/* ---------- c-radio and c-tier ----------
+   Selection dot for a tier row. Checked = orange ring around a white centre (zero blur, inset). */
+
+
+
+
+
+
+
+
+
+/* ---------- c-navbar with subtitle ----------
+   Chat header: the name on the first line, what the thread is about underneath. */
+.c-navbar__titles {
+  grid-column: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.c-navbar__titles .c-navbar__title { grid-column: auto; }
+.c-navbar__sub {
+  max-width: 100%;
+  margin: var(--space-half) 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: var(--fw-regular) var(--fs-tier)/var(--lh-none) var(--font);
+  color: var(--text-2);
+}
+
+/* ---------- c-switch ----------
+   iOS-style toggle: a native checkbox drawn as a pill with a sliding knob. */
+.c-switch {
+  flex: none;
+  position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 51px;
+  height: 31px;
+  margin: 0;
+  border-radius: var(--r-pill);
+  background: var(--inactive);
+  cursor: pointer;
+  transition: background 200ms ease-out;
+}
+.c-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: var(--r-pill);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 200ms ease-out;
+}
+.c-switch:checked { background: var(--accent); }
+.c-switch:checked::after { transform: translateX(20px); }
+
+/* ---------- c-pick ----------
+   Checkmark list row. A hidden radio drives the check, which sits at the trailing edge. */
+.c-pick { cursor: pointer; }
+.c-pick:focus-within { outline: 2px solid var(--accent); outline-offset: -2px; }
+.c-pick__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.c-pick__mark {
+  flex: none;
+  font-size: var(--icon-lg);
+  color: var(--accent);
+  visibility: hidden;
+}
+.c-pick__input:checked ~ .c-pick__mark { visibility: visible; }
+
+/* ---------- c-sheet--up ----------
+   A sheet over a dimmed parent page: the panel slides up and the scrim fades in, 250ms. */
+@keyframes c-sheet-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes c-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.c-sheet--up .c-sheet__panel { animation: c-sheet-up 250ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.c-sheet--up .c-sheet__scrim { animation: c-fade-in 250ms ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .c-sheet--up .c-sheet__panel,
+  .c-sheet--up .c-sheet__scrim { animation: none; }
+}
+
+/* ---------- choose-tier ----------
+   The whole screen takes the colour of the chosen pass (sand, navy, black). One card shows at a time
+   in a full-width snap row; a segmented control on top is the only picker. Price and a one-line pitch
+   sit on the tinted ground; the included list lives on a white sheet that rises over it. */
+.phone.c-tiers {
+  --tier-ground: var(--tier-premium-bg);
+  --tier-ink: var(--text);
+  --tier-ink-2: var(--text-2);
+  --tier-seg: rgb(0 0 0 / 0.06);
+  background: var(--tier-ground);
+  transition: background-color 300ms ease-out;
+}
+.phone.c-tiers[data-tier="prestige"] {
+  --tier-ground: var(--sea);
+  --tier-ink: var(--text);
+  --tier-ink-2: var(--text-2);
+  --tier-seg: rgb(0 0 0 / 0.06);
+}
+.phone.c-tiers[data-tier="elite"] {
+  --tier-ground: var(--tier-elite-bg);
+  --tier-ink: var(--bg);
+  --tier-ink-2: rgb(255 255 255 / 0.62);
+  --tier-seg: rgb(255 255 255 / 0.12);
+}
+.c-tiers > .c-statusbar,
+.c-tiers > .c-navbar { background: transparent; color: var(--tier-ink); transition: color 300ms ease-out; }
+.c-tiers .c-navbar__back,
+.c-tiers .c-navbar__title { color: var(--tier-ink); }
+.c-tiers .screen-scroll { display: flex; flex-direction: column; padding-bottom: 0; background: transparent; }
+
+.c-tiers__seg {
+  position: relative;
+  display: flex;
+  height: 34px;
+  margin: var(--space-2) var(--gutter) 0;
+  padding: 2px;
+  border-radius: 9px;
+  background: var(--tier-seg);
+}
+.c-tiers__seg-input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.c-tiers__seg-label {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--fw-medium) var(--fs-callout)/var(--lh-none) var(--font);
+  color: var(--tier-ink);
+  cursor: pointer;
+  transition: color 200ms ease-out;
+}
+.c-tiers__seg-input:checked + .c-tiers__seg-label { font-weight: var(--fw-semibold); color: var(--text); }
+.c-tiers__seg-input:focus-visible + .c-tiers__seg-label { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 7px; }
+/* The white thumb slides under the checked label. */
+.c-tiers__thumb {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc((100% - 4px) / 3);
+  border-radius: 7px;
+  background: var(--bg);
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.12), 0 1px 1px rgb(0 0 0 / 0.04);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1);
+}
+.c-tiers[data-tier="prestige"] .c-tiers__thumb { transform: translateX(100%); }
+.c-tiers[data-tier="elite"] .c-tiers__thumb { transform: translateX(200%); }
+
+.c-tiers__row {
+  display: flex;
+  margin-top: var(--space-6);
+  padding: 4px 0 44px;
+  margin-bottom: -16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.c-tiers__row::-webkit-scrollbar { display: none; }
+.c-tiers__slide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+.c-tiers__slide .c-mcard { width: calc(100% - 2 * var(--space-8)); max-width: 330px; }
+/* Token-free exception: a deep, soft lift so the card floats on the tinted ground. */
+.c-tiers__slide .c-mcard { box-shadow: 0 18px 30px -12px rgb(0 0 0 / 0.45), 0 2px 6px rgb(0 0 0 / 0.12); }
+/* On the navy ground the Prestige card needs a faint rim and a lift on its name to keep its edge. */
+.c-tiers__slide .c-mcard.is-prestige { outline: 1px solid rgb(255 255 255 / 0.22); outline-offset: -1px; }
+.c-tiers__slide .c-mcard.is-prestige .c-mcard__name { text-shadow: 0 1px 3px rgb(11 37 69 / 0.8); }
+.c-tiers__slide .c-mcard.is-prestige .c-wordmark {
+  background: none;
+  color: var(--mat-prestige-ink);
+  -webkit-text-fill-color: var(--mat-prestige-ink);
+  text-shadow: 0 1px 2px rgb(11 37 69 / 0.9);
+}
+
+.c-tiers__offer { padding: 0 var(--gutter) var(--space-8); text-align: center; }
+.c-tiers__price {
+  margin: 0;
+  color: var(--tier-ink);
+  transition: color 300ms ease-out;
+}
+.c-tiers__amt {
+  font: var(--fw-bold) 36px/1.1 var(--font);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.c-tiers__per { margin-left: 4px; font: var(--fw-regular) var(--fs-body)/var(--lh-none) var(--font); color: var(--tier-ink-2); }
+
+
+.c-tiers__sheet {
+  flex: 1 0 auto;
+  padding: var(--space-6) var(--gutter) var(--space-6);
+  border-radius: 22px 22px 0 0;
+  background: var(--bg);
+}
+.c-tiers__perks-head {
+  margin: 0 0 var(--space-2);
+  font: var(--fw-semibold) var(--fs-footnote)/var(--lh-none) var(--font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.c-tiers__perk-stack { display: grid; }
+.c-tiers__perks {
+  grid-area: 1 / 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease-out, visibility 150ms ease-out;
+}
+.c-tiers__perks.is-on { opacity: 1; visibility: visible; }
+.c-tiers__perk {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 9px 0;
+  font: var(--fw-regular) var(--fs-body)/var(--lh-snug) var(--font);
+  color: var(--text);
+}
+.c-tiers__perk .material-symbols-outlined {
+  flex: none;
+  margin-top: 1px;
+  font-size: 20px;
+  color: var(--accent);
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 20;
+}
+
+
+
+.c-tiers__bar {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5);
+  padding: var(--space-3) var(--gutter) calc(var(--space-7) + env(safe-area-inset-bottom, 0px));
+  background: var(--bg);
+}
+.c-tiers__bar .c-btn { height: 52px; }
+.c-tiers__note {
+  margin: 0;
+  text-align: center;
+  font: var(--fw-regular) var(--fs-refresh)/var(--lh-none) var(--font);
+  color: var(--text-2);
+}
+.c-tiers__slide .c-mcard.is-prestige .c-mcard__name { color: var(--bg); }
+
+/* ---------- Me header (c-mehero) ----------
+   Who you are and what the membership has done for you, on the deep bay field. */
+
+
+
+
+
+
+
+
+
+

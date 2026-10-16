@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Category</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone is-pushed">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-navbar">
+    <a data-back class="c-navbar__back" href="explore.html" aria-label="Back to Explore">
+      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <h1 class="c-navbar__title" data-title>Hotels</h1>
+  </div>
+
+  <main class="screen-scroll">
+
+    <div class="c-chiprow u-mt-12">
+      <a class="c-chip" href="category.html?c=hotels" data-c="hotels"><span class="material-symbols-outlined c-chip__icon">hotel</span>Hotels</a>
+      <a class="c-chip" href="category.html?c=food" data-c="food"><span class="material-symbols-outlined c-chip__icon">restaurant</span>Food</a>
+      <a class="c-chip" href="category.html?c=beaches" data-c="beaches"><span class="material-symbols-outlined c-chip__icon">beach_access</span>Beaches</a>
+      <a class="c-chip" href="category.html?c=water-sports" data-c="water-sports"><span class="material-symbols-outlined c-chip__icon">sailing</span>Water sports</a>
+      <a class="c-chip" href="category.html?c=nature" data-c="nature"><span class="material-symbols-outlined c-chip__icon">forest</span>Nature</a>
+      <a class="c-chip" href="category.html?c=nightlife" data-c="nightlife"><span class="material-symbols-outlined c-chip__icon">local_bar</span>Nightlife</a>
+    </div>
+
+    <p class="c-count" data-count></p>
+
+    <div class="u-gutter" data-list></div>
+
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script>
+  (function () {
+    var key = queryParam('c');
+    if (!CATEGORIES[key]) key = 'hotels';
+    var cat = CATEGORIES[key];
+    var items = placesIn(key);
+
+    document.title = 'Subic.Life - ' + cat.title;
+    document.querySelector('[data-title]').textContent = cat.title;
+    document.querySelectorAll('.c-chip').forEach(function (chip) {
+      chip.classList.toggle('is-selected', chip.dataset.c === key);
+    });
+
+    var count = document.querySelector('[data-count]');
+    var list = document.querySelector('[data-list]');
+
+    if (!items.length) {
+      count.hidden = true;
+      list.innerHTML =
+        '<div class="c-empty">' +
+          '<span class="c-empty__icon"><span class="material-symbols-outlined">' + cat.icon + '</span></span>' +
+          '<h2 class="c-empty__title">No partners yet</h2>' +
+          '<p class="c-empty__sub">We are adding ' + cat.title.toLowerCase() + ' partners soon.</p>' +
+        '</div>';
+      return;
+    }
+
+    count.textContent = items.length + (items.length === 1 ? ' partner' : ' partners') + ' in Subic Bay';
+    list.innerHTML = items.map(function (p) {
+      return '<a class="c-list-row" href="place.html?p=' + p.id + '">' +
+        '<div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="' + p.thumb + '" alt="' + p.name + '"></div></div>' +
+        '<div class="c-list-row__main">' +
+          '<p class="c-list-row__title">' + p.name + '</p>' +
+          '<p class="c-list-row__sub">' + p.category + ' · ' + p.area + ' · ★ ' + p.rating + '</p>' +
+        '</div>' +
+        '<div class="c-list-row__trail"><span class="c-list-row__offer">' + p.offerShort + '</span></div>' +
+      '</a>';
+    }).join('');
+  })();
+</script>
+</body>
+</html>

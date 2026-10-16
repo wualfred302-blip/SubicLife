@@ -1,0 +1,370 @@
+/* components-f.css - map (Round 4, Agent F). Live Leaflet layer, offer pins, the card carousel, the locate dot,
+   the list sheet and the Leaflet skin. Tokens only. Loaded after components.css. Uses the c- prefix. */
+
+/* ---------- stacking inside .c-map ----------
+   .c-map is z 0 and holds, bottom to top: the static SVG fallback, the Leaflet layer (its own stacking
+   context so its panes stay below the controls), the pins and the locate dot, then the controls and carousel. */
+.c-map .c-map__svg { position: absolute; inset: 0; }
+.c-map.is-nomap .c-map__svg { display: none; }
+.c-fmap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  isolation: isolate;
+  background: transparent;
+  font-family: var(--font);
+}
+.c-fmap.leaflet-container { background: transparent; outline: 0; }
+/* Softer base map so the orange pins stay the loudest thing on screen. Tile pane only. */
+/* Street map only: softer land and roads so the orange pins lead. Satellite stays unfiltered. */
+.c-map.is-street .c-fmap .leaflet-tile-pane { filter: grayscale(0.85) brightness(1.04) contrast(0.92); }
+.c-map .c-map-controls { z-index: 3; }
+.c-map.is-static .c-fmap .leaflet-control-zoom { display: none; }
+
+/* ---------- attribution (required by Esri) ---------- */
+.c-fmap .leaflet-control-attribution {
+  margin: 0 var(--space-2) var(--space-2) 0;
+  padding: var(--space-half) var(--space-1-5);
+  border-radius: var(--r-thumb);
+  background: var(--tabbar-bg);
+  color: var(--text-2);
+  font: var(--fw-regular) 10px/var(--lh-snug) var(--font);
+}
+.c-fmap .leaflet-control-attribution a { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---------- top overlay: search and chips over the map, below the status bar ----------
+   Desktop shows the 48px status bar, so the overlay starts below it. In device mode the shell hides the fake
+   status bar and the overlay starts at the safe-area inset. */
+.c-map-topbar {
+  position: absolute;
+  top: max(env(safe-area-inset-top, 0px), var(--size-statusbar-h));
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding-bottom: var(--space-2-5);
+  background: var(--tabbar-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: var(--hairline-w) solid var(--hairline);
+  box-shadow: var(--shadow-sm);
+}
+html.is-device .c-map-topbar { top: env(safe-area-inset-top, 0px); }
+
+/* ---------- pins: 32px orange circle with a 20% badge; the selected pin turns dark and opens its offer above ----------
+   The button stays 32px so taps land on the circle. The offer pill sits outside the box and ignores pointer
+   events, so it never blocks a neighbouring pin. */
+.c-fpins {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 180ms ease-out;
+}
+.c-fpins.is-zooming { opacity: 0; }
+@keyframes c-fpin-in {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.c-fpin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--bg);
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate(-50%, -50%);
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 200ms ease-out, visibility 0s linear 0s;
+  animation: c-fpin-in 360ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+.c-fpin__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--bg);
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  box-shadow: var(--shadow-md);
+  transition: background-color 220ms ease-out;
+}
+.c-fpin__dot .material-symbols-outlined {
+  font-size: var(--icon-xs);
+  line-height: var(--lh-none);
+  color: var(--bg);
+}
+.c-fpin__badge {
+  position: absolute;
+  top: -7px;
+  right: -10px;
+  padding: 1px 4px;
+  border: var(--hairline-w) solid var(--hairline);
+  border-radius: var(--r-pill);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  color: var(--accent-text);
+  font: var(--fw-bold) 10px/var(--lh-none) var(--font);
+  white-space: nowrap;
+}
+.c-fpin__offer {
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 50%;
+  display: none;
+  align-items: flex-start;
+  gap: var(--space-1-5);
+  width: max-content;
+  max-width: 230px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--r-control);
+  background: var(--text);
+  box-shadow: var(--shadow-md);
+  color: var(--bg);
+  font: var(--fw-semibold) var(--fs-footnote)/var(--lh-snug) var(--font);
+  letter-spacing: var(--track-tight);
+  text-align: left;
+  white-space: normal;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.c-fpin__offer .material-symbols-outlined {
+  font-size: var(--icon-xs);
+  line-height: var(--lh-snug);
+  color: var(--bg);
+}
+.c-fpin.is-selected { z-index: 3; }
+.c-fpin.is-selected .c-fpin__dot { background: var(--text); }
+.c-fpin.is-selected .c-fpin__badge { display: none; }
+.c-fpin.is-selected .c-fpin__offer { display: flex; }
+.c-fpin.is-off {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: opacity 200ms ease-out, transform 200ms ease-out, visibility 0s linear 200ms;
+}
+.c-fpin:focus-visible .c-fpin__dot { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Declutter: a pin that would sit on another shown pin fades out; its card and list row remain. */
+.c-fpin.is-cull {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease-out, visibility 0s linear 180ms;
+}
+
+/* ---------- locate dot: "you are here" beside Harbor Point ---------- */
+@keyframes c-fme-pulse {
+  0%   { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes c-fme-in {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+.c-fme {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 3px solid var(--bg);
+  border-radius: var(--r-pill);
+  background: var(--text);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+}
+.c-fme[hidden] { display: none; }
+.c-fme:not([hidden]) { animation: c-fme-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+.c-fme::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: var(--text);
+  opacity: 0.35;
+  animation: c-fme-pulse 1.8s ease-out infinite;
+}
+.c-map-controls__btn.is-active { color: var(--accent); }
+.c-map-controls__btn:disabled { color: var(--inactive); cursor: default; }
+.c-map-controls__btn:focus-visible,
+.c-map-topbar__list:focus-visible,
+.c-fcard .c-btn:focus-visible,
+.c-fcard__dir:focus-visible,
+.c-fsheet__done:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- carousel: swipe, scroll-snap, synced with the pins ---------- */
+.c-fcarousel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--size-tabbar-h) + var(--space-3));
+  z-index: 3;
+}
+.c-fcarousel__track {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-1) var(--gutter);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+}
+.c-fcarousel__track::-webkit-scrollbar { display: none; }
+.c-fcard {
+  flex: none;
+  width: 310px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg);
+  border: var(--hairline-w) solid var(--hairline);
+  border-radius: var(--r-media);
+  box-shadow: var(--shadow-card);
+}
+.c-fcard[hidden] { display: none; }
+.c-fcard__top { display: flex; gap: var(--space-3); min-width: 0; }
+.c-fcard__photo {
+  flex: none;
+  width: var(--size-photo);
+  height: var(--size-photo);
+  overflow: hidden;
+  border-radius: var(--r-thumb);
+  background: var(--grouped);
+}
+.c-fcard__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.c-fcard__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-half);
+}
+.c-fcard__name {
+  margin: 0;
+  font: var(--fw-semibold) var(--fs-body)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+.c-fcard__offer {
+  margin: 0;
+  font: var(--fw-semibold) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--accent-text);
+}
+.c-fcard__meta {
+  margin: 0;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+.c-fcard__actions {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-2);
+}
+.c-fcard .c-btn.primary {
+  flex: 1;
+  height: var(--size-control);
+  font-size: var(--fs-callout);
+}
+.c-fcard__dir {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-control);
+  height: var(--size-control);
+  border-radius: var(--r-pill);
+  background: var(--search-fill);
+  color: var(--text);
+  text-decoration: none;
+}
+.c-fcard__dir .material-symbols-outlined {
+  font-size: var(--icon-lg);
+  line-height: var(--lh-none);
+}
+
+/* ---------- list sheet: partners in view, nearest first ---------- */
+.c-sheet[hidden] { display: none; }
+.c-fsheet-wrap .c-sheet__scrim { border: 0; padding: 0; cursor: pointer; }
+.c-fsheet {
+  max-height: 72%;
+  padding-bottom: var(--space-6);
+  box-shadow: var(--shadow-pass);
+}
+.c-fsheet__head {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: var(--size-navbar-h);
+  padding: 0 var(--gutter);
+  border-bottom: var(--hairline-w) solid var(--hairline);
+}
+.c-fsheet__title {
+  margin: 0;
+  text-align: center;
+  font: var(--fw-semibold) var(--fs-body)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+.c-fsheet__done {
+  justify-self: end;
+  min-width: var(--size-control);
+  height: var(--size-control);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
+  color: var(--accent-text);
+  cursor: pointer;
+}
+.c-fsheet__list {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 0 var(--gutter);
+  overflow-y: auto;
+  list-style: none;
+  scrollbar-width: none;
+}
+.c-fsheet__list::-webkit-scrollbar { display: none; }
+.c-fsheet__list li[hidden] { display: none; }
+.c-fsheet__list .c-list-row { min-height: var(--size-list-row-h); }
+.c-fsheet__list a.c-list-row { color: var(--text); text-decoration: none; }
+.c-fsheet__list .c-list-row__chev { font-size: var(--icon-value-chev); }
+.c-map-topbar__list.is-open { background: var(--text); border-color: var(--text); color: var(--bg); }
+
+/* ---------- empty states: no pins match the filter ---------- */
+.c-fempty {
+  margin: 0 var(--gutter) var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg);
+  border: var(--hairline-w) solid var(--hairline);
+  border-radius: var(--r-media);
+  box-shadow: var(--shadow-card);
+  font: var(--fw-medium) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+  text-align: center;
+}
+.c-fempty[hidden] { display: none; }
+.c-fsheet__none {
+  padding: var(--space-6) 0;
+  text-align: center;
+  font: var(--fw-regular) var(--fs-callout)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}

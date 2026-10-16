@@ -1,0 +1,1496 @@
+/* components.css - one block per component. Class names prefixed c-.
+   Every color, size and radius comes from tokens.css via var(--...). */
+
+/* ---------- c-statusbar ----------
+   Top row of the phone: time on the left, signal/wifi/battery on the right.
+   --clear removes the background so a map can show through. */
+.c-statusbar {
+  position: relative;
+  z-index: 10;
+  flex: none;
+  height: var(--size-statusbar-h);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-7) 0;
+  background: var(--bg);
+  color: var(--text);
+  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+}
+.c-statusbar--clear { background: transparent; }
+.c-statusbar__icons { display: flex; align-items: center; gap: var(--space-1-5); }
+.c-statusbar__icons .material-symbols-outlined { font-size: var(--icon-status); }
+.c-statusbar__icons .material-symbols-outlined:last-child { font-size: var(--icon-lg); }
+
+/* ---------- c-largetitle (title + 32px right slot) ----------
+   Explore and Card share this exactly. The right slot is always 32px: the avatar on Explore,
+   the "..." button on Card. */
+.c-largetitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter) var(--space-4);
+}
+.c-largetitle__title {
+  margin: 0;
+  font: var(--fw-bold) var(--fs-large-title)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+.c-largetitle__avatar {
+  flex: none;
+  width: var(--size-avatar);
+  height: var(--size-avatar);
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  border: var(--hairline-w) solid var(--hairline);
+}
+.c-largetitle__avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+
+
+/* ---------- c-search ----------
+   The one search field: 40px, search fill, 16px icon, 15px text. Explore and the map top bar use it
+   unchanged. The map adds only the trailing clear X (.c-search__clear). */
+.c-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+  height: var(--size-search-h);
+  padding: 0 var(--space-2-5);
+  border-radius: var(--r-control);
+  background: var(--search-fill);
+}
+.c-search__icon { font-size: var(--icon-search); color: var(--inactive); }
+.c-search > .material-symbols-outlined {
+  width: var(--icon-search);
+  height: var(--icon-search);
+  font-size: var(--icon-search);
+  line-height: var(--lh-none);
+}
+.c-search__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: var(--fw-regular) var(--fs-callout)/var(--lh-none) var(--font);
+  color: var(--text);
+}
+.c-search__input::placeholder { color: var(--inactive); }
+.c-search__clear {
+  display: flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--inactive);
+  cursor: pointer;
+}
+.c-search__clear .material-symbols-outlined { font-size: var(--icon-md); }
+
+/* ---------- c-chip ----------
+   Category filter pill. .is-selected = near-black fill, white text. */
+.c-chip {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: var(--space-1);
+  height: var(--size-chip-h);
+  padding: 0 var(--space-3);
+  border: var(--border-w) solid var(--hairline);
+  border-radius: var(--r-pill);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-footnote);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-none);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.c-chip__icon { font-size: var(--icon-chip); color: var(--text-2); }
+.c-chip .material-symbols-outlined {
+  width: var(--icon-chip);
+  height: var(--icon-chip);
+  font-size: var(--icon-chip);
+  line-height: var(--lh-none);
+}
+.c-chip.is-selected { background: var(--text); border-color: var(--text); color: var(--bg); }
+.c-chip.is-selected .c-chip__icon { color: var(--bg); }
+
+/* ---------- c-chiprow ----------
+   Horizontal, scrollable row of chips. --compact drops the bottom padding (Map top bar). */
+.c-chiprow {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding: 0 var(--gutter) var(--space-4);
+  scrollbar-width: none;
+}
+.c-chiprow::-webkit-scrollbar { display: none; }
+.c-chiprow--compact { padding: var(--space-half) var(--gutter) 0; }
+
+/* ---------- c-section-head (title + optional text link) ----------
+   Section title 20 semibold, 32px above, 12px below. No hairline above it. */
+.c-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter);
+  margin: var(--space-8) 0 var(--space-3);
+}
+.c-section-head__title {
+  margin: 0;
+  font: var(--fw-semibold) var(--fs-section)/1.2 var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+.c-section-head__link {
+  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* ---------- c-carousel ----------
+   Horizontal snap row. Left padding = gutter, so the first card lines up with the title.
+   Right side has no clip, so cards bleed off the edge while scrolling. */
+.c-carousel {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  padding: 0 var(--gutter);
+  scroll-padding-inline: var(--gutter);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.c-carousel::-webkit-scrollbar { display: none; }
+
+/* ---------- c-place-card (carousel: 168 wide, 3:4 photo) ---------- */
+.c-place-card {
+  flex: none;
+  width: var(--size-card-w);
+  scroll-snap-align: start;
+}
+.c-place-card__photo {
+  aspect-ratio: 3 / 4;
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+  border-radius: var(--r-media);
+  background: var(--grouped);
+}
+.c-place-card__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.c-place-card__name {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: var(--fw-semibold) var(--fs-callout)/var(--lh-tight) var(--font);
+  color: var(--text);
+}
+.c-place-card__meta {
+  margin: var(--space-1) 0 0;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-tight) var(--font);
+  color: var(--text-2);
+}
+.c-place-card__offer {
+  margin: var(--space-1) 0 0;
+  font: var(--fw-semibold) var(--fs-footnote)/var(--lh-tight) var(--font);
+  color: var(--accent-text);
+}
+
+/* ---------- c-list-row ----------
+   The one list row. 48px leading slot (thumbnail, or a 24px outline icon), title 15 semibold and a
+   one-line subtitle 13 grey, then a trailing value, member offer or text action, and an optional
+   chevron. Min height 64. Hairline between rows, inset to the text column. */
+.c-list-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--size-list-row-h);
+  padding: var(--space-2) 0;
+}
+.c-list-row::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--size-thumb) + var(--space-3));
+  right: 0;
+  bottom: 0;
+  height: var(--hairline-w);
+  background: var(--hairline);
+}
+.c-list-row:last-child::after { display: none; }
+.c-list-row__lead {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-thumb);
+  height: var(--size-thumb);
+}
+.c-list-row__thumb {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--r-thumb);
+  background: var(--grouped);
+}
+.c-list-row__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.c-list-row__icon {
+  font-size: var(--icon-benefit);
+  color: var(--text);
+}
+.c-list-row__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.c-list-row__title {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: var(--fw-semibold) var(--fs-callout)/var(--lh-snug) var(--font);
+  color: var(--text);
+}
+.c-list-row__sub {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+.c-list-row__trail {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.c-list-row__value {
+  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  white-space: nowrap;
+}
+.c-list-row__offer {
+  font: var(--fw-semibold) var(--fs-footnote)/var(--lh-none) var(--font);
+  color: var(--accent-text);
+  white-space: nowrap;
+}
+.c-list-row__action {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.c-list-row__chev {
+  font-size: var(--icon-value-chev);
+  color: var(--inactive);
+}
+
+/* ---------- c-member-strip ----------
+   Explore: membership presence under the chip row. 64px plain row, no box. A 56 x 35 mini membership
+   card, the tier name and the saved total, then a chevron. Hairline under it, inset to the gutter. */
+
+
+
+
+
+
+
+
+/* ---------- c-tabbar ----------
+   Five equal tabs pinned to the bottom of the phone. 24px icons at weight 300, 11px 500 labels.
+   Active tab = orange label and a filled icon, the same for every tab. */
+.c-tabbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  height: var(--size-tabbar-h);
+  padding: var(--space-1-5) var(--space-half) 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: start;
+  background: var(--tabbar-bg);
+  border-top: var(--hairline-w) solid var(--hairline);
+  backdrop-filter: blur(20px);
+}
+.c-tabbar__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-half);
+  padding: var(--space-half) 0;
+  color: var(--inactive);
+  text-decoration: none;
+  font: var(--fw-medium) var(--fs-tab)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+}
+.c-tabbar__icon {
+  font-size: var(--size-tab-icon);
+  background: none;
+}
+/* Every tab: inactive = grey, icon weight 300. Active = orange icon and label, icon weight 500, not filled. */
+.c-tabbar__tab.is-active { color: var(--accent); }
+.c-tabbar__tab.is-active .c-tabbar__icon { font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 20; }
+
+/* ---------- c-homeindicator ----------
+   The 134x5 bar at the bottom edge of the phone. */
+.c-homeindicator {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-2);
+  z-index: 50;
+  width: var(--size-homeind-w);
+  height: var(--size-homeind-h);
+  transform: translateX(-50%);
+  border-radius: var(--r-pill);
+  background: var(--home-ind);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ---------- c-map ----------
+   Full-bleed map layer behind the top bar, pins and sheet. Holds the inline SVG. */
+.c-map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--map-bg);
+}
+.c-map__svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- c-pin ----------
+   Offer tag on the map. Positioned with left/top; the tip sits on the point.
+   .is-selected = orange (the accent token), white text, slightly larger. */
+.c-pin {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: var(--size-pin-h);
+  padding: var(--space-1) var(--space-2);
+  border: var(--hairline-w) solid var(--hairline);
+  border-radius: var(--r-pill);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  font: var(--fw-semibold) var(--fs-pin)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translate(-50%, -100%);
+}
+.c-pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--size-tail-h) * -1);
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: var(--size-tail-h) var(--size-tail-x) 0;
+  border-color: var(--bg) transparent transparent transparent;
+}
+.c-pin__icon { font-size: var(--icon-xs); color: var(--text-2); }
+.c-pin .material-symbols-outlined {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+  font-size: var(--icon-xs);
+  line-height: var(--lh-none);
+}
+.c-pin.is-selected {
+  z-index: 4;
+  height: var(--size-pin-h-sel);
+  padding: 0 var(--space-3);
+  border: var(--border-w) solid var(--bg);
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: var(--shadow-md);
+  font-size: var(--fs-footnote);
+  font-weight: var(--fw-bold);
+  transform: translate(-50%, -100%) scale(var(--pin-scale));
+}
+.c-pin.is-selected::after { border-top-color: var(--accent); }
+.c-pin.is-selected .c-pin__icon { font-size: var(--icon-xs); color: var(--bg); }
+
+/* ---------- c-map-controls ----------
+   Stacked white button group, 44px wide, top right: locate-me and layers. Same shadow as the place card. */
+.c-map-controls {
+  position: absolute;
+  right: var(--gutter);
+  top: var(--size-controls-top);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg);
+  border: var(--hairline-w) solid var(--hairline);
+  border-radius: var(--r-control);
+  box-shadow: var(--shadow-card);
+}
+.c-map-controls__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-control);
+  height: var(--size-control);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+}
+.c-map-controls__btn + .c-map-controls__btn { border-top: var(--hairline-w) solid var(--hairline); }
+.c-map-controls__btn:hover { background: var(--grouped); }
+.c-map-controls .material-symbols-outlined {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+  font-size: var(--icon-lg);
+  line-height: var(--lh-none);
+}
+
+/* ---------- c-place-sheet ----------
+   Floating card for the selected place, sitting just above the tab bar. 16px padding, 72px photo,
+   title, meta, offer and open status, then two c-btn side by side (12px gap), then the page dots.
+   Hidden with the hidden attribute (the close X sets it). */
+.c-place-sheet {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: calc(var(--size-tabbar-h) + var(--space-3));
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--bg);
+  border: var(--hairline-w) solid var(--hairline);
+  border-radius: var(--r-media);
+  box-shadow: var(--shadow-card);
+}
+.c-place-sheet[hidden] { display: none; }
+.c-place-sheet__top { position: relative; display: flex; gap: var(--space-3); }
+.c-place-sheet__photo {
+  flex: none;
+  width: var(--size-photo);
+  height: var(--size-photo);
+  overflow: hidden;
+  border-radius: var(--r-thumb);
+  background: var(--grouped);
+}
+.c-place-sheet__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.c-place-sheet__info { flex: 1; min-width: 0; padding-right: var(--space-6); }
+.c-place-sheet__name {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: var(--fw-semibold) var(--fs-body)/var(--lh-tight) var(--font);
+  color: var(--text);
+}
+.c-place-sheet__meta,
+.c-place-sheet__hours {
+  margin: var(--space-half) 0 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-tight) var(--font);
+  color: var(--text-2);
+}
+.c-place-sheet__meta strong { color: var(--text); font-weight: var(--fw-medium); }
+.c-place-sheet__offer {
+  margin: var(--space-1) 0 0;
+  font: var(--fw-semibold) var(--fs-footnote)/var(--lh-tight) var(--font);
+  color: var(--accent-text);
+}
+.c-place-sheet__hours b { color: var(--open); font-weight: var(--fw-medium); }
+.c-place-sheet__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-close);
+  height: var(--size-close);
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--grouped);
+  color: var(--inactive);
+  cursor: pointer;
+}
+.c-place-sheet__close .material-symbols-outlined { font-size: var(--icon-sm); }
+.c-place-sheet__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.c-place-sheet__dots { display: flex; justify-content: center; gap: var(--space-1-5); }
+.c-place-sheet__dots span {
+  width: var(--size-dot);
+  height: var(--size-dot);
+  border-radius: var(--r-pill);
+  background: var(--dot);
+}
+.c-place-sheet__dots .is-on { background: var(--text); }
+
+/* ---------- c-btn ----------
+   One button: 48px tall, control radius, 16 semibold, full width of its container.
+   .primary = orange fill, white text. .secondary = search-fill grey, near-black text.
+   .plain = text only, near-black. */
+.c-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1-5);
+  width: 100%;
+  height: var(--size-btn-h);
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: var(--r-control);
+  font: var(--fw-semibold) var(--fs-button)/var(--lh-none) var(--font);
+  text-decoration: none;
+  cursor: pointer;
+}
+.c-btn .material-symbols-outlined {
+  width: var(--icon-btn);
+  height: var(--icon-btn);
+  font-size: var(--icon-btn);
+  line-height: var(--lh-none);
+}
+.c-btn.primary { background: var(--cta-fill); color: var(--on-cta); }
+.c-btn.primary:active { background: var(--cta-press); }
+.c-btn.secondary { background: var(--search-fill); color: var(--text); }
+.c-btn.secondary:active { background: var(--hairline); }
+.c-btn.plain { background: none; color: var(--text); }
+.c-btn.plain:active { opacity: 0.5; }
+
+/* ---------- c-map-topbar ----------
+   Map header: the c-search field and a 40px square List button, then the category chips.
+   Sits in the flow under the status bar, not over the map. */
+.c-map-topbar {
+  position: relative;
+  z-index: 10;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5);
+  padding: var(--space-1) 0 var(--space-2-5);
+  background: var(--tabbar-bg);
+  border-bottom: var(--hairline-w) solid var(--hairline);
+  box-shadow: var(--shadow-sm);
+}
+.c-map-topbar__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2-5);
+  padding: 0 var(--gutter);
+}
+.c-map-topbar__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--size-search-h);
+  height: var(--size-search-h);
+  padding: 0;
+  border: var(--hairline-w) solid var(--hairline);
+  border-radius: var(--r-control);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+}
+.c-map-topbar__list .material-symbols-outlined {
+  font-size: var(--icon-lg);
+  line-height: var(--lh-none);
+}
+
+/* ---------- c-navbar ----------
+   Row under the status bar. Back chevron (or a text action such as "Done") on the left,
+   centered title, optional icon button on the right. Grid keeps the title centered. */
+.c-navbar {
+  position: relative;
+  z-index: 10;
+  flex: none;
+  height: var(--size-navbar-h);
+  display: grid;
+  grid-template-columns: var(--size-control) 1fr var(--size-control);
+  align-items: center;
+  padding: 0 var(--space-5);
+  background: var(--bg);
+}
+.c-navbar__back {
+  grid-column: 1;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  height: var(--size-control);
+  margin-left: calc(var(--space-1-5) * -1);
+  padding: 0 var(--space-1);
+  border: 0;
+  background: none;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.c-navbar__back:active,
+.c-navbar__right:active { opacity: 0.4; }
+.c-navbar__chevron {
+  width: var(--icon-nav);
+  height: var(--icon-nav);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.c-navbar__back.is-text {
+  font: var(--fw-semibold) var(--fs-body)/var(--lh-none) var(--font);
+  color: var(--text);
+}
+.c-navbar__title {
+  grid-column: 2;
+  margin: 0;
+  font: var(--fw-semibold) var(--fs-body)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+}
+.c-navbar__right {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-navbar-btn);
+  height: var(--size-navbar-btn);
+  border-radius: var(--r-pill);
+  color: var(--text);
+  text-decoration: none;
+}
+.c-navbar__right .material-symbols-outlined {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+  font-size: var(--icon-lg);
+  line-height: var(--lh-none);
+}
+
+/* ---------- c-wordmark ----------
+   "Subic" bold and ".Life" regular, 15px. Takes the colour of the surface it sits on. */
+.c-wordmark {
+  font: var(--fw-bold) var(--fs-wordmark)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-wordmark);
+  white-space: nowrap;
+}
+.c-wordmark span { font-weight: var(--fw-regular); }
+
+/* ---------- c-pass ----------
+   Apple-Wallet-style pass, 350 x 440. The whole pass is the tier colour.
+   Top: wordmark and tier label, then the name block. Bottom: the white QR tile, the number and the
+   refresh line, anchored to the bottom edge. Tiers: .is-prestige (aerial photo under a navy wash),
+   .is-elite (solid, gold inner border, gold tier label), .is-premium (sand, near-black text).
+   Default text is white. */
+.c-pass {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(var(--size-pass-w), 100%);
+  height: var(--size-pass-h);
+  margin: 0 auto;
+  padding: var(--space-5);
+  overflow: hidden;
+  border-radius: var(--r-media);
+  box-shadow: var(--shadow-wallet);
+  background: var(--tier-elite-bg);
+  color: var(--bg);
+}
+.c-pass__photo,
+.c-pass__wash {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.c-pass__photo { object-fit: cover; }
+.c-pass__wash { display: none; }
+.c-pass__head,
+.c-pass__member,
+.c-pass__panel { position: relative; z-index: 1; }
+.c-pass__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.c-pass__tier {
+  font: var(--fw-semibold) var(--fs-tier-label)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tier);
+  text-transform: uppercase;
+}
+.c-pass__member { margin-top: var(--space-5); }
+.c-pass__name {
+  margin: 0;
+  font: var(--fw-semibold) var(--fs-pass-name)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+}
+
+.c-pass__since {
+  margin: var(--space-half) 0 0;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-none) var(--font);
+  opacity: 0.7;
+}
+.c-pass__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+}
+
+.c-pass__number {
+  margin: var(--space-3) 0 0;
+  font: var(--fw-medium) var(--fs-card-number)/var(--lh-none) var(--font);
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.9;
+}
+.c-pass__refresh {
+  margin: var(--space-2) 0 0;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-none) var(--font);
+  opacity: 0.7;
+}
+
+/* Prestige: aerial photo, navy wash fading to solid. */
+.c-pass.is-prestige .c-pass__wash {
+  display: block;
+  background: linear-gradient(180deg, var(--tier-navy-top) 0%, var(--tier-navy-mid) 55%, var(--tier-navy-solid) 100%);
+}
+/* Elite: solid matte black, 1px gold inner border inset 8px, gold tier label and name rule. */
+.c-pass.is-elite::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-2);
+  border: var(--border-w) solid var(--gold-45);
+  border-radius: var(--r-thumb);
+  pointer-events: none;
+}
+.c-pass.is-elite .c-pass__tier { color: var(--gold); }
+
+/* Premium: sand, near-black text. */
+.c-pass.is-premium {
+  background: var(--tier-premium-bg);
+  color: var(--text);
+}
+
+/* ---------- c-qr ----------
+   Real QR, drawn by app.js (qrcode-generator, error level M, margin 0) into an empty .c-qr slot.
+   Dark modules are rect children filled with currentColor. */
+.c-qr {
+  display: block;
+  flex: none;
+  width: var(--size-qr);
+  height: var(--size-qr);
+  margin: 0 auto;
+  color: var(--text);
+}
+.c-qr.is-large { width: var(--size-qr-lg); height: var(--size-qr-lg); }
+.c-qr.is-card { width: var(--size-mc-qr); height: var(--size-mc-qr); }
+.c-qr svg { display: block; width: 100%; height: 100%; }
+.c-qr rect { fill: currentColor; }
+
+/* ---------- c-pass-stack ----------
+   Three top-only passes, 200px each. Front to back: Prestige, Elite, Premium. The back passes
+   peek 14px above the one in front. Later siblings paint on top. */
+.c-pass-stack {
+  position: relative;
+  width: min(var(--size-pass-w), 100%);
+  height: var(--size-stack-h);
+  margin: 0 auto;
+}
+.c-pass-stack__pass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--size-stack-pass-h);
+  overflow: hidden;
+  padding: var(--space-5);
+  border-radius: var(--r-media);
+  box-shadow: var(--shadow-wallet);
+  background: var(--tier-elite-bg);
+  color: var(--bg);
+}
+.c-pass-stack__pass:nth-child(1) { z-index: 1; top: 0; transform: scale(0.88); transform-origin: 50% 0; }
+.c-pass-stack__pass:nth-child(2) { z-index: 2; top: var(--size-stack-step); transform: scale(0.94); transform-origin: 50% 0; }
+.c-pass-stack__pass:nth-child(3) { z-index: 3; top: calc(var(--size-stack-step) * 2); }
+.c-pass-stack__pass.is-premium {
+  background: var(--tier-premium-bg);
+  color: var(--text);
+  border: var(--border-w) solid var(--pass-edge);
+}
+.c-pass-stack__pass.is-elite::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-2);
+  border: var(--border-w) solid var(--gold-45);
+  border-radius: var(--r-thumb);
+  pointer-events: none;
+}
+.c-pass-stack__photo,
+.c-pass-stack__wash {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.c-pass-stack__photo { object-fit: cover; }
+.c-pass-stack__wash { display: none; }
+.c-pass-stack__pass.is-prestige .c-pass-stack__wash {
+  display: block;
+  background: linear-gradient(180deg, var(--tier-navy-top) 0%, var(--tier-navy-mid) 55%, var(--tier-navy-solid) 100%);
+}
+.c-pass-stack__row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.c-pass-stack__tier {
+  font: var(--fw-semibold) var(--fs-tier-label)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tier);
+  text-transform: uppercase;
+}
+.c-pass-stack__pass.is-elite .c-pass-stack__tier { color: var(--gold); }
+
+/* ---------- c-pass-mini ----------
+   72 x 46 thumbnail. The real top-only pass (350 x 224) scaled by 72/350 inside a clipping box,
+   so the photo, wash, type and tier colour are the same as the full pass. */
+.c-pass-mini {
+  position: relative;
+  flex: none;
+  width: var(--size-pass-mini-w);
+  height: var(--size-pass-mini-h);
+  overflow: hidden;
+  border-radius: var(--r-thumb);
+}
+.c-pass-mini > .c-pass {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--size-pass-w);
+  height: 224px;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: scale(0.2057);
+  transform-origin: 0 0;
+}
+
+/* ---------- c-pass-summary ----------
+   Pass thumbnail next to its name and renewal date. */
+.c-pass-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.c-pass-summary__text { display: flex; flex-direction: column; min-width: 0; }
+.c-pass-summary__name {
+  margin: 0;
+  font: var(--fw-semibold) var(--fs-section)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+.c-pass-summary__meta {
+  margin: var(--space-half) 0 0;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+
+/* ---------- c-value-row ----------
+   Plain row, no box: grey label left, semibold value right, optional chevron.
+   .is-gold on the value = gold text, usually without the chevron. */
+.c-value-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--size-row-h);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.c-value-row:active { opacity: 0.6; }
+.c-value-row__label {
+  font: var(--fw-regular) var(--fs-callout)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+.c-value-row__value {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex: none;
+  font: var(--fw-semibold) var(--fs-body)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.c-value-row__value.is-gold { color: var(--gold); font-weight: var(--fw-medium); font-size: var(--fs-callout); }
+.c-value-row__chev {
+  width: var(--icon-value-chev);
+  height: var(--icon-value-chev);
+  font-size: var(--icon-value-chev);
+  line-height: var(--lh-none);
+  color: var(--inactive);
+}
+
+/* ---------- c-wallet-btn ----------
+   Secondary action under the pass: black, 48px tall, pill radius, auto width.
+   The parent centres it with text-align: center. */
+.c-wallet-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: auto;
+  height: var(--size-wallet-h);
+  padding: 0 var(--space-6);
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--black);
+  color: var(--on-black);
+  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+  cursor: pointer;
+}
+.c-wallet-btn:active { opacity: 0.8; }
+.c-wallet-btn__logo {
+  flex: none;
+  width: var(--icon-wallet);
+  height: var(--icon-wallet);
+  fill: currentColor;
+}
+
+/* ---------- c-receipt ----------
+   Label left, amount right, hairline under each row. Amounts use tabular numbers.
+   .is-discount = orange amount (the minus-peso member discount). .is-total = bold last line. */
+.c-receipt { width: 100%; }
+.c-receipt__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3-5) 0;
+  border-bottom: var(--hairline-w) solid var(--hairline);
+  font: var(--fw-regular) var(--fs-callout)/var(--lh-none) var(--font);
+  color: var(--text);
+}
+.c-receipt__row.is-total { font-size: var(--fs-body); font-weight: var(--fw-bold); }
+.c-receipt__amount {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+.c-receipt__row.is-total .c-receipt__amount { font-weight: var(--fw-bold); }
+.c-receipt__row.is-discount .c-receipt__amount { color: var(--accent-text); }
+
+/* ---------- c-section-title ----------
+   Sentence-case section heading (20 semibold), 12px below. .is-title = 22 bold page heading.
+   .is-caption = 13 grey month heading. Optional __sub line under the title. */
+.c-section-title {
+  margin: 0 0 var(--space-3);
+  font: var(--fw-semibold) var(--fs-section)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+.c-section-title.is-title {
+  font: var(--fw-bold) var(--fs-title-md)/1.2 var(--font);
+}
+.c-section-title.is-caption {
+  margin-bottom: var(--space-2);
+  font: var(--fw-semibold) var(--fs-caption)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text-2);
+}
+.c-section-title__sub {
+  margin: var(--space-2) 0 0;
+  font: var(--fw-regular) var(--fs-callout)/var(--lh-snug) var(--font);
+  letter-spacing: normal;
+  color: var(--text-2);
+}
+
+/* ---------- c-barchart ----------
+   Ten thin rounded grey bars, one per month, the current month in near-black.
+   Heights are set inline per bar (px). Month initial under each bar. */
+.c-barchart {
+  display: flex;
+  justify-content: space-between;
+}
+.c-barchart__col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.c-barchart__track {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: var(--size-chart-h);
+  border-bottom: var(--hairline-w) solid var(--hairline);
+}
+.c-barchart__bar {
+  display: block;
+  width: var(--size-bar-w);
+  border-radius: var(--r-thumb) var(--r-thumb) 0 0;
+  background: var(--hairline);
+}
+.c-barchart__col.is-current .c-barchart__bar { background: var(--accent); }
+.c-barchart__month {
+  margin-top: var(--space-2);
+  font: var(--fw-medium) var(--fs-chart)/var(--lh-none) var(--font);
+  color: var(--inactive);
+}
+.c-barchart__col.is-current .c-barchart__month {
+  color: var(--text);
+  font-weight: var(--fw-semibold);
+}
+
+/* ---------- c-sheet ----------
+   Bottom sheet over a dimmed screen. The scrim covers the whole phone; the panel sits at the bottom
+   with a grabber. __title, __sub and __meta are the centered text, __actions holds the buttons. */
+.c-sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.c-sheet__scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+}
+.c-sheet__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100%;
+  background: var(--bg);
+  border-radius: var(--r-media) var(--r-media) 0 0;
+}
+.c-sheet__grabber {
+  align-self: center;
+  width: var(--size-grabber-w);
+  height: var(--size-grabber-h);
+  margin-top: var(--space-3);
+  border-radius: var(--r-pill);
+  background: var(--dot);
+}
+.c-sheet__body {
+  padding: var(--space-6) var(--gutter) 0;
+}
+.c-sheet__title {
+  margin: var(--space-5) 0 0;
+  text-align: center;
+  font: var(--fw-bold) var(--fs-sheet-title)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+.c-sheet__sub {
+  margin: var(--space-2) 0 0;
+  text-align: center;
+  font: var(--fw-regular) var(--fs-callout)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+.c-sheet__body .c-receipt { margin-top: var(--space-8); }
+.c-sheet__meta {
+  margin: var(--space-4) 0 0;
+  text-align: center;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+.c-sheet__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
+  padding: var(--space-4) var(--gutter) var(--space-8);
+}
+
+/* ---------- c-success-icon ----------
+   56px filled green circle with a white check (28px glyph). */
+.c-success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-success);
+  height: var(--size-success);
+  margin: 0 auto;
+  border-radius: var(--r-pill);
+  background: var(--success);
+  color: var(--bg);
+}
+.c-success-icon svg {
+  width: var(--icon-check);
+  height: var(--icon-check);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- c-hero-amount ----------
+   Big centered total (40 bold tabular) with a caption line under it. */
+.c-hero-amount { text-align: center; }
+.c-hero-amount__value {
+  margin: 0;
+  font: var(--fw-bold) var(--fs-hero)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.c-hero-amount__caption {
+  margin: var(--space-2) 0 0;
+  font: var(--fw-regular) var(--fs-callout)/var(--lh-tight) var(--font);
+  color: var(--text-2);
+}
+
+/* ---------- c-staff-id ----------
+   Staff screen: member name and status line above the QR, then the fallback number and help text
+   below it. __fallback is the block under the QR. */
+.c-staff-id { text-align: center; }
+.c-staff-id__name {
+  margin: 0;
+  font: var(--fw-bold) var(--fs-staff-name)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--text);
+}
+.c-staff-id__sub {
+  margin: var(--space-1) 0 0;
+  font: var(--fw-regular) var(--fs-callout)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+.c-staff-id__fallback {
+  margin-top: var(--space-6);
+  text-align: center;
+}
+.c-staff-id__code {
+  margin: 0;
+  font: var(--fw-medium) var(--fs-staff-code)/var(--lh-none) var(--font);
+  letter-spacing: 0.15em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.c-staff-id__help {
+  margin: var(--space-2) 0 0;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+
+/* ---------- c-progress ----------
+   3px track, 160px wide, centred. Dark elapsed part; label under it. Bar width is set inline (percent). */
+.c-progress { width: var(--size-progress-w); margin: 0 auto; }
+.c-progress__track {
+  position: relative;
+  width: 100%;
+  height: var(--size-progress-h);
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--hairline);
+}
+.c-progress__bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: var(--r-pill);
+  background: var(--text);
+}
+.c-progress__label {
+  margin: var(--space-2) 0 0;
+  text-align: center;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-none) var(--font);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+
+/* Flexible text column in a value row: takes the free width and lets its text wrap. */
+.c-value-row__text { flex: 1; min-width: 0; }
+
+/* ---------- c-see-link ----------
+   Near-black semibold link with a gold dot before it. Gold text fails contrast, so gold stays on the dot. */
+.c-see-link {
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--fw-semibold) var(--fs-body)/var(--lh-none) var(--font);
+  color: var(--text);
+  text-decoration: none;
+}
+.c-see-link::before {
+  content: "";
+  flex: none;
+  width: var(--size-gold-dot);
+  height: var(--size-gold-dot);
+  border-radius: var(--r-pill);
+  background: var(--gold);
+}
+
+/* ---------- c-mcard ----------
+   Membership card at real card proportion (85.6 x 54), 350px wide, 16px radius.
+   Structure: .c-mcard > .c-mcard__flipper > two .c-mcard__face (front, back). Faces fill the card
+   absolutely, so the height comes from aspect-ratio alone. The tilt sits on .c-mcard and the flip on
+   the flipper, so the two transforms never fight. Materials live in tokens.css (the only gradients
+   allowed on the card). Tiers: .is-premium (pearl), .is-prestige (navy + silver foil), .is-elite
+   (black metal + gold foil). Tilt, sheen and tap-to-flip are wired in app.js. */
+.c-mcard {
+  --mc-sheen: none;
+  position: relative;
+  width: min(var(--size-mcard-w), 100%);
+  aspect-ratio: var(--mc-ratio);
+  margin: 0 auto;
+  border-radius: var(--r-media);
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 300ms ease-out;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.c-mcard:focus-visible { outline: var(--border-w) solid var(--accent); outline-offset: 4px; }
+.c-mcard__flipper {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.c-mcard.is-flipped .c-mcard__flipper { transform: rotateY(180deg); }
+.c-mcard__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--r-media);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.c-mcard__back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-mcard-back);
+  transform: rotateY(180deg);
+}
+.c-mcard__face::before,
+.c-mcard__face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.c-mcard__face::before { z-index: 0; }
+.c-mcard__face::after { z-index: 1; }
+
+/* Layout on the front face. Text sits above the material layers; the sheen sits above the text. */
+.c-mcard__top,
+.c-mcard__contactless,
+.c-mcard__bottom {
+  position: absolute;
+  z-index: 2;
+}
+.c-mcard__top {
+  top: var(--space-mcard);
+  left: var(--space-mcard);
+  right: var(--space-mcard);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.c-mcard__contactless {
+  left: var(--space-mcard);
+  top: 50%;
+  margin-top: calc(var(--size-mc-icon) / -2);
+  width: var(--size-mc-icon);
+  height: var(--size-mc-icon);
+  font-size: var(--size-mc-icon);
+  opacity: 0.75;
+}
+.c-mcard__bottom {
+  left: var(--space-mcard);
+  right: var(--space-mcard);
+  bottom: var(--space-mcard);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.c-mcard__tier {
+  font: var(--fw-semibold) var(--fs-mc-tier)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-mc-tier);
+  text-transform: uppercase;
+}
+.c-mcard__name {
+  margin: 0;
+  font: var(--fw-semibold) var(--fs-mc-name)/var(--lh-tight) var(--font);
+  letter-spacing: var(--track-tight);
+}
+.c-mcard__since {
+  margin: var(--space-half) 0 0;
+  font: var(--fw-regular) var(--fs-mc-since)/var(--lh-none) var(--font);
+  opacity: 0.7;
+}
+.c-mcard__number {
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  font: var(--fw-medium) var(--fs-card-number)/var(--lh-none) var(--font);
+  letter-spacing: var(--track-mc-number);
+  font-variant-numeric: tabular-nums;
+  text-shadow: var(--mat-emboss);
+  white-space: nowrap;
+}
+.c-mcard__sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image: var(--mc-sheen);
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  background-position: var(--sx, 50%) var(--sy, 50%);
+}
+
+/* Back face: white tile with the real QR, number below. */
+.c-mcard__qrtile {
+  position: relative;
+  z-index: 2;
+  padding: var(--size-mc-tile-pad);
+  border-radius: var(--r-media);
+  background: var(--mat-tile);
+}
+.c-mcard__qrtile .c-qr { color: var(--mat-qr-ink); }
+.c-mcard__back > .c-mcard__number { position: relative; z-index: 2; }
+
+/* Premium: pearl paper, warm taupe inner edge, near-black type, letterpressed wordmark, faint grain,
+   and a fine taupe rule under the wordmark row. */
+.c-mcard.is-premium { box-shadow: var(--mat-pearl-shadow); }
+.c-mcard.is-premium .c-mcard__face {
+  background: var(--mat-pearl-base);
+  color: var(--text);
+  box-shadow: var(--mat-pearl-edge);
+}
+.c-mcard.is-premium .c-mcard__face::after {
+  background: var(--mat-pearl-grain);
+  opacity: 0.06;
+}
+.c-mcard.is-premium .c-mcard__top {
+  padding-bottom: var(--space-2);
+  border-bottom: var(--border-w) solid var(--premium-rule);
+}
+.c-mcard.is-premium .c-wordmark { text-shadow: var(--mat-pearl-letterpress); }
+.c-mcard.is-premium .c-mcard__since { color: var(--text); opacity: 1; }
+.c-mcard.is-premium .c-mcard__contactless { color: var(--text-2); }
+
+/* Prestige: the aerial photo in grayscale under a navy wash, silver foil type, diagonal sheen.
+   The text shadow sits on the face (the wrapper), so the foil type gets legibility without a halo. */
+.c-mcard.is-prestige { box-shadow: var(--mat-prestige-shadow); --mc-sheen: var(--mat-sheen); }
+.c-mcard.is-prestige .c-mcard__face {
+  background: var(--mat-navy);
+  color: var(--mat-prestige-ink);
+  text-shadow: var(--mat-prestige-text-shadow);
+}
+.c-mcard.is-prestige .c-mcard__face::before {
+  background: var(--mat-prestige-photo) center / cover no-repeat;
+  filter: var(--mat-prestige-photo-filter);
+}
+.c-mcard.is-prestige .c-mcard__face::after { background: var(--mat-prestige-darken), var(--mat-navy-wash); }
+.c-mcard.is-prestige .c-wordmark,
+.c-mcard.is-prestige .c-mcard__tier,
+.c-mcard.is-prestige .c-mcard__name {
+  background: var(--mat-foil-silver);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Elite: brushed black metal, engraved coastline lower right, gold foil type, warm sheen. */
+.c-mcard.is-elite { box-shadow: var(--mat-elite-shadow); --mc-sheen: var(--mat-sheen-warm); }
+.c-mcard.is-elite .c-mcard__face {
+  background: var(--mat-elite-base);
+  color: var(--gold);
+  box-shadow: var(--mat-elite-edge);
+}
+.c-mcard.is-elite .c-mcard__face::before {
+  background: var(--mat-elite-engrave) right 12px bottom 14px / 62% auto no-repeat;
+}
+.c-mcard.is-elite .c-wordmark,
+.c-mcard.is-elite .c-mcard__tier,
+.c-mcard.is-elite .c-mcard__name,
+.c-mcard.is-elite .c-mcard__number {
+  background: var(--mat-foil-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.c-mcard.is-elite .c-mcard__since,
+.c-mcard.is-elite .c-mcard__contactless { color: var(--gold); }
+
+/* Hint under the card on the Card tab. */
+.c-mcard-hint {
+  margin: var(--space-2) 0 0;
+  text-align: center;
+  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
+  color: var(--text-2);
+}
+
+/* Stacked cards on the not-a-member screen. Prestige in front, Elite and Premium peek 18px each. */
+
+
+
+
+
+
+/* Mini real card, scaled down: the Benefits thumbnail (72 wide, in .c-pass-mini) and the Explore
+   membership strip (56 wide, in .c-member-strip__card). */
+.c-pass-mini > .c-mcard {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--size-mcard-w);
+  margin: 0;
+  box-shadow: none;
+  transform: scale(var(--scale-mc-mini));
+  transform-origin: 0 0;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .c-mcard,
+  .c-mcard__flipper { transition: none; }
+}

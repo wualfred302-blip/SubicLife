@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone is-pushed has-bottombar">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-navbar">
+    <a class="c-navbar__back" data-back href="place.html?p=lighthouse" aria-label="Back to the partner page">
+      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <h1 class="c-navbar__title">Book</h1>
+  </div>
+
+  <main class="screen-scroll">
+
+    <div class="u-mt-16">
+      <h2 class="c-section-title is-title c-group-head" data-name>Partner</h2>
+    </div>
+
+    <section class="u-mt-24">
+      <h2 class="c-section-title is-caption c-group-head">Dates</h2>
+      <div class="c-dates">
+        <div class="c-dates__cell">
+          <p class="c-dates__label" data-in-label>Check-in</p>
+          <p class="c-dates__value" data-in-value>Sat, 17 Oct</p>
+        </div>
+        <div class="c-dates__cell">
+          <p class="c-dates__label" data-out-label>Check-out</p>
+          <p class="c-dates__value" data-out-value>Sun, 18 Oct</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="u-mt-24">
+      <h2 class="c-section-title is-caption c-group-head">Guests</h2>
+      <div class="c-info-group">
+        <div class="c-info-row">
+          <span class="c-info-row__text">Guests</span>
+          <div class="c-stepper">
+            <button class="c-stepper__btn" type="button" data-step="-1" aria-label="Remove a guest"><span class="material-symbols-outlined">remove</span></button>
+            <span class="c-stepper__value" data-guests>2</span>
+            <button class="c-stepper__btn" type="button" data-step="1" aria-label="Add a guest"><span class="material-symbols-outlined">add</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="u-mt-24">
+      <h2 class="c-section-title is-caption c-group-head" data-room-head>Room</h2>
+      <div class="c-info-group" data-rooms></div>
+    </section>
+
+    <section class="u-mt-24">
+      <h2 class="c-section-title is-caption c-group-head">Price</h2>
+      <div class="c-receipt c-price">
+        <div class="c-receipt__row">
+          <span data-line>Room</span>
+          <span class="c-receipt__amount" data-rack>₱0</span>
+        </div>
+        <div class="c-receipt__row is-discount">
+          <span data-disc-label>Prestige discount</span>
+          <span class="c-receipt__amount" data-disc>−₱0</span>
+        </div>
+        <div class="c-receipt__row is-total">
+          <span>Total</span>
+          <span class="c-receipt__amount" data-total>₱0</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="u-mt-24">
+      <div class="c-info-group">
+        <a class="c-info-row" href="me-payment-methods.html">
+          <span class="material-symbols-outlined">credit_card</span>
+          <span class="c-info-row__text">Payment</span>
+          <span class="c-info-row__value">GCash</span>
+          <span class="material-symbols-outlined c-info-row__chev">chevron_right</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="c-bottombar c-bottombar--full">
+    <a class="c-btn primary" data-pay href="book-done.html">Pay</a>
+  </div>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script>
+  (function () {
+    var p = placeFor(queryParam('p') || 'lighthouse');
+    if (!p.bookable) {
+      location.replace('place.html?p=' + p.id);
+      return;
+    }
+    var $ = function (s) { return document.querySelector(s); };
+    var guests = 2;
+
+    document.title = 'Subic.Life - Book ' + p.name;
+    $('[data-name]').textContent = p.name;
+    $('[data-back]').href = 'place.html?p=' + p.id;
+    $('[data-room-head]').textContent = p.unit === 'trip' ? 'Trip' : 'Room';
+    $('[data-in-label]').textContent = p.dates[0];
+    $('[data-out-label]').textContent = p.dates[1];
+    $('[data-in-value]').textContent = p.dates[2];
+    $('[data-out-value]').textContent = p.dates[3];
+    $('[data-disc-label]').textContent = 'Prestige ' + p.discount + '% off';
+
+    var pick = Math.min(Number(queryParam('room')) || 0, p.rooms.length - 1);
+    $('[data-rooms]').innerHTML = p.rooms.map(function (r, i) {
+      return '<label class="c-radio-row">' +
+        '<input class="c-radio-row__input" type="radio" name="room" value="' + i + '"' + (i === pick ? ' checked' : '') + '>' +
+        '<span class="c-radio-row__dot"></span>' +
+        '<span class="c-radio-row__main">' +
+          '<span class="c-radio-row__title">' + r.name + '</span>' +
+          '<span class="c-radio-row__sub">' + r.sub + '</span>' +
+        '</span>' +
+        '<span class="c-radio-row__price">' + fmtPeso(r.rate) + '</span>' +
+      '</label>';
+    }).join('');
+
+    function render() {
+      var i = Number(document.querySelector('input[name="room"]:checked').value);
+      var r = p.rooms[i];
+      var off = Math.round(r.rate * p.discount / 100);
+      var total = r.rate - off;
+      $('[data-line]').textContent = r.name + ', 1 ' + p.unit;
+      $('[data-rack]').textContent = fmtPeso(r.rate);
+      $('[data-disc]').textContent = '−' + fmtPeso(off);
+      $('[data-total]').textContent = fmtPeso(total);
+      $('[data-pay]').textContent = 'Pay ' + fmtPeso(total);
+      $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i;
+    }
+
+    document.querySelectorAll('[data-rooms]').forEach(function (group) {
+      group.addEventListener('change', render);
+    });
+
+    document.querySelectorAll('[data-step]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        guests = Math.min(6, Math.max(1, guests + Number(b.dataset.step)));
+        $('[data-guests]').textContent = guests;
+      });
+    });
+
+    render();
+  })();
+</script>
+</body>
+</html>

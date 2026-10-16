@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Booked</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone is-pushed has-bottombar">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <main class="screen-scroll">
+
+    <div class="c-done">
+      <span class="c-success-icon is-lg" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </span>
+      <h1 class="c-done__title">You're booked</h1>
+      <p class="c-done__sub" data-sub></p>
+      <span class="c-badge is-saved"><span class="material-symbols-outlined">savings</span><span data-saved></span></span>
+    </div>
+
+    <div class="u-mt-24">
+      <div class="c-booking-card">
+        <div class="c-booking-card__head">
+          <div class="c-booking-card__thumb"><img data-thumb src="img/card-lighthouse.jpg" alt=""></div>
+          <div>
+            <p class="c-booking-card__name" data-name></p>
+            <p class="c-booking-card__sub" data-guests-line></p>
+          </div>
+        </div>
+        <div class="c-receipt" data-rows></div>
+      </div>
+    </div>
+
+    <p class="c-mcard-hint">Show your card QR at check-in.</p>
+
+  </main>
+
+  <div class="c-bottombar c-bottombar--full">
+    <a class="c-btn secondary" data-ics href="explore.html" download="booking.ics">Add to Calendar</a>
+    <a class="c-btn primary" href="explore.html">Done</a>
+  </div>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script>
+  (function () {
+    var p = placeFor(queryParam('p') || 'lighthouse');
+    if (!p.bookable) {
+      location.replace('place.html?p=' + p.id);
+      return;
+    }
+    var $ = function (s) { return document.querySelector(s); };
+    var i = Number(queryParam('room') || 0);
+    var r = p.rooms[i] || p.rooms[0];
+    var off = Math.round(r.rate * p.discount / 100);
+    var total = r.rate - off;
+    var trip = p.unit === 'trip';
+
+    document.title = 'Subic.Life - Booked ' + p.name;
+    $('[data-sub]').textContent = p.name + ', ' + r.name;
+    $('[data-saved]').textContent = 'You saved ' + fmtPeso(off);
+    $('[data-thumb]').src = p.thumb;
+    $('[data-name]').textContent = p.name;
+    $('[data-guests-line]').textContent = '2 guests · ' + p.area;
+
+    $('[data-rows]').innerHTML =
+      '<div class="c-receipt__row"><span>' + p.dates[0] + '</span><span class="c-receipt__amount">' + p.dates[2] + '</span></div>' +
+      '<div class="c-receipt__row"><span>' + p.dates[1] + '</span><span class="c-receipt__amount">' + p.dates[3] + '</span></div>' +
+      '<div class="c-receipt__row"><span>Booking code</span><span class="c-receipt__amount c-booking-code">' + p.code + '</span></div>' +
+      '<div class="c-receipt__row"><span>Paid with GCash</span><span class="c-receipt__amount">' + fmtPeso(total) + '</span></div>';
+
+    var ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'BEGIN:VEVENT',
+      'DTSTART:' + (trip ? '20261017T080000' : '20261017T140000'),
+      'DTEND:' + (trip ? '20261017T170000' : '20261018T120000'),
+      'SUMMARY:' + p.name + ' - ' + r.name,
+      'LOCATION:' + p.address,
+      'DESCRIPTION:Booking code ' + p.code + '. Show your card QR at check-in.',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    var icsLink = $('[data-ics]');
+    icsLink.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+    icsLink.setAttribute('download', p.id + '-booking.ics');
+  })();
+</script>
+</body>
+</html>

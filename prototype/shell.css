@@ -1,0 +1,234 @@
+/* shell.css - app shell. Loaded last on every page. Uses tokens.css variables only.
+   Desktop: the app is a 390 x 844 screen centred on a neutral background. No device frame.
+   Real phone (narrow screen or touch): the app fills the whole screen. */
+
+/* ---------- host: the app on a neutral page (desktop) or full screen (real phone) ---------- */
+body.shell-host {
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--page);
+}
+.shell-device {
+  position: relative;
+  flex: none;
+  width: 390px;
+  height: 844px;
+  transform-origin: center center;
+}
+.shell-screen {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--bg);
+  isolation: isolate;
+  box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+.shell-frame {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  background: var(--bg);
+  visibility: hidden;
+  z-index: 1;
+}
+html.is-device body.shell-host {
+  display: block;
+  background: var(--bg);
+}
+html.is-device .shell-device {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  transform: none !important;
+}
+html.is-device .shell-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ---------- embedded: a page inside the shell draws only its screen ---------- */
+html.is-embedded,
+html.is-embedded body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+html.is-embedded body {
+  display: block;
+  min-height: 0;
+  padding: 0;
+}
+html.is-embedded .phone {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* The shell slides the whole frame, so the page's own entrance animations would move twice. */
+html.is-embedded .c-push > *,
+html.is-embedded .c-phone--push > *,
+html.is-embedded .is-pushed > *,
+html.is-embedded .c-sheet__panel,
+html.is-embedded .c-sheet__scrim {
+  animation: none !important;
+}
+
+/* ---------- real phone: the app fills the screen, safe areas respected, device draws its own bars ---------- */
+html.is-embedded.is-device .phone {
+  height: 100vh;
+  height: 100dvh;
+  box-sizing: border-box;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+html.is-embedded.is-device body:not(:has(.phone)) {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  box-sizing: border-box;
+}
+html.is-embedded.is-device .c-statusbar,
+html.is-embedded.is-device .c-homeindicator {
+  display: none !important;
+}
+/* With the fake status bar hidden, nothing hugs the top edge: large titles, nav bars and top overlays
+   start below a 12px (or safe-area) inset. */
+html.is-embedded.is-device {
+  --shell-top: max(env(safe-area-inset-top, 0px), 12px);
+}
+html.is-embedded.is-device .c-largetitle { padding-top: var(--shell-top); }
+html.is-embedded.is-device .c-navbar { margin-top: var(--shell-top); }
+html.is-embedded.is-device .c-placehero__bar { top: calc(var(--shell-top) + var(--space-1)); }
+html.is-embedded.is-device .c-map-topbar { top: var(--shell-top); }
+
+/* ---------- scrolling: hidden scrollbars, horizontal rows drag with the mouse and snap to cards ---------- */
+html.is-embedded,
+html.is-embedded * {
+  scrollbar-width: none;
+}
+html.is-embedded *::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+html.is-embedded .shell-hscroll {
+  cursor: grab;
+}
+html.is-embedded .shell-hscroll.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+html.is-embedded .shell-snap {
+  scroll-snap-type: x mandatory;
+}
+html.is-embedded .shell-snap > * {
+  scroll-snap-align: start;
+}
+
+/* ---------- Brand voice ----------
+   Loaded last on every page: titles and big numbers use Geist semibold with tight tracking, quieter
+   and more premium than a heavy display face. (theme.css now sets the face and weight.) */
+.c-largetitle__title,
+.c-section-head__title,
+.c-section-title,
+.c-navbar__title,
+.c-place-head__name,
+.c-tiers__amt,
+.c-welcome__title,
+.c-post-title {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+.c-largetitle__title { font-weight: 600; font-size: 34px; letter-spacing: -0.035em; }
+.c-section-head__title,
+.c-section-title { font-weight: 600; font-size: 21px; }
+.c-navbar__title { font-weight: 700; letter-spacing: -0.01em; }
+.c-tiers__amt { font-weight: 600; }
+
+/* Prestige card: the silver foil vanished over the bright bay photo; name and tier read as solid white. */
+.c-mcard.is-prestige .c-mcard__name,
+.c-mcard.is-prestige .c-mcard__tier {
+  background: none;
+  color: var(--bg);
+  -webkit-text-fill-color: var(--bg);
+  text-shadow: 0 1px 3px rgb(11 37 69 / 0.8);
+}
+
+/* Inset-grouped screens (Me and its children): the grey ground was lost to .phone's white. */
+.phone.c-grouped { background: var(--grouped); }
+.phone.c-grouped .c-largetitle,
+.phone.c-grouped .screen-scroll { background: transparent; }
+
+/* ---------- Frosted top bar (c-xbar) ----------
+   Shared by full-bleed screens (Explore, place).  hidden over the cover, fades in once the cover scrolls away. */
+.c-xbar {
+  position: absolute;
+  z-index: 20;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: calc(var(--size-statusbar-h) + 44px);
+  padding: 0 var(--gutter) 8px;
+  background: rgb(255 255 255 / 0.86);
+  backdrop-filter: saturate(1.8) blur(20px);
+  -webkit-backdrop-filter: saturate(1.8) blur(20px);
+  box-shadow: 0 0.5px 0 var(--hairline);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease-out;
+}
+html.is-embedded.is-device .c-xbar { height: calc(var(--shell-top) + 48px); }
+.c-xbar__title { font: 600 20px/1 var(--font-display); letter-spacing: -0.03em; color: var(--text); padding-bottom: 6px; }
+.c-xbar__btn { text-decoration: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--search-fill); color: var(--text); }
+.c-xbar__btn .material-symbols-outlined { font-size: 20px; }
+.phone.is-scrolled .c-xbar { opacity: 1; pointer-events: auto; }
+.phone.is-scrolled > .c-statusbar { z-index: 21; color: var(--text); background: transparent; }
+.c-xbar__back { display: grid; place-items: center; width: 32px; height: 32px; margin-left: -6px; color: var(--text); text-decoration: none; }
+.c-xbar__back .material-symbols-outlined { font-size: 26px; }
+.c-xbar__title.is-small { flex: 1; padding: 0 8px 7px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 17px; text-align: center; }
+
+/* Form screen titles (sign up and the like) carry the display voice; small captions stay in the UI face. */
+.c-section-title.is-title { font-family: var(--font-display); font-size: 30px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; }
+.c-section-title.is-caption { font-family: var(--font); letter-spacing: 0; }
+
+/* Big money and offer headlines share the display voice. */
+.c-hero-amount__value,
+.c-offer-title { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; }
+
+/* Success moments (paid, booked): display-voice headline, a soft sea-green glow behind the tick so the
+   top of the screen feels like an arrival rather than a blank page, and savings as a pill. */
+.c-paid__title,
+.c-done__title { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; }
+.phone:has(.c-paid),
+.phone:has(.c-done) {
+  background:
+    radial-gradient(120% 340px at 50% 0%, rgb(22 163 74 / 0.14), rgb(22 163 74 / 0) 70%),
+    var(--bg);
+}
+.phone:has(.c-paid) > .c-statusbar,
+.phone:has(.c-done) > .c-statusbar,
+.phone:has(.c-paid) .c-navbar,
+.phone:has(.c-done) .screen-scroll { background: transparent; }
+.c-paid__save {
+  align-self: center;
+  padding: 7px 12px;
+  border-radius: var(--r-pill);
+  background: rgb(232 89 12 / 0.1);
+  font-size: var(--fs-footnote);
+}

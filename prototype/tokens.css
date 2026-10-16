@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap");
+/* tokens.css - design tokens for the Subic.Life prototype.
+   Values come from the Stitch exports (Tailwind classes converted to px/hex).
+   This is the only file where raw colors live. Everything else uses var(--...). */
+
+:root {
+  --font-display: "Geist", "Inter", sans-serif; /* brand voice: Geist semibold, tight tracking, for titles and big numbers */
+  --bay: #1C1A17;            /* warm ink: committed dark fields (card tab, member band, Me header) */
+  --sea: #E9F0F2;            /* sea-mist ground: grouped sections, sheets */
+  /* ---- Color ---- */
+  --bg: #FFFFFF;             /* screen + card background */
+  --grouped: #F2F2F7;        /* grey fill: thumbnail placeholder, list icon wells */
+  --hairline: #E5E7EB;       /* 0.5px dividers and borders */
+  --text: #111827;           /* primary text, selected chip fill, near-black links and buttons */
+  --text-2: #6B7280;         /* meta text */
+  --inactive: #8E8E93;       /* inactive tab icons and labels, search icon, chevrons */
+  --accent: #E8590C;         /* orange fill: buttons, selected pin, active tab, bar chart */
+  --accent-text: #C2410C;    /* small orange text only: member offers, receipt discount (5.2:1 on white) */
+  --accent-press: #D24F0A;   /* pressed orange */
+  --search-fill: rgba(227, 227, 232, 0.8); /* search field and secondary button fill (#E3E3E8 at 80%) */
+  --dot: #D1D5DB;            /* inactive page dot */
+  --open: #15803D;           /* "Open" status green */
+  --map-bg: #E5EBF0;         /* map background behind the SVG */
+  --tabbar-bg: rgba(255, 255, 255, 0.95);
+  --home-ind: #171717;       /* home indicator bar */
+  --page: #E5E5EA;           /* page background around the phone frame */
+
+  /* ---- Card / membership tiers ---- */
+  --tier-premium-bg: #F5EFE6;                  /* Premium pass top: sand white */
+  --tier-prestige-overlay: rgba(11, 37, 69, 0.55); /* navy wash over the Prestige photo */
+  --tier-elite-bg: #0E0E10;                    /* Elite pass top: matte black */
+  --gold: #C9A227;                             /* Elite tier label, coastline line */
+  --success: #16A34A;                          /* success check on the receipt sheet */
+  --black: #000000;                            /* Add to Apple Wallet button */
+  --scrim: rgba(0, 0, 0, 0.4);                 /* dim layer behind bottom sheets */
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.06);   /* place card, map controls, list-top buttons */
+  --shadow-pass: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* ---- Type ---- */
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --fs-large-title: 34px;
+  --fs-section: 20px;
+  --fs-body: 17px;
+  --fs-button: 16px;           /* every c-btn */
+  --fs-callout: 15px;
+  
+  --fs-footnote: 13px;
+  --fs-pin: 11px;
+  --fs-tab: 11px;              /* tab bar labels */
+  --fs-micro: 8px;             /* pass thumbnail labels */
+  --fs-chart: 11px;            /* savings bar chart month initials */
+  --fs-caption: 13px;          /* month group headings */
+  --fs-refresh: 12px;          /* pass refresh line */
+  --fs-tier: 12px;             /* tier name on a pass */
+  --fs-pass-name: 22px;        /* member name on a pass */
+  --fs-card-number: 15px;      /* "0042 1187" */
+  --fs-title-lg: 24px;         /* empty-state title */
+  --fs-sheet-title: 32px;      /* "You saved" sheet title */
+  --fs-hero: 40px;             /* savings total */
+  --fs-staff-name: 28px;       /* staff screen member name */
+  --fs-staff-code: 24px;       /* staff screen fallback number */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --lh-none: 1;
+  --lh-tight: 1.25;
+  --lh-snug: 1.375;
+  --track-tight: -0.025em;
+
+  /* ---- Spacing (scale 4/8/12/16/20/24/32, plus half-steps used by the exports) ---- */
+  --space-half: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-3-5: 14px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --gutter: var(--space-5);  /* side gutter for every screen (20px, matches the large title) */
+
+  /* ---- Radius: one scale only ---- */
+  --r-thumb: 10px;     /* list thumbnails, the map place photo, the Benefits mini pass */
+  --r-media: 16px;     /* carousel photos, place-card photo, sheets, cards, map place card, passes */
+  --r-control: 12px;   /* buttons, search, inputs, map controls */
+  --r-pill: 999px;     /* chips, pins, avatars, dots, the Apple Wallet button */
+  --radius-phone: 40px; /* device frame only, not a UI radius */
+
+  /* ---- Borders ---- */
+  --hairline-w: 0.5px;
+  --border-w: 1px;
+
+  /* ---- Sizes ---- */
+  --size-phone-w: 390px;
+  --size-phone-h: 844px;
+  --size-statusbar-h: 48px;
+  --size-tabbar-h: 83px;
+  --size-tab-icon: 24px;
+  --size-homeind-w: 134px;
+  --size-homeind-h: 5px;
+  --size-search-h: 40px;       /* c-search, and the 40px square List button on the map */
+  --size-chip-h: 32px;
+  --size-avatar: 32px;         /* right slot of the large title (same 32px as the Card "..." button) */
+  --size-thumb: 48px;          /* list-row leading slot and thumbnail */
+  --size-photo: 72px;          /* map place-card photo */
+  --size-card-w: 168px;        /* carousel place card (3:4 photo) */
+  --size-btn-h: 48px;          /* c-btn */
+  --size-control: 44px;        /* map control stack width */
+  --size-close: 24px;
+  --size-dot: 6px;
+  --size-tail-h: 5px;
+  --size-tail-x: 4px;
+  --size-controls-top: 176px;
+  --size-pin-h: 24px;
+  --size-pin-h-sel: 30px;
+  --pin-scale: 1.15;
+  --size-navbar-h: 44px;       /* c-navbar row */
+  --size-navbar-btn: 32px;     /* c-navbar right icon button, large-title "..." button */
+  --size-pass-top: 200px;      /* pass tier area */
+  --size-pass-top-elite: 278px;/* Elite tier area is taller */
+  --size-coast-h: 80px;        /* Elite gold coastline */
+  --size-qr: 168px;            /* QR on a pass */
+  --size-qr-lg: 264px;         /* QR on the staff screen */
+  --size-ring: 14px;           /* refresh ring */
+  --size-stack-h: 236px;       /* c-pass-stack total height */
+  --size-stack-step: 18px;     /* offset between stacked passes */
+  --size-stack-pass-h: 200px;  /* one stacked pass */
+  --size-pass-thumb-w: 96px;   /* pass thumbnail */
+  --size-pass-thumb-h: 64px;
+  --size-wallet-h: 48px;       /* Add to Apple Wallet */
+  --size-chart-h: 112px;       /* bar chart plot height */
+  --size-bar-w: 16px;          /* one chart bar */
+  --size-grabber-w: 36px;      /* sheet grabber */
+  --size-grabber-h: 5px;
+  --size-success: 56px;        /* success circle */
+  --size-progress-h: 3px;      /* staff code timer bar */
+  --size-row-h: 48px;          /* value row */
+  --size-list-row-h: 64px;     /* c-list-row minimum height */
+  --size-member-strip-h: 64px; /* Explore membership strip */
+
+  /* ---- Icon sizes (Material Symbols) ---- */
+  --icon-xs: 12px;     /* map pin glyphs */
+  --icon-sm: 14px;     /* close X */
+  --icon-md: 16px;     /* clear X, small button glyphs */
+  --icon-chip: 16px;   /* chip glyphs */
+  --icon-status: 17px; /* status bar signal and wifi */
+  --icon-search: 16px; /* search magnifier (c-search) */
+  --icon-btn: 18px;    /* Directions button glyph */
+  --icon-lg: 20px;     /* map controls, battery */
+  --icon-nav: 20px;    /* navbar back chevron */
+  --icon-value-chev: 18px; /* value row and list row chevron */
+  --icon-benefit: 24px;    /* list row outline icon */
+  --icon-wallet: 16px;     /* Apple logo in the wallet button */
+  --icon-check: 28px;      /* success check glyph */
+
+  /* ---- Card pass ---- */
+  --tier-navy-top: rgba(11, 37, 69, 0.35);  /* Prestige wash at the top */
+  --tier-navy-mid: rgba(11, 37, 69, 0.92);  /* Prestige wash at 55% */
+  --tier-navy-solid: rgb(11, 37, 69);       /* Prestige wash below 55% */
+  --gold-45: rgba(201, 162, 39, 0.45);      /* Elite inner border */
+  --premium-rule: rgba(120, 100, 70, 0.18); /* warm taupe: Premium inner edge and wordmark rule */
+  --pass-edge: var(--premium-rule);         /* edge on the sand Premium pass */
+  --shadow-wallet: 0 1px 0 rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.16);
+  --fs-tier-label: 11px;
+  --fs-wordmark: 15px;
+  --fs-title-md: 22px;
+  --track-wordmark: -0.2px;
+  --track-tier: 0.12em;
+  --size-pass-w: 350px;
+  --size-pass-h: 440px;
+  --size-pass-mini-w: 72px;
+  --size-pass-mini-h: 46px;
+  --size-progress-w: 160px;
+  --size-gold-rule: 24px;
+  --size-gold-dot: 8px;
+  --size-mc-strip-w: 56px;     /* Explore membership strip: mini card */
+  --size-mc-strip-h: 35px;
+
+  /* ---- Membership card (c-mcard): geometry ---- */
+  --size-mcard-w: 350px;               /* 85.6 x 54 proportion, 350 wide = 221px tall */
+  --mc-ratio: 85.6 / 54;
+  --space-mcard: 20px;                 /* face padding */
+  --space-mcard-back: 16px;            /* back face padding */
+  --size-mc-icon: 20px;                /* contactless glyph */
+  --size-mc-qr: 140px;                 /* QR on the card back */
+  --size-mc-tile-pad: 10px;            /* white tile padding around the QR */
+  --fs-mc-name: 17px;
+  --fs-mc-since: 12px;
+  --fs-mc-tier: 11px;
+  --track-mc-tier: 0.14em;
+  --track-mc-number: 2px;
+  --size-mc-stack-step: 18px;          /* how far each stacked card peeks */
+  --size-mc-stack-h: 257px;            /* 36px offset + one card */
+  --scale-mc-stack-elite: 0.94;
+  --scale-mc-stack-premium: 0.88;
+  --scale-mc-mini: 0.2057;             /* 72px / 350px */
+  --scale-mc-strip: 0.16;              /* 56px / 350px */
+
+  /* ---- Membership card: materials (the only gradients allowed on the card) ---- */
+  /* Shared */
+  --mat-tile: #FFFFFF;
+  --mat-qr-ink: #111827;
+  --mat-emboss: 0 1px 0 rgba(255, 255, 255, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.35);
+  /* Premium: pearl paper */
+  --mat-pearl-base: #F4EFE6;
+  --mat-pearl-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  --mat-pearl-edge: inset 0 0 0 1px var(--premium-rule);
+  --mat-pearl-letterpress: 0 1px 0 rgba(255, 255, 255, 0.7);
+  --mat-pearl-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+  /* Prestige: navy with silver foil */
+  --mat-navy: #0B2545;
+  --mat-navy-wash: rgba(11, 37, 69, 0.60);
+  --mat-prestige-darken: linear-gradient(180deg, rgba(11, 37, 69, 0) 40%, rgba(11, 37, 69, 0.55) 100%);
+  --mat-prestige-photo: url("img/pass-subic-bay.jpg");
+  --mat-prestige-photo-filter: grayscale(0.2);
+  --mat-prestige-ink: #FFFFFF;
+  --mat-prestige-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  --mat-foil-silver: linear-gradient(135deg, #FFFFFF, #B8C2CE 40%, #FFFFFF 52%, #8E99A6);
+  --mat-sheen: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.10) 50%, transparent 60%);
+  --mat-prestige-shadow: 0 14px 32px rgba(11, 37, 69, 0.35);
+  /* Elite: black metal with gold foil */
+  --mat-elite-base: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px), #0C0C0E;
+  --mat-elite-engrave: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'><g fill='none' stroke='%23C9A227' stroke-opacity='0.25' stroke-width='1.4'><path d='M10 150C40 120 60 130 90 110S140 70 170 95S230 40 260 60S300 30 316 50'/><path d='M20 170C60 150 80 160 110 140S170 110 200 130S260 100 300 120'/><path d='M40 190C80 175 110 185 140 168S200 150 230 165S280 150 310 160'/></g></svg>");
+  --mat-foil-gold: linear-gradient(135deg, #F3E3A0, #C9A227 40%, #FFF1BF 52%, #A9831A);
+  --mat-sheen-warm: linear-gradient(115deg, transparent 40%, rgba(255, 230, 160, 0.12) 50%, transparent 60%);
+  --mat-elite-edge: inset 0 0 0 1px rgba(201, 162, 39, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --mat-elite-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+
+  /* ---- CTA and small surface tokens (Elite theme overrides these) ---- */
+  --cta-fill: var(--accent);
+  --cta-press: var(--accent-press);
+  --on-cta: #FFFFFF;
+  --on-black: #FFFFFF;                 /* Apple Wallet button label */
+}
+
+/* Night look: the whole phone goes dark. Elite and the default (theme-night) share these tokens, so no
+   component CSS is duplicated. Elite alone swaps the primary button to gold; night keeps brand orange. */
+.phone.theme-elite,
+.phone.theme-night {
+  --bg: #0B0B0C;
+  --text: #F5F5F4;
+  --text-2: #A1A1AA;
+  --inactive: #71717A;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --grouped: #1C1C1F;
+  --tabbar-bg: #111113;
+  --home-ind: #F5F5F4;
+}
+.phone.theme-elite {
+  --cta-fill: var(--gold);
+  --cta-press: #B08D1F;
+  --on-cta: #0B0B0C;
+}

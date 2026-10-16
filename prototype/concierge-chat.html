@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Subic.Life - Chat with Mika</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="components-g.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-push">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar c-chat-nav">
+    <a data-back class="c-navbar__back" href="concierge.html" aria-label="Back to Concierge">
+      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+    </a>
+    <div class="c-navbar__titles">
+      <span class="c-chat-nav__av" aria-hidden="true">MK</span>
+      <h1 class="c-navbar__title">Mika</h1>
+      <p class="c-navbar__sub" id="nav-sub">Online</p>
+    </div>
+    <span></span>
+  </nav>
+
+  <main class="c-chat" id="thread" aria-live="polite">
+    <p class="c-chat__stamp">Today 9:12 AM</p>
+    <p class="c-chat__from">Mika</p>
+  </main>
+
+  <div class="c-replies" id="replies" role="group" aria-label="Quick replies"></div>
+
+  <form class="c-composer" id="composer" autocomplete="off">
+    <span class="c-composer__plus" aria-hidden="true"><span class="material-symbols-outlined">add</span></span>
+    <label class="c-composer__field">
+      <input class="c-composer__input" id="msg" type="text" placeholder="Message Mika" aria-label="Message Mika">
+    </label>
+    <button class="c-composer__send" id="send" type="submit" disabled aria-label="Send">
+      <span class="material-symbols-outlined">arrow_upward</span>
+    </button>
+  </form>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-g.js"></script>
+<script>
+(function () {
+  var C = window.CONCIERGE;
+  var params = new URLSearchParams(window.location.search);
+  var key = params.get('topic') || '';
+  var fromRequest = params.get('from') === 'request' && !!C.EXPERIENCES[key];
+  var exp = fromRequest ? C.EXPERIENCES[key] : null;
+  var topic = C.topicFor(key);
+
+  var guests = parseInt(params.get('guests'), 10) || (exp ? exp.guests : 1);
+  var date = params.get('date') || '2026-10-17';
+  var time = params.get('time') || (exp ? exp.time : '10:00');
+  var note = (params.get('note') || '').trim();
+
+  var thread = document.getElementById('thread');
+  var repliesEl = document.getElementById('replies');
+  var form = document.getElementById('composer');
+  var input = document.getElementById('msg');
+  var send = document.getElementById('send');
+  var back = document.querySelector('[data-back]');
+
+  if (fromRequest) back.setAttribute('href', 'concierge-request.html?type=' + key);
+
+  var lastKind = null;   // 'in' or 'out'; a new sender starts a new group
+  var typing = null;     // the typing row while Mika is typing
+  var typingPrev = null;
+  var busy = false;
+  var queue = [];
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function scroll() { thread.scrollTop = thread.scrollHeight; }
+  function fill(text) {
+    return text
+      .replace('{guests}', C.guestsWord(guests))
+      .replace('{date}', C.fmtDate(date))
+      .replace('{time}', C.fmtTime(time));
+  }
+
+  // One row per sender turn. Mika's rows carry an avatar; CSS shows it only on the last row of her group.
+  function addRow(kind) {
+    var first = lastKind !== kind;
+    lastKind = kind;
+    var r = el('div', 'c-msg ' + (kind === 'in' ? 'is-in' : 'is-out') + (first ? ' is-first' : ''));
+    if (kind === 'in') {
+      var av = el('span', 'c-msg__av', 'MK');
+      av.setAttribute('aria-hidden', 'true');
+      r.appendChild(av);
+    }
+    thread.appendChild(r);
+    scroll();
+    return r;
+  }
+
+  function bubble(kind, text, animate) {
+    var r = addRow(kind);
+    r.appendChild(el('p', 'c-bubble ' + (kind === 'in' ? 'is-in' : 'is-out') + (animate ? ' is-new' : ''), text));
+    scroll();
+    return r;
+  }
+
+  function markSent(animate) {
+    var old = thread.querySelector('.c-delivered');
+    if (old) old.remove();
+    thread.appendChild(el('p', 'c-delivered' + (animate ? ' is-new' : ''), 'Delivered'));
+    scroll();
+  }
+
+  function receiptRow(label, amount, total) {
+    var r = el('div', 'c-receipt__row' + (total ? ' is-total' : ''));
+    r.appendChild(el('span', '', label));
+    r.appendChild(el('span', 'c-receipt__amount', amount));
+    return r;
+  }
+
+  function bookCard(b, animate) {
+    var r = addRow('in');
+    var s = el('section', 'c-chat-card' + (animate ? ' is-new' : ''));
+    s.setAttribute('aria-label', 'Booking confirmation');
+    s.appendChild(el('p', 'c-chat-card__title', b.title));
+    s.appendChild(el('p', 'c-chat-card__sub', b.sub));
+    var rec = el('div', 'c-receipt');
+    b.lines.forEach(function (l) { rec.appendChild(receiptRow(l[0], C.peso(l[1]), false)); });
+    rec.appendChild(receiptRow('Total', C.peso(b.total), true));
+    s.appendChild(rec);
+    var pay = el('a', 'c-btn primary', 'Pay ' + C.peso(b.total));
+    pay.href = 'book-done.html';
+    s.appendChild(pay);
+    r.appendChild(s);
+    scroll();
+    return r;
+  }
+
+  function placeCard(id, animate) {
+    var P = C.PARTNERS[id];
+    var r = addRow('in');
+    var a = el('a', 'c-chat-place' + (animate ? ' is-new' : ''));
+    a.href = P.href;
+    var photo = el('span', 'c-chat-place__photo');
+    var img = el('img');
+    img.src = P.img;
+    img.alt = '';
+    photo.appendChild(img);
+    var main = el('span', 'c-chat-place__main');
+    main.appendChild(el('span', 'c-chat-place__name', P.name));
+    main.appendChild(el('span', 'c-chat-place__meta', P.meta));
+    main.appendChild(el('span', 'c-chat-place__offer', P.offer));
+    var chev = el('span', 'material-symbols-outlined c-chat-place__chev', 'chevron_right');
+    chev.setAttribute('aria-hidden', 'true');
+    a.appendChild(photo);
+    a.appendChild(main);
+    a.appendChild(chev);
+    r.appendChild(a);
+    scroll();
+    return r;
+  }
+
+  function setReplies(labels) {
+    repliesEl.innerHTML = '';
+    (labels || []).forEach(function (label) {
+      var b = el('button', 'c-reply', label);
+      b.type = 'button';
+      b.addEventListener('click', function () { say(label); });
+      repliesEl.appendChild(b);
+    });
+    // The chip row takes height from the thread, so keep the newest message in view.
+    scroll();
+  }
+
+  function showTyping() {
+    typingPrev = lastKind;
+    var r = addRow('in');
+    var t = el('p', 'c-bubble is-in c-typing is-new');
+    t.setAttribute('role', 'status');
+    t.setAttribute('aria-label', 'Mika is typing');
+    t.appendChild(el('span'));
+    t.appendChild(el('span'));
+    t.appendChild(el('span'));
+    r.appendChild(t);
+    typing = r;
+    scroll();
+  }
+  function hideTyping() {
+    if (typing) {
+      typing.remove();
+      typing = null;
+      lastKind = typingPrev;
+    }
+  }
+
+  function emit(step) {
+    if (step.t) bubble('in', fill(step.t), true);
+    if (step.card && exp) bookCard(C.bookingFor(key, guests, date, time), true);
+    if (step.place) placeCard(step.place, true);
+    setReplies(step.quick || []);
+  }
+
+  // One Mika step at a time: typing dots for about 1.2s, then the message.
+  function run() {
+    if (busy || !queue.length) return;
+    busy = true;
+    var step = queue.shift();
+    showTyping();
+    setTimeout(function () {
+      hideTyping();
+      emit(step);
+      busy = false;
+      run();
+    }, 1200);
+  }
+  function enqueue(steps) {
+    steps.forEach(function (s) { queue.push(s); });
+    run();
+  }
+
+  function pickSteps(text) {
+    var rules = (topic.rules || []).concat(C.GLOBAL_RULES);
+    for (var i = 0; i < rules.length; i++) {
+      if (rules[i].match.test(text)) return rules[i].steps;
+    }
+    return C.FALLBACK;
+  }
+
+  function say(text) {
+    text = String(text).trim();
+    if (!text) return;
+    setReplies([]);
+    bubble('out', text, true);
+    markSent(true);
+    input.value = '';
+    send.disabled = true;
+    enqueue(pickSteps(text));
+  }
+
+  input.addEventListener('input', function () {
+    send.disabled = input.value.trim() === '';
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    say(input.value);
+  });
+
+  // Start of the thread.
+  if (fromRequest) {
+    bubble('in', 'Hi Ana, Mika here. Thanks for the request. I am checking it now.', false);
+    var summary = exp.title + ', ' + C.guestsWord(guests) + ', ' + C.fmtDate(date) + ' at ' + C.fmtTime(time) + '.' +
+      (note ? ' ' + note : '');
+    bubble('out', summary, false);
+    markSent(false);
+    enqueue(exp.reply);
+  } else if (topic.history) {
+    topic.history.forEach(function (it) {
+      if (it.k === 'book') bookCard(it, false);
+      else if (it.k === 'place') placeCard(it.id, false);
+      else bubble(it.k, it.t, false);
+    });
+    setReplies(topic.quick);
+  } else {
+    bubble('in', topic.opener, false);
+    setReplies(topic.quick);
+  }
+})();
+</script>
+<script src="app.js"></script>
+</body>
+</html>

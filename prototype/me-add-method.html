@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Add a method</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-push c-grouped">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar">
+    <a data-back class="c-navbar__back" href="me.html" aria-label="Back to Me">
+      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+    </a>
+    <h1 class="c-navbar__title">Payment methods</h1>
+    <span></span>
+  </nav>
+
+  <main class="screen-scroll">
+
+    <div class="c-group c-group--lead u-mt-16">
+      <div class="c-group__row">
+        <span class="c-group__icon c-pm c-pm--gcash" aria-hidden="true">G</span>
+        <span class="c-group__main">GCash</span>
+        <span class="c-pill is-neutral">Default</span>
+      </div>
+      <div class="c-group__row">
+        <span class="c-group__icon c-pm c-pm--maya" aria-hidden="true">M</span>
+        <span class="c-group__main">Maya</span>
+      </div>
+      <div class="c-group__row">
+        <span class="c-group__icon c-pm c-pm--visa" aria-hidden="true">VISA</span>
+        <span class="c-group__main">Visa •• 4242</span>
+      </div>
+      <a class="c-group__row c-pressable" href="me-add-method.html">
+        <span class="c-group__icon c-ic--orange"><span class="material-symbols-outlined">add</span></span>
+        <span class="c-group__main">Add method</span>
+      </a>
+    </div>
+
+    <p class="c-group__sub u-gutter u-mt-12">Member payments at partner counters use your default method.</p>
+
+  </main>
+
+  <div class="c-sheet c-sheet--up">
+    <a class="c-sheet__scrim" href="me-payment-methods.html" aria-label="Close"></a>
+    <div class="c-sheet__panel">
+      <div class="c-sheet__grabber" aria-hidden="true"></div>
+      <div class="c-sheet__body">
+        <h2 class="c-sheet__title">Add a method</h2>
+        <p class="c-sheet__sub">Choose how you pay at partner counters.</p>
+      </div>
+      <div class="c-group u-mt-24">
+        <a class="c-group__row c-pressable" href="me-payment-methods.html">
+          <span class="c-group__icon c-pm c-pm--gcash" aria-hidden="true">G</span>
+          <span class="c-group__main">GCash</span>
+          <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+        </a>
+        <a class="c-group__row c-pressable" href="me-payment-methods.html">
+          <span class="c-group__icon c-pm c-pm--maya" aria-hidden="true">M</span>
+          <span class="c-group__main">Maya</span>
+          <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+        </a>
+        <a class="c-group__row c-pressable" href="me-payment-methods.html">
+          <span class="c-group__icon c-ic--blue"><span class="material-symbols-outlined">credit_card</span></span>
+          <span class="c-group__main">Credit or debit card</span>
+          <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+        </a>
+      </div>
+      <div class="c-sheet__actions">
+        <a class="c-btn secondary" href="me-payment-methods.html">Cancel</a>
+      </div>
+    </div>
+  </div>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>

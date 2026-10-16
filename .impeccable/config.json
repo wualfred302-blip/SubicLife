@@ -1,0 +1,208 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "prototype/theme.css"
+        ],
+        "createdAt": "2026-10-12T19:35:40.028Z",
+        "reason": "User confirmed the card looks great (2026-10-13): metallic foil wordmark on the physical membership card, not a heading or metric"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "prototype/explore.html"
+        ],
+        "createdAt": "2026-10-12T20:43:57.897Z",
+        "reason": "White text sits on photos with a dark scrim and on the Dusk wallpaper; rendered contrast measured 4.1:1 to 15:1 at 390px (2026-10-13). The detector cannot see image backdrops."
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "prototype/explore.html"
+        ],
+        "createdAt": "2026-10-12T20:43:58.067Z",
+        "reason": "Dusk wallpaper hero, a gradient backdrop the user asked for (2026-10-13)."
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "prototype/explore.html",
+          "prototype/offer.html"
+        ],
+        "createdAt": "2026-10-12T20:43:58.268Z",
+        "reason": "Only gradient text in the linked CSS is the membership card foil wordmark (components.css), approved by the user; no card is rendered on these pages."
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "prototype/explore.html",
+          "prototype/offer.html"
+        ],
+        "createdAt": "2026-10-12T20:43:58.465Z",
+        "reason": "Navy shadow belongs to the membership card material in components.css; no card is rendered on these pages."
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "prototype/story-new.html"
+        ],
+        "createdAt": "2026-10-12T22:19:34.977Z",
+        "reason": "Card foil rule in shared components.css; not used on this page (2026-10-13)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "prototype/story-new.html"
+        ],
+        "createdAt": "2026-10-12T22:19:35.137Z",
+        "reason": "Card navy #0B2545 rule in shared CSS; not used on this page (2026-10-13)"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "prototype/story-new.html"
+        ],
+        "createdAt": "2026-10-12T22:19:35.303Z",
+        "reason": "Dusk wallpaper swatch in shared theme.css; not used on this page (2026-10-13)"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "prototype/me-stories.html"
+        ],
+        "createdAt": "2026-10-12T22:19:35.462Z",
+        "reason": "Card foil rule in shared components.css; not used on this page (2026-10-13)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "prototype/me-stories.html"
+        ],
+        "createdAt": "2026-10-12T22:19:35.629Z",
+        "reason": "Card navy #0B2545 rule in shared CSS; not used on this page (2026-10-13)"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "prototype/me-stories.html"
+        ],
+        "createdAt": "2026-10-12T22:19:35.789Z",
+        "reason": "Dusk wallpaper swatch in shared theme.css; not used on this page (2026-10-13)"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "prototype/me.html"
+        ],
+        "createdAt": "2026-10-12T22:20:32.448Z",
+        "reason": "Card foil rule in shared components.css; not on this page (2026-10-13)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "prototype/me.html"
+        ],
+        "createdAt": "2026-10-12T22:20:32.628Z",
+        "reason": "Card navy #0B2545 rule in shared CSS; not on this page (2026-10-13)"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "prototype/pay-done.html"
+        ],
+        "createdAt": "2026-10-12T22:20:32.801Z",
+        "reason": "Card foil rule in shared components.css; not on this page (2026-10-13)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "prototype/pay-done.html"
+        ],
+        "createdAt": "2026-10-12T22:20:32.998Z",
+        "reason": "Card navy #0B2545 rule in shared CSS; not on this page (2026-10-13)"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "prototype/me.html"
+        ],
+        "createdAt": "2026-10-12T22:20:33.165Z",
+        "reason": "White labels sit on the dark Dusk wallpaper; detector samples a light gradient stop (2026-10-13)"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "prototype/pay-done.html"
+        ],
+        "createdAt": "2026-10-12T22:20:33.332Z",
+        "reason": "White on brand orange is final per owner; saved pill is orange on peach (6:1), detector reads a wrong backdrop (2026-10-13)"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "prototype/card-savings.html"
+        ],
+        "createdAt": "2026-10-12T22:21:39.753Z",
+        "reason": "Card foil rule in shared components.css; not on this page (2026-10-13)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "prototype/card-savings.html"
+        ],
+        "createdAt": "2026-10-12T22:21:39.934Z",
+        "reason": "Card navy #0B2545 rule in shared CSS; not on this page (2026-10-13)"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "prototype/place.html"
+        ],
+        "createdAt": "2026-10-12T22:57:54.088Z",
+        "reason": "Brand orange #E8590C button with white label; user confirmed the bright orange scheme (2026-10-11) and asked not to reopen the 3.6:1 note"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "prototype/place.html"
+        ],
+        "createdAt": "2026-10-12T22:57:54.328Z",
+        "reason": "Card foil rule in shared components.css/theme.css; no portrait card rendered on this page (2026-10-13)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "prototype/place.html"
+        ],
+        "createdAt": "2026-10-12T22:57:54.518Z",
+        "reason": "Navy shadow belongs to the card material in components.css; not rendered on this page (2026-10-13)"
+      }
+    ]
+  }
+}

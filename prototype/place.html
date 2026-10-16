@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Partner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone is-pushed has-bottombar has-glow">
+
+  <header class="c-statusbar is-overlay">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-xbar" aria-hidden="true"><a class="c-xbar__back" href="explore.html" data-back tabindex="-1"><span class="material-symbols-outlined">chevron_left</span></a><span class="c-xbar__title is-small" data-barname></span><span style="width:32px"></span></div>
+
+  <main class="screen-scroll">
+
+    <div class="c-placehero">
+      <div class="c-placehero__track" data-gallery data-snap></div>
+      <span class="c-placehero__count" data-count></span>
+      <div class="c-placehero__bar">
+        <a class="c-circle-btn" href="explore.html" aria-label="Back to Explore"><span class="material-symbols-outlined">chevron_left</span></a>
+        <div class="c-placehero__right">
+          <button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save place" data-save><span class="material-symbols-outlined">bookmark</span></button>
+          <a class="c-circle-btn" data-share href="mailto:" aria-label="Share place"><span class="material-symbols-outlined">ios_share</span></a>
+        </div>
+      </div>
+    </div>
+
+    <section class="c-place-head">
+      <h1 class="c-place-head__name" data-name>Partner</h1>
+      <p class="c-place-head__meta"><span class="c-place-head__star"><span class="material-symbols-outlined">star</span><span data-rating></span></span><span data-meta></span></p>
+    </section>
+
+    <a class="c-poffer c-pressable" data-deal href="offer.html">
+      <span class="c-minicard" aria-hidden="true"></span>
+      <span class="c-poffer__text"><span class="c-poffer__title" data-otitle></span><span class="c-poffer__sub" data-osub></span></span>
+      <span class="material-symbols-outlined c-poffer__chev" aria-hidden="true">chevron_right</span>
+    </a>
+
+    <section class="c-psec">
+      <h2 class="c-section-title">About</h2>
+      <p class="c-pabout__text" data-about></p>
+    </section>
+
+    <section class="c-psec" data-rooms-sec hidden>
+      <h2 class="c-section-title" data-rooms-title>Rooms</h2>
+      <div class="c-carousel c-rooms" data-rooms data-snap></div>
+    </section>
+
+    <section class="c-psec" data-stories-sec hidden>
+      <h2 class="c-section-title">Stories from members</h2>
+      <div class="c-carousel c-stories" data-stories data-snap></div>
+    </section>
+
+    <section class="c-psec">
+      <h2 class="c-section-title">Hours and location</h2>
+      <div class="c-info-group">
+        <a class="c-mapthumb" data-maplink href="map.html" aria-label="Show this place on the map">
+          <span class="c-mapthumb__live" id="minimap"></span>
+        </a>
+        <div class="c-info-row">
+          <span class="material-symbols-outlined">schedule</span>
+          <span class="c-info-row__text" data-hours></span>
+        </div>
+        <a class="c-info-row" data-address-link href="https://www.google.com/maps/search/?api=1&amp;query=Lighthouse+Marina+Resort+Subic+Bay" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined">location_on</span>
+          <span class="c-info-row__text" data-address></span>
+          <span class="material-symbols-outlined c-info-row__chev">chevron_right</span>
+        </a>
+        <a class="c-info-row" data-phone href="tel:">
+          <span class="material-symbols-outlined">call</span>
+          <span class="c-info-row__text" data-phone-text></span>
+          <span class="material-symbols-outlined c-info-row__chev">chevron_right</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="c-bottombar">
+    <div class="c-bottombar__price" data-barprice hidden></div>
+    <a class="c-btn primary is-full" data-action href="book.html">Book</a>
+  </div>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script src="map-data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function () {
+    var p = placeFor(queryParam('p') || 'lighthouse');
+    var $ = function (s) { return document.querySelector(s); };
+
+    // Photo gallery: swipe through, with a "1 / 4" counter like Photos.
+    var photos = p.photos || [p.hero];
+    var gal = $('[data-gallery]'), count = $('[data-count]');
+    gal.innerHTML = photos.map(function (src, i) {
+      return '<img src="' + src + '" alt="' + p.name + ', photo ' + (i + 1) + '"' + (i ? ' loading="lazy"' : '') + '>';
+    }).join('');
+    function syncCount() { count.textContent = (Math.round(gal.scrollLeft / gal.clientWidth) + 1) + ' / ' + photos.length; }
+    count.hidden = photos.length < 2;
+    gal.addEventListener('scroll', syncCount, { passive: true });
+    document.querySelector('main').style.setProperty('--ph', 'url(' + photos[0] + ')');
+    syncCount();
+    $('[data-name]').textContent = p.name;
+    $('[data-barname]').textContent = p.name;
+    var phone = document.querySelector('.phone'), main = document.querySelector('main');
+    main.addEventListener('scroll', function () { phone.classList.toggle('is-scrolled', main.scrollTop > 230); }, { passive: true });
+    $('[data-meta]').textContent = '· ' + p.category + ' · ' + p.distance + ' · ' + p.area;
+    $('[data-rating]').textContent = p.rating;
+
+    // The member offer gets its own row under the name; the price waits in the bottom bar beside
+    // the action, so each fact shows once.
+    var offer = ((window.FEED && FEED.offers) || []).filter(function (o) { return o.place === p.id; })[0];
+    var deal = $('[data-deal]');
+    if (offer) {
+      deal.href = 'offer.html?id=' + offer.id;
+      $('[data-otitle]').textContent = offer.title;
+      $('[data-osub]').textContent = 'Prestige perk · ' + (p.bookable ? 'applied when you book' : p.discount ? 'show your card to pay' : 'with any bill');
+    } else {
+      deal.hidden = true;
+      $('.c-place-head').classList.add('is-solo');
+    }
+    var member = function (rate) { return Math.round(rate * (100 - p.discount) / 100); };
+    if (p.bookable) {
+      // Quote the cheapest option, then list every room or tour with its member price.
+      var rooms = p.rooms || [];
+      var low = rooms.reduce(function (m, r) { return r.rate < m.rate ? r : m; }, rooms[0] || { rate: p.rackPrice });
+      var bar = $('[data-barprice]');
+      bar.innerHTML = '<p class="c-bottombar__total">' + (rooms.length > 1 ? '<small>From </small>' : '') +
+        fmtPeso(member(low.rate)) + '<small> / ' + p.unit + '</small></p>' +
+        '<p class="c-bottombar__was"><s>' + fmtPeso(low.rate) + '</s> · ' + p.discount + '% off</p>';
+      bar.hidden = false;
+      $('[data-action]').classList.remove('is-full');
+      if (rooms.length) {
+        $('[data-rooms-sec]').hidden = false;
+        $('[data-rooms-title]').textContent = p.unit === 'night' ? 'Rooms' : 'Tours';
+        $('[data-rooms]').innerHTML = rooms.map(function (r, i) { return { r: r, i: i }; })
+          .sort(function (a, b) { return a.r.rate - b.r.rate; })
+          .map(function (x) { var r = x.r, i = x.i;
+          return '<a class="c-room" href="book.html?p=' + p.id + '&amp;room=' + i + '">' +
+            '<span class="c-room__photo"><img src="' + (r.photo || p.hero) + '" alt=""></span>' +
+            '<span class="c-room__name">' + r.name + '</span><span class="c-room__sub">' + r.sub + '</span>' +
+            '<span class="c-room__price"><b>' + fmtPeso(member(r.rate)) + '</b> / ' + p.unit + ' <s>' + fmtPeso(r.rate) + '</s></span></a>';
+        }).join('');
+      }
+    }
+    $('[data-about]').textContent = p.about || '';
+
+    // Stories from members who paid here with the card. A visit of yours without one starts the row.
+    var stories = FEED.stories.filter(function (s) { return s.place === p.id; });
+    var visit = visitsToShare().filter(function (v) { return v.place === p.id; })[0];
+    if (stories.length || visit) {
+      $('[data-stories-sec]').hidden = false;
+      $('[data-stories]').innerHTML = (visit ? addStoryTile('story-new.html?p=' + p.id + '&amp;v=' + encodeURIComponent(visit.when) +
+        '&amp;from=' + encodeURIComponent('place.html?p=' + p.id), 'Add yours', 'From ' + (visit.when === 'Today' ? 'today' : visit.when)) : '') +
+        stories.map(function (s) { return storyTile(s, 'place'); }).join('');
+    }
+
+    // A real, still map of the spot. Tapping it opens the full map.
+    var spot = window.L && ((window.MAP_DATA && MAP_DATA.places) || []).filter(function (m) { return m.id === p.id; })[0];
+    if (spot) {
+      var mini = L.map('minimap', { zoomControl: false, attributionControl: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false })
+        .setView([spot.lat, spot.lng], 15);
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 }).addTo(mini);
+      L.marker([spot.lat, spot.lng], { icon: L.divIcon({ className: 'c-minipin', iconSize: [22, 22] }) }).addTo(mini);
+    }
+    $('[data-hours]').textContent = p.hours;
+    $('[data-address]').textContent = p.address;
+    $('[data-address-link]').href = mapsUrl(p);
+    $('[data-phone]').href = 'tel:' + p.phone.replace(/\s/g, '');
+    $('[data-phone-text]').textContent = p.phone;
+    $('[data-maplink]').href = 'map.html?p=' + p.id;
+    $('[data-share]').href = 'mailto:?subject=' + encodeURIComponent(p.name) +
+      '&body=' + encodeURIComponent(p.name + ', ' + p.area + ', Subic Bay.');
+    document.title = 'Subic.Life - ' + p.name;
+
+    // The price is already up top, so the bar is just the next step.
+    var action = $('[data-action]');
+    action.textContent = p.bookable ? 'Check availability' : 'Show my card';
+    action.href = p.bookable ? 'book.html?p=' + p.id : 'card.html';
+
+    var save = $('[data-save]');
+    save.addEventListener('click', function () {
+      var on = save.classList.toggle('is-on');
+      save.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  })();
+</script>
+</body>
+</html>

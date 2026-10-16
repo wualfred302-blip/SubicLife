@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Subic.Life - Story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="components-e.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone is-pushed has-bottombar">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar">
+    <a data-back class="c-navbar__back" href="explore.html" aria-label="Back to Explore">
+      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+    </a>
+    <h1 class="c-navbar__title" id="nav-title">Story</h1>
+    <span></span>
+  </nav>
+
+  <main class="screen-scroll" id="post-main"></main>
+
+  <form class="c-bottombar c-composer" id="composer" autocomplete="off">
+    <span class="c-composer__avatar"><img src="img/avatar.jpg" alt=""></span>
+    <input class="c-composer__field" id="comment-input" type="text" placeholder="Add a comment" aria-label="Add a comment" maxlength="180">
+    <button class="c-composer__send" id="comment-send" type="submit" disabled>Post</button>
+  </form>
+  <div class="c-bottombar c-goingbar" id="goingbar" hidden>
+    <div class="c-goingbar__text">
+      <p class="c-goingbar__count" id="going-count"></p>
+      <p class="c-goingbar__sub" id="going-sub"></p>
+    </div>
+    <button class="c-btn primary c-goingbar__btn" id="going" type="button" aria-pressed="false">I'm going</button>
+  </div>
+  <section class="c-sheet c-vsheet" id="delete-sheet" role="dialog" aria-modal="true" aria-labelledby="delete-title" hidden>
+    <div class="c-sheet__scrim" data-close></div>
+    <div class="c-sheet__panel">
+      <div class="c-sheet__grabber"></div>
+      <div class="c-sheet__body">
+        <h2 class="c-sheet__title" id="delete-title">Delete this story?</h2>
+        <p class="c-sheet__sub">It comes off Explore and the place page. Your visit stays, so you can share it again.</p>
+      </div>
+      <div class="c-sheet__actions">
+        <button class="c-btn primary is-danger" type="button" data-confirm>Delete story</button>
+        <button class="c-btn plain" type="button" data-close>Cancel</button>
+      </div>
+    </div>
+  </section>
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script>
+(function () {
+  var s = storyFor(queryParam('id') || 'camayan-sunrise') || storyFor('camayan-sunrise');
+  var place = PLACES[s.place];
+  var isEvent = s.kind === 'event';
+  var main = document.getElementById('post-main');
+  if (isEvent) document.querySelector('.phone').classList.add('is-event');
+  var commentTotal = s.commentCount || s.comments.length;
+  document.getElementById('nav-title').textContent = isEvent ? 'Event' : 'Story';
+  document.title = 'Subic.Life - ' + (isEvent ? 'Event' : 'Story');
+
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function avatarOf(c) { return c.avatar ? '<img src="' + c.avatar + '" alt="">' : '<span class="c-mono" style="background:' + monoColour(c.initials) + '">' + esc(c.initials) + '</span>'; }
+  function commentRow(c) {
+    return '<div class="c-comment">' +
+      '<span class="c-comment__avatar">' + avatarOf(c) + '</span>' +
+      '<div class="c-comment__body">' +
+        '<p class="c-comment__line"><strong>' + esc(c.who) + '</strong> ' + esc(c.text) + '</p>' +
+        '<p class="c-comment__ago">' + esc(c.ago) + '</p>' +
+      '</div></div>';
+  }
+
+  var slides = s.photos.map(function (src, i) {
+    return '<div class="c-pager__slide"><img src="' + src + '" alt="' + esc(s.caption) + ' (photo ' + (i + 1) + ')"></div>';
+  }).join('');
+  var dots = s.photos.map(function (_, i) {
+    return '<button class="c-pager__dot' + (i === 0 ? ' is-on' : '') + '" type="button" aria-label="Photo ' + (i + 1) + ' of ' + s.photos.length + '"></button>';
+  }).join('');
+
+  var head = isEvent
+    ? '<h1 class="c-post-title">' + esc(s.title) + '</h1>'
+    : '<div class="c-post__author">' +
+        '<span class="c-post__avatar">' + avatarOf(s) + '</span>' +
+        '<span class="c-post__who"><span class="c-post__name">' + esc(s.author) + '</span>' +
+        '<span class="c-post__where">' + esc(place.name) + ' · ' + esc(s.ago) + '</span></span>' +
+      '</div>';
+
+  var info = isEvent
+    ? '<div class="c-info-group c-post-info">' +
+        '<div class="c-info-row"><span class="material-symbols-outlined">schedule</span><span class="c-info-row__text">' + esc(s.when) + '</span></div>' +
+        '<div class="c-info-row"><span class="material-symbols-outlined">place</span><span class="c-info-row__text">' + esc(place.name) + '</span></div>' +
+      '</div>'
+    : '';
+
+  main.innerHTML =
+    (isEvent ? '' : '<div class="u-gutter c-post-top">' + head + '</div>') +
+    '<div class="c-pager">' +
+      '<div class="c-pager__track" id="pager" data-snap>' + slides + '</div>' +
+      (s.photos.length > 1 ? '<div class="c-pager__dots" id="dots">' + dots + '</div>' : '') +
+    '</div>' +
+    '<div class="u-gutter c-post-body">' +
+      (isEvent ? head : '<p class="c-verified"><span class="material-symbols-outlined" aria-hidden="true">verified</span>Verified visit · ' + esc(s.visited) + '</p>') +
+      (s.caption ? '<p class="c-post-caption">' + esc(s.caption) + '</p>' : '') +
+    '</div>' +
+    '<div class="u-gutter c-post-info-wrap">' + info + '</div>' +
+    '<div class="u-gutter c-post-actions">' +
+      '<button class="c-like" type="button" id="like" aria-pressed="false" aria-label="Like">' +
+        '<span class="material-symbols-outlined">favorite</span><span id="like-count">' + s.likes + '</span>' +
+      '</button>' +
+      '<span class="c-post__stat"><span class="material-symbols-outlined">chat_bubble</span><span id="comment-count">' + commentTotal + '</span></span>' +
+    '</div>' +
+    '<div class="c-info-group c-post-place">' +
+      '<a class="c-place-link" href="place.html?p=' + s.place + '">' +
+        '<span class="c-place-link__thumb"><img src="' + place.thumb + '" alt=""></span>' +
+        '<span class="c-place-link__text">' +
+          '<span class="c-place-link__name">' + esc(place.name) + '</span>' +
+          '<span class="c-place-link__sub">' + esc(place.category) + ' · ' + esc(place.area) + '</span>' +
+          '<span class="c-place-link__offer">' + esc(place.offer) + '</span>' +
+        '</span>' +
+        '<span class="material-symbols-outlined c-place-link__chev" aria-hidden="true">chevron_right</span>' +
+      '</a>' +
+    '</div>' +
+    '<section class="c-post-comments">' +
+      '<div class="c-section-head"><h2 class="c-section-head__title">Comments</h2></div>' +
+      '<div id="comments">' + (s.comments.length ? s.comments.map(commentRow).join('') : '<p class="c-post-empty" data-nocomments>No comments yet.</p>') + '</div>' +
+    '</section>' +
+    (String(s.id).indexOf('mine-') === 0 ? '<div class="u-gutter c-post-delete"><button class="c-btn plain is-danger" type="button" data-delete>Delete story</button></div>' : '');
+
+  // Photo pager: the dots follow the scroll position, and a dot jumps to its photo.
+  var track = document.getElementById('pager');
+  var dotEls = document.querySelectorAll('.c-pager__dot');
+  function syncDot() {
+    var i = Math.round(track.scrollLeft / track.clientWidth);
+    dotEls.forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+  }
+  track.addEventListener('scroll', syncDot, { passive: true });
+  dotEls.forEach(function (d, k) {
+    d.addEventListener('click', function () {
+      track.scrollTo({ left: k * track.clientWidth, behavior: 'smooth' });
+    });
+  });
+
+  // Like: toggles the heart (orange, filled) and the count by one.
+  var like = document.getElementById('like');
+  var likeCount = document.getElementById('like-count');
+  var liked = false;
+  var likes = s.likes;
+  like.addEventListener('click', function () {
+    liked = !liked;
+    likes += liked ? 1 : -1;
+    like.classList.toggle('is-liked', liked);
+    like.setAttribute('aria-pressed', liked ? 'true' : 'false');
+    likeCount.textContent = likes;
+    like.classList.remove('is-pop');
+    void like.offsetWidth;
+    like.classList.add('is-pop');
+  });
+  like.addEventListener('animationend', function () { like.classList.remove('is-pop'); });
+
+  // Comment composer: Post stays disabled until there is text. A new comment lands at the bottom.
+  var form = document.getElementById('composer');
+  var input = document.getElementById('comment-input');
+  var send = document.getElementById('comment-send');
+  var commentsEl = document.getElementById('comments');
+  var commentCount = document.getElementById('comment-count');
+  var total = commentTotal;
+
+  function syncSend() { send.disabled = input.value.trim() === ''; }
+  input.addEventListener('input', syncSend);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var text = input.value.trim();
+    if (!text) return;
+    var none = commentsEl.querySelector('[data-nocomments]');
+    if (none) none.remove();
+    commentsEl.insertAdjacentHTML('beforeend', commentRow({ who: 'Ana Reyes', avatar: 'img/avatar.jpg', ago: 'Just now', text: text }));
+    total += 1;
+    commentCount.textContent = total;
+    input.value = '';
+    syncSend();
+    main.scrollTop = main.scrollHeight;
+  });
+
+  // Your own story can be deleted. A sheet asks first; then it is gone from every page and you go back.
+  var del = main.querySelector('[data-delete]');
+  var sheet = document.getElementById('delete-sheet');
+  if (del) {
+    del.addEventListener('click', function () { sheet.hidden = false; });
+    sheet.addEventListener('click', function (e) {
+      if (e.target.closest('[data-close]')) sheet.hidden = true;
+      if (!e.target.closest('[data-confirm]')) return;
+      deleteStory(s.id);
+      if (window.parent !== window) window.subicNav('me-stories.html', 'back');
+      else window.location.href = 'me-stories.html';
+    });
+  }
+
+  // Events: the bottom bar is for joining. The comment box moves inline under the comments.
+  if (isEvent) {
+    var bar = document.getElementById('goingbar');
+    var btn = document.getElementById('going');
+    var countEl = document.getElementById('going-count');
+    var going = false;
+    var n = s.going;
+    bar.hidden = false;
+    form.classList.remove('c-bottombar');
+    form.classList.add('is-inline');
+    document.querySelector('.c-post-comments').appendChild(form);
+    document.getElementById('going-sub').textContent = s.when;
+    function syncGoing() {
+      countEl.textContent = n + ' members going';
+      btn.textContent = going ? 'You’re going' : 'I’m going';
+      btn.classList.toggle('primary', !going);
+      btn.classList.toggle('secondary', going);
+      btn.setAttribute('aria-pressed', going ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function () { going = !going; n += going ? 1 : -1; syncGoing(); });
+    syncGoing();
+  }
+})();
+</script>
+</body>
+</html>

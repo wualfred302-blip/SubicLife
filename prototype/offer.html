@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Subic.Life - Offer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="components-e.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone is-pushed has-bottombar has-glow c-offerx">
+
+  <header class="c-statusbar is-overlay">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-xbar" aria-hidden="true"><a class="c-xbar__back" href="explore.html" data-back tabindex="-1"><span class="material-symbols-outlined">chevron_left</span></a><span class="c-xbar__title is-small" id="bar-title"></span><span style="width:32px"></span></div>
+
+  <main class="screen-scroll" id="offer-main"></main>
+
+  <div class="c-bottombar" id="cta"></div>
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script>
+(function () {
+  var o = offerFor(queryParam('id') || 'lighthouse-rooms') || offerFor('lighthouse-rooms');
+  var place = PLACES[o.place];
+  var main = document.getElementById('offer-main');
+
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  document.title = 'Subic.Life - ' + o.title;
+  document.getElementById('bar-title').textContent = o.title;
+
+  // What the member actually pays. Bookable offers quote the cheapest room or tour, the same
+  // 'from' price the listing shows; counter offers show a typical bill (Meat Plus matches the
+  // ₱2,400 receipt used elsewhere in the app).
+  var pct = place.discount || 0;
+  var was, now, label, unit, pick = 0;
+  if (o.bookable && place.rackPrice) {
+    var rooms = place.rooms || [];
+    rooms.forEach(function (r, i) { if (r.rate < rooms[pick].rate) pick = i; });
+    was = rooms.length ? rooms[pick].rate : place.rackPrice; now = Math.round(was * (100 - pct) / 100); unit = place.unit;
+    label = (rooms.length ? rooms[pick].name + ', ' : '') + 'per ' + unit;
+  } else {
+    was = o.place === 'meatplus' ? 2400 : 2000; now = Math.round(was * (100 - pct) / 100);
+    label = 'On a ' + fmtPeso(was) + ' bill';
+  }
+  var saved = was - now;
+  var gift = !o.bookable && !pct;
+
+  var steps = gift
+    ? ['Show your card when you order.', 'Staff add the dessert to your table.', 'Pay the rest of the bill in the app as usual.']
+    : o.bookable
+    ? ['Book here at the member price.', 'Pay in the app with GCash, Maya or card.', 'Show your card QR when you arrive.']
+    : ['Show your card when the bill comes.', 'Staff send the bill to your phone with ' + pct + '% already off.', 'Pay in the app with Face ID. Done.'];
+
+  // Fine print only: the how-to lines are covered by the steps above.
+  var photos = [o.photo].concat((place.photos || []).filter(function (src) { return src !== o.photo; }));
+
+  var fine = o.terms.filter(function (t) { return !/show your|staff confirm|book at|in app/i.test(t); });
+
+  main.innerHTML =
+    '<div class="c-placehero">' +
+      '<div class="c-placehero__track" data-gallery data-snap>' + photos.map(function (src, i) { return '<img src="' + src + '" alt=""' + (i ? ' loading="lazy"' : '') + '>'; }).join('') + '</div>' +
+      (photos.length > 1 ? '<span class="c-placehero__count" data-count>1 / ' + photos.length + '</span>' : '') +
+      '<div class="c-placehero__bar">' +
+        '<a class="c-circle-btn" data-back href="explore.html" aria-label="Back to Explore"><span class="material-symbols-outlined">chevron_left</span></a>' +
+        '<div class="c-placehero__right">' +
+          '<button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save offer" data-save><span class="material-symbols-outlined">bookmark</span></button>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="c-offerbody">' +
+    '<div class="u-gutter c-offer-head">' +
+      '<h1 class="c-offer-title">' + esc(o.title) + '</h1>' +
+      '<p class="c-offer-tier">Prestige perk · until ' + esc(o.valid) + '</p>' +
+    '</div>' +
+    '<div class="c-oval">' +
+      (gift
+        ? '<p class="c-oval__label">Dessert, with any bill</p>' +
+          '<p class="c-oval__price"><span class="c-oval__now">On the house</span></p>'
+        : '<p class="c-oval__label">' + esc(label) + '</p>' +
+          '<p class="c-oval__price"><span class="c-oval__now">' + fmtPeso(now) + '</span><s class="c-oval__was">' + fmtPeso(was) + '</s></p>' +
+          '<p class="c-oval__save">You save ' + fmtPeso(saved) + (o.bookable ? ' a ' + unit : '') + '</p>') +
+    '</div>' +
+    '<section class="c-osec">' +
+      '<h2 class="c-section-title">How it works</h2>' +
+      '<ol class="c-osteps c-otile">' + steps.map(function (t, i) {
+        return '<li><span class="c-osteps__n">' + (i + 1) + '</span><span>' + esc(t) + '</span></li>';
+      }).join('') + '</ol>' +
+    '</section>' +
+    '<section class="c-osec">' +
+      '<h2 class="c-section-title">Where</h2>' +
+      '<a class="c-oplace c-otile c-pressable" href="place.html?p=' + o.place + '">' +
+        '<span class="c-oplace__thumb"><img src="' + place.thumb + '" alt=""></span>' +
+        '<span class="c-oplace__text"><span class="c-oplace__name">' + esc(place.name) + '</span>' +
+        '<span class="c-oplace__sub">' + esc(place.category) + ' · ' + esc(place.distance) + '</span></span>' +
+        '<span class="material-symbols-outlined c-oplace__chev" aria-hidden="true">chevron_right</span>' +
+      '</a>' +
+    '</section>' +
+    (fine.length ? '<section class="c-osec">' +
+      '<h2 class="c-section-title">Good to know</h2>' +
+      '<ul class="c-ofine c-otile">' + fine.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
+    '</section>' : '') +
+    '</div>';
+
+  main.style.setProperty('--ph', 'url(' + photos[0] + ')');
+  var cta = document.getElementById('cta');
+  // Airbnb-style bar: the price on the left, one short button on the right.
+  cta.innerHTML = o.bookable
+    ? '<div class="c-obar__price"><span><b>' + fmtPeso(now) + '</b> / ' + unit + '</span><s>' + fmtPeso(was) + '</s></div>' +
+      '<a class="c-btn primary" href="book.html?p=' + o.place + '&amp;room=' + pick + '">Book</a>'
+    : '<div class="c-obar__price"><span><b>' + esc(o.title) + '</b></span></div>' +
+      '<a class="c-btn primary" href="card.html">Show my card</a>';
+
+  var gal = main.querySelector('[data-gallery]'), count = main.querySelector('[data-count]');
+  if (count) gal.addEventListener('scroll', function () { count.textContent = (Math.round(gal.scrollLeft / gal.clientWidth) + 1) + ' / ' + photos.length; }, { passive: true });
+
+  var save = main.querySelector('[data-save]');
+  save.addEventListener('click', function () {
+    var on = save.classList.toggle('is-on');
+    save.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+
+  // Past the photo, a frosted bar with the offer title takes over the top.
+  var phone = document.querySelector('.phone');
+  var hero = main.querySelector('.c-placehero');
+  var bar = document.querySelector('.c-xbar');
+  main.addEventListener('scroll', function () {
+    phone.classList.toggle('is-scrolled', main.scrollTop > hero.offsetHeight - bar.offsetHeight - 8);
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

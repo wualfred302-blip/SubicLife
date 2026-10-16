@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Savings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-b.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar">
+    <a data-back class="c-navbar__back" href="card.html" aria-label="Back to card">
+      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+    </a>
+    <h1 class="c-navbar__title">Savings</h1>
+    <span></span>
+  </nav>
+
+  <main class="screen-scroll">
+
+    <section class="u-gutter u-mt-24">
+      <div class="c-hero-amount">
+        <p class="c-hero-amount__value">₱12,450</p>
+        <p class="c-hero-amount__caption">saved in 2026 across 19 visits</p>
+      </div>
+    </section>
+
+
+    <section class="u-gutter u-mt-24 c-ledger">
+      <h2 class="c-section-title is-caption">October</h2>
+      <div class="c-list-row">
+        <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-meat-plus.jpg" alt="Meat Plus Cafe"></div></div>
+        <div class="c-list-row__main"><p class="c-list-row__title">Meat Plus Cafe</p><p class="c-list-row__sub">Today · 20% off dinner</p></div>
+        <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱480</span><span class="c-visit__lbl">saved</span></div>
+      </div>
+      <div class="c-list-row">
+        <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-lighthouse-oct.jpg" alt="Lighthouse Marina Resort"></div></div>
+        <div class="c-list-row__main"><p class="c-list-row__title">Lighthouse Marina Resort</p><p class="c-list-row__sub">Oct 10 · 20% off hotel dining</p></div>
+        <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱1,840</span><span class="c-visit__lbl">saved</span></div>
+      </div>
+      <div class="c-list-row">
+        <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-sailing-club.jpg" alt="Subic Bay Yacht Club"></div></div>
+        <div class="c-list-row__main"><p class="c-list-row__title">Subic Bay Yacht Club</p><p class="c-list-row__sub">Oct 5 · Sunset yacht charter</p></div>
+        <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱1,200</span><span class="c-visit__lbl">saved</span></div>
+      </div>
+    </section>
+
+    <section class="u-gutter u-mt-24 c-ledger">
+      <h2 class="c-section-title is-caption">September</h2>
+      <div class="c-list-row">
+        <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-zoobic.jpg" alt="Zoobic Safari"></div></div>
+        <div class="c-list-row__main"><p class="c-list-row__title">Zoobic Safari</p><p class="c-list-row__sub">Sep 27 · Family adventure passes</p></div>
+        <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱920</span><span class="c-visit__lbl">saved</span></div>
+      </div>
+      <div class="c-list-row">
+        <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-ramas.jpg" alt="Rama's Kitchen"></div></div>
+        <div class="c-list-row__main"><p class="c-list-row__title">Rama's Kitchen</p><p class="c-list-row__sub">Sep 14 · Authentic Indian lunch</p></div>
+        <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱350</span><span class="c-visit__lbl">saved</span></div>
+      </div>
+      <div class="c-list-row">
+        <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-lighthouse-sep.jpg" alt="Lighthouse Marina Resort"></div></div>
+        <div class="c-list-row__main"><p class="c-list-row__title">Lighthouse Marina Resort</p><p class="c-list-row__sub">Sep 2 · 720 Bar sunset cocktails</p></div>
+        <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱720</span><span class="c-visit__lbl">saved</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>

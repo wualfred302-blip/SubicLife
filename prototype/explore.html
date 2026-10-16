@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F6F3EE">
+  <title>Subic.Life - Discover</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="components-e.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-discover">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-dhead">
+    <div class="c-dtabs" role="tablist" aria-label="Discover">
+      <button class="c-dtabs__tab" type="button" role="tab" id="tab-stories" aria-controls="panel-stories" data-tab="stories">Stories</button>
+      <button class="c-dtabs__tab" type="button" role="tab" id="tab-places" aria-controls="panel-places" data-tab="places">Places</button>
+      <button class="c-dtabs__tab" type="button" role="tab" id="tab-events" aria-controls="panel-events" data-tab="events">Events</button>
+    </div>
+    <button class="c-dhead__btn" type="button" data-add-story aria-label="Share a story"><span class="material-symbols-outlined" aria-hidden="true">add_circle</span></button>
+  </div>
+
+  <main class="screen-scroll">
+    <h1 class="u-sr-only">Discover</h1>
+
+    <section class="c-dpanel" id="panel-stories" role="tabpanel" aria-labelledby="tab-stories">
+      <div class="c-fgrid" id="feed-grid"></div>
+    </section>
+
+    <section class="c-dpanel" id="panel-places" role="tabpanel" aria-labelledby="tab-places" hidden>
+      <div class="c-chiprow" role="group" aria-label="Filter places">
+        <button class="c-chip is-selected" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="c-chip" type="button" data-filter="hotels" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">hotel</span>Hotels</button>
+        <button class="c-chip" type="button" data-filter="food" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">restaurant</span>Food</button>
+        <button class="c-chip" type="button" data-filter="beaches" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">beach_access</span>Beaches</button>
+        <button class="c-chip" type="button" data-filter="water-sports" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">sailing</span>Water sports</button>
+        <button class="c-chip" type="button" data-filter="nature" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">forest</span>Nature</button>
+        <button class="c-chip" type="button" data-filter="nightlife" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">local_bar</span>Nightlife</button>
+      </div>
+
+      <section data-section="near">
+        <div class="c-section-head">
+          <h2 class="c-section-head__title">Near you</h2>
+        </div>
+        <div class="c-carousel c-lrow" data-snap id="near-row"></div>
+      </section>
+
+      <section data-section="popular">
+        <div class="c-section-head">
+          <h2 class="c-section-head__title">Popular with members</h2>
+        </div>
+        <div class="c-bigcards" id="feed-popular"></div>
+      </section>
+
+      <p class="c-dempty" data-places-empty hidden>No partners match. Try another category.</p>
+    </section>
+
+    <section class="c-dpanel" id="panel-events" role="tabpanel" aria-labelledby="tab-events" hidden>
+      <div class="c-section-head">
+        <h2 class="c-section-head__title">This week in Subic</h2>
+      </div>
+      <div class="c-dlist" id="feed-events"></div>
+    </section>
+  </main>
+
+  <section class="c-sheet c-vsheet" id="visit-sheet" role="dialog" aria-modal="true" aria-labelledby="visit-sheet-title" hidden>
+    <div class="c-sheet__scrim" data-close></div>
+    <div class="c-sheet__panel">
+      <div class="c-sheet__grabber"></div>
+      <div class="c-sheet__body">
+        <h2 class="c-sheet__title" id="visit-sheet-title">Share a story</h2>
+        <p class="c-sheet__sub">Pick the visit it’s from. Stories come from places you paid at with your card.</p>
+        <div class="c-vlist" id="visit-list"></div>
+      </div>
+      <div class="c-sheet__actions"><button class="c-btn plain" type="button" data-close>Cancel</button></div>
+    </div>
+  </section>
+
+  <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
+    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
+    <a class="c-tabbar__tab is-active" href="explore.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+  </nav>
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var F = window.FEED;
+  var scroller = document.querySelector('.screen-scroll');
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function tags(list) { return list.join(' '); }
+
+  // Stories: two columns of member posts, filled alternately (the old Feed page).
+  function post(s) {
+    var face = s.avatar ? '<img src="' + s.avatar + '" alt="">' : '<span class="c-mono" style="background:' + window.monoColour(s.initials) + '">' + esc(s.initials) + '</span>';
+    return '<a class="c-fpost" href="post.html?id=' + s.id + '">' +
+      '<img class="c-fpost__img" src="' + s.photos[0] + '" alt="">' +
+      '<span class="c-fpost__cap">' + esc(s.caption || PLACES[s.place].name) + '</span>' +
+      '<span class="c-fpost__by"><span class="c-fpost__face">' + face + '</span><span class="c-fpost__name">' + esc(s.mine ? 'You' : s.author) + '</span>' +
+      '<span class="c-fpost__likes"><span class="material-symbols-outlined">favorite</span>' + (s.likes || 0) + '</span></span></a>';
+  }
+  var cols = ['', ''];
+  F.stories.forEach(function (s, i) { cols[i % 2] += post(s); });
+  document.getElementById('feed-grid').innerHTML = '<div class="c-fgrid__col">' + cols[0] + '</div><div class="c-fgrid__col">' + cols[1] + '</div>';
+
+  // Events: one column, photo on top, then name, time and place.
+  function eventRow(e) {
+    var place = PLACES[e.place];
+    return '<a class="c-devent" href="post.html?id=' + e.id + '">' +
+      '<img class="c-devent__img" src="' + e.photos[0] + '" alt="">' +
+      '<span class="c-devent__name">' + esc(e.title) + '</span>' +
+      '<span class="c-devent__when">' + esc(e.when) + '</span>' +
+      '<span class="c-devent__meta">' + esc(place.name) + '</span>' +
+      '</a>';
+  }
+  document.getElementById('feed-events').innerHTML = F.events.map(eventRow).join('');
+
+  // Places: Near you is a row of small cards, Popular with members a column of large ones (both like Airbnb).
+  // Prices match the place page: the cheapest room or tour at the member rate.
+  var NEAR = [
+    { place: 'lighthouse', cats: ['hotels'] },
+    { place: 'ocean', cats: ['water-sports', 'nature'] },
+    { place: 'camayan', cats: ['hotels', 'beaches'] }
+  ];
+  function peso(n) { return '₱' + n.toLocaleString('en-US'); }
+  function fromPrice(place) {
+    var rooms = place.rooms || [];
+    var low = rooms.reduce(function (m, r) { return r.rate < m.rate ? r : m; }, rooms[0] || { rate: place.rackPrice });
+    return Math.round(low.rate * (100 - place.discount) / 100);
+  }
+  function saveBtn(place) {
+    return '<button class="c-savebtn" type="button" aria-pressed="false" aria-label="Save ' + esc(place.name) + '">' +
+      '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span></button>';
+  }
+  function nearCard(n) {
+    var place = PLACES[n.place];
+    return '<div class="c-lcard" data-cats="' + tags(n.cats) + '">' +
+      '<a class="c-lcard__link" href="place.html?p=' + n.place + '">' +
+      '<span class="c-lcard__photo"><img src="' + place.thumb + '" alt=""><span class="c-xbadge">' + esc(place.offerShort) + '</span></span>' +
+      '<span class="c-lcard__name">' + esc(place.name) + '</span>' +
+      '<span class="c-lcard__meta">' + esc(place.category) + ' · ' + esc(place.distance) + '</span>' +
+      '<span class="c-lcard__meta"><b>' + peso(fromPrice(place)) + '</b> ' + place.unit + ' · ★ ' + esc(place.rating) + '</span>' +
+      '</a>' + saveBtn(place) + '</div>';
+  }
+  function stat(icon, value, label) {
+    return '<span class="c-bigcard__stat"><span class="material-symbols-outlined" aria-hidden="true">' + icon + '</span>' +
+      '<span class="c-bigcard__value">' + esc(value) + '</span><span class="c-bigcard__label">' + label + '</span></span>';
+  }
+  function popularCard(p) {
+    var place = PLACES[p.place];
+    var photos = place.photos.map(function (src) { return '<img src="' + src + '" alt="">'; }).join('');
+    var dots = place.photos.map(function (src, i) { return '<span class="c-bigcard__dot' + (i ? '' : ' is-on') + '"></span>'; }).join('');
+    return '<div class="c-bigcard" data-cats="' + tags(p.cats) + '">' +
+      '<a class="c-bigcard__link" href="place.html?p=' + p.place + '">' +
+      '<span class="c-bigcard__media"><span class="c-bigcard__gallery">' + photos + '</span>' +
+      '<span class="c-bigcard__dots" aria-hidden="true">' + dots + '</span></span>' +
+      '<span class="c-bigcard__head"><span class="c-bigcard__title">' +
+      '<span class="c-bigcard__name">' + esc(place.name) + '</span>' +
+      '<span class="c-bigcard__meta">' + esc(place.category) + ' · ' + esc(place.area) + '</span></span>' +
+      '<span class="c-bigcard__offer"><span class="c-perkmark" aria-hidden="true"></span>' + esc(p.offer) + '</span></span>' +
+      '<span class="c-bigcard__stats">' + stat('near_me', place.distance, 'Away') + stat('star', place.rating, 'Rating') +
+      stat('schedule', place.closes.replace('closes ', ''), 'Closes') + '</span>' +
+      '</a>' + saveBtn(place) + '</div>';
+  }
+  document.getElementById('near-row').innerHTML = NEAR.map(nearCard).join('');
+  document.getElementById('feed-popular').innerHTML = F.popular.map(popularCard).join('');
+
+  // Swiping a large card's photos moves its dots; the bookmark saves without opening the place.
+  document.querySelectorAll('.c-bigcard__gallery').forEach(function (g) {
+    var dots = g.parentNode.querySelectorAll('.c-bigcard__dot');
+    g.addEventListener('scroll', function () {
+      var at = Math.round(g.scrollLeft / g.clientWidth);
+      dots.forEach(function (d, i) { d.classList.toggle('is-on', i === at); });
+    }, { passive: true });
+  });
+  document.querySelectorAll('.c-savebtn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = b.classList.toggle('is-on');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  });
+
+  // Ana's visits that have no story yet, as rows in the "Share a story" sheet.
+  function visitRow(v) {
+    var place = PLACES[v.place];
+    return '<a class="c-list-row c-pressable" href="story-new.html?p=' + v.place + '&amp;v=' + encodeURIComponent(v.when) + '&amp;from=explore.html">' +
+      '<span class="c-list-row__lead"><span class="c-list-row__thumb"><img src="' + place.thumb + '" alt=""></span></span>' +
+      '<span class="c-list-row__main"><span class="c-list-row__title">' + esc(place.name) + '</span>' +
+      '<span class="c-list-row__sub">' + esc(v.when) + ' · ' + esc(v.what) + '</span></span>' +
+      '<span class="material-symbols-outlined c-list-row__chev" aria-hidden="true">chevron_right</span></a>';
+  }
+
+  // The + in the header opens a sheet of visits to share from. Picking one goes to the composer.
+  var sheet = document.getElementById('visit-sheet');
+  var toShare = visitsToShare();
+  document.getElementById('visit-list').innerHTML = toShare.length ? toShare.map(visitRow).join('')
+    : '<p class="c-sheet__meta">Every visit has its story. Your next one shows up here after you pay with your card.</p>';
+  document.querySelector('[data-add-story]').addEventListener('click', function () { sheet.hidden = false; });
+  sheet.addEventListener('click', function (e) {
+    if (e.target.closest('[data-close]')) sheet.hidden = true;
+    else if (e.target.closest('a')) setTimeout(function () { sheet.hidden = true; }, 400);
+  });
+
+  // Tabs: Stories, Places, Events. Each tab keeps its own scroll position. ?tab= picks the first one.
+  var tabs = document.querySelectorAll('[data-tab]');
+  var addBtn = document.querySelector('.c-dhead__btn');
+  var scrolls = {};
+  var current = null;
+
+  function show(name) {
+    if (current) scrolls[current] = scroller.scrollTop;
+    tabs.forEach(function (t) {
+      var on = t.getAttribute('data-tab') === name;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById('panel-' + t.getAttribute('data-tab')).hidden = !on;
+    });
+    addBtn.hidden = name !== 'stories';
+    current = name;
+    scroller.scrollTop = scrolls[name] || 0;
+  }
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { show(t.getAttribute('data-tab')); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      next.focus();
+      show(next.getAttribute('data-tab'));
+    });
+  });
+  var asked = new URLSearchParams(location.search).get('tab');
+  show(['stories', 'places', 'events'].indexOf(asked) >= 0 ? asked : 'stories');
+
+  // Places filter: each chip shows only the places tagged with it. A section with nothing left hides.
+  var panel = document.getElementById('panel-places');
+  var chips = panel.querySelectorAll('[data-filter]');
+  var empty = panel.querySelector('[data-places-empty]');
+
+  function applyFilter(f) {
+    panel.querySelectorAll('[data-cats]').forEach(function (el) {
+      el.hidden = !(f === 'all' || el.getAttribute('data-cats').split(' ').indexOf(f) >= 0);
+    });
+    var any = false;
+    panel.querySelectorAll('[data-section]').forEach(function (sec) {
+      sec.hidden = !sec.querySelector('[data-cats]:not([hidden])');
+      if (!sec.hidden) any = true;
+    });
+    empty.hidden = any;
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      chips.forEach(function (c) {
+        var on = c === chip;
+        c.classList.toggle('is-selected', on);
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      applyFilter(chip.getAttribute('data-filter'));
+    });
+  });
+})();
+</script>
+</body>
+</html>

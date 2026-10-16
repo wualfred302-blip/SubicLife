@@ -1,0 +1,249 @@
+"use client"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { Check, Shield, Gift, Percent, Headphones, Anchor, Star, Sparkles, ArrowRight, ChevronRight, Crown } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { PaymentModal } from "@/components/payment/payment-modal"
+import { useUser } from "@/lib/user-context"
+import { cn } from "@/lib/utils"
+
+interface TierInfo {
+  id: "premium" | "prestige" | "elite"
+  name: string
+  displayName: string
+  price: number
+  copy: string
+  tagline: string
+  accentColor: string
+  recommended?: boolean
+  image?: string
+  mainBenefits: string[]
+}
+
+const tiers: TierInfo[] = [
+  {
+    id: "premium",
+    name: "Premium",
+    displayName: "Signature",
+    price: 5500,
+    copy: "The Distinguished Choice",
+    tagline: "Refined access for the elite guest",
+    accentColor: "#D97706",
+    image: "/luxury-resort-suite-ocean-view-sunset.jpg",
+    mainBenefits: [
+      "₱500k Accident Insurance",
+      "15% Partner Discounts",
+      "24/7 AI Concierge",
+      "Priority Event Access"
+    ]
+  },
+  {
+    id: "prestige",
+    name: "Prestige",
+    displayName: "Prestige",
+    price: 15500,
+    copy: "Elevated Luxury Experience",
+    tagline: "Where distinction meets privilege",
+    accentColor: "#F59E0B",
+    recommended: true,
+    image: "/prestige-card-large.png",
+    mainBenefits: [
+      "₱750k Accident Insurance",
+      "18% Partner Discounts",
+      "Priority Concierge Access",
+      "Exclusive Event Invitations"
+    ]
+  },
+  {
+    id: "elite",
+    name: "Elite",
+    displayName: "Sovereign",
+    price: 25500,
+    copy: "Ultimate Lifestyle Mastery",
+    tagline: "Uncompromising Subic excellence",
+    accentColor: "#D97706",
+    image: "/luxury-yacht-cruise-sunset-subic-bay.jpg",
+    mainBenefits: [
+      "₱1M Accident Insurance",
+      "Private Yacht Cruise (20pax)",
+      "20% Partner Discounts",
+      "Dedicated Personal Concierge"
+    ]
+  },
+]
+
+export function MembershipOffer() {
+  const router = useRouter()
+  const { user } = useUser()
+  const [selectedTier, setSelectedTier] = useState<TierInfo | null>(null)
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false)
+
+  const handleSelectTier = (tier: TierInfo) => {
+    setSelectedTier(tier)
+    setIsPaymentOpen(true)
+  }
+
+  const handleSkip = () => {
+    router.push("/home")
+  }
+
+  return (
+    <div className="min-h-screen bg-white flex flex-col relative overflow-hidden font-sans text-[#111318] selection:bg-[#135bec]/10">
+      
+      {/* Soft Blending Premium Background - Bistro BFF Reference */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 bg-white">
+        {/* Top Teal Mist - Highly Visible */}
+        <div className="absolute top-[-15%] left-[-20%] w-[140%] h-[70%] bg-[#B2EBF2]/40 blur-[120px] rounded-full" />
+        
+        {/* Center Soft Glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-full h-1/2 bg-white/80 blur-[60px]" />
+
+        {/* Bottom Warm Earth Mist - Highly Visible */}
+        <div className="absolute bottom-[-10%] right-[-20%] w-[120%] h-[60%] bg-[#D7CCC8]/50 blur-[130px] rounded-full" />
+        <div className="absolute bottom-[-5%] left-[-10%] w-[100%] h-[50%] bg-[#EFEBE9]/40 blur-[100px] rounded-full" />
+      </div>
+      
+      {/* Main Scrollable Content */}
+      <div className="relative z-10 flex-1 flex flex-col p-6 pb-48 max-w-lg mx-auto w-full">
+        
+        {/* BFF Style Header */}
+        <header className="pt-16 pb-12 text-center space-y-4 animate-in fade-in duration-1000">
+          <h1 className="text-4xl font-black tracking-tighter text-[#111318] leading-[1.1]">
+            Welcome,<br/>
+            {user?.name || 'Subic Life'}
+          </h1>
+          <p className="text-[#111318]/70 text-lg font-medium max-w-[300px] mx-auto leading-relaxed pt-2">
+            You are now a step closer to enjoying exclusive island perks.
+          </p>
+        </header>
+
+        {/* BFF-Inspired Membership Cards */}
+        <div className="space-y-10">
+          {tiers.map((tier) => (
+            <div 
+              key={tier.id}
+              onClick={() => handleSelectTier(tier)}
+              className={cn(
+                "group relative flex flex-col p-7 rounded-[3.5rem] transition-all duration-700 cursor-pointer active:scale-[0.98]",
+                "bg-white border border-white/20 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.08)] hover:shadow-[0_48px_80px_-24px_rgba(0,0,0,0.12)] hover:-translate-y-2",
+                tier.recommended && "ring-1 ring-[#D97706]/20"
+              )}
+            >
+              {/* Inner BFF Member Card Visual */}
+              <div className="relative aspect-square w-full rounded-[2.5rem] overflow-hidden mb-8 shadow-inner border border-gray-50">
+                <img 
+                  src={tier.image} 
+                  alt={tier.name}
+                  className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
+                
+                {/* Overlay Text on Image Card */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                  <h3 className="text-4xl font-black tracking-tighter text-white drop-shadow-2xl">
+                    {tier.displayName}
+                  </h3>
+                  <div className="mt-2 px-4 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30">
+                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white">Member Card</p>
+                  </div>
+                </div>
+
+                {/* Price Tag Floating on Image Card */}
+                <div className="absolute bottom-6 right-6">
+                   <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-xl border border-white/50 flex flex-col items-end">
+                      <div className="flex items-baseline gap-0.5">
+                        <span className="text-xs font-black text-gray-500">₱</span>
+                        <span className="text-xl font-black text-gray-900">{tier.price.toLocaleString()}</span>
+                      </div>
+                    </div>
+                </div>
+
+                {/* Recommended Badge */}
+                {tier.recommended && (
+                  <div className="absolute top-6 left-6 bg-[#D97706] text-white text-[9px] font-black px-4 py-2 rounded-full shadow-lg tracking-widest uppercase flex items-center gap-1.5 ring-1 ring-white/20">
+                    <Crown className="w-3 h-3 fill-white" />
+                    Preferred
+                  </div>
+                )}
+              </div>
+
+              {/* Content Area */}
+              <div className="px-2 flex flex-col items-center text-center">
+                <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">{tier.tagline}</p>
+                
+                <div className="space-y-3 mb-8 w-full">
+                  {tier.mainBenefits.slice(0, 3).map((benefit, i) => (
+                    <div key={i} className="flex items-center justify-center gap-2">
+                      <Check className="w-4 h-4 text-[#10B981]" />
+                      <span className="text-sm font-semibold text-gray-600">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Button 
+                  className="w-full h-16 rounded-full bg-[#111318] text-white hover:bg-black font-bold text-lg transition-all flex items-center justify-center gap-3 group/btn"
+                >
+                  Get {tier.displayName}
+                  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* BFF Rewards Section */}
+        <div className="mt-16 p-10 rounded-[3rem] bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.06)] relative overflow-hidden group transition-all duration-700 hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)]">
+          <div className="flex flex-col items-center text-center space-y-6">
+            <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center shadow-inner border border-gray-100 mb-2">
+              <Gift className="w-8 h-8 text-[#D97706]" />
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-2xl font-black tracking-tight text-gray-900">Privilege Rewards</h4>
+              <p className="text-gray-500 text-sm font-medium leading-relaxed">Your activity is your currency. Unlock the curated catalog of exclusive rewards.</p>
+            </div>
+            
+            <Button 
+              onClick={() => router.push('/rewards')}
+              variant="outline"
+              className="rounded-full h-12 px-8 border-gray-200 text-gray-900 font-bold hover:bg-gray-50 transition-all"
+            >
+              Enter Catalog
+            </Button>
+          </div>
+        </div>
+
+        {/* Ultimate Breathing Room */}
+        <div className="h-40" />
+
+      </div>
+
+      {/* BFF Style Fixed Action Area */}
+      <div className="fixed bottom-[-20px] left-0 right-0 p-8 pb-12 bg-gradient-to-t from-white via-white/95 to-transparent z-40 backdrop-blur-sm">
+        <div className="max-w-lg mx-auto flex flex-col items-center space-y-4">
+          <button 
+            onClick={handleSkip}
+            className="w-full py-5 px-8 rounded-full bg-gray-50 text-gray-900 font-bold text-sm shadow-sm hover:bg-gray-100 active:scale-[0.98] transition-all flex items-center justify-center gap-3 border border-gray-200 group"
+          >
+            <span>Maintain Basic Registration</span>
+            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" />
+          </button>
+          
+          <div className="flex items-center gap-2 opacity-40">
+            <Shield className="w-3 h-3 text-gray-400" />
+            <p className="text-[9px] text-gray-500 font-bold tracking-widest uppercase">Secured Premium Membership</p>
+          </div>
+        </div>
+      </div>
+
+      {selectedTier && (
+        <PaymentModal
+          isOpen={isPaymentOpen}
+          onClose={() => setIsPaymentOpen(false)}
+          tier={selectedTier.id}
+          amount={selectedTier.price}
+        />
+      )}
+    </div>
+  )
+}

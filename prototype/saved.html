@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Saved</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone theme-night c-explore-lite has-wall">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-xbar" aria-hidden="true"><span class="c-xbar__title">Saved</span></div>
+
+  <main class="screen-scroll">
+
+    <header class="c-hero">
+    <div class="c-largetitle">
+      <h1 class="c-largetitle__title">Saved</h1>
+    </div>
+
+    <div class="u-gutter">
+      <div class="c-segmented" role="tablist" aria-label="Saved type">
+        <button class="c-segmented__opt is-on" type="button" role="tab" aria-selected="true" data-seg="places">Places</button>
+        <button class="c-segmented__opt" type="button" role="tab" aria-selected="false" data-seg="offers">Offers</button>
+      </div>
+    </div>
+
+    </header>
+
+    <div class="c-surface">
+    <section data-panel="places">
+      <div class="c-stile-grid">
+        <a class="c-stile" href="place.html?p=lighthouse">
+          <span class="c-stile__photo"><img src="img/hist-lighthouse-oct.jpg" alt=""><span class="c-xbadge">20% off</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
+          <span class="c-stile__name">Lighthouse Marina Resort</span>
+          <span class="c-stile__meta">Hotel · Moonbay</span>
+        </a>
+        <a class="c-stile" href="place.html?p=meatplus">
+          <span class="c-stile__photo"><img src="img/hist-meat-plus.jpg" alt=""><span class="c-xbadge">20% off</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
+          <span class="c-stile__name">Meat Plus Cafe</span>
+          <span class="c-stile__meta">Steakhouse · Harbor Point</span>
+        </a>
+        <a class="c-stile" href="place.html?p=ramas">
+          <span class="c-stile__photo"><img src="img/hist-ramas.jpg" alt=""><span class="c-xbadge">Gift</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
+          <span class="c-stile__name">Rama's Kitchen</span>
+          <span class="c-stile__meta">Indian · Freeport</span>
+        </a>
+        <a class="c-stile" href="place.html?p=yacht">
+          <span class="c-stile__photo"><img src="img/thumb-yacht-club.jpg" alt=""><span class="c-xbadge">10% off</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
+          <span class="c-stile__name">Subic Bay Yacht Club</span>
+          <span class="c-stile__meta">Marina dining</span>
+        </a>
+      </div>
+    </section>
+
+    <section data-panel="offers" hidden>
+      <p class="c-stile-count">4 offers ready to use</p>
+      <div class="c-stile-grid">
+        <a class="c-stile" href="place.html?p=lighthouse">
+          <span class="c-stile__photo"><img src="img/hist-lighthouse-oct.jpg" alt=""><span class="c-xbadge">20% off rooms</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
+          <span class="c-stile__name">Lighthouse Marina Resort</span>
+          <span class="c-stile__meta">Hotel · Moonbay</span>
+        </a>
+        <a class="c-stile" href="place.html?p=meatplus">
+          <span class="c-stile__photo"><img src="img/hist-meat-plus.jpg" alt=""><span class="c-xbadge">20% off your bill</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
+          <span class="c-stile__name">Meat Plus Cafe</span>
+          <span class="c-stile__meta">Steakhouse · Harbor Point</span>
+        </a>
+        <a class="c-stile" href="place.html?p=ramas">
+          <span class="c-stile__photo"><img src="img/hist-ramas.jpg" alt=""><span class="c-xbadge">Free dessert</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
+          <span class="c-stile__name">Rama's Kitchen</span>
+          <span class="c-stile__meta">Indian · Freeport</span>
+        </a>
+        <a class="c-stile" href="place.html?p=yacht">
+          <span class="c-stile__photo"><img src="img/thumb-yacht-club.jpg" alt=""><span class="c-xbadge">10% off dining</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
+          <span class="c-stile__name">Subic Bay Yacht Club</span>
+          <span class="c-stile__meta">Marina dining</span>
+        </a>
+      </div>
+    </section>
+
+    </div>
+  </main>
+
+  <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
+    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
+    <a class="c-tabbar__tab" href="explore.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
+    <a class="c-tabbar__tab is-active" href="me.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+  </nav>
+  <span class="c-homeindicator"></span>
+
+</div>
+<script>
+  (function () {
+    var opts = document.querySelectorAll('.c-segmented__opt');
+    opts.forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        opts.forEach(function (o) {
+          var on = o === opt;
+          o.classList.toggle('is-on', on);
+          o.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        document.querySelectorAll('[data-panel]').forEach(function (p) {
+          p.hidden = p.dataset.panel !== opt.dataset.seg;
+        });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

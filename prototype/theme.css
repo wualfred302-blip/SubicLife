@@ -1,0 +1,2575 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap");
+/* theme.css - the Subic.Life look. Loaded after shell.css on every page.
+   One family (Figtree, heavy for titles), a soft bay-at-golden-hour backdrop behind every screen,
+   content on white tiles, secondary actions on frosted glass, a floating glass tab bar. */
+
+:root {
+  --font: "Figtree", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font-display: "Figtree", -apple-system, sans-serif;
+  --text: #121212;
+  --text-2: #5F6670;
+  --ink: #161616;                          /* black buttons and the card */
+  --tile: #FFFFFF;                         /* content tiles */
+  --tile-r: 22px;
+  --glass: rgb(255 255 255 / 0.56);        /* menu rows, secondary buttons */
+  --glass-line: rgb(255 255 255 / 0.7);
+  --peach: #F7D4B5;                        /* icon discs */
+  --peach-ink: #8A3B0C;
+  /* Pushed and task screens: a calm warm ground with a hint of the bay at the top. */
+  --backdrop:
+    radial-gradient(80% 26% at 100% 0%, rgb(232 89 12 / 0.12), rgb(232 89 12 / 0) 100%),
+    radial-gradient(90% 30% at 0% 0%, rgb(31 138 153 / 0.16), rgb(31 138 153 / 0) 100%),
+    linear-gradient(180deg, #EDF1F0 0%, #F6F3EE 30%, #F6F3EE 100%);
+}
+
+/* ---------- the backdrop: fixed behind the scroll, every screen ---------- */
+.phone,
+.phone.c-cardtab,
+.phone.c-grouped,
+.phone.c-explore {
+  background: var(--backdrop);
+  color: var(--text);
+}
+.phone > .c-statusbar,
+.phone > .c-largetitle,
+.phone > .c-navbar,
+.phone .screen-scroll,
+.phone .c-largetitle { background: transparent; }
+.phone > .c-statusbar { color: var(--text); }
+.phone > .c-statusbar.is-overlay { color: #fff; }
+.phone.is-scrolled > .c-statusbar.is-overlay { color: var(--text); }
+
+/* ---------- type: heavy, tight, confident ---------- */
+.c-largetitle__title,
+.c-section-head__title,
+.c-section-title,
+.c-place-head__name,
+.c-offer-title,
+.c-navbar__title,
+.c-xbar__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--text);
+}
+.c-largetitle { padding-top: 8px; padding-bottom: 20px; }
+.c-largetitle__title { font-size: 34px; line-height: 1.05; }
+.c-section-head__title,
+.c-section-title { font-size: 22px; }
+.c-place-head__name { font-size: 30px; line-height: 1.08; }
+.c-xbar__title { font-weight: 800; }
+
+/* ---------- floating glass tab bar ---------- */
+.c-tabbar {
+  left: 12px;
+  right: 12px;
+  bottom: 22px;
+  height: 64px;
+  padding: 0 6px;
+  align-items: center;
+  border: 1px solid var(--glass-line);
+  border-radius: 32px;
+  background: rgb(255 255 255 / 0.74);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  box-shadow: 0 12px 32px -12px rgb(30 40 50 / 0.28);
+}
+.c-tabbar__tab { gap: 3px; padding: 7px 0 6px; border-radius: 26px; color: #6B7178; font-weight: 600; }
+.c-tabbar__tab.is-active { color: var(--ink); }
+.c-tabbar__tab.is-active .c-tabbar__icon { color: var(--accent); }
+.phone:has(.c-tabbar) .screen-scroll { padding-bottom: 116px; }
+.c-homeindicator { background: var(--ink); }
+
+/* ---------- frosted top bar once the title scrolls away ---------- */
+.c-xbar {
+  background: rgb(240 245 247 / 0.78);
+  box-shadow: none;
+  border-bottom: 1px solid rgb(255 255 255 / 0.6);
+}
+
+/* ---------- buttons ---------- */
+.c-btn {
+  min-height: 56px;
+  border-radius: var(--r-pill);
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.005em;
+}
+.c-btn.primary { box-shadow: 0 10px 24px -12px rgb(232 89 12 / 0.7); }
+.c-btn.secondary {
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  color: var(--text);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.c-circle-btn {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 6px 16px -8px rgb(0 0 0 / 0.35);
+}
+
+
+/* Sticky action bar: no slab, the button floats over a soft fade of the backdrop. */
+.c-bottombar {
+  border-top: 0;
+  background: linear-gradient(180deg, rgb(240 226 214 / 0), rgb(240 222 206 / 0.92) 38%);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding-top: 24px;
+}
+
+/* ---------- search and chips ---------- */
+.c-search {
+  height: 52px;
+  border-radius: var(--r-pill);
+  background: #fff;
+  box-shadow: 0 8px 22px -14px rgb(30 40 50 / 0.35);
+  padding: 0 18px;
+}
+.c-search__ph { color: #7A8088; font-size: 16px; }
+.c-chip {
+  height: 40px;
+  padding: 0 16px;
+  border: 1px solid rgb(18 18 18 / 0.08);
+  background: var(--tile);
+  font-weight: 600;
+  color: var(--text);
+}
+.c-chip.is-selected { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* ---------- tiles ---------- */
+/* Photo cards show the photo itself, no frame. Social posts sit on a white tile. */
+.c-place-card__photo,
+.c-event-card__photo { border-radius: 18px; overflow: hidden; }
+.c-place-card__name,
+.c-event-card__name { font-weight: 700; letter-spacing: -0.01em; }
+
+
+
+/* Lists are inset groups: consecutive rows join into one white tile, split by hairlines that start
+   after the thumbnail (iOS inset grouped). Only the outer corners round. */
+.c-list-row {
+  margin: 0;
+  padding: 10px 16px 10px 12px;
+  border: 0;
+  border-radius: 0;
+  background: var(--tile);
+  box-shadow: 0 12px 24px -22px rgb(30 40 50 / 0.5);
+}
+.c-list-row:not(.c-list-row + .c-list-row) { border-top-left-radius: var(--tile-r); border-top-right-radius: var(--tile-r); }
+.c-list-row:not(:has(+ .c-list-row)) { border-bottom-left-radius: var(--tile-r); border-bottom-right-radius: var(--tile-r); }
+.c-list-row::after { left: 72px; }
+
+.c-list-row + .c-list-row { border-top: 0; }
+.c-list-row__thumb { border-radius: 12px; }
+.c-list-row__title { font-weight: 700; }
+
+/* Settings groups (Me and its children): one white tile per group and a colour icon per row, like iOS
+   Settings. A row picks its colour with .c-ic--*; the default is a quiet slate. */
+.phone.c-grouped { background: var(--backdrop); }
+.c-group {
+  border-radius: var(--tile-r);
+  background: var(--tile);
+  box-shadow: 0 12px 24px -22px rgb(30 40 50 / 0.5);
+}
+.c-group__row { min-height: 54px; }
+.c-group--lead .c-group__row + .c-group__row::before { left: 58px; }
+.c-group__icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--ic, #7C858F);
+  color: #fff;
+}
+.c-group__icon .material-symbols-outlined { font-size: 19px; font-variation-settings: "FILL" 1, "wght" 500; }
+.c-ic--orange { --ic: #E8590C; }
+.c-ic--gold { --ic: linear-gradient(150deg, #E4C173, #B5843A); }
+
+.c-ic--blue { --ic: #2F6BDB; }
+.c-ic--green { --ic: #1F9D57; }
+.c-ic--red { --ic: #E5484D; }
+.c-ic--indigo { --ic: #5A55D6; }
+.c-group__main { font-weight: 600; }
+.c-group__row.is-danger { color: #D7263D; }
+.c-group__head,
+.c-grouped .c-group__head {
+  margin: 28px calc(var(--gutter) + 16px) 8px;
+  font: 600 13px/1 var(--font);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+/* ---------- Card tab: a portrait card is the hero, then the ID tile and the actions ---------- */
+.c-cardtab .c-mcard-hint { margin: 14px 0 0; text-align: center; color: var(--text-2); font-size: 13px; }
+.c-mcard.is-portrait {
+  width: 216px;
+  aspect-ratio: 54 / 85.6;
+  border-radius: 18px;
+  box-shadow: 0 34px 50px -26px rgb(16 24 32 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.08);
+}
+.c-mcard.is-portrait .c-mcard__face { border-radius: 18px; background: #1E1D1B; color: #fff; text-shadow: none; }
+.c-mcard.is-portrait .c-mcard__face::before { background: radial-gradient(130% 70% at 100% 0%, #34312D, #1C1B19 62%); filter: none; }
+.c-mcard.is-portrait .c-mcard__face::after { background: none; }
+.c-mcard__ghost {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font: 800 150px/0.8 var(--font-display);
+  letter-spacing: -0.06em;
+  color: rgb(255 255 255 / 0.055);
+  pointer-events: none;
+}
+.c-mcard__ghost span:first-child { margin: -8px 0 0 46px; }
+.c-mcard__ghost span:last-child { margin: 0 0 -6px -12px; }
+.c-mcard__brand {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: center;
+  font: 500 19px/1 var(--font);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  padding-left: 0.32em;
+  color: rgb(255 255 255 / 0.9);
+}
+.c-mcard__foot {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  bottom: 14px;
+  font: 500 10px/1 ui-monospace, "SF Mono", Menlo, monospace;
+  letter-spacing: 0.04em;
+  color: rgb(255 255 255 / 0.6);
+}
+.c-mcard.is-portrait .c-mcard__back { background: #1E1D1B; }
+.c-mcard.is-portrait .c-mcard__back .c-mcard__number { color: rgb(255 255 255 / 0.8); }
+
+
+/* Tabs: active = orange outline icon on a soft capsule, never a filled blob. */
+.c-tabbar__tab.is-active .c-tabbar__icon { font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 24; }
+a.c-list-row { text-decoration: none; color: inherit; }
+
+/* ---------- Place and offer: name and price sit on one white tile that overlaps the photo ---------- */
+.c-place-head {
+  position: relative;
+  z-index: 2;
+  margin: -44px var(--gutter) 0;
+  padding: 22px 20px 16px;
+  border-radius: 24px 24px 0 0;
+  background: var(--tile);
+}
+.c-place-head__name { margin: 0; }
+.c-place-head__meta { margin-top: 8px; }
+
+
+.c-psec .c-section-title { font-size: 20px; }
+.c-pabout__text { color: #2A2E33; }
+.c-info-group {
+  border-radius: var(--tile-r);
+  background: var(--tile);
+  box-shadow: 0 10px 26px -20px rgb(30 40 50 / 0.45);
+}
+
+.c-info-group .c-mapthumb { border-bottom-color: #EEF0F2; }
+.c-placehero__count { bottom: 56px; }
+
+/* ---------- tier cards (portrait) ---------- */
+.c-mcard.is-portrait.is-elite .c-mcard__face { background: #0C0C0D; }
+.c-mcard.is-portrait.is-elite .c-mcard__face::before { background: radial-gradient(130% 70% at 100% 0%, #26221B, #0C0C0D 62%); }
+.c-mcard.is-portrait.is-elite .c-mcard__ghost { color: rgb(214 176 98 / 0.09); }
+.c-mcard.is-portrait.is-elite .c-mcard__brand { color: #D8B46A; }
+.c-mcard.is-portrait.is-elite .c-mcard__foot { color: rgb(216 180 106 / 0.7); }
+.c-mcard.is-portrait.is-premium .c-mcard__face { background: #EFE8DD; color: #2A2621; box-shadow: inset 0 0 0 1px rgb(120 100 70 / 0.18); }
+.c-mcard.is-portrait.is-premium .c-mcard__face::before { background: radial-gradient(130% 70% at 100% 0%, #FBF8F2, #E9E0D2 65%); }
+.c-mcard.is-portrait.is-premium .c-mcard__ghost { color: rgb(60 45 25 / 0.06); }
+.c-mcard.is-portrait.is-premium .c-mcard__brand { color: #2A2621; }
+.c-mcard.is-portrait.is-premium .c-mcard__foot { color: rgb(42 38 33 / 0.55); }
+.c-mcard.is-portrait.is-premium .c-mcard__back { background: #EFE8DD; }
+.c-mcard.is-portrait.is-premium .c-mcard__back .c-mcard__number { color: #2A2621; }
+
+/* ---------- Elite: the same screens at night - dark bay, ember glow, gold accents ---------- */
+.phone.theme-elite,
+.phone.theme-night {
+  --backdrop:
+    radial-gradient(70% 36% at 0% 100%, rgb(232 89 12 / 0.32), rgb(232 89 12 / 0) 72%),
+    radial-gradient(80% 40% at 100% 90%, rgb(200 150 70 / 0.22), rgb(200 150 70 / 0) 70%),
+    radial-gradient(90% 46% at 85% 30%, rgb(60 90 110 / 0.45), rgb(60 90 110 / 0) 72%),
+    linear-gradient(180deg, #0E1012 0%, #141A1F 45%, #1D1916 100%);
+  --tile: #1B1C1F;
+  --glass: rgb(255 255 255 / 0.08);
+  --glass-line: rgb(255 255 255 / 0.12);
+  --ink: #F5F5F4;
+  color: var(--text);
+}
+.phone.theme-elite .c-tabbar__tab.is-active .c-tabbar__icon,
+.phone.theme-night .c-tabbar__tab.is-active .c-tabbar__icon { color: var(--gold); }
+.phone.theme-elite .c-largetitle__title,
+.phone.theme-elite .c-section-head__title,
+.phone.theme-elite > .c-statusbar,
+.phone.theme-night .c-largetitle__title,
+.phone.theme-night .c-section-head__title,
+.phone.theme-night > .c-statusbar { color: var(--text); }
+.phone.theme-elite .c-tabbar,
+.phone.theme-night .c-tabbar { background: rgb(28 29 32 / 0.78); border-color: rgb(255 255 255 / 0.1); }
+.phone.theme-elite .c-tabbar__tab,
+.phone.theme-night .c-tabbar__tab { color: #8A8F96; }
+.phone.theme-elite .c-tabbar__tab.is-active,
+.phone.theme-night .c-tabbar__tab.is-active { color: #F5F5F4; background: rgb(255 255 255 / 0.1); }
+
+.phone.theme-elite .c-mcard-hint,
+.phone.theme-night .c-mcard-hint { color: var(--text-2); }
+.phone.theme-elite .c-list-row,
+.phone.theme-night .c-list-row { box-shadow: none; }
+
+/* ---------- screens that painted their own white ground ---------- */
+.phone .c-chat,
+.phone .c-replies,
+.phone.c-phone--push { background: transparent; }
+.phone .c-composer {
+  background: rgb(255 255 255 / 0.6);
+  border-top: 1px solid var(--glass-line);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Pass picker: portrait cards, a little smaller so the price stays in view. */
+.c-tiers__row { flex-shrink: 0; }   /* it sits in a column flex and was being squeezed */
+.c-tiers__slide { align-items: flex-start; }
+.c-tiers__slide .c-mcard.is-portrait { width: 176px; height: 279px; max-width: none; }
+.c-tiers__slide .c-mcard.is-portrait .c-mcard__ghost { font-size: 122px; }
+.c-tiers__slide .c-mcard.is-portrait .c-mcard__brand { font-size: 15px; }
+
+/* No pass yet: the three cards fanned out, Prestige in front. */
+.c-cfan { position: relative; height: 300px; margin-top: 8px; }
+.c-cfan .c-mcard.is-portrait { position: absolute; left: 50%; top: 18px; width: 164px; margin: 0; cursor: default; }
+.c-cfan .c-mcard__ghost { font-size: 114px; }
+.c-cfan .c-mcard__brand { font-size: 14px; }
+.c-cfan .c-mcard.is-premium { transform: translateX(-50%) translateX(-78px) rotate(-11deg); }
+.c-cfan .c-mcard.is-elite { transform: translateX(-50%) translateX(78px) rotate(11deg); }
+.c-cfan .c-mcard.is-prestige { transform: translateX(-50%) translateY(-10px); }
+
+/* Concierge: Mika's bubbles are white tiles on the backdrop. */
+.c-bubble.is-in { background: var(--tile); box-shadow: 0 6px 16px -12px rgb(30 40 50 / 0.4); }
+.c-chat-card { border: 0; border-radius: var(--tile-r); box-shadow: 0 10px 26px -20px rgb(30 40 50 / 0.45); }
+
+/* Offer: title and price share one white tile over the photo, like the place page. */
+.c-offer-head.u-gutter {
+  position: relative;
+  z-index: 2;
+  margin: -44px var(--gutter) 0;
+  padding: 22px 20px 16px;
+  border-radius: 24px 24px 0 0;
+  background: var(--tile);
+}
+.c-offer-title { font-weight: 800; }
+.c-oval {
+  position: relative;
+  z-index: 2;
+  margin: 0 var(--gutter);
+  padding: 16px 20px 20px;
+  border-radius: 0 0 24px 24px;
+  background: linear-gradient(var(--hairline), var(--hairline)) 20px 0 / calc(100% - 40px) 1px no-repeat, var(--tile);
+  box-shadow: 0 18px 30px -22px rgb(30 40 50 / 0.45);
+}
+.c-oval__now { font-weight: 800; }
+.c-osec { margin-top: 32px; }
+
+
+/* Booking price summary on a tile. */
+.c-receipt.c-price { width: auto; margin-inline: var(--gutter); padding: 2px 18px; border-radius: var(--tile-r); background: var(--tile); box-shadow: 0 10px 26px -20px rgb(30 40 50 / 0.45); }
+.c-receipt.c-price .c-receipt__row:last-child { border-bottom: 0; }
+
+/* =====================================================================================
+   Wallpaper and surface
+   Tab screens open on a deep, textured wallpaper (Subic Bay at dusk by default) with white type.
+   The content rides up over it on a warm light surface; the hero fades as it goes (--hp, set in
+   shell.js). Members can pick another wallpaper in Me > Appearance (data-wall on <html>).
+   ===================================================================================== */
+:root {
+  --sheet: #F6F3EE;
+  --on-wall: #FFFFFF;
+  --on-wall-2: rgb(255 255 255 / 0.74);
+  --wall-glass: rgb(255 255 255 / 0.12);
+  --wall-glass-line: rgb(255 255 255 / 0.2);
+  --wall-glow: rgb(255 128 50 / 0.5);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Dusk: deep sea, a teal current on the left, the sun going down behind the hills top right. */
+  --wall:
+    radial-gradient(58% 30% at 96% 0%, rgb(255 142 66 / 0.78), rgb(255 142 66 / 0) 100%),
+    radial-gradient(46% 22% at 70% 2%, rgb(232 89 12 / 0.34), rgb(232 89 12 / 0) 100%),
+    radial-gradient(72% 36% at 0% 16%, rgb(33 150 162 / 0.62), rgb(33 150 162 / 0) 100%),
+    radial-gradient(100% 50% at 35% 62%, rgb(48 44 112 / 0.62), rgb(48 44 112 / 0) 100%),
+    linear-gradient(176deg, #0B2A37 0%, #0F3140 40%, #151E37 100%);
+}
+:root[data-wall="lagoon"] {
+  --wall-glow: rgb(255 214 120 / 0.42);
+  --wall:
+    radial-gradient(56% 28% at 100% 0%, rgb(255 206 112 / 0.62), rgb(255 206 112 / 0) 100%),
+    radial-gradient(80% 38% at 0% 10%, rgb(40 200 186 / 0.6), rgb(40 200 186 / 0) 100%),
+    radial-gradient(100% 50% at 70% 60%, rgb(8 84 104 / 0.7), rgb(8 84 104 / 0) 100%),
+    linear-gradient(176deg, #05434D 0%, #076070 42%, #08323E 100%);
+}
+:root[data-wall="sunset"] {
+  --wall-glow: rgb(255 170 90 / 0.5);
+  --wall:
+    radial-gradient(70% 34% at 86% 0%, rgb(255 178 92 / 0.85), rgb(255 178 92 / 0) 100%),
+    radial-gradient(60% 34% at 6% 12%, rgb(236 92 40 / 0.7), rgb(236 92 40 / 0) 100%),
+    radial-gradient(100% 56% at 50% 72%, rgb(96 30 84 / 0.75), rgb(96 30 84 / 0) 100%),
+    linear-gradient(176deg, #8E3220 0%, #62233A 46%, #2A1532 100%);
+}
+:root[data-wall="day"] {
+  --on-wall: #121212;
+  --on-wall-2: rgb(18 18 18 / 0.62);
+  --wall-glass: rgb(255 255 255 / 0.5);
+  --wall-glass-line: rgb(255 255 255 / 0.75);
+  --wall-glow: rgb(232 89 12 / 0.28);
+  --wall:
+    radial-gradient(60% 30% at 100% 0%, rgb(247 196 150 / 0.8), rgb(247 196 150 / 0) 100%),
+    radial-gradient(80% 40% at 0% 20%, rgb(120 176 196 / 0.6), rgb(120 176 196 / 0) 100%),
+    linear-gradient(180deg, #EAF1F3 0%, #D3E3E9 50%, #F1DCCB 100%);
+}
+
+.phone.has-wall { isolation: isolate; background: var(--wall); }
+.phone.has-wall::before {               /* film grain, so the gradient reads as a material, not CSS */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--grain);
+  opacity: 0.32;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.phone.has-wall > .screen-scroll { position: relative; z-index: 1; padding-bottom: 0; }
+.phone.has-wall:not(.is-scrolled) > .c-statusbar { color: var(--on-wall); }
+
+/* The hero stays put and the surface slides over it; behind the sheet it settles back a little. */
+.c-hero {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  color: var(--on-wall);
+  opacity: calc(1 - var(--hp, 0) * 0.6);
+  transform: scale(calc(1 - var(--hp, 0) * 0.06));
+  transform-origin: 50% 0;
+}
+.phone .c-hero .c-largetitle__title { color: var(--on-wall); }
+.c-hero .c-largetitle__avatar { border: 2px solid rgb(255 255 255 / 0.85); }
+
+
+
+.c-hero .c-search { box-shadow: 0 18px 34px -20px rgb(0 0 0 / 0.7); }
+
+.c-surface {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  margin-top: 22px;
+  padding: 24px 0 128px;
+  border-radius: 30px 30px 0 0;
+  background: var(--sheet);
+  box-shadow: 0 -20px 44px -26px rgb(0 0 0 / 0.55);
+}
+.c-surface > :first-child,
+.c-surface > :first-child .c-section-head { margin-top: 0; }
+
+/* Entrance: the hero settles, the surface rises. Quick, and off for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .c-hero > * { animation: c-rise 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .c-hero > :nth-child(2) { animation-delay: 50ms; }
+  .c-hero > :nth-child(3) { animation-delay: 100ms; }
+  .c-surface { animation: c-surface-in 620ms cubic-bezier(0.2, 0.7, 0.2, 1) 80ms both; }
+}
+@keyframes c-rise { from { opacity: 0; transform: translateY(10px); } }
+@keyframes c-surface-in { from { transform: translateY(56px); opacity: 0.4; } }
+
+/* ---------- Explore: photo-first cards ---------- */
+.c-explore .c-place-card { position: relative; width: 248px; }
+.c-explore .c-place-card__photo { aspect-ratio: auto; height: 312px; border-radius: 22px; }
+.c-explore .c-place-card__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0) 42%, rgb(0 0 0 / 0.66) 100%);
+}
+.c-explore .c-place-card__name {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  right: 16px;
+  bottom: 40px;
+  margin: 0;
+  color: #fff;
+  font: 800 21px/1.12 var(--font-display);
+  letter-spacing: -0.02em;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.c-explore .c-place-card__meta { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 17px; margin: 0; color: rgb(255 255 255 / 0.84); }
+.c-xbadge,
+.c-stile .c-xbadge {
+  z-index: 2;
+  top: 12px;
+  left: 12px;
+  padding: 7px 10px;
+  font: 700 13px/1 var(--font);
+}
+
+/* ---------- Saved: the switch sits on the wallpaper ---------- */
+.c-hero .c-segmented { background: var(--wall-glass); border: 1px solid var(--wall-glass-line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.c-hero .c-segmented__opt { color: var(--on-wall); }
+.c-hero .c-segmented__opt.is-on { background: #fff; color: var(--text); }
+
+/* ---------- Concierge: Mika on the wallpaper ---------- */
+
+
+.c-walls { cursor: default; }
+.c-walls .c-group__main { flex: 1; }
+.c-walls__opts { display: flex; gap: 10px; }
+.c-walls__opt {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08);
+}
+.c-walls__opt[aria-checked="true"] { box-shadow: 0 0 0 2px var(--tile), 0 0 0 4px var(--text); }
+.c-walls__opt[data-wall-opt="dusk"] { background: radial-gradient(70% 60% at 90% 10%, #FF8E42, transparent), linear-gradient(160deg, #1A8F9C, #151E37 70%); }
+.c-walls__opt[data-wall-opt="lagoon"] { background: radial-gradient(70% 60% at 90% 10%, #FFCE70, transparent), linear-gradient(160deg, #28C8BA, #08323E 75%); }
+.c-walls__opt[data-wall-opt="sunset"] { background: radial-gradient(70% 60% at 90% 10%, #FFB25C, transparent), linear-gradient(160deg, #EC5C28, #2A1532 80%); }
+.c-walls__opt[data-wall-opt="day"] { background: radial-gradient(70% 60% at 90% 10%, #F7C496, transparent), linear-gradient(160deg, #EAF1F3, #B9D3DC); }
+
+/* ---------- Card: the card on a stage, then the ID and the next steps ---------- */
+.c-cardstage { position: relative; padding-bottom: 6px; }
+.c-cardstage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: 470px;
+  height: 470px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, var(--wall-glow), rgb(0 0 0 / 0));
+  pointer-events: none;
+}
+.c-hero .c-mcard.is-portrait { box-shadow: 0 40px 60px -28px rgb(0 0 0 / 0.85), 0 0 0 1px rgb(255 255 255 / 0.16); }
+.c-hero .c-mcard-hint { color: var(--on-wall-2); }
+
+/* ---------- Elite and the night look: night wallpaper with gold glow, dark surface ---------- */
+.phone.theme-elite,
+.phone.theme-night {
+  --sheet: #111214;
+  --night-glow: rgb(214 170 90 / 0.5);
+  --night-wall:
+    radial-gradient(56% 30% at 96% 0%, rgb(214 170 90 / 0.42), rgb(214 170 90 / 0) 100%),
+    radial-gradient(72% 36% at 0% 18%, rgb(70 92 110 / 0.4), rgb(70 92 110 / 0) 100%),
+    linear-gradient(176deg, #15171A 0%, #0B0B0C 100%);
+}
+/* Elite is always night. The default night look yields to the Me wallpaper picker once one is chosen
+   (data-wall on <html>), so Dusk, Lagoon, Sunset and Daylight still work on the dark surface. */
+.phone.theme-elite { --wall: var(--night-wall); }
+:root:not([data-wall]) .phone.theme-night { --wall: var(--night-wall); --wall-glow: var(--night-glow); }
+
+/* The card as an object: a soft specular sweep and a lit top edge, so it reads as metal under light. */
+.c-mcard.is-portrait .c-mcard__front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background:
+    linear-gradient(118deg, rgb(255 255 255 / 0.16) 0%, rgb(255 255 255 / 0.04) 34%, rgb(255 255 255 / 0) 52%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.10), rgb(255 255 255 / 0) 2px);
+  pointer-events: none;
+}
+.c-mcard.is-portrait .c-mcard__brand {
+  background: linear-gradient(180deg, #FFFFFF 0%, #C9CED4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.c-mcard.is-portrait.is-elite .c-mcard__brand { background-image: linear-gradient(180deg, #F2D594 0%, #B88A3E 100%); }
+.c-mcard.is-portrait.is-premium .c-mcard__brand { background-image: linear-gradient(180deg, #3A342D 0%, #6B6052 100%); }
+
+/* Elite: black card on a black night needs a gold rim and a warmer pool of light to stand out. */
+.phone.theme-elite { --wall-glow: rgb(214 170 90 / 0.5); }
+.c-hero .c-mcard.is-portrait.is-elite { box-shadow: 0 40px 60px -28px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(216 180 106 / 0.42); }
+.c-surface.u-gutter { padding-inline: var(--gutter); }
+.c-surface .c-cta-stack { display: flex; flex-direction: column; gap: 4px; margin: 20px 0 8px; }
+.c-section-title.is-title { font-weight: 800; }
+
+/* Place and offer: the ground under the photo takes on the photo own colours, softly (like album art). */
+.phone.has-glow .screen-scroll { position: relative; overflow-x: hidden; }
+.phone.has-glow .screen-scroll::before {
+  content: "";
+  position: absolute;
+  top: 120px;
+  left: -20%;
+  right: -20%;
+  height: 820px;
+  background: var(--ph) center / cover no-repeat;
+  filter: blur(60px) saturate(1.6);
+  opacity: 0.4;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 100%);
+  pointer-events: none;
+}
+.phone.has-glow .screen-scroll > * { position: relative; }
+
+/* =====================================================================================
+   Pass 3: round actions on the wallpaper, Card visits, Concierge timeline, Me profile.
+   ===================================================================================== */
+
+/* On wallpaper screens the bar takes the surface colour, so the panel reads as one sheet under it. */
+.phone.has-wall .c-xbar {
+  background: color-mix(in srgb, var(--sheet) 96%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 0.5px solid rgb(0 0 0 / 0.06);
+}
+
+/* Round actions under a hero (Card, Me): glass circles with a label. .is-primary is the orange one. */
+.c-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 24px var(--gutter) 0;
+}
+.c-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 84px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 600 13px/1.1 var(--font);
+  color: var(--on-wall);
+  text-decoration: none;
+  cursor: pointer;
+}
+.c-action__btn {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--wall-glass-line);
+  border-radius: 50%;
+  background: var(--wall-glass);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  transition: transform 160ms ease-out;
+}
+.c-action__btn .material-symbols-outlined { font-size: 25px; }
+.c-action.is-primary .c-action__btn {
+  border-color: transparent;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 14px 26px -14px rgb(232 89 12 / 0.95);
+}
+.c-action:active .c-action__btn { transform: scale(0.94); }
+.c-action:focus-visible { outline: none; }
+.c-action:focus-visible .c-action__btn { outline: 2px solid var(--on-wall); outline-offset: 3px; }
+
+/* Card: member number under the card, actions below; the surface holds the visits. */
+.c-cardstage__id {
+  margin: 18px 0 0;
+  text-align: center;
+  font: 500 13px/1 var(--font);
+  color: var(--on-wall-2);
+}
+.c-cardstage__no { font-weight: 700; letter-spacing: 0.08em; color: var(--on-wall); font-variant-numeric: tabular-nums; }
+.c-lede {
+  margin: -4px var(--gutter) 16px;
+  font: 500 15px/1.35 var(--font);
+  color: var(--text-2);
+}
+.c-lede strong { font-weight: 800; color: var(--text); font-variant-numeric: tabular-nums; }
+.c-visit__amt { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.c-visit__save { font: 800 16px/1 var(--font-display); color: var(--open); font-variant-numeric: tabular-nums; }
+.c-visit__lbl { font: 500 12px/1 var(--font); color: var(--text-2); }
+.c-cardtab .c-surface .c-demo-link { margin-top: 20px; }
+
+/* Me: the member, centred, ringed in the tier's metal, with shortcuts below. */
+.c-hero.c-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 22px;
+  text-align: center;
+}
+.c-profile__avatar {
+  --ring: conic-gradient(from 210deg, #F5F6F7, #8D939B, #FFFFFF, #6C7279, #F5F6F7);
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
+.c-profile__avatar img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.c-profile__avatar::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  padding: 2.5px;
+  border-radius: 50%;
+  background: var(--ring);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.c-profile__name {
+  margin: 20px 0 0;
+  font: 800 30px/1.05 var(--font-display);
+  letter-spacing: -0.03em;
+  color: var(--on-wall);
+}
+.c-profile__tier {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid var(--wall-glass-line);
+  border-radius: var(--r-pill);
+  background: var(--wall-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font: 600 13px/1 var(--font);
+  color: var(--on-wall);
+}
+.c-profile__tier::before {
+  content: "";
+  width: 11px;
+  height: 17px;
+  border-radius: 2.5px;
+  background: radial-gradient(130% 70% at 100% 0%, #4A4640, #1C1B19 62%);
+  box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 0.45);
+}
+.c-profile .c-actions { margin-top: 26px; }
+
+/* Membership row: a small card stands in for the icon. */
+.c-group__row.c-memrow { min-height: 72px; }
+.c-minicard {
+  flex: none;
+  position: relative;
+  width: 30px;
+  height: 47px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: radial-gradient(130% 70% at 100% 0%, #3A3732, #1C1B19 62%);
+  box-shadow: 0 6px 12px -6px rgb(0 0 0 / 0.55), inset 0 0 0 0.5px rgb(255 255 255 / 0.14);
+}
+.c-minicard::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  top: 50%;
+  height: 1.5px;
+  background: linear-gradient(90deg, #FFFFFF, #C9CED4);
+  opacity: 0.75;
+}
+.c-minicard::after {
+  content: "S";
+  position: absolute;
+  left: 4px;
+  top: -4px;
+  font: 800 34px/1 var(--font-display);
+  letter-spacing: -0.06em;
+  color: rgb(255 255 255 / 0.08);
+}
+
+/* Concierge: Mika with quick asks; the trip is a timeline per day that only calls out what needs attention. */
+.c-mika2 .c-mika__av {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(150deg, #F6A35E 0%, #E8590C 72%);
+  font: 800 17px/1 var(--font-display);
+  letter-spacing: 0;
+}
+.c-mika2 .c-mika__av::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  width: 13px;
+  height: 13px;
+  border: 2.5px solid var(--tile);
+  border-radius: 50%;
+  background: #22B35E;
+}
+.c-mika2__name { font-weight: 800; }
+.c-mika2__quick { display: flex; gap: 6px; margin-top: 12px; }
+.c-mika2__chip {
+  flex: 1;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: var(--r-pill);
+  background: #F4EFE9;
+  font: 600 14px/1 var(--font);
+  color: var(--text);
+  text-decoration: none;
+}
+.c-mika2__chip .material-symbols-outlined { font-size: 18px; color: var(--accent-text); }
+
+.c-trip2__dates {
+  margin: -4px var(--gutter) 16px;
+  font: 500 15px/1.3 var(--font);
+  color: var(--text-2);
+}
+.c-tday + .c-tday { margin-top: 22px; }
+.c-tday__label { margin: 0 4px 10px; font: 800 17px/1.2 var(--font-display); letter-spacing: -0.01em; color: var(--text); }
+
+.c-tstop {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0 12px;
+}
+.c-tstop + .c-tstop { border-top: 0; }
+.c-tstop:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 52px;
+  bottom: -8px;
+  width: 2px;
+  border-radius: 1px;
+}
+.c-tstop__node {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.c-tstop__node .material-symbols-outlined { font-size: 19px; }
+.c-tstop.is-confirmed .c-tstop__node::after {
+  content: "check";
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--tile);
+  border-radius: 50%;
+  background: #1F9D57;
+  color: #fff;
+  font: 700 11px/1 "Material Symbols Outlined";
+}
+
+.c-tstop__main { gap: 3px; }
+.c-tstop__time { padding: 0; font: 700 12px/1.2 var(--font); letter-spacing: 0.02em; color: var(--text-2); }
+.c-tstop__name { font: 700 16px/1.25 var(--font); color: var(--text); }
+.c-tstop__sub { font: 500 13px/1.35 var(--font); }
+.c-tstop__status {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 5px 9px 5px 8px;
+  border-radius: var(--r-pill);
+  background: rgb(232 89 12 / 0.1);
+  font-weight: 700;
+  color: var(--accent-text);
+}
+.c-tstop__thumb { width: 52px; height: 52px; overflow: hidden; border-radius: 12px; }
+.c-tstop__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Ideas from Mika: photo-first, like Explore. */
+
+
+
+
+
+
+
+/* Read by screen readers, not shown. */
+.u-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Itinerary page uses the Concierge timeline; Mika's avatar is the same warm disc everywhere. */
+.c-trip-days { margin-top: 26px; }
+.c-chat-nav__av,
+.c-msg__av { background: linear-gradient(150deg, #F6A35E 0%, #E8590C 72%); }
+
+/* =====================================================================================
+   Pass 4: no grey parts. Controls on the wallpaper are solid white; controls inside a white tile
+   are white with a hairline; icons and avatars carry real colour. Orange stays the one accent.
+   ===================================================================================== */
+.c-action__btn,
+.c-profile__tier {
+  border: 0;
+  background: #fff;
+  color: #17191C;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.c-action__btn { box-shadow: 0 14px 24px -16px rgb(0 0 0 / 0.7); }
+.c-profile__tier { box-shadow: 0 10px 20px -14px rgb(0 0 0 / 0.7); }
+
+.c-tabbar__tab.is-active { background: rgb(232 89 12 / 0.1); }
+
+/* Deal badges on photos: a white tag, like a price label. */
+.c-xbadge,
+.c-stile .c-xbadge {
+  border: 0;
+  background: #fff;
+  color: #17191C;
+  box-shadow: 0 6px 14px -8px rgb(0 0 0 / 0.5);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Mika's card: hairline controls on white, like a message composer. */
+.c-mika2__call,
+.c-mika2__ask,
+.c-mika2__chip {
+  border: 1px solid #E6E0D8;
+  background: #fff;
+}
+.c-mika2__call { color: var(--text); }
+
+/* Trip: each stop is coloured by what it is, so the day reads at a glance. */
+.c-tstop__node { background: #5E6670; color: #fff; }
+.c-tstop__node .material-symbols-outlined { font-variation-settings: "FILL" 1, "wght" 500; }
+.c-tstop__node[data-ic="airport_shuttle"] { background: #2F6BDB; }
+.c-tstop__node[data-ic="sailing"],
+.c-tstop__node[data-ic="directions_boat"] { background: #0E7C86; }
+.c-tstop__node[data-ic="login"],
+.c-tstop__node[data-ic="logout"] { background: #5A55D6; }
+.c-tstop__node[data-ic="restaurant"],
+.c-tstop__node[data-ic="dinner_dining"] { background: #E8590C; }
+.c-tstop__node[data-ic="spa"] { background: #C2477A; }
+.c-tstop__node[data-ic="golf_course"] { background: #187A46; }
+
+/* Members without a photo get a coloured monogram, never a grey disc. */
+.c-mono {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: #5A55D6;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Payment methods wear their own colours. */
+.c-pm { font: 800 16px/1 var(--font-display); letter-spacing: -0.03em; }
+.c-pm--gcash { background: #0A6CF2; }
+.c-pm--maya { background: #067F48; }
+.c-pm--visa { background: #1A1F71; font-size: 9px; font-style: italic; letter-spacing: 0.02em; }
+
+/* Listing: the member offer is its own row under the name, led by a small copy of your card.
+   The price sits in the bottom bar beside the action, so each fact appears once. */
+.c-poffer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 var(--gutter);
+  padding: 16px 14px 18px 20px;
+  border-radius: 0 0 24px 24px;
+  background: linear-gradient(var(--hairline), var(--hairline)) 20px 0 / calc(100% - 40px) 1px no-repeat, var(--tile);
+  box-shadow: 0 18px 30px -22px rgb(30 40 50 / 0.45);
+  color: var(--text);
+  text-decoration: none;
+}
+.c-poffer__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.c-poffer__title { font: 800 18px/1.15 var(--font-display); letter-spacing: -0.01em; }
+.c-poffer__sub { font: 500 13px/1.3 var(--font); color: var(--text-2); }
+.c-poffer__chev { flex: none; font-size: 22px; color: var(--inactive); }
+.c-place-head.is-solo { padding-bottom: 20px; border-radius: 24px; box-shadow: 0 18px 30px -22px rgb(30 40 50 / 0.45); }
+.c-bottombar__total { font: 800 19px/1.1 var(--font-display); letter-spacing: -0.02em; }
+.c-bottombar__total small { font-weight: 500; }
+.c-bottombar__was { margin-top: 4px; }
+
+/* Offer page: steps, place and fine print sit on white tiles like every other list. */
+.c-otile {
+  border-radius: var(--tile-r);
+  background: var(--tile);
+  box-shadow: 0 12px 24px -22px rgb(30 40 50 / 0.5);
+}
+.c-osteps.c-otile { gap: 0; padding: 4px 0; }
+.c-osteps.c-otile li { position: relative; align-items: center; padding: 12px 16px; }
+.c-osteps.c-otile li + li::before,
+.c-ofine.c-otile li + li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 52px;
+  right: 0;
+  height: 1px;
+  background: var(--hairline);
+}
+.c-oplace.c-otile { padding: 12px 14px 12px 12px; }
+.c-ofine.c-otile { margin: 0; padding: 4px 0; border: 0; list-style: none; }
+.c-ofine.c-otile li { position: relative; padding: 12px 16px; font: 500 15px/1.4 var(--font); color: var(--text); }
+.c-ofine.c-otile li + li::before { left: 16px; }
+
+/* With a price beside the action, the bar turns solid so the price never sits on scrolling text. */
+.c-bottombar:has(.c-bottombar__price:not([hidden])) {
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+  background: var(--tile);
+}
+
+/* Pass 4b: the last grey wells. Fields and chips are white with a hairline; switches, charts and
+   empty states use the brand or the ink, never a mid grey. */
+.c-field,
+.c-composer__field {
+  border: 1px solid #E3DDD5;
+  background: #fff;
+}
+.c-composer__plus,
+.c-reply,
+.c-fcard__dir {
+  border: 1px solid #E3DDD5;
+  background: #fff;
+  color: var(--text);
+}
+.c-composer__send:disabled { background: rgb(232 89 12 / 0.4); color: #fff; }
+.c-switch { background: #E4DFD8; }
+.c-barchart__bar { background: rgb(232 89 12 / 0.22); }
+.c-dates,
+.c-booking-card {
+  border: 0;
+  background: var(--tile);
+  box-shadow: 0 12px 24px -22px rgb(30 40 50 / 0.5);
+}
+.c-empty__icon { background: #fff; color: var(--text); box-shadow: 0 10px 24px -14px rgb(30 40 50 / 0.45); }
+.c-pill.is-neutral { background: transparent; box-shadow: inset 0 0 0 1px #E3DDD5; color: var(--text-2); }
+.phone.has-wall .c-xbar__btn { background: transparent; color: var(--text); }
+.phone.c-tiers:not([data-tier="elite"]) .c-tiers__seg { background: #fff; box-shadow: inset 0 0 0 1px #E3DDD5; }
+.phone.c-tiers:not([data-tier="elite"]) .c-tiers__thumb { background: #17191C; box-shadow: none; }
+.phone.c-tiers:not([data-tier="elite"]) .c-tiers__seg-input:checked + .c-tiers__seg-label { color: #fff; }
+.c-fcard__meta { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+/* Pass 5: verified-visit stories. A member can only share a story from a visit paid with the card, so
+   every story carries its visit date. Rows of tall photo tiles; the first tile adds yours. */
+.c-stories { gap: 10px; }
+.c-psec .c-stories { margin: 0 calc(var(--gutter) * -1); }
+.c-story {
+  position: relative;
+  flex: none;
+  display: block;
+  width: 124px;
+  aspect-ratio: 3 / 4.4;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  background: #D9D3CB;
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  scroll-snap-align: start;
+  box-shadow: 0 12px 24px -20px rgb(30 40 50 / 0.6);
+}
+.c-story__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.c-story::after {
+  content: "";
+  position: absolute;
+  inset: 38% 0 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0), rgb(0 0 0 / 0.7));
+}
+.c-story__avatar {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 8px;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff;
+  font-size: 12px;
+}
+.c-story__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.c-story__text {
+  position: absolute;
+  z-index: 1;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.c-story__name { font: 700 13px/1.2 var(--font); }
+.c-story__place {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font: 500 12px/1.25 var(--font);
+  color: rgb(255 255 255 / 0.9);
+}
+.c-story--add { background: var(--tile); color: var(--text); }
+.c-story--add::after { display: none; }
+.c-story__me { position: absolute; inset: 0 0 40%; }
+.c-story__me img { width: 100%; height: 100%; object-fit: cover; }
+.c-story__plus {
+  position: absolute;
+  z-index: 1;
+  top: 60%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 3px var(--tile);
+}
+.c-story__plus .material-symbols-outlined { font-size: 22px; font-variation-settings: "wght" 600; }
+.c-story--add .c-story__text { left: 6px; right: 6px; bottom: 12px; align-items: center; text-align: center; }
+.c-story--add .c-story__place { color: var(--text-2); }
+
+/* "Verified visit": the line that makes a story worth trusting. */
+.c-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font: 600 13px/1.2 var(--font);
+  color: #187A46;
+}
+.c-verified .material-symbols-outlined { font-size: 17px; font-variation-settings: "FILL" 1, "wght" 500; }
+.c-post-body .c-verified { margin: 2px 0 8px; }
+
+/* Explore: pick the visit a story is from. */
+.c-vsheet[hidden] { display: none; }
+.c-vsheet .c-sheet__panel { background: #F6F3EE; }
+.c-vsheet .c-sheet__sub { max-width: 300px; margin-inline: auto; }
+.c-vlist { margin-top: 20px; }
+.c-vsheet:not([hidden]) .c-sheet__panel { animation: c-vsheet-up 300ms cubic-bezier(.2, .8, .2, 1) both; }
+.c-vsheet:not([hidden]) .c-sheet__scrim { animation: c-vsheet-fade 220ms ease-out both; }
+@keyframes c-vsheet-up { from { transform: translateY(100%); } }
+@keyframes c-vsheet-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .c-vsheet .c-sheet__panel,
+  .c-vsheet .c-sheet__scrim { animation: none; }
+}
+.c-list-row__chev { color: #A8AEB5; }
+
+/* After paying: one quiet row asking how it was. */
+.c-sharevisit {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 14px;
+  border-radius: 18px;
+  background: #F6F3EE;
+  color: var(--text);
+  text-align: left;
+  text-decoration: none;
+}
+.c-sharevisit__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+}
+.c-sharevisit__icon .material-symbols-outlined { font-size: 22px; font-variation-settings: "FILL" 1, "wght" 500; }
+.c-sharevisit__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.c-sharevisit__title { font: 700 16px/1.25 var(--font); }
+.c-sharevisit__sub { font: 500 14px/1.3 var(--font); color: var(--text-2); }
+.c-sharevisit__chev { color: #A8AEB5; }
+
+/* The composer: the visit (locked), a photo, one tip. */
+.c-navbar__cancel {
+  grid-column: 1;
+  justify-self: start;
+  align-self: center;
+  white-space: nowrap;
+  font: 500 17px/1 var(--font);
+  color: var(--text);
+  text-decoration: none;
+}
+.c-compose { padding: 8px var(--gutter) 120px; }
+.c-cvisit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--tile-r);
+  background: var(--tile);
+  box-shadow: 0 12px 24px -22px rgb(30 40 50 / 0.5);
+}
+.c-cvisit__thumb { flex: none; width: 48px; height: 48px; overflow: hidden; border-radius: 12px; }
+.c-cvisit__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.c-cvisit__text { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.c-cvisit__name { font: 700 16px/1.25 var(--font); }
+.c-cphoto {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin-top: 16px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--tile-r);
+  background: var(--tile);
+  box-shadow: inset 0 0 0 1px #E3DDD5;
+  cursor: pointer;
+}
+.c-cphoto > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.c-cphoto__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font: 500 14px/1.3 var(--font);
+  color: var(--text-2);
+}
+.c-cphoto__empty > .material-symbols-outlined {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: rgb(232 89 12 / 0.1);
+  color: var(--accent);
+  font-size: 26px;
+}
+.c-cphoto__empty strong { font: 700 16px/1.25 var(--font); color: var(--text); }
+.c-croll {
+  display: flex;
+  gap: 8px;
+  margin: 12px calc(var(--gutter) * -1) 0;
+  padding: 0 var(--gutter);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.c-croll::-webkit-scrollbar { display: none; }
+.c-croll__item {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: #E9E4DD;
+  cursor: pointer;
+}
+.c-croll__item img { width: 100%; height: 100%; object-fit: cover; }
+.c-croll__item.is-on::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 3px var(--accent);
+}
+.c-croll__check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: none;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 1.5px #fff;
+}
+.c-croll__item.is-on .c-croll__check { display: grid; }
+.c-croll__check .material-symbols-outlined { font-size: 15px; font-variation-settings: "wght" 700; }
+.c-croll__cam { background: var(--tile); box-shadow: inset 0 0 0 1px #E3DDD5; color: var(--text); }
+.c-ctip { margin-top: 24px; }
+.c-ctip__label { display: block; margin: 0 0 8px; font: 700 17px/1.2 var(--font); }
+.c-ctip__box { position: relative; border: 1px solid #E3DDD5; border-radius: 16px; background: #fff; }
+.c-ctip__box:focus-within { border-color: var(--accent); outline: 1px solid var(--accent); }
+.c-ctip__field {
+  display: block;
+  width: 100%;
+  min-height: 92px;
+  padding: 12px 14px 26px;
+  border: 0;
+  border-radius: inherit;
+  outline: none;
+  background: transparent;
+  resize: none;
+  font: 500 16px/1.4 var(--font);
+  color: var(--text);
+}
+.c-ctip__field::placeholder { color: #8A9098; }
+.c-ctip__count {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  font: 500 12px/1 var(--font);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+.c-cnote { margin: 10px 2px 0; font: 500 13px/1.35 var(--font); color: var(--text-2); }
+.c-compose-bar .c-btn.primary:disabled { background: rgb(232 89 12 / 0.4); box-shadow: none; cursor: default; }
+.c-bottombar.is-stack { flex-direction: column; align-items: stretch; gap: 4px; }
+.c-cdone { display: flex; flex-direction: column; align-items: center; padding: 88px var(--gutter) 0; text-align: center; }
+.c-cdone__photo {
+  position: relative;
+  width: 140px;
+  aspect-ratio: 3 / 4;
+  border-radius: 20px;
+  box-shadow: 0 22px 40px -24px rgb(30 40 50 / 0.7);
+}
+.c-cdone__photo img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
+.c-cdone__badge {
+  position: absolute;
+  right: -12px;
+  bottom: -12px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #1F9D57;
+  color: #fff;
+  box-shadow: 0 0 0 4px #F6F3EE;
+}
+.c-cdone__badge .material-symbols-outlined { font-size: 24px; font-variation-settings: "wght" 700; }
+.c-cdone__title { margin: 32px 0 0; font: 800 26px/1.15 var(--font-display); letter-spacing: -0.02em; }
+.c-cdone__sub { max-width: 290px; margin: 8px 0 0; font: 500 15px/1.4 var(--font); color: var(--text-2); }
+
+/* Your stories: visits waiting for one, then the ones you shared. */
+.c-addpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 7px 12px 7px 8px;
+  border-radius: 999px;
+  background: rgb(232 89 12 / 0.1);
+  font: 700 14px/1 var(--font);
+  color: #B8460A;
+}
+.c-addpill .material-symbols-outlined { font-size: 18px; font-variation-settings: "wght" 600; }
+.c-mystories { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 var(--gutter) 32px; }
+.c-mystories .c-story { width: auto; }
+.c-post-empty { margin: 0; padding: 4px var(--gutter) 8px; font: 500 15px/1.4 var(--font); color: var(--text-2); }
+.c-post-delete { display: flex; justify-content: center; margin: 8px 0 24px; }
+.c-btn.plain.is-danger { color: #C0182C; }
+.c-btn.primary.is-danger { background: #C0182C; box-shadow: none; }
+/* One shared story takes the whole row instead of leaving half of it empty. */
+.c-mystories > .c-story:last-child:nth-child(odd) { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
+/* The visit picker shows the whole place name, wrapping to two lines before it truncates. */
+[data-visits] .c-list-row__title { white-space: normal; }
+
+/* =====================================================================================
+   Pass 6: content sits on the paper, not in white boxes. A white tile now means something
+   you touch (fields, chips, the place header) or a settings group. Each content list gets
+   its own form: a photo list (Popular), a ledger (visits, savings), Mika on the wallpaper,
+   privileges stamped in the card's own black (Benefits) and room photos (listing).
+   ===================================================================================== */
+:root { --rule: #E6DFD6; }
+.phone.theme-elite,
+.phone.theme-night { --rule: rgb(255 255 255 / 0.1); }
+
+/* Ledger: rows straight on the paper, a warm rule between them, bigger photos. */
+.c-ledger .c-list-row {
+  min-height: 0;
+  padding: 12px 0;
+  background: none;
+  box-shadow: none;
+}
+.c-ledger .c-list-row::after { left: calc(56px + var(--space-3)); height: 1px; background: var(--rule); }
+.c-ledger .c-list-row__lead { width: 56px; height: 56px; }
+.c-ledger .c-list-row__thumb { border-radius: 14px; }
+.c-ledger .c-list-row__title { font: 700 16px/1.25 var(--font); letter-spacing: -0.01em; }
+.c-ledger .c-list-row__sub { margin-top: 3px; font: 500 14px/1.3 var(--font); }
+.c-ledger .c-visit__save { font-size: 17px; }
+
+/* Popular: rows on the paper with a larger photo; the perk carries the tiny card mark. */
+.c-popular { padding: 0 var(--gutter); }
+.c-popular__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 14px;
+  padding: 12px 0;
+  color: var(--text);
+  text-decoration: none;
+}
+.c-popular__row:not([hidden]) ~ .c-popular__row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 86px;
+  right: 0;
+  height: 1px;
+  background: var(--rule);
+}
+.c-popular__photo { width: 72px; height: 72px; overflow: hidden; border-radius: 16px; }
+.c-popular__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.c-popular__text { min-width: 0; display: flex; flex-direction: column; }
+.c-popular__name,
+.c-popular__meta { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.c-popular__name { font: 700 17px/1.25 var(--font); letter-spacing: -0.01em; }
+.c-popular__meta { margin-top: 2px; font: 500 14px/1.3 var(--font); color: var(--text-2); }
+.c-popular__perk { display: flex; align-items: center; gap: 6px; margin-top: 8px; font: 700 13px/1 var(--font); color: var(--text); }
+.c-popular__rate { font-weight: 600; color: var(--text-2); }
+.c-popular__rate::before { content: "·"; margin: 0 6px 0 2px; }
+
+/* A member perk is marked with a tiny copy of the card, the same mark as the Me tier chip. */
+.c-perkmark {
+  flex: none;
+  position: relative;
+  width: 11px;
+  height: 16px;
+  border-radius: 2.5px;
+  background: radial-gradient(130% 70% at 100% 0%, #4A4640, #1C1B19 62%);
+  box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 0.3);
+}
+.c-perkmark::before {
+  content: "";
+  position: absolute;
+  left: 2.5px;
+  right: 2.5px;
+  top: 7.5px;
+  height: 1px;
+  background: rgb(255 255 255 / 0.75);
+}
+
+/* Concierge: Mika stands on the wallpaper like the Explore search, not inside a white card.
+   Controls are solid white with dark icons, as everywhere on a wallpaper. */
+.c-hero .c-mika2 {
+  margin: 8px var(--gutter) 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.c-hero .c-mika2 .c-mika__av {
+  width: 58px;
+  height: 58px;
+  font-size: 19px;
+  box-shadow: 0 0 0 2.5px #fff, 0 14px 26px -14px rgb(0 0 0 / 0.7);
+}
+.c-hero .c-mika2 .c-mika__av::after { border-color: #fff; }
+.c-hero .c-mika2__name { font: 800 24px/1.1 var(--font-display); letter-spacing: -0.02em; color: var(--on-wall); }
+.c-hero .c-mika2__status { margin-top: 5px; font: 500 15px/1.2 var(--font); color: var(--on-wall-2); }
+.c-hero .c-mika2__call,
+.c-hero .c-mika2__ask,
+.c-hero .c-mika2__chip {
+  border: 0;
+  background: #fff;
+  box-shadow: 0 16px 30px -18px rgb(0 0 0 / 0.75);
+}
+.c-hero .c-mika2__call { width: 48px; height: 48px; }
+.c-hero .c-mika2__ask { margin-top: 20px; min-height: 56px; padding-left: 20px; font: 500 16px/1 var(--font); color: var(--text-2); }
+.c-hero .c-mika2__ask .c-ask__send { width: 44px; height: 44px; }
+.c-hero .c-mika2__quick { gap: 8px; margin-top: 10px; }
+.c-hero .c-mika2__chip { height: 40px; }
+.c-hero .c-mika2__chip .material-symbols-outlined { color: var(--text); }
+
+/* Benefits: the real (black, portrait) Prestige card heads the page, and each privilege is
+   stamped in that same black, straight on the paper. */
+.c-minicard.is-lg { width: 44px; height: 69px; border-radius: 7px; }
+.c-minicard.is-lg::before { left: 10px; right: 10px; height: 2px; }
+.c-minicard.is-lg::after { left: 5px; top: -6px; font-size: 52px; }
+.c-pass-summary__name { font: 800 22px/1.15 var(--font-display); letter-spacing: -0.02em; }
+.c-pass-summary__meta { margin-top: 4px; font: 500 14px/1.3 var(--font); }
+.c-perks .c-list-row__lead {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: radial-gradient(130% 80% at 100% 0%, #3A3732, #1C1B19 62%);
+  box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 0.16), 0 8px 16px -10px rgb(0 0 0 / 0.6);
+}
+.c-perks .c-list-row__icon { font-size: 22px; color: #fff; font-variation-settings: "FILL" 1, "wght" 500; }
+.c-perks .c-list-row::after { left: calc(44px + var(--space-3)); }
+.c-perks .c-list-row__action {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #E3DDD5;
+  border-radius: var(--r-pill);
+  background: #fff;
+  font: 600 14px/1 var(--font);
+  color: var(--text);
+}
+
+/* Listing: rooms (or tours) are photos you swipe, priced for members, like the Explore cards. */
+.c-psec .c-rooms { margin: 0 calc(var(--gutter) * -1); gap: 14px; }
+.c-room { flex: none; width: 252px; scroll-snap-align: start; color: var(--text); text-decoration: none; }
+.c-room__photo { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 18px; }
+.c-room__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.c-room__name { display: block; margin-top: 12px; font: 700 17px/1.2 var(--font); letter-spacing: -0.01em; }
+.c-room__sub { display: block; margin-top: 4px; font: 500 14px/1.3 var(--font); color: var(--text-2); }
+.c-room__price { display: flex; align-items: baseline; gap: 5px; margin-top: 10px; font: 500 14px/1 var(--font); color: var(--text-2); }
+.c-room__price b { font: 800 17px/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--text); }
+.c-room__price s { margin-left: 4px; font-size: 13px; }
+
+/* Trip: the timeline runs straight down the paper, under Mika, without a white box per day. */
+.c-tday__list { padding: 0; border-radius: 0; background: none; box-shadow: none; }
+.c-tstop { padding: 12px 0; }
+.c-tstop:not(:last-child)::before { left: 17px; background: var(--rule); }
+.c-tstop.is-confirmed .c-tstop__node::after { border-color: var(--sheet); }
+.c-tstop.is-progress .c-tstop__node { box-shadow: 0 0 0 2px var(--sheet), 0 0 0 4px var(--accent); }
+.c-tday__label { margin-left: 0; margin-right: 0; }
+
+/* Pass 7: no white cards. Lists and settings groups sit on the paper with hairlines. */
+/* Lists and groups: no tile, no shadow, no rounded corners. Buttons, fields, chips, round action
+   buttons, the card and the tab bar keep their own styles. */
+.c-list-row,
+.c-group {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+.c-list-row:not(.c-list-row + .c-list-row),
+.c-list-row:not(:has(+ .c-list-row)) { border-radius: 0; }
+.c-list-row::after { background: rgba(0, 0, 0, 0.08); }
+.c-list-row:not(:has(+ .c-list-row))::after { display: block; left: 0; }
+.c-group__row + .c-group__row::before { background: rgba(0, 0, 0, 0.08); }
+
+/* Night (Elite and default): the same hairlines, lit instead of shaded. */
+.phone.theme-elite .c-list-row::after,
+.phone.theme-elite .c-group__row + .c-group__row::before,
+.phone.theme-night .c-list-row::after,
+.phone.theme-night .c-group__row + .c-group__row::before { background: rgba(255, 255, 255, 0.1); }
+
+/* Card back: the quiet staff-scan link under the QR, light text on the dark back face. */
+.c-mcard__sim { position: relative; z-index: 2; margin-top: 4px; color: rgb(255 255 255 / 0.72); }
+
+/* Pass 8: phone and code entry */
+.c-auth { color: var(--on-wall); }
+.c-auth .c-navbar__back { color: var(--on-wall); }
+.c-auth__nav { align-items: center; }
+.c-auth__mark { justify-self: center; font-size: 22px; color: var(--on-wall); }
+.c-auth__head {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  padding: 20px var(--gutter) 191px;   /* taller wallpaper: the paper sheet starts lower */
+  color: var(--on-wall);
+}
+/* Code step: the resend line adds height under the boxes, so its hero is a little shorter. */
+.c-auth:has(.c-auth__otp) .c-auth__head { padding-bottom: 181px; }
+.c-auth__title {
+  margin: 0;
+  font: 700 34px/1.1 var(--font);
+  letter-spacing: var(--track-tight);
+  color: var(--on-wall);
+}
+.c-auth__sub {
+  margin: 8px 0 0;
+  font: 400 17px/1.35 var(--font);
+  color: var(--on-wall-2);
+  text-wrap: balance;
+}
+.c-auth__edit {
+  margin-left: 10px;
+  font-weight: 600;
+  color: #FFC46B;
+  text-decoration: none;
+}
+.c-auth__sheet {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 28px var(--gutter) 16px;
+  background: var(--sheet);
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0 -20px 44px -26px rgb(0 0 0 / 0.55);
+}
+.c-auth__field {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 64px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.c-auth__cc {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding-right: 16px;
+  border-right: 1px solid #E3DDD5;
+  font: 500 17px/1 var(--font);
+  color: var(--text);
+}
+.c-auth__flag { display: block; width: 24px; height: 16px; border-radius: 2px; }
+.c-auth__value {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  font: 700 26px/1 var(--font);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  white-space: nowrap;
+}
+.c-auth__caret {
+  width: 2px;
+  height: 30px;
+  margin-left: 2px;
+  background: var(--accent);
+  animation: c-auth-blink 1s steps(1) infinite;
+}
+@keyframes c-auth-blink { 50% { opacity: 0; } }
+.c-auth__cta { margin-top: auto; padding-top: 16px; }
+.c-auth__otp {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+.c-auth__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #E3DDD5;
+  font: 700 30px/1 var(--font);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.c-auth__cell.is-active { box-shadow: inset 0 0 0 2px var(--accent); }
+.c-auth__resend {
+  margin: 16px 0 0;
+  font: 400 13px/1.3 var(--font);
+  text-align: center;
+  color: #5F6670;
+}
+.c-auth__pad {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 8px 6px 34px;
+  background: #D9D5CF;
+}
+.c-auth__key {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgb(30 30 30 / 0.28);
+  font-family: var(--font);
+  color: #121212;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.c-auth__key:active { background: #ECE9E4; }
+.c-auth__key.is-blank,
+.c-auth__key.is-del { background: transparent; box-shadow: none; }
+.c-auth__key.is-blank { cursor: default; }
+.c-auth__key.is-del:active { background: rgb(255 255 255 / 0.4); }
+.c-auth__digit { font: 400 26px/1 var(--font); color: #121212; }
+.c-auth__letters {
+  height: 10px;
+  margin-top: 2px;
+  font: 600 10px/10px var(--font);
+  letter-spacing: 2px;
+  color: #1E1D1B;
+}
+.c-auth__key.is-del .material-symbols-outlined { font-size: 26px; color: #121212; }
+
+/* =====================================================================================
+   Pass 9: night look is the default. Every in-scope page carries .theme-night, which takes the
+   Elite tokens above (dark surface, night wallpaper, gold glow). Brand orange stays the primary
+   action; only Elite swaps it for gold. This block fixes what is still light or unreadable there.
+   ===================================================================================== */
+.phone.theme-night {
+  --cta-fill: var(--accent);
+  --cta-press: var(--accent-press);
+  --on-cta: #FFFFFF;
+  /* Brand greens and oranges, lifted one step so small text clears AA on the dark ground. */
+  --open: #4ADE80;
+  --accent-text: #FB923C;
+}
+
+/* Selected chip: light fill with a dark label (was white on white on Explore). */
+.phone.theme-night .c-chip.is-selected { background: var(--text); border-color: var(--text); color: var(--sheet); }
+.phone.theme-night .c-chip.is-selected .c-chip__icon { color: var(--sheet); }
+
+/* Saved: the raised option on the wallpaper switch is light, so its label is dark. */
+.phone.theme-night .c-hero .c-segmented__opt.is-on { background: var(--text); color: var(--sheet); }
+
+/* Forms: fields, code cells and the composer are dark tiles with a hairline (they were Pass 4b white). */
+.phone.theme-night .c-field,
+.phone.theme-night .c-composer__field,
+.phone.theme-night .c-composer__plus,
+.phone.theme-night .c-reply,
+.phone.theme-night .c-fcard__dir,
+.phone.theme-night .c-ctip__box { background: var(--tile); border-color: rgb(255 255 255 / 0.12); }
+.phone.theme-night .c-pill.is-neutral { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16); }
+
+/* Explore's "Share a story" sheet: a dark panel like every other sheet, not the paper cream. */
+.phone.theme-night .c-vsheet .c-sheet__panel { background: var(--sheet); }
+.phone.theme-night .c-vsheet .c-sheet__grabber { background: rgb(255 255 255 / 0.3); }
+
+/* Concierge on the wallpaper: the quick chips and call button are white, so their labels and icons are dark. */
+.phone.theme-night .c-hero .c-mika2__call,
+.phone.theme-night .c-hero .c-mika2__chip { color: #121212; }
+.phone.theme-night .c-hero .c-mika2__chip .material-symbols-outlined,
+.phone.theme-night .c-hero .c-mika2__call .material-symbols-outlined { color: #121212; }
+.phone.theme-night .c-hero .c-mika2__ask { color: #5F6670; }
+
+/* Welcome: the photo has a dark wash, so the wordmark, headline and links are light, not the dark ground. */
+.phone.theme-night.c-welcome > .c-statusbar,
+.phone.theme-night.c-welcome .c-welcome__mark,
+.phone.theme-night.c-welcome .c-welcome__title,
+.phone.theme-night.c-welcome .c-welcome__sub,
+.phone.theme-night.c-welcome .c-welcome__body,
+.phone.theme-night.c-welcome .c-btn.plain { color: var(--text); }
+
+.phone.theme-night.c-welcome .c-welcome__photo { filter: brightness(0.6) saturate(0.85); }
+
+/* Choose your card: the ground is the night backdrop for every pass; the pass card keeps its own colour. */
+.phone.theme-night.c-tiers,
+.phone.theme-night.c-tiers[data-tier] {
+  background: var(--backdrop);
+  --tier-ground: var(--backdrop);
+  --tier-ink: var(--text);
+  --tier-ink-2: var(--text-2);
+  --tier-seg: rgb(255 255 255 / 0.08);
+}
+.phone.theme-night.c-tiers:not([data-tier="elite"]) .c-tiers__seg { background: var(--tier-seg); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12); }
+.phone.theme-night.c-tiers:not([data-tier="elite"]) .c-tiers__thumb { background: var(--text); }
+.phone.theme-night.c-tiers:not([data-tier="elite"]) .c-tiers__seg-input:checked + .c-tiers__seg-label { color: var(--sheet); }
+
+/* Sign-in and sign-up: fields and code cells are dark tiles with a hairline; the keypad is iOS dark. */
+.phone.theme-night .c-auth__field,
+.phone.theme-night .c-auth__cell { background: var(--tile); }
+
+.phone.theme-night .c-auth__cc { border-right-color: rgb(255 255 255 / 0.12); }
+
+
+.phone.theme-night .c-auth__key { color: #F5F5F4; }
+
+
+.phone.theme-night .c-auth__key.is-del:active { background: rgb(255 255 255 / 0.12); }
+
+
+
+/* Tab bar: no highlight behind the selected tab */
+.c-tabbar__tab.is-active,
+.phone.theme-elite .c-tabbar__tab.is-active,
+.phone.theme-night .c-tabbar__tab.is-active { background: none; }
+
+/* Pass 11: code entry on the night look.
+   One continuous night surface: a single gold glow behind the heading, no hard-edged sheet,
+   the keypad tray fades into the same black, dark glass keys and cells, gold focus and button. */
+.phone.theme-night.c-auth:has(.c-auth__otp) {
+  --wall:
+    radial-gradient(60% 34% at 22% 14%, rgb(214 170 90 / 0.30), rgb(214 170 90 / 0) 100%),
+    radial-gradient(80% 40% at 100% 46%, rgb(70 92 110 / 0.28), rgb(70 92 110 / 0) 100%),
+    linear-gradient(180deg, #16181B 0%, #0B0B0C 62%);
+  --cta-fill: #C9A227;
+  --cta-press: #B08D1F;
+  --on-cta: #0B0B0C;
+}
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__head { padding-bottom: 36px; }
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sheet {
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding-top: 8px;
+}
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__cta { margin-top: auto; }
+
+.phone.theme-night .c-auth__cell {
+  height: 60px;
+}
+
+
+
+.phone.theme-night .c-auth__pad { padding-top: 10px; }
+
+
+
+
+
+
+/* Pass 11b: warm graphite instead of translucent white, so keys and cells separate from the tray
+   without glare and pick up the gold rather than reading as neutral grey. */
+.phone.theme-night .c-auth__cell {
+  background: #1F1C18;
+  box-shadow: inset 0 0 0 1px #4A4338;
+  color: #F7F2E8;
+}
+.phone.theme-night .c-auth__cell.is-active {
+  background: #26211A;
+}
+.phone.theme-night .c-auth__resend { color: #B9B0A1; }
+.phone.theme-night .c-auth__pad { background: #13110E; box-shadow: inset 0 1px 0 rgb(255 236 200 / 0.05); }
+.phone.theme-night .c-auth__key {
+  background: #2E2A24;
+  box-shadow: inset 0 1px 0 rgb(255 236 200 / 0.09), 0 1px 0 rgb(0 0 0 / 0.6);
+}
+.phone.theme-night .c-auth__key:active { background: #474036; }
+.phone.theme-night .c-auth__key.is-blank,
+.phone.theme-night .c-auth__key.is-del { background: transparent; box-shadow: none; }
+.phone.theme-night .c-auth__digit,
+.phone.theme-night .c-auth__key.is-del .material-symbols-outlined { color: #FAF6EE; }
+.phone.theme-night .c-auth__letters { color: #BDB4A4; }
+/* Pass 11c: detector fixes. Key letters to the 11px floor; active cell keeps a solid gold ring, no glow halo. */
+.phone.theme-night .c-auth__letters { font-size: 11px; }
+.phone.theme-night .c-auth__cell.is-active { box-shadow: inset 0 0 0 2px #D4AF37; }
+
+/* Pass 12: code entry recoloured. Midnight ink instead of warm black, no glow anywhere,
+   cool slate keys and cells, one muted champagne accent for focus and the button. */
+.phone.theme-night.c-auth:has(.c-auth__otp) {
+  --wall: linear-gradient(180deg, #121A28 0%, #0A0F18 55%, #070A10 100%);
+  --cta-fill: #D8BE7A;
+  --cta-press: #C4A962;
+  --on-cta: #111317;
+}
+.phone.theme-night.c-auth:has(.c-auth__otp)::before { opacity: 0; }
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-btn { box-shadow: none; }
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sub { color: #A9B3C4; }
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__edit { color: #D8BE7A; }
+.phone.theme-night .c-auth__cell {
+  background: #141C2A;
+  box-shadow: inset 0 0 0 1px #2A3446;
+  color: #EEF1F6;
+}
+.phone.theme-night .c-auth__cell.is-active {
+  background: #18202F;
+  box-shadow: inset 0 0 0 2px #D8BE7A;
+}
+.phone.theme-night .c-auth__resend { color: #8E99AC; }
+.phone.theme-night .c-auth__pad { background: #070A10; box-shadow: none; }
+.phone.theme-night .c-auth__key {
+  background: #1A2232;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+.phone.theme-night .c-auth__key:active { background: #2A3448; }
+.phone.theme-night .c-auth__key.is-blank,
+.phone.theme-night .c-auth__key.is-del { background: transparent; box-shadow: none; }
+.phone.theme-night .c-auth__digit,
+.phone.theme-night .c-auth__key.is-del .material-symbols-outlined { color: #EEF1F6; }
+.phone.theme-night .c-auth__letters { color: #8E99AC; }
+
+/* Pass 12b: more saturation. Richer navy, bluer keys and cells, a true gold accent. Still no glow. */
+.phone.theme-night.c-auth:has(.c-auth__otp) {
+  --wall: linear-gradient(180deg, #0F2147 0%, #0A1631 55%, #060D1F 100%);
+  --cta-fill: #F2B92E;
+  --cta-press: #DBA215;
+  --on-cta: #10131A;
+}
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sub { color: #B4C3E2; }
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__edit { color: #F2B92E; }
+.phone.theme-night .c-auth__cell { background: #12244B; box-shadow: inset 0 0 0 1px #2C4378; color: #F2F5FB; }
+.phone.theme-night .c-auth__cell.is-active { background: #162B58; box-shadow: inset 0 0 0 2px #F2B92E; }
+.phone.theme-night .c-auth__resend { color: #9AAAD0; }
+.phone.theme-night .c-auth__pad { background: #060D1F; }
+.phone.theme-night .c-auth__key { background: #17295A; }
+.phone.theme-night .c-auth__key:active { background: #26407E; }
+.phone.theme-night .c-auth__key.is-blank,
+.phone.theme-night .c-auth__key.is-del { background: transparent; }
+.phone.theme-night .c-auth__letters { color: #9AAAD0; }
+
+/* Pass 13: code entry in the Bistro BFF style. A blurred bay-at-dusk wash (teal into terracotta),
+   frosted white glass, solid filled code boxes, a solid black button. Text goes dark on the glass. */
+.phone.theme-night.c-auth:has(.c-auth__otp) {
+  --wall:
+    radial-gradient(90% 55% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(80% 50% at 100% 70%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #4F8796 0%, #7FAEB6 40%, #B7C9C4 70%, #D9B39A 100%);
+  --cta-fill: #111214;
+  --cta-press: #2A2B2E;
+  --on-cta: #FFFFFF;
+}
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sub { color: rgb(255 255 255 / 0.9); }
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__edit { color: #FFFFFF; text-decoration: underline; text-underline-offset: 3px; }
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sheet {
+  margin: 0 12px;
+  padding: 20px 16px 18px;
+  flex: 0 0 auto;
+  background: rgb(255 255 255 / 0.62);
+  border-radius: 24px;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.7), 0 12px 30px -18px rgb(30 50 60 / 0.5);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__cta { margin-top: 18px; padding-top: 0; }
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__pad { margin-top: auto; }
+.phone.theme-night .c-auth__cell { background: #FFFFFF; box-shadow: inset 0 0 0 1px rgb(17 18 20 / 0.08); color: #111214; }
+.phone.theme-night .c-auth__cell.is-active { background: #FFFFFF; box-shadow: inset 0 0 0 2px #111214; }
+.phone.theme-night .c-auth__resend { color: #3D4A50; }
+.phone.theme-night .c-auth__pad {
+  background: rgb(255 255 255 / 0.55);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.8);
+}
+.phone.theme-night .c-auth__key { background: #FFFFFF; box-shadow: 0 1px 0 rgb(17 18 20 / 0.18); }
+.phone.theme-night .c-auth__key:active { background: #E4E7E8; }
+.phone.theme-night .c-auth__key.is-blank,
+.phone.theme-night .c-auth__key.is-del { background: transparent; box-shadow: none; }
+.phone.theme-night .c-auth__digit,
+.phone.theme-night .c-auth__key.is-del .material-symbols-outlined { color: #111214; }
+.phone.theme-night .c-auth__letters { color: #4A5358; }
+/* Pass 13b: deeper teal behind the white heading so it reads clearly. */
+.phone.theme-night.c-auth:has(.c-auth__otp) {
+  --wall:
+    radial-gradient(90% 55% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(80% 50% at 100% 70%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #24505E 0%, #3C7584 32%, #8DB3B8 62%, #D9B39A 100%);
+}
+/* Pass 13c: no glass card behind the code; boxes and button sit straight on the wash. */
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sheet {
+  background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+  margin: 0; padding: 8px var(--gutter) 0;
+}
+.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__resend { color: rgb(255 255 255 / 0.92); }
+
+/* Pass 14: the reference look (code screen, Pass 13) on every keypad step:
+   sign-in number, sign-in code, sign-up number, sign-up code. */
+.phone.theme-night.c-auth:has(.c-auth__pad) {
+  --wall:
+    radial-gradient(90% 55% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(80% 50% at 100% 70%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #24505E 0%, #3C7584 32%, #8DB3B8 62%, #D9B39A 100%);
+  --cta-fill: #111214;
+  --cta-press: #2A2B2E;
+  --on-cta: #FFFFFF;
+}
+.phone.theme-night.c-auth:has(.c-auth__pad)::before { opacity: 0; }
+.phone.theme-night.c-auth:has(.c-auth__pad) .c-btn { box-shadow: none; }
+.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__head { padding-bottom: 36px; }
+.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__sub { color: rgb(255 255 255 / 0.9); }
+.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__edit { color: #FFFFFF; text-decoration: underline; text-underline-offset: 3px; }
+.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__sheet {
+  flex: 0 0 auto; margin: 0; padding: 8px var(--gutter) 0;
+  background: none; border-radius: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__cta { margin-top: 18px; padding-top: 0; }
+.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__pad { margin-top: auto; }
+.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__resend { color: rgb(255 255 255 / 0.92); }
+.phone.theme-night .c-auth__field { background: #FFFFFF; box-shadow: inset 0 0 0 2px #111214; }
+.phone.theme-night .c-auth__cc { color: #111214; border-right-color: rgb(17 18 20 / 0.14); }
+.phone.theme-night .c-auth__value { color: #111214; }
+.phone.theme-night .c-auth__caret { background: #111214; }
+
+/* Pass 15: Get started in the reference look. The bay photo stays at full colour up top and melts
+   into the teal-to-terracotta wash behind the text; black main button, solid white secondary. */
+.phone.theme-night.c-welcome { --cta-fill: #111214; --cta-press: #2A2B2E; --on-cta: #FFFFFF; background: #D9B39A; }
+.phone.theme-night.c-welcome .c-welcome__photo { filter: none; }
+.phone.theme-night.c-welcome .c-welcome__wash {
+  background:
+    radial-gradient(90% 40% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(80% 35% at 100% 92%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, rgb(36 80 94 / 0.35) 0%, rgb(36 80 94 / 0) 18%, rgb(36 80 94 / 0) 38%, rgb(36 80 94 / 0.85) 58%, #3C7584 70%, #8DB3B8 88%, #D9B39A 100%);
+}
+.phone.theme-night.c-welcome > .c-statusbar,
+.phone.theme-night.c-welcome .c-welcome__mark,
+.phone.theme-night.c-welcome .c-welcome__title { color: #FFFFFF; }
+.phone.theme-night.c-welcome .c-welcome__sub { color: rgb(255 255 255 / 0.92); }
+.phone.theme-night.c-welcome .c-btn { box-shadow: none; }
+.phone.theme-night.c-welcome .c-btn.plain { background: #FFFFFF; color: #111214; margin-top: 10px; }
+.phone.theme-night.c-welcome { background: #24505E; }
+
+/* Pass 16: sign-up steps (name, choose card, pay, card ready) in the reference look.
+   Same wash as the keypad steps, white text, solid white fields, black main button,
+   no dark panels: content sits straight on the wash. */
+.phone.theme-night.is-onboard {
+  --wall:
+    radial-gradient(90% 45% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(80% 40% at 100% 80%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #24505E 0%, #3C7584 32%, #8DB3B8 62%, #D9B39A 100%);
+  background: var(--wall);
+  --cta-fill: #111214; --cta-press: #2A2B2E; --on-cta: #FFFFFF;
+  --text: #FFFFFF; --text-2: rgb(255 255 255 / 0.9); --hairline: rgb(255 255 255 / 0.3);
+  color: #FFFFFF;
+}
+.phone.theme-night.is-onboard::before { opacity: 0; }
+.phone.theme-night.is-onboard .screen-scroll,
+.phone.theme-night.is-onboard .c-navbar,
+.phone.theme-night.is-onboard .c-tiers__sheet { background: transparent; box-shadow: none; border: 0; }
+.phone.theme-night.is-onboard .c-statusbar,
+.phone.theme-night.is-onboard .c-navbar,
+.phone.theme-night.is-onboard .c-navbar__back,
+.phone.theme-night.is-onboard .c-navbar__title,
+.phone.theme-night.is-onboard .c-section-title { color: #FFFFFF; }
+.phone.theme-night.is-onboard .c-section-title.is-caption,
+.phone.theme-night.is-onboard .c-group__sub,
+.phone.theme-night.is-onboard .c-tiers__note,
+.phone.theme-night.is-onboard .c-tiers__perks-head,
+.phone.theme-night.is-onboard .c-tiers__per { color: rgb(255 255 255 / 0.9); }
+.phone.theme-night.is-onboard .c-btn { box-shadow: none; }
+.phone.theme-night.is-onboard .c-btn.plain { background: #FFFFFF; color: #111214; }
+
+/* Fields: solid white, dark text */
+.phone.theme-night.is-onboard .c-field__input {
+  background: #FFFFFF; color: #111214; border: 0; box-shadow: inset 0 0 0 1px rgb(17 18 20 / 0.08);
+}
+.phone.theme-night.is-onboard .c-field__input:focus { box-shadow: inset 0 0 0 2px #111214; outline: none; }
+
+/* Choose card: white segmented control with a black thumb, white perks with white ticks */
+.phone.theme-night.is-onboard .c-tiers__seg { background: rgb(255 255 255 / 0.85); box-shadow: none; }
+.phone.theme-night.is-onboard .c-tiers__seg-label { color: #111214; }
+.phone.theme-night.is-onboard .c-tiers__thumb { background: #111214; box-shadow: none; }
+.phone.theme-night.is-onboard .c-tiers__seg-input:checked + .c-tiers__seg-label { color: #FFFFFF; }
+.phone.theme-night.is-onboard .c-tiers__perk,
+.phone.theme-night.is-onboard .c-tiers__amt,
+.phone.theme-night.is-onboard .c-tiers__price { color: #FFFFFF; }
+.phone.theme-night.is-onboard .c-tiers__perk .material-symbols-outlined { color: #FFFFFF; }
+.phone.theme-night.is-onboard .c-tiers__bar { background: transparent; box-shadow: none; }
+
+/* Pay: receipt rows on the wash with light hairlines */
+.phone.theme-night.is-onboard .c-receipt { background: transparent; box-shadow: none; }
+.phone.theme-night.is-onboard .c-receipt__row { color: #FFFFFF; border-color: rgb(255 255 255 / 0.3); }
+/* Pass 16b: the night wall rule outranked --wall; set the wash directly. Fields: the white sits on .c-field. */
+:root .phone.theme-night.is-onboard {
+  background:
+    radial-gradient(90% 45% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(80% 40% at 100% 80%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #24505E 0%, #3C7584 32%, #8DB3B8 62%, #D9B39A 100%);
+}
+.phone.theme-night.is-onboard .c-field { background: #FFFFFF; border: 0; box-shadow: inset 0 0 0 1px rgb(17 18 20 / 0.08); }
+.phone.theme-night.is-onboard .c-field:focus-within { box-shadow: inset 0 0 0 2px #111214; }
+.phone.theme-night.is-onboard .c-field__input,
+.phone.theme-night.is-onboard .c-field__input:focus { background: transparent; box-shadow: none; color: #111214; }
+.phone.theme-night.is-onboard .c-tiers__seg-label { color: #111214 !important; }
+.phone.theme-night.is-onboard .c-tiers__seg-input:checked + .c-tiers__seg-label { color: #FFFFFF !important; }
+/* Pass 16c: dark text in fields, black segment thumb, wash stays teal longer so white text holds to the bottom. */
+.phone.theme-night.is-onboard .c-field__input { color: #111214 !important; -webkit-text-fill-color: #111214; caret-color: #111214; }
+.phone.theme-night.is-onboard.c-tiers .c-tiers__thumb { background: #111214 !important; }
+:root .phone.theme-night.is-onboard {
+  background:
+    radial-gradient(70% 22% at 0% 100%, rgb(201 119 90 / 0.9) 0%, rgb(201 119 90 / 0) 70%),
+    linear-gradient(180deg, #24505E 0%, #33697A 40%, #4F8592 72%, #9A8A7C 100%);
+}
+/* Pass 16d: card switcher rebuilt in the reference look: a roomy solid white pill track,
+   a black pill thumb, dark labels, white on the selected one, breathing room under the title. */
+.phone.theme-night.is-onboard .c-tiers__seg {
+  height: 44px !important; margin: 14px var(--gutter) 6px !important; padding: 4px !important;
+  border-radius: 999px !important; background: #FFFFFF !important; border: 0 !important;
+  box-shadow: 0 6px 18px -10px rgb(10 30 40 / 0.45) !important;
+}
+.phone.theme-night.is-onboard .c-tiers__thumb {
+  top: 4px !important; bottom: 4px !important; left: 4px !important;
+  width: calc((100% - 8px) / 3) !important; border-radius: 999px !important; box-shadow: none !important;
+}
+.phone.theme-night.is-onboard .c-tiers__seg-label { font: 600 15px/1 var(--font) !important; color: #4A5358 !important; }
+.phone.theme-night.is-onboard .c-tiers__seg-input:checked + .c-tiers__seg-label { color: #FFFFFF !important; }
+.phone.theme-night.is-onboard .c-tiers__seg { flex: none !important; }
+:root .phone.theme-night.is-onboard { background-color: #2C5F6E; }
+/* Pass 16e: switcher and big price removed; the card's name sits under it and follows the swipe. */
+.c-tiers__name { margin: 0; text-align: center; font: 700 28px/1.1 var(--font); letter-spacing: var(--track-tight); color: #FFFFFF; }
+
+/* Logo: the traced brochure logo (img/logo.svg, white) replaces the typed wordmark. */
+img.c-logo { display: block; width: auto; height: 34px; }
+.c-auth__mark.c-logo { height: 30px; justify-self: center; }
+.c-welcome__mark.c-logo { height: 52px; }
+img.c-logo.is-ink { filter: invert(1) brightness(0.25); }
+
+/* Selfie step (signup-selfie.html): placeholder frame, non-functional */
+.c-selfie {
+  width: 220px; aspect-ratio: 1; margin: 0 auto; border-radius: 50%;
+  border: 2px solid #fff; display: grid; place-items: center;
+}
+.c-selfie .material-symbols-outlined { font-size: 120px; color: #fff; font-variation-settings: 'wght' 200; }
+
+/* Name step: first + middle share a row, last + email full width */
+.c-namegrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.c-namegrid__cell { min-width: 0; }
+.c-namegrid__cell.is-wide { grid-column: 1 / -1; }
+.c-namegrid .c-section-title.is-caption { margin: 0 0 6px; }
+.c-optional { font-weight: 400; opacity: 0.7; margin-left: 4px; }
+
+/* Explore rework (2026-10-16): spacing + hierarchy only, no content change.
+   One rhythm: 32px between sections, 12px title-to-content. Near-you cards
+   shorter so "This week" shows on the first screen. */
+.c-explore .c-hero .c-largetitle { padding-bottom: 14px; }
+.c-explore .c-hero .c-search { height: 48px; }
+.c-explore .c-chiprow { padding-top: 4px; padding-bottom: 0; }
+.c-explore .c-chip { height: 36px; }
+.c-explore [data-section] { margin-top: 32px; }
+.c-explore [data-section] .c-section-head { margin: 0 0 12px; }
+.c-explore .c-section-head__title { font-size: 21px; letter-spacing: -0.01em; }
+.c-explore .c-lede { margin-top: -6px; margin-bottom: 12px; }
+.c-explore .c-place-card { width: 216px; }
+.c-explore .c-place-card__photo { height: 248px; border-radius: 20px; }
+.c-explore .c-place-card__name { font-size: 18px; }
+.c-explore .c-event-card { width: 232px; }
+.c-explore .c-event-card__photo { aspect-ratio: 3 / 2; height: auto; }
+
+/* Explore on the reference look (2026-10-16): the registration wash, no sheet,
+   no glow, no grain, no gold. Chips follow the button pair: white pill, black when on. */
+:root .phone.theme-night.c-explore {
+  background-color: #24505E;
+  background:
+    radial-gradient(70% 22% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(60% 18% at 100% 100%, rgb(226 165 126 / 0.7) 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #24505E 0%, #2F6574 45%, #3C7584 75%, #4F7F86 100%);
+  --text-2: rgb(255 255 255 / 0.82);
+  --tile: #FFFFFF;
+}
+.phone.c-explore::before { display: none; }
+.phone.c-explore .c-surface { background: transparent; box-shadow: none; }
+.phone.c-explore .c-hero .c-search { box-shadow: none; }
+.phone.c-explore .c-xbar { background: rgb(36 80 94 / 0.92); border-bottom: 0; }
+.phone.c-explore .c-xbar__btn { color: #FFFFFF; }
+.phone.theme-night.c-explore .c-chip { background: #FFFFFF; border-color: #FFFFFF; color: #111214; }
+.phone.theme-night.c-explore .c-chip .c-chip__icon { color: #111214; }
+.phone.theme-night.c-explore .c-chip.is-selected { background: #111214; border-color: #111214; color: #FFFFFF; }
+.phone.theme-night.c-explore .c-chip.is-selected .c-chip__icon { color: #FFFFFF; }
+.phone.c-explore .c-event-card__when { color: #FFFFFF; font-weight: 700; }
+.phone.c-explore .c-story--add { color: #111214; }
+.phone.c-explore .c-story--add .c-story__place { color: rgb(17 18 20 / 0.6); }
+.phone.c-explore .c-story__plus { background: #111214; }
+.phone.c-explore .c-popular__row { border-color: rgb(255 255 255 / 0.25); }
+.phone.theme-night.c-explore .c-tabbar { background: rgb(17 18 20 / 0.82); }
+.phone.theme-night.c-explore .c-tabbar__tab.is-active,
+.phone.theme-night.c-explore .c-tabbar__tab.is-active .c-tabbar__icon { color: #FFFFFF; }
+
+/* Map, minimal (2026-10-16): Airbnb-style price-tag pins in the reference look.
+   Pins are white pills with the perk in black ink; the selected one turns black.
+   One black main button, no orange, no rings, soft shadows only. */
+.c-mapx .c-fpin { width: auto; height: auto; }
+.c-mapx .c-fpin__dot { display: none; }
+.c-mapx .c-fpin__badge {
+  position: static; padding: 6px 10px; border: 0; border-radius: 999px;
+  background: #FFFFFF; color: #111214; font: 700 13px/1 var(--font);
+  box-shadow: 0 2px 8px rgb(17 18 20 / 0.18), 0 0 0 0.5px rgb(17 18 20 / 0.08);
+  transition: background-color 180ms ease-out, color 180ms ease-out, transform 180ms ease-out;
+}
+.c-mapx .c-fpin.is-selected .c-fpin__badge { display: block; background: #111214; color: #FFFFFF; transform: scale(1.08); }
+.c-mapx .c-fpin.is-selected .c-fpin__offer { display: none; }
+.c-mapx .c-fpin:focus-visible .c-fpin__badge { outline: 2px solid #111214; outline-offset: 2px; }
+.c-mapx .c-fcard { border: 0; border-radius: 22px; box-shadow: 0 10px 30px -12px rgb(17 18 20 / 0.35); }
+.c-mapx .c-fcard__offer { color: #111214; }
+.c-mapx .c-fcard .c-btn.primary { background: #111214; color: #FFFFFF; box-shadow: none; }
+.c-mapx .c-fcard__dir { border: 0; background: #FFFFFF; box-shadow: 0 2px 10px rgb(17 18 20 / 0.16); }
+.c-mapx .c-chip { border: 0; background: #FFFFFF; color: #111214; box-shadow: 0 2px 8px rgb(17 18 20 / 0.12); }
+.c-mapx .c-chip.is-selected { background: #111214; color: #FFFFFF; }
+.c-mapx .c-search { border: 0; box-shadow: 0 2px 12px rgb(17 18 20 / 0.14); }
+.c-mapx .c-map-topbar__list,
+.c-mapx .c-map-controls { border: 0; box-shadow: 0 2px 10px rgb(17 18 20 / 0.14); }
+.c-mapx .c-tabbar__tab.is-active,
+.c-mapx .c-tabbar__tab.is-active .c-tabbar__icon { color: #111214; }
+
+/* Map pass 2: real map colour back, no white bar behind the top controls,
+   controls float as slightly see-through white, search text smaller. */
+.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: saturate(1.15) contrast(1.02); }
+.c-mapx .c-map-topbar { background: none; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 0; box-shadow: none; }
+.c-mapx .c-search,
+.c-mapx .c-chip:not(.is-selected),
+.c-mapx .c-map-topbar__list,
+.c-mapx .c-map-controls {
+  background: rgb(255 255 255 / 0.82);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.c-mapx .c-chip.is-selected { background: rgb(17 18 20 / 0.88); }
+.c-mapx .c-search__input { font-size: 15px; }
+.c-mapx .c-search__input::placeholder { font-size: 15px; }
+html .phone.c-mapx .c-map-topbar { top: 48px; }
+/* Map pass 3: duotone the tiles into the reference palette via #bff-tone (map.html):
+   dark ink -> deep teal, water -> sea teal, land -> warm sand. */
+.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: url(#bff-tone); }
+.c-mapx .c-map.is-street .c-fmap { background: #EFE3D6; }
+
+/* Map calm start: dots only, no offer text, no card until a chip or a dot is tapped. */
+.c-mapx.is-calm .c-fpin__badge { width: 14px; height: 14px; padding: 0; font-size: 0; border: 2.5px solid #FFFFFF; background: #24505E; }
+.c-mapx.is-calm .c-fpin.is-selected .c-fpin__badge { background: #111214; transform: scale(1.25); }
+.c-mapx.is-calm:not(.has-pick) .c-fcarousel { display: none; }
+
+/* Top section nav (Explore · Feed · Map), RED-style text tabs. Map is home. */
+.u-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.c-topnav-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.c-topnav { display: flex; gap: 22px; }
+.c-topnav a { font-size: 17px; font-weight: 500; color: rgba(255,255,255,.62); text-decoration: none; padding: 8px 0; border-bottom: 2px solid transparent; }
+.c-topnav a[aria-current="page"] { color: #fff; font-weight: 700; border-bottom-color: #fff; }
+.c-topnav__me img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; display: block; }
+html .phone.c-mapx .c-topnav-row { padding: 0 4px 8px 16px; }
+html .phone.c-mapx .c-topnav a { color: rgba(17,18,20,.55); text-shadow: 0 0 8px rgba(255,255,255,.9); }
+html .phone.c-mapx .c-topnav a[aria-current="page"] { color: #111214; border-bottom-color: #111214; }
+
+/* Feed: two-column photo grid of member posts */
+.c-fgrid { display: flex; gap: 8px; padding: 8px 12px 32px; }
+.c-fgrid__col { flex: 1; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.c-fpost { display: flex; flex-direction: column; gap: 6px; color: #fff; text-decoration: none; }
+.c-fpost__img { width: 100%; border-radius: 10px; object-fit: cover; aspect-ratio: 3/4; display: block; }
+.c-fgrid__col:nth-child(2) .c-fpost:nth-child(odd) .c-fpost__img { aspect-ratio: 4/5; }
+.c-fpost__cap { font-size: 14px; font-weight: 600; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.c-fpost__by { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.8); }
+.c-fpost__face img, .c-fpost__face .c-mono { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; display: grid; place-items: center; font-size: 9px; }
+.c-fpost__name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.c-fpost__likes { display: flex; align-items: center; gap: 2px; }
+.c-fpost__likes .material-symbols-outlined { font-size: 14px; }
+
+/* Facebook-style header: wordmark + search/menu, then an icon row of sections. Replaces the bottom tab bar. */
+.c-fbhead { display: flex; flex-direction: column; gap: 4px; }
+.c-fbhead__top { display: flex; align-items: center; gap: 8px; padding: 4px 16px 0; }
+.c-fbhead__word { flex: 1; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+.c-fbhead__btn { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / 0.16); color: #fff; text-decoration: none; }
+.c-fbhead__btn .material-symbols-outlined { font-size: 22px; }
+.c-iconnav { display: flex; }
+.c-iconnav a { flex: 1; display: grid; place-items: center; height: 44px; color: rgb(255 255 255 / 0.62); text-decoration: none; border-bottom: 3px solid transparent; }
+.c-iconnav a .material-symbols-outlined { font-size: 26px; }
+.c-iconnav a[aria-current="page"] { color: #fff; border-bottom-color: #fff; }
+.c-iconnav a[aria-current="page"] .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+/* On the map the header has no strip; it sits on the map in dark ink. */
+html .phone.c-mapx .c-map-topbar { top: 0; }
+html .phone.c-mapx .c-map-topbar__row { padding-left: 16px; padding-right: 16px; }
+/* No bottom bar any more: let the screens use the full height. */
+.c-explore .screen-scroll, .c-feedpage .screen-scroll { padding-bottom: 32px; }
+.c-explore .c-hero, .c-feedpage .c-hero { padding-top: 0; }
+html .phone.c-mapx .c-map-controls { top: 276px; }
+
+/* Header, minimal pass: no circles or strip behind anything, thin outline icons, ink follows each screen's background. */
+.c-fbhead { --hd-ink: #fff; --hd-dim: rgb(255 255 255 / 0.6); }
+.c-fbhead__btn { background: none; width: 32px; height: 32px; color: var(--hd-ink); }
+.c-fbhead__word { color: var(--hd-ink); font-weight: 600; font-size: 22px; }
+.c-fbhead .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300; }
+.c-iconnav a { color: var(--hd-dim); border-bottom-width: 2px; }
+.c-iconnav a .material-symbols-outlined { font-size: 24px; }
+.c-iconnav a[aria-current="page"] { color: var(--hd-ink); border-bottom-color: var(--hd-ink); }
+.c-iconnav a[aria-current="page"] .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 500; }
+html .phone.c-mapx .c-fbhead { --hd-ink: #111214; --hd-dim: rgb(17 18 20 / 0.5); padding-top: 48px; margin-bottom: 4px; }
+html .phone.c-mapx .c-fbhead { text-shadow: 0 0 6px #fff, 0 0 12px rgb(255 255 255 / 0.8); }
+
+/* Header pinned in the same place on every section (Map, Feed, Explore, Card, Concierge), so a tab switch
+   only swaps what is under it. Raised: tight top row, 40px icon row. */
+.phone .c-fbhead { position: absolute; top: var(--size-statusbar-h); left: 0; right: 0; z-index: 55; gap: 0; padding: 0; margin: 0; }
+html.is-device .phone .c-fbhead, .phone .c-fbhead { top: max(env(safe-area-inset-top, 0px), var(--size-statusbar-h)); }
+.c-fbhead__top { padding: 0 12px 0 16px; height: 36px; }
+.c-iconnav a { height: 40px; }
+.phone:has(> .c-fbhead) .screen-scroll { margin-top: 76px; padding-top: 0; }
+.phone:has(> .c-fbhead) .c-hero { padding-top: 4px; }
+html .phone.c-mapx .c-fbhead { padding-top: 0; margin-bottom: 0; }
+html .phone.c-mapx .c-map-topbar, html.is-device .phone.c-mapx .c-map-topbar { top: calc(var(--size-statusbar-h) + 80px); }
+html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 196px); }
+
+/* Header pass 3: logo instead of the wordmark text; logo and icons 10% smaller. Logo is white on teal, ink on the map. */
+.c-fbhead__logo { display: block; height: 22px; width: auto; filter: brightness(0) invert(1); }
+html .phone.c-mapx .c-fbhead__logo { filter: brightness(0) drop-shadow(0 0 4px #fff); }
+.c-fbhead__btn .material-symbols-outlined { font-size: 20px; }
+.c-iconnav a .material-symbols-outlined { font-size: 22px; }
+html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 140px); }
+.phone:has(> .c-fbhead) .c-hero:not(:has(> :not(.u-sr-only))) { padding: 0; margin: 0; min-height: 0; height: 0; }
+.phone:has(> .c-fbhead) .c-xfeed { margin-top: 0; padding-top: 4px; }
+
+/* Map offers, Airbnb-style: big photo on top, offer tag on the photo, directions as a round button on the photo,
+   name / details / offer underneath. The whole card opens the place. No tab bar any more, so it sits low. */
+.c-mapx .c-fcarousel { bottom: 24px; }
+.c-mapx .c-fcard { position: relative; width: 290px; padding: 0; gap: 0; overflow: hidden; background: #FFFFFF; }
+.c-mapx .c-fcard__photo { position: relative; width: 100%; height: 150px; border-radius: 0; }
+.c-mapx .c-fcard__tag { position: absolute; left: 12px; top: 12px; padding: 5px 10px; border-radius: 999px; background: #FFFFFF; color: #111214; font-size: 13px; font-weight: 700; box-shadow: 0 1px 6px rgb(17 18 20 / 0.18); }
+.c-mapx .c-fcard__dir { position: absolute; right: 10px; top: 10px; z-index: 2; width: 34px; height: 34px; }
+.c-mapx .c-fcard__dir .material-symbols-outlined { font-size: 20px; }
+.c-mapx .c-fcard__info { padding: 12px 14px 14px; gap: 2px; justify-content: flex-start; }
+.c-mapx .c-fcard__name { font-size: 16px; font-weight: 600; color: #111214; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.c-fcard__link { color: inherit; text-decoration: none; }
+.c-fcard__link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.c-mapx .c-fcard__meta { color: #6A6D70; font-size: 14px; }
+.c-mapx .c-fcard__offer { color: #111214; font-size: 14px; font-weight: 600; margin-top: 4px; }
+
+/* Feed and Explore: same colours, different layouts of the wash, both drifting slowly. */
+@property --wx { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --wy { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
+:root .phone.theme-night.c-explore {
+  background:
+    radial-gradient(70% 22% at var(--wx) var(--wy), #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(60% 18% at calc(100% - var(--wx)) 100%, rgb(226 165 126 / 0.7) 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #24505E 0%, #2F6574 45%, #3C7584 75%, #4F7F86 100%);
+  animation: wash-explore 14s ease-in-out infinite alternate;
+}
+@keyframes wash-explore { from { --wx: 0%; --wy: 100%; } to { --wx: 40%; --wy: 92%; } }
+:root .phone.theme-night.c-explore.c-feedpage {
+  background:
+    radial-gradient(65% 26% at calc(100% - var(--wx)) var(--wy), rgb(201 119 90 / 0.85) 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(55% 20% at var(--wx) 0%, rgb(226 165 126 / 0.45) 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(0deg, #24505E 0%, #2F6574 50%, #3C7584 100%);
+  animation: wash-feed 14s ease-in-out infinite alternate;
+}
+@keyframes wash-feed { from { --wx: 0%; --wy: 55%; } to { --wx: 35%; --wy: 30%; } }
+@media (prefers-reduced-motion: reduce) { :root .phone.theme-night.c-explore { animation: none; } }
+
+/* Explore top: a warm glow top-right and a lighter teal top-left, so the header area is not flat. */
+:root .phone.theme-night.c-explore:not(.c-feedpage) {
+  background:
+    radial-gradient(75% 20% at calc(100% - var(--wx)) 0%, rgb(226 165 126 / 0.55) 0%, rgb(226 165 126 / 0) 70%),
+    radial-gradient(60% 18% at var(--wx) 4%, rgb(141 179 184 / 0.45) 0%, rgb(141 179 184 / 0) 70%),
+    radial-gradient(70% 22% at var(--wx) var(--wy), #C9775A 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(60% 18% at calc(100% - var(--wx)) 100%, rgb(226 165 126 / 0.7) 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #24505E 0%, #2F6574 45%, #3C7584 75%, #4F7F86 100%);
+}
+.c-iconnav a, .c-iconnav a[aria-current="page"] { border-bottom-color: transparent; }
+
+/* Offer page, Airbnb-style: full-bleed photo, a white body with rounded top that overlaps it, centred title,
+   plain sections split by hairlines (no tiles), and a bar with the price left and a short black button right. */
+.c-offerx .c-placehero { height: 320px; }
+.c-offerbody { position: relative; z-index: 2; margin-top: -24px; padding-bottom: 24px; background: #FFFFFF; border-radius: 24px 24px 0 0; color: #111214; }
+.c-offerx .c-offer-head.u-gutter { padding-top: 28px; text-align: center; background: none; box-shadow: none; margin: 0; }
+.c-offerx .c-offer-title { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: #111214; }
+.c-offerx .c-offer-tier { color: #6A6D70; margin-top: 4px; }
+.c-offerx .c-oval { margin: 20px 24px 0; padding: 18px 0; background: none; box-shadow: none; border-radius: 0; border-top: 1px solid #E6E6E6; border-bottom: 1px solid #E6E6E6; text-align: center; }
+.c-offerx .c-osec { margin: 0 24px; padding: 24px 0; border-bottom: 1px solid #E6E6E6; }
+.c-offerx .c-osec:last-child { border-bottom: 0; }
+.c-offerx .c-section-title { font-size: 20px; font-weight: 600; color: #111214; margin: 0 0 12px; }
+.c-offerx .c-otile { background: none; box-shadow: none; border: 0; border-radius: 0; padding: 0; }
+.c-offerx .c-osteps li, .c-offerx .c-ofine li { border: 0; padding: 8px 0; }
+.c-offerx .c-osteps__n { background: #111214; color: #FFFFFF; }
+.c-offerx .c-oplace { padding: 4px 0; }
+.c-offerx .c-bottombar { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #FFFFFF; border-top: 1px solid #E6E6E6; box-shadow: none; }
+.c-obar__price { display: flex; flex-direction: column; color: #111214; font-size: 14px; min-width: 0; }
+.c-obar__price b { font-size: 17px; font-weight: 700; }
+.c-obar__price span { text-decoration: underline; text-underline-offset: 3px; }
+.c-obar__price s { color: #6A6D70; font-size: 13px; }
+.c-offerx .c-bottombar .c-btn.primary { flex: none; width: auto; padding: 0 28px; height: 48px; border-radius: 12px; background: #111214; color: #FFFFFF; box-shadow: none; }
+.c-offerx .c-oval__price { justify-content: center; }
+.c-offerx .c-osteps li + li, .c-offerx .c-ofine li + li { border-top: 0; box-shadow: none; }
+.c-offerx .c-osteps li::after, .c-offerx .c-ofine li::after, .c-offerx .c-osteps li::before { display: none; }
+.c-fbhead__logo { height: 24.2px; }
+
+/* Header raised to the max (2026-10-17): 30px logo row; on the phone app it sits right under the phone's own status bar
+   (the prototype's fake status bar is hidden there), so content and map chips follow it up. */
+.c-fbhead__top { height: 30px; align-items: center; }
+html.is-device .phone .c-fbhead { top: env(safe-area-inset-top, 0px); }
+.phone:has(> .c-fbhead) .screen-scroll { margin-top: 70px; }
+html .phone.c-mapx .c-map-topbar { top: calc(var(--size-statusbar-h) + 74px); }
+html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 134px); }
+html.is-device .phone.c-mapx .c-map-topbar { top: calc(env(safe-area-inset-top, 0px) + 74px); }
+html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top, 0px) + 134px); }
+
+/* Experiment (2026-10-17): Explore on cream instead of teal. Dark ink, white chips with a hairline. Feed stays teal. */
+:root .phone.theme-night.c-explore:not(.c-feedpage) {
+  animation: none;
+  background: linear-gradient(180deg, #F7F1E8 0%, #F2E8DA 60%, #EDDFCB 100%);
+  --text: #111214; --text-2: rgb(17 18 20 / 0.62); --hairline: rgb(17 18 20 / 0.08);
+  color: #111214;
+}
+.phone.c-explore:not(.c-feedpage) > .c-statusbar { color: #111214; }
+.phone.c-explore:not(.c-feedpage) .c-fbhead { --hd-ink: #111214; --hd-dim: rgb(17 18 20 / 0.45); }
+.phone.c-explore:not(.c-feedpage) .c-fbhead__logo { filter: brightness(0); }
+.phone.theme-night.c-explore:not(.c-feedpage) .c-chip { border: 1px solid rgb(17 18 20 / 0.12); }
+.phone.c-explore:not(.c-feedpage) .c-event-card__when { color: #111214; }
+.phone.c-explore:not(.c-feedpage) .c-xbar { background: rgb(247 241 232 / 0.94); }
+.phone.c-explore:not(.c-feedpage) .c-xbar__btn { color: #111214; }
+
+/* Cream Explore, gradients back (2026-10-17): the same drifting sand, light-teal and terracotta wash as before, on cream. */
+:root .phone.theme-night.c-explore:not(.c-feedpage) {
+  background:
+    radial-gradient(75% 20% at calc(100% - var(--wx)) 0%, rgb(226 165 126 / 0.6) 0%, rgb(226 165 126 / 0) 70%),
+    radial-gradient(60% 18% at var(--wx) 4%, rgb(141 179 184 / 0.5) 0%, rgb(141 179 184 / 0) 70%),
+    radial-gradient(70% 22% at var(--wx) var(--wy), rgb(201 119 90 / 0.6) 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(60% 18% at calc(100% - var(--wx)) 100%, rgb(226 165 126 / 0.75) 0%, rgb(226 165 126 / 0) 70%),
+    linear-gradient(180deg, #F7F1E8 0%, #F2E8DA 60%, #EDDFCB 100%);
+  animation: wash-explore 14s ease-in-out infinite alternate;
+}
+@media (prefers-reduced-motion: reduce) { :root .phone.theme-night.c-explore:not(.c-feedpage) { animation: none; } }
+
+/* Feed on cream too (2026-10-17), with its own arrangement of the drifting wash. Dark ink like Explore. */
+:root .phone.theme-night.c-explore.c-feedpage {
+  background:
+    radial-gradient(65% 26% at calc(100% - var(--wx)) var(--wy), rgb(201 119 90 / 0.5) 0%, rgb(201 119 90 / 0) 70%),
+    radial-gradient(55% 20% at var(--wx) 0%, rgb(226 165 126 / 0.55) 0%, rgb(226 165 126 / 0) 70%),
+    radial-gradient(60% 22% at var(--wx) 100%, rgb(141 179 184 / 0.5) 0%, rgb(141 179 184 / 0) 70%),
+    linear-gradient(0deg, #EDDFCB 0%, #F2E8DA 50%, #F7F1E8 100%);
+  --text: #111214; --text-2: rgb(17 18 20 / 0.62); --hairline: rgb(17 18 20 / 0.08);
+  color: #111214;
+}
+.phone.c-feedpage > .c-statusbar { color: #111214; }
+.phone.c-feedpage .c-fbhead { --hd-ink: #111214; --hd-dim: rgb(17 18 20 / 0.45); }
+.phone.c-feedpage .c-fbhead__logo { filter: brightness(0); }
+.c-feedpage .c-fpost { color: #111214; }
+.c-feedpage .c-fpost__by { color: rgb(17 18 20 / 0.62); }
+
+/* ===== Navigation v3 (2026-10-17) =====
+   A labelled bottom tab bar on every main section (Map, Discover, Card, Concierge, Me). Feed and Explore are
+   merged into Discover (Stories, Places, Events). Discover is flat cream with a solid header: no moving wash,
+   the photos bring the colour. */
+
+/* Bottom tab bar: solid, full width, labels always on. Light on light pages, dark on night pages.
+   Selected = ink colour and a filled icon (colour changes, weight doesn't). */
+html .phone .c-tabbar.c-tabbar--flat {
+  left: 0; right: 0; bottom: 0;
+  height: 83px; padding: 0 4px 19px;
+  display: grid; grid-template-columns: repeat(5, 1fr); align-items: center;
+  background: #F6F3EE; border: 0; border-top: 1px solid rgb(17 18 20 / 0.08); border-radius: 0;
+  box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+html.is-device .phone .c-tabbar.c-tabbar--flat { height: calc(64px + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px); }
+html .phone .c-tabbar--flat .c-tabbar__tab {
+  height: 56px; padding: 0; gap: 4px; justify-content: center; border-radius: 0; background: none;
+  color: #5F6670; font: 600 12px/16px var(--font); letter-spacing: 0;
+}
+html .phone .c-tabbar--flat .c-tabbar__icon { font-size: 24px; color: inherit; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+html .phone .c-tabbar--flat .c-tabbar__tab.is-active { color: #111214; background: none; }
+html .phone .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon { color: #111214; font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24; }
+html .phone.theme-night .c-tabbar.c-tabbar--flat,
+html .phone.theme-elite .c-tabbar.c-tabbar--flat { background: #111214; border-top-color: rgb(255 255 255 / 0.1); }
+html .phone.theme-night .c-tabbar--flat .c-tabbar__tab,
+html .phone.theme-elite .c-tabbar--flat .c-tabbar__tab { color: rgb(255 255 255 / 0.62); }
+html .phone.theme-night .c-tabbar--flat .c-tabbar__tab.is-active,
+html .phone.theme-night .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon,
+html .phone.theme-elite .c-tabbar--flat .c-tabbar__tab.is-active,
+html .phone.theme-elite .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon { color: #FFFFFF; }
+html .phone:has(.c-tabbar--flat) .screen-scroll { padding-bottom: 100px; }
+/* Card, Concierge and Me have no top header now: their content starts 16px below the status bar. */
+html .phone:has(.c-tabbar--flat):not(:has(> .c-fbhead)):not(:has(> .c-dhead)) > .screen-scroll { padding-top: 16px; }
+
+/* Map keeps only the logo row on top; chips, controls and the offer cards make room for the tab bar. */
+html .phone.c-mapx .c-map-topbar { top: calc(var(--size-statusbar-h) + 34px); }
+html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 94px); }
+html.is-device .phone.c-mapx .c-map-topbar { top: calc(env(safe-area-inset-top, 0px) + 34px); }
+html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top, 0px) + 94px); }
+html .phone.c-mapx .c-fcarousel { bottom: 95px; }
+html.is-device .phone.c-mapx .c-fcarousel { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+
+/* Discover: flat cream, dark ink. */
+html .phone.c-discover { background: #F6F3EE; color: #111214; --text: #111214; --text-2: #5F6670; --hairline: rgb(17 18 20 / 0.08); }
+.phone.c-discover::before { display: none; }
+.phone.c-discover > .c-statusbar { color: #111214; }
+
+/* Discover header: three text tabs left, Share a story (+) right on Stories only. Solid, so nothing shows through. */
+.phone .c-dhead {
+  position: absolute; top: var(--size-statusbar-h); left: 0; right: 0; z-index: 55;
+  height: 48px; display: flex; align-items: stretch; justify-content: space-between;
+  padding: 0 4px 0 20px; background: #F6F3EE; border-bottom: 1px solid rgb(17 18 20 / 0.08);
+}
+html.is-device .phone .c-dhead { top: env(safe-area-inset-top, 0px); }
+.phone:has(> .c-dhead) .screen-scroll { margin-top: 48px; padding-top: 0; }
+.c-dtabs { display: flex; gap: 24px; }
+.c-dtabs__tab {
+  position: relative; padding: 0; border: 0; background: none; cursor: pointer;
+  font: 600 17px/22px var(--font); color: #5F6670;
+}
+.c-dtabs__tab[aria-selected="true"] { color: #111214; }
+.c-dtabs__tab[aria-selected="true"]::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; border-radius: 1px; background: #111214;
+}
+.c-dhead__btn { width: 48px; display: grid; place-items: center; padding: 0; border: 0; background: none; color: #111214; cursor: pointer; }
+.c-dhead__btn[hidden] { display: none; }
+.c-dhead__btn .material-symbols-outlined { font-size: 24px; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+
+/* Stories: the two-column grid in dark ink. */
+.c-discover .c-fgrid { padding-top: 12px; }
+.c-discover .c-fpost { color: #111214; }
+.c-discover .c-fpost__by { color: #5F6670; }
+
+/* Places: white chips with a hairline; selected is black. */
+.c-discover .c-chiprow { padding-top: 12px; }
+html .phone.c-discover .c-chip { background: #FFFFFF; border: 1px solid rgb(17 18 20 / 0.12); color: #111214; }
+html .phone.c-discover .c-chip.is-selected { background: #111214; border-color: #111214; color: #FFFFFF; }
+.c-discover .c-place-card__photo { position: relative; }
+.c-dempty { padding: 32px 20px; text-align: center; font-size: 15px; line-height: 20px; color: #5F6670; }
+
+/* Events: one column, photo on top. */
+.c-dlist { display: flex; flex-direction: column; gap: 24px; padding: 0 20px; }
+.c-devent { display: flex; flex-direction: column; gap: 2px; color: #111214; text-decoration: none; }
+.c-devent__img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 16px; display: block; margin-bottom: 8px; }
+.c-devent__name { font-size: 17px; font-weight: 600; line-height: 22px; }
+.c-devent__when { font-size: 15px; font-weight: 400; line-height: 20px; }
+.c-devent__meta { font-size: 13px; font-weight: 400; line-height: 18px; color: #5F6670; }
+
+/* ===== Listing cards (2026-10-17) =====
+   Places on Discover, like Airbnb: Near you is a row of small square cards, Popular with members a column of
+   large photo cards (layout from 21st.dev "Property Preview Card"). Text sits on the page, no white card. */
+
+/* Save button: white circle, top right of the photo. Saved = filled bookmark. */
+.c-savebtn {
+  position: absolute; top: 10px; right: 10px; z-index: 2;
+  width: 32px; height: 32px; display: grid; place-items: center; padding: 0;
+  border: 0; border-radius: 50%; background: #FFFFFF; color: #111214; cursor: pointer;
+}
+.c-savebtn .material-symbols-outlined { font-size: 20px; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20; }
+.c-savebtn.is-on .material-symbols-outlined { font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20; }
+.c-lcard[hidden], .c-bigcard[hidden] { display: none; }
+
+/* Near you: 144px cards, square photo, three short lines. About two and a half fit across. */
+.c-discover .c-lrow { gap: 12px; }
+.c-lcard { position: relative; flex: 0 0 144px; width: 144px; scroll-snap-align: start; }
+.c-lcard__link { display: flex; flex-direction: column; color: #111214; text-decoration: none; }
+.c-lcard__photo { position: relative; display: block; aspect-ratio: 1; margin-bottom: 8px; border-radius: 16px; overflow: hidden; }
+.c-lcard__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+html .phone.c-discover .c-lcard .c-xbadge {
+  position: absolute; top: 10px; left: 10px; z-index: 1;
+  padding: 4px 8px; border: 0; border-radius: 999px; background: #FFFFFF; color: #111214;
+  font: 600 13px/16px var(--font); box-shadow: none;
+}
+.c-lcard__name { font: 600 15px/20px var(--font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-lcard__meta { font: 400 13px/18px var(--font); color: #5F6670; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-lcard__meta b { font-weight: 600; color: #111214; }
+
+/* Popular with members: full width, 4:3 photos you can swipe (dots show which), name and offer, then three facts. */
+.c-bigcards { display: flex; flex-direction: column; gap: 32px; padding: 0 20px; }
+.c-bigcard { position: relative; }
+.c-bigcard__link { display: block; color: #111214; text-decoration: none; }
+.c-bigcard__media { position: relative; display: block; border-radius: 16px; overflow: hidden; }
+.c-bigcard__gallery { display: flex; aspect-ratio: 4 / 3; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.c-bigcard__gallery::-webkit-scrollbar { display: none; }
+.c-bigcard__gallery img { display: block; flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+.c-bigcard__dots { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: center; gap: 5px; pointer-events: none; }
+.c-bigcard__dot { width: 6px; height: 6px; border-radius: 50%; background: rgb(255 255 255 / 0.6); }
+.c-bigcard__dot.is-on { background: #FFFFFF; }
+.c-bigcard__head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid rgb(17 18 20 / 0.08);
+}
+.c-bigcard__title { display: flex; flex-direction: column; min-width: 0; }
+.c-bigcard__name { font: 600 17px/22px var(--font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-bigcard__meta { font: 400 15px/20px var(--font); color: #5F6670; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-bigcard__offer {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+  border: 1px solid rgb(17 18 20 / 0.12); border-radius: 999px; background: #FFFFFF;
+  font: 600 15px/20px var(--font); color: #111214;
+}
+.c-bigcard__stats { display: grid; grid-template-columns: repeat(3, 1fr); padding-top: 12px; }
+.c-bigcard__stat { display: flex; flex-direction: column; padding-left: 12px; border-left: 1px solid rgb(17 18 20 / 0.08); }
+.c-bigcard__stat:first-child { padding-left: 0; border-left: 0; }
+.c-bigcard__stat .material-symbols-outlined {
+  margin-bottom: 4px; font-size: 20px; color: #111214;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+}
+.c-bigcard__value { font: 600 15px/20px var(--font); }
+.c-bigcard__label { font: 400 13px/18px var(--font); color: #5F6670; }

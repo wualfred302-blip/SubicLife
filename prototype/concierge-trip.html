@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Subic.Life - Your trip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="components-g.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-push">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar">
+    <a data-back class="c-navbar__back" href="concierge.html" aria-label="Back to Concierge">
+      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+    </a>
+    <div class="c-navbar__titles">
+      <h1 class="c-navbar__title" id="title">Your trip</h1>
+    </div>
+    <span></span>
+  </nav>
+
+  <main class="screen-scroll c-g-pushed">
+    <div class="u-gutter">
+      <p class="c-page-sub" id="dates">Sat 17 – Sun 18 Oct · Subic Bay</p>
+
+      <div class="c-trip-days" id="days"></div>
+
+      <a class="c-btn secondary c-trip-cal" id="cal" href="concierge-trip.html">
+        <span class="material-symbols-outlined" aria-hidden="true">event</span>Add to calendar
+      </a>
+    </div>
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-g.js"></script>
+<script>
+(function () {
+  var C = window.CONCIERGE;
+  var trip = C.TRIP;
+
+  document.title = 'Subic.Life - ' + trip.title;
+  document.getElementById('title').textContent = trip.title;
+  document.getElementById('dates').textContent = trip.dates + ' · Subic Bay';
+
+  var box = document.getElementById('days');
+  // Same timeline as the Concierge tab: a white tile per day, an icon per stop, a tick when confirmed,
+  // and words only for a stop Mika is still arranging.
+  trip.days.forEach(function (d) {
+    var day = document.createElement('section');
+    day.className = 'c-tday';
+    day.innerHTML = '<h2 class="c-tday__label">' + d.label + '</h2>';
+    var list = document.createElement('div');
+    list.className = 'c-tday__list';
+    d.items.forEach(function (i) {
+      var r = document.createElement('a');
+      r.className = 'c-tstop c-pressable' + (i.status ? ' is-' + i.status : '');
+      r.href = i.href;
+      r.innerHTML =
+        '<span class="c-tstop__node" data-ic="' + i.icon + '"><span class="material-symbols-outlined" aria-hidden="true">' + i.icon + '</span></span>' +
+        '<span class="c-tstop__main"><span class="c-tstop__time">' + i.time + '</span>' +
+        '<span class="c-tstop__name">' + i.title + '</span>' +
+        '<span class="c-tstop__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
+        (i.status === 'progress' ? '<span class="c-tstop__status">Mika is on it</span>' : '') +
+        '</span>' +
+        (i.photo === false ? '' : '<span class="c-tstop__thumb"><img alt="" src="' + i.img + '"></span>');
+      list.appendChild(r);
+    });
+    day.appendChild(list);
+    box.appendChild(day);
+  });
+
+  // Add to calendar: one event per stop, as an .ics file the browser downloads.
+  var lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Subic.Life//Trip//EN'];
+  trip.days.forEach(function (day) {
+    day.items.forEach(function (i) {
+      lines.push('BEGIN:VEVENT',
+        'UID:' + i.ics[0] + '-' + i.title.length + '@subic.life',
+        'DTSTAMP:20261012T000000Z',
+        'DTSTART:' + i.ics[0],
+        'DTEND:' + i.ics[1],
+        'SUMMARY:' + i.title.replace(/,/g, '\\,'),
+        'LOCATION:Subic Bay\\, Philippines',
+        'END:VEVENT');
+    });
+  });
+  lines.push('END:VCALENDAR');
+
+  var cal = document.getElementById('cal');
+  cal.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(lines.join('\r\n'));
+  cal.setAttribute('download', 'subic-life-trip.ics');
+  cal.target = '_blank';
+})();
+</script>
+</body>
+</html>

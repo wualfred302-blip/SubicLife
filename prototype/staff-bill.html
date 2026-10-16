@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life Partner - Bill</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-b.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-phone--push">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar">
+    <a data-back class="c-navbar__back" href="staff-scan.html" aria-label="Back to scan"><svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg></a>
+    <h1 class="c-navbar__title">Subic.Life Partner</h1>
+    <span></span>
+  </nav>
+
+  <main class="c-staff">
+    <div class="c-member-found">
+      <span class="c-member-found__disc" aria-hidden="true">AR</span>
+      <div>
+        <p class="c-member-found__name">Ana Reyes</p>
+        <p class="c-member-found__status"><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>Prestige · valid</p>
+      </div>
+    </div>
+
+    <div class="c-bill">
+      <p class="c-bill__label">Bill</p>
+      <p class="c-bill__value" id="bill" aria-live="polite">₱2,400</p>
+      <p class="c-bill__pay" id="pay">Member pays ₱1,920 (20% off)</p>
+    </div>
+
+    <div class="u-gutter">
+      <div class="c-keypad" role="group" aria-label="Bill amount">
+        <button class="c-keypad__key" type="button" data-key="1">1</button>
+        <button class="c-keypad__key" type="button" data-key="2">2</button>
+        <button class="c-keypad__key" type="button" data-key="3">3</button>
+        <button class="c-keypad__key" type="button" data-key="4">4</button>
+        <button class="c-keypad__key" type="button" data-key="5">5</button>
+        <button class="c-keypad__key" type="button" data-key="6">6</button>
+        <button class="c-keypad__key" type="button" data-key="7">7</button>
+        <button class="c-keypad__key" type="button" data-key="8">8</button>
+        <button class="c-keypad__key" type="button" data-key="9">9</button>
+        <button class="c-keypad__key" type="button" data-key="00">00</button>
+        <button class="c-keypad__key" type="button" data-key="0">0</button>
+        <button class="c-keypad__key" type="button" data-key="back" aria-label="Delete last digit"><span class="material-symbols-outlined">backspace</span></button>
+      </div>
+    </div>
+
+    <div class="u-gutter u-mt-24">
+      <a class="c-btn primary" id="send" href="staff-wait.html?bill=2400&pay=1920">Send to member</a>
+    </div>
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script>
+  // Keypad builds the bill. The member price is 20% off, rounded to the peso.
+  (function () {
+    var MAX_DIGITS = 6;
+    var params = new URLSearchParams(location.search);
+    var digits = params.get('bill') || '2400';
+    var bill = document.getElementById('bill');
+    var pay = document.getElementById('pay');
+    var send = document.getElementById('send');
+
+    function money(n) { return '₱' + n.toLocaleString('en-US'); }
+
+    function render() {
+      var amount = digits ? parseInt(digits, 10) : 0;
+      var member = Math.round(amount * 0.8);
+      bill.textContent = money(amount);
+      pay.textContent = 'Member pays ' + money(member) + ' (20% off)';
+      send.href = 'staff-wait.html?bill=' + amount + '&pay=' + member;
+    }
+
+    document.querySelectorAll('.c-keypad__key').forEach(function (key) {
+      key.addEventListener('click', function () {
+        var k = key.getAttribute('data-key');
+        if (k === 'back') {
+          digits = digits.slice(0, -1);
+        } else if (digits.length + k.length <= MAX_DIGITS) {
+          digits = (digits + k).replace(/^0+(?=\d)/, '');
+        }
+        render();
+      });
+    });
+
+    render();
+  })();
+</script>
+</body>
+</html>
