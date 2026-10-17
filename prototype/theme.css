@@ -3074,3 +3074,298 @@ html .phone.c-cgchat .c-composer__send:disabled { color: rgb(17 18 20 / 0.25); }
 html .phone.c-cgchat .c-composer__plus i,
 html .phone.c-cgchat .c-composer__send i { font-size: 24px; }
 html .phone.c-cgchat .c-composer__field { background: #FFFFFF; border: 1px solid rgb(17 18 20 / 0.12); }
+
+/* ===== Perks: white, Apple-like (2026-10-17) =====
+   Card → Perks moves to the Concierge / Me standard (the user): white ground and soft lines, a pushed white header
+   titled Perks like the button that opens it, the membership as a profile row with the mini card, then hairline
+   lists with Phosphor light icons instead of black icon tiles. Book and View policy are white hairline pills;
+   Elite is a plain row with a caret. Subtitles wrap instead of being cut off. */
+.phone.c-pkpage .screen-scroll { padding-bottom: 40px; }
+.c-pkpage .c-minicard.is-lg { box-shadow: none; }
+.c-pkname { font: 600 15px/20px var(--font); color: #111214; }
+.c-pkbtn {
+  flex: none; display: inline-flex; align-items: center; height: 32px; padding: 0 14px;
+  border: 1px solid rgb(17 18 20 / 0.12); border-radius: 999px; background: #FFFFFF; cursor: pointer;
+  font: 600 13px/1 var(--font); color: #111214; text-decoration: none;
+}
+.c-pkbtn:active { opacity: 0.6; }
+.c-pkup { margin-top: 32px; border-top: 1px solid rgb(17 18 20 / 0.08); }
+
+/* ===== Show QR: white, Apple-like (2026-10-17) =====
+   Card → Show QR moves to the Concierge / Me standard (the user): white ground and soft lines, a pushed white
+   header titled Show QR like the button that opens it (instead of a lone Done), the member's name centred, and the
+   code on a white tile with a hairline so the lines never run under it and it still scans. */
+.phone.c-qrpage .screen-scroll { padding-bottom: 40px; }
+.c-qrwho { margin: 28px 20px 0; text-align: center; }
+.c-qrwho__name { margin: 0; font: 700 22px/28px var(--font); letter-spacing: -0.01em; color: #111214; }
+.c-qrwho__sub { margin: 2px 0 0; font: 400 14px/20px var(--font); color: #5F6670; }
+.c-qrtile {
+  width: max-content; margin: 24px auto 0; padding: 20px;
+  border: 1px solid rgb(17 18 20 / 0.12); border-radius: 20px; background: #FFFFFF;
+}
+.c-qrtile .c-qr { color: #111214; }
+.c-qrcode {
+  margin: 24px 0 0; text-align: center; font: 500 26px/1 var(--font); letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums; color: #111214;
+}
+.c-qrtimer { margin-top: 20px; }
+.c-qrtimer .c-progress__track { background: rgb(17 18 20 / 0.08); }
+.c-qrtimer .c-progress__bar { background: #111214; }
+.c-qrtimer .c-progress__label { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-qrhelp { margin: 4px 20px 0; text-align: center; font: 400 13px/18px var(--font); color: #5F6670; }
+
+/* ===== Trip: time and photo, no type icons (2026-10-17) =====
+   The type icons (van, boat, check-in arrows, fork) looked generic and would need a new icon for every kind of
+   place Subic adds (the user). Each stop now reads like a calendar: the time in its own column on the left,
+   the plan in the middle, and the place's own photo on the right, so a new establishment brings its own picture.
+   A stop Mika is still arranging has no place yet, so it has no photo, only the hairline "Mika is on it" pill. */
+.c-cgstop__clock { flex: none; width: 48px; display: flex; flex-direction: column; padding-top: 1px; }
+.c-cgstop__hm { font: 600 15px/20px var(--font); font-variant-numeric: tabular-nums; color: #111214; }
+.c-cgstop__ampm { font: 400 12px/16px var(--font); color: #5F6670; }
+.c-merow.c-cgstop + .c-merow.c-cgstop::before { left: 62px; }
+.c-cgstop .c-cgstop__thumb { width: 64px; height: 64px; border-radius: 10px; margin-top: 0; }
+
+/* ===== Concierge: rolling ask bar, chips in the chat (2026-10-18) =====
+   The Dinner / Transfer / Day plan shortcuts are gone: Day plan opened the same chat as the ask bar, and a fixed
+   three can't cover what Mika arranges (the user). The ask bar now rolls through her services ("Ask Mika for a
+   table tonight"), and the chat opens with the six as chips that come in one after another, first to last. */
+.c-cgask__text { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.c-cgask__roll { display: inline-block; transition: transform 250ms ease, opacity 250ms ease; }
+.c-cgask__roll.is-out { transform: translateY(-8px); opacity: 0; }
+.c-cgask__roll.is-in { transform: translateY(8px); opacity: 0; transition: none; }
+html .phone.c-cgchat .c-replies { flex-wrap: wrap; }
+@keyframes c-cgchip { from { opacity: 0; transform: translateY(6px); } }
+html .phone.c-cgchat .c-reply { animation: c-cgchip 300ms ease both; }
+html .phone.c-cgchat .c-reply:nth-child(2) { animation-delay: 70ms; }
+html .phone.c-cgchat .c-reply:nth-child(3) { animation-delay: 140ms; }
+html .phone.c-cgchat .c-reply:nth-child(4) { animation-delay: 210ms; }
+html .phone.c-cgchat .c-reply:nth-child(5) { animation-delay: 280ms; }
+html .phone.c-cgchat .c-reply:nth-child(6) { animation-delay: 350ms; }
+@media (prefers-reduced-motion: reduce) {
+  .c-cgask__roll { transition: none; }
+  html .phone.c-cgchat .c-reply { animation: none; }
+}
+
+/* ===== Listings and booking: white, Apple-like (2026-10-18) =====
+   The partner page, Book, Booked and Bookings move to the Concierge + Me look (the user: "authentic, in the style of
+   Apple's minimalism"). Listing = the offer page's frame (full photo, white body with a rounded top, left title),
+   then the member perk as one hairline row with the mini card, plain sections split by hairlines, rooms as photos
+   with no card behind them, and Hours and location as a quiet map plus hairline rows with light icons.
+   Booking pages = white ground with lines, centred push header, hairline form rows, a room list with photos and a
+   tick, a plain price list (saving in green, hairline over the total) and one orange Pay pill.
+   The book or pay button is orange on the offer page too, so one flow has one colour for its main step. */
+
+/* Listing */
+.c-offerwhite .c-bottombar .c-btn.primary { background: #E8590C; color: #FFFFFF; box-shadow: none; }
+.c-placewhite .c-bottombar .c-btn.primary.is-full { flex: 1; width: 100%; }
+.c-placewhite .c-obar__price { flex: none; }
+.c-placewhite .c-obar__price span { white-space: nowrap; }
+.c-pmeta { display: block; }
+.c-pmeta i { margin-right: 4px; font-size: 13px; vertical-align: -1px; color: #111214; }
+.c-pmeta [data-rating] { font-weight: 600; color: #111214; }
+.c-pperk {
+  display: flex; align-items: center; gap: 14px; margin: 20px 24px 0; padding: 14px 0;
+  border-top: 1px solid rgb(17 18 20 / 0.08); border-bottom: 1px solid rgb(17 18 20 / 0.08);
+  color: #111214; text-decoration: none;
+}
+.c-pperk[hidden] { display: none; }
+.c-pperk[hidden] + .c-osec { margin-top: 20px; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-pperk .c-minicard { flex: none; box-shadow: none; }
+.c-pperk__text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.c-pperk__title { font: 600 15px/20px var(--font); }
+.c-pperk__sub { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-pperk__chev { font-size: 18px; color: #9AA0A6; }
+.c-pperk:active { opacity: 0.5; }
+.c-pabout { margin: 0; font: 400 15px/22px var(--font); color: #111214; }
+.c-placewhite .c-osec .c-carousel { margin: 0 -24px; padding: 0 24px; scroll-padding-inline: 24px; }
+.c-placewhite .c-room { width: 220px; color: #111214; }
+.c-placewhite .c-room__photo { border-radius: 12px; }
+.c-placewhite .c-room__name { margin-top: 10px; font: 600 15px/20px var(--font); letter-spacing: 0; }
+.c-placewhite .c-room__sub { margin-top: 2px; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-placewhite .c-room__price { margin-top: 6px; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-placewhite .c-room__price b { font: 600 15px/20px var(--font); color: #111214; }
+.c-pmap {
+  position: relative; display: block; height: 150px; overflow: hidden;
+  border: 1px solid rgb(17 18 20 / 0.08); border-radius: 12px; background: #EEF0F1;
+}
+.c-pinfo { margin-top: 4px; }
+.c-pinfo__row {
+  position: relative; display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 8px 0;
+  font: 400 15px/21px var(--font); color: #111214; text-decoration: none;
+}
+.c-pinfo__row + .c-pinfo__row::before { content: ''; position: absolute; top: 0; left: 36px; right: 0; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-pinfo__row > i:first-child { flex: none; width: 22px; font-size: 22px; }
+.c-pinfo__text { flex: 1; min-width: 0; }
+.c-pinfo__chev { font-size: 18px; color: #9AA0A6; }
+a.c-pinfo__row:active { opacity: 0.5; }
+
+/* Booking pages */
+html .phone.c-bkpage .c-req-bar { background: #FFFFFF; border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone.c-bkpage .c-req-bar .c-btn.primary { box-shadow: none; }
+.c-bkpage .screen-scroll > .c-mehead:first-child { margin-top: 16px; }
+.c-bkplace { display: flex; align-items: center; gap: 14px; padding: 20px 20px 0; }
+.c-bkplace__img { flex: none; width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
+.c-bkplace__text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.c-bkplace__name { font: 700 20px/26px var(--font); letter-spacing: -0.01em; color: #111214; }
+.c-bkplace__sub { margin-top: 2px; font: 400 14px/20px var(--font); color: #5F6670; }
+.c-bkval { color: #111214; font-variant-numeric: tabular-nums; }
+.c-bkroom { cursor: pointer; padding: 12px 0; }
+.c-bkroom__input { position: absolute; opacity: 0; pointer-events: none; }
+.c-bkroom__img { flex: none; width: 56px; height: 56px; border-radius: 8px; object-fit: cover; }
+.c-bkroom__name { font: 600 15px/20px var(--font); color: #111214; }
+.c-bkroom__price { margin-top: 2px; font: 600 14px/20px var(--font); color: #111214; font-variant-numeric: tabular-nums; }
+.c-bkroom__price s { margin-left: 4px; font-weight: 400; font-size: 13px; color: #5F6670; }
+.c-bkroom__tick { flex: none; width: 24px; font-size: 22px; color: #111214; visibility: hidden; }
+.c-bkroom:has(input:checked) .c-bkroom__tick { visibility: visible; }
+.c-bkroom:has(input:focus-visible) { outline: 2px solid #111214; outline-offset: 2px; border-radius: 8px; }
+.c-bklist .c-bkroom + .c-bkroom::before { left: 70px; }
+.c-bkprice__row {
+  display: flex; justify-content: space-between; gap: 16px; padding: 8px 0;
+  font: 400 15px/21px var(--font); color: #111214; font-variant-numeric: tabular-nums;
+}
+.c-bkprice__row.is-save span:last-child { color: #15803D; }
+.c-bkprice__row.is-total { margin-top: 6px; padding-top: 14px; border-top: 1px solid rgb(17 18 20 / 0.08); font: 700 17px/22px var(--font); }
+
+/* Booked */
+.c-bkdone__gap { width: 56px; }
+.c-bkdone__done { display: grid; place-items: center; width: 56px; height: 40px; font: 600 17px/22px var(--font); color: #E8590C; text-decoration: none; }
+.c-bkdone__done:active { opacity: 0.5; }
+.c-bkdone { display: flex; flex-direction: column; align-items: center; padding: 32px 20px 8px; text-align: center; }
+.c-bkdone__tick { font-size: 72px; color: #111214; }
+.c-bkdone__title { margin: 12px 0 0; font: 700 28px/32px var(--font); letter-spacing: -0.02em; color: #111214; }
+.c-bkdone__saved { margin: 6px 0 0; font: 600 15px/20px var(--font); color: #15803D; }
+.c-bkcode { font-weight: 500; letter-spacing: 0.06em; }
+.c-bkdone__note { margin: 12px 20px 0; text-align: center; font: 400 13px/18px var(--font); color: #5F6670; }
+
+/* Bookings: calendar-like rows, the place's photo on the right. */
+.c-bkrows .c-merow + .c-merow::before { left: 0; }
+.c-bkrow { align-items: flex-start; gap: 16px; padding: 14px 0; }
+.c-bkrow__name { font: 600 15px/20px var(--font); color: #111214; }
+.c-bkrow__img { flex: none; width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
+.c-bkrow__paid { margin-top: 6px; font: 600 14px/20px var(--font); color: #111214; font-variant-numeric: tabular-nums; }
+.c-bkrow__save { font-weight: 500; color: #15803D; }
+
+/* ===== Me payments: white, Apple-like (2026-10-18) =====
+   Payments, Payment methods and the Add a method sheet move to the Concierge + Me look. Payments reads like
+   Bookings (hairline rows, the place's photo on the right, savings in green). Payment methods keeps the GCash,
+   Maya and Visa marks, since a wallet is recognised by its brand, but "Default" is grey text and Add method is a
+   plain plus, with no orange tile. The sheet uses the same rows and a white Cancel pill. */
+.c-pmark { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; color: #FFFFFF; }
+.c-pmlist .c-merow + .c-merow::before { left: 44px; }
+.c-pmnote { margin: 12px 20px 0; font: 400 13px/18px var(--font); color: #5F6670; }
+.phone.c-pmpage .screen-scroll > .c-melist:first-child { margin-top: 16px; }
+.c-pmsheet .c-sheet__panel { background: #FFFFFF; border-radius: 16px 16px 0 0; }
+.c-pmsheet .c-sheet__title { font: 700 22px/28px var(--font); letter-spacing: -0.01em; color: #111214; }
+.c-pmsheet .c-sheet__sub { font: 400 15px/20px var(--font); color: #5F6670; }
+.c-pmsheet .c-cgform { margin-top: 24px; }
+.c-pmsheet .c-sheet__actions .c-cgcal { margin: 8px 0 0; }
+
+/* ===== Receipt: white, Apple-like (2026-10-18) =====
+   The receipt used to sit as a sheet over a stale copy of the old dark Card tab, even when opened from Payments
+   or Bookings. Now it is its own white page that still slides up like an iOS modal, with "Done" top right going
+   back to wherever it was opened. The place's photo replaces the green tick circle; the bill is a plain price list
+   (saving in green, hairline over the total), like Book. */
+.c-rchead { display: flex; flex-direction: column; align-items: center; padding: 32px 20px 0; text-align: center; }
+.c-rchead__img { width: 72px; height: 72px; border-radius: 12px; object-fit: cover; }
+.c-rchead__title { margin: 16px 0 0; font: 700 28px/32px var(--font); letter-spacing: -0.02em; color: #111214; }
+.c-rchead__sub { margin: 6px 0 0; font: 400 15px/20px var(--font); color: #5F6670; }
+.c-rcprice { margin-top: 28px; padding-top: 8px; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-rcnote { margin: 16px 20px 0; text-align: center; font: 400 13px/18px var(--font); color: #5F6670; }
+
+/* ===== Your stories: white, Apple-like (2026-10-18) =====
+   Me → Your stories moves to the Concierge + Me look. Visits to share are hairline rows with the place's photo and a
+   white hairline "+ Story" pill (no orange tint: orange stays for book, pay and send). Shared stories sit in two
+   columns like Discover's places: the photo with no text on it, then the place and its likes underneath. */
+.c-msvisits .c-merow + .c-merow::before { left: 0; }
+.c-msvisit { gap: 14px; padding: 12px 0; }
+.c-msvisit__img { flex: none; width: 56px; height: 56px; border-radius: 8px; object-fit: cover; }
+.c-msvisit__name { font: 600 15px/20px var(--font); color: #111214; }
+.c-msadd {
+  flex: none; display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 0 14px 0 10px;
+  border: 1px solid rgb(17 18 20 / 0.12); border-radius: 999px; background: #FFFFFF;
+  font: 600 14px/1 var(--font); color: #111214;
+}
+.c-msadd i { font-size: 16px; }
+.c-msgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 12px; margin: 10px 20px 0; padding-bottom: 40px; }
+.c-msstory { display: flex; flex-direction: column; min-width: 0; color: #111214; text-decoration: none; }
+.c-msstory__img { width: 100%; aspect-ratio: 4 / 5; border-radius: 12px; object-fit: cover; }
+.c-msstory__name { margin-top: 8px; font: 600 15px/20px var(--font); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.c-msstory__meta { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-msstory:active { opacity: 0.6; }
+
+/* ===== Notifications: white, Apple-like (2026-10-18) =====
+   Me → Notifications moves to the Concierge + Me look: white page, push header, one hairline list of switches.
+   Switches are ink when on, not orange: orange stays for the one book, pay or send action. */
+.c-ntlist { margin-top: 16px; }
+.c-ntlist .c-merow { cursor: pointer; }
+.phone.c-ntpage .c-switch { background: rgb(17 18 20 / 0.12); }
+.phone.c-ntpage .c-switch:checked { background: #111214; }
+.phone.c-ntpage .c-switch::after { background: #FFFFFF; }
+.phone.c-ntpage .c-switch:focus-visible { outline: 2px solid #111214; outline-offset: 2px; }
+
+/* ===== Language: white, Apple-like (2026-10-18) =====
+   Me → Language moves to the Concierge + Me look: white page, push header, one hairline list with a light ink tick
+   on the chosen language, like iOS Settings. */
+.c-lglist { margin-top: 16px; }
+.c-lglist .c-pick__mark { font-size: 22px; color: #111214; }
+.c-lglist .c-pick:focus-within { outline: 2px solid #111214; outline-offset: 2px; border-radius: 8px; }
+
+/* ===== Card: logo, engraved tier, lighter shadow (2026-10-18) =====
+   The user: action icons 20% smaller, softer card shadow, the Subic.Life logo on the card, and "Prestige member"
+   looking cut into the steel. The logo (img/logo.svg, white) replaces the typed SUBIC.LIFE in the middle. The tier
+   line is set like an engraving: small spaced capitals in a dark-on-dark tone, with a dark edge above and a light
+   edge below, so it reads pressed in rather than printed on. */
+.c-cardwhite .c-action__btn i { font-size: 24px; }
+.c-cardwhite .c-hero .c-mcard.is-portrait { box-shadow: 0 18px 28px -18px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.1); }
+.c-mcard__logo { position: absolute; left: 50%; top: 50%; z-index: 2; width: 62%; height: auto; transform: translate(-50%, -50%); opacity: 0.92; }
+.c-cardwhite .c-mcard.is-portrait .c-mcard__foot {
+  z-index: 2; left: 18px; bottom: 18px;
+  font: 600 10px/12px var(--font); letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgb(255 255 255 / 0.36);
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 0.75), 0 1px 0 rgb(255 255 255 / 0.18);
+}
+
+/* ===== Card back and Recent visits: neater (2026-10-18) =====
+   The user: the QR on the back of the card "significantly neater", and the Recent visits rows "a bit more minimalist".
+   Back: a smaller QR (108px, about half the card) in a tight white tile, drawn as one path so no seams show between
+   modules (app.js), the number under it in the same engraved spaced type as "Prestige member", and the demo link
+   pinned quietly to the bottom. Rows: the Me list type (regular-weight title, grey sub), a lighter green figure,
+   10px photo corners and a hairline divider. */
+.c-cardwhite .c-mcard.is-portrait .c-mcard__back { gap: 0; padding: 18px 18px 36px; }
+.c-cardwhite .c-mcard__qrtile { padding: 10px; border-radius: 12px; box-shadow: 0 8px 18px -10px rgb(0 0 0 / 0.7); }
+.c-cardwhite .c-mcard__qrtile .c-qr { width: 108px; height: 108px; color: #111214; }
+.c-cardwhite .c-mcard.is-portrait .c-mcard__back .c-mcard__number {
+  margin-top: 16px;
+  font: 500 11px/14px var(--font); letter-spacing: 0.24em;
+  color: rgb(255 255 255 / 0.56);
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 0.75), 0 1px 0 rgb(255 255 255 / 0.14);
+}
+.c-cardwhite .c-mcard__sim {
+  position: absolute; left: 0; right: 0; bottom: 16px; margin: 0; text-align: center;
+  font: 400 11px/14px var(--font); color: rgb(255 255 255 / 0.4);
+  text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.2); text-underline-offset: 3px;
+}
+.c-cardwhite .c-ledger .c-list-row__thumb { border-radius: 10px; }
+.c-cardwhite .c-ledger .c-list-row::after { background: rgb(17 18 20 / 0.08); }
+.c-cardwhite .c-ledger .c-list-row__title { font: 400 16px/22px var(--font); color: #111214; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-cardwhite .c-ledger .c-list-row__sub { margin-top: 2px; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-cardwhite .c-ledger .c-visit__amt { gap: 2px; }
+.c-cardwhite .c-ledger .c-visit__save { font: 500 15px/20px var(--font); color: #15803D; }
+.c-cardwhite .c-ledger .c-visit__lbl { font: 400 12px/16px var(--font); color: #5F6670; }
+
+/* ===== Your trip rows: lighter type (2026-10-18) =====
+   The user: the rows under Your trip "a bit more minimalistic, similarly to the recents on the card section". Same
+   type as the Recent visits rows and the Me lists: regular-weight title, grey sub, and the time in regular ink
+   instead of bold. Applies wherever trip stops show (Concierge and the itinerary). */
+.c-cgstop__name { font: 400 16px/22px var(--font); color: #111214; }
+.c-cgstop .c-merow__sub { margin-top: 2px; }
+.c-cgstop__hm { font: 400 15px/20px var(--font); font-variant-numeric: tabular-nums; color: #111214; }
+
+/* ===== Map: orange roads (2026-10-18) =====
+   The soft clay highways felt flat (the user), so #quiet-tone in map.html now paints them #E8590C, the same orange as
+   the app's icons and the picked dot: a mask from the raw tiles (red well above blue, only Esri's highways) lets a
+   flat orange through over the quiet colours. Land, white roads, sea and labels are unchanged. */
+
+/* ===== Map: richer quiet colour (2026-10-18) =====
+   The other map colours felt washed out (the user: not too dark, not washed out), so #quiet-tone saturates its quiet
+   colours (map.html): bluer sea, slightly warmer land. Lightness is unchanged. */

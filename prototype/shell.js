@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  var SHEETS = ['pay-request.html', 'pay-faceid.html', 'me-add-method.html', 'card-receipt.html', 'story-new.html'];
+  var SHEETS = ['pay-request.html', 'me-add-method.html', 'card-receipt.html', 'story-new.html'];
   var EASE = 'cubic-bezier(.2,.8,.2,1)';
   var inFrame = window.parent !== window;
   var root = document.documentElement;

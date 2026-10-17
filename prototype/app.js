@@ -85,17 +85,14 @@ if (typeof qrcode === 'function') {
     var n = qr.getModuleCount();
     var size = slot.classList.contains('is-large') ? 264
       : slot.classList.contains('is-card') ? 140 : 168;
-    var cell = size / n;
-    var rects = '';
+    // One path in module units: shared edges are filled once, so no hairline seams show between modules.
+    var d = '';
     for (var r = 0; r < n; r++) {
       for (var c = 0; c < n; c++) {
-        if (qr.isDark(r, c)) {
-          rects += '<rect x="' + (c * cell).toFixed(3) + '" y="' + (r * cell).toFixed(3) +
-                   '" width="' + cell.toFixed(3) + '" height="' + cell.toFixed(3) + '"/>';
-        }
+        if (qr.isDark(r, c)) d += 'M' + c + ' ' + r + 'h1v1h-1z';
       }
     }
     slot.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size +
-                     '" viewBox="0 0 ' + size + ' ' + size + '" role="img" aria-label="Member QR code">' + rects + '</svg>';
+                     '" viewBox="0 0 ' + n + ' ' + n + '" role="img" aria-label="Member QR code"><path fill="currentColor" d="' + d + '"/></svg>';
   });
 }

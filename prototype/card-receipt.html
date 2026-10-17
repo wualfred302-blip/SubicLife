@@ -10,14 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
-  <link rel="stylesheet" href="components-b.css">
   <link rel="stylesheet" href="screen.css">
   <link rel="stylesheet" href="shell.css">
   <link rel="stylesheet" href="theme.css">
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-cardtab has-wall">
+<div class="phone c-push c-discover c-cgpage c-bkpage c-rcpage">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -28,92 +27,33 @@
     </span>
   </header>
 
-  <div class="c-xbar" aria-hidden="true"><span class="c-xbar__title">Card</span></div>
+  <div class="c-dhead c-dhead--push">
+    <span class="c-dhead__spacer c-bkdone__gap" aria-hidden="true"></span>
+    <h1 class="c-dhead__title">Receipt</h1>
+    <a class="c-bkdone__done" data-back href="me-payments.html">Done</a>
+  </div>
 
   <main class="screen-scroll">
 
-    <header class="c-hero">
-      <div class="c-largetitle">
-        <h1 class="c-largetitle__title">Card</h1>
-      </div>
-      <section class="u-gutter c-cardstage">
-      <div class="c-mcard is-prestige is-portrait" data-mcard role="button" tabindex="0" aria-pressed="false" aria-label="Membership card. Tap to show the QR code.">
-        <div class="c-mcard__flipper">
-          <div class="c-mcard__face c-mcard__front">
-            <span class="c-mcard__sheen" aria-hidden="true"></span>
-            <span class="c-mcard__ghost" aria-hidden="true"><span>Su</span><span>bic</span></span>
-            <span class="c-mcard__brand">Subic.Life</span>
-            <span class="c-mcard__foot">Prestige member</span>
-          </div>
-          <div class="c-mcard__face c-mcard__back" aria-hidden="true">
-            <span class="c-mcard__sheen"></span>
-            <div class="c-mcard__qrtile"><span class="c-qr is-card"></span></div>
-            <p class="c-mcard__number">0042 1187</p>
-          </div>
-        </div>
-      </div>
-      <p class="c-cardstage__id"><span class="c-cardstage__no">SL 0042 1187</span> · valid until Mar 2027</p>
-      </section>
-      <nav class="c-actions" aria-label="Card actions">
-        <a class="c-action is-primary" href="card-staff.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">qr_code_2</span></span>Show QR</a>
-        <a class="c-action" href="card-benefits.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">loyalty</span></span>Perks</a>
-        <button class="c-action" type="button"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">wallet</span></span>Add to Wallet</button>
-      </nav>
-    </header>
-
-    <div class="c-surface">
-      <section>
-      <div class="c-section-head">
-        <h2 class="c-section-head__title">Recent visits</h2>
-        <a class="c-section-head__link" href="card-savings.html">See all</a>
-      </div>
-      <div class="u-gutter c-ledger">
-        <a class="c-list-row" href="card-savings.html">
-          <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-meat-plus.jpg" alt=""></div></div>
-          <div class="c-list-row__main"><p class="c-list-row__title">Meat Plus Cafe</p><p class="c-list-row__sub">Today · Dinner</p></div>
-          <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱480</span><span class="c-visit__lbl">saved</span></div>
-        </a>
-        <a class="c-list-row" href="card-savings.html">
-          <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-lighthouse-oct.jpg" alt=""></div></div>
-          <div class="c-list-row__main"><p class="c-list-row__title">Lighthouse Marina Resort</p><p class="c-list-row__sub">Oct 10 · Hotel dining</p></div>
-          <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱1,840</span><span class="c-visit__lbl">saved</span></div>
-        </a>
-        <a class="c-list-row" href="card-savings.html">
-          <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-sailing-club.jpg" alt=""></div></div>
-          <div class="c-list-row__main"><p class="c-list-row__title">Subic Bay Yacht Club</p><p class="c-list-row__sub">Oct 5 · Sunset charter</p></div>
-          <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱1,200</span><span class="c-visit__lbl">saved</span></div>
-        </a>
-      </div>
-      </section>
+    <div class="c-rchead">
+      <img class="c-rchead__img" src="img/thumb-meat-plus.jpg" alt="">
+      <h2 class="c-rchead__title">You saved ₱480</h2>
+      <p class="c-rchead__sub">Meat Plus Cafe · Today, 7:42 PM</p>
     </div>
+
+    <div class="c-melist c-bkprice c-rcprice">
+      <div class="c-bkprice__row"><span>Bill</span><span>₱2,400</span></div>
+      <div class="c-bkprice__row is-save"><span>Prestige discount (20%)</span><span>−₱480</span></div>
+      <div class="c-bkprice__row is-total"><span>You paid</span><span>₱1,920</span></div>
+    </div>
+
+    <p class="c-rcnote">Saved this year: ₱12,450</p>
+
   </main>
 
-  <div class="c-sheet">
-    <div class="c-sheet__scrim"></div>
-    <div class="c-sheet__panel">
-      <div class="c-sheet__grabber"></div>
-      <div class="c-sheet__body">
-        <div class="c-success-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h1 class="c-sheet__title">You saved ₱480</h1>
-        <p class="c-sheet__sub">Meat Plus Cafe · Today, 7:42 PM</p>
-        <div class="c-receipt">
-          <div class="c-receipt__row"><span>Bill</span><span class="c-receipt__amount">₱2,400</span></div>
-          <div class="c-receipt__row is-discount"><span>Prestige discount (20%)</span><span class="c-receipt__amount">−₱480</span></div>
-          <div class="c-receipt__row is-total"><span>You paid</span><span class="c-receipt__amount">₱1,920</span></div>
-        </div>
-        <p class="c-sheet__meta">Saved this year: ₱12,450</p>
-      </div>
-      <div class="c-sheet__actions">
-        <a class="c-btn primary" href="card.html">Done</a>
-      </div>
-    </div>
-  </div>
   <span class="c-homeindicator"></span>
 
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

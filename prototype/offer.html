@@ -79,7 +79,7 @@
     ? ['Show your card when you order.', 'Staff add the dessert to your table.', 'Pay the rest of the bill in the app as usual.']
     : o.bookable
     ? ['Book here at the member price.', 'Pay in the app with GCash, Maya or card.', 'Show your card QR when you arrive.']
-    : ['Show your card when the bill comes.', 'Staff send the bill to your phone with ' + pct + '% already off.', 'Pay in the app with Face ID. Done.'];
+    : ['Show your card when the bill comes.', 'Staff send the bill to your phone with ' + pct + '% already off.', 'Pay in the app. Done.'];
 
   // Fine print only: the how-to lines are covered by the steps above.
   var photos = [o.photo].concat((place.photos || []).filter(function (src) { return src !== o.photo; }));

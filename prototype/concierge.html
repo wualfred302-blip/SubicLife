@@ -46,16 +46,10 @@
       <a class="c-cgcall" href="tel:+63472520800" aria-label="Call Mika"><i class="ph-thin ph-phone" aria-hidden="true"></i></a>
     </div>
 
-    <a class="c-cgask" href="concierge-chat.html?topic=other">
-      <span>Ask Mika for anything</span>
+    <a class="c-cgask" href="concierge-chat.html?topic=other" aria-label="Ask Mika for anything">
+      <span class="c-cgask__text" aria-hidden="true">Ask Mika for <span class="c-cgask__roll">anything</span></span>
       <i class="ph-light ph-arrow-up" aria-hidden="true"></i>
     </a>
-
-    <nav class="c-quick c-cgquick" aria-label="Ask Mika about">
-      <a class="c-quick__item" href="concierge-chat.html?topic=table"><i class="ph-thin ph-fork-knife" aria-hidden="true"></i>Dinner</a>
-      <a class="c-quick__item" href="concierge-chat.html?topic=transfer"><i class="ph-thin ph-van" aria-hidden="true"></i>Transfer</a>
-      <a class="c-quick__item" href="concierge-chat.html?topic=other"><i class="ph-thin ph-sparkle" aria-hidden="true"></i>Day plan</a>
-    </nav>
 
     <section aria-labelledby="trip-title">
       <div class="c-cgsec">
@@ -82,8 +76,25 @@
 (function () {
   var C = window.CONCIERGE;
 
-  // Phosphor light icons for the trip's icon names.
-  var ICON = { airport_shuttle: 'van', sailing: 'sailboat', login: 'sign-in', logout: 'sign-out', restaurant: 'fork-knife' };
+  // The ask bar rolls through what Mika arranges; the chat opens with the same services as chips.
+  // Kept still for people who turn motion off.
+  var roll = document.querySelector('.c-cgask__roll');
+  var asks = ['anything', 'a table tonight', 'a ride from Clark', 'a yacht charter', 'island hopping', 'a tee time', 'a spa day'];
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (roll && !still) {
+    var at = 0;
+    setInterval(function () {
+      roll.classList.add('is-out');
+      setTimeout(function () {
+        at = (at + 1) % asks.length;
+        roll.textContent = asks[at];
+        roll.classList.remove('is-out');
+        roll.classList.add('is-in');
+        void roll.offsetWidth;
+        roll.classList.remove('is-in');
+      }, 250);
+    }, 2800);
+  }
 
   // The whole trip, one hairline list per day. Only a stop Mika is still arranging is called out in words.
   // Tapping a stop opens it.
@@ -100,8 +111,9 @@
       r.className = 'c-merow c-cgstop';
       r.href = i.href;
       r.innerHTML =
-        '<span class="c-merow__lead"><i class="ph-light ph-' + (ICON[i.icon] || 'calendar-blank') + '" aria-hidden="true"></i></span>' +
-        '<span class="c-merow__main"><span class="c-cgstop__time">' + i.time + '</span>' +
+        '<span class="c-cgstop__clock"><span class="c-cgstop__hm">' + i.time.split(' ')[0] + '</span>' +
+        '<span class="c-cgstop__ampm">' + (i.time.split(' ')[1] || '') + '</span></span>' +
+        '<span class="c-merow__main">' +
         '<span class="c-cgstop__name">' + i.title + '</span>' +
         '<span class="c-merow__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
         (i.status === 'progress' ? '<span class="c-cgstop__status">Mika is on it</span>' : '') +

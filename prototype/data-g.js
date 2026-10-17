@@ -168,9 +168,21 @@
     other: {
       sub: 'Ask anything · replies in ~5 min',
       opener: 'Hi Ana, Mika here. Tell me what you need and I will take care of it.',
-      quick: ['Dinner reservation', 'Boat for the day']
+      quick: ['Dinner reservation', 'Airport transfer', 'Yacht charter', 'Island hopping', 'Golf at Subic', 'Spa day']
     }
   };
+
+  // In the general chat each chip starts that service's questions; Mika has already said hello, so her greeting is dropped.
+  // The chips' own rules go first so "Golf at Subic" isn't read as a Clark–Subic transfer.
+  function ask(opener) { return opener.replace(/^Hi Ana, Mika here\. /, ''); }
+  CHAT_TOPICS.other.rules = [
+    { match: /dinner/i, steps: [{ t: ask(CHAT_TOPICS.table.opener), quick: CHAT_TOPICS.table.quick }] },
+    { match: /transfer|airport/i, steps: [{ t: ask(CHAT_TOPICS.transfer.opener), quick: CHAT_TOPICS.transfer.quick }] },
+    { match: /yacht/i, steps: [{ t: ask(EXPERIENCES.yacht.opener) }] },
+    { match: /island/i, steps: [{ t: ask(EXPERIENCES.island.opener) }] },
+    { match: /golf/i, steps: [{ t: ask(EXPERIENCES.golf.opener) }] },
+    { match: /\bspa\b/i, steps: [{ t: ask(EXPERIENCES.spa.opener) }] }
+  ].concat(CHAT_TOPICS.table.rules, CHAT_TOPICS.transfer.rules);
 
   // Which chat script a ?topic= value uses. Experiences without a fixed script get their own opener.
   function topicFor(key) {

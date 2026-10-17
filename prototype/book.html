@@ -8,16 +8,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="screen.css">
   <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="components-g.css">
   <link rel="stylesheet" href="shell.css">
   <link rel="stylesheet" href="theme.css">
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone is-pushed has-bottombar">
+<div class="phone c-push c-discover c-cgpage c-bkpage">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -28,84 +30,61 @@
     </span>
   </header>
 
-  <div class="c-navbar">
-    <a class="c-navbar__back" data-back href="place.html?p=lighthouse" aria-label="Back to the partner page">
-      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-    </a>
-    <h1 class="c-navbar__title">Book</h1>
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" data-back href="place.html?p=lighthouse" aria-label="Back to the partner page"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title">Book</h1>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
   </div>
 
   <main class="screen-scroll">
 
-    <div class="u-mt-16">
-      <h2 class="c-section-title is-title c-group-head" data-name>Partner</h2>
+    <div class="c-bkplace">
+      <img class="c-bkplace__img" data-thumb src="img/card-lighthouse.jpg" alt="">
+      <span class="c-bkplace__text"><span class="c-bkplace__name" data-name>Partner</span><span class="c-bkplace__sub" data-area></span></span>
     </div>
 
-    <section class="u-mt-24">
-      <h2 class="c-section-title is-caption c-group-head">Dates</h2>
-      <div class="c-dates">
-        <div class="c-dates__cell">
-          <p class="c-dates__label" data-in-label>Check-in</p>
-          <p class="c-dates__value" data-in-value>Sat, 17 Oct</p>
-        </div>
-        <div class="c-dates__cell">
-          <p class="c-dates__label" data-out-label>Check-out</p>
-          <p class="c-dates__value" data-out-value>Sun, 18 Oct</p>
-        </div>
+    <div class="c-melist c-cgform">
+      <div class="c-merow">
+        <span class="c-merow__main" data-in-label>Check-in</span>
+        <span class="c-merow__value c-bkval" data-in-value>Sat, 17 Oct</span>
       </div>
-    </section>
-
-    <section class="u-mt-24">
-      <h2 class="c-section-title is-caption c-group-head">Guests</h2>
-      <div class="c-info-group">
-        <div class="c-info-row">
-          <span class="c-info-row__text">Guests</span>
-          <div class="c-stepper">
-            <button class="c-stepper__btn" type="button" data-step="-1" aria-label="Remove a guest"><span class="material-symbols-outlined">remove</span></button>
-            <span class="c-stepper__value" data-guests>2</span>
-            <button class="c-stepper__btn" type="button" data-step="1" aria-label="Add a guest"><span class="material-symbols-outlined">add</span></button>
-          </div>
-        </div>
+      <div class="c-merow">
+        <span class="c-merow__main" data-out-label>Check-out</span>
+        <span class="c-merow__value c-bkval" data-out-value>Sun, 18 Oct</span>
       </div>
-    </section>
-
-    <section class="u-mt-24">
-      <h2 class="c-section-title is-caption c-group-head" data-room-head>Room</h2>
-      <div class="c-info-group" data-rooms></div>
-    </section>
-
-    <section class="u-mt-24">
-      <h2 class="c-section-title is-caption c-group-head">Price</h2>
-      <div class="c-receipt c-price">
-        <div class="c-receipt__row">
-          <span data-line>Room</span>
-          <span class="c-receipt__amount" data-rack>₱0</span>
-        </div>
-        <div class="c-receipt__row is-discount">
-          <span data-disc-label>Prestige discount</span>
-          <span class="c-receipt__amount" data-disc>−₱0</span>
-        </div>
-        <div class="c-receipt__row is-total">
-          <span>Total</span>
-          <span class="c-receipt__amount" data-total>₱0</span>
-        </div>
+      <div class="c-merow">
+        <span class="c-merow__main">Guests</span>
+        <span class="c-cgstep">
+          <button class="c-cgstep__btn" type="button" data-step="-1" aria-label="Remove a guest"><i class="ph-light ph-minus" aria-hidden="true"></i></button>
+          <span class="c-cgstep__value" data-guests aria-live="polite">2</span>
+          <button class="c-cgstep__btn" type="button" data-step="1" aria-label="Add a guest"><i class="ph-light ph-plus" aria-hidden="true"></i></button>
+        </span>
       </div>
-    </section>
+    </div>
 
-    <section class="u-mt-24">
-      <div class="c-info-group">
-        <a class="c-info-row" href="me-payment-methods.html">
-          <span class="material-symbols-outlined">credit_card</span>
-          <span class="c-info-row__text">Payment</span>
-          <span class="c-info-row__value">GCash</span>
-          <span class="material-symbols-outlined c-info-row__chev">chevron_right</span>
-        </a>
-      </div>
-    </section>
+    <p class="c-mehead" data-room-head>Room</p>
+    <div class="c-melist c-bklist" data-rooms role="radiogroup"></div>
+
+    <p class="c-mehead">Price</p>
+    <div class="c-melist c-bkprice">
+      <div class="c-bkprice__row"><span data-line>Room</span><span data-rack>₱0</span></div>
+      <div class="c-bkprice__row is-save"><span data-disc-label>Prestige discount</span><span data-disc>−₱0</span></div>
+      <div class="c-bkprice__row is-total"><span>Total</span><span data-total>₱0</span></div>
+    </div>
+
+    <p class="c-mehead">Payment</p>
+    <div class="c-melist c-bklist">
+      <a class="c-merow" href="me-payment-methods.html">
+        <span class="c-merow__lead"><i class="ph-light ph-wallet" aria-hidden="true"></i></span>
+        <span class="c-merow__main">GCash</span>
+        <span class="c-merow__value">Change</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
+      </a>
+    </div>
 
   </main>
 
-  <div class="c-bottombar c-bottombar--full">
+  <div class="c-req-bar">
     <a class="c-btn primary" data-pay href="book-done.html">Pay</a>
   </div>
 
@@ -122,9 +101,12 @@
     }
     var $ = function (s) { return document.querySelector(s); };
     var guests = 2;
+    var member = function (rate) { return rate - Math.round(rate * p.discount / 100); };
 
     document.title = 'Subic.Life - Book ' + p.name;
     $('[data-name]').textContent = p.name;
+    $('[data-thumb]').src = p.thumb;
+    $('[data-area]').textContent = p.category + ' · ' + p.area;
     $('[data-back]').href = 'place.html?p=' + p.id;
     $('[data-room-head]').textContent = p.unit === 'trip' ? 'Trip' : 'Room';
     $('[data-in-label]').textContent = p.dates[0];
@@ -133,16 +115,15 @@
     $('[data-out-value]').textContent = p.dates[3];
     $('[data-disc-label]').textContent = 'Prestige ' + p.discount + '% off';
 
+    // Each room with its photo and the member price, the same price the partner page quotes. A tick marks the pick.
     var pick = Math.min(Number(queryParam('room')) || 0, p.rooms.length - 1);
     $('[data-rooms]').innerHTML = p.rooms.map(function (r, i) {
-      return '<label class="c-radio-row">' +
-        '<input class="c-radio-row__input" type="radio" name="room" value="' + i + '"' + (i === pick ? ' checked' : '') + '>' +
-        '<span class="c-radio-row__dot"></span>' +
-        '<span class="c-radio-row__main">' +
-          '<span class="c-radio-row__title">' + r.name + '</span>' +
-          '<span class="c-radio-row__sub">' + r.sub + '</span>' +
-        '</span>' +
-        '<span class="c-radio-row__price">' + fmtPeso(r.rate) + '</span>' +
+      return '<label class="c-merow c-bkroom">' +
+        '<input class="c-bkroom__input" type="radio" name="room" value="' + i + '"' + (i === pick ? ' checked' : '') + '>' +
+        '<img class="c-bkroom__img" src="' + (r.photo || p.thumb) + '" alt="">' +
+        '<span class="c-merow__main"><span class="c-bkroom__name">' + r.name + '</span><span class="c-merow__sub">' + r.sub + '</span>' +
+        '<span class="c-bkroom__price">' + fmtPeso(member(r.rate)) + ' <s>' + fmtPeso(r.rate) + '</s></span></span>' +
+        '<i class="ph-light ph-check c-bkroom__tick" aria-hidden="true"></i>' +
       '</label>';
     }).join('');
 
@@ -159,9 +140,7 @@
       $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i;
     }
 
-    document.querySelectorAll('[data-rooms]').forEach(function (group) {
-      group.addEventListener('change', render);
-    });
+    $('[data-rooms]').addEventListener('change', render);
 
     document.querySelectorAll('[data-step]').forEach(function (b) {
       b.addEventListener('click', function () {

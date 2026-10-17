@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-c.css">
@@ -17,7 +18,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-push c-grouped">
+<div class="phone c-push c-discover c-cgpage c-ntpage">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -28,31 +29,29 @@
     </span>
   </header>
 
-  <nav class="c-navbar">
-    <a data-back class="c-navbar__back" href="me.html" aria-label="Back to Me">
-      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-    </a>
-    <h1 class="c-navbar__title">Notifications</h1>
-    <span></span>
-  </nav>
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" data-back href="me.html" aria-label="Back to Me"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title">Notifications</h1>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
 
   <main class="screen-scroll">
 
-    <div class="c-group u-mt-16">
-      <label class="c-group__row">
-        <span class="c-group__main">Offers near me</span>
+    <div class="c-melist c-cgform c-ntlist">
+      <label class="c-merow">
+        <span class="c-merow__main">Offers near me</span>
         <input class="c-switch" type="checkbox" checked>
       </label>
-      <label class="c-group__row">
-        <span class="c-group__main">Booking updates</span>
+      <label class="c-merow">
+        <span class="c-merow__main">Booking updates</span>
         <input class="c-switch" type="checkbox" checked>
       </label>
-      <label class="c-group__row">
-        <span class="c-group__main">Payment receipts</span>
+      <label class="c-merow">
+        <span class="c-merow__main">Payment receipts</span>
         <input class="c-switch" type="checkbox" checked>
       </label>
-      <label class="c-group__row">
-        <span class="c-group__main">Concierge messages</span>
+      <label class="c-merow">
+        <span class="c-merow__main">Concierge messages</span>
         <input class="c-switch" type="checkbox">
       </label>
     </div>

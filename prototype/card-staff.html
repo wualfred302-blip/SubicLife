@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Subic.Life - Show to Staff</title>
+  <title>Subic.Life - Show QR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-b.css">
@@ -17,7 +18,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone">
+<div class="phone c-discover c-qrpage">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -28,26 +29,28 @@
     </span>
   </header>
 
-  <nav class="c-navbar">
-    <a data-back class="c-navbar__back is-text" href="card.html">Done</a>
-  </nav>
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" href="card.html" data-back aria-label="Back to Card"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title">Show QR</h1>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
 
-  <main class="screen-scroll u-gutter">
-    <div class="c-staff-id u-mt-32">
-      <h1 class="c-staff-id__name">Ana Reyes</h1>
-      <p class="c-staff-id__sub">Prestige member · valid until Oct 2027</p>
+  <main class="screen-scroll">
+    <div class="c-qrwho">
+      <h2 class="c-qrwho__name">Ana Reyes</h2>
+      <p class="c-qrwho__sub">Prestige member · valid until Oct 2027</p>
     </div>
-    <div class="u-mt-32">
+
+    <div class="c-qrtile">
       <span class="c-qr is-large" role="img" aria-label="Member QR code"></span>
     </div>
-    <div class="c-staff-id__fallback">
-      <p class="c-staff-id__code">0042 1187</p>
-      <div class="c-progress u-mt-24">
-        <div class="c-progress__track"><span class="c-progress__bar" style="width: 60%"></span></div>
-        <p class="c-progress__label">New code in 0:24</p>
-      </div>
-      <p class="c-staff-id__help">Staff can type this number if the scan fails</p>
+
+    <p class="c-qrcode">0042 1187</p>
+    <div class="c-progress c-qrtimer">
+      <div class="c-progress__track"><span class="c-progress__bar" style="width: 60%"></span></div>
+      <p class="c-progress__label">New code in 0:24</p>
     </div>
+    <p class="c-qrhelp">Staff can type this number if the scan fails</p>
   </main>
 
   <span class="c-homeindicator"></span>

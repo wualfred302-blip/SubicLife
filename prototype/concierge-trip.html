@@ -59,8 +59,6 @@
   document.getElementById('dates').textContent = trip.dates + ' · Subic Bay';
 
   var box = document.getElementById('days');
-  // Phosphor light icons for the trip's icon names.
-  var ICON = { airport_shuttle: 'van', sailing: 'sailboat', login: 'sign-in', logout: 'sign-out', restaurant: 'fork-knife' };
   // Same lists as the Concierge tab: one hairline list per day, words only for a stop Mika is still arranging.
   trip.days.forEach(function (d) {
     var day = document.createElement('section');
@@ -73,8 +71,9 @@
       r.className = 'c-merow c-cgstop';
       r.href = i.href;
       r.innerHTML =
-        '<span class="c-merow__lead"><i class="ph-light ph-' + (ICON[i.icon] || 'calendar-blank') + '" aria-hidden="true"></i></span>' +
-        '<span class="c-merow__main"><span class="c-cgstop__time">' + i.time + '</span>' +
+        '<span class="c-cgstop__clock"><span class="c-cgstop__hm">' + i.time.split(' ')[0] + '</span>' +
+        '<span class="c-cgstop__ampm">' + (i.time.split(' ')[1] || '') + '</span></span>' +
+        '<span class="c-merow__main">' +
         '<span class="c-cgstop__name">' + i.title + '</span>' +
         '<span class="c-merow__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
         (i.status === 'progress' ? '<span class="c-cgstop__status">Mika is on it</span>' : '') +

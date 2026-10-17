@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="screen.css">
@@ -18,7 +20,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone is-pushed has-bottombar has-glow">
+<div class="phone is-pushed has-bottombar c-offerx c-offerwhite c-placewhite">
 
   <header class="c-statusbar is-overlay">
     <span>9:41</span>
@@ -29,7 +31,7 @@
     </span>
   </header>
 
-  <div class="c-xbar" aria-hidden="true"><a class="c-xbar__back" href="explore.html" data-back tabindex="-1"><span class="material-symbols-outlined">chevron_left</span></a><span class="c-xbar__title is-small" data-barname></span><span style="width:32px"></span></div>
+  <div class="c-xbar" aria-hidden="true"><a class="c-xbar__back" href="explore.html" data-back tabindex="-1"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a><span class="c-xbar__title is-small" data-barname></span><span style="width:32px"></span></div>
 
   <main class="screen-scroll">
 
@@ -37,67 +39,71 @@
       <div class="c-placehero__track" data-gallery data-snap></div>
       <span class="c-placehero__count" data-count></span>
       <div class="c-placehero__bar">
-        <a class="c-circle-btn" href="explore.html" aria-label="Back to Explore"><span class="material-symbols-outlined">chevron_left</span></a>
+        <a class="c-circle-btn" href="explore.html" data-back aria-label="Back to Explore"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
         <div class="c-placehero__right">
-          <button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save place" data-save><span class="material-symbols-outlined">bookmark</span></button>
-          <a class="c-circle-btn" data-share href="mailto:" aria-label="Share place"><span class="material-symbols-outlined">ios_share</span></a>
+          <button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save place" data-save><i class="ph-light ph-bookmark-simple" aria-hidden="true"></i></button>
+          <a class="c-circle-btn" data-share href="mailto:" aria-label="Share place"><i class="ph-light ph-export" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>
 
-    <section class="c-place-head">
-      <h1 class="c-place-head__name" data-name>Partner</h1>
-      <p class="c-place-head__meta"><span class="c-place-head__star"><span class="material-symbols-outlined">star</span><span data-rating></span></span><span data-meta></span></p>
-    </section>
+    <div class="c-offerbody">
 
-    <a class="c-poffer c-pressable" data-deal href="offer.html">
-      <span class="c-minicard" aria-hidden="true"></span>
-      <span class="c-poffer__text"><span class="c-poffer__title" data-otitle></span><span class="c-poffer__sub" data-osub></span></span>
-      <span class="material-symbols-outlined c-poffer__chev" aria-hidden="true">chevron_right</span>
-    </a>
+      <div class="u-gutter c-offer-head">
+        <h1 class="c-offer-title" data-name>Partner</h1>
+        <p class="c-offer-tier c-pmeta"><i class="ph-fill ph-star" aria-hidden="true"></i><span data-rating></span>&nbsp;<span data-meta></span></p>
+      </div>
 
-    <section class="c-psec">
-      <h2 class="c-section-title">About</h2>
-      <p class="c-pabout__text" data-about></p>
-    </section>
+      <a class="c-pperk" data-deal href="offer.html">
+        <span class="c-minicard" aria-hidden="true"></span>
+        <span class="c-pperk__text"><span class="c-pperk__title" data-otitle></span><span class="c-pperk__sub" data-osub></span></span>
+        <i class="ph-light ph-caret-right c-pperk__chev" aria-hidden="true"></i>
+      </a>
 
-    <section class="c-psec" data-rooms-sec hidden>
-      <h2 class="c-section-title" data-rooms-title>Rooms</h2>
-      <div class="c-carousel c-rooms" data-rooms data-snap></div>
-    </section>
+      <section class="c-osec">
+        <h2 class="c-section-title">About</h2>
+        <p class="c-pabout" data-about></p>
+      </section>
 
-    <section class="c-psec" data-stories-sec hidden>
-      <h2 class="c-section-title">Stories from members</h2>
-      <div class="c-carousel c-stories" data-stories data-snap></div>
-    </section>
+      <section class="c-osec" data-rooms-sec hidden>
+        <h2 class="c-section-title" data-rooms-title>Rooms</h2>
+        <div class="c-carousel c-rooms" data-rooms data-snap></div>
+      </section>
 
-    <section class="c-psec">
-      <h2 class="c-section-title">Hours and location</h2>
-      <div class="c-info-group">
-        <a class="c-mapthumb" data-maplink href="map.html" aria-label="Show this place on the map">
+      <section class="c-osec" data-stories-sec hidden>
+        <h2 class="c-section-title">Stories from members</h2>
+        <div class="c-carousel c-stories" data-stories data-snap></div>
+      </section>
+
+      <section class="c-osec">
+        <h2 class="c-section-title">Hours and location</h2>
+        <a class="c-pmap" data-maplink href="map.html" aria-label="Show this place on the map">
           <span class="c-mapthumb__live" id="minimap"></span>
         </a>
-        <div class="c-info-row">
-          <span class="material-symbols-outlined">schedule</span>
-          <span class="c-info-row__text" data-hours></span>
+        <div class="c-pinfo">
+          <div class="c-pinfo__row">
+            <i class="ph-light ph-clock" aria-hidden="true"></i>
+            <span class="c-pinfo__text" data-hours></span>
+          </div>
+          <a class="c-pinfo__row" data-address-link href="https://www.google.com/maps/search/?api=1&amp;query=Lighthouse+Marina+Resort+Subic+Bay" target="_blank" rel="noopener">
+            <i class="ph-light ph-map-pin" aria-hidden="true"></i>
+            <span class="c-pinfo__text" data-address></span>
+            <i class="ph-light ph-caret-right c-pinfo__chev" aria-hidden="true"></i>
+          </a>
+          <a class="c-pinfo__row" data-phone href="tel:">
+            <i class="ph-light ph-phone" aria-hidden="true"></i>
+            <span class="c-pinfo__text" data-phone-text></span>
+            <i class="ph-light ph-caret-right c-pinfo__chev" aria-hidden="true"></i>
+          </a>
         </div>
-        <a class="c-info-row" data-address-link href="https://www.google.com/maps/search/?api=1&amp;query=Lighthouse+Marina+Resort+Subic+Bay" target="_blank" rel="noopener">
-          <span class="material-symbols-outlined">location_on</span>
-          <span class="c-info-row__text" data-address></span>
-          <span class="material-symbols-outlined c-info-row__chev">chevron_right</span>
-        </a>
-        <a class="c-info-row" data-phone href="tel:">
-          <span class="material-symbols-outlined">call</span>
-          <span class="c-info-row__text" data-phone-text></span>
-          <span class="material-symbols-outlined c-info-row__chev">chevron_right</span>
-        </a>
-      </div>
-    </section>
+      </section>
+
+    </div>
 
   </main>
 
   <div class="c-bottombar">
-    <div class="c-bottombar__price" data-barprice hidden></div>
+    <div class="c-obar__price" data-barprice hidden></div>
     <a class="c-btn primary is-full" data-action href="book.html">Book</a>
   </div>
 
@@ -142,7 +148,6 @@
       $('[data-osub]').textContent = 'Prestige perk · ' + (p.bookable ? 'applied when you book' : p.discount ? 'show your card to pay' : 'with any bill');
     } else {
       deal.hidden = true;
-      $('.c-place-head').classList.add('is-solo');
     }
     var member = function (rate) { return Math.round(rate * (100 - p.discount) / 100); };
     if (p.bookable) {
@@ -150,9 +155,8 @@
       var rooms = p.rooms || [];
       var low = rooms.reduce(function (m, r) { return r.rate < m.rate ? r : m; }, rooms[0] || { rate: p.rackPrice });
       var bar = $('[data-barprice]');
-      bar.innerHTML = '<p class="c-bottombar__total">' + (rooms.length > 1 ? '<small>From </small>' : '') +
-        fmtPeso(member(low.rate)) + '<small> / ' + p.unit + '</small></p>' +
-        '<p class="c-bottombar__was"><s>' + fmtPeso(low.rate) + '</s> · ' + p.discount + '% off</p>';
+      bar.innerHTML = '<span>' + (rooms.length > 1 ? 'From ' : '') + '<b>' + fmtPeso(member(low.rate)) + '</b> / ' + p.unit + '</span>' +
+        '<s>' + fmtPeso(low.rate) + '</s>';
       bar.hidden = false;
       $('[data-action]').classList.remove('is-full');
       if (rooms.length) {
@@ -200,13 +204,14 @@
 
     // The price is already up top, so the bar is just the next step.
     var action = $('[data-action]');
-    action.textContent = p.bookable ? 'Check availability' : 'Show my card';
+    action.textContent = p.bookable ? 'Book' : 'Show my card';
     action.href = p.bookable ? 'book.html?p=' + p.id : 'card.html';
 
     var save = $('[data-save]');
     function paint(on) {
       save.classList.toggle('is-on', on);
       save.setAttribute('aria-pressed', on ? 'true' : 'false');
+      save.firstChild.className = (on ? 'ph-fill' : 'ph-light') + ' ph-bookmark-simple';
     }
     paint(SLSaved.has('place', p.id));
     save.addEventListener('click', function () {
