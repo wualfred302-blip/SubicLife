@@ -22,7 +22,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="quiet-tone" color-interpolation-filters="sRGB"><feColorMatrix in="SourceGraphic" type="matrix" values="0.9895 -0.1824 0.1886 0 0.0316  0.3305 0.4399 0.2209 0 0.0358  0.0647 0.5647 0.3491 0 0.0484  0 0 0 1 0" result="flat"/><feColorMatrix in="flat" type="saturate" values="2.0" result="quiet"/><feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  5 0 -5 0 -1.2" result="hwy"/><feFlood flood-color="#E8590C" result="orange"/><feComposite in="orange" in2="hwy" operator="in" result="road"/><feMerge><feMergeNode in="quiet"/><feMergeNode in="road"/></feMerge></filter></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="quiet-tone" color-interpolation-filters="sRGB"><feColorMatrix in="SourceGraphic" type="matrix" values="2.5339 -2.1223 0.4677 0 0.1448  1.1013 -0.7737 0.5345 0 0.1616  0.1554 -0.0164 0.6972 0 0.1867  0 0 0 1 0" result="quiet"/><feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  5 0 -5 0 -1.2" result="hwy"/><feMorphology in="hwy" operator="dilate" radius="3" result="hd"/><feMorphology in="hd" operator="erode" radius="3" result="hc"/><feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -0.66 -1.3 -0.24 0 1.4" result="dk"/><feComposite in="dk" in2="hc" operator="in" result="txt"/><feFlood flood-color="#E8590C" result="or"/><feComposite in="or" in2="hc" operator="in" result="road"/><feFlood flood-color="#FFFFFF" result="wh"/><feComposite in="wh" in2="txt" operator="in" result="wt"/><feMerge><feMergeNode in="quiet"/><feMergeNode in="road"/><feMergeNode in="wt"/></feMerge></filter></svg>
 <div class="phone c-mapx is-calm">
 
   <header class="c-statusbar c-statusbar--clear">
@@ -33,10 +33,6 @@
       <span class="material-symbols-outlined">battery_full</span>
     </span>
   </header>
-
-  <div class="c-fbhead">
-    <div class="c-fbhead__top"><span class="c-fbhead__word"><img class="c-fbhead__logo" src="img/logo.svg" alt="Subic.Life"></span></div>
-  </div>
 
   <div class="c-map" role="img" aria-label="Map of Subic Bay">
     <svg class="c-map__svg" preserveaspectratio="none" viewbox="0 0 390 844">
@@ -172,6 +168,7 @@
   </section>
 
   <div class="c-map-topbar">
+    <button class="c-msearch-btn" type="button" data-msearch aria-label="Search places"><i class="ph-light ph-magnifying-glass" aria-hidden="true"></i><span>Search places and offers</span></button>
     <div class="c-chiprow c-chiprow--compact" role="group" aria-label="Filter by category">
       <button class="c-chip" type="button" data-cat="all">All</button>
       <button class="c-chip" type="button" data-cat="hotels"><i class="ph-light ph-bed c-chip__icon" aria-hidden="true"></i>Hotels</button>
@@ -182,6 +179,14 @@
       <button class="c-chip" type="button" data-cat="nightlife"><i class="ph-light ph-moon c-chip__icon" aria-hidden="true"></i>Nightlife</button>
     </div>
   </div>
+  <div class="c-msearch" hidden>
+    <div class="c-msearch__scrim" data-msearch-close></div>
+    <div class="c-msearch__panel" role="dialog" aria-label="Search places">
+      <label class="c-msearch__bar"><i class="ph-light ph-magnifying-glass" aria-hidden="true"></i><input class="c-msearch__input" type="search" placeholder="Search places and offers" autocomplete="off" enterkeyhint="search" aria-label="Search places and offers"><button class="c-msearch__clear" type="button" aria-label="Clear" hidden><i class="ph-fill ph-x-circle" aria-hidden="true"></i></button></label>
+      <ul class="c-msearch__list" hidden></ul>
+    </div>
+  </div>
+
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
     <a class="c-tabbar__tab is-active" href="map.html" aria-current="page"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
     <a class="c-tabbar__tab" href="explore.html"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
@@ -193,6 +198,10 @@
 
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
+<script src="map-vector.js"></script>
 <script src="app.js"></script>
 <script src="data-a.js"></script>
 <script src="map-data.js"></script>
@@ -413,6 +422,12 @@
   function setLayer(key) {
     if (tiles) map.removeLayer(tiles);
     stage.classList.toggle('is-street', key === 'light');
+    if (key === 'light') {
+      // Vector street map: sharp text at any zoom (OpenFreeMap, recoloured in map-vector.js).
+      var gl = tiles = L.maplibreGL({ style: { version: 8, sources: {}, layers: [] }, attribution: '&copy; <a href="https://openfreemap.org">OpenFreeMap</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+      SLMapStyle().then(function (s) { if (tiles !== gl) return; gl.getMaplibreMap().setStyle(s); gl.getMaplibreMap().once('idle', function () { tileOk++; }); }).catch(function () { lockMap(); });
+      return;
+    }
     tiles = L.tileLayer(TILE[key], { maxZoom: 19, attribution: ATTRS[key] });
     tiles.on('tileload', function () { tileOk++; });
     tiles.on('tileerror', function () { tileErr++; if (!tileOk && tileErr >= 3) lockMap(); });
@@ -532,6 +547,56 @@
       applyFilter(true);
     });
   });
+
+  // Search: the magnifier floats a Spotlight-style bar; places matching name, category, area or offer list as you type.
+  // Picking one closes search, shows every category if a chip hid it, then flies to its pin and card.
+  var sBox = $('.c-msearch'), sBtn = $('[data-msearch]'), sInput = $('.c-msearch__input'),
+      sList = $('.c-msearch__list'), sClear = $('.c-msearch__clear');
+  function openSearch() {
+    // The floating bar opens exactly where the top bar sits, so it reads as the same bar lifting.
+    var r = sBtn.getBoundingClientRect(), o = sBox.parentElement.getBoundingClientRect(), panel = $('.c-msearch__panel');
+    panel.style.top = (r.top - o.top) + 'px'; panel.style.left = (r.left - o.left) + 'px'; panel.style.right = (o.right - r.right) + 'px';
+    sBox.hidden = false; sInput.value = ''; renderSearch();
+    setTimeout(function () { sInput.focus(); }, 30);
+  }
+  function closeSearch() { sBox.hidden = true; sInput.blur(); sBtn.focus(); }
+  function renderSearch() {
+    var q = sInput.value.trim().toLowerCase();
+    sClear.hidden = !q;
+    sList.innerHTML = '';
+    sList.hidden = !q;
+    if (!q) return;
+    var hits = byDist.filter(function (it) {
+      return [it.name, it.category, it.area, it.offer].join(' ').toLowerCase().indexOf(q) >= 0;
+    }).slice(0, 8);
+    if (!hits.length) { sList.innerHTML = '<li class="c-msearch__none">No places match</li>'; return; }
+    hits.forEach(function (it) {
+      var li = document.createElement('li');
+      li.innerHTML = '<button class="c-msearch__row" type="button"><img alt=""><span class="c-msearch__txt">' +
+        '<span class="c-msearch__name"></span><span class="c-msearch__sub"></span></span><span class="c-msearch__tag"></span></button>';
+      li.querySelector('img').src = it.photo;
+      li.querySelector('.c-msearch__name').textContent = it.name;
+      li.querySelector('.c-msearch__sub').textContent = it.category + ' · ' + it.dist;
+      li.querySelector('.c-msearch__tag').textContent = it.tag;
+      li.querySelector('button').addEventListener('click', function () { pickSearch(it); });
+      sList.appendChild(li);
+    });
+  }
+  function pickSearch(it) {
+    sBox.hidden = true; sInput.blur();
+    if (it.hidden) {
+      cat = 'all';
+      $$('.c-chiprow [data-cat]').forEach(function (c) { c.classList.remove('is-selected'); });
+      applyFilter(false);
+    }
+    phoneEl.classList.add('has-pick');
+    select(it.id, { pan: true });
+  }
+  sBtn.addEventListener('click', openSearch);
+  sInput.addEventListener('input', renderSearch);
+  sClear.addEventListener('click', function () { sInput.value = ''; renderSearch(); sInput.focus(); });
+  $('[data-msearch-close]').addEventListener('click', closeSearch);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !sBox.hidden) closeSearch(); });
 
   // Locate: the you-are-here dot appears and the map flies to it. Layers: street map and satellite.
   locateBtn.addEventListener('click', function () {
