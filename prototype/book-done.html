@@ -69,32 +69,46 @@
     var $ = function (s) { return document.querySelector(s); };
     var i = Number(queryParam('room') || 0);
     var r = p.rooms[i] || p.rooms[0];
-    var off = Math.round(r.rate * p.discount / 100);
-    var total = r.rate - off;
     var trip = p.unit === 'trip';
+    var plural = function (n, one, many) { return n + ' ' + (n === 1 ? one : many); };
+
+    // Stays carry their dates, party and free night from Book; trips and old links fall back to the sample day.
+    var WK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var parse = function (s) { var m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(s || ''); return m ? new Date(+m[1], m[2] - 1, +m[3]) : null; };
+    var dayName = function (d) { return WK[d.getDay()] + ', ' + d.getDate() + ' ' + MON[d.getMonth()]; };
+    var stamp = function (d, h) { return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + 'T' + h + '0000'; };
+    var checkIn = !trip && parse(queryParam('in')), checkOut = !trip && parse(queryParam('out'));
+    var nights = checkIn && checkOut ? Math.round((checkOut - checkIn) / 864e5) : 1;
+    var adults = Number(queryParam('a')) || 2, kids = Number(queryParam('c')) || 0;
+    var off = Math.round(r.rate * p.discount / 100) * nights;
+    var free = !trip && queryParam('free') === '1' ? r.rate - Math.round(r.rate * p.discount / 100) : 0;
+    var total = r.rate * nights - off - free;
 
     // The place shows once, in its row; the room and guests sit under its name.
     document.title = 'Subic.Life - Booked ' + p.name;
-    $('[data-saved]').textContent = 'You saved ' + fmtPeso(off);
+    $('[data-saved]').textContent = 'You saved ' + fmtPeso(off + free);
     $('[data-thumb]').src = p.thumb;
     $('[data-name]').textContent = p.name;
-    $('[data-sub]').textContent = r.name + ' · 2 guests';
+    $('[data-sub]').textContent = checkIn
+      ? r.name + ' · ' + plural(nights, 'night', 'nights') + ' · ' + plural(adults + kids, 'guest', 'guests')
+      : r.name + ' · 2 guests';
 
     var row = function (label, value, cls) {
       return '<div class="c-merow"><span class="c-merow__main">' + label + '</span><span class="c-merow__value' + (cls ? ' ' + cls : '') + '">' + value + '</span></div>';
     };
     $('[data-rows]').innerHTML =
-      row(p.dates[0], p.dates[2], 'c-bkval') +
-      row(p.dates[1], p.dates[3], 'c-bkval') +
+      row(p.dates[0], checkIn ? dayName(checkIn) : p.dates[2], 'c-bkval') +
+      row(p.dates[1], checkOut ? dayName(checkOut) : p.dates[3], 'c-bkval') +
+      (free ? row('Free night', 'Used', 'c-bkval') : '') +
       row('Booking code', p.code, 'c-bkval c-bkcode') +
-      row('Paid with GCash', fmtPeso(total), 'c-bkval');
+      (total > 0 ? row('Paid with GCash', fmtPeso(total), 'c-bkval') : '');
 
     var ics = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'BEGIN:VEVENT',
-      'DTSTART:' + (trip ? '20261017T080000' : '20261017T140000'),
-      'DTEND:' + (trip ? '20261017T170000' : '20261018T120000'),
+      'DTSTART:' + (trip ? '20261017T080000' : checkIn ? stamp(checkIn, 14) : '20261017T140000'),
+      'DTEND:' + (trip ? '20261017T170000' : checkOut ? stamp(checkOut, 12) : '20261018T120000'),
       'SUMMARY:' + p.name + ' - ' + r.name,
       'LOCATION:' + p.address,
       'DESCRIPTION:Booking code ' + p.code + '. Show your card QR at check-in.',

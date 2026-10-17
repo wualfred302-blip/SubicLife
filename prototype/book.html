@@ -43,7 +43,20 @@
       <span class="c-bkplace__text"><span class="c-bkplace__name" data-name>Partner</span><span class="c-bkplace__sub" data-area></span></span>
     </div>
 
-    <div class="c-melist c-cgform">
+    <div class="c-melist c-cgform" data-stay-form hidden>
+      <button class="c-merow c-bkpick" type="button" data-open="dates">
+        <span class="c-merow__main">Dates<span class="c-merow__sub" data-nights>2 nights</span></span>
+        <span class="c-merow__value c-bkval" data-range>Fri 23 – Sun 25 Oct</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
+      </button>
+      <button class="c-merow c-bkpick" type="button" data-open="guests">
+        <span class="c-merow__main">Guests</span>
+        <span class="c-merow__value c-bkval" data-party>2 adults</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="c-melist c-cgform" data-trip-form hidden>
       <div class="c-merow">
         <span class="c-merow__main" data-in-label>Check-in</span>
         <span class="c-merow__value c-bkval" data-in-value>Sat, 17 Oct</span>
@@ -65,11 +78,28 @@
     <p class="c-mehead" data-room-head>Room</p>
     <div class="c-melist c-bklist" data-rooms role="radiogroup"></div>
 
+    <div data-perk hidden>
+      <p class="c-mehead">Prestige perk</p>
+      <div class="c-melist c-cgform">
+        <label class="c-merow c-bkperk">
+          <span class="c-merow__main">Use your free night<span class="c-merow__sub">Prestige includes 1 free night</span></span>
+          <input class="c-switch" type="checkbox" data-free checked>
+        </label>
+      </div>
+    </div>
+
     <p class="c-mehead">Price</p>
     <div class="c-melist c-bkprice">
       <div class="c-bkprice__row"><span data-line>Room</span><span data-rack>₱0</span></div>
       <div class="c-bkprice__row is-save"><span data-disc-label>Prestige discount</span><span data-disc>−₱0</span></div>
+      <div class="c-bkprice__row is-save" data-free-row hidden><span>Free night</span><span data-free-amt>−₱0</span></div>
       <div class="c-bkprice__row is-total"><span>Total</span><span data-total>₱0</span></div>
+    </div>
+    <p class="c-bknote" data-cancel hidden></p>
+
+    <div data-req hidden>
+      <p class="c-mehead">Requests</p>
+      <div class="c-melist"><textarea class="c-bkreq" rows="3" placeholder="Arrival time, bed setup, anything the hotel should know (optional)" aria-label="Requests for the hotel"></textarea></div>
     </div>
 
     <p class="c-mehead">Payment</p>
@@ -85,7 +115,33 @@
   </main>
 
   <div class="c-req-bar">
+    <span class="c-bkbar__sum" data-bar-sum hidden><b data-bar-total>₱0</b><span data-bar-nights>Total</span></span>
     <a class="c-btn primary" data-pay href="book-done.html">Pay</a>
+  </div>
+
+  <div class="c-sheet c-bksheet" data-sheet="dates" role="dialog" aria-modal="true" aria-label="Choose dates" hidden>
+    <button class="c-sheet__scrim" type="button" data-close aria-label="Close"></button>
+    <div class="c-sheet__panel">
+      <div class="c-sheet__grabber" aria-hidden="true"></div>
+      <div class="c-bksheet__head"><h2 class="c-bksheet__title">Dates</h2><p class="c-bksheet__sub" data-cal-sum aria-live="polite"></p></div>
+      <div class="c-bkdow" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+      <div class="c-bkcal" data-cal></div>
+      <div class="c-bksheet__foot"><button class="c-bksheet__link" type="button" data-cal-clear>Clear</button><button class="c-bksheet__done" type="button" data-cal-done>Done</button></div>
+    </div>
+  </div>
+
+  <div class="c-sheet c-bksheet" data-sheet="guests" role="dialog" aria-modal="true" aria-label="Guests" hidden>
+    <button class="c-sheet__scrim" type="button" data-close aria-label="Close"></button>
+    <div class="c-sheet__panel">
+      <div class="c-sheet__grabber" aria-hidden="true"></div>
+      <div class="c-bksheet__head"><h2 class="c-bksheet__title">Guests</h2></div>
+      <div class="c-melist c-cgform">
+        <div class="c-merow"><span class="c-merow__main">Adults<span class="c-merow__sub">Ages 13 or above</span></span><span class="c-cgstep"><button class="c-cgstep__btn" type="button" data-gstep="a-1" aria-label="Remove an adult"><i class="ph-light ph-minus" aria-hidden="true"></i></button><span class="c-cgstep__value" data-adults aria-live="polite">2</span><button class="c-cgstep__btn" type="button" data-gstep="a1" aria-label="Add an adult"><i class="ph-light ph-plus" aria-hidden="true"></i></button></span></div>
+        <div class="c-merow"><span class="c-merow__main">Children<span class="c-merow__sub">Ages 2 to 12</span></span><span class="c-cgstep"><button class="c-cgstep__btn" type="button" data-gstep="c-1" aria-label="Remove a child"><i class="ph-light ph-minus" aria-hidden="true"></i></button><span class="c-cgstep__value" data-kids aria-live="polite">0</span><button class="c-cgstep__btn" type="button" data-gstep="c1" aria-label="Add a child"><i class="ph-light ph-plus" aria-hidden="true"></i></button></span></div>
+      </div>
+      <p class="c-bksheet__note" data-guest-note></p>
+      <div class="c-bksheet__foot"><button class="c-bksheet__done is-wide" type="button" data-guests-done>Done</button></div>
+    </div>
   </div>
 
   <span class="c-homeindicator"></span>
@@ -100,7 +156,8 @@
       return;
     }
     var $ = function (s) { return document.querySelector(s); };
-    var guests = 2;
+    var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+    var stay = p.unit === 'night';
     var member = function (rate) { return rate - Math.round(rate * p.discount / 100); };
 
     document.title = 'Subic.Life - Book ' + p.name;
@@ -108,15 +165,12 @@
     $('[data-thumb]').src = p.thumb;
     $('[data-area]').textContent = p.category + ' · ' + p.area;
     $('[data-back]').href = 'place.html?p=' + p.id;
-    $('[data-room-head]').textContent = p.unit === 'trip' ? 'Trip' : 'Room';
-    $('[data-in-label]').textContent = p.dates[0];
-    $('[data-out-label]').textContent = p.dates[1];
-    $('[data-in-value]').textContent = p.dates[2];
-    $('[data-out-value]').textContent = p.dates[3];
+    $('[data-room-head]').textContent = stay ? 'Room' : 'Trip';
     $('[data-disc-label]').textContent = 'Prestige ' + p.discount + '% off';
 
     // Each room with its photo and the member price, the same price the partner page quotes. A tick marks the pick.
     var pick = Math.min(Number(queryParam('room')) || 0, p.rooms.length - 1);
+    var sleeps = p.rooms.map(function (r) { var m = /sleeps (\d+)/.exec(r.sub); return m ? Number(m[1]) : 99; });
     $('[data-rooms]').innerHTML = p.rooms.map(function (r, i) {
       return '<label class="c-merow c-bkroom">' +
         '<input class="c-bkroom__input" type="radio" name="room" value="' + i + '"' + (i === pick ? ' checked' : '') + '>' +
@@ -126,28 +180,183 @@
         '<i class="ph-light ph-check c-bkroom__tick" aria-hidden="true"></i>' +
       '</label>';
     }).join('');
+    var room = function () { return Number(document.querySelector('input[name="room"]:checked').value); };
+
+    if (!stay) {
+      // Trips keep the simple form: one date, a start time and a guest count.
+      $('[data-trip-form]').hidden = false;
+      $('[data-in-label]').textContent = p.dates[0];
+      $('[data-out-label]').textContent = p.dates[1];
+      $('[data-in-value]').textContent = p.dates[2];
+      $('[data-out-value]').textContent = p.dates[3];
+      var guests = 2;
+      var renderTrip = function () {
+        var i = room(), r = p.rooms[i], off = Math.round(r.rate * p.discount / 100), total = r.rate - off;
+        $('[data-line]').textContent = r.name + ', 1 ' + p.unit;
+        $('[data-rack]').textContent = fmtPeso(r.rate);
+        $('[data-disc]').textContent = '−' + fmtPeso(off);
+        $('[data-total]').textContent = fmtPeso(total);
+        $('[data-pay]').textContent = 'Pay ' + fmtPeso(total);
+        $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i;
+      };
+      $('[data-rooms]').addEventListener('change', renderTrip);
+      $$('[data-step]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          guests = Math.min(6, Math.max(1, guests + Number(b.dataset.step)));
+          $('[data-guests]').textContent = guests;
+        });
+      });
+      renderTrip();
+      return;
+    }
+
+    // ---- Stays: a date range from a calendar, adults and children, the Prestige free night, requests. ----
+    $$('[data-stay-form], [data-perk], [data-free-row], [data-cancel], [data-req], [data-bar-sum]').forEach(function (e) { e.hidden = false; });
+    $('.c-req-bar').classList.add('is-stay');
+
+    var DAY = 864e5, MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var WK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var parse = function (s) { var m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(s || ''); return m ? new Date(+m[1], m[2] - 1, +m[3]) : null; };
+    var iso = function (d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+    var add = function (d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); };
+    var nightsOf = function (a, b) { return Math.round((b - a) / DAY); };
+    var dayName = function (d) { return WK[d.getDay()] + ', ' + d.getDate() + ' ' + MON[d.getMonth()]; };
+    var range = function (a, b) {
+      return a.getMonth() === b.getMonth()
+        ? WK[a.getDay()] + ' ' + a.getDate() + ' – ' + WK[b.getDay()] + ' ' + b.getDate() + ' ' + MON[b.getMonth()]
+        : WK[a.getDay()] + ' ' + a.getDate() + ' ' + MON[a.getMonth()] + ' – ' + WK[b.getDay()] + ' ' + b.getDate() + ' ' + MON[b.getMonth()];
+    };
+    var plural = function (n, one, many) { return n + ' ' + (n === 1 ? one : many); };
+
+    // The prototype's "today" is Sat 17 Oct 2026; the sample stay is the next weekend.
+    var today = new Date(2026, 9, 17);
+    var checkIn = parse(queryParam('in')) || new Date(2026, 9, 23);
+    var checkOut = parse(queryParam('out')) || add(checkIn, 2);
+    var adults = Number(queryParam('a')) || 2, kids = Number(queryParam('c')) || 0;
+    var maxParty = Math.max.apply(null, sleeps);
+
+    function party() {
+      return plural(adults, 'adult', 'adults') + (kids ? ', ' + plural(kids, 'child', 'children') : '');
+    }
 
     function render() {
-      var i = Number(document.querySelector('input[name="room"]:checked').value);
-      var r = p.rooms[i];
-      var off = Math.round(r.rate * p.discount / 100);
-      var total = r.rate - off;
-      $('[data-line]').textContent = r.name + ', 1 ' + p.unit;
-      $('[data-rack]').textContent = fmtPeso(r.rate);
+      // Rooms too small for the party grey out; if the picked one no longer fits, the first that does is picked.
+      var n = adults + kids;
+      $$('.c-bkroom').forEach(function (row, i) {
+        var input = row.querySelector('input');
+        input.disabled = sleeps[i] < n;
+        row.classList.toggle('is-full', input.disabled);
+      });
+      if (document.querySelector('input[name="room"]:checked').disabled) {
+        var fit = $$('input[name="room"]').filter(function (x) { return !x.disabled; })[0];
+        if (fit) fit.checked = true;
+      }
+
+      var i = room(), r = p.rooms[i], nights = nightsOf(checkIn, checkOut);
+      var rack = r.rate * nights, off = Math.round(r.rate * p.discount / 100) * nights;
+      var free = $('[data-free]').checked ? member(r.rate) : 0;
+      var total = rack - off - free;
+      var deadline = add(checkIn, -2);
+
+      $('[data-range]').textContent = range(checkIn, checkOut);
+      $('[data-nights]').textContent = plural(nights, 'night', 'nights');
+      $('[data-party]').textContent = party();
+      $('[data-line]').textContent = fmtPeso(r.rate) + ' × ' + plural(nights, 'night', 'nights');
+      $('[data-rack]').textContent = fmtPeso(rack);
       $('[data-disc]').textContent = '−' + fmtPeso(off);
+      $('[data-free-row]').hidden = !free;
+      $('[data-free-amt]').textContent = '−' + fmtPeso(free);
       $('[data-total]').textContent = fmtPeso(total);
-      $('[data-pay]').textContent = 'Pay ' + fmtPeso(total);
-      $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i;
+      $('[data-cancel]').textContent = deadline >= today
+        ? 'Free cancellation until ' + dayName(deadline) + '.'
+        : 'Check-in is under 2 days away, so this stay can’t be cancelled for free.';
+      $('[data-bar-total]').textContent = fmtPeso(total);
+      $('[data-bar-nights]').textContent = 'Total for ' + plural(nights, 'night', 'nights');
+      $('[data-pay]').textContent = total > 0 ? 'Pay' : 'Confirm';
+      $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i + '&in=' + iso(checkIn) + '&out=' + iso(checkOut) +
+        '&a=' + adults + '&c=' + kids + '&free=' + (free ? 1 : 0);
     }
 
     $('[data-rooms]').addEventListener('change', render);
+    $('[data-free]').addEventListener('change', render);
 
-    document.querySelectorAll('[data-step]').forEach(function (b) {
+    // ---- Sheets: dates and guests slide up over the page; the scrim or Done closes them. ----
+    var opener = null;
+    function openSheet(name, from) {
+      opener = from;
+      var s = $('[data-sheet="' + name + '"]');
+      s.hidden = false;
+      (s.querySelector('[data-focus]') || s.querySelector('button')).focus();
+    }
+    function closeSheet() {
+      $$('[data-sheet]').forEach(function (s) { s.hidden = true; });
+      if (opener) opener.focus();
+    }
+    $$('[data-open]').forEach(function (b) {
       b.addEventListener('click', function () {
-        guests = Math.min(6, Math.max(1, guests + Number(b.dataset.step)));
-        $('[data-guests]').textContent = guests;
+        if (b.dataset.open === 'dates') { pickIn = checkIn; pickOut = checkOut; drawCal(); }
+        if (b.dataset.open === 'guests') drawGuests();
+        openSheet(b.dataset.open, b);
       });
     });
+    $$('[data-close]').forEach(function (b) { b.addEventListener('click', closeSheet); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeSheet(); });
+
+    // Calendar: two months from today. Tap check-in, then check-out; tapping again starts over.
+    var pickIn = checkIn, pickOut = checkOut;
+    var months = [new Date(today.getFullYear(), today.getMonth(), 1), new Date(today.getFullYear(), today.getMonth() + 1, 1)];
+    function drawCal() {
+      $('[data-cal]').innerHTML = months.map(function (m) {
+        var cells = '', first = m.getDay(), last = new Date(m.getFullYear(), m.getMonth() + 1, 0).getDate();
+        for (var b = 0; b < first; b++) cells += '<span></span>';
+        for (var d = 1; d <= last; d++) {
+          var day = new Date(m.getFullYear(), m.getMonth(), d), cls = 'c-bkday';
+          if (pickIn && +day === +pickIn) cls += ' is-start';
+          if (pickOut && +day === +pickOut) cls += ' is-end';
+          if (pickIn && pickOut && day > pickIn && day < pickOut) cls += ' is-in';
+          if (pickIn && pickOut) cls += ' has-range';
+          cells += '<button class="' + cls + '" type="button" data-day="' + iso(day) + '"' + (day < today ? ' disabled' : '') +
+            ' aria-label="' + dayName(day) + '"' + (cls.indexOf('is-start') > -1 || cls.indexOf('is-end') > -1 ? ' aria-pressed="true"' : '') + '>' + d + '</button>';
+        }
+        return '<section class="c-bkmonth"><h3 class="c-bkmonth__title">' + MONTH[m.getMonth()] + ' ' + m.getFullYear() + '</h3><div class="c-bkmonth__grid">' + cells + '</div></section>';
+      }).join('');
+      $('[data-cal-sum]').textContent = pickIn && pickOut
+        ? range(pickIn, pickOut) + ' · ' + plural(nightsOf(pickIn, pickOut), 'night', 'nights')
+        : pickIn ? 'Check-in ' + dayName(pickIn) + ' · now pick check-out' : 'Pick your check-in day';
+      $('[data-cal-done]').disabled = !(pickIn && pickOut);
+    }
+    $('[data-cal]').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-day]');
+      if (!b || b.disabled) return;
+      var d = parse(b.dataset.day);
+      if (!pickIn || pickOut || d <= pickIn) { pickIn = d; pickOut = null; }
+      else pickOut = d;
+      drawCal();
+      var again = $('[data-day="' + b.dataset.day + '"]');
+      if (again) again.focus();
+    });
+    $('[data-cal-clear]').addEventListener('click', function () { pickIn = null; pickOut = null; drawCal(); });
+    $('[data-cal-done]').addEventListener('click', function () { checkIn = pickIn; checkOut = pickOut; closeSheet(); render(); });
+
+    // Guests: adults (at least one) and children; the total is capped at the biggest room here.
+    function drawGuests() {
+      $('[data-adults]').textContent = adults;
+      $('[data-kids]').textContent = kids;
+      $('[data-gstep="a-1"]').disabled = adults <= 1;
+      $('[data-gstep="c-1"]').disabled = kids <= 0;
+      $('[data-gstep="a1"]').disabled = $('[data-gstep="c1"]').disabled = adults + kids >= maxParty;
+      $('[data-guest-note]').textContent = 'Rooms here sleep up to ' + maxParty + '.';
+    }
+    $$('[data-gstep]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.gstep, step = k.slice(1) === '1' ? 1 : -1;
+        if (k[0] === 'a') adults += step; else kids += step;
+        drawGuests();
+        render();
+      });
+    });
+    $('[data-guests-done]').addEventListener('click', closeSheet);
 
     render();
   })();
