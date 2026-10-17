@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="screen.css">
@@ -19,7 +21,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone is-pushed has-bottombar has-glow c-offerx">
+<div class="phone is-pushed has-bottombar c-offerx c-offerwhite">
 
   <header class="c-statusbar is-overlay">
     <span>9:41</span>
@@ -30,7 +32,7 @@
     </span>
   </header>
 
-  <div class="c-xbar" aria-hidden="true"><a class="c-xbar__back" href="explore.html" data-back tabindex="-1"><span class="material-symbols-outlined">chevron_left</span></a><span class="c-xbar__title is-small" id="bar-title"></span><span style="width:32px"></span></div>
+  <div class="c-xbar" aria-hidden="true"><a class="c-xbar__back" href="explore.html" data-back tabindex="-1"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a><span class="c-xbar__title is-small" id="bar-title"></span><span style="width:32px"></span></div>
 
   <main class="screen-scroll" id="offer-main"></main>
 
@@ -40,6 +42,7 @@
 </div>
 <script src="data-a.js"></script>
 <script src="data-e.js"></script>
+<script src="saved.js"></script>
 <script>
 (function () {
   var o = offerFor(queryParam('id') || 'lighthouse-rooms') || offerFor('lighthouse-rooms');
@@ -64,10 +67,10 @@
     var rooms = place.rooms || [];
     rooms.forEach(function (r, i) { if (r.rate < rooms[pick].rate) pick = i; });
     was = rooms.length ? rooms[pick].rate : place.rackPrice; now = Math.round(was * (100 - pct) / 100); unit = place.unit;
-    label = (rooms.length ? rooms[pick].name + ', ' : '') + 'per ' + unit;
+    label = 'per ' + unit;
   } else {
     was = o.place === 'meatplus' ? 2400 : 2000; now = Math.round(was * (100 - pct) / 100);
-    label = 'On a ' + fmtPeso(was) + ' bill';
+    label = 'on a ' + fmtPeso(was) + ' bill';
   }
   var saved = was - now;
   var gift = !o.bookable && !pct;
@@ -83,30 +86,33 @@
 
   var fine = o.terms.filter(function (t) { return !/show your|staff confirm|book at|in app/i.test(t); });
 
+  // The key numbers in one row, like the App Store's info strip: what you pay, what you save, until when.
+  var until = o.valid.split(' ');
+  var validFact = ['Valid until', until.slice(0, 2).join(' '), until.slice(2).join(' ')];
+  var facts = gift
+    ? [['Dessert', 'Free', 'with any bill'], validFact]
+    : [['You pay', fmtPeso(now), label], ['You save', fmtPeso(saved), pct + '% off', true], validFact];
+
   main.innerHTML =
     '<div class="c-placehero">' +
       '<div class="c-placehero__track" data-gallery data-snap>' + photos.map(function (src, i) { return '<img src="' + src + '" alt=""' + (i ? ' loading="lazy"' : '') + '>'; }).join('') + '</div>' +
       (photos.length > 1 ? '<span class="c-placehero__count" data-count>1 / ' + photos.length + '</span>' : '') +
       '<div class="c-placehero__bar">' +
-        '<a class="c-circle-btn" data-back href="explore.html" aria-label="Back to Explore"><span class="material-symbols-outlined">chevron_left</span></a>' +
+        '<a class="c-circle-btn" data-back href="explore.html" aria-label="Back to Explore"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>' +
         '<div class="c-placehero__right">' +
-          '<button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save offer" data-save><span class="material-symbols-outlined">bookmark</span></button>' +
+          '<button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save offer" data-save><i class="ph-light ph-bookmark-simple" aria-hidden="true"></i></button>' +
         '</div>' +
       '</div>' +
     '</div>' +
     '<div class="c-offerbody">' +
     '<div class="u-gutter c-offer-head">' +
       '<h1 class="c-offer-title">' + esc(o.title) + '</h1>' +
-      '<p class="c-offer-tier">Prestige perk · until ' + esc(o.valid) + '</p>' +
+      '<p class="c-offer-tier">' + esc(place.name) + ' · Prestige perk</p>' +
     '</div>' +
-    '<div class="c-oval">' +
-      (gift
-        ? '<p class="c-oval__label">Dessert, with any bill</p>' +
-          '<p class="c-oval__price"><span class="c-oval__now">On the house</span></p>'
-        : '<p class="c-oval__label">' + esc(label) + '</p>' +
-          '<p class="c-oval__price"><span class="c-oval__now">' + fmtPeso(now) + '</span><s class="c-oval__was">' + fmtPeso(was) + '</s></p>' +
-          '<p class="c-oval__save">You save ' + fmtPeso(saved) + (o.bookable ? ' a ' + unit : '') + '</p>') +
-    '</div>' +
+    '<div class="c-ofacts">' + facts.map(function (f) {
+      return '<div class="c-ofacts__cell"><span class="c-ofacts__label">' + f[0] + '</span>' +
+        '<span class="c-ofacts__value' + (f[3] ? ' is-save' : '') + '">' + esc(f[1]) + '</span><span class="c-ofacts__sub">' + esc(f[2]) + '</span></div>';
+    }).join('') + '</div>' +
     '<section class="c-osec">' +
       '<h2 class="c-section-title">How it works</h2>' +
       '<ol class="c-osteps c-otile">' + steps.map(function (t, i) {
@@ -119,7 +125,7 @@
         '<span class="c-oplace__thumb"><img src="' + place.thumb + '" alt=""></span>' +
         '<span class="c-oplace__text"><span class="c-oplace__name">' + esc(place.name) + '</span>' +
         '<span class="c-oplace__sub">' + esc(place.category) + ' · ' + esc(place.distance) + '</span></span>' +
-        '<span class="material-symbols-outlined c-oplace__chev" aria-hidden="true">chevron_right</span>' +
+        '<i class="ph-light ph-caret-right c-oplace__chev" aria-hidden="true"></i>' +
       '</a>' +
     '</section>' +
     (fine.length ? '<section class="c-osec">' +
@@ -141,9 +147,16 @@
   if (count) gal.addEventListener('scroll', function () { count.textContent = (Math.round(gal.scrollLeft / gal.clientWidth) + 1) + ' / ' + photos.length; }, { passive: true });
 
   var save = main.querySelector('[data-save]');
-  save.addEventListener('click', function () {
-    var on = save.classList.toggle('is-on');
+  function paint(on) {
+    save.classList.toggle('is-on', on);
     save.setAttribute('aria-pressed', on ? 'true' : 'false');
+    save.firstChild.className = (on ? 'ph-fill' : 'ph-light') + ' ph-bookmark-simple';
+  }
+  paint(SLSaved.has('offer', o.id));
+  save.addEventListener('click', function () {
+    var on = SLSaved.toggle('offer', o.id);
+    paint(on);
+    SLSaved.note(on);
   });
 
   // Past the photo, a frosted bar with the offer title takes over the top.

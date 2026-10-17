@@ -9,6 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/thin/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-c.css">
@@ -19,7 +23,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone theme-night has-wall">
+<div class="phone c-discover c-cgpage">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -30,51 +34,45 @@
     </span>
   </header>
 
+  <div class="c-dhead">
+    <h1 class="c-dhead__title">Concierge</h1>
+  </div>
 
   <main class="screen-scroll">
 
-    <header class="c-hero">
-    <h1 class="u-sr-only">Concierge</h1>
-
-    <section class="c-mika2">
-      <div class="c-mika2__head">
-        <span class="c-mika__av" aria-hidden="true">MK</span>
-        <div class="c-mika2__who">
-          <h2 class="c-mika2__name">Mika</h2>
-          <p class="c-mika2__status">Online · replies in ~5 min</p>
-        </div>
-        <a class="c-mika2__call" href="tel:+63472520800" aria-label="Call Mika"><span class="material-symbols-outlined">call</span></a>
-      </div>
-      <a class="c-mika2__ask c-pressable" href="concierge-chat.html?topic=other">
-        <span>Ask Mika for anything</span>
-        <span class="c-ask__send" aria-hidden="true"><span class="material-symbols-outlined">arrow_upward</span></span>
-      </a>
-      <div class="c-mika2__quick">
-        <a class="c-mika2__chip" href="concierge-chat.html?topic=table"><span class="material-symbols-outlined" aria-hidden="true">restaurant</span>Dinner</a>
-        <a class="c-mika2__chip" href="concierge-chat.html?topic=transfer"><span class="material-symbols-outlined" aria-hidden="true">airport_shuttle</span>Transfer</a>
-        <a class="c-mika2__chip" href="concierge-chat.html?topic=other"><span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>Day plan</a>
-      </div>
-    </section>
-    </header>
-
-    <div class="c-surface">
-    <section class="c-trip2">
-      <div class="c-section-head">
-        <h2 class="c-section-head__title">Your trip</h2>
-        <a class="c-section-head__link" href="concierge-trip.html">Itinerary</a>
-      </div>
-      <p class="c-trip2__dates" id="trip-dates"></p>
-      <div class="u-gutter" id="trip-days"></div>
-    </section>
-
+    <div class="c-meprof c-cgmika">
+      <span class="c-cgav" aria-hidden="true">MK</span>
+      <span class="c-meprof__text"><span class="c-meprof__name">Mika</span><span class="c-meprof__sub">Online · replies in ~5 min</span></span>
+      <a class="c-cgcall" href="tel:+63472520800" aria-label="Call Mika"><i class="ph-thin ph-phone" aria-hidden="true"></i></a>
     </div>
+
+    <a class="c-cgask" href="concierge-chat.html?topic=other">
+      <span>Ask Mika for anything</span>
+      <i class="ph-light ph-arrow-up" aria-hidden="true"></i>
+    </a>
+
+    <nav class="c-quick c-cgquick" aria-label="Ask Mika about">
+      <a class="c-quick__item" href="concierge-chat.html?topic=table"><i class="ph-thin ph-fork-knife" aria-hidden="true"></i>Dinner</a>
+      <a class="c-quick__item" href="concierge-chat.html?topic=transfer"><i class="ph-thin ph-van" aria-hidden="true"></i>Transfer</a>
+      <a class="c-quick__item" href="concierge-chat.html?topic=other"><i class="ph-thin ph-sparkle" aria-hidden="true"></i>Day plan</a>
+    </nav>
+
+    <section aria-labelledby="trip-title">
+      <div class="c-cgsec">
+        <h2 class="c-cgsec__title" id="trip-title">Your trip</h2>
+        <a class="c-cgsec__link" href="concierge-trip.html">Itinerary</a>
+      </div>
+      <p class="c-cgsec__sub" id="trip-dates"></p>
+      <div id="trip-days"></div>
+    </section>
+
   </main>
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
-    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
-    <a class="c-tabbar__tab" href="explore.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
-    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
-    <a class="c-tabbar__tab is-active" href="concierge.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
-    <a class="c-tabbar__tab" href="me.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+    <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
+    <a class="c-tabbar__tab" href="explore.html"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab is-active" href="concierge.html" aria-current="page"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 
@@ -84,28 +82,31 @@
 (function () {
   var C = window.CONCIERGE;
 
-  // The whole trip, day by day, as a timeline. Confirmed stops get a tick on their icon; only a stop
-  // Mika is still arranging is called out in words. Tapping a stop opens it.
+  // Phosphor light icons for the trip's icon names.
+  var ICON = { airport_shuttle: 'van', sailing: 'sailboat', login: 'sign-in', logout: 'sign-out', restaurant: 'fork-knife' };
+
+  // The whole trip, one hairline list per day. Only a stop Mika is still arranging is called out in words.
+  // Tapping a stop opens it.
   var days = document.getElementById('trip-days');
   var count = 0;
   C.TRIP.days.forEach(function (d) {
     var day = document.createElement('div');
-    day.className = 'c-tday';
-    day.innerHTML = '<p class="c-tday__label">' + d.label + '</p>';
+    day.className = 'c-cgday';
+    day.innerHTML = '<h3 class="c-mehead">' + d.label + '</h3>';
     var list = document.createElement('div');
-    list.className = 'c-tday__list';
+    list.className = 'c-melist';
     d.items.forEach(function (i) {
       var r = document.createElement('a');
-      r.className = 'c-tstop c-pressable' + (i.status ? ' is-' + i.status : '');
+      r.className = 'c-merow c-cgstop';
       r.href = i.href;
       r.innerHTML =
-        '<span class="c-tstop__node" data-ic="' + i.icon + '"><span class="material-symbols-outlined" aria-hidden="true">' + i.icon + '</span></span>' +
-        '<span class="c-tstop__main"><span class="c-tstop__time">' + i.time + '</span>' +
-        '<span class="c-tstop__name">' + i.title + '</span>' +
-        '<span class="c-tstop__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
-        (i.status === 'progress' ? '<span class="c-tstop__status">Mika is on it</span>' : '') +
+        '<span class="c-merow__lead"><i class="ph-light ph-' + (ICON[i.icon] || 'calendar-blank') + '" aria-hidden="true"></i></span>' +
+        '<span class="c-merow__main"><span class="c-cgstop__time">' + i.time + '</span>' +
+        '<span class="c-cgstop__name">' + i.title + '</span>' +
+        '<span class="c-merow__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
+        (i.status === 'progress' ? '<span class="c-cgstop__status">Mika is on it</span>' : '') +
         '</span>' +
-        (i.photo === false ? '' : '<span class="c-tstop__thumb"><img alt="" src="' + i.img + '"></span>');
+        (i.photo === false ? '' : '<img class="c-cgstop__thumb" alt="" src="' + i.img + '">');
       list.appendChild(r);
       count++;
     });

@@ -106,6 +106,7 @@
 </div>
 <script src="data-a.js"></script>
 <script src="data-e.js"></script>
+<script src="saved.js"></script>
 <script src="map-data.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
@@ -203,9 +204,15 @@
     action.href = p.bookable ? 'book.html?p=' + p.id : 'card.html';
 
     var save = $('[data-save]');
-    save.addEventListener('click', function () {
-      var on = save.classList.toggle('is-on');
+    function paint(on) {
+      save.classList.toggle('is-on', on);
       save.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    paint(SLSaved.has('place', p.id));
+    save.addEventListener('click', function () {
+      var on = SLSaved.toggle('place', p.id);
+      paint(on);
+      SLSaved.note(on);
     });
   })();
 </script>

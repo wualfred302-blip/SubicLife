@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="screen.css">
@@ -18,7 +21,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone is-pushed has-bottombar">
+<div class="phone is-pushed c-flat">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -32,7 +35,7 @@
   <nav class="c-navbar">
     <a data-back class="c-navbar__cancel" href="explore.html">Cancel</a>
     <h1 class="c-navbar__title">New story</h1>
-    <span></span>
+    <button class="c-navbar__share" type="button" data-share disabled>Share</button>
   </nav>
 
   <main class="screen-scroll c-compose">
@@ -46,16 +49,15 @@
 
     <label class="c-cphoto" for="photo-file" data-preview>
       <span class="c-cphoto__empty">
-        <span class="material-symbols-outlined" aria-hidden="true">add_a_photo</span>
-        <strong>Add a photo</strong>
-        Pick one below, or take a new one
+        <i class="ph-light ph-camera" aria-hidden="true"></i>
+        Add a photo
       </span>
     </label>
     <input id="photo-file" type="file" accept="image/*" hidden>
     <div class="c-croll" data-roll aria-label="Recent photos"></div>
 
     <div class="c-ctip">
-      <label class="c-ctip__label" for="tip">Your tip</label>
+      <label class="c-ctip__label u-sr-only" for="tip">Your tip</label>
       <div class="c-ctip__box">
         <textarea class="c-ctip__field" id="tip" rows="3" maxlength="150" placeholder="What should members know? A dish, a time, a table."></textarea>
         <span class="c-ctip__count" data-count>0/150</span>
@@ -64,9 +66,6 @@
     </div>
   </main>
 
-  <div class="c-bottombar c-compose-bar">
-    <button class="c-btn primary is-full" type="button" data-share disabled>Share story</button>
-  </div>
   <span class="c-homeindicator"></span>
 
 </div>
@@ -89,16 +88,16 @@
   $('[data-thumb]').src = p.thumb;
   $('[data-name]').textContent = p.name;
   $('[data-when]').textContent = 'Verified visit · ' + when;
-  $('[data-note]').textContent = 'Members see it on ' + p.name + ' and in Explore, with your name and photo.';
+  $('[data-note]').textContent = 'Members see it on ' + p.name + ' and in Discover, with your name and photo.';
 
   // A stand-in for the camera roll: this place's photos first. The camera tile opens the real picker.
   var roll = (p.photos || [p.hero]).concat(['img/pass-subic-bay.jpg', 'img/hist-lighthouse-sep.jpg', 'img/card-camayan.jpg'])
     .filter(function (src, i, all) { return all.indexOf(src) === i; }).slice(0, 7);
   var rollEl = $('[data-roll]');
-  rollEl.innerHTML = '<label class="c-croll__item c-croll__cam" for="photo-file" aria-label="Take or choose a photo"><span class="material-symbols-outlined">photo_camera</span></label>' +
+  rollEl.innerHTML = '<label class="c-croll__item c-croll__cam" for="photo-file" aria-label="Take or choose a photo"><i class="ph-light ph-camera" aria-hidden="true"></i></label>' +
     roll.map(function (src, i) {
       return '<button class="c-croll__item" type="button" data-src="' + src + '" aria-pressed="false" aria-label="Recent photo ' + (i + 1) + '">' +
-        '<img src="' + src + '" alt=""><span class="c-croll__check"><span class="material-symbols-outlined">check</span></span></button>';
+        '<img src="' + src + '" alt=""><span class="c-croll__check"><i class="ph ph-check" aria-hidden="true"></i></span></button>';
     }).join('');
 
   var photo = null;
@@ -137,21 +136,13 @@
   var tip = $('#tip'), count = $('[data-count]');
   tip.addEventListener('input', function () { count.textContent = tip.value.length + '/150'; });
 
-  // Share: save it, then say where it went. Done closes the composer; View story opens it.
+  // Share: save it and go back where you came from, like Instagram (no success screen).
+  // Discover then opens on Stories, with yours first and a short "Story shared" note.
   share.addEventListener('click', function () {
     if (!photo) return;
     var s = { id: 'mine-' + Date.now(), at: Date.now(), place: p.id, visited: when, photos: [photo], caption: tip.value.trim() };
-    var saved = saveStory(s);
-    $('.c-navbar__cancel').hidden = true;
-    $('.c-navbar__title').textContent = '';
-    $('main').innerHTML = '<div class="c-cdone">' +
-      '<span class="c-cdone__photo"><img src="' + photo + '" alt=""><span class="c-cdone__badge"><span class="material-symbols-outlined">check</span></span></span>' +
-      '<h2 class="c-cdone__title">Story shared</h2>' +
-      '<p class="c-cdone__sub">Members can see it on ' + esc(p.name) + ' and in Explore.</p></div>';
-    var bar = $('.c-bottombar');
-    bar.classList.add('is-stack');
-    bar.innerHTML = '<a class="c-btn primary is-full" data-back href="' + esc(from) + '">Done</a>' +
-      (saved ? '<a class="c-btn plain" href="post.html?id=' + s.id + '">View story</a>' : '');
+    if (saveStory(s)) { try { sessionStorage.setItem('sl-shared', '1'); } catch (e) {} }
+    window.subicNav(from, 'back');
   });
 })();
 </script>

@@ -2573,3 +2573,504 @@ html .phone.c-discover .c-lcard .c-xbadge {
 }
 .c-bigcard__value { font: 600 15px/20px var(--font); }
 .c-bigcard__label { font: 400 13px/18px var(--font); color: #5F6670; }
+
+/* ===== Listing cards: colour (2026-10-17) =====
+   Green = the member deal (prices and offers), gold = ratings. The three facts on large cards get coloured
+   icon squares, the same as the settings rows on Me. */
+.c-lcard__meta b { color: #15803D; }
+.c-star { color: #E3A008; }
+html .phone.c-discover .c-lcard .c-xbadge { color: #15803D; }
+.c-bigcard__offer { color: #15803D; }
+.c-bigcard__stat { flex-direction: row; align-items: center; gap: 8px; }
+.c-bigcard__icon { flex: none; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; }
+.c-bigcard__icon .material-symbols-outlined {
+  margin: 0; font-size: 18px; color: #FFFFFF;
+  font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 20;
+}
+.c-bigcard__icon.is-blue { background: #2F6BDB; }
+.c-bigcard__icon.is-gold { background: #D9A13B; }
+.c-bigcard__icon.is-indigo { background: #5A55D6; }
+.c-bigcard__text { display: flex; flex-direction: column; min-width: 0; }
+
+/* ===== Icons: Phosphor on the tab bar and Places (2026-10-17) =====
+   Plainer line icons than Material Symbols, about 10% smaller. Filled = selected or saved. The three facts on
+   large cards drop their coloured squares: the icon itself carries the colour. */
+html .phone .c-tabbar--flat .c-tabbar__icon { font-size: 22px; line-height: 1; }
+.c-dhead__btn .ph { font-size: 22px; }
+html .phone.c-discover .c-chip .c-chip__icon { font-size: 15px; }
+.c-savebtn .ph, .c-savebtn .ph-fill { font-size: 18px; }
+.c-star { font-size: 12px; vertical-align: -1px; color: #C98A12; }
+.c-bigcard__icon { width: auto; height: auto; display: block; border-radius: 0; font-size: 20px; }
+.c-bigcard__icon.is-blue { background: none; color: #2F6BDB; }
+.c-bigcard__icon.is-gold { background: none; color: #C98A12; }
+.c-bigcard__icon.is-indigo { background: none; color: #5A55D6; }
+
+/* ===== Icons: Airbnb-style (2026-10-17) =====
+   Thin outline icons that never fill in. The selected tab turns brand orange, icon and label. The bookmark sits
+   straight on the photo: a white outline over a see-through dark fill that turns orange when saved. */
+html .phone .c-tabbar--flat .c-tabbar__tab { font-weight: 500; }
+html .phone .c-tabbar--flat .c-tabbar__icon { font-size: 24px; }
+html .phone .c-tabbar--flat .c-tabbar__tab.is-active,
+html .phone .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon,
+html .phone.theme-night .c-tabbar--flat .c-tabbar__tab.is-active,
+html .phone.theme-night .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon,
+html .phone.theme-elite .c-tabbar--flat .c-tabbar__tab.is-active,
+html .phone.theme-elite .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon { color: #E8590C; }
+.c-dhead__btn .ph-light { font-size: 24px; }
+html .phone.c-discover .c-chip .c-chip__icon { font-size: 16px; }
+
+.c-savebtn { top: 6px; right: 6px; width: 36px; height: 36px; border-radius: 0; background: none; }
+.c-savebtn .c-savebtn__fill, .c-savebtn .c-savebtn__line { position: absolute; inset: 0; display: grid; place-items: center; font-size: 24px; }
+.c-savebtn .c-savebtn__fill { color: rgb(17 18 20 / 0.35); }
+.c-savebtn .c-savebtn__line { color: #FFFFFF; }
+.c-savebtn.is-on .c-savebtn__fill { color: #E8590C; }
+
+/* ===== Stories: share box, member photos, comment counts (2026-10-17) =====
+   The top of Stories has a share box (your photo + a pill) that opens the visit sheet. Each post shows the
+   member's photo, their name, and likes and comments under it. */
+.c-dcompose {
+  display: flex; align-items: center; gap: 10px; width: calc(100% - 24px); margin: 12px 12px 0; padding: 0;
+  border: 0; background: none; font: inherit; text-align: left; cursor: pointer;
+}
+.c-dcompose__face img { display: block; width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+.c-dcompose__field {
+  flex: 1; min-width: 0; height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 0 12px 0 16px; border: 1px solid rgb(17 18 20 / 0.12); border-radius: 999px; background: #FFFFFF;
+  font: 400 15px/20px var(--font); color: #5F6670;
+}
+.c-dcompose__field i { font-size: 22px; color: #111214; }
+
+.c-discover .c-fpost__by { gap: 8px; }
+.c-discover .c-fpost__face img, .c-discover .c-fpost__face .c-mono { width: 28px; height: 28px; font-size: 11px; }
+.c-fpost__who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.c-discover .c-fpost__name { font: 600 13px/16px var(--font); color: #111214; }
+.c-fpost__stats { display: flex; align-items: center; gap: 3px; font: 400 12px/16px var(--font); color: #5F6670; }
+.c-fpost__stats i { font-size: 14px; }
+.c-fpost__stats i + i, .c-fpost__stats .c-fpost__talk { margin-left: 8px; }
+
+/* ===== New story + Story page: flat and native (2026-10-17) =====
+   Flat paper with no wash. New story is plain rows on the page with Share in the top bar, like Instagram:
+   no white boxes, no glowing button, no success screen. Thin icons match Discover. */
+.phone.c-flat { background: #F6F3EE; }
+.c-navbar__share {
+  justify-self: end; padding: 0; border: 0; background: none; white-space: nowrap; cursor: pointer;
+  font: 600 17px/22px var(--font); color: #E8590C;
+}
+.c-navbar__share:disabled { color: rgb(17 18 20 / 0.3); cursor: default; }
+.c-flat .c-compose { padding-bottom: 40px; }
+.c-flat .c-cvisit { padding: 4px 0 16px; border-radius: 0; background: none; box-shadow: none; border-bottom: 1px solid rgb(17 18 20 / 0.08); }
+.c-flat .c-cvisit__thumb { width: 44px; height: 44px; border-radius: 10px; }
+.c-flat .c-cvisit__name { font: 600 16px/20px var(--font); }
+.c-flat .c-cphoto { border-radius: 12px; background: none; box-shadow: inset 0 0 0 1px rgb(17 18 20 / 0.12); }
+.c-flat .c-cphoto__empty { gap: 8px; font: 500 15px/20px var(--font); color: #5F6670; }
+.c-flat .c-cphoto__empty i { font-size: 32px; color: #111214; }
+.c-flat .c-croll__item { border-radius: 8px; }
+.c-flat .c-croll__item.is-on::after { box-shadow: inset 0 0 0 2px #111214; }
+.c-flat .c-croll__check { background: #111214; }
+.c-flat .c-croll__check i { font-size: 13px; }
+.c-flat .c-croll__cam { background: none; box-shadow: inset 0 0 0 1px rgb(17 18 20 / 0.12); }
+.c-flat .c-croll__cam i { font-size: 24px; }
+.c-flat .c-ctip { margin-top: 20px; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-flat .c-ctip__box, .c-flat .c-ctip__box:focus-within { border: 0; border-radius: 0; outline: none; background: none; }
+.c-flat .c-ctip__field { padding: 14px 0 26px; font: 400 16px/22px var(--font); }
+.c-flat .c-ctip__count { right: 0; }
+.c-flat .c-cnote { margin: 4px 0 0; font: 400 13px/18px var(--font); }
+
+/* Story page: thin heart and comment icons, and Post is a text button like Send in Messages. */
+.c-flat .c-like i, .c-flat .c-post__stat i { font-size: 22px; }
+.phone.c-flat .c-composer__send:disabled { background: none; color: rgb(232 89 12 / 0.4); }
+.phone.c-flat > .c-bottombar {
+  background: #F6F3EE; border-top: 1px solid rgb(17 18 20 / 0.08); box-shadow: none;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+
+/* A short note after sharing, above the tab bar. It fades on its own. */
+.c-toast {
+  position: absolute; left: 50%; bottom: 100px; z-index: 70; transform: translateX(-50%);
+  margin: 0; padding: 10px 16px; border-radius: 999px; background: #111214; color: #FFFFFF;
+  font: 600 15px/20px var(--font); white-space: nowrap; transition: opacity 300ms ease;
+}
+html.is-device .c-toast { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+.c-toast.is-gone { opacity: 0; }
+
+/* Share a story sheet: above the Discover header, so the tabs dim with the rest of the page. */
+.phone.c-discover > .c-vsheet { z-index: 60; }
+
+/* ===== White ground (2026-10-17) =====
+   Cream felt tiring after a while (the user), so Discover, its share sheet, New story, the Story page and the
+   light tab bar are white, like Airbnb. The photos bring the colour. Night pages keep the dark bar. */
+html .phone.c-discover,
+html .phone .c-dhead,
+html .phone .c-tabbar.c-tabbar--flat,
+.phone.c-flat,
+.phone.c-flat > .c-bottombar,
+.phone.c-discover .c-vsheet .c-sheet__panel { background: #FFFFFF; }
+
+/* ===== Discover: centred chips and contour lines (2026-10-17) =====
+   The Places chips sit midway between the tabs and the first heading: 28px above, and 28px below to the top of the
+   letters (4px padding, then the heading's 32px margin minus 13px; a negative margin, so it holds when a filter hides
+   Near you). Thin map contour lines sit behind Discover, like the user's floW app, so the white feels less empty.
+   The header repeats the same picture lined up with the page, so the lines run on behind the tabs while the header
+   stays solid when cards scroll under it. */
+.c-discover .c-chiprow { padding-top: 28px; padding-bottom: 4px; margin-bottom: -13px; }
+html .phone.c-discover { background: #FFFFFF url(img/contours.svg) center top / 100% auto no-repeat; }
+html .phone.c-discover .c-dhead {
+  background: #FFFFFF url(img/contours.svg) center calc(-1 * var(--size-statusbar-h)) / 100% auto no-repeat;
+}
+html.is-device .phone.c-discover .c-dhead { background-position: center calc(-1 * env(safe-area-inset-top, 0px)); }
+
+/* ===== Stories: Facebook-style posts (2026-10-17) =====
+   The two-column grid felt flat (the user), so Stories is one column of posts like Facebook: who and where, the tip,
+   photos edge to edge, the counts, then Like and Comment. A light grey band separates posts. */
+.c-sfeed { padding-bottom: 24px; }
+.c-spost { border-top: 8px solid #F1F2F4; padding-top: 12px; }
+.c-spost__head { display: flex; align-items: center; gap: 10px; padding: 0 16px; color: inherit; text-decoration: none; }
+.c-spost__face img, .c-spost__face .c-mono {
+  width: 40px; height: 40px; border-radius: 50%; object-fit: cover; display: grid; place-items: center;
+  font: 600 14px/1 var(--font); color: #FFFFFF;
+}
+.c-spost__who { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.c-spost__name { font: 600 15px/20px var(--font); color: #111214; }
+.c-spost__meta { font: 400 13px/16px var(--font); color: #5F6670; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.c-spost__body { display: block; color: inherit; text-decoration: none; }
+.c-spost__text { margin: 10px 16px 0; font: 400 15px/21px var(--font); color: #111214; }
+.c-spost__photos { display: grid; gap: 2px; margin-top: 12px; }
+.c-spost__photos.is-2 { grid-template-columns: 1fr 1fr; }
+.c-spost__photos img { width: 100%; display: block; object-fit: cover; aspect-ratio: 1 / 1; }
+.c-spost__photos.is-2 img { aspect-ratio: 3 / 4; }
+.c-spost__counts { display: flex; align-items: center; gap: 6px; padding: 10px 16px; font: 400 13px/16px var(--font); color: #5F6670; }
+.c-spost__bubble { width: 18px; height: 18px; border-radius: 50%; background: #E8590C; display: grid; place-items: center; }
+.c-spost__bubble i { font-size: 11px; color: #FFFFFF; }
+.c-spost__talk { margin-left: auto; }
+.c-spost__actions { display: flex; margin: 0 16px; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-spost__act {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; height: 44px; padding: 0; border: 0;
+  background: none; color: #5F6670; font: 600 14px/1 var(--font); text-decoration: none; cursor: pointer;
+}
+.c-spost__act i { font-size: 20px; }
+.c-spost__act[aria-pressed="true"] { color: #E8590C; }
+
+/* ===== Card page: Discover look (2026-10-17) =====
+   The Card tab moves to Discover's white look (the user): white ground with the same soft snaking lines, a solid
+   white header with the title, thin Phosphor icons on the round actions, and Recent visits as a plain list instead
+   of a sheet sliding over the card. The card itself is unchanged. */
+html .phone.c-cardtab.c-cardwhite {
+  background: #FFFFFF url(img/contours.svg) center top / 100% auto no-repeat;
+  color: #111214; --text: #111214; --text-2: #5F6670; --hairline: rgb(17 18 20 / 0.08);
+}
+.phone.c-cardwhite::before { display: none; }
+.phone.c-cardwhite > .c-statusbar { color: #111214; }
+html .phone.c-cardwhite .c-dhead {
+  background: #FFFFFF url(img/contours.svg) center calc(-1 * var(--size-statusbar-h)) / 100% auto no-repeat;
+}
+html.is-device .phone.c-cardwhite .c-dhead { background-position: center calc(-1 * env(safe-area-inset-top, 0px)); }
+.c-dhead__title { margin: 0; align-self: center; font: 600 17px/22px var(--font); color: #111214; }
+.c-cardwhite .c-hero { position: static; padding-top: 24px; opacity: 1; transform: none; color: #111214; }
+.c-cardwhite .c-cardstage::before { display: none; }       /* the orange glow behind the card reads as a smudge on white */
+.c-cardwhite .c-cardstage__id { color: #5F6670; }
+.c-cardwhite .c-cardstage__no { color: #111214; }
+.c-cardwhite .c-action { color: #111214; font-weight: 500; }
+.c-cardwhite .c-action__btn {
+  border: 1px solid rgb(17 18 20 / 0.12); background: #FFFFFF; color: #111214;
+  box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.c-cardwhite .c-action__btn i { font-size: 26px; }
+.c-cardwhite .c-action.is-primary .c-action__btn { border-color: #E8590C; background: #E8590C; color: #FFFFFF; box-shadow: none; }
+.c-cardwhite .c-action:focus-visible .c-action__btn { outline-color: #111214; }
+.c-cardwhite .c-surface { min-height: 0; margin-top: 12px; padding-top: 8px; border-radius: 0; background: transparent; box-shadow: none; }
+/* Visit rows use the same type as Discover's listing cards. */
+.c-cardwhite .c-list-row__title { font: 600 15px/20px var(--font); letter-spacing: 0; }
+.c-cardwhite .c-list-row__sub { font: 400 13px/18px var(--font); }
+.c-cardwhite .c-visit__save { font: 700 15px/18px var(--font); }
+
+/* ===== Card actions: thin line row (2026-10-17) =====
+   Show QR, Perks and Add to Wallet lose their circles and orange fill (the user: "significantly minimalistic, fitting
+   the white theme and lines"). Like the fact row on Places cards: three equal columns split by hairlines, a thin
+   Phosphor icon over a small label, all in ink. Pressed state dims instead of shrinking a circle. */
+.c-cardwhite .c-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 24px var(--gutter) 0; }
+.c-cardwhite .c-action { width: auto; gap: 8px; padding: 6px 0; font: 500 13px/16px var(--font); color: #111214; }
+.c-cardwhite .c-action + .c-action { border-left: 1px solid rgb(17 18 20 / 0.08); }
+.c-cardwhite .c-action .c-action__btn,
+.c-cardwhite .c-action.is-primary .c-action__btn {
+  width: auto; height: auto; border: 0; border-radius: 0; background: none; color: #111214;
+  box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; transition: none;
+}
+.c-cardwhite .c-action__btn i { font-size: 30px; }
+.c-cardwhite .c-action:active .c-action__btn { transform: none; }
+.c-cardwhite .c-action:active { opacity: 0.5; }
+.c-cardwhite .c-action:focus-visible { outline: 2px solid #111214; outline-offset: 2px; border-radius: 8px; }
+.c-cardwhite .c-action:focus-visible .c-action__btn { outline: none; }
+
+/* ===== Tab bar: thin and quiet (2026-10-17) =====
+   The tab bar matches the Card actions (the user: "more minimalist"): Phosphor thin icons, a smaller regular-weight
+   label, and nothing else. The selected tab keeps brand orange, the only colour in the bar. */
+html .phone .c-tabbar--flat .c-tabbar__tab { gap: 3px; font: 400 11px/14px var(--font); }
+html .phone .c-tabbar--flat .c-tabbar__icon { font-size: 26px; }
+
+/* ===== Filter chips: one minimal set (2026-10-17) =====
+   Discover and Map share the same chip (the user: "minimalistic and consistent between map and discover"): the
+   simplest Phosphor light icon per category (bed, fork-knife, sun-horizon, waves, leaf, moon), no icon on All,
+   18px in ink so the stroke matches the thin tab bar, medium label, white with a hairline. On the map the chip is
+   a little see-through with a faint shadow so it stays clear over busy streets. Selected stays solid ink. */
+html .phone.c-discover .c-chip,
+html .phone.c-mapx .c-chip { gap: 6px; padding: 0 14px; font: 500 13px/16px var(--font); color: #111214; border: 1px solid rgb(17 18 20 / 0.12); }
+html .phone.c-discover .c-chip .c-chip__icon,
+html .phone.c-mapx .c-chip .c-chip__icon { font-size: 18px; color: inherit; }
+html .phone.c-mapx .c-chip:not(.is-selected) { box-shadow: 0 1px 4px rgb(17 18 20 / 0.08); }
+html .phone.c-discover .c-chip.is-selected,
+html .phone.c-mapx .c-chip.is-selected { border-color: #111214; background: #111214; color: #FFFFFF; box-shadow: none; }
+
+/* ===== Map: black and white (2026-10-17) =====
+   The street map loses its teal and sand (the user: "fit the black and white contrast of the rest of the app").
+   #bw-tone (map.html) turns the tiles grey and lifts them: land near white, sea light grey so the coast still shows,
+   labels dark grey. Calm dots are ink; the picked dot turns brand orange, the app's one accent.
+   Satellite stays in colour. */
+.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: url(#bw-tone); }
+.c-mapx .c-map.is-street .c-fmap { background: #F5F5F5; }
+.c-mapx.is-calm .c-fpin__badge { background: #111214; }
+.c-mapx.is-calm .c-fpin.is-selected .c-fpin__badge { background: #E8590C; }
+
+/* ===== Map: quiet colour (2026-10-17) =====
+   Pure black and white felt flat and hard to read (the user), so the street map keeps a little colour through
+   #quiet-tone (map.html): light warm-grey land, white roads, soft blue-grey sea, soft clay highways, ink labels.
+   Dots stay ink and the picked dot brand orange. Satellite stays in colour. */
+.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: url(#quiet-tone); }
+.c-mapx .c-map.is-street .c-fmap { background: #F1F0EC; }
+
+/* ===== Offer page: quiet, Apple-like (2026-10-17) =====
+   The offer page follows Discover (the user: "minimalistic, like an apple design"): left-aligned title with the
+   place underneath, the key numbers in one row split by hairlines (like the App Store's info strip and the Places
+   fact row), thin outlined step numbers, Phosphor light icons, a plain white top bar on scroll, a pill Book button.
+   No blurred photo glow behind the page. */
+.phone.c-offerwhite .c-xbar { background: #FFFFFF; border-bottom: 1px solid rgb(17 18 20 / 0.08); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.c-offerwhite .c-xbar__back i { font-size: 24px; color: #111214; }
+.c-offerwhite .c-xbar__title { font: 600 16px/20px var(--font); color: #111214; }
+.c-offerwhite .c-circle-btn i { font-size: 20px; }
+.c-offerwhite .c-circle-btn.is-on { color: #E8590C; }
+
+.c-offerwhite .c-offer-head.u-gutter { padding: 24px 24px 0; text-align: left; }
+.c-offerwhite .c-offer-title { font: 700 28px/32px var(--font); letter-spacing: -0.02em; color: #111214; }
+.c-offerwhite .c-offer-tier { margin-top: 6px; font: 400 15px/20px var(--font); color: #5F6670; }
+
+.c-ofacts {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; margin: 20px 24px 0; padding: 14px 0;
+  border-top: 1px solid rgb(17 18 20 / 0.08); border-bottom: 1px solid rgb(17 18 20 / 0.08);
+}
+.c-ofacts__cell { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; padding: 0 6px; text-align: center; }
+.c-ofacts__cell + .c-ofacts__cell { border-left: 1px solid rgb(17 18 20 / 0.08); }
+.c-ofacts__label, .c-ofacts__sub { font: 400 12px/16px var(--font); color: #5F6670; }
+.c-ofacts__label { font-weight: 500; }
+.c-ofacts__value { font: 700 20px/26px var(--font); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; color: #111214; }
+.c-ofacts__value.is-save { color: #15803D; }
+
+.c-offerwhite .c-osec { border-bottom-color: rgb(17 18 20 / 0.08); }
+.c-offerwhite .c-section-title { margin: 0 0 12px; font: 700 20px/26px var(--font); letter-spacing: -0.01em; }
+.c-offerwhite .c-osteps li { align-items: center; gap: 14px; font: 400 15px/21px var(--font); color: #111214; }
+.c-offerwhite .c-osteps__n {
+  width: 26px; height: 26px; margin: 0; border: 1px solid rgb(17 18 20 / 0.2); background: none; color: #111214;
+  font: 500 13px/1 var(--font);
+}
+.c-offerwhite .c-ofine li { font: 400 15px/21px var(--font); color: #5F6670; }
+.c-offerwhite .c-oplace__name { font: 600 15px/20px var(--font); }
+.c-offerwhite .c-oplace__sub { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-offerwhite .c-oplace__chev { font-size: 18px; color: #5F6670; }
+
+.c-offerwhite .c-bottombar { border-top-color: rgb(17 18 20 / 0.08); }
+.c-offerwhite .c-obar__price span { text-decoration: none; }
+.c-offerwhite .c-bottombar .c-btn.primary { padding: 0 32px; border-radius: 999px; }
+
+/* ===== Saved and Me: white, Apple-like (2026-10-17) =====
+   Bookmarks now really save (saved.js). Saved lives under Me, first in the shortcut row, and a short black note
+   "Saved · View" appears when you save. Me and Saved move to Discover's white look: header, soft lines, thin icons,
+   hairline lists like iOS Settings (no tinted icon squares, no grey cards), listing cards for saved items. */
+
+/* The note after saving: "Saved" and a View link that opens the Saved page. */
+.c-savenote { display: flex; align-items: center; gap: 4px; padding: 10px 8px 10px 18px; }
+.c-savenote a { padding: 0 10px; color: #FFA270; font-weight: 600; text-decoration: none; }
+
+/* A pushed white page: back caret, centred title. */
+.c-dhead.c-dhead--push { align-items: center; padding: 0 8px; }
+.c-dhead__back { display: grid; place-items: center; width: 40px; height: 40px; color: #111214; text-decoration: none; }
+.c-dhead__back i { font-size: 24px; }
+.c-dhead--push .c-dhead__title { flex: 1; text-align: center; }
+.c-dhead__spacer { width: 40px; }
+
+/* Saved: chips for Places / Offers with a count, then listing cards two to a row. */
+.c-savedpage .c-chiprow { padding-top: 16px; padding-bottom: 4px; margin-bottom: 0; }
+.c-chip__n { margin-left: 6px; font-weight: 400; color: #5F6670; }
+.c-chip.is-selected .c-chip__n { color: rgb(255 255 255 / 0.7); }
+.c-svgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; padding: 16px 20px 24px; }
+.c-svgrid .c-lcard { flex: none; width: auto; min-width: 0; }
+.c-svgrid[hidden], .c-svempty[hidden] { display: none; }
+.c-svempty { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 96px 40px 0; text-align: center; }
+.c-svempty i { font-size: 48px; color: #5F6670; }
+.c-svempty__title { margin: 10px 0 0; font: 600 17px/22px var(--font); color: #111214; }
+.c-svempty__text { margin: 0; font: 400 15px/21px var(--font); color: #5F6670; }
+.c-svempty__link { margin-top: 14px; font: 600 15px/20px var(--font); color: #E8590C; text-decoration: none; }
+
+/* Me: profile, a thin shortcut row like the Card actions, then plain hairline lists. */
+.c-meprof { display: flex; align-items: center; gap: 16px; padding: 24px 20px 0; }
+.c-meprof__face { flex: none; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.c-meprof__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.c-meprof__name { font: 700 22px/28px var(--font); letter-spacing: -0.01em; color: #111214; }
+.c-meprof__sub { font: 400 14px/20px var(--font); color: #5F6670; }
+
+.c-quick { display: grid; grid-template-columns: repeat(4, 1fr); margin: 24px 20px 0; }
+.c-quick__item {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 6px 0;
+  font: 500 13px/16px var(--font); color: #111214; text-decoration: none;
+}
+.c-quick__item + .c-quick__item { border-left: 1px solid rgb(17 18 20 / 0.08); }
+.c-quick__item i { font-size: 30px; }
+.c-quick__item:active { opacity: 0.5; }
+
+.c-mehead { margin: 32px 20px 2px; font: 500 13px/18px var(--font); color: #5F6670; }
+.c-melist { margin: 0 20px; }
+.c-merow {
+  position: relative; display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 8px 0;
+  font: 400 16px/22px var(--font); color: #111214; text-decoration: none;
+}
+.c-merow + .c-merow::before { content: ''; position: absolute; top: 0; left: 44px; right: 0; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-merow__lead { flex: none; display: grid; place-items: center; width: 30px; }
+.c-merow__lead i { font-size: 24px; }
+.c-merow__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.c-merow__sub { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-merow__value { font: 400 15px/20px var(--font); color: #5F6670; }
+.c-merow__chev { font-size: 18px; color: #9AA0A6; }
+a.c-merow:active { opacity: 0.5; }
+.c-mepage .c-minicard { width: 26px; height: 40px; box-shadow: none; }
+.c-mepage .c-walls__opts { gap: 8px; }
+.c-mepage .c-walls__opt { width: 24px; height: 24px; }
+.c-mepage .c-walls__opt[aria-checked="true"] { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 3px #111214; }
+.c-mesignout {
+  display: block; margin: 32px 20px 0; padding: 16px 0; border-top: 1px solid rgb(17 18 20 / 0.08);
+  font: 500 16px/22px var(--font); color: #D93025; text-align: center; text-decoration: none;
+}
+
+/* ===== Concierge: white, Apple-like (2026-10-17) =====
+   The Concierge tab and its pages (chat, request, trip) move to Discover's white look (the user): white header
+   and soft lines, Mika as a plain profile row like Me, a hairline ask field, the three shortcuts as thin icons
+   split by hairlines, and the trip as iOS hairline lists with light icons. In the chat, Mika's bubbles are white
+   with a hairline and the member's are black. No coloured circles behind icons, no orange fills except the
+   one button that books or pays. */
+
+/* Mika: a black monogram, on the tab, in the chat header and beside her messages. */
+.c-cgav {
+  flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%;
+  background: #111214; color: #FFFFFF; font: 600 20px/1 var(--font); letter-spacing: 0.02em;
+}
+.c-cgmika .c-meprof__text { flex: 1; }
+.c-cgcall { flex: none; display: grid; place-items: center; width: 44px; height: 44px; margin-right: -8px; color: #111214; text-decoration: none; }
+.c-cgcall i { font-size: 28px; }
+.c-cgcall:active { opacity: 0.5; }
+
+.c-cgask {
+  display: flex; align-items: center; gap: 12px; height: 48px; margin: 24px 20px 0; padding: 0 16px 0 20px;
+  border: 1px solid rgb(17 18 20 / 0.12); border-radius: 999px; background: #FFFFFF;
+  font: 400 16px/22px var(--font); color: #5F6670; text-decoration: none;
+}
+.c-cgask span { flex: 1; }
+.c-cgask i { font-size: 22px; color: #111214; }
+.c-cgask:active { opacity: 0.6; }
+.c-cgquick { grid-template-columns: repeat(3, 1fr); }
+
+.c-cgsec { display: flex; align-items: baseline; justify-content: space-between; margin: 40px 20px 0; }
+.c-cgsec__title { margin: 0; font: 700 22px/28px var(--font); letter-spacing: -0.01em; color: #111214; }
+.c-cgsec__link { font: 500 15px/20px var(--font); color: #E8590C; text-decoration: none; }
+.c-cgsec__sub { margin: 2px 20px 0; font: 400 13px/18px var(--font); color: #5F6670; }
+
+/* Trip: one hairline list per day. A light icon, the time, the plan, a small photo; the one stop Mika is still
+   arranging says so in a hairline pill. */
+.c-cgday .c-mehead { margin-top: 24px; }
+.c-merow.c-cgstop { align-items: flex-start; padding: 14px 0; }
+.c-cgstop .c-merow__lead { padding-top: 15px; }
+.c-cgstop__time { font: 400 13px/18px var(--font); color: #5F6670; font-variant-numeric: tabular-nums; }
+.c-cgstop__name { font: 600 15px/20px var(--font); color: #111214; }
+.c-cgstop__status {
+  align-self: flex-start; margin-top: 8px; padding: 3px 10px; border: 1px solid rgb(17 18 20 / 0.12);
+  border-radius: 999px; font: 500 12px/16px var(--font); color: #111214;
+}
+.c-cgstop__thumb { flex: none; width: 56px; height: 56px; margin-top: 2px; border-radius: 8px; object-fit: cover; }
+
+/* Pushed Concierge pages: no tab bar to clear. */
+.phone.c-cgpage.c-push .screen-scroll { padding-bottom: 40px; }
+.c-cgdates { margin: 20px 20px 0; font: 400 15px/20px var(--font); color: #5F6670; }
+.c-cgdates + div .c-cgday:first-child .c-mehead { margin-top: 16px; }
+.c-cgcal {
+  display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; margin: 32px 20px 0;
+  border: 1px solid rgb(17 18 20 / 0.12); border-radius: 999px; background: #FFFFFF;
+  font: 600 15px/20px var(--font); color: #111214; text-decoration: none;
+}
+.c-cgcal i { font-size: 20px; }
+.c-cgcal:active { opacity: 0.6; }
+
+/* Request: photo, left title like the offer page, then a plain hairline form. */
+.c-cgreq__hero { display: block; width: 100%; height: 232px; object-fit: cover; }
+.c-cgreq__head { padding: 24px 20px 0; }
+.c-cgreq__title { margin: 0; font: 700 28px/32px var(--font); letter-spacing: -0.02em; color: #111214; }
+.c-cgreq__desc { margin: 8px 0 0; font: 400 15px/21px var(--font); color: #5F6670; }
+.c-cgreq__price { margin: 12px 0 0; font: 600 15px/20px var(--font); color: #111214; }
+.c-cgform { margin-top: 20px; border-top: 1px solid rgb(17 18 20 / 0.08); border-bottom: 1px solid rgb(17 18 20 / 0.08); }
+.c-cgform .c-merow + .c-merow::before { left: 0; }
+.c-cgform label.c-merow { cursor: pointer; }
+.c-cgform label.c-merow:focus-within { opacity: 0.6; }
+.c-cgstep { display: flex; align-items: center; height: 34px; border: 1px solid rgb(17 18 20 / 0.12); border-radius: 999px; }
+.c-cgstep__btn {
+  display: grid; place-items: center; width: 44px; height: 32px; padding: 0; border: 0; background: none;
+  color: #111214; cursor: pointer;
+}
+.c-cgstep__btn i { font-size: 18px; }
+.c-cgstep__btn:disabled { color: rgb(17 18 20 / 0.25); cursor: default; }
+.c-cgstep__value { min-width: 24px; text-align: center; font: 500 16px/1 var(--font); font-variant-numeric: tabular-nums; color: #111214; }
+.c-cgnotes {
+  display: block; box-sizing: border-box; width: calc(100% - 40px); min-height: 96px; margin: 8px 20px 0; padding: 12px 14px;
+  border: 1px solid rgb(17 18 20 / 0.12); border-radius: 12px; background: #FFFFFF; resize: none; outline: none;
+  font: 400 16px/22px var(--font); color: #111214;
+}
+.c-cgnotes::placeholder { color: #9AA0A6; }
+.c-cgnotes:focus-visible { border-color: #111214; }
+.c-cgreq__note { margin: 12px 20px 0; font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone.c-cgreq .c-req-bar { background: #FFFFFF; border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone.c-cgpage .c-req-bar .c-btn.primary,
+html .phone.c-cgchat .c-chat-card .c-btn.primary { border-radius: 999px; }
+
+/* Chat: plain white, black monogram, white bubbles with a hairline for Mika and black ones for the member,
+   white reply chips like Discover's, and a hairline composer with line icons. */
+html .phone.c-cgchat { background: #FFFFFF; --bg: #FFFFFF; }
+html .phone.c-cgchat .c-chat { background: #FFFFFF; }
+html .phone.c-cgchat .c-chat-nav {
+  background: #FFFFFF; border-bottom: 1px solid rgb(17 18 20 / 0.08); backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+html .phone.c-cgchat .c-navbar__back { color: #111214; }
+html .phone.c-cgchat .c-navbar__back i { font-size: 24px; }
+html .phone.c-cgchat .c-chat-nav__av,
+html .phone.c-cgchat .c-msg__av { background: #111214; color: #FFFFFF; box-shadow: none; }
+html .phone.c-cgchat .c-chat-nav__av { width: 32px; height: 32px; font: 600 12px/1 var(--font); }
+html .phone.c-cgchat .c-navbar__title { font: 600 15px/20px var(--font); color: #111214; }
+html .phone.c-cgchat .c-navbar__sub { font: 400 12px/16px var(--font); color: #5F6670; }
+html .phone.c-cgchat .c-chat__stamp,
+html .phone.c-cgchat .c-chat__from,
+html .phone.c-cgchat .c-delivered { color: #5F6670; }
+html .phone.c-cgchat .c-bubble { font: 400 16px/22px var(--font); box-shadow: none; }
+html .phone.c-cgchat .c-bubble.is-in { background: #FFFFFF; border: 1px solid rgb(17 18 20 / 0.12); color: #111214; }
+html .phone.c-cgchat .c-bubble.is-out { background: #111214; border: 1px solid #111214; color: #FFFFFF; }
+html .phone.c-cgchat .c-typing span { background: #9AA0A6; }
+html .phone.c-cgchat .c-chat-card,
+html .phone.c-cgchat .c-chat-place {
+  border: 1px solid rgb(17 18 20 / 0.12); border-radius: 16px; background: #FFFFFF; box-shadow: none;
+}
+html .phone.c-cgchat .c-chat-card__title { font: 600 16px/22px var(--font); color: #111214; }
+html .phone.c-cgchat .c-chat-card__sub { font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone.c-cgchat .c-chat-place__chev { font-size: 18px; color: #9AA0A6; }
+html .phone.c-cgchat .c-replies { background: #FFFFFF; }
+html .phone.c-cgchat .c-reply {
+  height: 36px; border: 1px solid rgb(17 18 20 / 0.12); background: #FFFFFF; color: #111214; font: 500 14px/1 var(--font);
+}
+html .phone.c-cgchat .c-composer { background: #FFFFFF; border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone.c-cgchat .c-composer__plus,
+html .phone.c-cgchat .c-composer__send,
+html .phone.c-cgchat .c-composer__send:disabled { border: 0; background: none; color: #111214; box-shadow: none; }
+html .phone.c-cgchat .c-composer__send:disabled { color: rgb(17 18 20 / 0.25); }
+html .phone.c-cgchat .c-composer__plus i,
+html .phone.c-cgchat .c-composer__send i { font-size: 24px; }
+html .phone.c-cgchat .c-composer__field { background: #FFFFFF; border: 1px solid rgb(17 18 20 / 0.12); }

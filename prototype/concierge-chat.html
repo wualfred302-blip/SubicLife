@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-c.css">
@@ -19,7 +20,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-push">
+<div class="phone c-push c-cgchat">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -32,7 +33,7 @@
 
   <nav class="c-navbar c-chat-nav">
     <a data-back class="c-navbar__back" href="concierge.html" aria-label="Back to Concierge">
-      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+      <i class="ph-light ph-caret-left" aria-hidden="true"></i>
     </a>
     <div class="c-navbar__titles">
       <span class="c-chat-nav__av" aria-hidden="true">MK</span>
@@ -50,12 +51,12 @@
   <div class="c-replies" id="replies" role="group" aria-label="Quick replies"></div>
 
   <form class="c-composer" id="composer" autocomplete="off">
-    <span class="c-composer__plus" aria-hidden="true"><span class="material-symbols-outlined">add</span></span>
+    <span class="c-composer__plus" aria-hidden="true"><i class="ph-light ph-plus"></i></span>
     <label class="c-composer__field">
       <input class="c-composer__input" id="msg" type="text" placeholder="Message Mika" aria-label="Message Mika">
     </label>
     <button class="c-composer__send" id="send" type="submit" disabled aria-label="Send">
-      <span class="material-symbols-outlined">arrow_upward</span>
+      <i class="ph-light ph-paper-plane-right" aria-hidden="true"></i>
     </button>
   </form>
 
@@ -174,7 +175,7 @@
     main.appendChild(el('span', 'c-chat-place__name', P.name));
     main.appendChild(el('span', 'c-chat-place__meta', P.meta));
     main.appendChild(el('span', 'c-chat-place__offer', P.offer));
-    var chev = el('span', 'material-symbols-outlined c-chat-place__chev', 'chevron_right');
+    var chev = el('i', 'ph-light ph-caret-right c-chat-place__chev');
     chev.setAttribute('aria-hidden', 'true');
     a.appendChild(photo);
     a.appendChild(main);

@@ -151,11 +151,12 @@
     var device = document.querySelector('.shell-device');
     var startHref = body.getAttribute('data-start') || 'welcome.html';
     var qs = new URLSearchParams(window.location.search);
-    // ?reset=1 clears saved wallpaper and stories before any screen loads
+    // ?reset=1 clears saved wallpaper, stories and the saved list before any screen loads
     if (qs.get('reset') === '1') {
       try {
         window.localStorage.removeItem('sl-wall');
         window.localStorage.removeItem('subic-stories');
+        window.localStorage.removeItem('sl-saved');
       } catch (e) { /* storage blocked, nothing to clear */ }
     }
     // ?start=<page>.html opens that screen first; other params (e.g. topic=table) pass through to it

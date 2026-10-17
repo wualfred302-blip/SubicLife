@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/thin/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-c.css">
@@ -17,7 +21,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone theme-night c-grouped has-wall">
+<div class="phone c-discover c-mepage">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -28,86 +32,74 @@
     </span>
   </header>
 
-  <div class="c-xbar" aria-hidden="true"><span class="c-xbar__title">Me</span></div>
+  <div class="c-dhead">
+    <h1 class="c-dhead__title">Me</h1>
+  </div>
 
   <main class="screen-scroll">
 
-    <header class="c-hero c-profile">
-      <span class="c-profile__avatar"><img src="img/avatar.jpg" alt=""></span>
-      <h1 class="c-profile__name">Ana Reyes</h1>
-      <p class="c-profile__tier">Prestige member</p>
-      <nav class="c-actions" aria-label="Shortcuts">
-        <a class="c-action" href="me-bookings.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">event</span></span>Bookings</a>
-        <a class="c-action" href="me-payments.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">receipt_long</span></span>Payments</a>
-        <a class="c-action" href="me-stories.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">photo_library</span></span>Stories</a>
-        <a class="c-action" href="concierge-chat.html?topic=other"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">support_agent</span></span>Help</a>
-      </nav>
-    </header>
+    <div class="c-meprof">
+      <img class="c-meprof__face" src="img/avatar.jpg" alt="">
+      <span class="c-meprof__text"><span class="c-meprof__name">Ana Reyes</span><span class="c-meprof__sub">Prestige member · since 2025</span></span>
+    </div>
 
-    <div class="c-surface">
+    <nav class="c-quick" aria-label="Shortcuts">
+      <a class="c-quick__item" href="saved.html"><i class="ph-thin ph-bookmark-simple" aria-hidden="true"></i>Saved</a>
+      <a class="c-quick__item" href="me-bookings.html"><i class="ph-thin ph-calendar-blank" aria-hidden="true"></i>Bookings</a>
+      <a class="c-quick__item" href="me-payments.html"><i class="ph-thin ph-receipt" aria-hidden="true"></i>Payments</a>
+      <a class="c-quick__item" href="me-stories.html"><i class="ph-thin ph-images" aria-hidden="true"></i>Stories</a>
+    </nav>
 
-    <h2 class="c-group__head">Membership</h2>
-    <div class="c-group c-group--lead">
-      <a class="c-group__row c-memrow c-pressable" href="card-benefits.html">
-        <span class="c-minicard" aria-hidden="true"></span>
-        <span class="c-group__main">Prestige<span class="c-group__sub">Member since 2025 · renews Mar 2027</span></span>
-        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+    <h2 class="c-mehead">Membership</h2>
+    <div class="c-melist">
+      <a class="c-merow" href="card-benefits.html">
+        <span class="c-merow__lead"><span class="c-minicard" aria-hidden="true"></span></span>
+        <span class="c-merow__main">Prestige<span class="c-merow__sub">Member since 2025 · renews Mar 2027</span></span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
       </a>
-      <a class="c-group__row c-pressable" href="choose-tier.html">
-        <span class="c-group__icon c-ic--gold"><span class="material-symbols-outlined">workspace_premium</span></span>
-        <span class="c-group__main">Upgrade to Elite</span>
-        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+      <a class="c-merow" href="choose-tier.html">
+        <span class="c-merow__lead"><i class="ph-light ph-crown-simple" aria-hidden="true"></i></span>
+        <span class="c-merow__main">Upgrade to Elite</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
       </a>
     </div>
 
-    <h2 class="c-group__head">Appearance</h2>
-    <div class="c-group c-group--lead">
-      <div class="c-group__row c-walls" role="radiogroup" aria-label="Wallpaper">
-        <span class="c-group__icon c-ic--indigo"><span class="material-symbols-outlined">wallpaper</span></span>
-        <span class="c-group__main">Wallpaper</span>
-        <span class="c-walls__opts">
-          <button class="c-walls__opt" type="button" role="radio" aria-checked="false" data-wall-opt="dusk" aria-label="Dusk"></button>
-          <button class="c-walls__opt" type="button" role="radio" aria-checked="false" data-wall-opt="lagoon" aria-label="Lagoon"></button>
-          <button class="c-walls__opt" type="button" role="radio" aria-checked="false" data-wall-opt="sunset" aria-label="Sunset"></button>
-          <button class="c-walls__opt" type="button" role="radio" aria-checked="false" data-wall-opt="day" aria-label="Daylight"></button>
-        </span>
-      </div>
-    </div>
-
-    <h2 class="c-group__head">Settings</h2>
-    <div class="c-group c-group--lead">
-      <a class="c-group__row c-pressable" href="me-notifications.html">
-        <span class="c-group__icon c-ic--red"><span class="material-symbols-outlined">notifications</span></span>
-        <span class="c-group__main">Notifications</span>
-        <span class="c-group__value">On</span>
-        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+    <h2 class="c-mehead">Settings</h2>
+    <div class="c-melist">
+      <a class="c-merow" href="me-notifications.html">
+        <span class="c-merow__lead"><i class="ph-light ph-bell" aria-hidden="true"></i></span>
+        <span class="c-merow__main">Notifications</span>
+        <span class="c-merow__value">On</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
       </a>
-      <a class="c-group__row c-pressable" href="me-payment-methods.html">
-        <span class="c-group__icon c-ic--green"><span class="material-symbols-outlined">credit_card</span></span>
-        <span class="c-group__main">Payment methods</span>
-        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+      <a class="c-merow" href="me-payment-methods.html">
+        <span class="c-merow__lead"><i class="ph-light ph-credit-card" aria-hidden="true"></i></span>
+        <span class="c-merow__main">Payment methods</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
       </a>
-      <a class="c-group__row c-pressable" href="me-language.html">
-        <span class="c-group__icon c-ic--blue"><span class="material-symbols-outlined">translate</span></span>
-        <span class="c-group__main">Language</span>
-        <span class="c-group__value">English</span>
-        <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
+      <a class="c-merow" href="me-language.html">
+        <span class="c-merow__lead"><i class="ph-light ph-translate" aria-hidden="true"></i></span>
+        <span class="c-merow__main">Language</span>
+        <span class="c-merow__value">English</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
+      </a>
+      <a class="c-merow" href="concierge-chat.html?topic=other">
+        <span class="c-merow__lead"><i class="ph-light ph-question" aria-hidden="true"></i></span>
+        <span class="c-merow__main">Help</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
       </a>
     </div>
 
-    <div class="c-group u-mt-32">
-      <a class="c-group__row is-center is-danger c-pressable" data-root href="welcome.html">Sign out</a>
-    </div>
+    <a class="c-mesignout" data-root href="welcome.html">Sign out</a>
 
-    </div>
   </main>
 
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
-    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
-    <a class="c-tabbar__tab" href="explore.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
-    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
-    <a class="c-tabbar__tab" href="concierge.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
-    <a class="c-tabbar__tab is-active" href="me.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+    <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
+    <a class="c-tabbar__tab" href="explore.html"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab is-active" href="me.html" aria-current="page"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 

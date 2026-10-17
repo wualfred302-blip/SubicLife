@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/thin/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-b.css">
@@ -17,7 +21,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone theme-night c-cardtab has-wall">
+<div class="phone c-cardtab c-cardwhite">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -28,11 +32,13 @@
     </span>
   </header>
 
+  <div class="c-dhead">
+    <h1 class="c-dhead__title">Card</h1>
+  </div>
 
   <main class="screen-scroll">
 
     <header class="c-hero">
-      <h1 class="u-sr-only">Card</h1>
       <section class="u-gutter c-cardstage">
       <div class="c-mcard is-prestige is-portrait" data-mcard role="button" tabindex="0" aria-pressed="false" aria-label="Membership card. Tap to show the QR code.">
         <div class="c-mcard__flipper">
@@ -53,9 +59,9 @@
       <p class="c-cardstage__id"><span class="c-cardstage__no">SL 0042 1187</span> · valid until Mar 2027</p>
       </section>
       <nav class="c-actions" aria-label="Card actions">
-        <a class="c-action is-primary" href="card-staff.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">qr_code_2</span></span>Show QR</a>
-        <a class="c-action" href="card-benefits.html"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">loyalty</span></span>Perks</a>
-        <button class="c-action" type="button"><span class="c-action__btn"><span class="material-symbols-outlined" aria-hidden="true">wallet</span></span>Add to Wallet</button>
+        <a class="c-action is-primary" href="card-staff.html"><span class="c-action__btn"><i class="ph-thin ph-qr-code" aria-hidden="true"></i></span>Show QR</a>
+        <a class="c-action" href="card-benefits.html"><span class="c-action__btn"><i class="ph-thin ph-tag" aria-hidden="true"></i></span>Perks</a>
+        <button class="c-action" type="button"><span class="c-action__btn"><i class="ph-thin ph-wallet" aria-hidden="true"></i></span>Add to Wallet</button>
       </nav>
     </header>
 
@@ -86,11 +92,11 @@
     </div>
   </main>
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
-    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
-    <a class="c-tabbar__tab" href="explore.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
-    <a class="c-tabbar__tab is-active" href="card.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
-    <a class="c-tabbar__tab" href="concierge.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
-    <a class="c-tabbar__tab" href="me.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+    <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
+    <a class="c-tabbar__tab" href="explore.html"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
+    <a class="c-tabbar__tab is-active" href="card.html" aria-current="page"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 

@@ -3,11 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFFFFF">
   <title>Subic.Life - Saved</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/thin/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="screen.css">
@@ -17,7 +22,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone theme-night c-explore-lite has-wall">
+<div class="phone c-discover c-savedpage">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -28,104 +33,119 @@
     </span>
   </header>
 
-  <div class="c-xbar" aria-hidden="true"><span class="c-xbar__title">Saved</span></div>
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" href="me.html" data-back aria-label="Back to Me"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title">Saved</h1>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
 
   <main class="screen-scroll">
-
-    <header class="c-hero">
-    <div class="c-largetitle">
-      <h1 class="c-largetitle__title">Saved</h1>
+    <div class="c-chiprow" role="tablist" aria-label="Saved type">
+      <button class="c-chip is-selected" type="button" role="tab" aria-selected="true" data-seg="place">Places<span class="c-chip__n" data-n="place"></span></button>
+      <button class="c-chip" type="button" role="tab" aria-selected="false" data-seg="offer">Offers<span class="c-chip__n" data-n="offer"></span></button>
     </div>
-
-    <div class="u-gutter">
-      <div class="c-segmented" role="tablist" aria-label="Saved type">
-        <button class="c-segmented__opt is-on" type="button" role="tab" aria-selected="true" data-seg="places">Places</button>
-        <button class="c-segmented__opt" type="button" role="tab" aria-selected="false" data-seg="offers">Offers</button>
-      </div>
-    </div>
-
-    </header>
-
-    <div class="c-surface">
-    <section data-panel="places">
-      <div class="c-stile-grid">
-        <a class="c-stile" href="place.html?p=lighthouse">
-          <span class="c-stile__photo"><img src="img/hist-lighthouse-oct.jpg" alt=""><span class="c-xbadge">20% off</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
-          <span class="c-stile__name">Lighthouse Marina Resort</span>
-          <span class="c-stile__meta">Hotel · Moonbay</span>
-        </a>
-        <a class="c-stile" href="place.html?p=meatplus">
-          <span class="c-stile__photo"><img src="img/hist-meat-plus.jpg" alt=""><span class="c-xbadge">20% off</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
-          <span class="c-stile__name">Meat Plus Cafe</span>
-          <span class="c-stile__meta">Steakhouse · Harbor Point</span>
-        </a>
-        <a class="c-stile" href="place.html?p=ramas">
-          <span class="c-stile__photo"><img src="img/hist-ramas.jpg" alt=""><span class="c-xbadge">Gift</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
-          <span class="c-stile__name">Rama's Kitchen</span>
-          <span class="c-stile__meta">Indian · Freeport</span>
-        </a>
-        <a class="c-stile" href="place.html?p=yacht">
-          <span class="c-stile__photo"><img src="img/thumb-yacht-club.jpg" alt=""><span class="c-xbadge">10% off</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
-          <span class="c-stile__name">Subic Bay Yacht Club</span>
-          <span class="c-stile__meta">Marina dining</span>
-        </a>
-      </div>
-    </section>
-
-    <section data-panel="offers" hidden>
-      <p class="c-stile-count">4 offers ready to use</p>
-      <div class="c-stile-grid">
-        <a class="c-stile" href="place.html?p=lighthouse">
-          <span class="c-stile__photo"><img src="img/hist-lighthouse-oct.jpg" alt=""><span class="c-xbadge">20% off rooms</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
-          <span class="c-stile__name">Lighthouse Marina Resort</span>
-          <span class="c-stile__meta">Hotel · Moonbay</span>
-        </a>
-        <a class="c-stile" href="place.html?p=meatplus">
-          <span class="c-stile__photo"><img src="img/hist-meat-plus.jpg" alt=""><span class="c-xbadge">20% off your bill</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
-          <span class="c-stile__name">Meat Plus Cafe</span>
-          <span class="c-stile__meta">Steakhouse · Harbor Point</span>
-        </a>
-        <a class="c-stile" href="place.html?p=ramas">
-          <span class="c-stile__photo"><img src="img/hist-ramas.jpg" alt=""><span class="c-xbadge">Free dessert</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
-          <span class="c-stile__name">Rama's Kitchen</span>
-          <span class="c-stile__meta">Indian · Freeport</span>
-        </a>
-        <a class="c-stile" href="place.html?p=yacht">
-          <span class="c-stile__photo"><img src="img/thumb-yacht-club.jpg" alt=""><span class="c-xbadge">10% off dining</span><span class="material-symbols-outlined c-stile__mark" aria-hidden="true">bookmark</span></span>
-          <span class="c-stile__name">Subic Bay Yacht Club</span>
-          <span class="c-stile__meta">Marina dining</span>
-        </a>
-      </div>
-    </section>
-
+    <div class="c-svgrid" data-grid></div>
+    <div class="c-svempty" data-empty hidden>
+      <i class="ph-thin ph-bookmark-simple" aria-hidden="true"></i>
+      <p class="c-svempty__title" data-empty-title></p>
+      <p class="c-svempty__text">Tap the bookmark on a place or an offer and it shows up here.</p>
+      <a class="c-svempty__link" href="explore.html">Go to Discover</a>
     </div>
   </main>
 
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
-    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
-    <a class="c-tabbar__tab" href="explore.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
-    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
-    <a class="c-tabbar__tab" href="concierge.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
-    <a class="c-tabbar__tab is-active" href="me.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+    <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
+    <a class="c-tabbar__tab" href="explore.html"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab is-active" href="me.html" aria-current="page"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 
 </div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script src="saved.js"></script>
 <script>
+  // Saved: the places and offers Ana bookmarked anywhere in the app, as Discover's listing cards in two columns.
+  // Tapping a card's bookmark removes it here and everywhere else.
   (function () {
-    var opts = document.querySelectorAll('.c-segmented__opt');
-    opts.forEach(function (opt) {
-      opt.addEventListener('click', function () {
-        opts.forEach(function (o) {
-          var on = o === opt;
-          o.classList.toggle('is-on', on);
-          o.setAttribute('aria-selected', on ? 'true' : 'false');
+    var grid = document.querySelector('[data-grid]');
+    var empty = document.querySelector('[data-empty]');
+    var chips = document.querySelectorAll('[data-seg]');
+    var kind = 'place';
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function peso(n) { return '₱' + n.toLocaleString('en-US'); }
+    function fromPrice(place) {
+      var rooms = place.rooms || [];
+      var low = rooms.reduce(function (m, r) { return r.rate < m.rate ? r : m; }, rooms[0] || { rate: place.rackPrice });
+      return Math.round(low.rate * (100 - place.discount) / 100);
+    }
+    function mark(k, id, name) {
+      return '<button class="c-savebtn is-on" type="button" aria-pressed="true" aria-label="Remove ' + esc(name) + ' from Saved" data-kind="' + k + '" data-id="' + id + '">' +
+        '<i class="ph-fill ph-bookmark-simple c-savebtn__fill" aria-hidden="true"></i><i class="ph ph-bookmark-simple c-savebtn__line" aria-hidden="true"></i></button>';
+    }
+    function placeCard(id) {
+      var p = PLACES[id];
+      if (!p) return '';
+      // Price only for stays and tours (as on Discover); restaurants show the rating alone.
+      var price = p.bookable && p.rackPrice ? '<b>' + peso(fromPrice(p)) + '</b> ' + p.unit + ' · ' : '';
+      return '<div class="c-lcard">' +
+        '<a class="c-lcard__link" href="place.html?p=' + id + '">' +
+        '<span class="c-lcard__photo"><img src="' + p.thumb + '" alt=""><span class="c-xbadge">' + esc(p.offerShort) + '</span></span>' +
+        '<span class="c-lcard__name">' + esc(p.name) + '</span>' +
+        '<span class="c-lcard__meta">' + esc(p.category) + ' · ' + esc(p.distance) + '</span>' +
+        '<span class="c-lcard__meta">' + price + '<i class="ph-fill ph-star c-star" aria-hidden="true"></i> ' + esc(p.rating) + '</span>' +
+        '</a>' + mark('place', id, p.name) + '</div>';
+    }
+    function offerCard(id) {
+      var o = offerFor(id);
+      if (!o) return '';
+      var p = PLACES[o.place];
+      return '<div class="c-lcard">' +
+        '<a class="c-lcard__link" href="offer.html?id=' + id + '">' +
+        '<span class="c-lcard__photo"><img src="' + o.photo + '" alt=""><span class="c-xbadge">' + esc(p.offerShort) + '</span></span>' +
+        '<span class="c-lcard__name">' + esc(o.title) + '</span>' +
+        '<span class="c-lcard__meta">' + esc(p.name) + '</span>' +
+        '<span class="c-lcard__meta">Until ' + esc(o.valid) + '</span>' +
+        '</a>' + mark('offer', id, o.title) + '</div>';
+    }
+
+    function render() {
+      ['place', 'offer'].forEach(function (k) {
+        document.querySelector('[data-n="' + k + '"]').textContent = SLSaved.list(k).length;
+      });
+      var ids = SLSaved.list(kind);
+      grid.innerHTML = ids.map(kind === 'place' ? placeCard : offerCard).join('');
+      grid.hidden = !ids.length;
+      empty.hidden = !!ids.length;
+      document.querySelector('[data-empty-title]').textContent = kind === 'place' ? 'No saved places' : 'No saved offers';
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        kind = chip.getAttribute('data-seg');
+        chips.forEach(function (c) {
+          var on = c === chip;
+          c.classList.toggle('is-selected', on);
+          c.setAttribute('aria-selected', on ? 'true' : 'false');
         });
-        document.querySelectorAll('[data-panel]').forEach(function (p) {
-          p.hidden = p.dataset.panel !== opt.dataset.seg;
-        });
+        render();
       });
     });
+    grid.addEventListener('click', function (e) {
+      var b = e.target.closest('.c-savebtn');
+      if (!b) return;
+      SLSaved.toggle(b.getAttribute('data-kind'), b.getAttribute('data-id'));
+      render();
+      SLSaved.note(false);
+    });
+    render();
   })();
 </script>
 </body>

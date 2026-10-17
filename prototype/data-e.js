@@ -11,8 +11,8 @@
       caption: 'Two hours on the bay with a skipper. Drinks are included for Prestige members. Twelve seats left.',
       going: 38, likes: 61,
       comments: [
-        { who: 'Paolo Cruz', initials: 'PC', ago: '40m', text: 'Is the boat big enough for six?' },
-        { who: 'Jen Santos', initials: 'JS', ago: '22m', text: 'Yes, the catamaran seats eight.' }
+        { who: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '40m', text: 'Is the boat big enough for six?' },
+        { who: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '22m', text: 'Yes, the catamaran seats eight.' }
       ]
     },
     {
@@ -22,7 +22,7 @@
       caption: 'Acoustic set on the deck with the sun going down over the marina. Member drinks are 10% off the menu.',
       going: 54, likes: 90,
       comments: [
-        { who: 'Marco Dizon', initials: 'MD', ago: '2h', text: 'Saving a table near the rail.' }
+        { who: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '2h', text: 'Saving a table near the rail.' }
       ]
     },
     {
@@ -47,29 +47,29 @@
   // carries its visit date (shown as "Verified visit"). Ana Reyes is the signed-in member. Newest first.
   var STORIES = [
     {
-      id: 'camayan-sunrise', kind: 'story', author: 'Marco Dizon', initials: 'MD', ago: '2h', visited: 'Today',
+      id: 'camayan-sunrise', kind: 'story', author: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '2h', visited: 'Today',
       place: 'camayan', cats: ['beaches', 'nature'], commentCount: 18,
       photos: ['img/pass-subic-bay.jpg', 'img/card-camayan.jpg'],
       caption: 'Sunrise walk before the crowds. The sand is clean and the water is flat this week.',
       likes: 214,
       comments: [
         { who: 'Ana Reyes', initials: 'AR', avatar: 'img/avatar.jpg', ago: '1h', text: 'Going this weekend. Is the garden side worth it?' },
-        { who: 'Jen Santos', initials: 'JS', ago: '50m', text: 'Yes, book the garden side. The pool is quieter.' },
-        { who: 'Marco Dizon', initials: 'MD', ago: '20m', text: 'Garden side all the way.' }
+        { who: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '50m', text: 'Yes, book the garden side. The pool is quieter.' },
+        { who: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '20m', text: 'Garden side all the way.' }
       ]
     },
     {
-      id: 'meatplus-steak', kind: 'story', author: 'Bea Lim', initials: 'BL', ago: '5h', visited: 'Today',
+      id: 'meatplus-steak', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '5h', visited: 'Today',
       place: 'meatplus', cats: ['food'], commentCount: 9,
       photos: ['img/hist-lighthouse-sep.jpg', 'img/hist-meat-plus.jpg'],
       caption: 'Window table just as the boats came in. Book ahead on weekends, the terrace fills up fast.',
       likes: 132,
       comments: [
-        { who: 'Paolo Cruz', initials: 'PC', ago: '3h', text: 'Which steak did you get?' }
+        { who: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '3h', text: 'Which steak did you get?' }
       ]
     },
     {
-      id: 'ocean-snorkel', kind: 'story', author: 'Jen Santos', initials: 'JS', ago: '1d', visited: 'Oct 12',
+      id: 'ocean-snorkel', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '1d', visited: 'Oct 12',
       place: 'ocean', cats: ['water-sports', 'nature'], commentCount: 6,
       photos: ['img/card-ocean.jpg', 'img/pass-subic-bay.jpg'],
       caption: 'Snorkel day with the kids. We saw a sea turtle near the reef and the crew knew every stop.',
@@ -79,7 +79,7 @@
       ]
     },
     {
-      id: 'ramas-curry', kind: 'story', author: 'Paolo Cruz', initials: 'PC', ago: '2d', visited: 'Oct 11',
+      id: 'ramas-curry', kind: 'story', author: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '2d', visited: 'Oct 11',
       place: 'ramas', cats: ['food'], commentCount: 4,
       photos: ['img/hist-ramas.jpg', 'img/thumb-ramas.jpg'],
       caption: 'The curry was the best thing we ate all week. Worth the drive from the port.',
@@ -87,17 +87,17 @@
       comments: []
     },
     {
-      id: 'lighthouse-pool', kind: 'story', author: 'Paolo Cruz', initials: 'PC', ago: '3d', visited: 'Oct 10',
+      id: 'lighthouse-pool', kind: 'story', author: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '3d', visited: 'Oct 10',
       place: 'lighthouse', cats: ['hotels'], commentCount: 3,
       photos: ['img/hist-lighthouse-oct.jpg', 'img/place-lighthouse.jpg'],
       caption: 'The pool is quiet before ten. Ask for an upper floor if you want the bay view.',
       likes: 76,
       comments: [
-        { who: 'Jen Santos', initials: 'JS', ago: '2d', text: 'Upper floor is worth it, the sunsets are right there.' }
+        { who: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '2d', text: 'Upper floor is worth it, the sunsets are right there.' }
       ]
     },
     {
-      id: 'meatplus-burger', kind: 'story', author: 'Jen Santos', initials: 'JS', ago: '4d', visited: 'Oct 9',
+      id: 'meatplus-burger', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '4d', visited: 'Oct 9',
       place: 'meatplus', cats: ['food'], commentCount: 2,
       photos: ['img/thumb-meat-plus.jpg', 'img/hist-meat-plus.jpg'],
       caption: 'Big portions. One grill plate fed both kids, and they had crayons at the table.',
@@ -105,7 +105,7 @@
       comments: []
     },
     {
-      id: 'lighthouse-sunset', kind: 'story', author: 'Marco Dizon', initials: 'MD', ago: '6d', visited: 'Oct 7',
+      id: 'lighthouse-sunset', kind: 'story', author: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '6d', visited: 'Oct 7',
       place: 'lighthouse', cats: ['hotels', 'nature'], commentCount: 5,
       photos: ['img/card-lighthouse.jpg', 'img/place-lighthouse.jpg'],
       caption: 'Golden hour walk out to the lighthouse. Go before six, the path gets busy after.',
@@ -119,7 +119,7 @@
       caption: 'Sunset charter from the pontoons. Bring a light jacket, it gets windy past the point.',
       likes: 31,
       comments: [
-        { who: 'Marco Dizon', initials: 'MD', ago: '7d', text: 'Good call on the jacket.' }
+        { who: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '7d', text: 'Good call on the jacket.' }
       ]
     }
   ];

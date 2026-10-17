@@ -9,6 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/thin/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="screen.css">
@@ -32,29 +36,32 @@
 
   <div class="c-dhead">
     <div class="c-dtabs" role="tablist" aria-label="Discover">
-      <button class="c-dtabs__tab" type="button" role="tab" id="tab-stories" aria-controls="panel-stories" data-tab="stories">Stories</button>
       <button class="c-dtabs__tab" type="button" role="tab" id="tab-places" aria-controls="panel-places" data-tab="places">Places</button>
+      <button class="c-dtabs__tab" type="button" role="tab" id="tab-stories" aria-controls="panel-stories" data-tab="stories">Stories</button>
       <button class="c-dtabs__tab" type="button" role="tab" id="tab-events" aria-controls="panel-events" data-tab="events">Events</button>
     </div>
-    <button class="c-dhead__btn" type="button" data-add-story aria-label="Share a story"><span class="material-symbols-outlined" aria-hidden="true">add_circle</span></button>
   </div>
 
   <main class="screen-scroll">
     <h1 class="u-sr-only">Discover</h1>
 
     <section class="c-dpanel" id="panel-stories" role="tabpanel" aria-labelledby="tab-stories">
-      <div class="c-fgrid" id="feed-grid"></div>
+      <button class="c-dcompose" type="button" data-add-story>
+        <span class="c-dcompose__face"><img src="img/avatar.jpg" alt=""></span>
+        <span class="c-dcompose__field">Share a story from a visit<i class="ph-light ph-image" aria-hidden="true"></i></span>
+      </button>
+      <div class="c-sfeed" id="feed-grid"></div>
     </section>
 
     <section class="c-dpanel" id="panel-places" role="tabpanel" aria-labelledby="tab-places" hidden>
       <div class="c-chiprow" role="group" aria-label="Filter places">
         <button class="c-chip is-selected" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="c-chip" type="button" data-filter="hotels" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">hotel</span>Hotels</button>
-        <button class="c-chip" type="button" data-filter="food" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">restaurant</span>Food</button>
-        <button class="c-chip" type="button" data-filter="beaches" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">beach_access</span>Beaches</button>
-        <button class="c-chip" type="button" data-filter="water-sports" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">sailing</span>Water sports</button>
-        <button class="c-chip" type="button" data-filter="nature" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">forest</span>Nature</button>
-        <button class="c-chip" type="button" data-filter="nightlife" aria-pressed="false"><span class="material-symbols-outlined c-chip__icon">local_bar</span>Nightlife</button>
+        <button class="c-chip" type="button" data-filter="hotels" aria-pressed="false"><i class="ph-light ph-bed c-chip__icon" aria-hidden="true"></i>Hotels</button>
+        <button class="c-chip" type="button" data-filter="food" aria-pressed="false"><i class="ph-light ph-fork-knife c-chip__icon" aria-hidden="true"></i>Food</button>
+        <button class="c-chip" type="button" data-filter="beaches" aria-pressed="false"><i class="ph-light ph-sun-horizon c-chip__icon" aria-hidden="true"></i>Beaches</button>
+        <button class="c-chip" type="button" data-filter="water-sports" aria-pressed="false"><i class="ph-light ph-waves c-chip__icon" aria-hidden="true"></i>Water sports</button>
+        <button class="c-chip" type="button" data-filter="nature" aria-pressed="false"><i class="ph-light ph-leaf c-chip__icon" aria-hidden="true"></i>Nature</button>
+        <button class="c-chip" type="button" data-filter="nightlife" aria-pressed="false"><i class="ph-light ph-moon c-chip__icon" aria-hidden="true"></i>Nightlife</button>
       </div>
 
       <section data-section="near">
@@ -96,17 +103,18 @@
   </section>
 
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
-    <a class="c-tabbar__tab" href="map.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">map</span>Map</a>
-    <a class="c-tabbar__tab is-active" href="explore.html" aria-current="page"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">explore</span>Discover</a>
-    <a class="c-tabbar__tab" href="card.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">credit_card</span>Card</a>
-    <a class="c-tabbar__tab" href="concierge.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">headset_mic</span>Concierge</a>
-    <a class="c-tabbar__tab" href="me.html"><span class="material-symbols-outlined c-tabbar__icon" aria-hidden="true">person</span>Me</a>
+    <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
+    <a class="c-tabbar__tab is-active" href="explore.html" aria-current="page"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
+    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 
 </div>
 <script src="data-a.js"></script>
 <script src="data-e.js"></script>
+<script src="saved.js"></script>
 <script src="app.js"></script>
 <script>
 (function () {
@@ -120,18 +128,40 @@
   }
   function tags(list) { return list.join(' '); }
 
-  // Stories: two columns of member posts, filled alternately (the old Feed page).
+  // Stories: one column of Facebook-style posts. Who and where on top, then the tip, the photos, the counts,
+  // and Like / Comment. Like toggles in place (as on the Story page); everything else opens the story.
   function post(s) {
     var face = s.avatar ? '<img src="' + s.avatar + '" alt="">' : '<span class="c-mono" style="background:' + window.monoColour(s.initials) + '">' + esc(s.initials) + '</span>';
-    return '<a class="c-fpost" href="post.html?id=' + s.id + '">' +
-      '<img class="c-fpost__img" src="' + s.photos[0] + '" alt="">' +
-      '<span class="c-fpost__cap">' + esc(s.caption || PLACES[s.place].name) + '</span>' +
-      '<span class="c-fpost__by"><span class="c-fpost__face">' + face + '</span><span class="c-fpost__name">' + esc(s.mine ? 'You' : s.author) + '</span>' +
-      '<span class="c-fpost__likes"><span class="material-symbols-outlined">favorite</span>' + (s.likes || 0) + '</span></span></a>';
+    var href = 'post.html?id=' + s.id;
+    var photos = (s.photos || []).slice(0, 2);
+    var talk = s.commentCount != null ? s.commentCount : (s.comments || []).length;
+    return '<article class="c-spost">' +
+      '<a class="c-spost__head" href="' + href + '"><span class="c-spost__face">' + face + '</span>' +
+        '<span class="c-spost__who"><span class="c-spost__name">' + esc(s.mine ? 'You' : s.author) + '</span>' +
+        '<span class="c-spost__meta">' + esc(PLACES[s.place].name) + ' · ' + esc(s.ago) + '</span></span></a>' +
+      '<a class="c-spost__body" href="' + href + '">' +
+        (s.caption ? '<p class="c-spost__text">' + esc(s.caption) + '</p>' : '') +
+        (photos.length ? '<span class="c-spost__photos is-' + photos.length + '">' +
+          photos.map(function (src) { return '<img src="' + src + '" alt="">'; }).join('') + '</span>' : '') +
+      '</a>' +
+      '<div class="c-spost__counts"><span class="c-spost__bubble"><i class="ph-fill ph-heart" aria-hidden="true"></i></span>' +
+        '<span data-likes>' + (s.likes || 0) + '</span><span class="c-spost__talk">' + talk + (talk === 1 ? ' comment' : ' comments') + '</span></div>' +
+      '<div class="c-spost__actions">' +
+        '<button class="c-spost__act" type="button" data-like aria-pressed="false"><i class="ph-light ph-heart" aria-hidden="true"></i>Like</button>' +
+        '<a class="c-spost__act" href="' + href + '"><i class="ph-light ph-chat-circle" aria-hidden="true"></i>Comment</a>' +
+      '</div></article>';
   }
-  var cols = ['', ''];
-  F.stories.forEach(function (s, i) { cols[i % 2] += post(s); });
-  document.getElementById('feed-grid').innerHTML = '<div class="c-fgrid__col">' + cols[0] + '</div><div class="c-fgrid__col">' + cols[1] + '</div>';
+  var feed = document.getElementById('feed-grid');
+  feed.innerHTML = F.stories.map(post).join('');
+  feed.addEventListener('click', function (e) {
+    var like = e.target.closest('[data-like]');
+    if (!like) return;
+    var on = like.getAttribute('aria-pressed') !== 'true';
+    var count = like.closest('.c-spost').querySelector('[data-likes]');
+    like.setAttribute('aria-pressed', on ? 'true' : 'false');
+    like.firstChild.className = (on ? 'ph-fill' : 'ph-light') + ' ph-heart';
+    count.textContent = +count.textContent + (on ? 1 : -1);
+  });
 
   // Events: one column, photo on top, then name, time and place.
   function eventRow(e) {
@@ -159,8 +189,9 @@
     return Math.round(low.rate * (100 - place.discount) / 100);
   }
   function saveBtn(place) {
-    return '<button class="c-savebtn" type="button" aria-pressed="false" aria-label="Save ' + esc(place.name) + '">' +
-      '<span class="material-symbols-outlined" aria-hidden="true">bookmark</span></button>';
+    var on = SLSaved.has('place', place.id);
+    return '<button class="c-savebtn' + (on ? ' is-on' : '') + '" type="button" aria-pressed="' + on + '" aria-label="Save ' + esc(place.name) + '" data-place="' + place.id + '">' +
+      '<i class="ph-fill ph-bookmark-simple c-savebtn__fill" aria-hidden="true"></i><i class="ph ph-bookmark-simple c-savebtn__line" aria-hidden="true"></i></button>';
   }
   function nearCard(n) {
     var place = PLACES[n.place];
@@ -169,12 +200,12 @@
       '<span class="c-lcard__photo"><img src="' + place.thumb + '" alt=""><span class="c-xbadge">' + esc(place.offerShort) + '</span></span>' +
       '<span class="c-lcard__name">' + esc(place.name) + '</span>' +
       '<span class="c-lcard__meta">' + esc(place.category) + ' · ' + esc(place.distance) + '</span>' +
-      '<span class="c-lcard__meta"><b>' + peso(fromPrice(place)) + '</b> ' + place.unit + ' · ★ ' + esc(place.rating) + '</span>' +
+      '<span class="c-lcard__meta"><b>' + peso(fromPrice(place)) + '</b> ' + place.unit + ' · <i class="ph-fill ph-star c-star" aria-hidden="true"></i> ' + esc(place.rating) + '</span>' +
       '</a>' + saveBtn(place) + '</div>';
   }
-  function stat(icon, value, label) {
-    return '<span class="c-bigcard__stat"><span class="material-symbols-outlined" aria-hidden="true">' + icon + '</span>' +
-      '<span class="c-bigcard__value">' + esc(value) + '</span><span class="c-bigcard__label">' + label + '</span></span>';
+  function stat(icon, tone, value, label) {
+    return '<span class="c-bigcard__stat"><i class="' + icon + ' c-bigcard__icon is-' + tone + '" aria-hidden="true"></i>' +
+      '<span class="c-bigcard__text"><span class="c-bigcard__value">' + esc(value) + '</span><span class="c-bigcard__label">' + label + '</span></span></span>';
   }
   function popularCard(p) {
     var place = PLACES[p.place];
@@ -188,8 +219,8 @@
       '<span class="c-bigcard__name">' + esc(place.name) + '</span>' +
       '<span class="c-bigcard__meta">' + esc(place.category) + ' · ' + esc(place.area) + '</span></span>' +
       '<span class="c-bigcard__offer"><span class="c-perkmark" aria-hidden="true"></span>' + esc(p.offer) + '</span></span>' +
-      '<span class="c-bigcard__stats">' + stat('near_me', place.distance, 'Away') + stat('star', place.rating, 'Rating') +
-      stat('schedule', place.closes.replace('closes ', ''), 'Closes') + '</span>' +
+      '<span class="c-bigcard__stats">' + stat('ph-light ph-navigation-arrow', 'blue', place.distance, 'Away') + stat('ph-fill ph-star', 'gold', place.rating, 'Rating') +
+      stat('ph-light ph-clock', 'indigo', place.closes.replace('closes ', ''), 'Closes') + '</span>' +
       '</a>' + saveBtn(place) + '</div>';
   }
   document.getElementById('near-row').innerHTML = NEAR.map(nearCard).join('');
@@ -205,8 +236,13 @@
   });
   document.querySelectorAll('.c-savebtn').forEach(function (b) {
     b.addEventListener('click', function () {
-      var on = b.classList.toggle('is-on');
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var id = b.getAttribute('data-place');
+      var on = SLSaved.toggle('place', id);
+      document.querySelectorAll('.c-savebtn[data-place="' + id + '"]').forEach(function (x) {
+        x.classList.toggle('is-on', on);
+        x.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      SLSaved.note(on);
     });
   });
 
@@ -220,7 +256,7 @@
       '<span class="material-symbols-outlined c-list-row__chev" aria-hidden="true">chevron_right</span></a>';
   }
 
-  // The + in the header opens a sheet of visits to share from. Picking one goes to the composer.
+  // The share box opens a sheet of visits to share from. Picking one goes to the composer.
   var sheet = document.getElementById('visit-sheet');
   var toShare = visitsToShare();
   document.getElementById('visit-list').innerHTML = toShare.length ? toShare.map(visitRow).join('')
@@ -233,7 +269,6 @@
 
   // Tabs: Stories, Places, Events. Each tab keeps its own scroll position. ?tab= picks the first one.
   var tabs = document.querySelectorAll('[data-tab]');
-  var addBtn = document.querySelector('.c-dhead__btn');
   var scrolls = {};
   var current = null;
 
@@ -245,7 +280,6 @@
       t.tabIndex = on ? 0 : -1;
       document.getElementById('panel-' + t.getAttribute('data-tab')).hidden = !on;
     });
-    addBtn.hidden = name !== 'stories';
     current = name;
     scroller.scrollTop = scrolls[name] || 0;
   }
@@ -260,7 +294,18 @@
     });
   });
   var asked = new URLSearchParams(location.search).get('tab');
-  show(['stories', 'places', 'events'].indexOf(asked) >= 0 ? asked : 'stories');
+  var shared = false;
+  try { shared = sessionStorage.getItem('sl-shared') === '1'; sessionStorage.removeItem('sl-shared'); } catch (err) {}
+  show(shared ? 'stories' : ['stories', 'places', 'events'].indexOf(asked) >= 0 ? asked : 'places');
+  // Back from New story: a short note that it's shared, gone after a moment.
+  if (shared) {
+    var toast = document.createElement('p');
+    toast.className = 'c-toast';
+    toast.setAttribute('role', 'status');
+    toast.textContent = 'Story shared';
+    document.querySelector('.phone').appendChild(toast);
+    setTimeout(function () { toast.classList.add('is-gone'); }, 2400);
+  }
 
   // Places filter: each chip shows only the places tagged with it. A section with nothing left hides.
   var panel = document.getElementById('panel-places');

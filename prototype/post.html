@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="screen.css">
@@ -19,7 +22,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone is-pushed has-bottombar">
+<div class="phone is-pushed has-bottombar c-flat">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -132,9 +135,9 @@
     '<div class="u-gutter c-post-info-wrap">' + info + '</div>' +
     '<div class="u-gutter c-post-actions">' +
       '<button class="c-like" type="button" id="like" aria-pressed="false" aria-label="Like">' +
-        '<span class="material-symbols-outlined">favorite</span><span id="like-count">' + s.likes + '</span>' +
+        '<i class="ph-light ph-heart" aria-hidden="true"></i><span id="like-count">' + s.likes + '</span>' +
       '</button>' +
-      '<span class="c-post__stat"><span class="material-symbols-outlined">chat_bubble</span><span id="comment-count">' + commentTotal + '</span></span>' +
+      '<span class="c-post__stat"><i class="ph-light ph-chat-circle" aria-hidden="true"></i><span id="comment-count">' + commentTotal + '</span></span>' +
     '</div>' +
     '<div class="c-info-group c-post-place">' +
       '<a class="c-place-link" href="place.html?p=' + s.place + '">' +
@@ -176,6 +179,7 @@
     liked = !liked;
     likes += liked ? 1 : -1;
     like.classList.toggle('is-liked', liked);
+    like.firstChild.className = (liked ? 'ph-fill' : 'ph-light') + ' ph-heart';
     like.setAttribute('aria-pressed', liked ? 'true' : 'false');
     likeCount.textContent = likes;
     like.classList.remove('is-pop');

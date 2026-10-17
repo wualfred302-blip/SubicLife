@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-c.css">
@@ -19,7 +20,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-push">
+<div class="phone c-push c-discover c-cgpage">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -30,26 +31,18 @@
     </span>
   </header>
 
-  <nav class="c-navbar">
-    <a data-back class="c-navbar__back" href="concierge.html" aria-label="Back to Concierge">
-      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-    </a>
-    <div class="c-navbar__titles">
-      <h1 class="c-navbar__title" id="title">Your trip</h1>
-    </div>
-    <span></span>
-  </nav>
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" href="concierge.html" data-back aria-label="Back to Concierge"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title" id="title">Your trip</h1>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
 
-  <main class="screen-scroll c-g-pushed">
-    <div class="u-gutter">
-      <p class="c-page-sub" id="dates">Sat 17 – Sun 18 Oct · Subic Bay</p>
+  <main class="screen-scroll">
+    <p class="c-cgdates" id="dates">Sat 17 – Sun 18 Oct · Subic Bay</p>
 
-      <div class="c-trip-days" id="days"></div>
+    <div id="days"></div>
 
-      <a class="c-btn secondary c-trip-cal" id="cal" href="concierge-trip.html">
-        <span class="material-symbols-outlined" aria-hidden="true">event</span>Add to calendar
-      </a>
-    </div>
+    <a class="c-cgcal" id="cal" href="concierge-trip.html"><i class="ph-light ph-calendar-plus" aria-hidden="true"></i>Add to calendar</a>
   </main>
 
   <span class="c-homeindicator"></span>
@@ -66,26 +59,27 @@
   document.getElementById('dates').textContent = trip.dates + ' · Subic Bay';
 
   var box = document.getElementById('days');
-  // Same timeline as the Concierge tab: a white tile per day, an icon per stop, a tick when confirmed,
-  // and words only for a stop Mika is still arranging.
+  // Phosphor light icons for the trip's icon names.
+  var ICON = { airport_shuttle: 'van', sailing: 'sailboat', login: 'sign-in', logout: 'sign-out', restaurant: 'fork-knife' };
+  // Same lists as the Concierge tab: one hairline list per day, words only for a stop Mika is still arranging.
   trip.days.forEach(function (d) {
     var day = document.createElement('section');
-    day.className = 'c-tday';
-    day.innerHTML = '<h2 class="c-tday__label">' + d.label + '</h2>';
+    day.className = 'c-cgday';
+    day.innerHTML = '<h2 class="c-mehead">' + d.label + '</h2>';
     var list = document.createElement('div');
-    list.className = 'c-tday__list';
+    list.className = 'c-melist';
     d.items.forEach(function (i) {
       var r = document.createElement('a');
-      r.className = 'c-tstop c-pressable' + (i.status ? ' is-' + i.status : '');
+      r.className = 'c-merow c-cgstop';
       r.href = i.href;
       r.innerHTML =
-        '<span class="c-tstop__node" data-ic="' + i.icon + '"><span class="material-symbols-outlined" aria-hidden="true">' + i.icon + '</span></span>' +
-        '<span class="c-tstop__main"><span class="c-tstop__time">' + i.time + '</span>' +
-        '<span class="c-tstop__name">' + i.title + '</span>' +
-        '<span class="c-tstop__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
-        (i.status === 'progress' ? '<span class="c-tstop__status">Mika is on it</span>' : '') +
+        '<span class="c-merow__lead"><i class="ph-light ph-' + (ICON[i.icon] || 'calendar-blank') + '" aria-hidden="true"></i></span>' +
+        '<span class="c-merow__main"><span class="c-cgstop__time">' + i.time + '</span>' +
+        '<span class="c-cgstop__name">' + i.title + '</span>' +
+        '<span class="c-merow__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
+        (i.status === 'progress' ? '<span class="c-cgstop__status">Mika is on it</span>' : '') +
         '</span>' +
-        (i.photo === false ? '' : '<span class="c-tstop__thumb"><img alt="" src="' + i.img + '"></span>');
+        (i.photo === false ? '' : '<img class="c-cgstop__thumb" alt="" src="' + i.img + '">');
       list.appendChild(r);
     });
     day.appendChild(list);

@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-c.css">
@@ -19,7 +20,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-push">
+<div class="phone c-push c-discover c-cgpage c-cgreq">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -30,61 +31,49 @@
     </span>
   </header>
 
-  <nav class="c-navbar">
-    <a data-back class="c-navbar__back" href="concierge.html" aria-label="Back to Concierge">
-      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-    </a>
-    <div class="c-navbar__titles">
-      <h1 class="c-navbar__title" id="nav-title">Request</h1>
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" href="concierge.html" data-back aria-label="Back to Concierge"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title" id="nav-title">Request</h1>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
+
+  <main class="screen-scroll">
+
+    <img class="c-cgreq__hero" id="hero" src="img/card-lighthouse.jpg" alt="">
+
+    <div class="c-cgreq__head">
+      <h2 class="c-cgreq__title" id="title">Request</h2>
+      <p class="c-cgreq__desc" id="desc"></p>
+      <p class="c-cgreq__price" id="price"></p>
     </div>
-    <span></span>
-  </nav>
 
-  <main class="screen-scroll c-g-pushed">
-
-    <figure class="c-req-hero u-mb-0">
-      <img id="hero" src="img/card-lighthouse.jpg" alt="">
-    </figure>
-
-    <div class="u-gutter">
-      <h1 class="c-req-title" id="title">Request</h1>
-      <p class="c-req-desc" id="desc"></p>
-      <p class="c-req-price" id="price"></p>
-
-      <div class="c-group">
-        <label class="c-group__row">
-          <span class="c-group__label">Date</span>
-          <span class="c-group__pick">
-            <span class="c-group__value" id="date-out">Sat 17 Oct</span>
-            <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
-            <input class="c-group__input" id="date" type="date" value="2026-10-17" min="2026-10-12" aria-label="Date">
-          </span>
-        </label>
-        <label class="c-group__row">
-          <span class="c-group__label">Time</span>
-          <span class="c-group__pick">
-            <span class="c-group__value" id="time-out">10:00 AM</span>
-            <span class="material-symbols-outlined c-group__chev" aria-hidden="true">chevron_right</span>
-            <input class="c-group__input" id="time" type="time" value="10:00" aria-label="Time">
-          </span>
-        </label>
-        <div class="c-group__row">
-          <span class="c-group__label">Guests</span>
-          <span class="c-stepper">
-            <button class="c-stepper__btn" type="button" id="g-minus" aria-label="Fewer guests"><span class="material-symbols-outlined">remove</span></button>
-            <span class="c-stepper__value" id="g-val" aria-live="polite">6</span>
-            <button class="c-stepper__btn" type="button" id="g-plus" aria-label="More guests"><span class="material-symbols-outlined">add</span></button>
-          </span>
-        </div>
+    <div class="c-melist c-cgform">
+      <label class="c-merow">
+        <span class="c-merow__main">Date</span>
+        <span class="c-merow__value" id="date-out">Sat 17 Oct</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
+        <input class="c-group__input" id="date" type="date" value="2026-10-17" min="2026-10-12" aria-label="Date">
+      </label>
+      <label class="c-merow">
+        <span class="c-merow__main">Time</span>
+        <span class="c-merow__value" id="time-out">10:00 AM</span>
+        <i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>
+        <input class="c-group__input" id="time" type="time" value="10:00" aria-label="Time">
+      </label>
+      <div class="c-merow">
+        <span class="c-merow__main">Guests</span>
+        <span class="c-cgstep">
+          <button class="c-cgstep__btn" type="button" id="g-minus" aria-label="Fewer guests"><i class="ph-light ph-minus" aria-hidden="true"></i></button>
+          <span class="c-cgstep__value" id="g-val" aria-live="polite">6</span>
+          <button class="c-cgstep__btn" type="button" id="g-plus" aria-label="More guests"><i class="ph-light ph-plus" aria-hidden="true"></i></button>
+        </span>
       </div>
-
-      <p class="c-group-head">Notes for Mika</p>
-      <div class="c-group">
-        <textarea class="c-group__notes" id="note" rows="3" placeholder="Pickup point, flight number, dietary needs" aria-label="Notes for Mika"></textarea>
-      </div>
-
-      <p class="c-req-note">Mika replies in about 5 minutes.</p>
     </div>
+
+    <p class="c-mehead">Notes for Mika</p>
+    <textarea class="c-cgnotes" id="note" rows="3" placeholder="Pickup point, flight number, dietary needs" aria-label="Notes for Mika"></textarea>
+
+    <p class="c-cgreq__note">Mika replies in about 5 minutes.</p>
 
   </main>
 
