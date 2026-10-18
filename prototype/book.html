@@ -159,6 +159,54 @@
     }).join('');
     var room = function () { return Number(document.querySelector('input[name="room"]:checked').value); };
 
+    if (p.kind === 'tickets') {
+      // Tickets: the day and how many can still change here; the ticket itself changes on the listing.
+      $$('[data-stay-form], [data-bar-sum], [data-cancel]').forEach(function (e) { e.hidden = false; });
+      $('.c-req-bar').classList.add('is-stay');
+      $('[data-stay-form] [data-open="dates"] .c-merow__main').firstChild.textContent = 'Date';
+      $('[data-room-head]').textContent = 'Ticket';
+      $('[data-room-head]').insertAdjacentHTML('beforeend', '<a class="c-bkchange" data-tixchange href="place.html?p=' + p.id + '#tickets">Change</a>');
+      $$('.c-bkroom__price').forEach(function (el, i) {
+        var t = p.rooms[i];
+        el.innerHTML = t.child
+          ? fmtPeso(member(t.rate)) + ' adult · ' + fmtPeso(member(t.child)) + ' child'
+          : fmtPeso(member(t.rate)) + ' / person <s>' + fmtPeso(t.rate) + '</s>';
+      });
+      $$('.c-bkroom__img, .c-bkroom__tick').forEach(function (x) { x.remove(); });
+      $$('.c-bkroom').forEach(function (row, i) { row.hidden = i !== pick; });
+      $('.c-bkprice .c-bkprice__row').insertAdjacentHTML('afterend', '<div class="c-bkprice__row" data-kidline hidden><span data-kidlabel></span><span data-kidamt></span></div>');
+      var tf = SLStay.fmt;
+      var tk = SLStay({
+        single: true, checkIn: tf.parse(queryParam('d')) || tf.add(SLStay.today, 1),
+        adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0, maxParty: 20, guestNote: '',
+        onChange: function () { renderTix(); }
+      });
+      var renderTix = function () {
+        var s = tk.state, i = room(), t = p.rooms[i], kid = t.child || t.rate;
+        var full = t.rate * s.adults + kid * s.kids, total = member(t.rate) * s.adults + member(kid) * s.kids;
+        var q = '&d=' + tf.iso(s.checkIn) + '&a=' + s.adults + '&c=' + s.kids;
+        $('[data-range]').textContent = tf.day(s.checkIn);
+        $('[data-nights]').hidden = true;
+        $('[data-party]').textContent = tf.party(s.adults, s.kids);
+        $('[data-line]').textContent = fmtPeso(t.rate) + ' × ' + tf.plural(s.adults, 'adult', 'adults');
+        $('[data-rack]').textContent = fmtPeso(t.rate * s.adults);
+        $('[data-kidline]').hidden = !s.kids;
+        $('[data-kidlabel]').textContent = fmtPeso(kid) + ' × ' + tf.plural(s.kids, 'child', 'children');
+        $('[data-kidamt]').textContent = fmtPeso(kid * s.kids);
+        $('[data-disc]').textContent = '−' + fmtPeso(full - total);
+        $('[data-total]').textContent = fmtPeso(total);
+        // The park store's own terms.
+        $('[data-cancel]').textContent = 'Valid only on ' + tf.day(s.checkIn) + '. ' + p.ticketTerms;
+        $('[data-bar-total]').textContent = fmtPeso(total);
+        $('[data-bar-nights]').textContent = tf.day(s.checkIn);
+        $('[data-pay]').textContent = 'Pay';
+        $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i + q;
+        $('[data-tixchange]').href = 'place.html?p=' + p.id + q + '#tickets';
+      };
+      renderTix();
+      return;
+    }
+
     if (!stay) {
       // Trips keep the simple form: one date, a start time and a guest count.
       $('[data-trip-form]').hidden = false;

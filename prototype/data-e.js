@@ -148,14 +148,23 @@
       ]
     },
     {
-      id: 'ocean-tours', title: '15% off tours', place: 'ocean', cats: ['water-sports', 'nature'],
+      id: 'ocean-tours', title: '15% off tickets', place: 'ocean', cats: ['water-sports', 'nature'],
       photo: 'img/card-ocean.jpg', tier: 'Prestige · 15% off', valid: '30 Nov 2026',
-      applies: 'Half-day and full-day tours', bookable: true,
+      applies: 'Every ticket booked in the app', bookable: true,
       terms: [
-        'Applies to half-day and full-day tours.',
-        'Book at the dock or in the app.',
-        'Life jackets and snorkel gear are included.',
-        'Not valid on public holidays.'
+        'Applies to every ticket you book in the app.',
+        'Show your card QR at the gate.',
+        'The park\'s ₱20 environment fee is paid at the gate.'
+      ]
+    },
+    {
+      id: 'zoobic-tickets', title: '10% off tickets', place: 'zoobic', cats: ['nature'],
+      photo: 'img/zoobic-1.jpg', tier: 'Prestige · 10% off', valid: '30 Nov 2026',
+      applies: 'Every ticket booked in the app', bookable: true,
+      terms: [
+        'Applies to every ticket you book in the app.',
+        'Show your card QR at the gate.',
+        'The park\'s ₱20 environment fee is paid at the gate.'
       ]
     },
     {

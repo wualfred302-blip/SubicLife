@@ -66,7 +66,7 @@
   if (o.bookable && place.rackPrice) {
     var rooms = place.rooms || [];
     rooms.forEach(function (r, i) { if (r.rate < rooms[pick].rate) pick = i; });
-    was = rooms.length ? rooms[pick].rate : place.rackPrice; now = Math.round(was * (100 - pct) / 100); unit = place.unit;
+    was = rooms.length ? rooms[pick].rate : place.rackPrice; now = was - Math.round(was * pct / 100); unit = place.unit;
     label = 'per ' + unit;
   } else {
     was = o.place === 'meatplus' ? 2400 : 2000; now = Math.round(was * (100 - pct) / 100);
@@ -140,7 +140,9 @@
   cta.innerHTML = o.bookable
     ? '<div class="c-obar__price"><span class="c-obar__line"><b>' + fmtPeso(now) + '</b>' + (unit === 'night' ? ' night' : ' / ' + unit) + '</span>' +
       '<span class="c-obar__sub">' + pct + '% off</span></div>' +
-      '<a class="c-btn primary" href="book.html?p=' + o.place + '&amp;room=' + pick + '">Check availability</a>'
+      (place.kind === 'tickets'
+        ? '<a class="c-btn primary" href="place.html?p=' + o.place + '#tickets">See tickets</a>'
+        : '<a class="c-btn primary" href="book.html?p=' + o.place + '&amp;room=' + pick + '">Check availability</a>')
     : '<div class="c-obar__price"><span class="c-obar__line is-title"><b>' + esc(o.title) + '</b></span><span class="c-obar__sub">Prestige perk</span></div>' +
       '<a class="c-btn primary" href="card.html">Show my card</a>';
 

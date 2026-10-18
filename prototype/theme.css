@@ -3580,6 +3580,47 @@ html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top
 .c-plroom { padding: 12px 0; }
 .c-plroom .c-merow__chev { flex: none; }
 .c-plrooms .c-plroom + .c-plroom::before { left: 70px; }
+.c-plrooms .c-pltix + .c-pltix::before { left: 0; }
+.c-pltix { width: 100%; border: 0; background: none; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.c-pltix:active { opacity: 0.5; }
+.c-pltix:focus-visible { outline: 2px solid #111214; outline-offset: 2px; border-radius: 8px; }
+.c-tixsheet__body { flex: 0 1 auto; min-height: 0; overflow-y: auto; }
+.c-tixsheet .c-mehead { margin-top: 18px; }
+.c-tixsheet .c-melist .c-merow { min-height: 46px; padding: 6px 0; }
+.c-tixsheet .c-cgform .c-merow { min-height: 56px; }
+.c-tixsheet .c-bksheet__foot { margin-top: 16px; }
+.c-tixsheet .c-btn {
+  flex: none; display: inline-flex; align-items: center; justify-content: center; width: auto; min-width: 148px;
+  min-height: 48px; height: 48px; padding: 0 22px; font-size: 16px; font-weight: 600; box-shadow: none; text-decoration: none;
+}
+.c-tixsheet .c-btn[aria-disabled="true"] { background: rgb(17 18 20 / 0.08); color: #5F6670; cursor: default; }
+.c-tixfacts {
+  display: grid; grid-template-columns: repeat(3, 1fr); margin: 12px 20px 0; padding: 12px 0; list-style: none;
+  border-top: 1px solid rgb(17 18 20 / 0.08); border-bottom: 1px solid rgb(17 18 20 / 0.08);
+}
+.c-tixfacts li {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 6px; text-align: center;
+  font: 400 12px/16px var(--font); color: #5F6670;
+}
+.c-tixfacts li + li { border-left: 1px solid rgb(17 18 20 / 0.08); }
+.c-tixfacts i { font-size: 22px; color: #111214; }
+.c-tixcal { padding: 0 20px; }
+.c-mcal__head { display: flex; align-items: center; gap: 4px; margin: 4px 0 4px; }
+.c-mcal__title { flex: 1; margin: 0; font: 600 16px/22px var(--font); color: #111214; }
+.c-mcal__nav {
+  display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%;
+  background: none; color: #111214; font-size: 20px; cursor: pointer;
+}
+.c-mcal__nav:disabled { color: rgb(17 18 20 / 0.25); cursor: default; }
+.c-mcal__nav:focus-visible { outline: 2px solid #111214; outline-offset: -2px; }
+.c-mcal__dow {
+  display: grid; grid-template-columns: repeat(7, 1fr); padding: 4px 0 6px;
+  font: 500 12px/16px var(--font); color: #5F6670; text-align: center;
+}
+.c-mcal .c-bkday { height: 40px; }
+.c-mcal .c-bkday.is-start::before { width: 40px; height: 40px; }
+.c-bkcal .c-mcal { margin-top: 8px; }
+.c-bkchange { float: right; color: #E8590C; font: 500 13px/18px var(--font); text-decoration: none; }
 .c-plroom__unit { font-weight: 400; color: #5F6670; }
 
 /* Hours and location rows */

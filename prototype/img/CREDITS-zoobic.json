@@ -1,0 +1,32 @@
+[
+  {
+    "file": "zoobic-1.jpg",
+    "title": "Tiger in Safari",
+    "author": "haopee",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "source_url": "https://www.flickr.com/photos/118661164@N04/13995028956",
+    "width": 1024,
+    "height": 683
+  },
+  {
+    "file": "zoobic-6.jpg",
+    "title": "sunbathing",
+    "author": "/mark/",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source_url": "https://www.flickr.com/photos/22568752@N03/2180598084",
+    "width": 1024,
+    "height": 768
+  },
+  {
+    "file": "zoobic-8.jpg",
+    "title": "Zoobic camel",
+    "author": "Peanut Dela Cruz",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source_url": "https://www.flickr.com/photos/13063679@N02/3438651591",
+    "width": 1024,
+    "height": 683
+  }
+]

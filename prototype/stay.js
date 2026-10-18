@@ -1,7 +1,9 @@
 // Dates and guests for a hotel stay: the calendar and guest sheets the listing and Confirm and pay share, and the
 // date words both print. SLStay(options) adds the two sheets to the phone, opens them from any [data-open]
 // button, and calls onChange when the stay changes. It returns { state, open }.
-// options: checkIn, checkOut (Dates or null), adults, kids, maxParty, optional (dates can be cleared), onChange.
+// options: checkIn, checkOut (Dates or null), adults, kids, maxParty, optional (dates can be cleared), onChange,
+// single (pick one day, for tickets: one month at a time), guestNote (text under the guest counters; '' for none).
+// SLStay.month(month, picked) is that one-month calendar as HTML: [data-day] days and [data-mnav] arrows.
 (function () {
   var DAY = 864e5, MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var WK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -31,6 +33,24 @@
   var today = new Date(2026, 9, 17);
   var months = [];
   for (var mi = 0; mi < 12; mi++) months.push(new Date(today.getFullYear(), today.getMonth() + mi, 1));
+  // One month for picking a single day: the month with arrows, weekday letters, then the days; past days are off.
+  function month(m, picked) {
+    var cells = '', first = m.getDay(), last = new Date(m.getFullYear(), m.getMonth() + 1, 0).getDate();
+    for (var b = 0; b < first; b++) cells += '<span></span>';
+    for (var d = 1; d <= last; d++) {
+      var day = new Date(m.getFullYear(), m.getMonth(), d), on = picked && +day === +picked;
+      cells += '<button class="c-bkday' + (on ? ' is-start' : '') + '" type="button" data-day="' + fmt.iso(day) + '"' + (day < today ? ' disabled' : '') +
+        ' aria-label="' + fmt.day(day) + '"' + (on ? ' aria-pressed="true"' : '') + '>' + d + '</button>';
+    }
+    var nav = function (step, label, icon, off) {
+      return '<button class="c-mcal__nav" type="button" data-mnav="' + step + '" aria-label="' + label + '"' + (off ? ' disabled' : '') + '>' +
+        '<i class="ph-light ph-caret-' + icon + '" aria-hidden="true"></i></button>';
+    };
+    return '<section class="c-bkmonth c-mcal"><div class="c-mcal__head"><h3 class="c-mcal__title">' + MONTH[m.getMonth()] + ' ' + m.getFullYear() + '</h3>' +
+      nav(-1, 'Previous month', 'left', +m <= +months[0]) + nav(1, 'Next month', 'right', +m >= +months[months.length - 1]) + '</div>' +
+      '<div class="c-mcal__dow" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>' +
+      '<div class="c-bkmonth__grid">' + cells + '</div></section>';
+  }
 
   var SHEETS =
     '<div class="c-sheet c-bksheet" data-sheet="dates" role="dialog" aria-modal="true" aria-label="Choose dates" hidden>' +
@@ -62,13 +82,22 @@
     phone.querySelector('.c-homeindicator').insertAdjacentHTML('beforebegin', SHEETS);
     var $ = function (q) { return phone.querySelector(q); };
     var $$ = function (q) { return Array.prototype.slice.call(phone.querySelectorAll(q)); };
-    var s = { checkIn: (o.checkIn && o.checkOut && o.checkIn) || null, checkOut: (o.checkIn && o.checkOut) || null, adults: o.adults || 2, kids: o.kids || 0 };
+    var view = months[0];
+    if (o.single) {
+      $('[data-sheet="dates"] .c-bksheet__title').textContent = 'Date';
+      $('[data-sheet="dates"] .c-bkdow').style.display = 'none';
+    }
+    var s = { checkIn: (o.checkIn && (o.single || o.checkOut) && o.checkIn) || null, checkOut: (o.checkIn && o.checkOut) || null, adults: o.adults || 2, kids: o.kids || 0 };
     var opener = null, pickIn = null, pickOut = null;
 
     // Sheets slide up over the page; the scrim, Escape or Done closes them.
     function open(name, from) {
       opener = from || null;
-      if (name === 'dates') { pickIn = s.checkIn; pickOut = s.checkOut; drawCal(); }
+      if (name === 'dates') {
+        pickIn = s.checkIn; pickOut = s.checkOut;
+        if (o.single && pickIn) view = new Date(pickIn.getFullYear(), pickIn.getMonth(), 1);
+        drawCal();
+      }
       if (name === 'guests') drawGuests();
       var sheet = $('[data-sheet="' + name + '"]');
       sheet.hidden = false;
@@ -88,7 +117,7 @@
 
     // Calendar: tap check-in, then check-out; tapping again starts over.
     function drawCal() {
-      $('[data-cal]').innerHTML = months.map(function (m) {
+      $('[data-cal]').innerHTML = o.single ? month(view, pickIn) : months.map(function (m) {
         var cells = '', first = m.getDay(), last = new Date(m.getFullYear(), m.getMonth() + 1, 0).getDate();
         for (var b = 0; b < first; b++) cells += '<span></span>';
         for (var d = 1; d <= last; d++) {
@@ -102,16 +131,24 @@
         }
         return '<section class="c-bkmonth"><h3 class="c-bkmonth__title">' + MONTH[m.getMonth()] + ' ' + m.getFullYear() + '</h3><div class="c-bkmonth__grid">' + cells + '</div></section>';
       }).join('');
-      $('[data-cal-sum]').textContent = pickIn && pickOut
+      $('[data-cal-sum]').textContent = o.single ? (pickIn ? fmt.day(pickIn) : 'Pick a day') : pickIn && pickOut
         ? fmt.range(pickIn, pickOut) + ' · ' + plural(fmt.nights(pickIn, pickOut), 'night', 'nights')
         : pickIn ? 'Check-in ' + fmt.day(pickIn) + ' · now pick check-out' : 'Pick your check-in day';
-      $('[data-cal-done]').disabled = !(pickIn && pickOut) && !(o.optional && !pickIn);
+      $('[data-cal-done]').disabled = !(pickIn && (pickOut || o.single)) && !(o.optional && !pickIn);
     }
     $('[data-cal]').addEventListener('click', function (e) {
+      var nv = e.target.closest('[data-mnav]');
+      if (nv) {
+        view = new Date(view.getFullYear(), view.getMonth() + Number(nv.dataset.mnav), 1);
+        drawCal();
+        var nv2 = $('[data-cal] [data-mnav="' + nv.dataset.mnav + '"]');
+        if (nv2 && !nv2.disabled) nv2.focus();
+        return;
+      }
       var b = e.target.closest('[data-day]');
       if (!b || b.disabled) return;
       var d = fmt.parse(b.dataset.day);
-      if (!pickIn || pickOut || d <= pickIn) { pickIn = d; pickOut = null; }
+      if (o.single || !pickIn || pickOut || d <= pickIn) { pickIn = d; pickOut = null; }
       else pickOut = d;
       drawCal();
       var again = $('[data-day="' + b.dataset.day + '"]');
@@ -127,7 +164,7 @@
       $('[data-gstep="a-1"]').disabled = s.adults <= 1;
       $('[data-gstep="c-1"]').disabled = s.kids <= 0;
       $('[data-gstep="a1"]').disabled = $('[data-gstep="c1"]').disabled = s.adults + s.kids >= o.maxParty;
-      $('[data-guest-note]').textContent = 'Rooms here sleep up to ' + o.maxParty + '.';
+      $('[data-guest-note]').textContent = o.guestNote != null ? o.guestNote : 'Rooms here sleep up to ' + o.maxParty + '.';
     }
     $$('[data-gstep]').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -143,4 +180,5 @@
   };
   SLStay.fmt = fmt;
   SLStay.today = today;
+  SLStay.month = month;
 })();
