@@ -158,6 +158,15 @@
       ]
     },
     {
+      id: 'sailing-lessons', title: '10% off lessons', place: 'sailing', cats: ['water-sports'],
+      photo: 'img/hist-sailing-club.jpg', tier: 'Prestige · 10% off', valid: '30 Nov 2026',
+      applies: 'Every lesson booked in the app', bookable: true,
+      terms: [
+        'Applies to every lesson you book in the app.',
+        'Show your card QR at the marina.'
+      ]
+    },
+    {
       id: 'zoobic-tickets', title: '10% off tickets', place: 'zoobic', cats: ['nature'],
       photo: 'img/zoobic-1.jpg', tier: 'Prestige · 10% off', valid: '30 Nov 2026',
       applies: 'Every ticket booked in the app', bookable: true,

@@ -14,6 +14,7 @@
       { id: 'yacht', partner: true, lat: 14.8214, lng: 120.2754, cats: ['food', 'water-sports'] }, // Subic Bay Yacht Club
       { id: 'camayan', partner: true, lat: 14.7729, lng: 120.2285, cats: ['hotels', 'beaches'] }, // Camayan Beach
       { id: 'ocean', partner: true, lat: 14.7739, lng: 120.2295, cats: ['water-sports'] },       // Ocean Adventure, Camayan Wharf
+      { id: 'sailing', partner: true, lat: 14.8214, lng: 120.2719, cats: ['water-sports'] },     // Subic Sailing, Lighthouse Marina
       { id: 'zoobic', partner: true, lat: 14.7533, lng: 120.2722, cats: ['nature'] },          // Zoobic Safari, Ilanin Forest
 
       { id: 'all-hands', partner: false, name: 'All Hands Beach', category: 'Beach', area: 'Camayan',

@@ -128,6 +128,59 @@
       ],
       code: 'SBL-3Z8T5W'
     },
+    sailing: {
+      id: 'sailing',
+      about: "Subic Bay's sailing club at Lighthouse Marina. It started as the Saturday Afternoon Gentlemen Sailors, now organises the Subic Regatta, and teaches first-timers to sail with its own crew.",
+      name: 'Subic Sailing',
+      category: 'Sailing School',
+      categories: ['water-sports'],
+      area: 'Moonbay Marina',
+      distance: '1.2 km',
+      rating: '4.2',
+      hero: 'img/hist-sailing-club.jpg',
+      photos: ['img/hist-sailing-club.jpg', 'img/sailing-bay.jpg', 'img/sailing-lighthouse.jpg'],
+      thumb: 'img/hist-sailing-club.jpg',
+      offer: '10% off lessons · Prestige',
+      offerShort: '10% off',
+      offerSub: 'Applied when you book. Show your card at the marina.',
+      discount: 10,
+      hours: 'Open daily, 9 AM to 5 PM',
+      closes: 'closes 17:00',
+      address: 'Lighthouse Marina Resort, Waterfront Road, Subic Bay Freeport Zone',
+      phone: '+63 917 536 6349',
+      bookable: true,
+      // Lessons on the ticket pattern: one price per sailor, a day, and a start time where the lesson has slots.
+      kind: 'tickets',
+      tixWord: ['Lessons', 'Lesson'],
+      meet: 'the club at Lighthouse Marina',
+      chat: ['+639175366349', 'Text the club'],
+      tixFacts: [['calendar-check', 'Valid on your date'], ['sailboat', 'Crew on board'], ['qr-code', 'Show your QR at the marina']],
+      // SAMPLE until the club confirms: the weather rule, life jackets, ages, group size, arriving early.
+      ticketTerms: 'If the club calls off your lesson for weather, you pick a new day or get your money back.',
+      gate: ['09', '17'],
+      unit: 'person',
+      rackPrice: 1500,
+      memberPrice: 1350,
+      rooms: [
+        // From the club's sailing-school and price pages. hours: the lesson's length; slots: SAMPLE start times;
+        // facts replace the place's three icons with what a first-timer asks first; max caps one booking.
+        { name: 'Discover Dinghy', sub: 'One hour on a small sailboat with the crew', rate: 1500, hours: 1,
+          slots: ['0900', '1000', '1100', '1400', '1500', '1600'], max: 4, who: 'Up to 4 per booking',
+          facts: [['clock', '1 hour'], ['student', 'No experience needed'], ['wind', 'Bad weather? Pick a new day']],
+          incl: ['One hour of dinghy sailing', 'A professional crew on board', 'Life jacket'],
+          know: [['map-pin', 'Meet at the club at Lighthouse Marina, 15 minutes early'],
+            ['t-shirt', 'Wear clothes that can get wet. Bring sunscreen, a hat and water'],
+            ['lifebuoy', 'Ages 8 and up. No need to be a strong swimmer']] },
+        { name: 'Intro to Sailing', sub: 'A three-hour first course, on land and on the water', rate: 4500, hours: 3,
+          slots: ['0900', '1300'], max: 6, who: 'Up to 6 per booking',
+          facts: [['clock', '3 hours'], ['student', 'No experience needed'], ['wind', 'Bad weather? Pick a new day']],
+          incl: ['Orientation and a gear check', 'Boat safety and the points of sail', 'Dry sailing on land, then a short sail', 'Basic steering', 'Life jacket'],
+          know: [['map-pin', 'Meet at the club at Lighthouse Marina, 15 minutes early'],
+            ['t-shirt', 'Wear clothes that can get wet. Bring sunscreen, a hat and water'],
+            ['lifebuoy', 'Ages 8 and up. No need to be a strong swimmer']] }
+      ],
+      code: 'SBL-5S1L9C'
+    },
     camayan: {
       id: 'camayan',
       about: "A quiet cove resort at the mouth of the bay with its own reef, kayaks and beach huts. The calmest water in Subic for a swim.",
@@ -264,6 +317,11 @@
   };
   window.queryParam = function (k) { return new URLSearchParams(window.location.search).get(k); };
   window.fmtPeso = function (n) { return '₱' + n.toLocaleString('en-US'); };
+  // '0900' → '9:00 AM'; with a lesson's length in hours it gives the end ('0900', 3 → '12:00 PM').
+  window.fmtClock = function (t, add) {
+    var h = Number(t.slice(0, 2)) + (add || 0);
+    return (h % 12 || 12) + ':' + t.slice(2) + (h < 12 ? ' AM' : ' PM');
+  };
   window.mapsUrl = function (p) {
     return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.name + ' ' + p.area + ' Subic Bay');
   };

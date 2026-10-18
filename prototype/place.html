@@ -164,12 +164,12 @@
       // A day pass is like a zoo ticket: open daily, never sold out, so nothing to check. The listing lists the
       // tickets at member prices; tapping one opens what it includes, a row of days and how many, then Book.
       var tix = p.rooms, tf = SLStay.fmt, tsec = $('[data-rooms-sec]');
-      var tstate = { day: tf.parse(queryParam('d')), adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0 };
+      var tstate = { day: tf.parse(queryParam('d')), time: queryParam('t') || '', adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0 };
       // No bottom bar: the tickets are the way in, and a bar pointing back at them would only repeat them.
       $('.c-bottombar').style.display = 'none';
       tsec.hidden = false;
       tsec.id = 'tickets';
-      $('[data-rooms-title]').textContent = 'Tickets';
+      $('[data-rooms-title]').textContent = p.tixWord ? p.tixWord[0] : 'Tickets';
       var tprice = function (t) {
         return t.child
           ? fmtPeso(member(t.rate)) + '<span class="c-plroom__unit"> adult · </span>' + fmtPeso(member(t.child)) + '<span class="c-plroom__unit"> child</span>'
@@ -192,31 +192,39 @@
       var tlead = function (icon) { return '<span class="c-merow__lead"><i class="ph-light ph-' + icon + '" aria-hidden="true"></i></span>'; };
       var tlist = function (head, items, icon) {
         return items && items.length ? '<p class="c-mehead">' + head + '</p><div class="c-melist">' + items.map(function (x) {
-          return '<div class="c-merow">' + tlead(icon) + '<span class="c-merow__main">' + x + '</span></div>';
+          var r = Array.isArray(x) ? x : [icon, x];
+          return '<div class="c-merow">' + tlead(r[0]) + '<span class="c-merow__main">' + r[1] + '</span></div>';
         }).join('') + '</div>' : '';
       };
       var tstep = function (key, label, sub, value, min) {
         return '<div class="c-merow"><span class="c-merow__main">' + label + '<span class="c-merow__sub">' + sub + '</span></span>' +
           '<span class="c-cgstep"><button class="c-cgstep__btn" type="button" data-tstep="' + key + '-1" aria-label="One fewer"' + (value <= min ? ' disabled' : '') + '><i class="ph-light ph-minus" aria-hidden="true"></i></button>' +
           '<span class="c-cgstep__value" aria-live="polite">' + value + '</span>' +
-          '<button class="c-cgstep__btn" type="button" data-tstep="' + key + '1" aria-label="One more"' + (tstate.adults + tstate.kids >= 20 ? ' disabled' : '') + '><i class="ph-light ph-plus" aria-hidden="true"></i></button></span></div>';
+          '<button class="c-cgstep__btn" type="button" data-tstep="' + key + '1" aria-label="One more"' + (tstate.adults + tstate.kids >= (tix[topen].max || 20) ? ' disabled' : '') + '><i class="ph-light ph-plus" aria-hidden="true"></i></button></span></div>';
       };
       // The day comes from one month at a time (SLStay.month), opening on the picked day's month.
       var monthOf = function (x) { return new Date(x.getFullYear(), x.getMonth(), 1); };
       var tview = monthOf(tstate.day || SLStay.today);
       var drawSheet = function () {
         var t = tix[topen], s = tstate, d = s.day, ppl = s.adults + s.kids;
+        // Lessons with start times ask for one before Book.
+        var sl = t.slots, tm = sl && sl.indexOf(s.time) > -1 ? s.time : '';
+        if (t.max && ppl > t.max) { s.adults = ppl = t.max; s.kids = 0; }
         var total = t.child ? member(t.rate) * s.adults + member(t.child) * s.kids : member(t.rate) * ppl;
         // Redrawing keeps the sheet's scroll and the day row's scroll where they were.
         var body = $('[data-tixbody]'), top0 = body.scrollTop;
         body.innerHTML =
           '<div class="c-bksheet__head"><h2 class="c-bksheet__title" id="tix-title">' + t.name + '</h2><p class="c-bksheet__sub">' + t.sub + '</p></div>' +
           // The rules that decide a purchase, before the price: the park store's own terms.
-          '<ul class="c-tixfacts">' + p.tixFacts.map(function (f) {
+          '<ul class="c-tixfacts">' + (t.facts || p.tixFacts).map(function (f) {
             return '<li><i class="ph-light ph-' + f[0] + '" aria-hidden="true"></i>' + f[1] + '</li>';
           }).join('') + '</ul>' +
           tlist('Includes', t.incl, 'check') + tlist('Good to know', (t.know || []).concat(p.ticketNote || []), 'info') +
           '<p class="c-mehead">When are you going?</p><div class="c-tixcal">' + SLStay.month(tview, d) + '</div>' +
+          (sl ? '<p class="c-mehead">What time?</p><div class="c-tixslots">' + sl.map(function (x) {
+              return '<button class="c-tixslot" type="button" data-slot="' + x + '" aria-pressed="' + (x === tm) + '">' +
+                fmtClock(x) + '<span>to ' + fmtClock(x, t.hours) + '</span></button>';
+            }).join('') + '</div>' : '') +
           '<p class="c-mehead">How many?</p><div class="c-melist c-cgform">' +
             (t.child
               ? tstep('a', 'Adults', p.ages[0], s.adults, 1) + tstep('c', 'Children', p.ages[1], s.kids, 0)
@@ -224,11 +232,13 @@
           '</div>';
         body.scrollTop = top0;
         var who = t.child ? tf.party(s.adults, s.kids) : tf.plural(ppl, 'guest', 'guests');
-        var go = d ? 'book.html?p=' + p.id + '&room=' + topen + '&d=' + tf.iso(d) + '&a=' + (t.child ? s.adults : ppl) + '&c=' + (t.child ? s.kids : 0) : '';
+        var ready = d && (!sl || tm);
+        var go = ready ? 'book.html?p=' + p.id + '&room=' + topen + '&d=' + tf.iso(d) + '&a=' + (t.child ? s.adults : ppl) + '&c=' + (t.child ? s.kids : 0) +
+          (tm ? '&t=' + tm : '') : '';
         $('[data-tixfoot]').innerHTML =
-          '<span class="c-bkbar__sum"><b>' + fmtPeso(total) + '</b><span>' + (d ? tf.day(d) + ' · ' : '') + who + '</span></span>' +
-          (d ? '<a class="c-btn primary" href="' + go.replace(/&/g, '&amp;') + '">Book</a>'
-             : '<span class="c-btn primary" aria-disabled="true">Pick a day</span>');
+          '<span class="c-bkbar__sum"><b>' + fmtPeso(total) + '</b><span>' + (d ? tf.day(d) + (tm ? ', ' + fmtClock(tm) : '') + ' · ' : '') + who + '</span></span>' +
+          (ready ? '<a class="c-btn primary" href="' + go.replace(/&/g, '&amp;') + '">Book</a>'
+             : '<span class="c-btn primary" aria-disabled="true">' + (d ? 'Pick a time' : 'Pick a day') + '</span>');
       };
       var closeTix = function () { tsheet.hidden = true; if (topener) topener.focus(); };
       $('[data-rooms]').addEventListener('click', function (e) {
@@ -247,6 +257,13 @@
           if (!day.disabled) { tstate.day = tf.parse(day.dataset.day); drawSheet(); }
           var day2 = tsheet.querySelector('[data-day="' + day.dataset.day + '"]');
           if (day2) day2.focus();
+          return;
+        }
+        var slot = e.target.closest('[data-slot]');
+        if (slot) {
+          tstate.time = slot.dataset.slot;
+          drawSheet();
+          tsheet.querySelector('[data-slot="' + slot.dataset.slot + '"]').focus();
           return;
         }
         var nv = e.target.closest('[data-mnav]');

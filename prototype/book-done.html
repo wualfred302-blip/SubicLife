@@ -76,6 +76,8 @@
     var r = p.rooms[i] || p.rooms[0];
     var trip = p.unit === 'trip';
     var tix = p.kind === 'tickets';
+    var tm = tix && queryParam('t'), hrs = r.hours, meet = p.meet || 'the gate';
+    var hm = function (t, add) { return String(Number(t.slice(0, 2)) + (add || 0)).padStart(2, '0') + t.slice(2); };
     var plural = function (n, one, many) { return n + ' ' + (n === 1 ? one : many); };
 
     // Stays carry their dates, party and free night from Book; trips and old links fall back to the sample day.
@@ -112,6 +114,7 @@
     };
     $('[data-rows]').innerHTML = tix
       ? row('Date', dayName(day), 'c-bkval') +
+        (tm ? row('Time', fmtClock(tm) + ' to ' + fmtClock(tm, hrs), 'c-bkval') : '') +
         row('Guests', plural(adults, 'adult', 'adults') + (kids ? ', ' + plural(kids, 'child', 'children') : ''), 'c-bkval') +
         row('Booking code', p.code, 'c-bkval c-bkcode') +
         row('Paid with GCash', fmtPeso(total), 'c-bkval')
@@ -125,11 +128,11 @@
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'BEGIN:VEVENT',
-      'DTSTART:' + (tix ? stamp(day, p.gate[0]) : trip ? '20261017T080000' : checkIn ? stamp(checkIn, 14) : '20261017T140000'),
-      'DTEND:' + (tix ? stamp(day, p.gate[1]) : trip ? '20261017T170000' : checkOut ? stamp(checkOut, 12) : '20261018T120000'),
+      'DTSTART:' + (tix ? (tm ? stamp(day, hm(tm)).slice(0, -2) : stamp(day, p.gate[0])) : trip ? '20261017T080000' : checkIn ? stamp(checkIn, 14) : '20261017T140000'),
+      'DTEND:' + (tix ? (tm ? stamp(day, hm(tm, hrs)).slice(0, -2) : stamp(day, p.gate[1])) : trip ? '20261017T170000' : checkOut ? stamp(checkOut, 12) : '20261018T120000'),
       'SUMMARY:' + p.name + ' - ' + r.name,
       'LOCATION:' + p.address,
-      'DESCRIPTION:Booking code ' + p.code + '. Show your card QR at ' + (tix ? 'the gate.' : 'check-in.'),
+      'DESCRIPTION:Booking code ' + p.code + '. Show your card QR at ' + (tix ? meet + '.' : 'check-in.'),
       'END:VEVENT',
       'END:VCALENDAR'
     ].join('\r\n');
@@ -137,7 +140,16 @@
     var req = (queryParam('req') || '').trim();
     if (req && !trip) { $('[data-req-text]').textContent = req; $('[data-req-block]').hidden = false; }
 
-    if (tix) $('.c-bkdone__note').textContent = 'Show your card QR at the gate.';
+    if (tix) $('.c-bkdone__note').textContent = 'Show your card QR at ' + meet + '.';
+    // A way to reach the place after booking, where it takes messages (a text opens the phone's own app).
+    // It sits beside Add to calendar, so the booked screen stays one screen tall.
+    if (p.chat) {
+      var acts = document.createElement('div'), cal = $('[data-ics]');
+      acts.className = 'c-bkacts';
+      cal.before(acts);
+      acts.append(cal);
+      acts.insertAdjacentHTML('beforeend', '<a class="c-cgcal" href="sms:' + p.chat[0] + '"><i class="ph-light ph-chat-circle-text" aria-hidden="true"></i>' + p.chat[1] + '</a>');
+    }
     var icsLink = $('[data-ics]');
     icsLink.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
     icsLink.setAttribute('download', p.id + '-booking.ics');

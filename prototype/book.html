@@ -164,7 +164,7 @@
       $$('[data-stay-form], [data-bar-sum], [data-cancel]').forEach(function (e) { e.hidden = false; });
       $('.c-req-bar').classList.add('is-stay');
       $('[data-stay-form] [data-open="dates"] .c-merow__main').firstChild.textContent = 'Date';
-      $('[data-room-head]').textContent = 'Ticket';
+      $('[data-room-head]').textContent = p.tixWord ? p.tixWord[1] : 'Ticket';
       $('[data-room-head]').insertAdjacentHTML('beforeend', '<a class="c-bkchange" data-tixchange href="place.html?p=' + p.id + '#tickets">Change</a>');
       $$('.c-bkroom__price').forEach(function (el, i) {
         var t = p.rooms[i];
@@ -178,14 +178,15 @@
       var tf = SLStay.fmt;
       var tk = SLStay({
         single: true, checkIn: tf.parse(queryParam('d')) || tf.add(SLStay.today, 1),
-        adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0, maxParty: 20, guestNote: '',
+        adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0, maxParty: p.rooms[pick].max || 20, guestNote: '',
         onChange: function () { renderTix(); }
       });
       var renderTix = function () {
         var s = tk.state, i = room(), t = p.rooms[i], kid = t.child || t.rate;
         var full = t.rate * s.adults + kid * s.kids, total = member(t.rate) * s.adults + member(kid) * s.kids;
-        var q = '&d=' + tf.iso(s.checkIn) + '&a=' + s.adults + '&c=' + s.kids;
-        $('[data-range]').textContent = tf.day(s.checkIn);
+        var tm = queryParam('t') || '', at = tm ? ', ' + fmtClock(tm) : '';
+        var q = '&d=' + tf.iso(s.checkIn) + '&a=' + s.adults + '&c=' + s.kids + (tm ? '&t=' + tm : '');
+        $('[data-range]').textContent = tf.day(s.checkIn) + at;
         $('[data-nights]').hidden = true;
         $('[data-party]').textContent = tf.party(s.adults, s.kids);
         $('[data-line]').textContent = fmtPeso(t.rate) + ' × ' + tf.plural(s.adults, 'adult', 'adults');
@@ -196,9 +197,9 @@
         $('[data-disc]').textContent = '−' + fmtPeso(full - total);
         $('[data-total]').textContent = fmtPeso(total);
         // The park store's own terms.
-        $('[data-cancel]').textContent = 'Valid only on ' + tf.day(s.checkIn) + '. ' + p.ticketTerms;
+        $('[data-cancel]').textContent = (p.tixWord ? '' : 'Valid only on ' + tf.day(s.checkIn) + '. ') + p.ticketTerms;
         $('[data-bar-total]').textContent = fmtPeso(total);
-        $('[data-bar-nights]').textContent = tf.day(s.checkIn);
+        $('[data-bar-nights]').textContent = tf.day(s.checkIn) + at;
         $('[data-pay]').textContent = 'Pay';
         $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i + q;
         $('[data-tixchange]').href = 'place.html?p=' + p.id + q + '#tickets';
