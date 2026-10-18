@@ -19,7 +19,7 @@
       offerShort: '20% off',
       offerSub: 'Applied at checkout. Show your card at check-in.',
       discount: 20,
-      hours: 'Check-in 2 PM · check-out noon',
+      hours: 'Check-in from 2 PM · check-out by 12 PM',
       closes: 'closes 23:00',
       address: 'Moonbay Marina, Subic Bay Freeport Zone',
       phone: '+63 47 252 0100',

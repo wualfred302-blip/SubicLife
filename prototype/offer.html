@@ -138,9 +138,10 @@
   var cta = document.getElementById('cta');
   // Airbnb-style bar: the price on the left, one short button on the right.
   cta.innerHTML = o.bookable
-    ? '<div class="c-obar__price"><span><b>' + fmtPeso(now) + '</b> / ' + unit + '</span><s>' + fmtPeso(was) + '</s></div>' +
-      '<a class="c-btn primary" href="book.html?p=' + o.place + '&amp;room=' + pick + '">Book</a>'
-    : '<div class="c-obar__price"><span><b>' + esc(o.title) + '</b></span></div>' +
+    ? '<div class="c-obar__price"><span class="c-obar__line"><b>' + fmtPeso(now) + '</b>' + (unit === 'night' ? ' night' : ' / ' + unit) + '</span>' +
+      '<span class="c-obar__sub">' + pct + '% off</span></div>' +
+      '<a class="c-btn primary" href="book.html?p=' + o.place + '&amp;room=' + pick + '">Check availability</a>'
+    : '<div class="c-obar__price"><span class="c-obar__line is-title"><b>' + esc(o.title) + '</b></span><span class="c-obar__sub">Prestige perk</span></div>' +
       '<a class="c-btn primary" href="card.html">Show my card</a>';
 
   var gal = main.querySelector('[data-gallery]'), count = main.querySelector('[data-count]');

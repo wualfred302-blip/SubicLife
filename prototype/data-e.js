@@ -257,6 +257,53 @@
         '<span class="c-story__place">' + escT(own ? s.visited + (s.likes ? ' · ' + s.likes + (s.likes === 1 ? ' like' : ' likes') : '') : mode === 'place' ? 'Visited ' + day : place.name) + '</span>' +
       '</span></a>';
   };
+  // One story as a Discover → Stories post (who, the tip, the photos, likes, Like / Comment). meta is the grey
+  // line under the name; by default the place and how long ago.
+  window.storyPost = function (s, meta) {
+    var face = s.avatar ? '<img src="' + s.avatar + '" alt="">' : '<span class="c-mono" style="background:' + window.monoColour(s.initials) + '">' + escT(s.initials) + '</span>';
+    var href = 'post.html?id=' + s.id;
+    var shots = (s.photos || []).slice(0, 2);
+    var talk = s.commentCount != null ? s.commentCount : (s.comments || []).length;
+    return '<article class="c-spost">' +
+      '<a class="c-spost__head" href="' + href + '"><span class="c-spost__face">' + face + '</span>' +
+        '<span class="c-spost__who"><span class="c-spost__name">' + escT(s.mine ? 'You' : s.author) + '</span>' +
+        '<span class="c-spost__meta">' + escT(meta || PLACES[s.place].name + ' · ' + s.ago) + '</span></span></a>' +
+      '<a class="c-spost__body" href="' + href + '">' +
+        (s.caption ? '<p class="c-spost__text">' + escT(s.caption) + '</p>' : '') +
+        (shots.length ? '<span class="c-spost__photos is-' + shots.length + '">' +
+          shots.map(function (src) { return '<img src="' + src + '" alt="">'; }).join('') + '</span>' : '') +
+      '</a>' +
+      '<div class="c-spost__counts"><span class="c-spost__bubble"><i class="ph-fill ph-heart" aria-hidden="true"></i></span>' +
+        '<span data-likes>' + (s.likes || 0) + '</span><span class="c-spost__talk">' + talk + (talk === 1 ? ' comment' : ' comments') + '</span></div>' +
+      '<div class="c-spost__actions">' +
+        '<button class="c-spost__act" type="button" data-like aria-pressed="false"><i class="ph-light ph-heart" aria-hidden="true"></i>Like</button>' +
+        '<a class="c-spost__act" href="' + href + '"><i class="ph-light ph-chat-circle" aria-hidden="true"></i>Comment</a>' +
+      '</div></article>';
+  };
+  // Like toggles in place on any list of posts.
+  window.bindLikes = function (root) {
+    root.addEventListener('click', function (e) {
+      var like = e.target.closest('[data-like]');
+      if (!like) return;
+      var on = like.getAttribute('aria-pressed') !== 'true';
+      var count = like.closest('.c-spost').querySelector('[data-likes]');
+      like.setAttribute('aria-pressed', on ? 'true' : 'false');
+      like.firstChild.className = (on ? 'ph-fill' : 'ph-light') + ' ph-heart';
+      count.textContent = +count.textContent + (on ? 1 : -1);
+    });
+  };
+  // A story as a card in a swipe row on a place page: photo, who and when, two lines of the tip, likes.
+  window.storyCard = function (s) {
+    var face = s.avatar ? '<img src="' + s.avatar + '" alt="">' : '<span class="c-mono" style="background:' + window.monoColour(s.initials) + '">' + escT(s.initials) + '</span>';
+    var talk = s.commentCount != null ? s.commentCount : (s.comments || []).length;
+    return '<a class="c-plstory" href="post.html?id=' + s.id + '">' +
+      '<img class="c-plstory__img" src="' + s.photos[0] + '" alt="">' +
+      '<span class="c-plstory__who"><span class="c-plstory__face">' + face + '</span>' +
+        '<span class="c-plstory__name">' + escT(s.mine ? 'You' : s.author) + '</span><span class="c-plstory__ago">' + escT(s.ago) + '</span></span>' +
+      (s.caption ? '<span class="c-plstory__text">' + escT(s.caption) + '</span>' : '') +
+      '<span class="c-plstory__meta"><i class="ph-fill ph-heart" aria-hidden="true"></i>' + (s.likes || 0) + ' · ' + talk + (talk === 1 ? ' comment' : ' comments') + '</span>' +
+    '</a>';
+  };
   // The first tile of a row: your photo with a plus. A button opens the visit picker, a link goes straight to a visit.
   window.addStoryTile = function (href, label, sub) {
     var inner = '<span class="c-story__me"><img src="img/avatar.jpg" alt=""></span>' +

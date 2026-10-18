@@ -50,6 +50,11 @@
 
     <div class="c-melist c-cgform" data-rows></div>
 
+    <div data-req-block hidden>
+      <p class="c-mehead">Your requests</p>
+      <p class="c-bkreqtext" data-req-text></p>
+    </div>
+
     <a class="c-cgcal" data-ics href="explore.html" download="booking.ics"><i class="ph-light ph-calendar-plus" aria-hidden="true"></i>Add to calendar</a>
     <p class="c-bkdone__note">Show your card QR at check-in.</p>
 
@@ -97,8 +102,8 @@
       return '<div class="c-merow"><span class="c-merow__main">' + label + '</span><span class="c-merow__value' + (cls ? ' ' + cls : '') + '">' + value + '</span></div>';
     };
     $('[data-rows]').innerHTML =
-      row(p.dates[0], checkIn ? dayName(checkIn) : p.dates[2], 'c-bkval') +
-      row(p.dates[1], checkOut ? dayName(checkOut) : p.dates[3], 'c-bkval') +
+      row(trip ? p.dates[0] : p.dates[0] + '<span class="c-merow__sub">From 2 PM</span>', checkIn ? dayName(checkIn) : p.dates[2], 'c-bkval') +
+      row(trip ? p.dates[1] : p.dates[1] + '<span class="c-merow__sub">By 12 PM</span>', checkOut ? dayName(checkOut) : p.dates[3], 'c-bkval') +
       (free ? row('Free night', 'Used', 'c-bkval') : '') +
       row('Booking code', p.code, 'c-bkval c-bkcode') +
       (total > 0 ? row('Paid with GCash', fmtPeso(total), 'c-bkval') : '');
@@ -115,6 +120,10 @@
       'END:VEVENT',
       'END:VCALENDAR'
     ].join('\r\n');
+    // What the guest asked the hotel for, as they typed it.
+    var req = (queryParam('req') || '').trim();
+    if (req && !trip) { $('[data-req-text]').textContent = req; $('[data-req-block]').hidden = false; }
+
     var icsLink = $('[data-ics]');
     icsLink.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
     icsLink.setAttribute('download', p.id + '-booking.ics');

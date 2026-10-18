@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Stories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="components-a.css">
+  <link rel="stylesheet" href="components-g.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-push c-discover c-cgpage c-plspage">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" data-back href="place.html?p=lighthouse" aria-label="Back to the place"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title">Stories</h1>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
+
+  <main class="screen-scroll">
+    <a class="c-bkplace c-plsplace" data-place href="place.html?p=lighthouse">
+      <img class="c-bkplace__img" data-thumb src="img/card-lighthouse.jpg" alt="">
+      <span class="c-bkplace__text"><span class="c-bkplace__name" data-name>Partner</span><span class="c-bkplace__sub" data-count></span></span>
+    </a>
+    <div data-compose></div>
+    <div class="c-sfeed" data-feed></div>
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script>
+  (function () {
+    var p = placeFor(queryParam('p') || 'lighthouse');
+    var $ = function (s) { return document.querySelector(s); };
+    var stories = FEED.stories.filter(function (s) { return s.place === p.id; });
+    var visit = visitsToShare().filter(function (v) { return v.place === p.id; })[0];
+
+    // Every story for one place, the same posts as Discover → Stories, newest first.
+    document.title = 'Subic.Life - Stories, ' + p.name;
+    $('[data-back]').href = $('[data-place]').href = 'place.html?p=' + p.id;
+    $('[data-thumb]').src = p.thumb;
+    $('[data-name]').textContent = p.name;
+    $('[data-count]').textContent = stories.length + (stories.length === 1 ? ' story' : ' stories') + ' from members';
+    if (visit) {
+      $('[data-compose]').innerHTML = '<a class="c-dcompose" href="story-new.html?p=' + p.id + '&amp;v=' + encodeURIComponent(visit.when) +
+        '&amp;from=' + encodeURIComponent('place-stories.html?p=' + p.id) + '">' +
+        '<span class="c-dcompose__face"><img src="img/avatar.jpg" alt=""></span>' +
+        '<span class="c-dcompose__field">Share a story from your visit<i class="ph-light ph-image" aria-hidden="true"></i></span></a>';
+    }
+    $('[data-feed]').innerHTML = stories.map(function (s) {
+      return storyPost(s, 'Visited ' + (s.visited === 'Today' ? 'today' : s.visited) + ' · ' + s.ago);
+    }).join('');
+    bindLikes($('[data-feed]'));
+  })();
+</script>
+</body>
+</html>

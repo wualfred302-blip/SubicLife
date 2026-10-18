@@ -3552,3 +3552,162 @@ html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top
 @keyframes c-bksheet-up { from { transform: translateY(100%); } }
 @keyframes c-bksheet-fade { from { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .c-bksheet .c-sheet__panel, .c-bksheet .c-sheet__scrim { animation: none; } }
+
+/* ===== Book: hotel stay, round 2 (2026-10-18) =====
+   The calendar runs a year ahead and opens on the picked month; check-in and check-out times sit under the dates
+   on Book and under the labels on the confirmation; the guest's requests show on the confirmation as typed. */
+.c-bkcal { position: relative; }
+.c-bkreqtext { margin: 8px 20px 0; font: 400 15px/21px var(--font); color: #111214; white-space: pre-line; overflow-wrap: anywhere; }
+
+/* ===== Listing: the Concierge + Me standard (2026-10-18) =====
+   The place listing and its offer page brought in line with Me, Concierge and Book: 20px side gutters (they were
+   24), 22px section titles, contour lines on the white ground under the photo, 16px body and rows, the perk row
+   typed like Me's Membership row, location rows typed like Me's settings rows (24px light icon in a 30px column,
+   hairline from the text), and rooms as a hairline photo list that reads exactly like the Room list on Book.
+   The street thumbnail uses the same cool grey vector map as the Map tab. */
+.c-offerwhite .c-offerbody { background: #FFFFFF url(img/contours.svg) center top / 100% auto no-repeat; }
+.c-offerwhite .c-offer-head.u-gutter { padding: 24px 20px 0; }
+.c-offerwhite .c-ofacts { margin: 20px 20px 0; }
+.c-offerwhite .c-pperk { margin: 20px 20px 0; min-height: 64px; padding: 8px 0; }
+.c-offerwhite .c-pperk__title { font: 400 16px/22px var(--font); }
+.phone.c-offerx .c-osec { margin: 0 20px; padding: 28px 0; }
+.c-offerwhite .c-section-title { margin: 0 0 12px; font: 700 22px/28px var(--font); letter-spacing: -0.01em; color: #111214; }
+.c-offerwhite .c-pabout { font: 400 16px/24px var(--font); }
+.c-placewhite .c-osec .c-carousel { margin: 0 -20px; padding: 0 20px; scroll-padding-inline: 20px; }
+
+/* Rooms: the same rows as Book (photo, name, what it is, member price over the rack rate), opening Book. */
+.c-plrooms { margin: 0; }
+.c-plroom { padding: 12px 0; }
+.c-plroom .c-merow__chev { flex: none; }
+.c-plrooms .c-plroom + .c-plroom::before { left: 70px; }
+.c-plroom__unit { font-weight: 400; color: #5F6670; }
+
+/* Hours and location rows */
+.c-offerwhite .c-pmap { margin-bottom: 4px; }
+.c-offerwhite .c-pinfo__row { min-height: 56px; font: 400 16px/22px var(--font); }
+.c-offerwhite .c-pinfo__row > i:first-child { width: 30px; font-size: 24px; }
+.c-offerwhite .c-pinfo__row + .c-pinfo__row::before { left: 44px; }
+
+/* Offer page */
+.c-offerwhite .c-osteps li { font: 400 16px/22px var(--font); }
+.c-offerwhite .c-ofine li { font: 400 15px/21px var(--font); }
+.c-offerwhite .c-oplace__name { font: 600 16px/22px var(--font); }
+
+/* ===== Listing: Discover's colour and stories (2026-10-18) =====
+   The listing read grey next to Discover. It now speaks Discover's language: green = the member deal (the perk,
+   room prices, the price in the bar), gold = the rating, and the same three facts with coloured icons as the
+   Popular cards (Away, Rating, Closes). Stories are the same posts as Discover → Stories, with the same share field
+   when you have a visit to share. Room prices on Book turn green too, so the two pages match. */
+.c-plfacts { margin-top: 16px; padding: 14px 0; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-plfacts .c-bigcard__value { color: #111214; }
+.c-offerwhite .c-plfacts + .c-pperk, .c-offerwhite .c-offer-head + .c-pperk { margin-top: 0; }
+.c-offerwhite .c-pperk__title { font: 600 16px/22px var(--font); color: #15803D; }
+.c-bkroom__price { color: #15803D; }
+.c-bkroom__price s, .c-plroom__unit { color: #5F6670; }
+.c-offerwhite .c-obar__price b { color: #15803D; }
+
+/* Stories */
+.c-plstories { margin: 0 -20px; }
+.c-plstories .c-spost:first-child { border-top: 0; padding-top: 0; }
+.c-plstories .c-dcompose { width: auto; margin: 0 20px 16px; text-decoration: none; color: inherit; }
+.c-plstories .c-dcompose:active { opacity: 0.6; }
+
+/* The street thumbnail in the Map tab's colours (the old grey-out filter was for the raster tiles). */
+.c-pmap .c-mapthumb__live .leaflet-tile-pane { filter: none; }
+.c-plstories .c-spost__head, .c-plstories .c-spost__counts { padding-left: 20px; padding-right: 20px; }
+.c-plstories .c-spost__text { margin-left: 20px; margin-right: 20px; }
+.c-plstories .c-spost__actions { margin: 0 20px; }
+.c-placewhite [data-stories-sec].c-osec { padding-bottom: 8px; }
+
+/* ===== Listing: stories row, details rows, Book-style bar (2026-10-18) =====
+   Stories from members: a swipe row of cards (photo, who and when, two lines of the tip, likes) under the share
+   field, with "See all" in orange on the title line like Concierge's "Itinerary"; See all opens every story for
+   the place as Discover posts (place-stories.html). Hours and location: the map, then Me-style rows (light icon,
+   label, grey value under it). The bottom bar matches Book's: 12/20/28 padding, a 19px price over a grey line,
+   and a 148px pill. Offer pages share the bar. */
+.c-plhead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.c-plhead .c-cgsec__link:active { opacity: 0.5; }
+.c-plhead .c-cgsec__link:focus-visible { outline: 2px solid #111214; outline-offset: 2px; border-radius: 4px; }
+.c-plstory-row {
+  display: flex; gap: 12px; overflow-x: auto; padding: 0 20px 4px; scroll-snap-type: x mandatory; scroll-padding-inline: 20px;
+  scrollbar-width: none;
+}
+.c-plstory-row::-webkit-scrollbar { display: none; }
+.c-plstory { flex: none; width: 248px; display: flex; flex-direction: column; color: #111214; text-decoration: none; scroll-snap-align: start; }
+.c-plstory:active { opacity: 0.7; }
+.c-plstory:focus-visible { outline: 2px solid #111214; outline-offset: 2px; border-radius: 12px; }
+.c-plstory__img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+.c-plstory__who { display: flex; align-items: center; gap: 8px; margin-top: 10px; min-width: 0; }
+.c-plstory__face img, .c-plstory__face .c-mono {
+  display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; object-fit: cover;
+  color: #FFFFFF; font: 600 10px/1 var(--font);
+}
+.c-plstory__name { font: 600 14px/20px var(--font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-plstory__ago { flex: none; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-plstory__ago::before { content: "· "; }
+.c-plstory__text {
+  margin-top: 4px; font: 400 15px/21px var(--font); color: #111214;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.c-plstory__meta { display: flex; align-items: center; gap: 4px; margin-top: 6px; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-plstory__meta i { font-size: 14px; color: #E8590C; }
+
+/* Hours and location */
+.c-plinfo { margin: 8px 0 0; }
+
+/* Bottom bar, the same as Book's */
+.phone.c-offerwhite .c-bottombar { gap: 16px; padding: 12px 20px 28px; }
+.phone.c-offerwhite .c-bottombar .c-btn.primary { flex: none; min-width: 148px; padding: 0 16px; }
+.phone.c-placewhite .c-bottombar .c-btn.primary.is-full { flex: 1; }
+.phone.c-offerwhite .c-obar__price { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.phone.c-offerwhite .c-obar__price .c-obar__line { font: 400 15px/24px var(--font); color: #5F6670; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.phone.c-offerwhite .c-obar__price b { font: 700 19px/24px var(--font); color: #15803D; font-variant-numeric: tabular-nums; }
+.phone.c-offerwhite .c-obar__price .c-obar__line.is-title b { color: #111214; }
+.phone.c-offerwhite .c-obar__price .c-obar__sub { font: 400 13px/18px var(--font); color: #5F6670; white-space: nowrap; }
+.phone.c-offerwhite .c-obar__price .c-obar__sub s { font-size: 13px; color: #5F6670; }
+
+/* Stories page */
+.c-plsplace { color: inherit; text-decoration: none; }
+.c-plsplace:active { opacity: 0.6; }
+.c-plspage .c-dcompose { width: auto; margin: 20px 20px 0; text-decoration: none; color: inherit; }
+.c-plspage .c-sfeed { margin-top: 20px; }
+
+/* ===== Listing: hours rows, bar price, white to the bar (2026-10-18) =====
+   Hours and location reads like Me's rows: a light icon and the fact itself (no "Hours" or "Call" label over
+   it), 56px, a chevron when the row opens Maps or the phone; a hotel's check-in and check-out get a row each and
+   the address splits into place and grey area. The bar price is one amount over one grey line, like Book's
+   total. The white body now runs under the bar, so the page's tinted ground no longer shows as a strip. */
+.phone.c-offerwhite .screen-scroll { padding-bottom: 0; }
+.phone.c-offerwhite .c-offerbody { padding-bottom: 104px; }
+
+/* ===== Stays: check availability on the listing, Confirm and pay (2026-10-18) =====
+   Like Airbnb, a stay's listing asks for dates before anything sounds final. Rooms gets Book's Dates and Guests
+   rows over the list ("Add dates" in grey until there are some), and both open the same sheets as Book (stay.js).
+   With dates, each room shows its price for the whole stay; rooms too small for the party grey out like on Book.
+   The bar says "Check availability" until there are dates, then the total and "Reserve". Book is titled
+   "Confirm and pay", since that's what happens there. */
+.c-plpick { margin: 12px 0 4px; }
+.c-bkpick .c-bkval.is-empty { color: #5F6670; }
+.c-plroom.is-full { opacity: 0.4; cursor: default; }
+
+/* ===== Listing: photo-pin map, Airbnb-style bar (2026-10-18) =====
+   The user picked these from three built options. Map: rounded like the photos (16px, no border), 180px, the
+   place's own photo as the pin. Bar: the price in ink with what it covers ("From ₱5,920 night"), under it an
+   underlined "Add dates" or the chosen dates, which opens the calendar; the button is a slimmer 48px pill, the
+   same on the listing, offers and Confirm and pay. */
+.c-offerwhite .c-pmap { height: 180px; border: 0; border-radius: 16px; }
+.c-minipin.is-photo { overflow: hidden; background: #FFFFFF; box-shadow: 0 0 0 3px #FFFFFF, 0 4px 12px rgb(0 0 0 / 0.3); }
+.c-minipin.is-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.phone.c-offerwhite .c-obar__price .c-obar__line { color: #111214; }
+.phone.c-offerwhite .c-obar__price b { color: #111214; }
+.c-obar__dates {
+  align-self: flex-start; padding: 0; border: 0; background: none; cursor: pointer; white-space: nowrap;
+  font: 600 14px/20px var(--font); color: #111214; text-decoration: underline; text-underline-offset: 3px;
+}
+.c-obar__dates:active { opacity: 0.5; }
+.c-obar__dates:focus-visible { outline: 2px solid #111214; outline-offset: 2px; border-radius: 4px; }
+.phone.c-offerwhite .c-bottombar .c-btn.primary,
+html .phone.c-bkpage .c-req-bar .c-btn.primary {
+  min-height: 48px; height: 48px; min-width: 120px; padding: 0 22px; font-size: 16px; font-weight: 600;
+}
