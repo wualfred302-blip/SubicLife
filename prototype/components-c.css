@@ -31,124 +31,22 @@
 
 /* ---------- grouped screen ----------
    Settings-style screen: the page sits on the grouped grey, rows are white inset groups. */
-.c-grouped { background: var(--grouped); }
-.c-grouped > .c-statusbar { background: var(--grouped); }
 /* Footnotes sitting on the grey: text-2 is 4.3:1 on this fill, so they take the full text colour. */
-.c-grouped .c-group__head,
-.c-grouped .c-group__sub { color: var(--text); }
 
 /* ---------- c-group ----------
    Inset grouped list, like iOS Settings. Rows are links or static lines; a hairline sits between rows,
    inset from the leading edge. .c-group--lead insets the hairline past a 28px icon well. */
-.c-group {
-  margin: 0 var(--gutter);
-  overflow: hidden;
-  border-radius: var(--r-media);
-  background: var(--bg);
-}
-.c-group__head {
-  margin: var(--space-6) var(--gutter) var(--space-2);
-  font: var(--fw-regular) var(--fs-footnote)/var(--lh-none) var(--font);
-  color: var(--text-2);
-}
-.c-group__row {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: var(--size-row-h);
-  padding: var(--space-2) var(--space-4);
-  color: var(--text);
-  text-decoration: none;
-  font: var(--fw-regular) var(--fs-body)/var(--lh-snug) var(--font);
-}
-.c-group__row + .c-group__row::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: var(--space-4);
-  right: 0;
-  height: var(--hairline-w);
-  background: var(--hairline);
-}
-.c-group--lead .c-group__row + .c-group__row::before { left: 56px; }
-.c-group__row.is-center { justify-content: center; font-weight: var(--fw-semibold); }
-
-
-.c-group__icon {
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--r-thumb);
-  background: var(--grouped);
-  color: var(--text);
-}
-.c-group__icon .material-symbols-outlined { font-size: var(--icon-md); }
-.c-group__main {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
 .c-group__sub {
   margin: var(--space-half) 0 0;
   font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
   color: var(--text-2);
 }
-.c-group__value {
-  flex: none;
-  font: var(--fw-regular) var(--fs-body)/var(--lh-none) var(--font);
-  color: var(--text-2);
-  white-space: nowrap;
-}
-.c-group__chev {
-  flex: none;
-  font-size: var(--icon-value-chev);
-  color: var(--inactive);
-}
 
 /* Profile header sits as the first group: avatar, name, membership line. */
-.c-profile {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-4);
-}
-.c-profile__avatar {
-  flex: none;
-  width: 64px;
-  height: 64px;
-  overflow: hidden;
-  border-radius: var(--r-pill);
-  border: var(--hairline-w) solid var(--hairline);
-}
-.c-profile__avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.c-profile__name {
-  margin: 0;
-  font: var(--fw-bold) var(--fs-title-md)/var(--lh-tight) var(--font);
-  letter-spacing: var(--track-tight);
-  color: var(--text);
-}
 
 
 /* ---------- c-pill ----------
    Status label: 22px tall, tinted fill, semibold 12px. Tints are mixed from the token colour. */
-.c-pill {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  height: 22px;
-  padding: 0 var(--space-2);
-  border-radius: var(--r-pill);
-  font: var(--fw-semibold) var(--fs-tier)/var(--lh-none) var(--font);
-  white-space: nowrap;
-}
-.c-pill.is-confirmed { background: color-mix(in srgb, var(--success) 8%, var(--bg)); color: var(--open); }
-.c-pill.is-progress { background: color-mix(in srgb, var(--accent) 8%, var(--bg)); color: var(--accent-text); }
-.c-pill.is-neutral { background: var(--grouped); color: var(--text); }
 
 /* ---------- c-quick ----------
    Concierge quick actions: a 2 x 2 grid of grey tiles, icon top, label bottom. */
@@ -158,13 +56,6 @@
 
 /* Plain link rows that use c-list-row (inside a list, not a group). */
 a.c-list-row { color: var(--text); text-decoration: none; }
-.c-amount {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--space-half);
-}
 
 
 /* ---------- c-chat ----------
@@ -497,45 +388,7 @@ a.c-list-row { color: var(--text); text-decoration: none; }
 .c-tiers .c-navbar__back,
 .c-tiers .c-navbar__title { color: var(--tier-ink); }
 .c-tiers .screen-scroll { display: flex; flex-direction: column; padding-bottom: 0; background: transparent; }
-
-.c-tiers__seg {
-  position: relative;
-  display: flex;
-  height: 34px;
-  margin: var(--space-2) var(--gutter) 0;
-  padding: 2px;
-  border-radius: 9px;
-  background: var(--tier-seg);
-}
-.c-tiers__seg-input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
-.c-tiers__seg-label {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: var(--fw-medium) var(--fs-callout)/var(--lh-none) var(--font);
-  color: var(--tier-ink);
-  cursor: pointer;
-  transition: color 200ms ease-out;
-}
-.c-tiers__seg-input:checked + .c-tiers__seg-label { font-weight: var(--fw-semibold); color: var(--text); }
-.c-tiers__seg-input:focus-visible + .c-tiers__seg-label { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 7px; }
 /* The white thumb slides under the checked label. */
-.c-tiers__thumb {
-  position: absolute;
-  top: 2px;
-  bottom: 2px;
-  left: 2px;
-  width: calc((100% - 4px) / 3);
-  border-radius: 7px;
-  background: var(--bg);
-  box-shadow: 0 3px 8px rgb(0 0 0 / 0.12), 0 1px 1px rgb(0 0 0 / 0.04);
-  transition: transform 250ms cubic-bezier(.3, .7, .4, 1);
-}
-.c-tiers[data-tier="prestige"] .c-tiers__thumb { transform: translateX(100%); }
-.c-tiers[data-tier="elite"] .c-tiers__thumb { transform: translateX(200%); }
 
 .c-tiers__row {
   display: flex;
@@ -569,17 +422,6 @@ a.c-list-row { color: var(--text); text-decoration: none; }
 }
 
 .c-tiers__offer { padding: 0 var(--gutter) var(--space-8); text-align: center; }
-.c-tiers__price {
-  margin: 0;
-  color: var(--tier-ink);
-  transition: color 300ms ease-out;
-}
-.c-tiers__amt {
-  font: var(--fw-bold) 36px/1.1 var(--font);
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
-}
-.c-tiers__per { margin-left: 4px; font: var(--fw-regular) var(--fs-body)/var(--lh-none) var(--font); color: var(--tier-ink-2); }
 
 
 .c-tiers__sheet {

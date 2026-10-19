@@ -2,8 +2,9 @@
 // date words both print. SLStay(options) adds the two sheets to the phone, opens them from any [data-open]
 // button, and calls onChange when the stay changes. It returns { state, open }.
 // options: checkIn, checkOut (Dates or null), adults, kids, maxParty, optional (dates can be cleared), onChange,
-// single (pick one day, for tickets: one month at a time), guestNote (text under the guest counters; '' for none).
-// SLStay.month(month, picked) is that one-month calendar as HTML: [data-day] days and [data-mnav] arrows.
+// single (pick one day, for tickets: one month at a time), from (with single, the first day that can be picked),
+// guestNote (text under the guest counters; '' for none).
+// SLStay.month(month, picked, from) is that one-month calendar as HTML: [data-day] days and [data-mnav] arrows.
 (function () {
   var DAY = 864e5, MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var WK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -33,13 +34,14 @@
   var today = new Date(2026, 9, 17);
   var months = [];
   for (var mi = 0; mi < 12; mi++) months.push(new Date(today.getFullYear(), today.getMonth() + mi, 1));
-  // One month for picking a single day: the month with arrows, weekday letters, then the days; past days are off.
-  function month(m, picked) {
+  // One month for picking a single day: the month with arrows, weekday letters, then the days; days before from
+  // (today unless a ticket must be bought ahead) are off.
+  function month(m, picked, from) {
     var cells = '', first = m.getDay(), last = new Date(m.getFullYear(), m.getMonth() + 1, 0).getDate();
     for (var b = 0; b < first; b++) cells += '<span></span>';
     for (var d = 1; d <= last; d++) {
       var day = new Date(m.getFullYear(), m.getMonth(), d), on = picked && +day === +picked;
-      cells += '<button class="c-bkday' + (on ? ' is-start' : '') + '" type="button" data-day="' + fmt.iso(day) + '"' + (day < today ? ' disabled' : '') +
+      cells += '<button class="c-bkday' + (on ? ' is-start' : '') + '" type="button" data-day="' + fmt.iso(day) + '"' + (day < (from || today) ? ' disabled' : '') +
         ' aria-label="' + fmt.day(day) + '"' + (on ? ' aria-pressed="true"' : '') + '>' + d + '</button>';
     }
     var nav = function (step, label, icon, off) {
@@ -117,7 +119,7 @@
 
     // Calendar: tap check-in, then check-out; tapping again starts over.
     function drawCal() {
-      $('[data-cal]').innerHTML = o.single ? month(view, pickIn) : months.map(function (m) {
+      $('[data-cal]').innerHTML = o.single ? month(view, pickIn, o.from) : months.map(function (m) {
         var cells = '', first = m.getDay(), last = new Date(m.getFullYear(), m.getMonth() + 1, 0).getDate();
         for (var b = 0; b < first; b++) cells += '<span></span>';
         for (var d = 1; d <= last; d++) {

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Table request</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-b.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-phone--push">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <nav class="c-navbar">
+    <a data-back class="c-navbar__back" data-placelink href="place.html" aria-label="Back"><svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg></a>
+    <h1 class="c-navbar__title">Table request</h1>
+    <span></span>
+  </nav>
+
+  <main class="u-fill-col c-wait">
+    <div class="c-spinner" role="img" aria-label="Waiting for the restaurant to confirm"></div>
+    <h2 class="c-wait__title" data-title></h2>
+    <p class="c-wait__sub">Your request is in their Subic.Life app</p>
+    <div class="c-receipt c-tblrows" data-rows></div>
+    <div class="c-tblsample">
+      <span>Demo: in the real app you get a message when they answer.</span>
+      <a class="c-btn plain" data-staff href="partner-tables.html">See what the restaurant sees</a>
+    </div>
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="stay.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), p = PLACES[q.get('p')] || PLACES.elfilos;
+  var day = SLStay.fmt.parse(q.get('d')) || new Date(2026, 9, 23), t = q.get('t') || '1900', n = Number(q.get('n')) || 2;
+  var ask = 'p=' + p.id + '&d=' + SLStay.fmt.iso(day) + '&t=' + t + '&n=' + n;
+  var people = n + (n === 1 ? ' person' : ' people');
+  var rows = function () {
+    return [['Day', SLStay.fmt.day(day)], ['Time', fmtClock(t)], ['People', people]].map(function (r) {
+      return '<div class="c-receipt__row"><span>' + r[0] + '</span><span class="c-receipt__amount">' + r[1] + '</span></div>';
+    }).join('');
+  };
+  var $ = function (s) { return document.querySelector(s); };
+  $('[data-title]').textContent = 'Waiting for ' + p.name + ' to confirm…';
+  $('[data-rows]').innerHTML = rows();
+  $('[data-placelink]').href = 'place.html?p=' + p.id;
+  $('[data-staff]').href = 'partner-tables.html?' + ask;
+})();
+</script>
+</body>
+</html>

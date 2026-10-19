@@ -137,6 +137,115 @@
       ]
     },
     {
+      id: 'bestwestern-rooms', title: '10% off rooms', place: 'bestwestern', cats: ['hotels'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Room rates', bookable: true,
+      terms: [
+        'Applies to every room type.',
+        'Show your Prestige card at check-in.',
+        'Subject to availability.'
+      ]
+    },
+    {
+      id: 'lecharme-rooms', title: '10% off rooms', place: 'lecharme', cats: ['hotels'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Room rates', bookable: true,
+      terms: [
+        'Applies to every room type.',
+        'Show your Prestige card at check-in.',
+        'Subject to availability.'
+      ]
+    },
+    {
+      id: 'segara-rooms', title: '10% off rooms', place: 'segara', cats: ['hotels'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Room rates', bookable: true,
+      terms: [
+        'Applies to every room type.',
+        'Show your Prestige card at check-in.',
+        'Subject to availability.'
+      ]
+    },
+    {
+      id: 'reef-rooms', title: '10% off rooms', place: 'reef', cats: ['hotels'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Room rates', bookable: true,
+      terms: [
+        'Applies to every room type.',
+        'Show your Prestige card at check-in.',
+        'Subject to availability.'
+      ]
+    },
+    {
+      id: 'terrace-rooms', title: '10% off rooms', place: 'terrace', cats: ['hotels'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Room rates', bookable: true,
+      terms: [
+        'Applies to every room type.',
+        'Show your Prestige card at check-in.',
+        'Subject to availability.'
+      ]
+    },
+    {
+      id: 'bayfront-rooms', title: '10% off rooms', place: 'bayfront', cats: ['hotels'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Room rates', bookable: true,
+      terms: [
+        'Applies to every room type.',
+        'Show your Prestige card at check-in.',
+        'Subject to availability.'
+      ]
+    },
+    {
+      id: 'forestview-rooms', title: '10% off rooms', place: 'forestview', cats: ['hotels'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Room rates', bookable: true,
+      terms: [
+        'Applies to every room type.',
+        'Show your Prestige card at check-in.',
+        'Subject to availability.'
+      ]
+    },
+    {
+      id: 'elfilos-bill', title: '10% off your bill', place: 'elfilos', cats: ['food', 'nightlife'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Food and drinks', bookable: false,
+      terms: [
+        'Applies to food and drinks, before tax.',
+        'Show your card when the bill comes.',
+        'One discount per table.'
+      ]
+    },
+    {
+      id: 'teppan-bill', title: '10% off your bill', place: 'teppan', cats: ['food'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Food and drinks', bookable: false,
+      terms: [
+        'Applies to food and drinks, before tax.',
+        'Show your card when the bill comes.',
+        'One discount per table.'
+      ]
+    },
+    {
+      id: 'sands-bill', title: '10% off your bill', place: 'sands', cats: ['food'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Food and drinks', bookable: false,
+      terms: [
+        'Applies to food and drinks, before tax.',
+        'Show your card when the bill comes.',
+        'One discount per table.'
+      ]
+    },
+    {
+      id: 'labanca-perk', title: '10% off cruises', place: 'labanca', cats: ['water-sports'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
+      applies: 'Every cruise booked in the app', bookable: true,
+      terms: [
+        'Applies to every booking in the app.',
+        'Show your card QR when you arrive.'
+      ]
+    },
+    {
       id: 'meatplus-bill', title: '20% off your bill', place: 'meatplus', cats: ['food'],
       photo: 'img/hist-meat-plus.jpg', tier: 'Prestige · 20% off', valid: '31 Dec 2026',
       applies: 'Food and drinks', bookable: false,
@@ -164,6 +273,15 @@
       terms: [
         'Applies to every lesson you book in the app.',
         'Show your card QR at the marina.'
+      ]
+    },
+    {
+      id: 'networx-rides', title: '10% off rides', place: 'networx', cats: ['water-sports'],
+      photo: 'img/pass-subic-bay.jpg', tier: 'Prestige · 10% off', valid: '30 Nov 2026',
+      applies: 'Every ride booked in the app', bookable: true,
+      terms: [
+        'Applies to every ride you book in the app.',
+        'Show your card QR at the dock.'
       ]
     },
     {
@@ -209,11 +327,17 @@
   ];
 
   // Popular with members: place keys from PLACES, with the tags the filter uses.
+  // Brochure partners, one or two per kind of outing. The offer line is the place's own perk.
   var POPULAR = [
-    { place: 'meatplus', cats: ['food'], offer: '20% off' },
-    { place: 'ramas', cats: ['food'], offer: 'Free dessert' },
-    { place: 'yacht', cats: ['food', 'nightlife', 'water-sports'], offer: '10% off' },
-    { place: 'ocean', cats: ['water-sports', 'nature'], offer: '15% off' }
+    { place: 'ocean', cats: ['water-sports', 'nature'] },
+    { place: 'zoobic', cats: ['nature'] },
+    { place: 'labanca', cats: ['water-sports'] },
+    { place: 'lecharme', cats: ['hotels'] },
+    { place: 'sailing', cats: ['water-sports'] },
+    { place: 'elfilos', cats: ['food', 'nightlife'] },
+    { place: 'segara', cats: ['hotels'] },
+    { place: 'networx', cats: ['water-sports'] },
+    { place: 'sands', cats: ['food'] }
   ];
 
   // Ana's own card visits, newest first (the Card tab lists the same three). A visit can carry one story.

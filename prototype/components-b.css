@@ -88,37 +88,6 @@
 /* ---------- c-faceid ----------
    The iOS Face ID glyph (four corner brackets and a face, one 2.2 stroke) centered in a dark rounded
    square, with the caption under it. */
-.c-faceid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
-}
-.c-faceid__square {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 96px;
-  height: 96px;
-  border-radius: var(--r-media);
-  background: var(--text);
-  color: var(--bg);
-}
-.c-faceid__square svg {
-  width: 56px;
-  height: 56px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.c-faceid__label {
-  margin: 0;
-  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
-  color: var(--text);
-}
 
 /* ---------- c-success-icon.is-lg ----------
    96px success circle for the full-screen paid state. The circle pops in, then the check draws itself.
@@ -383,50 +352,9 @@
 .c-cardtab > .c-statusbar { background: transparent; color: var(--bg); }
 .c-cardtab .c-largetitle { background: transparent; }
 .c-cardtab .c-largetitle__title { color: var(--bg); }
-.c-cardtab .c-largetitle__btn { background: rgb(255 255 255 / 0.14); color: var(--bg); }
 .c-cardtab .screen-scroll { display: flex; flex-direction: column; background: transparent; padding-bottom: 0; }
 .c-cardtab .c-mcard { box-shadow: 0 24px 40px -16px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.14); }
-.c-cardtab .c-mcard-hint { color: rgb(255 255 255 / 0.6); }
-.c-ctab__actions { margin-top: var(--space-4); padding-bottom: var(--space-7); }
-.c-ctab__actions .c-btn { gap: 8px; }
-.c-ctab__actions .c-btn .material-symbols-outlined { font-size: 22px; }
-.c-ctab__sheet {
-  flex: 1 0 auto;
-  padding: var(--space-6) 0 calc(var(--size-tabbar-h) + var(--space-6));
-  border-radius: 26px 26px 0 0;
-  background: var(--bg);
-}
-.c-ctab__total { display: flex; flex-direction: column; gap: 6px; padding: 0 var(--gutter); color: var(--text); text-decoration: none; }
-.c-ctab__label { font: var(--fw-semibold) var(--fs-footnote)/1 var(--font); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-2); }
-.c-ctab__num { font: 600 44px/1 var(--font-display); letter-spacing: -0.035em; font-variant-numeric: tabular-nums; }
-.c-ctab__meta { display: inline-flex; align-items: center; font: var(--fw-regular) var(--fs-callout)/1.3 var(--font); color: var(--text-2); }
-.c-ctab__meta .material-symbols-outlined { font-size: 20px; color: var(--inactive); }
-.c-ctab__head { margin-top: var(--space-7); margin-bottom: var(--space-1); }
-.c-ctab__save { font: 600 15px/1 var(--font-display); color: var(--open); font-variant-numeric: tabular-nums; }
-.c-ctab__wallet { display: flex; flex-direction: column; align-items: center; gap: var(--space-4); margin-top: var(--space-7); }
-.c-ctab__sheet a.c-list-row { color: inherit; text-decoration: none; }
 .c-cardtab .c-mcard.is-prestige .c-mcard__name { color: var(--bg); text-shadow: 0 1px 3px rgb(11 37 69 / 0.8); }
 
 /* Under the card: quiet rows, no hero number. The card is the point of this tab. */
-.c-ctab__sheet { padding-top: var(--space-3); }
-.c-ctab__row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: 60px;
-  padding: var(--space-3) 0;
-  color: var(--text);
-  text-decoration: none;
-}
-.c-ctab__row + .c-ctab__row { border-top: var(--hairline-w) solid var(--hairline); }
-.c-ctab__rowmain { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.c-ctab__rowtitle { font: var(--fw-semibold) var(--fs-body)/1.25 var(--font); }
-.c-ctab__rowsub { font: var(--fw-regular) var(--fs-footnote)/1.25 var(--font); color: var(--text-2); }
-.c-ctab__rowval { font: 600 17px/1 var(--font-display); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
-.c-ctab__chev { font-size: 20px; color: var(--inactive); }
-.c-ctab__head { margin-top: var(--space-6); }
-.c-ctab__save { font: var(--fw-semibold) var(--fs-footnote)/1 var(--font); }
-.c-wallet-btn__icon { font-size: 20px; font-variation-settings: "FILL" 1; }
 /* Once the QR is showing, the hint tells you how to flip back. */
-.c-mcard[aria-pressed="true"] + .c-mcard-hint { font-size: 0; }
-.c-mcard[aria-pressed="true"] + .c-mcard-hint::after { content: "Tap card to hide QR"; font-size: var(--fs-footnote); }

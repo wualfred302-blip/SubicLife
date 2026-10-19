@@ -24,9 +24,7 @@
 
 /* ---------- the backdrop: fixed behind the scroll, every screen ---------- */
 .phone,
-.phone.c-cardtab,
-.phone.c-grouped,
-.phone.c-explore {
+.phone.c-cardtab {
   background: var(--backdrop);
   color: var(--text);
 }
@@ -43,7 +41,6 @@
 .c-largetitle__title,
 .c-section-head__title,
 .c-section-title,
-.c-place-head__name,
 .c-offer-title,
 .c-navbar__title,
 .c-xbar__title {
@@ -56,7 +53,6 @@
 .c-largetitle__title { font-size: 34px; line-height: 1.05; }
 .c-section-head__title,
 .c-section-title { font-size: 22px; }
-.c-place-head__name { font-size: 30px; line-height: 1.08; }
 .c-xbar__title { font-weight: 800; }
 
 /* ---------- floating glass tab bar ---------- */
@@ -121,14 +117,6 @@
 }
 
 /* ---------- search and chips ---------- */
-.c-search {
-  height: 52px;
-  border-radius: var(--r-pill);
-  background: #fff;
-  box-shadow: 0 8px 22px -14px rgb(30 40 50 / 0.35);
-  padding: 0 18px;
-}
-.c-search__ph { color: #7A8088; font-size: 16px; }
 .c-chip {
   height: 40px;
   padding: 0 16px;
@@ -141,10 +129,6 @@
 
 /* ---------- tiles ---------- */
 /* Photo cards show the photo itself, no frame. Social posts sit on a white tile. */
-.c-place-card__photo,
-.c-event-card__photo { border-radius: 18px; overflow: hidden; }
-.c-place-card__name,
-.c-event-card__name { font-weight: 700; letter-spacing: -0.01em; }
 
 
 
@@ -168,42 +152,8 @@
 
 /* Settings groups (Me and its children): one white tile per group and a colour icon per row, like iOS
    Settings. A row picks its colour with .c-ic--*; the default is a quiet slate. */
-.phone.c-grouped { background: var(--backdrop); }
-.c-group {
-  border-radius: var(--tile-r);
-  background: var(--tile);
-  box-shadow: 0 12px 24px -22px rgb(30 40 50 / 0.5);
-}
-.c-group__row { min-height: 54px; }
-.c-group--lead .c-group__row + .c-group__row::before { left: 58px; }
-.c-group__icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
-  background: var(--ic, #7C858F);
-  color: #fff;
-}
-.c-group__icon .material-symbols-outlined { font-size: 19px; font-variation-settings: "FILL" 1, "wght" 500; }
-.c-ic--orange { --ic: #E8590C; }
-.c-ic--gold { --ic: linear-gradient(150deg, #E4C173, #B5843A); }
-
-.c-ic--blue { --ic: #2F6BDB; }
-.c-ic--green { --ic: #1F9D57; }
-.c-ic--red { --ic: #E5484D; }
-.c-ic--indigo { --ic: #5A55D6; }
-.c-group__main { font-weight: 600; }
-.c-group__row.is-danger { color: #D7263D; }
-.c-group__head,
-.c-grouped .c-group__head {
-  margin: 28px calc(var(--gutter) + 16px) 8px;
-  font: 600 13px/1 var(--font);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-2);
-}
 
 /* ---------- Card tab: a portrait card is the hero, then the ID tile and the actions ---------- */
-.c-cardtab .c-mcard-hint { margin: 14px 0 0; text-align: center; color: var(--text-2); font-size: 13px; }
 .c-mcard.is-portrait {
   width: 216px;
   aspect-ratio: 54 / 85.6;
@@ -259,27 +209,11 @@
 a.c-list-row { text-decoration: none; color: inherit; }
 
 /* ---------- Place and offer: name and price sit on one white tile that overlaps the photo ---------- */
-.c-place-head {
-  position: relative;
-  z-index: 2;
-  margin: -44px var(--gutter) 0;
-  padding: 22px 20px 16px;
-  border-radius: 24px 24px 0 0;
-  background: var(--tile);
-}
-.c-place-head__name { margin: 0; }
-.c-place-head__meta { margin-top: 8px; }
-
-
-.c-psec .c-section-title { font-size: 20px; }
-.c-pabout__text { color: #2A2E33; }
 .c-info-group {
   border-radius: var(--tile-r);
   background: var(--tile);
   box-shadow: 0 10px 26px -20px rgb(30 40 50 / 0.45);
 }
-
-.c-info-group .c-mapthumb { border-bottom-color: #EEF0F2; }
 .c-placehero__count { bottom: 56px; }
 
 /* ---------- tier cards (portrait) ---------- */
@@ -324,9 +258,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .phone.theme-night .c-tabbar__tab { color: #8A8F96; }
 .phone.theme-elite .c-tabbar__tab.is-active,
 .phone.theme-night .c-tabbar__tab.is-active { color: #F5F5F4; background: rgb(255 255 255 / 0.1); }
-
-.phone.theme-elite .c-mcard-hint,
-.phone.theme-night .c-mcard-hint { color: var(--text-2); }
 .phone.theme-elite .c-list-row,
 .phone.theme-night .c-list-row { box-shadow: none; }
 
@@ -371,22 +302,10 @@ a.c-list-row { text-decoration: none; color: inherit; }
   background: var(--tile);
 }
 .c-offer-title { font-weight: 800; }
-.c-oval {
-  position: relative;
-  z-index: 2;
-  margin: 0 var(--gutter);
-  padding: 16px 20px 20px;
-  border-radius: 0 0 24px 24px;
-  background: linear-gradient(var(--hairline), var(--hairline)) 20px 0 / calc(100% - 40px) 1px no-repeat, var(--tile);
-  box-shadow: 0 18px 30px -22px rgb(30 40 50 / 0.45);
-}
-.c-oval__now { font-weight: 800; }
 .c-osec { margin-top: 32px; }
 
 
 /* Booking price summary on a tile. */
-.c-receipt.c-price { width: auto; margin-inline: var(--gutter); padding: 2px 18px; border-radius: var(--tile-r); background: var(--tile); box-shadow: 0 10px 26px -20px rgb(30 40 50 / 0.45); }
-.c-receipt.c-price .c-receipt__row:last-child { border-bottom: 0; }
 
 /* =====================================================================================
    Wallpaper and surface
@@ -463,11 +382,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
   transform-origin: 50% 0;
 }
 .phone .c-hero .c-largetitle__title { color: var(--on-wall); }
-.c-hero .c-largetitle__avatar { border: 2px solid rgb(255 255 255 / 0.85); }
-
-
-
-.c-hero .c-search { box-shadow: 0 18px 34px -20px rgb(0 0 0 / 0.7); }
 
 .c-surface {
   position: relative;
@@ -493,33 +407,7 @@ a.c-list-row { text-decoration: none; color: inherit; }
 @keyframes c-surface-in { from { transform: translateY(56px); opacity: 0.4; } }
 
 /* ---------- Explore: photo-first cards ---------- */
-.c-explore .c-place-card { position: relative; width: 248px; }
-.c-explore .c-place-card__photo { aspect-ratio: auto; height: 312px; border-radius: 22px; }
-.c-explore .c-place-card__photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0) 42%, rgb(0 0 0 / 0.66) 100%);
-}
-.c-explore .c-place-card__name {
-  position: absolute;
-  z-index: 2;
-  left: 16px;
-  right: 16px;
-  bottom: 40px;
-  margin: 0;
-  color: #fff;
-  font: 800 21px/1.12 var(--font-display);
-  letter-spacing: -0.02em;
-  white-space: normal;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.c-explore .c-place-card__meta { position: absolute; z-index: 2; left: 16px; right: 16px; bottom: 17px; margin: 0; color: rgb(255 255 255 / 0.84); }
-.c-xbadge,
-.c-stile .c-xbadge {
+.c-xbadge {
   z-index: 2;
   top: 12px;
   left: 12px;
@@ -528,30 +416,8 @@ a.c-list-row { text-decoration: none; color: inherit; }
 }
 
 /* ---------- Saved: the switch sits on the wallpaper ---------- */
-.c-hero .c-segmented { background: var(--wall-glass); border: 1px solid var(--wall-glass-line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-.c-hero .c-segmented__opt { color: var(--on-wall); }
-.c-hero .c-segmented__opt.is-on { background: #fff; color: var(--text); }
 
 /* ---------- Concierge: Mika on the wallpaper ---------- */
-
-
-.c-walls { cursor: default; }
-.c-walls .c-group__main { flex: 1; }
-.c-walls__opts { display: flex; gap: 10px; }
-.c-walls__opt {
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.08);
-}
-.c-walls__opt[aria-checked="true"] { box-shadow: 0 0 0 2px var(--tile), 0 0 0 4px var(--text); }
-.c-walls__opt[data-wall-opt="dusk"] { background: radial-gradient(70% 60% at 90% 10%, #FF8E42, transparent), linear-gradient(160deg, #1A8F9C, #151E37 70%); }
-.c-walls__opt[data-wall-opt="lagoon"] { background: radial-gradient(70% 60% at 90% 10%, #FFCE70, transparent), linear-gradient(160deg, #28C8BA, #08323E 75%); }
-.c-walls__opt[data-wall-opt="sunset"] { background: radial-gradient(70% 60% at 90% 10%, #FFB25C, transparent), linear-gradient(160deg, #EC5C28, #2A1532 80%); }
-.c-walls__opt[data-wall-opt="day"] { background: radial-gradient(70% 60% at 90% 10%, #F7C496, transparent), linear-gradient(160deg, #EAF1F3, #B9D3DC); }
 
 /* ---------- Card: the card on a stage, then the ID and the next steps ---------- */
 .c-cardstage { position: relative; padding-bottom: 6px; }
@@ -567,7 +433,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
   pointer-events: none;
 }
 .c-hero .c-mcard.is-portrait { box-shadow: 0 40px 60px -28px rgb(0 0 0 / 0.85), 0 0 0 1px rgb(255 255 255 / 0.16); }
-.c-hero .c-mcard-hint { color: var(--on-wall-2); }
 
 /* ---------- Elite and the night look: night wallpaper with gold glow, dark surface ---------- */
 .phone.theme-elite,
@@ -613,22 +478,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .c-section-title.is-title { font-weight: 800; }
 
 /* Place and offer: the ground under the photo takes on the photo own colours, softly (like album art). */
-.phone.has-glow .screen-scroll { position: relative; overflow-x: hidden; }
-.phone.has-glow .screen-scroll::before {
-  content: "";
-  position: absolute;
-  top: 120px;
-  left: -20%;
-  right: -20%;
-  height: 820px;
-  background: var(--ph) center / cover no-repeat;
-  filter: blur(60px) saturate(1.6);
-  opacity: 0.4;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 100%);
-  pointer-events: none;
-}
-.phone.has-glow .screen-scroll > * { position: relative; }
 
 /* =====================================================================================
    Pass 3: round actions on the wallpaper, Card visits, Concierge timeline, Me profile.
@@ -687,83 +536,14 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .c-action:focus-visible .c-action__btn { outline: 2px solid var(--on-wall); outline-offset: 3px; }
 
 /* Card: member number under the card, actions below; the surface holds the visits. */
-.c-cardstage__id {
-  margin: 18px 0 0;
-  text-align: center;
-  font: 500 13px/1 var(--font);
-  color: var(--on-wall-2);
-}
-.c-cardstage__no { font-weight: 700; letter-spacing: 0.08em; color: var(--on-wall); font-variant-numeric: tabular-nums; }
-.c-lede {
-  margin: -4px var(--gutter) 16px;
-  font: 500 15px/1.35 var(--font);
-  color: var(--text-2);
-}
-.c-lede strong { font-weight: 800; color: var(--text); font-variant-numeric: tabular-nums; }
 .c-visit__amt { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
 .c-visit__save { font: 800 16px/1 var(--font-display); color: var(--open); font-variant-numeric: tabular-nums; }
 .c-visit__lbl { font: 500 12px/1 var(--font); color: var(--text-2); }
 .c-cardtab .c-surface .c-demo-link { margin-top: 20px; }
 
 /* Me: the member, centred, ringed in the tier's metal, with shortcuts below. */
-.c-hero.c-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 22px;
-  text-align: center;
-}
-.c-profile__avatar {
-  --ring: conic-gradient(from 210deg, #F5F6F7, #8D939B, #FFFFFF, #6C7279, #F5F6F7);
-  position: relative;
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-}
-.c-profile__avatar img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-.c-profile__avatar::before {
-  content: "";
-  position: absolute;
-  inset: -7px;
-  padding: 2.5px;
-  border-radius: 50%;
-  background: var(--ring);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-}
-.c-profile__name {
-  margin: 20px 0 0;
-  font: 800 30px/1.05 var(--font-display);
-  letter-spacing: -0.03em;
-  color: var(--on-wall);
-}
-.c-profile__tier {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0 0;
-  padding: 6px 12px 6px 8px;
-  border: 1px solid var(--wall-glass-line);
-  border-radius: var(--r-pill);
-  background: var(--wall-glass);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  font: 600 13px/1 var(--font);
-  color: var(--on-wall);
-}
-.c-profile__tier::before {
-  content: "";
-  width: 11px;
-  height: 17px;
-  border-radius: 2.5px;
-  background: radial-gradient(130% 70% at 100% 0%, #4A4640, #1C1B19 62%);
-  box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 0.45);
-}
-.c-profile .c-actions { margin-top: 26px; }
 
 /* Membership row: a small card stands in for the icon. */
-.c-group__row.c-memrow { min-height: 72px; }
 .c-minicard {
   flex: none;
   position: relative;
@@ -795,107 +575,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 }
 
 /* Concierge: Mika with quick asks; the trip is a timeline per day that only calls out what needs attention. */
-.c-mika2 .c-mika__av {
-  position: relative;
-  width: 52px;
-  height: 52px;
-  background: linear-gradient(150deg, #F6A35E 0%, #E8590C 72%);
-  font: 800 17px/1 var(--font-display);
-  letter-spacing: 0;
-}
-.c-mika2 .c-mika__av::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 1px;
-  width: 13px;
-  height: 13px;
-  border: 2.5px solid var(--tile);
-  border-radius: 50%;
-  background: #22B35E;
-}
-.c-mika2__name { font-weight: 800; }
-.c-mika2__quick { display: flex; gap: 6px; margin-top: 12px; }
-.c-mika2__chip {
-  flex: 1;
-  min-width: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  height: 36px;
-  padding: 0 8px;
-  border-radius: var(--r-pill);
-  background: #F4EFE9;
-  font: 600 14px/1 var(--font);
-  color: var(--text);
-  text-decoration: none;
-}
-.c-mika2__chip .material-symbols-outlined { font-size: 18px; color: var(--accent-text); }
-
-.c-trip2__dates {
-  margin: -4px var(--gutter) 16px;
-  font: 500 15px/1.3 var(--font);
-  color: var(--text-2);
-}
-.c-tday + .c-tday { margin-top: 22px; }
-.c-tday__label { margin: 0 4px 10px; font: 800 17px/1.2 var(--font-display); letter-spacing: -0.01em; color: var(--text); }
-
-.c-tstop {
-  display: grid;
-  grid-template-columns: 36px minmax(0, 1fr) auto;
-  align-items: start;
-  gap: 0 12px;
-}
-.c-tstop + .c-tstop { border-top: 0; }
-.c-tstop:not(:last-child)::before {
-  content: "";
-  position: absolute;
-  top: 52px;
-  bottom: -8px;
-  width: 2px;
-  border-radius: 1px;
-}
-.c-tstop__node {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-}
-.c-tstop__node .material-symbols-outlined { font-size: 19px; }
-.c-tstop.is-confirmed .c-tstop__node::after {
-  content: "check";
-  position: absolute;
-  right: -3px;
-  bottom: -3px;
-  display: grid;
-  place-items: center;
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--tile);
-  border-radius: 50%;
-  background: #1F9D57;
-  color: #fff;
-  font: 700 11px/1 "Material Symbols Outlined";
-}
-
-.c-tstop__main { gap: 3px; }
-.c-tstop__time { padding: 0; font: 700 12px/1.2 var(--font); letter-spacing: 0.02em; color: var(--text-2); }
-.c-tstop__name { font: 700 16px/1.25 var(--font); color: var(--text); }
-.c-tstop__sub { font: 500 13px/1.35 var(--font); }
-.c-tstop__status {
-  align-self: flex-start;
-  margin-top: 6px;
-  padding: 5px 9px 5px 8px;
-  border-radius: var(--r-pill);
-  background: rgb(232 89 12 / 0.1);
-  font-weight: 700;
-  color: var(--accent-text);
-}
-.c-tstop__thumb { width: 52px; height: 52px; overflow: hidden; border-radius: 12px; }
-.c-tstop__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* Ideas from Mika: photo-first, like Explore. */
 
@@ -909,7 +588,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .u-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Itinerary page uses the Concierge timeline; Mika's avatar is the same warm disc everywhere. */
-.c-trip-days { margin-top: 26px; }
 .c-chat-nav__av,
 .c-msg__av { background: linear-gradient(150deg, #F6A35E 0%, #E8590C 72%); }
 
@@ -917,8 +595,7 @@ a.c-list-row { text-decoration: none; color: inherit; }
    Pass 4: no grey parts. Controls on the wallpaper are solid white; controls inside a white tile
    are white with a hairline; icons and avatars carry real colour. Orange stays the one accent.
    ===================================================================================== */
-.c-action__btn,
-.c-profile__tier {
+.c-action__btn {
   border: 0;
   background: #fff;
   color: #17191C;
@@ -926,13 +603,11 @@ a.c-list-row { text-decoration: none; color: inherit; }
   -webkit-backdrop-filter: none;
 }
 .c-action__btn { box-shadow: 0 14px 24px -16px rgb(0 0 0 / 0.7); }
-.c-profile__tier { box-shadow: 0 10px 20px -14px rgb(0 0 0 / 0.7); }
 
 .c-tabbar__tab.is-active { background: rgb(232 89 12 / 0.1); }
 
 /* Deal badges on photos: a white tag, like a price label. */
-.c-xbadge,
-.c-stile .c-xbadge {
+.c-xbadge {
   border: 0;
   background: #fff;
   color: #17191C;
@@ -942,26 +617,8 @@ a.c-list-row { text-decoration: none; color: inherit; }
 }
 
 /* Mika's card: hairline controls on white, like a message composer. */
-.c-mika2__call,
-.c-mika2__ask,
-.c-mika2__chip {
-  border: 1px solid #E6E0D8;
-  background: #fff;
-}
-.c-mika2__call { color: var(--text); }
 
 /* Trip: each stop is coloured by what it is, so the day reads at a glance. */
-.c-tstop__node { background: #5E6670; color: #fff; }
-.c-tstop__node .material-symbols-outlined { font-variation-settings: "FILL" 1, "wght" 500; }
-.c-tstop__node[data-ic="airport_shuttle"] { background: #2F6BDB; }
-.c-tstop__node[data-ic="sailing"],
-.c-tstop__node[data-ic="directions_boat"] { background: #0E7C86; }
-.c-tstop__node[data-ic="login"],
-.c-tstop__node[data-ic="logout"] { background: #5A55D6; }
-.c-tstop__node[data-ic="restaurant"],
-.c-tstop__node[data-ic="dinner_dining"] { background: #E8590C; }
-.c-tstop__node[data-ic="spa"] { background: #C2477A; }
-.c-tstop__node[data-ic="golf_course"] { background: #187A46; }
 
 /* Members without a photo get a coloured monogram, never a grey disc. */
 .c-mono {
@@ -983,28 +640,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 
 /* Listing: the member offer is its own row under the name, led by a small copy of your card.
    The price sits in the bottom bar beside the action, so each fact appears once. */
-.c-poffer {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin: 0 var(--gutter);
-  padding: 16px 14px 18px 20px;
-  border-radius: 0 0 24px 24px;
-  background: linear-gradient(var(--hairline), var(--hairline)) 20px 0 / calc(100% - 40px) 1px no-repeat, var(--tile);
-  box-shadow: 0 18px 30px -22px rgb(30 40 50 / 0.45);
-  color: var(--text);
-  text-decoration: none;
-}
-.c-poffer__text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.c-poffer__title { font: 800 18px/1.15 var(--font-display); letter-spacing: -0.01em; }
-.c-poffer__sub { font: 500 13px/1.3 var(--font); color: var(--text-2); }
-.c-poffer__chev { flex: none; font-size: 22px; color: var(--inactive); }
-.c-place-head.is-solo { padding-bottom: 20px; border-radius: 24px; box-shadow: 0 18px 30px -22px rgb(30 40 50 / 0.45); }
-.c-bottombar__total { font: 800 19px/1.1 var(--font-display); letter-spacing: -0.02em; }
-.c-bottombar__total small { font-weight: 500; }
-.c-bottombar__was { margin-top: 4px; }
 
 /* Offer page: steps, place and fine print sit on white tiles like every other list. */
 .c-otile {
@@ -1052,25 +687,11 @@ a.c-list-row { text-decoration: none; color: inherit; }
 }
 .c-composer__send:disabled { background: rgb(232 89 12 / 0.4); color: #fff; }
 .c-switch { background: #E4DFD8; }
-.c-barchart__bar { background: rgb(232 89 12 / 0.22); }
-.c-dates,
-.c-booking-card {
-  border: 0;
-  background: var(--tile);
-  box-shadow: 0 12px 24px -22px rgb(30 40 50 / 0.5);
-}
 .c-empty__icon { background: #fff; color: var(--text); box-shadow: 0 10px 24px -14px rgb(30 40 50 / 0.45); }
-.c-pill.is-neutral { background: transparent; box-shadow: inset 0 0 0 1px #E3DDD5; color: var(--text-2); }
-.phone.has-wall .c-xbar__btn { background: transparent; color: var(--text); }
-.phone.c-tiers:not([data-tier="elite"]) .c-tiers__seg { background: #fff; box-shadow: inset 0 0 0 1px #E3DDD5; }
-.phone.c-tiers:not([data-tier="elite"]) .c-tiers__thumb { background: #17191C; box-shadow: none; }
-.phone.c-tiers:not([data-tier="elite"]) .c-tiers__seg-input:checked + .c-tiers__seg-label { color: #fff; }
 .c-fcard__meta { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
 /* Pass 5: verified-visit stories. A member can only share a story from a visit paid with the card, so
    every story carries its visit date. Rows of tall photo tiles; the first tile adds yours. */
-.c-stories { gap: 10px; }
-.c-psec .c-stories { margin: 0 calc(var(--gutter) * -1); }
 .c-story {
   position: relative;
   flex: none;
@@ -1340,54 +961,14 @@ a.c-list-row { text-decoration: none; color: inherit; }
   color: var(--text-2);
 }
 .c-cnote { margin: 10px 2px 0; font: 500 13px/1.35 var(--font); color: var(--text-2); }
-.c-compose-bar .c-btn.primary:disabled { background: rgb(232 89 12 / 0.4); box-shadow: none; cursor: default; }
 .c-bottombar.is-stack { flex-direction: column; align-items: stretch; gap: 4px; }
-.c-cdone { display: flex; flex-direction: column; align-items: center; padding: 88px var(--gutter) 0; text-align: center; }
-.c-cdone__photo {
-  position: relative;
-  width: 140px;
-  aspect-ratio: 3 / 4;
-  border-radius: 20px;
-  box-shadow: 0 22px 40px -24px rgb(30 40 50 / 0.7);
-}
-.c-cdone__photo img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
-.c-cdone__badge {
-  position: absolute;
-  right: -12px;
-  bottom: -12px;
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #1F9D57;
-  color: #fff;
-  box-shadow: 0 0 0 4px #F6F3EE;
-}
-.c-cdone__badge .material-symbols-outlined { font-size: 24px; font-variation-settings: "wght" 700; }
-.c-cdone__title { margin: 32px 0 0; font: 800 26px/1.15 var(--font-display); letter-spacing: -0.02em; }
-.c-cdone__sub { max-width: 290px; margin: 8px 0 0; font: 500 15px/1.4 var(--font); color: var(--text-2); }
 
 /* Your stories: visits waiting for one, then the ones you shared. */
-.c-addpill {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 7px 12px 7px 8px;
-  border-radius: 999px;
-  background: rgb(232 89 12 / 0.1);
-  font: 700 14px/1 var(--font);
-  color: #B8460A;
-}
-.c-addpill .material-symbols-outlined { font-size: 18px; font-variation-settings: "wght" 600; }
-.c-mystories { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 var(--gutter) 32px; }
-.c-mystories .c-story { width: auto; }
 .c-post-empty { margin: 0; padding: 4px var(--gutter) 8px; font: 500 15px/1.4 var(--font); color: var(--text-2); }
 .c-post-delete { display: flex; justify-content: center; margin: 8px 0 24px; }
 .c-btn.plain.is-danger { color: #C0182C; }
 .c-btn.primary.is-danger { background: #C0182C; box-shadow: none; }
 /* One shared story takes the whole row instead of leaving half of it empty. */
-.c-mystories > .c-story:last-child:nth-child(odd) { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
 /* The visit picker shows the whole place name, wrapping to two lines before it truncates. */
 [data-visits] .c-list-row__title { white-space: normal; }
 
@@ -1416,36 +997,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .c-ledger .c-visit__save { font-size: 17px; }
 
 /* Popular: rows on the paper with a larger photo; the perk carries the tiny card mark. */
-.c-popular { padding: 0 var(--gutter); }
-.c-popular__row {
-  position: relative;
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  align-items: center;
-  column-gap: 14px;
-  padding: 12px 0;
-  color: var(--text);
-  text-decoration: none;
-}
-.c-popular__row:not([hidden]) ~ .c-popular__row::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 86px;
-  right: 0;
-  height: 1px;
-  background: var(--rule);
-}
-.c-popular__photo { width: 72px; height: 72px; overflow: hidden; border-radius: 16px; }
-.c-popular__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.c-popular__text { min-width: 0; display: flex; flex-direction: column; }
-.c-popular__name,
-.c-popular__meta { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.c-popular__name { font: 700 17px/1.25 var(--font); letter-spacing: -0.01em; }
-.c-popular__meta { margin-top: 2px; font: 500 14px/1.3 var(--font); color: var(--text-2); }
-.c-popular__perk { display: flex; align-items: center; gap: 6px; margin-top: 8px; font: 700 13px/1 var(--font); color: var(--text); }
-.c-popular__rate { font-weight: 600; color: var(--text-2); }
-.c-popular__rate::before { content: "·"; margin: 0 6px 0 2px; }
 
 /* A member perk is marked with a tiny copy of the card, the same mark as the Me tier chip. */
 .c-perkmark {
@@ -1469,88 +1020,21 @@ a.c-list-row { text-decoration: none; color: inherit; }
 
 /* Concierge: Mika stands on the wallpaper like the Explore search, not inside a white card.
    Controls are solid white with dark icons, as everywhere on a wallpaper. */
-.c-hero .c-mika2 {
-  margin: 8px var(--gutter) 0;
-  padding: 0;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-}
-.c-hero .c-mika2 .c-mika__av {
-  width: 58px;
-  height: 58px;
-  font-size: 19px;
-  box-shadow: 0 0 0 2.5px #fff, 0 14px 26px -14px rgb(0 0 0 / 0.7);
-}
-.c-hero .c-mika2 .c-mika__av::after { border-color: #fff; }
-.c-hero .c-mika2__name { font: 800 24px/1.1 var(--font-display); letter-spacing: -0.02em; color: var(--on-wall); }
-.c-hero .c-mika2__status { margin-top: 5px; font: 500 15px/1.2 var(--font); color: var(--on-wall-2); }
-.c-hero .c-mika2__call,
-.c-hero .c-mika2__ask,
-.c-hero .c-mika2__chip {
-  border: 0;
-  background: #fff;
-  box-shadow: 0 16px 30px -18px rgb(0 0 0 / 0.75);
-}
-.c-hero .c-mika2__call { width: 48px; height: 48px; }
-.c-hero .c-mika2__ask { margin-top: 20px; min-height: 56px; padding-left: 20px; font: 500 16px/1 var(--font); color: var(--text-2); }
-.c-hero .c-mika2__ask .c-ask__send { width: 44px; height: 44px; }
-.c-hero .c-mika2__quick { gap: 8px; margin-top: 10px; }
-.c-hero .c-mika2__chip { height: 40px; }
-.c-hero .c-mika2__chip .material-symbols-outlined { color: var(--text); }
 
 /* Benefits: the real (black, portrait) Prestige card heads the page, and each privilege is
    stamped in that same black, straight on the paper. */
 .c-minicard.is-lg { width: 44px; height: 69px; border-radius: 7px; }
 .c-minicard.is-lg::before { left: 10px; right: 10px; height: 2px; }
 .c-minicard.is-lg::after { left: 5px; top: -6px; font-size: 52px; }
-.c-pass-summary__name { font: 800 22px/1.15 var(--font-display); letter-spacing: -0.02em; }
-.c-pass-summary__meta { margin-top: 4px; font: 500 14px/1.3 var(--font); }
-.c-perks .c-list-row__lead {
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
-  background: radial-gradient(130% 80% at 100% 0%, #3A3732, #1C1B19 62%);
-  box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 0.16), 0 8px 16px -10px rgb(0 0 0 / 0.6);
-}
-.c-perks .c-list-row__icon { font-size: 22px; color: #fff; font-variation-settings: "FILL" 1, "wght" 500; }
-.c-perks .c-list-row::after { left: calc(44px + var(--space-3)); }
-.c-perks .c-list-row__action {
-  display: inline-flex;
-  align-items: center;
-  height: 34px;
-  padding: 0 14px;
-  border: 1px solid #E3DDD5;
-  border-radius: var(--r-pill);
-  background: #fff;
-  font: 600 14px/1 var(--font);
-  color: var(--text);
-}
 
 /* Listing: rooms (or tours) are photos you swipe, priced for members, like the Explore cards. */
-.c-psec .c-rooms { margin: 0 calc(var(--gutter) * -1); gap: 14px; }
-.c-room { flex: none; width: 252px; scroll-snap-align: start; color: var(--text); text-decoration: none; }
-.c-room__photo { display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 18px; }
-.c-room__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.c-room__name { display: block; margin-top: 12px; font: 700 17px/1.2 var(--font); letter-spacing: -0.01em; }
-.c-room__sub { display: block; margin-top: 4px; font: 500 14px/1.3 var(--font); color: var(--text-2); }
-.c-room__price { display: flex; align-items: baseline; gap: 5px; margin-top: 10px; font: 500 14px/1 var(--font); color: var(--text-2); }
-.c-room__price b { font: 800 17px/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--text); }
-.c-room__price s { margin-left: 4px; font-size: 13px; }
 
 /* Trip: the timeline runs straight down the paper, under Mika, without a white box per day. */
-.c-tday__list { padding: 0; border-radius: 0; background: none; box-shadow: none; }
-.c-tstop { padding: 12px 0; }
-.c-tstop:not(:last-child)::before { left: 17px; background: var(--rule); }
-.c-tstop.is-confirmed .c-tstop__node::after { border-color: var(--sheet); }
-.c-tstop.is-progress .c-tstop__node { box-shadow: 0 0 0 2px var(--sheet), 0 0 0 4px var(--accent); }
-.c-tday__label { margin-left: 0; margin-right: 0; }
 
 /* Pass 7: no white cards. Lists and settings groups sit on the paper with hairlines. */
 /* Lists and groups: no tile, no shadow, no rounded corners. Buttons, fields, chips, round action
    buttons, the card and the tab bar keep their own styles. */
-.c-list-row,
-.c-group {
+.c-list-row {
   background: transparent;
   box-shadow: none;
   border-radius: 0;
@@ -1559,13 +1043,10 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .c-list-row:not(:has(+ .c-list-row)) { border-radius: 0; }
 .c-list-row::after { background: rgba(0, 0, 0, 0.08); }
 .c-list-row:not(:has(+ .c-list-row))::after { display: block; left: 0; }
-.c-group__row + .c-group__row::before { background: rgba(0, 0, 0, 0.08); }
 
 /* Night (Elite and default): the same hairlines, lit instead of shaded. */
 .phone.theme-elite .c-list-row::after,
-.phone.theme-elite .c-group__row + .c-group__row::before,
-.phone.theme-night .c-list-row::after,
-.phone.theme-night .c-group__row + .c-group__row::before { background: rgba(255, 255, 255, 0.1); }
+.phone.theme-night .c-list-row::after { background: rgba(255, 255, 255, 0.1); }
 
 /* Card back: the quiet staff-scan link under the QR, light text on the dark back face. */
 .c-mcard__sim { position: relative; z-index: 2; margin-top: 4px; color: rgb(255 255 255 / 0.72); }
@@ -1740,7 +1221,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .phone.theme-night .c-chip.is-selected .c-chip__icon { color: var(--sheet); }
 
 /* Saved: the raised option on the wallpaper switch is light, so its label is dark. */
-.phone.theme-night .c-hero .c-segmented__opt.is-on { background: var(--text); color: var(--sheet); }
 
 /* Forms: fields, code cells and the composer are dark tiles with a hairline (they were Pass 4b white). */
 .phone.theme-night .c-field,
@@ -1749,18 +1229,12 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .phone.theme-night .c-reply,
 .phone.theme-night .c-fcard__dir,
 .phone.theme-night .c-ctip__box { background: var(--tile); border-color: rgb(255 255 255 / 0.12); }
-.phone.theme-night .c-pill.is-neutral { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16); }
 
 /* Explore's "Share a story" sheet: a dark panel like every other sheet, not the paper cream. */
 .phone.theme-night .c-vsheet .c-sheet__panel { background: var(--sheet); }
 .phone.theme-night .c-vsheet .c-sheet__grabber { background: rgb(255 255 255 / 0.3); }
 
 /* Concierge on the wallpaper: the quick chips and call button are white, so their labels and icons are dark. */
-.phone.theme-night .c-hero .c-mika2__call,
-.phone.theme-night .c-hero .c-mika2__chip { color: #121212; }
-.phone.theme-night .c-hero .c-mika2__chip .material-symbols-outlined,
-.phone.theme-night .c-hero .c-mika2__call .material-symbols-outlined { color: #121212; }
-.phone.theme-night .c-hero .c-mika2__ask { color: #5F6670; }
 
 /* Welcome: the photo has a dark wash, so the wordmark, headline and links are light, not the dark ground. */
 .phone.theme-night.c-welcome > .c-statusbar,
@@ -1781,9 +1255,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
   --tier-ink-2: var(--text-2);
   --tier-seg: rgb(255 255 255 / 0.08);
 }
-.phone.theme-night.c-tiers:not([data-tier="elite"]) .c-tiers__seg { background: var(--tier-seg); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12); }
-.phone.theme-night.c-tiers:not([data-tier="elite"]) .c-tiers__thumb { background: var(--text); }
-.phone.theme-night.c-tiers:not([data-tier="elite"]) .c-tiers__seg-input:checked + .c-tiers__seg-label { color: var(--sheet); }
 
 /* Sign-in and sign-up: fields and code cells are dark tiles with a hairline; the keypad is iOS dark. */
 .phone.theme-night .c-auth__field,
@@ -2041,8 +1512,7 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .phone.theme-night.is-onboard .c-section-title.is-caption,
 .phone.theme-night.is-onboard .c-group__sub,
 .phone.theme-night.is-onboard .c-tiers__note,
-.phone.theme-night.is-onboard .c-tiers__perks-head,
-.phone.theme-night.is-onboard .c-tiers__per { color: rgb(255 255 255 / 0.9); }
+.phone.theme-night.is-onboard .c-tiers__perks-head { color: rgb(255 255 255 / 0.9); }
 .phone.theme-night.is-onboard .c-btn { box-shadow: none; }
 .phone.theme-night.is-onboard .c-btn.plain { background: #FFFFFF; color: #111214; }
 
@@ -2053,13 +1523,7 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .phone.theme-night.is-onboard .c-field__input:focus { box-shadow: inset 0 0 0 2px #111214; outline: none; }
 
 /* Choose card: white segmented control with a black thumb, white perks with white ticks */
-.phone.theme-night.is-onboard .c-tiers__seg { background: rgb(255 255 255 / 0.85); box-shadow: none; }
-.phone.theme-night.is-onboard .c-tiers__seg-label { color: #111214; }
-.phone.theme-night.is-onboard .c-tiers__thumb { background: #111214; box-shadow: none; }
-.phone.theme-night.is-onboard .c-tiers__seg-input:checked + .c-tiers__seg-label { color: #FFFFFF; }
-.phone.theme-night.is-onboard .c-tiers__perk,
-.phone.theme-night.is-onboard .c-tiers__amt,
-.phone.theme-night.is-onboard .c-tiers__price { color: #FFFFFF; }
+.phone.theme-night.is-onboard .c-tiers__perk { color: #FFFFFF; }
 .phone.theme-night.is-onboard .c-tiers__perk .material-symbols-outlined { color: #FFFFFF; }
 .phone.theme-night.is-onboard .c-tiers__bar { background: transparent; box-shadow: none; }
 
@@ -2077,11 +1541,8 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .phone.theme-night.is-onboard .c-field:focus-within { box-shadow: inset 0 0 0 2px #111214; }
 .phone.theme-night.is-onboard .c-field__input,
 .phone.theme-night.is-onboard .c-field__input:focus { background: transparent; box-shadow: none; color: #111214; }
-.phone.theme-night.is-onboard .c-tiers__seg-label { color: #111214 !important; }
-.phone.theme-night.is-onboard .c-tiers__seg-input:checked + .c-tiers__seg-label { color: #FFFFFF !important; }
 /* Pass 16c: dark text in fields, black segment thumb, wash stays teal longer so white text holds to the bottom. */
 .phone.theme-night.is-onboard .c-field__input { color: #111214 !important; -webkit-text-fill-color: #111214; caret-color: #111214; }
-.phone.theme-night.is-onboard.c-tiers .c-tiers__thumb { background: #111214 !important; }
 :root .phone.theme-night.is-onboard {
   background:
     radial-gradient(70% 22% at 0% 100%, rgb(201 119 90 / 0.9) 0%, rgb(201 119 90 / 0) 70%),
@@ -2089,18 +1550,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 }
 /* Pass 16d: card switcher rebuilt in the reference look: a roomy solid white pill track,
    a black pill thumb, dark labels, white on the selected one, breathing room under the title. */
-.phone.theme-night.is-onboard .c-tiers__seg {
-  height: 44px !important; margin: 14px var(--gutter) 6px !important; padding: 4px !important;
-  border-radius: 999px !important; background: #FFFFFF !important; border: 0 !important;
-  box-shadow: 0 6px 18px -10px rgb(10 30 40 / 0.45) !important;
-}
-.phone.theme-night.is-onboard .c-tiers__thumb {
-  top: 4px !important; bottom: 4px !important; left: 4px !important;
-  width: calc((100% - 8px) / 3) !important; border-radius: 999px !important; box-shadow: none !important;
-}
-.phone.theme-night.is-onboard .c-tiers__seg-label { font: 600 15px/1 var(--font) !important; color: #4A5358 !important; }
-.phone.theme-night.is-onboard .c-tiers__seg-input:checked + .c-tiers__seg-label { color: #FFFFFF !important; }
-.phone.theme-night.is-onboard .c-tiers__seg { flex: none !important; }
 :root .phone.theme-night.is-onboard { background-color: #2C5F6E; }
 /* Pass 16e: switcher and big price removed; the card's name sits under it and follows the swipe. */
 .c-tiers__name { margin: 0; text-align: center; font: 700 28px/1.1 var(--font); letter-spacing: var(--track-tight); color: #FFFFFF; }
@@ -2128,48 +1577,9 @@ img.c-logo.is-ink { filter: invert(1) brightness(0.25); }
 /* Explore rework (2026-10-16): spacing + hierarchy only, no content change.
    One rhythm: 32px between sections, 12px title-to-content. Near-you cards
    shorter so "This week" shows on the first screen. */
-.c-explore .c-hero .c-largetitle { padding-bottom: 14px; }
-.c-explore .c-hero .c-search { height: 48px; }
-.c-explore .c-chiprow { padding-top: 4px; padding-bottom: 0; }
-.c-explore .c-chip { height: 36px; }
-.c-explore [data-section] { margin-top: 32px; }
-.c-explore [data-section] .c-section-head { margin: 0 0 12px; }
-.c-explore .c-section-head__title { font-size: 21px; letter-spacing: -0.01em; }
-.c-explore .c-lede { margin-top: -6px; margin-bottom: 12px; }
-.c-explore .c-place-card { width: 216px; }
-.c-explore .c-place-card__photo { height: 248px; border-radius: 20px; }
-.c-explore .c-place-card__name { font-size: 18px; }
-.c-explore .c-event-card { width: 232px; }
-.c-explore .c-event-card__photo { aspect-ratio: 3 / 2; height: auto; }
 
 /* Explore on the reference look (2026-10-16): the registration wash, no sheet,
    no glow, no grain, no gold. Chips follow the button pair: white pill, black when on. */
-:root .phone.theme-night.c-explore {
-  background-color: #24505E;
-  background:
-    radial-gradient(70% 22% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(60% 18% at 100% 100%, rgb(226 165 126 / 0.7) 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #24505E 0%, #2F6574 45%, #3C7584 75%, #4F7F86 100%);
-  --text-2: rgb(255 255 255 / 0.82);
-  --tile: #FFFFFF;
-}
-.phone.c-explore::before { display: none; }
-.phone.c-explore .c-surface { background: transparent; box-shadow: none; }
-.phone.c-explore .c-hero .c-search { box-shadow: none; }
-.phone.c-explore .c-xbar { background: rgb(36 80 94 / 0.92); border-bottom: 0; }
-.phone.c-explore .c-xbar__btn { color: #FFFFFF; }
-.phone.theme-night.c-explore .c-chip { background: #FFFFFF; border-color: #FFFFFF; color: #111214; }
-.phone.theme-night.c-explore .c-chip .c-chip__icon { color: #111214; }
-.phone.theme-night.c-explore .c-chip.is-selected { background: #111214; border-color: #111214; color: #FFFFFF; }
-.phone.theme-night.c-explore .c-chip.is-selected .c-chip__icon { color: #FFFFFF; }
-.phone.c-explore .c-event-card__when { color: #FFFFFF; font-weight: 700; }
-.phone.c-explore .c-story--add { color: #111214; }
-.phone.c-explore .c-story--add .c-story__place { color: rgb(17 18 20 / 0.6); }
-.phone.c-explore .c-story__plus { background: #111214; }
-.phone.c-explore .c-popular__row { border-color: rgb(255 255 255 / 0.25); }
-.phone.theme-night.c-explore .c-tabbar { background: rgb(17 18 20 / 0.82); }
-.phone.theme-night.c-explore .c-tabbar__tab.is-active,
-.phone.theme-night.c-explore .c-tabbar__tab.is-active .c-tabbar__icon { color: #FFFFFF; }
 
 /* Map, minimal (2026-10-16): Airbnb-style price-tag pins in the reference look.
    Pins are white pills with the perk in black ink; the selected one turns black.
@@ -2191,30 +1601,22 @@ img.c-logo.is-ink { filter: invert(1) brightness(0.25); }
 .c-mapx .c-fcard__dir { border: 0; background: #FFFFFF; box-shadow: 0 2px 10px rgb(17 18 20 / 0.16); }
 .c-mapx .c-chip { border: 0; background: #FFFFFF; color: #111214; box-shadow: 0 2px 8px rgb(17 18 20 / 0.12); }
 .c-mapx .c-chip.is-selected { background: #111214; color: #FFFFFF; }
-.c-mapx .c-search { border: 0; box-shadow: 0 2px 12px rgb(17 18 20 / 0.14); }
-.c-mapx .c-map-topbar__list,
 .c-mapx .c-map-controls { border: 0; box-shadow: 0 2px 10px rgb(17 18 20 / 0.14); }
 .c-mapx .c-tabbar__tab.is-active,
 .c-mapx .c-tabbar__tab.is-active .c-tabbar__icon { color: #111214; }
 
 /* Map pass 2: real map colour back, no white bar behind the top controls,
    controls float as slightly see-through white, search text smaller. */
-.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: saturate(1.15) contrast(1.02); }
 .c-mapx .c-map-topbar { background: none; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 0; box-shadow: none; }
-.c-mapx .c-search,
 .c-mapx .c-chip:not(.is-selected),
-.c-mapx .c-map-topbar__list,
 .c-mapx .c-map-controls {
   background: rgb(255 255 255 / 0.82);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
 .c-mapx .c-chip.is-selected { background: rgb(17 18 20 / 0.88); }
-.c-mapx .c-search__input { font-size: 15px; }
-.c-mapx .c-search__input::placeholder { font-size: 15px; }
 html .phone.c-mapx .c-map-topbar { top: 48px; }
 /* Map pass 3: duotone the tiles into the reference palette via #bff-tone (map.html):
    dark ink -> deep teal, water -> sea teal, land -> warm sand. */
-.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: url(#bff-tone); }
 .c-mapx .c-map.is-street .c-fmap { background: #EFE3D6; }
 
 /* Map calm start: dots only, no offer text, no card until a chip or a dot is tapped. */
@@ -2224,34 +1626,10 @@ html .phone.c-mapx .c-map-topbar { top: 48px; }
 
 /* Top section nav (Explore · Feed · Map), RED-style text tabs. Map is home. */
 .u-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.c-topnav-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.c-topnav { display: flex; gap: 22px; }
-.c-topnav a { font-size: 17px; font-weight: 500; color: rgba(255,255,255,.62); text-decoration: none; padding: 8px 0; border-bottom: 2px solid transparent; }
-.c-topnav a[aria-current="page"] { color: #fff; font-weight: 700; border-bottom-color: #fff; }
-.c-topnav__me img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; display: block; }
-html .phone.c-mapx .c-topnav-row { padding: 0 4px 8px 16px; }
-html .phone.c-mapx .c-topnav a { color: rgba(17,18,20,.55); text-shadow: 0 0 8px rgba(255,255,255,.9); }
-html .phone.c-mapx .c-topnav a[aria-current="page"] { color: #111214; border-bottom-color: #111214; }
 
 /* Feed: two-column photo grid of member posts */
-.c-fgrid { display: flex; gap: 8px; padding: 8px 12px 32px; }
-.c-fgrid__col { flex: 1; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-.c-fpost { display: flex; flex-direction: column; gap: 6px; color: #fff; text-decoration: none; }
-.c-fpost__img { width: 100%; border-radius: 10px; object-fit: cover; aspect-ratio: 3/4; display: block; }
-.c-fgrid__col:nth-child(2) .c-fpost:nth-child(odd) .c-fpost__img { aspect-ratio: 4/5; }
-.c-fpost__cap { font-size: 14px; font-weight: 600; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.c-fpost__by { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.8); }
-.c-fpost__face img, .c-fpost__face .c-mono { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; display: grid; place-items: center; font-size: 9px; }
-.c-fpost__name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.c-fpost__likes { display: flex; align-items: center; gap: 2px; }
-.c-fpost__likes .material-symbols-outlined { font-size: 14px; }
 
 /* Facebook-style header: wordmark + search/menu, then an icon row of sections. Replaces the bottom tab bar. */
-.c-fbhead { display: flex; flex-direction: column; gap: 4px; }
-.c-fbhead__top { display: flex; align-items: center; gap: 8px; padding: 4px 16px 0; }
-.c-fbhead__word { flex: 1; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
-.c-fbhead__btn { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / 0.16); color: #fff; text-decoration: none; }
-.c-fbhead__btn .material-symbols-outlined { font-size: 22px; }
 .c-iconnav { display: flex; }
 .c-iconnav a { flex: 1; display: grid; place-items: center; height: 44px; color: rgb(255 255 255 / 0.62); text-decoration: none; border-bottom: 3px solid transparent; }
 .c-iconnav a .material-symbols-outlined { font-size: 26px; }
@@ -2259,44 +1637,27 @@ html .phone.c-mapx .c-topnav a[aria-current="page"] { color: #111214; border-bot
 .c-iconnav a[aria-current="page"] .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
 /* On the map the header has no strip; it sits on the map in dark ink. */
 html .phone.c-mapx .c-map-topbar { top: 0; }
-html .phone.c-mapx .c-map-topbar__row { padding-left: 16px; padding-right: 16px; }
 /* No bottom bar any more: let the screens use the full height. */
-.c-explore .screen-scroll, .c-feedpage .screen-scroll { padding-bottom: 32px; }
-.c-explore .c-hero, .c-feedpage .c-hero { padding-top: 0; }
 html .phone.c-mapx .c-map-controls { top: 276px; }
 
 /* Header, minimal pass: no circles or strip behind anything, thin outline icons, ink follows each screen's background. */
-.c-fbhead { --hd-ink: #fff; --hd-dim: rgb(255 255 255 / 0.6); }
-.c-fbhead__btn { background: none; width: 32px; height: 32px; color: var(--hd-ink); }
-.c-fbhead__word { color: var(--hd-ink); font-weight: 600; font-size: 22px; }
-.c-fbhead .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300; }
 .c-iconnav a { color: var(--hd-dim); border-bottom-width: 2px; }
 .c-iconnav a .material-symbols-outlined { font-size: 24px; }
 .c-iconnav a[aria-current="page"] { color: var(--hd-ink); border-bottom-color: var(--hd-ink); }
 .c-iconnav a[aria-current="page"] .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 500; }
-html .phone.c-mapx .c-fbhead { --hd-ink: #111214; --hd-dim: rgb(17 18 20 / 0.5); padding-top: 48px; margin-bottom: 4px; }
-html .phone.c-mapx .c-fbhead { text-shadow: 0 0 6px #fff, 0 0 12px rgb(255 255 255 / 0.8); }
 
 /* Header pinned in the same place on every section (Map, Feed, Explore, Card, Concierge), so a tab switch
    only swaps what is under it. Raised: tight top row, 40px icon row. */
-.phone .c-fbhead { position: absolute; top: var(--size-statusbar-h); left: 0; right: 0; z-index: 55; gap: 0; padding: 0; margin: 0; }
-html.is-device .phone .c-fbhead, .phone .c-fbhead { top: max(env(safe-area-inset-top, 0px), var(--size-statusbar-h)); }
-.c-fbhead__top { padding: 0 12px 0 16px; height: 36px; }
 .c-iconnav a { height: 40px; }
 .phone:has(> .c-fbhead) .screen-scroll { margin-top: 76px; padding-top: 0; }
 .phone:has(> .c-fbhead) .c-hero { padding-top: 4px; }
-html .phone.c-mapx .c-fbhead { padding-top: 0; margin-bottom: 0; }
 html .phone.c-mapx .c-map-topbar, html.is-device .phone.c-mapx .c-map-topbar { top: calc(var(--size-statusbar-h) + 80px); }
 html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 196px); }
 
 /* Header pass 3: logo instead of the wordmark text; logo and icons 10% smaller. Logo is white on teal, ink on the map. */
-.c-fbhead__logo { display: block; height: 22px; width: auto; filter: brightness(0) invert(1); }
-html .phone.c-mapx .c-fbhead__logo { filter: brightness(0) drop-shadow(0 0 4px #fff); }
-.c-fbhead__btn .material-symbols-outlined { font-size: 20px; }
 .c-iconnav a .material-symbols-outlined { font-size: 22px; }
 html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 140px); }
 .phone:has(> .c-fbhead) .c-hero:not(:has(> :not(.u-sr-only))) { padding: 0; margin: 0; min-height: 0; height: 0; }
-.phone:has(> .c-fbhead) .c-xfeed { margin-top: 0; padding-top: 4px; }
 
 /* Map offers, Airbnb-style: big photo on top, offer tag on the photo, directions as a round button on the photo,
    name / details / offer underneath. The whole card opens the place. No tab bar any more, so it sits low. */
@@ -2316,33 +1677,10 @@ html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 140px);
 /* Feed and Explore: same colours, different layouts of the wash, both drifting slowly. */
 @property --wx { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
 @property --wy { syntax: '<percentage>'; inherits: false; initial-value: 100%; }
-:root .phone.theme-night.c-explore {
-  background:
-    radial-gradient(70% 22% at var(--wx) var(--wy), #C9775A 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(60% 18% at calc(100% - var(--wx)) 100%, rgb(226 165 126 / 0.7) 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #24505E 0%, #2F6574 45%, #3C7584 75%, #4F7F86 100%);
-  animation: wash-explore 14s ease-in-out infinite alternate;
-}
 @keyframes wash-explore { from { --wx: 0%; --wy: 100%; } to { --wx: 40%; --wy: 92%; } }
-:root .phone.theme-night.c-explore.c-feedpage {
-  background:
-    radial-gradient(65% 26% at calc(100% - var(--wx)) var(--wy), rgb(201 119 90 / 0.85) 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(55% 20% at var(--wx) 0%, rgb(226 165 126 / 0.45) 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(0deg, #24505E 0%, #2F6574 50%, #3C7584 100%);
-  animation: wash-feed 14s ease-in-out infinite alternate;
-}
 @keyframes wash-feed { from { --wx: 0%; --wy: 55%; } to { --wx: 35%; --wy: 30%; } }
-@media (prefers-reduced-motion: reduce) { :root .phone.theme-night.c-explore { animation: none; } }
 
 /* Explore top: a warm glow top-right and a lighter teal top-left, so the header area is not flat. */
-:root .phone.theme-night.c-explore:not(.c-feedpage) {
-  background:
-    radial-gradient(75% 20% at calc(100% - var(--wx)) 0%, rgb(226 165 126 / 0.55) 0%, rgb(226 165 126 / 0) 70%),
-    radial-gradient(60% 18% at var(--wx) 4%, rgb(141 179 184 / 0.45) 0%, rgb(141 179 184 / 0) 70%),
-    radial-gradient(70% 22% at var(--wx) var(--wy), #C9775A 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(60% 18% at calc(100% - var(--wx)) 100%, rgb(226 165 126 / 0.7) 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #24505E 0%, #2F6574 45%, #3C7584 75%, #4F7F86 100%);
-}
 .c-iconnav a, .c-iconnav a[aria-current="page"] { border-bottom-color: transparent; }
 
 /* Offer page, Airbnb-style: full-bleed photo, a white body with rounded top that overlaps it, centred title,
@@ -2352,7 +1690,6 @@ html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 140px);
 .c-offerx .c-offer-head.u-gutter { padding-top: 28px; text-align: center; background: none; box-shadow: none; margin: 0; }
 .c-offerx .c-offer-title { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: #111214; }
 .c-offerx .c-offer-tier { color: #6A6D70; margin-top: 4px; }
-.c-offerx .c-oval { margin: 20px 24px 0; padding: 18px 0; background: none; box-shadow: none; border-radius: 0; border-top: 1px solid #E6E6E6; border-bottom: 1px solid #E6E6E6; text-align: center; }
 .c-offerx .c-osec { margin: 0 24px; padding: 24px 0; border-bottom: 1px solid #E6E6E6; }
 .c-offerx .c-osec:last-child { border-bottom: 0; }
 .c-offerx .c-section-title { font-size: 20px; font-weight: 600; color: #111214; margin: 0 0 12px; }
@@ -2366,15 +1703,11 @@ html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 140px);
 .c-obar__price span { text-decoration: underline; text-underline-offset: 3px; }
 .c-obar__price s { color: #6A6D70; font-size: 13px; }
 .c-offerx .c-bottombar .c-btn.primary { flex: none; width: auto; padding: 0 28px; height: 48px; border-radius: 12px; background: #111214; color: #FFFFFF; box-shadow: none; }
-.c-offerx .c-oval__price { justify-content: center; }
 .c-offerx .c-osteps li + li, .c-offerx .c-ofine li + li { border-top: 0; box-shadow: none; }
 .c-offerx .c-osteps li::after, .c-offerx .c-ofine li::after, .c-offerx .c-osteps li::before { display: none; }
-.c-fbhead__logo { height: 24.2px; }
 
 /* Header raised to the max (2026-10-17): 30px logo row; on the phone app it sits right under the phone's own status bar
    (the prototype's fake status bar is hidden there), so content and map chips follow it up. */
-.c-fbhead__top { height: 30px; align-items: center; }
-html.is-device .phone .c-fbhead { top: env(safe-area-inset-top, 0px); }
 .phone:has(> .c-fbhead) .screen-scroll { margin-top: 70px; }
 html .phone.c-mapx .c-map-topbar { top: calc(var(--size-statusbar-h) + 74px); }
 html .phone.c-mapx .c-map-controls { top: calc(var(--size-statusbar-h) + 134px); }
@@ -2382,47 +1715,10 @@ html.is-device .phone.c-mapx .c-map-topbar { top: calc(env(safe-area-inset-top, 
 html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top, 0px) + 134px); }
 
 /* Experiment (2026-10-17): Explore on cream instead of teal. Dark ink, white chips with a hairline. Feed stays teal. */
-:root .phone.theme-night.c-explore:not(.c-feedpage) {
-  animation: none;
-  background: linear-gradient(180deg, #F7F1E8 0%, #F2E8DA 60%, #EDDFCB 100%);
-  --text: #111214; --text-2: rgb(17 18 20 / 0.62); --hairline: rgb(17 18 20 / 0.08);
-  color: #111214;
-}
-.phone.c-explore:not(.c-feedpage) > .c-statusbar { color: #111214; }
-.phone.c-explore:not(.c-feedpage) .c-fbhead { --hd-ink: #111214; --hd-dim: rgb(17 18 20 / 0.45); }
-.phone.c-explore:not(.c-feedpage) .c-fbhead__logo { filter: brightness(0); }
-.phone.theme-night.c-explore:not(.c-feedpage) .c-chip { border: 1px solid rgb(17 18 20 / 0.12); }
-.phone.c-explore:not(.c-feedpage) .c-event-card__when { color: #111214; }
-.phone.c-explore:not(.c-feedpage) .c-xbar { background: rgb(247 241 232 / 0.94); }
-.phone.c-explore:not(.c-feedpage) .c-xbar__btn { color: #111214; }
 
 /* Cream Explore, gradients back (2026-10-17): the same drifting sand, light-teal and terracotta wash as before, on cream. */
-:root .phone.theme-night.c-explore:not(.c-feedpage) {
-  background:
-    radial-gradient(75% 20% at calc(100% - var(--wx)) 0%, rgb(226 165 126 / 0.6) 0%, rgb(226 165 126 / 0) 70%),
-    radial-gradient(60% 18% at var(--wx) 4%, rgb(141 179 184 / 0.5) 0%, rgb(141 179 184 / 0) 70%),
-    radial-gradient(70% 22% at var(--wx) var(--wy), rgb(201 119 90 / 0.6) 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(60% 18% at calc(100% - var(--wx)) 100%, rgb(226 165 126 / 0.75) 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #F7F1E8 0%, #F2E8DA 60%, #EDDFCB 100%);
-  animation: wash-explore 14s ease-in-out infinite alternate;
-}
-@media (prefers-reduced-motion: reduce) { :root .phone.theme-night.c-explore:not(.c-feedpage) { animation: none; } }
 
 /* Feed on cream too (2026-10-17), with its own arrangement of the drifting wash. Dark ink like Explore. */
-:root .phone.theme-night.c-explore.c-feedpage {
-  background:
-    radial-gradient(65% 26% at calc(100% - var(--wx)) var(--wy), rgb(201 119 90 / 0.5) 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(55% 20% at var(--wx) 0%, rgb(226 165 126 / 0.55) 0%, rgb(226 165 126 / 0) 70%),
-    radial-gradient(60% 22% at var(--wx) 100%, rgb(141 179 184 / 0.5) 0%, rgb(141 179 184 / 0) 70%),
-    linear-gradient(0deg, #EDDFCB 0%, #F2E8DA 50%, #F7F1E8 100%);
-  --text: #111214; --text-2: rgb(17 18 20 / 0.62); --hairline: rgb(17 18 20 / 0.08);
-  color: #111214;
-}
-.phone.c-feedpage > .c-statusbar { color: #111214; }
-.phone.c-feedpage .c-fbhead { --hd-ink: #111214; --hd-dim: rgb(17 18 20 / 0.45); }
-.phone.c-feedpage .c-fbhead__logo { filter: brightness(0); }
-.c-feedpage .c-fpost { color: #111214; }
-.c-feedpage .c-fpost__by { color: rgb(17 18 20 / 0.62); }
 
 /* ===== Navigation v3 (2026-10-17) =====
    A labelled bottom tab bar on every main section (Map, Discover, Card, Concierge, Me). Feed and Explore are
@@ -2488,20 +1784,13 @@ html.is-device .phone .c-dhead { top: env(safe-area-inset-top, 0px); }
 .c-dtabs__tab[aria-selected="true"]::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; border-radius: 1px; background: #111214;
 }
-.c-dhead__btn { width: 48px; display: grid; place-items: center; padding: 0; border: 0; background: none; color: #111214; cursor: pointer; }
-.c-dhead__btn[hidden] { display: none; }
-.c-dhead__btn .material-symbols-outlined { font-size: 24px; font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
 
 /* Stories: the two-column grid in dark ink. */
-.c-discover .c-fgrid { padding-top: 12px; }
-.c-discover .c-fpost { color: #111214; }
-.c-discover .c-fpost__by { color: #5F6670; }
 
 /* Places: white chips with a hairline; selected is black. */
 .c-discover .c-chiprow { padding-top: 12px; }
 html .phone.c-discover .c-chip { background: #FFFFFF; border: 1px solid rgb(17 18 20 / 0.12); color: #111214; }
 html .phone.c-discover .c-chip.is-selected { background: #111214; border-color: #111214; color: #FFFFFF; }
-.c-discover .c-place-card__photo { position: relative; }
 .c-dempty { padding: 32px 20px; text-align: center; font-size: 15px; line-height: 20px; color: #5F6670; }
 
 /* Events: one column, photo on top. */
@@ -2596,7 +1885,6 @@ html .phone.c-discover .c-lcard .c-xbadge { color: #15803D; }
    Plainer line icons than Material Symbols, about 10% smaller. Filled = selected or saved. The three facts on
    large cards drop their coloured squares: the icon itself carries the colour. */
 html .phone .c-tabbar--flat .c-tabbar__icon { font-size: 22px; line-height: 1; }
-.c-dhead__btn .ph { font-size: 22px; }
 html .phone.c-discover .c-chip .c-chip__icon { font-size: 15px; }
 .c-savebtn .ph, .c-savebtn .ph-fill { font-size: 18px; }
 .c-star { font-size: 12px; vertical-align: -1px; color: #C98A12; }
@@ -2616,7 +1904,6 @@ html .phone.theme-night .c-tabbar--flat .c-tabbar__tab.is-active,
 html .phone.theme-night .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon,
 html .phone.theme-elite .c-tabbar--flat .c-tabbar__tab.is-active,
 html .phone.theme-elite .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon { color: #E8590C; }
-.c-dhead__btn .ph-light { font-size: 24px; }
 html .phone.c-discover .c-chip .c-chip__icon { font-size: 16px; }
 
 .c-savebtn { top: 6px; right: 6px; width: 36px; height: 36px; border-radius: 0; background: none; }
@@ -2639,14 +1926,6 @@ html .phone.c-discover .c-chip .c-chip__icon { font-size: 16px; }
   font: 400 15px/20px var(--font); color: #5F6670;
 }
 .c-dcompose__field i { font-size: 22px; color: #111214; }
-
-.c-discover .c-fpost__by { gap: 8px; }
-.c-discover .c-fpost__face img, .c-discover .c-fpost__face .c-mono { width: 28px; height: 28px; font-size: 11px; }
-.c-fpost__who { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.c-discover .c-fpost__name { font: 600 13px/16px var(--font); color: #111214; }
-.c-fpost__stats { display: flex; align-items: center; gap: 3px; font: 400 12px/16px var(--font); color: #5F6670; }
-.c-fpost__stats i { font-size: 14px; }
-.c-fpost__stats i + i, .c-fpost__stats .c-fpost__talk { margin-left: 8px; }
 
 /* ===== New story + Story page: flat and native (2026-10-17) =====
    Flat paper with no wash. New story is plain rows on the page with Share in the top bar, like Instagram:
@@ -2767,8 +2046,6 @@ html.is-device .phone.c-cardwhite .c-dhead { background-position: center calc(-1
 .c-dhead__title { margin: 0; align-self: center; font: 600 17px/22px var(--font); color: #111214; }
 .c-cardwhite .c-hero { position: static; padding-top: 24px; opacity: 1; transform: none; color: #111214; }
 .c-cardwhite .c-cardstage::before { display: none; }       /* the orange glow behind the card reads as a smudge on white */
-.c-cardwhite .c-cardstage__id { color: #5F6670; }
-.c-cardwhite .c-cardstage__no { color: #111214; }
 .c-cardwhite .c-action { color: #111214; font-weight: 500; }
 .c-cardwhite .c-action__btn {
   border: 1px solid rgb(17 18 20 / 0.12); background: #FFFFFF; color: #111214;
@@ -2825,7 +2102,6 @@ html .phone.c-mapx .c-chip.is-selected { border-color: #111214; background: #111
    #bw-tone (map.html) turns the tiles grey and lifts them: land near white, sea light grey so the coast still shows,
    labels dark grey. Calm dots are ink; the picked dot turns brand orange, the app's one accent.
    Satellite stays in colour. */
-.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: url(#bw-tone); }
 .c-mapx .c-map.is-street .c-fmap { background: #F5F5F5; }
 .c-mapx.is-calm .c-fpin__badge { background: #111214; }
 .c-mapx.is-calm .c-fpin.is-selected .c-fpin__badge { background: #E8590C; }
@@ -2834,7 +2110,6 @@ html .phone.c-mapx .c-chip.is-selected { border-color: #111214; background: #111
    Pure black and white felt flat and hard to read (the user), so the street map keeps a little colour through
    #quiet-tone (map.html): light warm-grey land, white roads, soft blue-grey sea, soft clay highways, ink labels.
    Dots stay ink and the picked dot brand orange. Satellite stays in colour. */
-.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: url(#quiet-tone); }
 .c-mapx .c-map.is-street .c-fmap { background: #F1F0EC; }
 
 /* ===== Offer page: quiet, Apple-like (2026-10-17) =====
@@ -2939,9 +2214,6 @@ html .phone.c-mapx .c-chip.is-selected { border-color: #111214; background: #111
 .c-merow__chev { font-size: 18px; color: #9AA0A6; }
 a.c-merow:active { opacity: 0.5; }
 .c-mepage .c-minicard { width: 26px; height: 40px; box-shadow: none; }
-.c-mepage .c-walls__opts { gap: 8px; }
-.c-mepage .c-walls__opt { width: 24px; height: 24px; }
-.c-mepage .c-walls__opt[aria-checked="true"] { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 3px #111214; }
 .c-mesignout {
   display: block; margin: 32px 20px 0; padding: 16px 0; border-top: 1px solid rgb(17 18 20 / 0.08);
   font: 500 16px/22px var(--font); color: #D93025; text-align: center; text-decoration: none;
@@ -2972,7 +2244,6 @@ a.c-merow:active { opacity: 0.5; }
 .c-cgask span { flex: 1; }
 .c-cgask i { font-size: 22px; color: #111214; }
 .c-cgask:active { opacity: 0.6; }
-.c-cgquick { grid-template-columns: repeat(3, 1fr); }
 
 .c-cgsec { display: flex; align-items: baseline; justify-content: space-between; margin: 40px 20px 0; }
 .c-cgsec__title { margin: 0; font: 700 22px/28px var(--font); letter-spacing: -0.01em; color: #111214; }
@@ -2984,7 +2255,6 @@ a.c-merow:active { opacity: 0.5; }
 .c-cgday .c-mehead { margin-top: 24px; }
 .c-merow.c-cgstop { align-items: flex-start; padding: 14px 0; }
 .c-cgstop .c-merow__lead { padding-top: 15px; }
-.c-cgstop__time { font: 400 13px/18px var(--font); color: #5F6670; font-variant-numeric: tabular-nums; }
 .c-cgstop__name { font: 600 15px/20px var(--font); color: #111214; }
 .c-cgstop__status {
   align-self: flex-start; margin-top: 8px; padding: 3px 10px; border: 1px solid rgb(17 18 20 / 0.12);
@@ -3160,9 +2430,6 @@ html .phone.c-cgchat .c-reply:nth-child(6) { animation-delay: 350ms; }
 .c-placewhite .c-bottombar .c-btn.primary.is-full { flex: 1; width: 100%; }
 .c-placewhite .c-obar__price { flex: none; }
 .c-placewhite .c-obar__price span { white-space: nowrap; }
-.c-pmeta { display: block; }
-.c-pmeta i { margin-right: 4px; font-size: 13px; vertical-align: -1px; color: #111214; }
-.c-pmeta [data-rating] { font-weight: 600; color: #111214; }
 .c-pperk {
   display: flex; align-items: center; gap: 14px; margin: 20px 24px 0; padding: 14px 0;
   border-top: 1px solid rgb(17 18 20 / 0.08); border-bottom: 1px solid rgb(17 18 20 / 0.08);
@@ -3178,26 +2445,10 @@ html .phone.c-cgchat .c-reply:nth-child(6) { animation-delay: 350ms; }
 .c-pperk:active { opacity: 0.5; }
 .c-pabout { margin: 0; font: 400 15px/22px var(--font); color: #111214; }
 .c-placewhite .c-osec .c-carousel { margin: 0 -24px; padding: 0 24px; scroll-padding-inline: 24px; }
-.c-placewhite .c-room { width: 220px; color: #111214; }
-.c-placewhite .c-room__photo { border-radius: 12px; }
-.c-placewhite .c-room__name { margin-top: 10px; font: 600 15px/20px var(--font); letter-spacing: 0; }
-.c-placewhite .c-room__sub { margin-top: 2px; font: 400 13px/18px var(--font); color: #5F6670; }
-.c-placewhite .c-room__price { margin-top: 6px; font: 400 13px/18px var(--font); color: #5F6670; }
-.c-placewhite .c-room__price b { font: 600 15px/20px var(--font); color: #111214; }
 .c-pmap {
   position: relative; display: block; height: 150px; overflow: hidden;
   border: 1px solid rgb(17 18 20 / 0.08); border-radius: 12px; background: #EEF0F1;
 }
-.c-pinfo { margin-top: 4px; }
-.c-pinfo__row {
-  position: relative; display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 8px 0;
-  font: 400 15px/21px var(--font); color: #111214; text-decoration: none;
-}
-.c-pinfo__row + .c-pinfo__row::before { content: ''; position: absolute; top: 0; left: 36px; right: 0; border-top: 1px solid rgb(17 18 20 / 0.08); }
-.c-pinfo__row > i:first-child { flex: none; width: 22px; font-size: 22px; }
-.c-pinfo__text { flex: 1; min-width: 0; }
-.c-pinfo__chev { font-size: 18px; color: #9AA0A6; }
-a.c-pinfo__row:active { opacity: 0.5; }
 
 /* Booking pages */
 html .phone.c-bkpage .c-req-bar { background: #FFFFFF; border-top: 1px solid rgb(17 18 20 / 0.08); }
@@ -3383,7 +2634,6 @@ html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top
    Esri raster tiles looked low-res on phone screens. The street map is now OpenFreeMap vectors drawn by MapLibre
    (map-vector.js recolours them: cool grey land, white roads, sea #9DCDF0, ink labels, no third-party POIs),
    so text stays sharp at every zoom. The #quiet-tone filter is no longer applied to street tiles. */
-.c-mapx .c-map.is-street .c-fmap .leaflet-tile-pane { filter: none; }
 
 /* ===== Map: search (2026-10-18) =====
    Round magnifier at the left of the filter row. Tapping it floats a Spotlight-style rounded search bar in the
@@ -3632,9 +2882,6 @@ html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top
 
 /* Hours and location rows */
 .c-offerwhite .c-pmap { margin-bottom: 4px; }
-.c-offerwhite .c-pinfo__row { min-height: 56px; font: 400 16px/22px var(--font); }
-.c-offerwhite .c-pinfo__row > i:first-child { width: 30px; font-size: 24px; }
-.c-offerwhite .c-pinfo__row + .c-pinfo__row::before { left: 44px; }
 
 /* Offer page */
 .c-offerwhite .c-osteps li { font: 400 16px/22px var(--font); }
@@ -3661,7 +2908,6 @@ html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top
 .c-plstories .c-dcompose:active { opacity: 0.6; }
 
 /* The street thumbnail in the Map tab's colours (the old grey-out filter was for the raster tiles). */
-.c-pmap .c-mapthumb__live .leaflet-tile-pane { filter: none; }
 .c-plstories .c-spost__head, .c-plstories .c-spost__counts { padding-left: 20px; padding-right: 20px; }
 .c-plstories .c-spost__text { margin-left: 20px; margin-right: 20px; }
 .c-plstories .c-spost__actions { margin: 0 20px; }
@@ -3759,3 +3005,20 @@ html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top
 html .phone.c-bkpage .c-req-bar .c-btn.primary {
   min-height: 48px; height: 48px; min-width: 120px; padding: 0 22px; font-size: 16px; font-weight: 600;
 }
+
+/* "From ₱2,340 / jet ski · …" under a listing's name (places priced per unit) */
+.c-plede { margin: var(--space-1) 0 0; font: var(--fw-regular) var(--fs-callout)/var(--lh-snug) var(--font); color: var(--text-2); }
+.c-plede b { color: var(--text); font-weight: var(--fw-semibold); }
+
+/* Restaurant tables: two buttons in the listing bar, the sheet's note, the request pages. */
+.c-bottombar.is-two { display: flex; gap: 10px; }
+.phone .c-bottombar.is-two .c-btn { flex: 1 1 0; width: auto; min-width: 0; padding: 0 12px; }
+.c-tblcard { display: inline-flex; align-items: center; justify-content: center; background: #FFFFFF; color: #121212; border: 1px solid rgb(17 18 20 / 0.14); box-shadow: none; }
+.c-tblnote { font: 400 13px/18px var(--font); color: #5F6670; padding: 14px 20px 4px; margin: 0; }
+.c-tblrows { width: 100%; max-width: 320px; margin-top: 24px; }
+.c-tblsample { margin-top: auto; padding-top: 24px; display: grid; gap: 6px; justify-items: center; font: 400 12px/16px var(--font); color: #5F6670; }
+.c-staff.c-tblreq { display: grid; align-content: start; gap: 16px; padding: 12px 20px 28px; }
+.c-tblreq .c-member-found { margin: 0; }
+.c-tblreq h2 { font: 700 22px/28px var(--font); margin: 0; }
+.c-tblreq .c-receipt { margin: 0; }
+.c-tblreq__actions { display: grid; gap: 8px; margin-top: 8px; }

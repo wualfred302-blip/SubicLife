@@ -116,6 +116,8 @@
 <script src="data-e.js"></script>
 <script src="saved.js"></script>
 <script src="app.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
 <script>
 (function () {
   var F = window.FEED;
@@ -177,11 +179,9 @@
 
   // Places: Near you is a row of small cards, Popular with members a column of large ones (both like Airbnb).
   // Prices match the place page: the cheapest room or tour at the member rate.
-  var NEAR = [
-    { place: 'lighthouse', cats: ['hotels'] },
-    { place: 'ocean', cats: ['water-sports', 'nature'] },
-    { place: 'camayan', cats: ['hotels', 'beaches'] }
-  ];
+  // Every partner, nearest first, so each one can be found here as well as on the map.
+  var NEAR = Object.keys(PLACES).map(function (id) { return { place: id, cats: PLACES[id].categories }; })
+    .sort(function (a, b) { return parseFloat(PLACES[a.place].distance) - parseFloat(PLACES[b.place].distance); });
   function peso(n) { return '₱' + n.toLocaleString('en-US'); }
   function fromPrice(place) {
     var rooms = place.rooms || [];
@@ -200,7 +200,8 @@
       '<span class="c-lcard__photo"><img src="' + place.thumb + '" alt=""><span class="c-xbadge">' + esc(place.offerShort) + '</span></span>' +
       '<span class="c-lcard__name">' + esc(place.name) + '</span>' +
       '<span class="c-lcard__meta">' + esc(place.category) + ' · ' + esc(place.distance) + '</span>' +
-      '<span class="c-lcard__meta"><b>' + peso(fromPrice(place)) + '</b> ' + place.unit + ' · <i class="ph-fill ph-star c-star" aria-hidden="true"></i> ' + esc(place.rating) + '</span>' +
+      '<span class="c-lcard__meta">' + (place.bookable ? '<b>' + peso(fromPrice(place)) + '</b> ' + (place.per ? place.per[0] : place.unit) + ' · ' : '') +
+        '<i class="ph-fill ph-star c-star" aria-hidden="true"></i> ' + esc(place.rating) + '</span>' +
       '</a>' + saveBtn(place) + '</div>';
   }
   function stat(icon, tone, value, label) {
@@ -218,7 +219,7 @@
       '<span class="c-bigcard__head"><span class="c-bigcard__title">' +
       '<span class="c-bigcard__name">' + esc(place.name) + '</span>' +
       '<span class="c-bigcard__meta">' + esc(place.category) + ' · ' + esc(place.area) + '</span></span>' +
-      '<span class="c-bigcard__offer"><span class="c-perkmark" aria-hidden="true"></span>' + esc(p.offer) + '</span></span>' +
+      '<span class="c-bigcard__offer"><span class="c-perkmark" aria-hidden="true"></span>' + esc(p.offer || place.offerShort) + '</span></span>' +
       '<span class="c-bigcard__stats">' + stat('ph-light ph-navigation-arrow', 'blue', place.distance, 'Away') + stat('ph-fill ph-star', 'gold', place.rating, 'Rating') +
       stat('ph-light ph-clock', 'indigo', place.closes.replace('closes ', ''), 'Closes') + '</span>' +
       '</a>' + saveBtn(place) + '</div>';

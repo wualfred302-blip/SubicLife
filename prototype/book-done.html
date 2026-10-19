@@ -64,6 +64,8 @@
 
 </div>
 <script src="data-a.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
 <script>
   (function () {
     var p = placeFor(queryParam('p') || 'lighthouse');
@@ -77,7 +79,10 @@
     var trip = p.unit === 'trip';
     var tix = p.kind === 'tickets';
     var tm = tix && queryParam('t'), hrs = r.hours, meet = p.meet || 'the gate';
-    var hm = function (t, add) { return String(Number(t.slice(0, 2)) + (add || 0)).padStart(2, '0') + t.slice(2); };
+    var hm = function (t, add) {
+      var m = Number(t.slice(0, 2)) * 60 + Number(t.slice(2)) + Math.round((add || 0) * 60);
+      return String(Math.floor(m / 60)).padStart(2, '0') + String(m % 60).padStart(2, '0');
+    };
     var plural = function (n, one, many) { return n + ' ' + (n === 1 ? one : many); };
 
     // Stays carry their dates, party and free night from Book; trips and old links fall back to the sample day.
@@ -91,7 +96,7 @@
     var day = tix && (parse(queryParam('d')) || new Date(2026, 9, 18));
     if (tix) {
       // A ticket's price is for the party: adults at the adult rate, children at the child rate where there is one.
-      var kid = r.child || r.rate, cut = function (x) { return Math.round(x * p.discount / 100); };
+      var kid = r.child || r.rate, per = r.per || p.per, cut = function (x) { return Math.round(x * p.discount / 100); };
       r = { name: r.name, rate: r.rate * adults + kid * kids, saved: cut(r.rate) * adults + cut(kid) * kids };
     }
     var off = tix ? r.saved : Math.round(r.rate * p.discount / 100) * nights;
@@ -104,7 +109,7 @@
     $('[data-thumb]').src = p.thumb;
     $('[data-name]').textContent = p.name;
     $('[data-sub]').textContent = tix
-      ? r.name + ' · ' + plural(adults + kids, 'guest', 'guests')
+      ? r.name + ' · ' + (per ? plural(adults, per[0], per[1]) : plural(adults + kids, 'guest', 'guests'))
       : checkIn
       ? r.name + ' · ' + plural(nights, 'night', 'nights') + ' · ' + plural(adults + kids, 'guest', 'guests')
       : r.name + ' · 2 guests';
@@ -115,7 +120,8 @@
     $('[data-rows]').innerHTML = tix
       ? row('Date', dayName(day), 'c-bkval') +
         (tm ? row('Time', fmtClock(tm) + ' to ' + fmtClock(tm, hrs), 'c-bkval') : '') +
-        row('Guests', plural(adults, 'adult', 'adults') + (kids ? ', ' + plural(kids, 'child', 'children') : ''), 'c-bkval') +
+        (per ? row(per[2], plural(adults, per[0], per[1]), 'c-bkval')
+          : row('Guests', plural(adults, 'adult', 'adults') + (kids ? ', ' + plural(kids, 'child', 'children') : ''), 'c-bkval')) +
         row('Booking code', p.code, 'c-bkval c-bkcode') +
         row('Paid with GCash', fmtPeso(total), 'c-bkval')
       : row(trip ? p.dates[0] : p.dates[0] + '<span class="c-merow__sub">From 2 PM</span>', checkIn ? dayName(checkIn) : p.dates[2], 'c-bkval') +

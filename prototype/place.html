@@ -113,6 +113,8 @@
 <script src="stay.js"></script>
 <script src="saved.js"></script>
 <script src="map-data.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
@@ -125,20 +127,27 @@
 
     // Photo gallery: swipe through, with a "1 / 4" counter like Photos.
     var photos = p.photos || [p.hero];
+    // A strong video opens the gallery; any other video comes right after the first photo.
+    if (p.video) photos = p.videoFirst ? [p.video].concat(photos) : photos.slice(0, 1).concat([p.video], photos.slice(1));
     var gal = $('[data-gallery]'), count = $('[data-count]');
     gal.innerHTML = photos.map(function (src, i) {
+      if (/\.mp4$/.test(src)) return '<video src="' + src + '" poster="' + p.poster + '" autoplay muted loop playsinline aria-label="' + p.name + ', video"></video>';
       return '<img src="' + src + '" alt="' + p.name + ', photo ' + (i + 1) + '"' + (i ? ' loading="lazy"' : '') + '>';
     }).join('');
     function syncCount() { count.textContent = (Math.round(gal.scrollLeft / gal.clientWidth) + 1) + ' / ' + photos.length; }
     count.hidden = photos.length < 2;
     gal.addEventListener('scroll', syncCount, { passive: true });
-    document.querySelector('main').style.setProperty('--ph', 'url(' + photos[0] + ')');
+    document.querySelector('main').style.setProperty('--ph', 'url(' + (p.videoFirst ? p.poster : photos[0]) + ')');
     syncCount();
     $('[data-name]').textContent = p.name;
     $('[data-barname]').textContent = p.name;
     var phone = document.querySelector('.phone'), main = document.querySelector('main');
     main.addEventListener('scroll', function () { phone.classList.toggle('is-scrolled', main.scrollTop > 230); }, { passive: true });
     $('[data-meta]').textContent = p.category + ' · ' + p.area;
+    if (p.per) {
+      var lo = Math.min.apply(null, p.rooms.map(function (r) { return r.rate; }));
+      $('[data-meta]').insertAdjacentHTML('afterend', '<p class="c-plede">From <b>' + fmtPeso(lo - Math.round(lo * p.discount / 100)) + '</b> / ' + p.per[0] + (p.lede ? ' · ' + p.lede : '') + '</p>');
+    }
     // The same three facts as Discover's Popular cards: blue distance, gold rating, indigo closing time.
     var fact = function (icon, tone, value, label) {
       return '<span class="c-bigcard__stat"><i class="' + icon + ' c-bigcard__icon is-' + tone + '" aria-hidden="true"></i>' +
@@ -164,7 +173,11 @@
       // A day pass is like a zoo ticket: open daily, never sold out, so nothing to check. The listing lists the
       // tickets at member prices; tapping one opens what it includes, a row of days and how many, then Book.
       var tix = p.rooms, tf = SLStay.fmt, tsec = $('[data-rooms-sec]');
-      var tstate = { day: tf.parse(queryParam('d')), time: queryParam('t') || '', adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0 };
+      var tstate = { day: tf.parse(queryParam('d')), time: queryParam('t') || '', adults: Number(queryParam('a')) || (p.per ? 1 : 2), kids: Number(queryParam('c')) || 0 };
+      // A ticket can be priced by something other than people (Zoobic's family package is priced a package of 5), so its
+      // own per wins. People and packages keep separate counts, so 2 adults don't turn into 2 packages.
+      var perOf = function (t) { return t.per || p.per; }, kindOf = function (t) { return perOf(t) ? perOf(t)[0] : ''; };
+      var tkind = kindOf(tix[Number(queryParam('room'))] || {}), tcounts = {};
       // No bottom bar: the tickets are the way in, and a bar pointing back at them would only repeat them.
       $('.c-bottombar').style.display = 'none';
       tsec.hidden = false;
@@ -173,7 +186,7 @@
       var tprice = function (t) {
         return t.child
           ? fmtPeso(member(t.rate)) + '<span class="c-plroom__unit"> adult · </span>' + fmtPeso(member(t.child)) + '<span class="c-plroom__unit"> child</span>'
-          : fmtPeso(member(t.rate)) + '<span class="c-plroom__unit"> / person</span> <s>' + fmtPeso(t.rate) + '</s>';
+          : fmtPeso(member(t.rate)) + '<span class="c-plroom__unit"> / ' + (perOf(t) ? perOf(t)[0] : 'person') + '</span> <s>' + fmtPeso(t.rate) + '</s>';
       };
       $('[data-rooms]').innerHTML = tix.map(function (t, i) {
         return '<button class="c-merow c-plroom c-pltix" type="button" data-tix="' + i + '">' +
@@ -206,7 +219,10 @@
       var monthOf = function (x) { return new Date(x.getFullYear(), x.getMonth(), 1); };
       var tview = monthOf(tstate.day || SLStay.today);
       var drawSheet = function () {
-        var t = tix[topen], s = tstate, d = s.day, ppl = s.adults + s.kids;
+        var t = tix[topen], s = tstate, d = s.day, ppl = s.adults + s.kids, per = perOf(t);
+        // A ticket that must be bought ahead (t.ahead days) can't be picked for today.
+        var from = tf.add(SLStay.today, t.ahead || 0);
+        if (d && d < from) s.day = d = null;
         // Lessons with start times ask for one before Book.
         var sl = t.slots, tm = sl && sl.indexOf(s.time) > -1 ? s.time : '';
         if (t.max && ppl > t.max) { s.adults = ppl = t.max; s.kids = 0; }
@@ -220,7 +236,7 @@
             return '<li><i class="ph-light ph-' + f[0] + '" aria-hidden="true"></i>' + f[1] + '</li>';
           }).join('') + '</ul>' +
           tlist('Includes', t.incl, 'check') + tlist('Good to know', (t.know || []).concat(p.ticketNote || []), 'info') +
-          '<p class="c-mehead">When are you going?</p><div class="c-tixcal">' + SLStay.month(tview, d) + '</div>' +
+          '<p class="c-mehead">When are you going?</p><div class="c-tixcal">' + SLStay.month(tview, d, from) + '</div>' +
           (sl ? '<p class="c-mehead">What time?</p><div class="c-tixslots">' + sl.map(function (x) {
               return '<button class="c-tixslot" type="button" data-slot="' + x + '" aria-pressed="' + (x === tm) + '">' +
                 fmtClock(x) + '<span>to ' + fmtClock(x, t.hours) + '</span></button>';
@@ -228,10 +244,10 @@
           '<p class="c-mehead">How many?</p><div class="c-melist c-cgform">' +
             (t.child
               ? tstep('a', 'Adults', p.ages[0], s.adults, 1) + tstep('c', 'Children', p.ages[1], s.kids, 0)
-              : tstep('g', 'Guests', t.who || 'Per person', ppl, 1)) +
+              : tstep('g', per ? per[2] : 'Guests', t.who || 'Per person', ppl, 1)) +
           '</div>';
         body.scrollTop = top0;
-        var who = t.child ? tf.party(s.adults, s.kids) : tf.plural(ppl, 'guest', 'guests');
+        var who = t.child ? tf.party(s.adults, s.kids) : tf.plural(ppl, per ? per[0] : 'guest', per ? per[1] : 'guests');
         var ready = d && (!sl || tm);
         var go = ready ? 'book.html?p=' + p.id + '&room=' + topen + '&d=' + tf.iso(d) + '&a=' + (t.child ? s.adults : ppl) + '&c=' + (t.child ? s.kids : 0) +
           (tm ? '&t=' + tm : '') : '';
@@ -245,6 +261,12 @@
         var b = e.target.closest('[data-tix]');
         if (!b) return;
         topen = Number(b.dataset.tix); topener = b;
+        var k = kindOf(tix[topen]);
+        if (k !== tkind) {
+          tcounts[tkind] = [tstate.adults, tstate.kids];
+          var c = tcounts[k] || [k ? 1 : 2, 0];
+          tstate.adults = c[0]; tstate.kids = c[1]; tkind = k;
+        }
         drawSheet();
         tsheet.hidden = false;
         $('[data-tixbody]').scrollTop = 0;
@@ -407,6 +429,64 @@
 
     // Places you don't book show the card; bookable ones set their button above.
     if (!p.bookable) { action.textContent = 'Show my card'; action.href = 'card.html'; }
+
+    // Restaurant tables: an open restaurant gets "Reserve a table" beside "Show my card". The sheet asks the day,
+    // a time and how many, then sends the request.
+    if (!p.bookable && p.categories.indexOf('food') > -1 && p.closes !== 'Closed') {
+      var tf = SLStay.fmt, tb = { day: null, time: '', n: 2 };
+      var tbv = new Date(SLStay.today.getFullYear(), SLStay.today.getMonth(), 1);
+      var TIMES = ['1800', '1830', '1900', '1930', '2000', '2030'];  // SAMPLE: the restaurant's real seating times
+      action.textContent = 'Reserve a table';
+      action.href = '#table';
+      action.insertAdjacentHTML('beforebegin', '<a class="c-btn c-tblcard" href="card.html">Show my card</a>');
+      action.parentNode.classList.add('is-two');
+      document.querySelector('.phone .c-homeindicator').insertAdjacentHTML('beforebegin',
+        '<div class="c-sheet c-bksheet c-tixsheet" data-tblsheet role="dialog" aria-modal="true" aria-labelledby="tbl-title" hidden>' +
+          '<button class="c-sheet__scrim" type="button" data-tblclose aria-label="Close"></button>' +
+          '<div class="c-sheet__panel"><div class="c-sheet__grabber" aria-hidden="true"></div>' +
+            '<div class="c-tixsheet__body" data-tblbody></div><div class="c-bksheet__foot" data-tblfoot></div></div>' +
+        '</div>');
+      var tsh = $('[data-tblsheet]');
+      var drawTable = function () {
+        var body = $('[data-tblbody]'), top0 = body.scrollTop, ready = tb.day && tb.time;
+        body.innerHTML =
+          '<div class="c-bksheet__head"><h2 class="c-bksheet__title" id="tbl-title" tabindex="-1">Reserve a table</h2>' +
+            '<p class="c-bksheet__sub">' + p.name + ' · ' + p.area + '</p></div>' +
+          '<p class="c-mehead">When?</p><div class="c-tixcal">' + SLStay.month(tbv, tb.day) + '</div>' +
+          '<p class="c-mehead">What time?</p><div class="c-tixslots">' + TIMES.map(function (x) {
+            return '<button class="c-tixslot" type="button" data-tbslot="' + x + '" aria-pressed="' + (x === tb.time) + '">' + fmtClock(x) + '</button>';
+          }).join('') + '</div>' +
+          '<p class="c-mehead">How many?</p><div class="c-melist c-cgform"><div class="c-merow">' +
+            '<span class="c-merow__main">People<span class="c-merow__sub">Children too</span></span><span class="c-cgstep">' +
+            '<button class="c-cgstep__btn" type="button" data-tbstep="-1" aria-label="One fewer"' + (tb.n <= 1 ? ' disabled' : '') + '><i class="ph-light ph-minus" aria-hidden="true"></i></button>' +
+            '<span class="c-cgstep__value" aria-live="polite">' + tb.n + '</span>' +
+            '<button class="c-cgstep__btn" type="button" data-tbstep="1" aria-label="One more"' + (tb.n >= 12 ? ' disabled' : '') + '><i class="ph-light ph-plus" aria-hidden="true"></i></button>' +
+          '</span></div></div>' +
+          '<p class="c-tblnote">' + p.name + ' gets your request in its Subic.Life app and confirms it here.' + '</p>';
+        body.scrollTop = top0;
+        var go = ready ? 'table-wait.html?p=' + p.id + '&d=' + tf.iso(tb.day) + '&t=' + tb.time + '&n=' + tb.n : '';
+        $('[data-tblfoot]').innerHTML =
+          '<span class="c-bkbar__sum"><b>' + (tb.day ? tf.day(tb.day) + (tb.time ? ', ' + fmtClock(tb.time) : '') : 'Pick a day') + '</b>' +
+            '<span>' + tb.n + (tb.n === 1 ? ' person' : ' people') + '</span></span>' +
+          (ready ? '<a class="c-btn primary" href="' + go.replace(/&/g, '&amp;') + '">Send request</a>'
+            : '<span class="c-btn primary" aria-disabled="true">' + (tb.day ? 'Pick a time' : 'Pick a day') + '</span>');
+      };
+      var openTable = function () { drawTable(); tsh.hidden = false; $('[data-tblbody]').scrollTop = 0; $('#tbl-title').focus(); };
+      action.addEventListener('click', function (e) { e.preventDefault(); openTable(); });
+      tsh.addEventListener('click', function (e) {
+        if (e.target.closest('[data-tblclose]')) { tsh.hidden = true; action.focus(); return; }
+        var day = e.target.closest('[data-day]');
+        if (day && !day.disabled) { tb.day = tf.parse(day.dataset.day); drawTable(); return; }
+        var nv = e.target.closest('[data-mnav]');
+        if (nv) { tbv = new Date(tbv.getFullYear(), tbv.getMonth() + Number(nv.dataset.mnav), 1); drawTable(); return; }
+        var sl = e.target.closest('[data-tbslot]');
+        if (sl) { tb.time = sl.dataset.tbslot; drawTable(); return; }
+        var st = e.target.closest('[data-tbstep]');
+        if (st) { tb.n = Math.min(12, Math.max(1, tb.n + Number(st.dataset.tbstep))); drawTable(); }
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !tsh.hidden) { tsh.hidden = true; action.focus(); } });
+      if (location.hash === '#table') openTable();
+    }
 
     var save = $('[data-save]');
     function paint(on) {

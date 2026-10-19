@@ -31,3 +31,6 @@ SubiclifeClone/
 
 # GSD planning docs stay local (commit_docs: false)
 .planning/
+
+# real partner photos/videos for the investor demo (not licensed, never commit)
+/prototype/img/real/

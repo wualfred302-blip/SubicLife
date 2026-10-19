@@ -42,6 +42,8 @@
 </div>
 <script src="data-a.js"></script>
 <script src="data-e.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
 <script src="saved.js"></script>
 <script>
 (function () {
@@ -69,7 +71,7 @@
     was = rooms.length ? rooms[pick].rate : place.rackPrice; now = was - Math.round(was * pct / 100); unit = place.unit;
     label = 'per ' + unit;
   } else {
-    was = o.place === 'meatplus' ? 2400 : 2000; now = Math.round(was * (100 - pct) / 100);
+    was = place.rackPrice || 2000; now = Math.round(was * (100 - pct) / 100);
     label = 'on a ' + fmtPeso(was) + ' bill';
   }
   var saved = was - now;
@@ -83,6 +85,7 @@
 
   // Fine print only: the how-to lines are covered by the steps above.
   var photos = [o.photo].concat((place.photos || []).filter(function (src) { return src !== o.photo; }));
+  if (place.video) photos = place.videoFirst ? [place.video].concat(photos) : photos.slice(0, 1).concat([place.video], photos.slice(1));
 
   var fine = o.terms.filter(function (t) { return !/show your|staff confirm|book at|in app/i.test(t); });
 
@@ -95,7 +98,10 @@
 
   main.innerHTML =
     '<div class="c-placehero">' +
-      '<div class="c-placehero__track" data-gallery data-snap>' + photos.map(function (src, i) { return '<img src="' + src + '" alt=""' + (i ? ' loading="lazy"' : '') + '>'; }).join('') + '</div>' +
+      '<div class="c-placehero__track" data-gallery data-snap>' + photos.map(function (src, i) {
+        return /\.mp4$/.test(src) ? '<video src="' + src + '" poster="' + place.poster + '" autoplay muted loop playsinline></video>'
+          : '<img src="' + src + '" alt=""' + (i ? ' loading="lazy"' : '') + '>';
+      }).join('') + '</div>' +
       (photos.length > 1 ? '<span class="c-placehero__count" data-count>1 / ' + photos.length + '</span>' : '') +
       '<div class="c-placehero__bar">' +
         '<a class="c-circle-btn" data-back href="explore.html" aria-label="Back to Explore"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>' +
@@ -134,7 +140,7 @@
     '</section>' : '') +
     '</div>';
 
-  main.style.setProperty('--ph', 'url(' + photos[0] + ')');
+  main.style.setProperty('--ph', 'url(' + (place.videoFirst ? place.poster : photos[0]) + ')');
   var cta = document.getElementById('cta');
   // Airbnb-style bar: the price on the left, one short button on the right.
   cta.innerHTML = o.bookable

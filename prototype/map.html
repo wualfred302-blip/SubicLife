@@ -205,6 +205,8 @@
 <script src="app.js"></script>
 <script src="data-a.js"></script>
 <script src="map-data.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
 <script>
 (function () {
   'use strict';
@@ -266,6 +268,7 @@
       badge: discount ? discount + '%' : 'Free',
       tag: p ? (discount ? discount + '%' : p.offerShort) : (discount ? discount + '%' : m.offerShort),
       photo: p ? p.thumb : m.photo,
+      video: p && p.videoFirst && p.video, poster: p && (p.poster || p.thumb),
       href: 'place.html?p=' + (p ? m.id : nearestPartnerId(m)),
       lat: m.lat, lng: m.lng,
       cats: m.cats, icon: icon, partner: !!m.partner,
@@ -295,6 +298,7 @@
     b.querySelector('.c-fpin__offer .material-symbols-outlined').textContent = it.icon;
     b.querySelector('.c-fpin__text').textContent = it.offer;
     b.addEventListener('click', function () { phoneEl.classList.add('has-pick'); select(it.id, { pan: true }); });
+    if (matchMedia('(hover: hover)').matches) b.addEventListener('mouseenter', function () { phoneEl.classList.add('has-pick'); select(it.id); });
     pinLayer.appendChild(b);
     it.pin = b;
   });
@@ -305,7 +309,9 @@
     card.className = 'c-fcard';
     card.dataset.id = it.id;
     card.innerHTML =
-      '<div class="c-fcard__photo"><img alt="" src="' + it.photo + '">' +
+      '<div class="c-fcard__photo">' + (it.video
+        ? '<video muted loop playsinline preload="metadata" poster="' + it.poster + '" src="' + it.video + '"></video>'
+        : '<img alt="" src="' + it.photo + '">') +
         '<span class="c-fcard__tag"></span>' +
         '<a class="c-fcard__dir" href="' + dirUrl(it) + '" target="_blank" rel="noopener">' +
           '<span class="material-symbols-outlined" aria-hidden="true">directions</span></a>' +
@@ -479,7 +485,11 @@
     var it = byId[id];
     if (!it || it.hidden) return;
     current = it;
-    items.forEach(function (x) { x.pin.classList.toggle('is-selected', x === it); });
+    items.forEach(function (x) {
+      x.pin.classList.toggle('is-selected', x === it);
+      var v = x.card && x.card.querySelector('video');
+      if (v && x === it) { var go = v.play(); if (go) go.catch(function () {}); } else if (v) v.pause();
+    });
     if (!opts.fromTrack) scrollToCard(it, !!opts.instant);
     if (opts.pan) panToVisible(it);
     placePins();

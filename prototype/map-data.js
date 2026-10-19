@@ -15,7 +15,20 @@
       { id: 'camayan', partner: true, lat: 14.7729, lng: 120.2285, cats: ['hotels', 'beaches'] }, // Camayan Beach
       { id: 'ocean', partner: true, lat: 14.7739, lng: 120.2295, cats: ['water-sports'] },       // Ocean Adventure, Camayan Wharf
       { id: 'sailing', partner: true, lat: 14.8214, lng: 120.2719, cats: ['water-sports'] },     // Subic Sailing, Lighthouse Marina
+
+      { id: 'networx', partner: true, lat: 14.8180, lng: 120.2815, cats: ['water-sports'] },     // NetWorX Jetsports, Waterfront Rd (SAMPLE spot)
       { id: 'zoobic', partner: true, lat: 14.7533, lng: 120.2722, cats: ['nature'] },          // Zoobic Safari, Ilanin Forest
+      { id: 'bestwestern', partner: true, lat: 14.8234, lng: 120.2737, cats: ['hotels'] },  // Best Western PLUS Subic, Dewey Avenue
+      { id: 'lecharme', partner: true, lat: 14.8233, lng: 120.3005, cats: ['hotels'] },  // Le Charmé Suites, Palm Street
+      { id: 'segara', partner: true, lat: 14.8148, lng: 120.2849, cats: ['hotels'] },  // Segara Villas, Waterfront Road
+      { id: 'reef', partner: true, lat: 14.8157, lng: 120.2826, cats: ['hotels'] },  // The Reef Hotel & Residences, Waterfront Road
+      { id: 'terrace', partner: true, lat: 14.8206, lng: 120.2754, cats: ['hotels'] },  // Terrace Hotel, Moonbay Marina
+      { id: 'bayfront', partner: true, lat: 14.8212, lng: 120.2758, cats: ['hotels'] },  // Bayfront Hotel, Moonbay Marina
+      { id: 'forestview', partner: true, lat: 14.8044, lng: 120.3233, cats: ['hotels'] },  // Forestview Leisure Residences, Binictican
+      { id: 'elfilos', partner: true, lat: 14.8217, lng: 120.2751, cats: ['food', 'nightlife'] },  // El Filo's, Moonbay Marina
+      { id: 'teppan', partner: true, lat: 14.8230, lng: 120.3009, cats: ['food'] },  // Teppan 101, Palm Street
+      { id: 'sands', partner: true, lat: 14.8211, lng: 120.2714, cats: ['food'] },  // Sands Resto-Grill, Lighthouse Marina
+      { id: 'labanca', partner: true, lat: 14.8232, lng: 120.2919, cats: ['water-sports'] },  // La Banca Cruises, WV Docks
 
       { id: 'all-hands', partner: false, name: 'All Hands Beach', category: 'Beach', area: 'Camayan',
         lat: 14.7705, lng: 120.2300, cats: ['beaches'], discount: 10, offerShort: '10% off',

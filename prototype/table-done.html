@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Table confirmed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-b.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-phone--push">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <main class="c-paid">
+    <div class="c-success-icon is-lg" data-icon>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline class="c-draw" pathLength="1" points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1 class="c-paid__title" data-title>Table confirmed</h1>
+    <p class="c-paid__sub" data-sub></p>
+    <div class="c-receipt c-paid__receipt" data-rows></div>
+    <p class="c-paid__sub" data-tip></p>
+    <div class="c-paid__actions">
+      <a class="c-btn primary" data-done href="place.html">Done</a>
+      <a class="c-btn plain" data-other href="card.html">Show my card</a>
+    </div>
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="stay.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), p = PLACES[q.get('p')] || PLACES.elfilos;
+  var day = SLStay.fmt.parse(q.get('d')) || new Date(2026, 9, 23), t = q.get('t') || '1900', n = Number(q.get('n')) || 2;
+  var ask = 'p=' + p.id + '&d=' + SLStay.fmt.iso(day) + '&t=' + t + '&n=' + n;
+  var people = n + (n === 1 ? ' person' : ' people');
+  var rows = function () {
+    return [['Day', SLStay.fmt.day(day)], ['Time', fmtClock(t)], ['People', people]].map(function (r) {
+      return '<div class="c-receipt__row"><span>' + r[0] + '</span><span class="c-receipt__amount">' + r[1] + '</span></div>';
+    }).join('');
+  };
+  var $ = function (s) { return document.querySelector(s); };
+  var full = q.has('full');
+  $('[data-rows]').innerHTML = rows();
+  $('[data-done]').href = 'place.html?p=' + p.id;
+  if (full) {
+    $('[data-icon]').hidden = true;
+    $('[data-title]').textContent = p.name + ' is full then';
+    $('[data-sub]').textContent = 'Try another time or day.';
+    $('[data-other]').textContent = 'Pick another time';
+    $('[data-other]').href = 'place.html?p=' + p.id + '#table';
+  } else {
+    $('[data-sub]').textContent = p.name + ' is holding your table.';
+    $('[data-tip]').textContent = 'Show your card when you sit down for your 10% off.';
+  }
+})();
+</script>
+</body>
+</html>

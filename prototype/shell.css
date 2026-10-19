@@ -147,8 +147,6 @@ html.is-embedded .shell-snap > * {
 .c-section-head__title,
 .c-section-title,
 .c-navbar__title,
-.c-place-head__name,
-.c-tiers__amt,
 .c-welcome__title,
 .c-post-title {
   font-family: var(--font-display);
@@ -158,7 +156,6 @@ html.is-embedded .shell-snap > * {
 .c-section-head__title,
 .c-section-title { font-weight: 600; font-size: 21px; }
 .c-navbar__title { font-weight: 700; letter-spacing: -0.01em; }
-.c-tiers__amt { font-weight: 600; }
 
 /* Prestige card: the silver foil vanished over the bright bay photo; name and tier read as solid white. */
 .c-mcard.is-prestige .c-mcard__name,
@@ -170,9 +167,6 @@ html.is-embedded .shell-snap > * {
 }
 
 /* Inset-grouped screens (Me and its children): the grey ground was lost to .phone's white. */
-.phone.c-grouped { background: var(--grouped); }
-.phone.c-grouped .c-largetitle,
-.phone.c-grouped .screen-scroll { background: transparent; }
 
 /* ---------- Frosted top bar (c-xbar) ----------
    Shared by full-bleed screens (Explore, place).  hidden over the cover, fades in once the cover scrolls away. */
@@ -195,8 +189,6 @@ html.is-embedded .shell-snap > * {
 }
 html.is-embedded.is-device .c-xbar { height: calc(var(--shell-top) + 48px); }
 .c-xbar__title { font: 600 20px/1 var(--font-display); letter-spacing: -0.03em; color: var(--text); padding-bottom: 6px; }
-.c-xbar__btn { text-decoration: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--search-fill); color: var(--text); }
-.c-xbar__btn .material-symbols-outlined { font-size: 20px; }
 .phone.is-scrolled .c-xbar { opacity: 1; pointer-events: auto; }
 .phone.is-scrolled > .c-statusbar { z-index: 21; color: var(--text); background: transparent; }
 .c-xbar__back { display: grid; place-items: center; width: 32px; height: 32px; margin-left: -6px; color: var(--text); text-decoration: none; }
@@ -213,8 +205,7 @@ html.is-embedded.is-device .c-xbar { height: calc(var(--shell-top) + 48px); }
 
 /* Success moments (paid, booked): display-voice headline, a soft sea-green glow behind the tick so the
    top of the screen feels like an arrival rather than a blank page, and savings as a pill. */
-.c-paid__title,
-.c-done__title { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; }
+.c-paid__title { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.03em; }
 .phone:has(.c-paid),
 .phone:has(.c-done) {
   background:

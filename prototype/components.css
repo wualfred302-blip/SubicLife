@@ -38,59 +38,12 @@
   letter-spacing: var(--track-tight);
   color: var(--text);
 }
-.c-largetitle__avatar {
-  flex: none;
-  width: var(--size-avatar);
-  height: var(--size-avatar);
-  overflow: hidden;
-  border-radius: var(--r-pill);
-  border: var(--hairline-w) solid var(--hairline);
-}
-.c-largetitle__avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 
 
 /* ---------- c-search ----------
    The one search field: 40px, search fill, 16px icon, 15px text. Explore and the map top bar use it
    unchanged. The map adds only the trailing clear X (.c-search__clear). */
-.c-search {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  flex: 1;
-  min-width: 0;
-  height: var(--size-search-h);
-  padding: 0 var(--space-2-5);
-  border-radius: var(--r-control);
-  background: var(--search-fill);
-}
-.c-search__icon { font-size: var(--icon-search); color: var(--inactive); }
-.c-search > .material-symbols-outlined {
-  width: var(--icon-search);
-  height: var(--icon-search);
-  font-size: var(--icon-search);
-  line-height: var(--lh-none);
-}
-.c-search__input {
-  flex: 1;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  outline: none;
-  background: transparent;
-  font: var(--fw-regular) var(--fs-callout)/var(--lh-none) var(--font);
-  color: var(--text);
-}
-.c-search__input::placeholder { color: var(--inactive); }
-.c-search__clear {
-  display: flex;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--inactive);
-  cursor: pointer;
-}
-.c-search__clear .material-symbols-outlined { font-size: var(--icon-md); }
 
 /* ---------- c-chip ----------
    Category filter pill. .is-selected = near-black fill, white text. */
@@ -170,37 +123,6 @@
 .c-carousel::-webkit-scrollbar { display: none; }
 
 /* ---------- c-place-card (carousel: 168 wide, 3:4 photo) ---------- */
-.c-place-card {
-  flex: none;
-  width: var(--size-card-w);
-  scroll-snap-align: start;
-}
-.c-place-card__photo {
-  aspect-ratio: 3 / 4;
-  margin-bottom: var(--space-2);
-  overflow: hidden;
-  border-radius: var(--r-media);
-  background: var(--grouped);
-}
-.c-place-card__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.c-place-card__name {
-  margin: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font: var(--fw-semibold) var(--fs-callout)/var(--lh-tight) var(--font);
-  color: var(--text);
-}
-.c-place-card__meta {
-  margin: var(--space-1) 0 0;
-  font: var(--fw-regular) var(--fs-footnote)/var(--lh-tight) var(--font);
-  color: var(--text-2);
-}
-.c-place-card__offer {
-  margin: var(--space-1) 0 0;
-  font: var(--fw-semibold) var(--fs-footnote)/var(--lh-tight) var(--font);
-  color: var(--accent-text);
-}
 
 /* ---------- c-list-row ----------
    The one list row. 48px leading slot (thumbnail, or a 24px outline icon), title 15 semibold and a
@@ -272,27 +194,10 @@
   align-items: center;
   gap: var(--space-1);
 }
-.c-list-row__value {
-  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
-  font-variant-numeric: tabular-nums;
-  color: var(--text);
-  white-space: nowrap;
-}
 .c-list-row__offer {
   font: var(--fw-semibold) var(--fs-footnote)/var(--lh-none) var(--font);
   color: var(--accent-text);
   white-space: nowrap;
-}
-.c-list-row__action {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
-  color: var(--text);
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
 }
 .c-list-row__chev {
   font-size: var(--icon-value-chev);
@@ -408,7 +313,6 @@
   border-width: var(--size-tail-h) var(--size-tail-x) 0;
   border-color: var(--bg) transparent transparent transparent;
 }
-.c-pin__icon { font-size: var(--icon-xs); color: var(--text-2); }
 .c-pin .material-symbols-outlined {
   width: var(--icon-xs);
   height: var(--icon-xs);
@@ -428,7 +332,6 @@
   transform: translate(-50%, -100%) scale(var(--pin-scale));
 }
 .c-pin.is-selected::after { border-top-color: var(--accent); }
-.c-pin.is-selected .c-pin__icon { font-size: var(--icon-xs); color: var(--bg); }
 
 /* ---------- c-map-controls ----------
    Stacked white button group, 44px wide, top right: locate-me and layers. Same shadow as the place card. */
@@ -486,41 +389,6 @@
   box-shadow: var(--shadow-card);
 }
 .c-place-sheet[hidden] { display: none; }
-.c-place-sheet__top { position: relative; display: flex; gap: var(--space-3); }
-.c-place-sheet__photo {
-  flex: none;
-  width: var(--size-photo);
-  height: var(--size-photo);
-  overflow: hidden;
-  border-radius: var(--r-thumb);
-  background: var(--grouped);
-}
-.c-place-sheet__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.c-place-sheet__info { flex: 1; min-width: 0; padding-right: var(--space-6); }
-.c-place-sheet__name {
-  margin: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font: var(--fw-semibold) var(--fs-body)/var(--lh-tight) var(--font);
-  color: var(--text);
-}
-.c-place-sheet__meta,
-.c-place-sheet__hours {
-  margin: var(--space-half) 0 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font: var(--fw-regular) var(--fs-footnote)/var(--lh-tight) var(--font);
-  color: var(--text-2);
-}
-.c-place-sheet__meta strong { color: var(--text); font-weight: var(--fw-medium); }
-.c-place-sheet__offer {
-  margin: var(--space-1) 0 0;
-  font: var(--fw-semibold) var(--fs-footnote)/var(--lh-tight) var(--font);
-  color: var(--accent-text);
-}
-.c-place-sheet__hours b { color: var(--open); font-weight: var(--fw-medium); }
 .c-place-sheet__close {
   position: absolute;
   top: 0;
@@ -538,15 +406,6 @@
   cursor: pointer;
 }
 .c-place-sheet__close .material-symbols-outlined { font-size: var(--icon-sm); }
-.c-place-sheet__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
-.c-place-sheet__dots { display: flex; justify-content: center; gap: var(--space-1-5); }
-.c-place-sheet__dots span {
-  width: var(--size-dot);
-  height: var(--size-dot);
-  border-radius: var(--r-pill);
-  background: var(--dot);
-}
-.c-place-sheet__dots .is-on { background: var(--text); }
 
 /* ---------- c-btn ----------
    One button: 48px tall, control radius, 16 semibold, full width of its container.
@@ -594,31 +453,6 @@
   border-bottom: var(--hairline-w) solid var(--hairline);
   box-shadow: var(--shadow-sm);
 }
-.c-map-topbar__row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2-5);
-  padding: 0 var(--gutter);
-}
-.c-map-topbar__list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-  width: var(--size-search-h);
-  height: var(--size-search-h);
-  padding: 0;
-  border: var(--hairline-w) solid var(--hairline);
-  border-radius: var(--r-control);
-  background: var(--bg);
-  color: var(--text);
-  box-shadow: var(--shadow-card);
-  text-decoration: none;
-}
-.c-map-topbar__list .material-symbols-outlined {
-  font-size: var(--icon-lg);
-  line-height: var(--lh-none);
-}
 
 /* ---------- c-navbar ----------
    Row under the status bar. Back chevron (or a text action such as "Done") on the left,
@@ -648,8 +482,7 @@
   text-decoration: none;
   cursor: pointer;
 }
-.c-navbar__back:active,
-.c-navbar__right:active { opacity: 0.4; }
+.c-navbar__back:active { opacity: 0.4; }
 .c-navbar__chevron {
   width: var(--icon-nav);
   height: var(--icon-nav);
@@ -672,24 +505,6 @@
   text-align: center;
   white-space: nowrap;
 }
-.c-navbar__right {
-  grid-column: 3;
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--size-navbar-btn);
-  height: var(--size-navbar-btn);
-  border-radius: var(--r-pill);
-  color: var(--text);
-  text-decoration: none;
-}
-.c-navbar__right .material-symbols-outlined {
-  width: var(--icon-lg);
-  height: var(--icon-lg);
-  font-size: var(--icon-lg);
-  line-height: var(--lh-none);
-}
 
 /* ---------- c-wordmark ----------
    "Subic" bold and ".Life" regular, 15px. Takes the colour of the surface it sits on. */
@@ -706,95 +521,11 @@
    refresh line, anchored to the bottom edge. Tiers: .is-prestige (aerial photo under a navy wash),
    .is-elite (solid, gold inner border, gold tier label), .is-premium (sand, near-black text).
    Default text is white. */
-.c-pass {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: min(var(--size-pass-w), 100%);
-  height: var(--size-pass-h);
-  margin: 0 auto;
-  padding: var(--space-5);
-  overflow: hidden;
-  border-radius: var(--r-media);
-  box-shadow: var(--shadow-wallet);
-  background: var(--tier-elite-bg);
-  color: var(--bg);
-}
-.c-pass__photo,
-.c-pass__wash {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.c-pass__photo { object-fit: cover; }
-.c-pass__wash { display: none; }
-.c-pass__head,
-.c-pass__member,
-.c-pass__panel { position: relative; z-index: 1; }
-.c-pass__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.c-pass__tier {
-  font: var(--fw-semibold) var(--fs-tier-label)/var(--lh-none) var(--font);
-  letter-spacing: var(--track-tier);
-  text-transform: uppercase;
-}
-.c-pass__member { margin-top: var(--space-5); }
-.c-pass__name {
-  margin: 0;
-  font: var(--fw-semibold) var(--fs-pass-name)/var(--lh-tight) var(--font);
-  letter-spacing: var(--track-tight);
-}
-
-.c-pass__since {
-  margin: var(--space-half) 0 0;
-  font: var(--fw-regular) var(--fs-footnote)/var(--lh-none) var(--font);
-  opacity: 0.7;
-}
-.c-pass__panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: auto;
-}
-
-.c-pass__number {
-  margin: var(--space-3) 0 0;
-  font: var(--fw-medium) var(--fs-card-number)/var(--lh-none) var(--font);
-  letter-spacing: 2px;
-  font-variant-numeric: tabular-nums;
-  opacity: 0.9;
-}
-.c-pass__refresh {
-  margin: var(--space-2) 0 0;
-  font: var(--fw-regular) var(--fs-footnote)/var(--lh-none) var(--font);
-  opacity: 0.7;
-}
 
 /* Prestige: aerial photo, navy wash fading to solid. */
-.c-pass.is-prestige .c-pass__wash {
-  display: block;
-  background: linear-gradient(180deg, var(--tier-navy-top) 0%, var(--tier-navy-mid) 55%, var(--tier-navy-solid) 100%);
-}
 /* Elite: solid matte black, 1px gold inner border inset 8px, gold tier label and name rule. */
-.c-pass.is-elite::before {
-  content: "";
-  position: absolute;
-  inset: var(--space-2);
-  border: var(--border-w) solid var(--gold-45);
-  border-radius: var(--r-thumb);
-  pointer-events: none;
-}
-.c-pass.is-elite .c-pass__tier { color: var(--gold); }
 
 /* Premium: sand, near-black text. */
-.c-pass.is-premium {
-  background: var(--tier-premium-bg);
-  color: var(--text);
-}
 
 /* ---------- c-qr ----------
    Real QR, drawn by app.js (qrcode-generator, error level M, margin 0) into an empty .c-qr slot.
@@ -815,111 +546,13 @@
 /* ---------- c-pass-stack ----------
    Three top-only passes, 200px each. Front to back: Prestige, Elite, Premium. The back passes
    peek 14px above the one in front. Later siblings paint on top. */
-.c-pass-stack {
-  position: relative;
-  width: min(var(--size-pass-w), 100%);
-  height: var(--size-stack-h);
-  margin: 0 auto;
-}
-.c-pass-stack__pass {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: var(--size-stack-pass-h);
-  overflow: hidden;
-  padding: var(--space-5);
-  border-radius: var(--r-media);
-  box-shadow: var(--shadow-wallet);
-  background: var(--tier-elite-bg);
-  color: var(--bg);
-}
-.c-pass-stack__pass:nth-child(1) { z-index: 1; top: 0; transform: scale(0.88); transform-origin: 50% 0; }
-.c-pass-stack__pass:nth-child(2) { z-index: 2; top: var(--size-stack-step); transform: scale(0.94); transform-origin: 50% 0; }
-.c-pass-stack__pass:nth-child(3) { z-index: 3; top: calc(var(--size-stack-step) * 2); }
-.c-pass-stack__pass.is-premium {
-  background: var(--tier-premium-bg);
-  color: var(--text);
-  border: var(--border-w) solid var(--pass-edge);
-}
-.c-pass-stack__pass.is-elite::before {
-  content: "";
-  position: absolute;
-  inset: var(--space-2);
-  border: var(--border-w) solid var(--gold-45);
-  border-radius: var(--r-thumb);
-  pointer-events: none;
-}
-.c-pass-stack__photo,
-.c-pass-stack__wash {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.c-pass-stack__photo { object-fit: cover; }
-.c-pass-stack__wash { display: none; }
-.c-pass-stack__pass.is-prestige .c-pass-stack__wash {
-  display: block;
-  background: linear-gradient(180deg, var(--tier-navy-top) 0%, var(--tier-navy-mid) 55%, var(--tier-navy-solid) 100%);
-}
-.c-pass-stack__row {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.c-pass-stack__tier {
-  font: var(--fw-semibold) var(--fs-tier-label)/var(--lh-none) var(--font);
-  letter-spacing: var(--track-tier);
-  text-transform: uppercase;
-}
-.c-pass-stack__pass.is-elite .c-pass-stack__tier { color: var(--gold); }
 
 /* ---------- c-pass-mini ----------
    72 x 46 thumbnail. The real top-only pass (350 x 224) scaled by 72/350 inside a clipping box,
    so the photo, wash, type and tier colour are the same as the full pass. */
-.c-pass-mini {
-  position: relative;
-  flex: none;
-  width: var(--size-pass-mini-w);
-  height: var(--size-pass-mini-h);
-  overflow: hidden;
-  border-radius: var(--r-thumb);
-}
-.c-pass-mini > .c-pass {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: var(--size-pass-w);
-  height: 224px;
-  margin: 0;
-  border-radius: 0;
-  box-shadow: none;
-  transform: scale(0.2057);
-  transform-origin: 0 0;
-}
 
 /* ---------- c-pass-summary ----------
    Pass thumbnail next to its name and renewal date. */
-.c-pass-summary {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-}
-.c-pass-summary__text { display: flex; flex-direction: column; min-width: 0; }
-.c-pass-summary__name {
-  margin: 0;
-  font: var(--fw-semibold) var(--fs-section)/var(--lh-tight) var(--font);
-  letter-spacing: var(--track-tight);
-  color: var(--text);
-}
-.c-pass-summary__meta {
-  margin: var(--space-half) 0 0;
-  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
-  color: var(--text-2);
-}
 
 /* ---------- c-value-row ----------
    Plain row, no box: grey label left, semibold value right, optional chevron.
@@ -966,29 +599,6 @@
 /* ---------- c-wallet-btn ----------
    Secondary action under the pass: black, 48px tall, pill radius, auto width.
    The parent centres it with text-align: center. */
-.c-wallet-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  width: auto;
-  height: var(--size-wallet-h);
-  padding: 0 var(--space-6);
-  border: 0;
-  border-radius: var(--r-pill);
-  background: var(--black);
-  color: var(--on-black);
-  font: var(--fw-semibold) var(--fs-callout)/var(--lh-none) var(--font);
-  letter-spacing: var(--track-tight);
-  cursor: pointer;
-}
-.c-wallet-btn:active { opacity: 0.8; }
-.c-wallet-btn__logo {
-  flex: none;
-  width: var(--icon-wallet);
-  height: var(--icon-wallet);
-  fill: currentColor;
-}
 
 /* ---------- c-receipt ----------
    Label left, amount right, hairline under each row. Amounts use tabular numbers.
@@ -1040,40 +650,6 @@
 /* ---------- c-barchart ----------
    Ten thin rounded grey bars, one per month, the current month in near-black.
    Heights are set inline per bar (px). Month initial under each bar. */
-.c-barchart {
-  display: flex;
-  justify-content: space-between;
-}
-.c-barchart__col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.c-barchart__track {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  width: 100%;
-  height: var(--size-chart-h);
-  border-bottom: var(--hairline-w) solid var(--hairline);
-}
-.c-barchart__bar {
-  display: block;
-  width: var(--size-bar-w);
-  border-radius: var(--r-thumb) var(--r-thumb) 0 0;
-  background: var(--hairline);
-}
-.c-barchart__col.is-current .c-barchart__bar { background: var(--accent); }
-.c-barchart__month {
-  margin-top: var(--space-2);
-  font: var(--fw-medium) var(--fs-chart)/var(--lh-none) var(--font);
-  color: var(--inactive);
-}
-.c-barchart__col.is-current .c-barchart__month {
-  color: var(--text);
-  font-weight: var(--fw-semibold);
-}
 
 /* ---------- c-sheet ----------
    Bottom sheet over a dimmed screen. The scrim covers the whole phone; the panel sits at the bottom
@@ -1180,34 +756,6 @@
 /* ---------- c-staff-id ----------
    Staff screen: member name and status line above the QR, then the fallback number and help text
    below it. __fallback is the block under the QR. */
-.c-staff-id { text-align: center; }
-.c-staff-id__name {
-  margin: 0;
-  font: var(--fw-bold) var(--fs-staff-name)/var(--lh-tight) var(--font);
-  letter-spacing: var(--track-tight);
-  color: var(--text);
-}
-.c-staff-id__sub {
-  margin: var(--space-1) 0 0;
-  font: var(--fw-regular) var(--fs-callout)/var(--lh-snug) var(--font);
-  color: var(--text-2);
-}
-.c-staff-id__fallback {
-  margin-top: var(--space-6);
-  text-align: center;
-}
-.c-staff-id__code {
-  margin: 0;
-  font: var(--fw-medium) var(--fs-staff-code)/var(--lh-none) var(--font);
-  letter-spacing: 0.15em;
-  font-variant-numeric: tabular-nums;
-  color: var(--text);
-}
-.c-staff-id__help {
-  margin: var(--space-2) 0 0;
-  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
-  color: var(--text-2);
-}
 
 /* ---------- c-progress ----------
    3px track, 160px wide, centred. Dark elapsed part; label under it. Bar width is set inline (percent). */
@@ -1237,27 +785,9 @@
 }
 
 /* Flexible text column in a value row: takes the free width and lets its text wrap. */
-.c-value-row__text { flex: 1; min-width: 0; }
 
 /* ---------- c-see-link ----------
    Near-black semibold link with a gold dot before it. Gold text fails contrast, so gold stays on the dot. */
-.c-see-link {
-  display: inline-flex;
-  white-space: nowrap;
-  align-items: center;
-  gap: var(--space-2);
-  font: var(--fw-semibold) var(--fs-body)/var(--lh-none) var(--font);
-  color: var(--text);
-  text-decoration: none;
-}
-.c-see-link::before {
-  content: "";
-  flex: none;
-  width: var(--size-gold-dot);
-  height: var(--size-gold-dot);
-  border-radius: var(--r-pill);
-  background: var(--gold);
-}
 
 /* ---------- c-mcard ----------
    Membership card at real card proportion (85.6 x 54), 350px wide, 16px radius.
@@ -1462,12 +992,6 @@
 .c-mcard.is-elite .c-mcard__contactless { color: var(--gold); }
 
 /* Hint under the card on the Card tab. */
-.c-mcard-hint {
-  margin: var(--space-2) 0 0;
-  text-align: center;
-  font: var(--fw-regular) var(--fs-footnote)/var(--lh-snug) var(--font);
-  color: var(--text-2);
-}
 
 /* Stacked cards on the not-a-member screen. Prestige in front, Elite and Premium peek 18px each. */
 
@@ -1478,16 +1002,6 @@
 
 /* Mini real card, scaled down: the Benefits thumbnail (72 wide, in .c-pass-mini) and the Explore
    membership strip (56 wide, in .c-member-strip__card). */
-.c-pass-mini > .c-mcard {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: var(--size-mcard-w);
-  margin: 0;
-  box-shadow: none;
-  transform: scale(var(--scale-mc-mini));
-  transform-origin: 0 0;
-}
 
 
 @media (prefers-reduced-motion: reduce) {

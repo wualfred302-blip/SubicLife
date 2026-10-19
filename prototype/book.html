@@ -125,6 +125,8 @@
 </div>
 <script src="data-a.js"></script>
 <script src="stay.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
 <script>
   (function () {
     var p = placeFor(queryParam('p') || 'lighthouse');
@@ -165,12 +167,14 @@
       $('.c-req-bar').classList.add('is-stay');
       $('[data-stay-form] [data-open="dates"] .c-merow__main').firstChild.textContent = 'Date';
       $('[data-room-head]').textContent = p.tixWord ? p.tixWord[1] : 'Ticket';
+      var gt = p.rooms[pick], gper = gt.per || p.per;
+      if (gper) $('[data-party]').previousElementSibling.textContent = gper[2];
       $('[data-room-head]').insertAdjacentHTML('beforeend', '<a class="c-bkchange" data-tixchange href="place.html?p=' + p.id + '#tickets">Change</a>');
       $$('.c-bkroom__price').forEach(function (el, i) {
         var t = p.rooms[i];
         el.innerHTML = t.child
           ? fmtPeso(member(t.rate)) + ' adult · ' + fmtPeso(member(t.child)) + ' child'
-          : fmtPeso(member(t.rate)) + ' / person <s>' + fmtPeso(t.rate) + '</s>';
+          : fmtPeso(member(t.rate)) + ' / ' + (t.per || p.per || ['person'])[0] + ' <s>' + fmtPeso(t.rate) + '</s>';
       });
       $$('.c-bkroom__img, .c-bkroom__tick').forEach(function (x) { x.remove(); });
       $$('.c-bkroom').forEach(function (row, i) { row.hidden = i !== pick; });
@@ -178,9 +182,20 @@
       var tf = SLStay.fmt;
       var tk = SLStay({
         single: true, checkIn: tf.parse(queryParam('d')) || tf.add(SLStay.today, 1),
-        adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0, maxParty: p.rooms[pick].max || 20, guestNote: '',
+        adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0, maxParty: p.rooms[pick].max || 20, guestNote: '', from: tf.add(SLStay.today, gt.ahead || 0),
         onChange: function () { renderTix(); }
       });
+      // The guest sheet counts what the ticket is priced by: packages, jet skis or yachts, or the park's own age bands.
+      var gsheet = $('[data-sheet="guests"]'), grows = gsheet.querySelectorAll('.c-cgform > .c-merow');
+      gsheet.querySelector('.c-bksheet__title').textContent = gper ? gper[2] : 'Guests';
+      grows[0].querySelector('.c-merow__main').firstChild.textContent = gper ? gper[2] : gt.child ? 'Adults' : 'Guests';
+      if (!gt.child || gper) {
+        grows[0].querySelector('.c-merow__sub').textContent = gt.who || 'Per person';
+        grows[1].hidden = true;
+      } else if (p.ages) {
+        grows[0].querySelector('.c-merow__sub').textContent = p.ages[0];
+        grows[1].querySelector('.c-merow__sub').textContent = p.ages[1];
+      }
       var renderTix = function () {
         var s = tk.state, i = room(), t = p.rooms[i], kid = t.child || t.rate;
         var full = t.rate * s.adults + kid * s.kids, total = member(t.rate) * s.adults + member(kid) * s.kids;
@@ -188,8 +203,9 @@
         var q = '&d=' + tf.iso(s.checkIn) + '&a=' + s.adults + '&c=' + s.kids + (tm ? '&t=' + tm : '');
         $('[data-range]').textContent = tf.day(s.checkIn) + at;
         $('[data-nights]').hidden = true;
-        $('[data-party]').textContent = tf.party(s.adults, s.kids);
-        $('[data-line]').textContent = fmtPeso(t.rate) + ' × ' + tf.plural(s.adults, 'adult', 'adults');
+        var who = gper ? tf.plural(s.adults, gper[0], gper[1]) : tf.party(s.adults, s.kids);
+        $('[data-party]').textContent = who;
+        $('[data-line]').textContent = fmtPeso(t.rate) + ' × ' + (gper ? who : tf.plural(s.adults, 'adult', 'adults'));
         $('[data-rack]').textContent = fmtPeso(t.rate * s.adults);
         $('[data-kidline]').hidden = !s.kids;
         $('[data-kidlabel]').textContent = fmtPeso(kid) + ' × ' + tf.plural(s.kids, 'child', 'children');
@@ -202,7 +218,7 @@
         $('[data-bar-nights]').textContent = tf.day(s.checkIn) + at;
         $('[data-pay]').textContent = 'Pay';
         $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i + q;
-        $('[data-tixchange]').href = 'place.html?p=' + p.id + q + '#tickets';
+        $('[data-tixchange]').href = 'place.html?p=' + p.id + q + '&room=' + i + '#tickets';
       };
       renderTix();
       return;
