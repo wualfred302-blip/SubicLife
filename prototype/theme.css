@@ -3022,3 +3022,24 @@ html .phone.c-bkpage .c-req-bar .c-btn.primary {
 .c-tblreq h2 { font: 700 22px/28px var(--font); margin: 0; }
 .c-tblreq .c-receipt { margin: 0; }
 .c-tblreq__actions { display: grid; gap: 8px; margin-top: 8px; }
+
+/* hotel-std */
+/* Hotel listing: What's here, rooms that open their own sheet; Booked's cancel link; names under map pins. */
+.c-plhas { margin: 8px 0 0; }
+.c-plroom { width: 100%; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.c-plroom.is-full { cursor: pointer; }
+.c-rmsheet__img { display: block; width: calc(100% - 40px); height: 190px; margin: 8px 20px 0; border-radius: 14px; object-fit: cover; }
+.c-rmsheet__note { margin: 16px 20px 0; font: 400 14px/20px var(--font); color: #5F6670; }
+.c-bkcancel { display: block; margin: 16px auto 0; padding: 8px; border: 0; background: none; font: 500 15px/20px var(--font); color: #5F6670; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.c-fpin__name { display: none; }
+.c-mapx .c-fpin__name {
+  display: block; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 3px;
+  max-width: 104px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+  font: 600 11px/14px var(--font); color: #111214; text-shadow: 0 0 2px #FFFFFF, 0 0 2px #FFFFFF, 0 0 4px #FFFFFF; pointer-events: none;
+}
+.c-mapx.is-calm .c-fpin__name { display: none; }
+
+/* hotel-flow */
+.c-tixsheet .c-bkbar__sum b s { margin-left: 6px; font: 400 14px/20px var(--font); color: #5F6670; }
+.c-tixsheet button.c-btn { border: 0; font-family: var(--font); cursor: pointer; }
+button.c-bkchange { padding: 0; border: 0; background: none; cursor: pointer; }

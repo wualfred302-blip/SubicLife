@@ -66,6 +66,11 @@
         <p class="c-pabout" data-about></p>
       </section>
 
+      <section class="c-osec" data-has-sec hidden>
+        <h2 class="c-section-title">What's here</h2>
+        <div class="c-melist c-plhas" data-has></div>
+      </section>
+
       <section class="c-osec" data-rooms-sec hidden>
         <h2 class="c-section-title" data-rooms-title>Rooms</h2>
         <div class="c-melist c-cgform c-plpick" data-pick hidden>
@@ -153,8 +158,10 @@
       return '<span class="c-bigcard__stat"><i class="' + icon + ' c-bigcard__icon is-' + tone + '" aria-hidden="true"></i>' +
         '<span class="c-bigcard__text"><span class="c-bigcard__value">' + value + '</span><span class="c-bigcard__label">' + label + '</span></span></span>';
     };
+    var checkin = p.unit === 'night' && /(\d+(?::\d\d)? ?[AP]M)/.exec(p.hours || '');
     $('[data-facts]').innerHTML = fact('ph-light ph-navigation-arrow', 'blue', p.distance, 'Away') + fact('ph-fill ph-star', 'gold', p.rating, 'Rating') +
-      fact('ph-light ph-clock', 'indigo', p.closes.replace('closes ', ''), 'Closes');
+      (checkin ? fact('ph-light ph-sign-in', 'indigo', checkin[1], 'Check-in')
+        : fact('ph-light ph-clock', 'indigo', p.closes.replace('closes ', ''), 'Closes'));
 
     // The member offer gets its own row under the name; the price waits in the bottom bar beside
     // the action, so each fact shows once.
@@ -163,7 +170,7 @@
     if (offer) {
       deal.href = 'offer.html?id=' + offer.id;
       $('[data-otitle]').textContent = offer.title;
-      $('[data-osub]').textContent = 'Prestige perk · ' + (p.bookable ? 'applied when you book' : p.discount ? 'show your card to pay' : 'with any bill');
+      $('[data-osub]').textContent = 'Prestige perk · ' + (p.unit === 'night' ? 'includes 1 free night' : p.bookable ? 'applied when you book' : p.discount ? 'show your card to pay' : 'with any bill');
     } else {
       deal.hidden = true;
     }
@@ -323,36 +330,39 @@
       $('[data-rooms-sec]').hidden = !rooms.length;
       $('[data-rooms-title]').textContent = p.unit === 'night' ? 'Rooms' : 'Tours';
       var order = rooms.map(function (r, i) { return i; }).sort(function (a, b) { return rooms[a].rate - rooms[b].rate; });
-      var sleeps = rooms.map(function (r) { var m = /sleeps (\d+)/.exec(r.sub); return m ? Number(m[1]) : 99; });
+      var sleeps = rooms.map(function (r) { var m = /sleeps (\d+)/.exec(r.sub); return r.sleeps || (m ? Number(m[1]) : 2); });
       var f = window.SLStay && SLStay.fmt;
       var picker = p.unit === 'night' && rooms.length && f && SLStay({
         checkIn: f.parse(queryParam('in')), checkOut: f.parse(queryParam('out')),
         adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0,
-        maxParty: Math.max.apply(null, sleeps), optional: true, onChange: function () { draw(); }
+        maxParty: Math.max.apply(null, sleeps), optional: true, onChange: function () { draw(); if (want > -1 && picker.state.checkOut) { var w = want; want = -1; openRoom(w, ropener); } }
       });
       $('[data-pick]').hidden = !picker;
+      if (picker) $('.c-bottombar').style.display = 'none';
       var draw = function () {
         var s = picker ? picker.state : null;
         var n = s && s.checkOut ? f.nights(s.checkIn, s.checkOut) : 0;
         var q = (n ? '&in=' + f.iso(s.checkIn) + '&out=' + f.iso(s.checkOut) : '') + (s ? '&a=' + s.adults + '&c=' + s.kids : '');
         var fits = order.filter(function (i) { return !s || sleeps[i] >= s.adults + s.kids; });
+        cur = { s: s, n: n, q: q };
         $('[data-rooms]').innerHTML = order.map(function (i) {
           var r = rooms[i], full = fits.indexOf(i) < 0;
-          return '<a class="c-merow c-plroom' + (full ? ' is-full" aria-disabled="true"' : '" href="book.html?p=' + p.id + '&amp;room=' + i + q.replace(/&/g, '&amp;') + '"') + '>' +
+          return '<button class="c-merow c-plroom' + (full ? ' is-full' : '') + '" type="button" data-room="' + i + '">' +
             '<img class="c-bkroom__img" src="' + (r.photo || p.hero) + '" alt="">' +
-            '<span class="c-merow__main"><span class="c-bkroom__name">' + r.name + '</span><span class="c-merow__sub">' + r.sub + '</span>' +
-            '<span class="c-bkroom__price">' + fmtPeso(member(r.rate) * (n || 1)) + '<span class="c-plroom__unit"> ' + (n ? 'for ' + f.plural(n, 'night', 'nights') : '/ ' + p.unit) + '</span>' +
-            ' <s>' + fmtPeso(r.rate * (n || 1)) + '</s></span></span>' +
-            '<i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i></a>';
+            '<span class="c-merow__main"><span class="c-bkroom__name">' + r.name + '</span><span class="c-merow__sub">' + r.sub +
+            (r.sleeps && !/sleeps|up to/.test(r.sub) ? ' · sleeps ' + r.sleeps : '') + '</span>' +
+            '<span class="c-bkroom__price">' + money(pay(r, n)) + '<span class="c-plroom__unit"> ' + (n > 1 ? 'for ' + f.plural(n, 'night', 'nights') + ', 1 free' : n ? 'with your free night' : '/ ' + p.unit) + '</span>' +
+            (n ? '' : ' <s>' + fmtPeso(r.rate) + '</s>') + '</span></span>' +
+            '<i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i></button>';
         }).join('');
         var low = fits.length ? rooms[fits[0]] : (rooms[order[0]] || { rate: p.rackPrice });
         // Like Airbnb: the price in ink with what it covers; under it the dates (or "Add dates"), which open the calendar.
-        bar.innerHTML = '<span class="c-obar__line">' + (fits.length > 1 ? 'From ' : '') + '<b>' + fmtPeso(member(low.rate) * (n || 1)) + '</b>' +
+        bar.innerHTML = '<span class="c-obar__line">' + (fits.length > 1 ? 'From ' : '') + '<b>' + money(pay(low, n)) + '</b>' +
           (n ? ' total' : p.unit === 'night' ? ' night' : ' / ' + p.unit) + '</span>' +
           (picker
             ? '<button class="c-obar__dates" type="button" data-bar-dates>' + (n ? f.short(s.checkIn, s.checkOut) + ' · ' + f.plural(n, 'night', 'nights') : 'Add dates') + '</button>'
             : '<span class="c-obar__sub">' + p.discount + '% off</span>');
-        action.textContent = n ? 'Reserve' : 'Check availability';
+        action.textContent = n ? 'Choose a room' : 'Check availability';
         action.href = 'book.html?p=' + p.id + (fits.length ? '&room=' + fits[0] : '') + q;
         if (picker) {
           $('[data-range]').textContent = n ? f.range(s.checkIn, s.checkOut) : 'Add dates';
@@ -367,9 +377,74 @@
       bar.addEventListener('click', function (e) { if (e.target.closest('[data-bar-dates]')) picker.open('dates', action); });
       // Without dates, the bar's button opens the calendar instead of leaving the page.
       action.addEventListener('click', function (e) {
-        if (picker && !picker.state.checkOut) { e.preventDefault(); picker.open('dates', action); }
+        if (picker) {
+          e.preventDefault();
+          if (!picker.state.checkOut) picker.open('dates', action);
+          else $('[data-rooms-sec]').scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+      // A room's own sheet, before paying: its photo, bed, size and how many it sleeps, what every room has, and
+      // the price for the dates picked with the Prestige free night shown.
+      var cur = {}, ropen = -1, want = -1;
+      // What a stay costs: the member rate a night, less the Prestige free night (as Confirm and pay takes it off).
+      var pay = function (r, nights) { return nights ? member(r.rate) * (nights - 1) : member(r.rate); };
+      var money = function (x) { return x ? fmtPeso(x) : 'Free'; };
+      document.querySelector('.phone .c-homeindicator').insertAdjacentHTML('beforebegin',
+        '<div class="c-sheet c-bksheet c-tixsheet" data-roomsheet role="dialog" aria-modal="true" aria-labelledby="room-title" hidden>' +
+          '<button class="c-sheet__scrim" type="button" data-roomclose aria-label="Close"></button>' +
+          '<div class="c-sheet__panel"><div class="c-sheet__grabber" aria-hidden="true"></div>' +
+            '<div class="c-tixsheet__body" data-roombody></div><div class="c-bksheet__foot" data-roomfoot></div></div>' +
+        '</div>');
+      var rsheet = $('[data-roomsheet]'), ropener = null;
+      var rfact = function (x) {
+        return /bed/i.test(x) ? 'bed' : /m²/.test(x) ? 'ruler' : /breakfast/.test(x) ? 'coffee' : /kitchen/i.test(x) ? 'cooking-pot' :
+          /bath/.test(x) ? 'bathtub' : /view|terrace|balcony/.test(x) ? 'sun-horizon' : 'house-line';
+      };
+      var openRoom = function (i, opener) {
+        var r = rooms[i], nn = cur.n, ppl = cur.s ? cur.s.adults + cur.s.kids : 0, fit = sleeps[i] >= ppl;
+        var facts = r.sub.split(' · ').filter(function (x) { return !/sleeps|up to/.test(x); }).slice(0, 2)
+          .map(function (x) { return [rfact(x), x.charAt(0).toUpperCase() + x.slice(1)]; })
+          .concat([['users', 'Up to ' + sleeps[i] + ' guests']]);
+        $('[data-roombody]').innerHTML =
+          '<img class="c-rmsheet__img" src="' + (r.photo || p.hero) + '" alt="">' +
+          '<div class="c-bksheet__head"><h2 class="c-bksheet__title" id="room-title">' + r.name + '</h2><p class="c-bksheet__sub">' + p.name + '</p></div>' +
+          '<ul class="c-tixfacts" style="grid-template-columns: repeat(' + facts.length + ', 1fr)">' + facts.map(function (x) {
+            return '<li><i class="ph-light ph-' + x[0] + '" aria-hidden="true"></i>' + x[1] + '</li>';
+          }).join('') + '</ul>' +
+          (p.inroom ? '<p class="c-mehead">In every room</p><div class="c-melist">' + p.inroom.map(function (x) {
+            return '<div class="c-merow"><span class="c-merow__lead"><i class="ph-light ph-check" aria-hidden="true"></i></span><span class="c-merow__main">' + x + '</span></div>';
+          }).join('') + '</div>' : '') +
+          (!fit ? '<p class="c-rmsheet__note">This room sleeps up to ' + sleeps[i] + '. Pick a bigger room or fewer guests.</p>'
+            : !nn ? '<p class="c-rmsheet__note">Add your dates to see the total. Prestige gives you 1 night free.</p>' : '');
+        $('[data-roomfoot]').innerHTML =
+          '<span class="c-bkbar__sum"><b>' + money(pay(r, nn)) + (nn ? '<s>' + fmtPeso(r.rate * nn) + '</s>' : '') + '</b><span>' +
+            (nn ? f.short(cur.s.checkIn, cur.s.checkOut) + ' · ' + (nn > 1 ? '1 night free' : 'your free night')
+              : 'a night · ' + p.discount + '% off') + '</span></span>' +
+          (!fit ? '<span class="c-btn primary" aria-disabled="true">Too small for ' + ppl + '</span>'
+            : nn ? '<a class="c-btn primary" href="' + ('book.html?p=' + p.id + '&room=' + i + cur.q).replace(/&/g, '&amp;') + '">Reserve</a>'
+            : '<button class="c-btn primary" type="button" data-roomdates>Add dates</button>');
+        ropener = opener;
+        ropen = i;
+        rsheet.hidden = false;
+        $('[data-roombody]').scrollTop = 0;
+      };
+      $('[data-rooms]').addEventListener('click', function (e) {
+        var b = e.target.closest('[data-room]');
+        if (b) openRoom(Number(b.dataset.room), b);
+      });
+      rsheet.addEventListener('click', function (e) {
+        if (e.target.closest('[data-roomclose]')) { rsheet.hidden = true; if (ropener) ropener.focus(); }
+        if (e.target.closest('[data-roomdates]')) { want = ropen; rsheet.hidden = true; picker.open('dates', ropener); }
       });
       draw();
+    }
+    // What a hotel has: pool, Wi-Fi, parking, breakfast included or not.
+    if (p.has) {
+      $('[data-has-sec]').hidden = false;
+      $('[data-has]').innerHTML = p.has.map(function (h) {
+        return '<div class="c-merow"><span class="c-merow__lead"><i class="ph-light ph-' + h[0] + '" aria-hidden="true"></i></span>' +
+          '<span class="c-merow__main">' + h[1] + '</span></div>';
+      }).join('');
     }
     $('[data-about]').textContent = p.about || '';
 

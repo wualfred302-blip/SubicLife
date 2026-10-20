@@ -85,5 +85,19 @@
 <script src="app.js"></script>
 <script src="img/real/manifest.js"></script>
 <script src="real-photos.js"></script>
+<script>
+  // Stays booked in this browser (Booked saves them), newest first, above the sample bookings.
+  (function () {
+    var list = [];
+    try { list = JSON.parse(localStorage.getItem('sl-bookings') || '[]'); } catch (e) {}
+    var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var rows = document.querySelector('.c-bkrows');
+    list.forEach(function (b) {
+      rows.insertAdjacentHTML('afterbegin', '<a class="c-merow c-bkrow" href="' + esc(b.href) + '"><span class="c-merow__main">' +
+        '<span class="c-bkrow__name">' + esc(b.name) + '</span><span class="c-merow__sub">' + esc(b.sub) + '</span>' +
+        '<span class="c-cgstop__status">Confirmed</span></span><img class="c-bkrow__img" src="' + esc(b.thumb) + '" alt=""></a>');
+    });
+  })();
+</script>
 </body>
 </html>

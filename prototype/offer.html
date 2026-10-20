@@ -79,6 +79,8 @@
 
   var steps = gift
     ? ['Show your card when you order.', 'Staff add the dessert to your table.', 'Pay the rest of the bill in the app as usual.']
+    : o.bookable && place.unit === 'night'
+    ? ['Book here at the member price.', 'Prestige includes 1 free night. It comes off at checkout.', 'Pay in the app with GCash, Maya or card.', 'Show your card QR when you arrive.']
     : o.bookable
     ? ['Book here at the member price.', 'Pay in the app with GCash, Maya or card.', 'Show your card QR when you arrive.']
     : ['Show your card when the bill comes.', 'Staff send the bill to your phone with ' + pct + '% already off.', 'Pay in the app. Done.'];

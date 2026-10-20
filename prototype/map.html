@@ -292,11 +292,13 @@
     b.innerHTML =
       '<span class="c-fpin__dot"><span class="material-symbols-outlined" aria-hidden="true"></span></span>' +
       '<span class="c-fpin__badge"></span>' +
-      '<span class="c-fpin__offer"><span class="material-symbols-outlined" aria-hidden="true"></span><span class="c-fpin__text"></span></span>';
+      '<span class="c-fpin__offer"><span class="material-symbols-outlined" aria-hidden="true"></span><span class="c-fpin__text"></span></span>' +
+      '<span class="c-fpin__name" aria-hidden="true"></span>';
     b.querySelector('.c-fpin__dot .material-symbols-outlined').textContent = it.icon;
     b.querySelector('.c-fpin__badge').textContent = it.badge;
     b.querySelector('.c-fpin__offer .material-symbols-outlined').textContent = it.icon;
     b.querySelector('.c-fpin__text').textContent = it.offer;
+    b.querySelector('.c-fpin__name').textContent = it.name;
     b.addEventListener('click', function () { phoneEl.classList.add('has-pick'); select(it.id, { pan: true }); });
     if (matchMedia('(hover: hover)').matches) b.addEventListener('mouseenter', function () { phoneEl.classList.add('has-pick'); select(it.id); });
     pinLayer.appendChild(b);

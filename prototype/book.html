@@ -149,13 +149,13 @@
 
     // Each room with its photo and the member price, the same price the partner page quotes. A tick marks the pick.
     var pick = Math.min(Number(queryParam('room')) || 0, p.rooms.length - 1);
-    var sleeps = p.rooms.map(function (r) { var m = /sleeps (\d+)/.exec(r.sub); return m ? Number(m[1]) : 99; });
+    var sleeps = p.rooms.map(function (r) { var m = /sleeps (\d+)/.exec(r.sub); return r.sleeps || (m ? Number(m[1]) : 2); });
     $('[data-rooms]').innerHTML = p.rooms.map(function (r, i) {
       return '<label class="c-merow c-bkroom">' +
         '<input class="c-bkroom__input" type="radio" name="room" value="' + i + '"' + (i === pick ? ' checked' : '') + '>' +
         '<img class="c-bkroom__img" src="' + (r.photo || p.thumb) + '" alt="">' +
         '<span class="c-merow__main"><span class="c-bkroom__name">' + r.name + '</span><span class="c-merow__sub">' + r.sub + '</span>' +
-        '<span class="c-bkroom__price">' + fmtPeso(member(r.rate)) + ' <s>' + fmtPeso(r.rate) + '</s></span></span>' +
+        '<span class="c-bkroom__price">' + fmtPeso(member(r.rate)) + (stay ? ' / night' : '') + ' <s>' + fmtPeso(r.rate) + '</s></span></span>' +
         '<i class="ph-light ph-check c-bkroom__tick" aria-hidden="true"></i>' +
       '</label>';
     }).join('');
@@ -300,11 +300,23 @@
       $('[data-bar-total]').textContent = fmtPeso(total);
       $('[data-bar-nights]').textContent = 'Total for ' + f.plural(nights, 'night', 'nights');
       $('[data-pay]').textContent = total > 0 ? 'Pay' : 'Confirm';
+      fold();
       $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i + '&in=' + f.iso(s.checkIn) + '&out=' + f.iso(s.checkOut) +
-        '&a=' + s.adults + '&c=' + s.kids + '&free=' + (free ? 1 : 0) +
+        '&a=' + s.adults + '&c=' + s.kids + '&free=' + (free ? 1 : 0) + '&new=1' +
         ($('[data-reqtext]').value.trim() ? '&req=' + encodeURIComponent($('[data-reqtext]').value.trim()) : '');
     }
 
+    // The room picked on the listing stays picked: one row, with Change to see the others.
+    var roomsOpen = false;
+    function fold() {
+      var b = $('[data-roomchange]');
+      if (!b) return;
+      $$('.c-bkroom').forEach(function (row) { row.hidden = !roomsOpen && !row.querySelector('input').checked; });
+      b.textContent = roomsOpen ? 'Done' : 'Change';
+    }
+    $('[data-room-head]').insertAdjacentHTML('beforeend', '<button class="c-bkchange" type="button" data-roomchange>Change</button>');
+    $('[data-roomchange]').addEventListener('click', function () { roomsOpen = !roomsOpen; fold(); });
+    $('[data-rooms]').addEventListener('change', function () { roomsOpen = false; });
     $('[data-rooms]').addEventListener('change', render);
     $('[data-free]').addEventListener('change', render);
     $('[data-reqtext]').addEventListener('input', render);

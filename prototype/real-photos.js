@@ -33,7 +33,7 @@
     F.offers.forEach(function (o) { if (has(o.place)) o.photo = R[o.place].offer || nth(o.place, 1); });
     F.events.concat(F.stories).forEach(function (s, k) {
       if (!has(s.place) || !s.photos) return;
-      s.photos = s.photos.map(function (src, i) { return /^data:/.test(src) ? src : nth(s.place, k + i + 1); });
+      s.photos = s.real || s.photos.map(function (src, i) { return /^data:/.test(src) ? src : nth(s.place, k + i + 1); });
     });
   }
 

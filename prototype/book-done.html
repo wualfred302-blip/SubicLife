@@ -147,14 +147,45 @@
     if (req && !trip) { $('[data-req-text]').textContent = req; $('[data-req-block]').hidden = false; }
 
     if (tix) $('.c-bkdone__note').textContent = 'Show your card QR at ' + meet + '.';
-    // A way to reach the place after booking, where it takes messages (a text opens the phone's own app).
+    // A way to reach the place after booking: a text where it takes messages (the phone's own app), a call for hotels.
     // It sits beside Add to calendar, so the booked screen stays one screen tall.
-    if (p.chat) {
+    var reach = p.chat ? ['sms:' + p.chat[0], 'chat-circle-text', p.chat[1]]
+      : !tix && !trip && p.phone ? ['tel:' + p.phone.replace(/\s/g, ''), 'phone', 'Call'] : null;
+    if (reach) {
       var acts = document.createElement('div'), cal = $('[data-ics]');
       acts.className = 'c-bkacts';
       cal.before(acts);
       acts.append(cal);
-      acts.insertAdjacentHTML('beforeend', '<a class="c-cgcal" href="sms:' + p.chat[0] + '"><i class="ph-light ph-chat-circle-text" aria-hidden="true"></i>' + p.chat[1] + '</a>');
+      acts.insertAdjacentHTML('beforeend', '<a class="c-cgcal" href="' + reach[0] + '"><i class="ph-light ph-' + reach[1] + '" aria-hidden="true"></i>' + reach[2] + '</a>');
+    }
+
+    // A stay paid for just now goes into Me > Bookings (this browser only). While it is free to cancel (until two days
+    // before check-in, as Confirm and pay says), Booked offers it; cancelling takes it out of Bookings.
+    var load = function (k) { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch (e) { return []; } };
+    var keep = function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+    if (checkIn && checkOut && !tix) {
+      var key = p.id + '-' + queryParam('in') + '-' + i, mine = load('sl-bookings');
+      var has = function () { return load('sl-bookings').some(function (b) { return b.key === key; }); };
+      if (queryParam('new') === '1' && !has() && load('sl-bookings-off').indexOf(key) < 0) {
+        var span = checkIn.getMonth() === checkOut.getMonth() ? checkIn.getDate() + ' to ' + checkOut.getDate() + ' ' + MON[checkOut.getMonth()]
+          : checkIn.getDate() + ' ' + MON[checkIn.getMonth()] + ' to ' + checkOut.getDate() + ' ' + MON[checkOut.getMonth()];
+        mine.push({ key: key, name: p.name, sub: r.name + ' · ' + span + ' · Code ' + p.code, thumb: p.thumb,
+          href: 'book-done.html' + location.search.replace('&new=1', '') });
+        keep('sl-bookings', mine);
+      }
+      var today = new Date(2026, 9, 17);  // the demo's today, as SLStay.today in stay.js
+      var deadline = new Date(checkIn.getFullYear(), checkIn.getMonth(), checkIn.getDate() - 2);
+      if (has() && deadline >= today) {
+        $('main').insertAdjacentHTML('beforeend', '<button class="c-bkcancel" type="button" data-cancel>Cancel for free until ' + dayName(deadline) + '</button>');
+        $('[data-cancel]').addEventListener('click', function () {
+          keep('sl-bookings', load('sl-bookings').filter(function (b) { return b.key !== key; }));
+          keep('sl-bookings-off', load('sl-bookings-off').concat(key));
+          $('.c-bkdone__tick').className = 'ph-light ph-x-circle c-bkdone__tick';
+          $('.c-bkdone__title').textContent = 'Booking cancelled';
+          $('[data-saved]').textContent = total > 0 ? fmtPeso(total) + ' goes back to GCash' : 'Nothing was charged';
+          ['.c-bkacts', '[data-ics]', '.c-bkdone__note', '[data-cancel]'].forEach(function (s) { var el = $(s); if (el) el.style.display = 'none'; });
+        });
+      }
     }
     var icsLink = $('[data-ics]');
     icsLink.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);

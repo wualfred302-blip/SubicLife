@@ -113,6 +113,69 @@
       comments: []
     },
     {
+      id: 'bestwestern-roof', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '6d', visited: 'Oct 11',
+      place: 'bestwestern', cats: ['hotels'], commentCount: 2,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      real: ['img/real/bestwestern/bestwestern-03.jpg', 'img/real/bestwestern/bestwestern-04.jpg'],
+      caption: 'Sky Oasis on the roof at sunset, the bay right below. The kids’ pool is next to the big one, open till 10 PM.',
+      likes: 64,
+      comments: []
+    },
+    {
+      id: 'lecharme-pool', kind: 'story', author: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '6d', visited: 'Oct 11',
+      place: 'lecharme', cats: ['hotels'], commentCount: 4,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      real: ['img/real/lecharme/lecharme-02.jpg', 'img/real/lecharme/lecharme-05.jpg'],
+      caption: 'Rooftop infinity pool over the whole bay. We brought our bikes and there’s a rack right in the room.',
+      likes: 88,
+      comments: []
+    },
+    {
+      id: 'segara-villa', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '7d', visited: 'Oct 10',
+      place: 'segara', cats: ['hotels'], commentCount: 1,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      real: ['img/real/segara/segara-04.jpg', 'img/real/segara/segara-01.jpg'],
+      caption: 'Breakfast comes with the villa, and the pool and garden are for guests only, so it stays quiet. Book a massage after the beach.',
+      likes: 41,
+      comments: []
+    },
+    {
+      id: 'reef-work', kind: 'story', author: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '7d', visited: 'Oct 10',
+      place: 'reef', cats: ['hotels'], commentCount: 1,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      real: ['img/real/reef/reef-04.jpg', 'img/real/reef/reef-02.jpg'],
+      caption: 'Fast fibre Wi-Fi, so I could work from the room. Pirates Bistro is downstairs and the shop is open 24 hours.',
+      likes: 23,
+      comments: []
+    },
+    {
+      id: 'terrace-room', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '7d', visited: 'Oct 9',
+      place: 'terrace', cats: ['hotels'], commentCount: 0,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      real: ['img/real/terrace/terrace-07.jpg', 'img/real/terrace/terrace-01.jpg'],
+      caption: 'Our room had its own terrace, and parking out front is free.',
+      likes: 17,
+      comments: []
+    },
+    {
+      id: 'bayfront-pool', kind: 'story', author: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '8d', visited: 'Oct 9',
+      place: 'bayfront', cats: ['hotels'], commentCount: 2,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      real: ['img/real/bayfront/bayfront-02.jpg', 'img/real/bayfront/bayfront-04.jpg'],
+      caption: 'Breakfast for two came with our Deluxe room. There’s an indoor pool too, handy when it rains.',
+      likes: 35,
+      comments: []
+    },
+    {
+      id: 'forestview-kitchen', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '8d', visited: 'Oct 8',
+      place: 'forestview', cats: ['hotels'], commentCount: 1,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      real: ['img/real/forestview/forestview-02.jpg', 'img/real/forestview/forestview-06.jpg'],
+      caption: 'We cooked breakfast in our own kitchen. Lots of trees, and a big pool for the kids.',
+      likes: 29,
+      comments: []
+    },
+    {
       id: 'yacht-charter', kind: 'story', mine: true, author: 'Ana Reyes', avatar: 'img/avatar.jpg', ago: '8d', visited: 'Oct 5',
       place: 'yacht', cats: ['water-sports'], commentCount: 3,
       photos: ['img/hist-sailing-club.jpg', 'img/thumb-yacht-club.jpg'],

@@ -33,7 +33,16 @@
         { name: 'Garden Room', sub: 'Queen bed · pool side · sleeps 2', rate: 7400, photo: 'img/hist-lighthouse-oct.jpg' }
       ],
       dates: ['Check-in', 'Check-out', 'Sat, 17 Oct', 'Sun, 18 Oct'],
-      code: 'SBL-4K7Q2M'
+      code: 'SBL-4K7Q2M',
+      has: [
+        ['coffee', 'Breakfast for 2 adults included'],
+        ['swimming-pool', 'Outdoor pool and hot tub'],
+        ['wifi-high', 'Free Wi-Fi'],
+        ['fork-knife', 'Sands Resto Grill and the 720 Bar'],
+        ['flower-lotus', 'Massage room'],
+        ['baby', 'Children 5 and under stay free']
+      ],
+      inroom: ['Air-con', 'Minibar and fridge', 'Safe']
     },
     ocean: {
       id: 'ocean',
@@ -274,14 +283,23 @@
       rackPrice: 6500,
       memberPrice: 5850,
       rooms: [
-        { name: 'Deluxe Queen Room', sub: 'Queen bed · 24 m² · sleeps 2', rate: 6500, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Deluxe King Room', sub: 'King bed · 31 m² · sleeps 2', rate: 7200, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Deluxe Two Queen Beds', sub: 'Two queen beds · 35 m²', rate: 7800, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Superior King Room', sub: 'King bed · 40 m²', rate: 8500, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Executive King Suite', sub: 'King bed · lounge and bathtub', rate: 11000, photo: 'img/pass-subic-bay.jpg' }
+        { name: 'Deluxe Queen Room', sleeps: 2, sub: 'Queen bed · 24 m² · sleeps 2', rate: 6500, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Deluxe King Room', sleeps: 2, sub: 'King bed · 31 m² · sleeps 2', rate: 7200, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Deluxe Two Queen Beds', sleeps: 4, sub: 'Two queen beds · 35 m²', rate: 7800, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Superior King Room', sleeps: 2, sub: 'King bed · 40 m²', rate: 8500, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Executive King Suite', sleeps: 2, sub: 'King bed · lounge and bathtub', rate: 11000, photo: 'img/pass-subic-bay.jpg' }
       ],
       dates: ['Check-in', 'Check-out', 'Sat, 17 Oct', 'Sun, 18 Oct'],
-      code: 'SBL-353HJB'
+      code: 'SBL-353HJB',
+      has: [
+        ['coffee', 'Breakfast included, 6 to 10 AM'],
+        ['swimming-pool', 'Rooftop pool, kids’ pool and pool bar, 7 AM to 10 PM'],
+        ['wifi-high', 'Free Wi-Fi'],
+        ['car', 'Free parking'],
+        ['barbell', 'Gym'],
+        ['fork-knife', 'Cactus Jack restaurant and Café Viktor']
+      ],
+      inroom: ['Air-con', 'Minibar', 'Flat-screen TV']
     },
     lecharme: {
       id: 'lecharme',
@@ -308,14 +326,22 @@
       rackPrice: 8764,
       memberPrice: 7888,
       rooms: [
-        { name: 'Standard Room', sub: 'One bed · 28 m² · sleeps 2', rate: 8764, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Deluxe King', sub: 'One bed · 45 m² · sleeps 2', rate: 13750, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Deluxe Twin', sub: 'Two beds · 45 m² · up to 5', rate: 15840, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Charmé Suite', sub: 'One bed · 55 m² · up to 3', rate: 19500, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Family Room', sub: 'Three beds · 65 m² · up to 7', rate: 23800, photo: 'img/pass-subic-bay.jpg' }
+        { name: 'Standard Room', sleeps: 2, sub: 'One bed · 28 m² · sleeps 2', rate: 8764, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Deluxe King', sleeps: 2, sub: 'One bed · 45 m² · sleeps 2', rate: 13750, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Deluxe Twin', sleeps: 5, sub: 'Two beds · 45 m² · up to 5', rate: 15840, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Charmé Suite', sleeps: 3, sub: 'One bed · 55 m² · up to 3', rate: 19500, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Family Room', sleeps: 7, sub: 'Three beds · 65 m² · up to 7', rate: 23800, photo: 'img/pass-subic-bay.jpg' }
       ],
       dates: ['Check-in', 'Check-out', 'Sat, 17 Oct', 'Sun, 18 Oct'],
-      code: 'SBL-UO5USU'
+      code: 'SBL-UO5USU',
+      has: [
+        ['swimming-pool', 'Rooftop infinity pool over the bay'],
+        ['coffee', 'Breakfast with some rates, otherwise ₱770'],
+        ['wifi-high', 'Free Wi-Fi'],
+        ['car', 'Free secure parking'],
+        ['fork-knife', 'Mi Tapas and Le Charmé Café'],
+        ['bicycle', 'Bike racks in the rooms']
+      ]
     },
     segara: {
       id: 'segara',
@@ -342,12 +368,21 @@
       rackPrice: 8130,
       memberPrice: 7317,
       rooms: [
-        { name: 'Junior Villa', sub: 'King bed · 57 m² · breakfast', rate: 8130, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Executive Villa', sub: 'King bed · 70 m² · bathtub', rate: 12090, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Family Villa', sub: 'Six double beds · for groups', rate: 22600, photo: 'img/pass-subic-bay.jpg' }
+        { name: 'Junior Villa', sleeps: 2, sub: 'King bed · 57 m² · breakfast', rate: 8130, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Executive Villa', sleeps: 2, sub: 'King bed · 70 m² · bathtub', rate: 12090, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Family Villa', sleeps: 12, sub: 'Six double beds · for groups', rate: 22600, photo: 'img/pass-subic-bay.jpg' }
       ],
       dates: ['Check-in', 'Check-out', 'Sat, 17 Oct', 'Sun, 18 Oct'],
-      code: 'SBL-GQ5H9E'
+      code: 'SBL-GQ5H9E',
+      has: [
+        ['coffee', 'Breakfast included'],
+        ['swimming-pool', 'Pool and garden for guests, 7 AM to 10 PM'],
+        ['wifi-high', 'Free Wi-Fi'],
+        ['car', 'Free parking'],
+        ['fork-knife', 'Asian Spices restaurant'],
+        ['flower-lotus', 'Massage and spa']
+      ],
+      inroom: ['Air-con', 'Safe and minibar', 'Coffee things and bathrobes']
     },
     reef: {
       id: 'reef',
@@ -374,13 +409,23 @@
       rackPrice: 3350,
       memberPrice: 3015,
       rooms: [
-        { name: 'Deluxe Parkview Room', sub: 'Queen bed · 24 m² · park view', rate: 3350, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Junior Suite', sub: 'Queen bed · 27 m²', rate: 3900, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Executive Suite', sub: 'King bed · 33 m² · kitchenette', rate: 4200, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Deluxe Parkview Room', sleeps: 2, sub: 'Queen bed · 24 m² · park view', rate: 3350, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Junior Suite', sleeps: 2, sub: 'Queen bed · 27 m²', rate: 3900, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Executive Suite', sleeps: 2, sub: 'King bed · 33 m² · kitchenette', rate: 4200, photo: 'img/pass-subic-bay.jpg' },
         { name: 'Family Suite Bayview', sub: 'Queen and single bed · bay view · sleeps 3', rate: 5000, photo: 'img/pass-subic-bay.jpg' }
       ],
       dates: ['Check-in', 'Check-out', 'Sat, 17 Oct', 'Sun, 18 Oct'],
-      code: 'SBL-X5XI1N'
+      code: 'SBL-X5XI1N',
+      has: [
+        ['wifi-high', 'Free fibre Wi-Fi'],
+        ['car', 'Free parking'],
+        ['fork-knife', 'Pirates Bistro, 7 AM to 11 PM'],
+        ['coffee', 'Breakfast not included'],
+        ['storefront', '24-hour shop on site'],
+        ['sun-horizon', 'Roof deck'],
+        ['flower-lotus', 'Massages and facials']
+      ],
+      inroom: ['Air-con', 'Fridge and TV', 'Non-smoking']
     },
     terrace: {
       id: 'terrace',
@@ -407,10 +452,17 @@
       rackPrice: 3660,
       memberPrice: 3294,
       rooms: [
-        { name: 'Executive Room with Terrace', sub: 'King bed · private terrace', rate: 3660, photo: 'img/pass-subic-bay.jpg' }
+        { name: 'Executive Room with Terrace', sleeps: 2, sub: 'King bed · private terrace', rate: 3660, photo: 'img/pass-subic-bay.jpg' }
       ],
       dates: ['Check-in', 'Check-out', 'Sat, 17 Oct', 'Sun, 18 Oct'],
-      code: 'SBL-05O0AZ'
+      code: 'SBL-05O0AZ',
+      has: [
+        ['coffee', 'Breakfast included, 6 to 10 AM'],
+        ['wifi-high', 'Free Wi-Fi'],
+        ['car', 'Free parking'],
+        ['bell', 'Front desk 24 hours']
+      ],
+      inroom: ['Air-con and cable TV', 'Safe and kettle', 'Toiletries, cleaned daily']
     },
     bayfront: {
       id: 'bayfront',
@@ -437,11 +489,18 @@
       rackPrice: 2750,
       memberPrice: 2475,
       rooms: [
-        { name: 'Superior Room', sub: 'Queen bed · breakfast for 2', rate: 2750, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Deluxe Room', sub: 'Queen bed · breakfast for 2', rate: 3100, photo: 'img/pass-subic-bay.jpg' }
+        { name: 'Superior Room', sleeps: 2, sub: 'Queen bed · breakfast for 2', rate: 2750, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Deluxe Room', sleeps: 2, sub: 'Queen bed · breakfast for 2', rate: 3100, photo: 'img/pass-subic-bay.jpg' }
       ],
       dates: ['Check-in', 'Check-out', 'Sat, 17 Oct', 'Sun, 18 Oct'],
-      code: 'SBL-DA3592'
+      code: 'SBL-DA3592',
+      has: [
+        ['coffee', 'Breakfast for 2 with Superior and Deluxe rooms'],
+        ['swimming-pool', 'Indoor and outdoor pools'],
+        ['wifi-high', 'Free Wi-Fi'],
+        ['car', 'Free parking'],
+        ['fork-knife', 'Tong Kyung Am restaurant and room service']
+      ]
     },
     forestview: {
       id: 'forestview',
@@ -468,12 +527,21 @@
       rackPrice: 3500,
       memberPrice: 3150,
       rooms: [
-        { name: 'One-bedroom Apartment', sub: 'Kitchen · sleeps 2, up to 3', rate: 3500, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Superior Villa', sub: 'Three bedrooms · 140 m²', rate: 6050, photo: 'img/pass-subic-bay.jpg' },
-        { name: 'Deluxe Villa', sub: 'Whole villa', rate: 7370, photo: 'img/pass-subic-bay.jpg' }
+        { name: 'One-bedroom Apartment', sleeps: 3, sub: 'Kitchen · sleeps 2, up to 3', rate: 3500, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Superior Villa', sleeps: 8, sub: 'Three bedrooms · 140 m²', rate: 6050, photo: 'img/pass-subic-bay.jpg' },
+        { name: 'Deluxe Villa', sleeps: 6, sub: 'Whole villa', rate: 7370, photo: 'img/pass-subic-bay.jpg' }
       ],
       dates: ['Check-in', 'Check-out', 'Sat, 17 Oct', 'Sun, 18 Oct'],
-      code: 'SBL-7LKWP5'
+      code: 'SBL-7LKWP5',
+      has: [
+        ['cooking-pot', 'A kitchen in every unit'],
+        ['coffee', 'No breakfast served'],
+        ['swimming-pool', 'Outdoor pool'],
+        ['car', 'Free parking'],
+        ['basketball', 'Basketball court and garden'],
+        ['wifi-low', 'Wi-Fi in shared areas']
+      ],
+      inroom: ['Air-con and TV', 'Fridge, microwave and kettle', 'Private patio']
     },
     elfilos: {
       id: 'elfilos',
