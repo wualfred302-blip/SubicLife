@@ -3043,3 +3043,7 @@ html .phone.c-bkpage .c-req-bar .c-btn.primary {
 .c-tixsheet .c-bkbar__sum b s { margin-left: 6px; font: 400 14px/20px var(--font); color: #5F6670; }
 .c-tixsheet button.c-btn { border: 0; font-family: var(--font); cursor: pointer; }
 button.c-bkchange { padding: 0; border: 0; background: none; cursor: pointer; }
+
+/* hotel-room */
+.c-mcal .c-bkday.is-end::before { width: 40px; height: 40px; }
+.c-tixsheet .c-bksheet__title:focus { outline: none; }

@@ -335,9 +335,9 @@
       var picker = p.unit === 'night' && rooms.length && f && SLStay({
         checkIn: f.parse(queryParam('in')), checkOut: f.parse(queryParam('out')),
         adults: Number(queryParam('a')) || 2, kids: Number(queryParam('c')) || 0,
-        maxParty: Math.max.apply(null, sleeps), optional: true, onChange: function () { draw(); if (want > -1 && picker.state.checkOut) { var w = want; want = -1; openRoom(w, ropener); } }
+        maxParty: Math.max.apply(null, sleeps), optional: true, onChange: function () { draw(); }
       });
-      $('[data-pick]').hidden = !picker;
+      $('[data-pick]').hidden = true;
       if (picker) $('.c-bottombar').style.display = 'none';
       var draw = function () {
         var s = picker ? picker.state : null;
@@ -351,8 +351,8 @@
             '<img class="c-bkroom__img" src="' + (r.photo || p.hero) + '" alt="">' +
             '<span class="c-merow__main"><span class="c-bkroom__name">' + r.name + '</span><span class="c-merow__sub">' + r.sub +
             (r.sleeps && !/sleeps|up to/.test(r.sub) ? ' · sleeps ' + r.sleeps : '') + '</span>' +
-            '<span class="c-bkroom__price">' + money(pay(r, n)) + '<span class="c-plroom__unit"> ' + (n > 1 ? 'for ' + f.plural(n, 'night', 'nights') + ', 1 free' : n ? 'with your free night' : '/ ' + p.unit) + '</span>' +
-            (n ? '' : ' <s>' + fmtPeso(r.rate) + '</s>') + '</span></span>' +
+            '<span class="c-bkroom__price">' + money(pay(r, n)) + '<span class="c-plroom__unit"> ' + (n ? 'for ' + f.plural(n, 'night', 'nights') : '/ ' + p.unit) + '</span>' +
+            ' <s>' + fmtPeso(r.rate * (n || 1)) + '</s></span></span>' +
             '<i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i></button>';
         }).join('');
         var low = fits.length ? rooms[fits[0]] : (rooms[order[0]] || { rate: p.rackPrice });
@@ -385,10 +385,11 @@
       });
       // A room's own sheet, before paying: its photo, bed, size and how many it sleeps, what every room has, and
       // the price for the dates picked with the Prestige free night shown.
-      var cur = {}, ropen = -1, want = -1;
-      // What a stay costs: the member rate a night, less the Prestige free night (as Confirm and pay takes it off).
-      var pay = function (r, nights) { return nights ? member(r.rate) * (nights - 1) : member(r.rate); };
-      var money = function (x) { return x ? fmtPeso(x) : 'Free'; };
+      var cur = {};
+      // What a stay costs before checkout: the member rate for the nights picked (a night without dates). The free
+      // night is the guest's choice at Confirm and pay.
+      var pay = function (r, nights) { return member(r.rate) * (nights || 1); };
+      var money = fmtPeso;
       document.querySelector('.phone .c-homeindicator').insertAdjacentHTML('beforebegin',
         '<div class="c-sheet c-bksheet c-tixsheet" data-roomsheet role="dialog" aria-modal="true" aria-labelledby="room-title" hidden>' +
           '<button class="c-sheet__scrim" type="button" data-roomclose aria-label="Close"></button>' +
@@ -400,42 +401,109 @@
         return /bed/i.test(x) ? 'bed' : /m²/.test(x) ? 'ruler' : /breakfast/.test(x) ? 'coffee' : /kitchen/i.test(x) ? 'cooking-pot' :
           /bath/.test(x) ? 'bathtub' : /view|terrace|balcony/.test(x) ? 'sun-horizon' : 'house-line';
       };
-      var openRoom = function (i, opener) {
-        var r = rooms[i], nn = cur.n, ppl = cur.s ? cur.s.adults + cur.s.kids : 0, fit = sleeps[i] >= ppl;
+      // The room's page: what it is, then when and who, with the total at the bottom as they change. The dates and
+      // guests are the listing's stay (picker.state), so the rooms list and the address keep them too.
+      var rs = picker.state, ri = -1;
+      var monthOf = function (x) { return new Date(x.getFullYear(), x.getMonth(), 1); };
+      var mview = monthOf(SLStay.today);
+      var rstep = function (key, label, sub, value, min, cap) {
+        return '<div class="c-merow"><span class="c-merow__main">' + label + '<span class="c-merow__sub">' + sub + '</span></span>' +
+          '<span class="c-cgstep"><button class="c-cgstep__btn" type="button" data-rstep="' + key + '-1" aria-label="One fewer"' + (value <= min ? ' disabled' : '') + '><i class="ph-light ph-minus" aria-hidden="true"></i></button>' +
+          '<span class="c-cgstep__value" aria-live="polite">' + value + '</span>' +
+          '<button class="c-cgstep__btn" type="button" data-rstep="' + key + '1" aria-label="One more"' + (rs.adults + rs.kids >= cap ? ' disabled' : '') + '><i class="ph-light ph-plus" aria-hidden="true"></i></button></span></div>';
+      };
+      // SLStay.month draws one month and marks check-in; check-out and the nights between are marked here.
+      var paint = function () {
+        var a = rs.checkIn, b = rs.checkOut;
+        Array.prototype.forEach.call(rsheet.querySelectorAll('[data-day]'), function (el) {
+          var d = f.parse(el.dataset.day), end = !!b && +d === +b;
+          el.classList.toggle('is-end', end);
+          el.classList.toggle('is-in', !!b && d > a && d < b);
+          el.classList.toggle('has-range', !!b);
+          if (end) el.setAttribute('aria-pressed', 'true');
+        });
+      };
+      var drawRoom = function () {
+        var r = rooms[ri], cap = sleeps[ri];
+        // A room sleeps so many: a bigger party is cut down to fit, and the + buttons stop there.
+        if (rs.adults > cap) rs.adults = cap;
+        if (rs.adults + rs.kids > cap) rs.kids = cap - rs.adults;
+        draw();
+        var nn = cur.n;
         var facts = r.sub.split(' · ').filter(function (x) { return !/sleeps|up to/.test(x); }).slice(0, 2)
           .map(function (x) { return [rfact(x), x.charAt(0).toUpperCase() + x.slice(1)]; })
-          .concat([['users', 'Up to ' + sleeps[i] + ' guests']]);
-        $('[data-roombody]').innerHTML =
+          .concat([['users', 'Up to ' + cap + ' guests']]);
+        var body = $('[data-roombody]'), top0 = body.scrollTop;
+        body.innerHTML =
           '<img class="c-rmsheet__img" src="' + (r.photo || p.hero) + '" alt="">' +
-          '<div class="c-bksheet__head"><h2 class="c-bksheet__title" id="room-title">' + r.name + '</h2><p class="c-bksheet__sub">' + p.name + '</p></div>' +
+          '<div class="c-bksheet__head"><h2 class="c-bksheet__title" id="room-title" tabindex="-1">' + r.name + '</h2><p class="c-bksheet__sub">' + p.name + '</p></div>' +
           '<ul class="c-tixfacts" style="grid-template-columns: repeat(' + facts.length + ', 1fr)">' + facts.map(function (x) {
             return '<li><i class="ph-light ph-' + x[0] + '" aria-hidden="true"></i>' + x[1] + '</li>';
           }).join('') + '</ul>' +
           (p.inroom ? '<p class="c-mehead">In every room</p><div class="c-melist">' + p.inroom.map(function (x) {
             return '<div class="c-merow"><span class="c-merow__lead"><i class="ph-light ph-check" aria-hidden="true"></i></span><span class="c-merow__main">' + x + '</span></div>';
           }).join('') + '</div>' : '') +
-          (!fit ? '<p class="c-rmsheet__note">This room sleeps up to ' + sleeps[i] + '. Pick a bigger room or fewer guests.</p>'
-            : !nn ? '<p class="c-rmsheet__note">Add your dates to see the total. Prestige gives you 1 night free.</p>' : '');
+          '<p class="c-mehead">When are you staying?</p><div class="c-tixcal">' + SLStay.month(mview, rs.checkIn) + '</div>' +
+          '<p class="c-rmsheet__note" aria-live="polite">' + (nn ? f.range(rs.checkIn, rs.checkOut) + ' · ' + f.plural(nn, 'night', 'nights')
+            : rs.checkIn ? 'Check-in ' + f.day(rs.checkIn) + '. Now tap check-out.' : 'Tap your check-in day, then check-out.') + '</p>' +
+          '<p class="c-mehead">Guests</p><div class="c-melist c-cgform">' +
+            rstep('a', 'Adults', 'Ages 13 or above', rs.adults, 1, cap) + rstep('c', 'Children', 'Ages 2 to 12', rs.kids, 0, cap) +
+          '</div>' +
+          '<p class="c-rmsheet__note">This room sleeps up to ' + cap + '.</p>';
+        body.scrollTop = top0;
+        paint();
         $('[data-roomfoot]').innerHTML =
-          '<span class="c-bkbar__sum"><b>' + money(pay(r, nn)) + (nn ? '<s>' + fmtPeso(r.rate * nn) + '</s>' : '') + '</b><span>' +
-            (nn ? f.short(cur.s.checkIn, cur.s.checkOut) + ' · ' + (nn > 1 ? '1 night free' : 'your free night')
-              : 'a night · ' + p.discount + '% off') + '</span></span>' +
-          (!fit ? '<span class="c-btn primary" aria-disabled="true">Too small for ' + ppl + '</span>'
-            : nn ? '<a class="c-btn primary" href="' + ('book.html?p=' + p.id + '&room=' + i + cur.q).replace(/&/g, '&amp;') + '">Reserve</a>'
-            : '<button class="c-btn primary" type="button" data-roomdates>Add dates</button>');
+          '<span class="c-bkbar__sum"><b>' + fmtPeso(pay(r, nn)) + '<s>' + fmtPeso(r.rate * (nn || 1)) + '</s></b><span>' +
+            (nn ? f.plural(nn, 'night', 'nights') + ' · ' + f.party(rs.adults, rs.kids) : 'a night · ' + p.discount + '% off') + '</span></span>' +
+          (nn ? '<a class="c-btn primary" href="' + ('book.html?p=' + p.id + '&room=' + ri + cur.q).replace(/&/g, '&amp;') + '">Reserve</a>'
+            : '<span class="c-btn primary" aria-disabled="true">Pick dates</span>');
+      };
+      var openRoom = function (i, opener) {
+        ri = i;
         ropener = opener;
-        ropen = i;
+        mview = monthOf(rs.checkIn || SLStay.today);
+        drawRoom();
         rsheet.hidden = false;
         $('[data-roombody]').scrollTop = 0;
+        $('#room-title').focus();
       };
+      var closeRoom = function () { rsheet.hidden = true; if (ropener) ropener.focus(); };
       $('[data-rooms]').addEventListener('click', function (e) {
         var b = e.target.closest('[data-room]');
         if (b) openRoom(Number(b.dataset.room), b);
       });
+      // Tap check-in, then check-out; tapping again (or a day before check-in) starts over, as in the Dates sheet.
       rsheet.addEventListener('click', function (e) {
-        if (e.target.closest('[data-roomclose]')) { rsheet.hidden = true; if (ropener) ropener.focus(); }
-        if (e.target.closest('[data-roomdates]')) { want = ropen; rsheet.hidden = true; picker.open('dates', ropener); }
+        if (e.target.closest('[data-roomclose]')) return closeRoom();
+        var day = e.target.closest('[data-day]');
+        if (day) {
+          if (day.disabled) return;
+          var d = f.parse(day.dataset.day);
+          if (!rs.checkIn || rs.checkOut || d <= rs.checkIn) { rs.checkIn = d; rs.checkOut = null; }
+          else rs.checkOut = d;
+          drawRoom();
+          var day2 = rsheet.querySelector('[data-day="' + day.dataset.day + '"]');
+          if (day2) day2.focus();
+          return;
+        }
+        var nv = e.target.closest('[data-mnav]');
+        if (nv) {
+          mview = new Date(mview.getFullYear(), mview.getMonth() + Number(nv.dataset.mnav), 1);
+          drawRoom();
+          var nv2 = rsheet.querySelector('[data-mnav="' + nv.dataset.mnav + '"]');
+          if (nv2 && !nv2.disabled) nv2.focus();
+          return;
+        }
+        var st = e.target.closest('[data-rstep]');
+        if (st) {
+          var step = st.dataset.rstep.slice(1) === '1' ? 1 : -1;
+          if (st.dataset.rstep[0] === 'a') rs.adults += step; else rs.kids += step;
+          drawRoom();
+          var again = rsheet.querySelector('[data-rstep="' + st.dataset.rstep + '"]');
+          if (again && !again.disabled) again.focus();
+        }
       });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !rsheet.hidden) closeRoom(); });
       draw();
     }
     // What a hotel has: pool, Wi-Fi, parking, breakfast included or not.
