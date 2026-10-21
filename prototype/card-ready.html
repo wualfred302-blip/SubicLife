@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/thin/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-c.css">
@@ -17,8 +19,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone theme-night is-onboard c-push">
-
+<div class="phone c-discover c-auth c-auth--white c-auth--form c-cardwhite c-cr c-cr--a">
   <header class="c-statusbar">
     <span>9:41</span>
     <span class="c-statusbar__icons">
@@ -27,52 +28,58 @@
       <span class="material-symbols-outlined">battery_full</span>
     </span>
   </header>
-
+  <div class="c-dhead c-dhead--push">
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+    <img class="c-auth__inklogo" src="img/logo-ink.svg" alt="Subic.Life">
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
   <main class="screen-scroll">
-
-    <section class="u-gutter u-mt-8">
-      <h2 class="c-section-title is-title">Your card is ready</h2>
-    </section>
-
-    <section class="u-gutter u-mt-24 c-cardstage">
-      <div class="c-mcard is-prestige is-portrait" id="ready-card">
+    <div class="c-auth__head">
+      <h1 class="c-auth__title">Your card is ready</h1>
+      <p class="c-auth__sub" id="ready-sub">Ana Reyes · Prestige member</p>
+    </div>
+    <section class="c-cr__stage">
+      <div class="c-mcard is-prestige is-portrait" id="ready-card" data-mcard role="button" tabindex="0" aria-pressed="false" aria-label="Membership card. Tap to show the QR code.">
         <div class="c-mcard__flipper">
           <div class="c-mcard__face c-mcard__front">
             <span class="c-mcard__sheen" aria-hidden="true"></span>
             <span class="c-mcard__ghost" aria-hidden="true"><span>Su</span><span>bic</span></span>
-            <span class="c-mcard__brand">Subic.Life</span>
-            <span class="c-mcard__foot" id="ready-foot">Ana Reyes · Prestige member</span>
+            <img class="c-mcard__logo" id="ready-logo" src="img/logo.svg" alt="Subic.Life">
+            <span class="c-mcard__foot" id="ready-foot">Prestige member</span>
+          </div>
+          <div class="c-mcard__face c-mcard__back" aria-hidden="true">
+            <span class="c-mcard__sheen"></span>
+            <div class="c-mcard__qrtile"><span class="c-qr is-card"></span></div>
+            <p class="c-mcard__number">SL 0042 1187</p>
+            <p class="c-mcard__valid">Valid until Oct 2027</p>
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="u-gutter u-mt-32">
-    </section>
-
-    <section class="u-gutter u-mt-12">
-      <a class="c-btn primary" href="map.html">See the map</a>
+      <p class="c-cr__hint">Tap the card to see your QR</p>
     </section>
 
   </main>
-
+  <footer class="c-cr__foot">
+    <a class="c-auth__send" href="map.html">See the map</a>
+  </footer>
   <span class="c-homeindicator"></span>
-
 </div>
 <script>
 (function () {
   var tiers = ['premium', 'prestige', 'elite'];
   var names = { premium: 'Premium', prestige: 'Prestige', elite: 'Elite' };
-
   var requested = new URLSearchParams(window.location.search).get('tier');
   var tier = tiers.indexOf(requested) !== -1 ? requested : 'prestige';
 
   var card = document.getElementById('ready-card');
   tiers.forEach(function (t) { card.classList.remove('is-' + t); });
   card.classList.add('is-' + tier);
-  document.getElementById('ready-foot').textContent = 'Ana Reyes · ' + names[tier] + ' member';
+  document.getElementById('ready-foot').textContent = names[tier] + ' member';
+  document.getElementById('ready-sub').textContent = 'Ana Reyes · ' + names[tier] + ' member';
+  if (tier === 'premium') document.getElementById('ready-logo').src = 'img/logo-ink.svg';
 })();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="app.js"></script>
 <script src="img/real/manifest.js"></script>
 <script src="real-photos.js"></script>

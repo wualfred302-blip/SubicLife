@@ -68,6 +68,134 @@
         { who: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '3h', text: 'Which steak did you get?' }
       ]
     },
+    // SAMPLE member stories for every bookable listing, added by design/after-pay/stories.mjs
+    {
+      id: 'zoobic-safari', kind: 'story', author: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '2d', visited: 'Oct 18',
+      place: 'zoobic', cats: ['nature'], commentCount: 5,
+      photos: ['img/zoobic-1.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "The safari ride was the highlight for the kids. Bring a hat, the walk between stops is sunny.",
+      likes: 64, comments: []
+    },
+    {
+      id: 'zoobic-early', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '6d', visited: 'Oct 14',
+      place: 'zoobic', cats: ['nature'], commentCount: 2,
+      photos: ['img/zoobic-6.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Took my parents for the day. Go early before it gets hot, we were done by lunch.",
+      likes: 38, comments: []
+    },
+    {
+      id: 'sailing-first', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '3d', visited: 'Oct 17',
+      place: 'sailing', cats: ['water-sports'], commentCount: 4,
+      photos: ['img/sailing-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "First time on a dinghy and the instructor had me steering in minutes. The bay was calm all morning.",
+      likes: 52, comments: []
+    },
+    {
+      id: 'sailing-birthday', kind: 'story', author: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '1w', visited: 'Oct 11',
+      place: 'sailing', cats: ['water-sports'], commentCount: 1,
+      photos: ['img/sailing-lighthouse.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Booked a lesson for my son’s birthday. Now he wants to go back every weekend.",
+      likes: 31, comments: []
+    },
+    {
+      id: 'networx-bay', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '4d', visited: 'Oct 16',
+      place: 'networx', cats: ['water-sports'], commentCount: 3,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Jet ski with my brother. Short briefing, then the bay was all ours.",
+      likes: 45, comments: []
+    },
+    {
+      id: 'networx-drybag', kind: 'story', author: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '1w', visited: 'Oct 12',
+      place: 'networx', cats: ['water-sports'], commentCount: 2,
+      photos: ['img/sailing-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Worth it for the view of the bay from the water. Bring a dry bag for your phone.",
+      likes: 27, comments: []
+    },
+    {
+      id: 'labanca-sunset', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '5d', visited: 'Oct 15',
+      place: 'labanca', cats: ['water-sports'], commentCount: 6,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Family cruise and everyone fit easily. The crew even took our photos.",
+      likes: 73, comments: []
+    },
+    {
+      id: 'labanca-anniv', kind: 'story', author: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '2w', visited: 'Oct 4',
+      place: 'labanca', cats: ['water-sports'], commentCount: 4,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Celebrated our anniversary on the yacht. Calm water and the mountains all around.",
+      likes: 58, comments: []
+    },
+    {
+      id: 'bestwestern-quiet', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '6d', visited: 'Oct 13',
+      place: 'bestwestern', cats: ['hotels'], commentCount: 1,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Clean, quiet room and a friendly front desk. A good base for a weekend in Subic.",
+      likes: 22, comments: []
+    },
+    {
+      id: 'lecharme-sisters', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '1w', visited: 'Oct 10',
+      place: 'lecharme', cats: ['hotels'], commentCount: 2,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Two nights with my sister. The room was spotless and the staff remembered our names.",
+      likes: 34, comments: []
+    },
+    {
+      id: 'segara-friends', kind: 'story', author: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '9d', visited: 'Oct 9',
+      place: 'segara', cats: ['hotels'], commentCount: 3,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Rented a villa with friends. Plenty of room to spread out after a day on the bay.",
+      likes: 41, comments: []
+    },
+    {
+      id: 'reef-view', kind: 'story', author: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '4d', visited: 'Oct 15',
+      place: 'reef', cats: ['hotels'], commentCount: 1,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Woke up to a nice view and slept well. Check-in with the card was easy.",
+      likes: 19, comments: []
+    },
+    {
+      id: 'terrace-evening', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '2w', visited: 'Oct 3',
+      place: 'terrace', cats: ['hotels'], commentCount: 2,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "We spent every evening out on our terrace. Quiet and comfortable.",
+      likes: 26, comments: []
+    },
+    {
+      id: 'bayfront-simple', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '1w', visited: 'Oct 11',
+      place: 'bayfront', cats: ['hotels'], commentCount: 0,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Simple, clean and close to everything we wanted to see.",
+      likes: 17, comments: []
+    },
+    {
+      id: 'forestview-family', kind: 'story', author: 'Marco Dizon', initials: 'MD', avatar: 'img/avatar-marco.jpg', ago: '2w', visited: 'Oct 5',
+      place: 'forestview', cats: ['hotels'], commentCount: 2,
+      photos: ['img/pass-subic-bay.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Great for a family weekend. The kids loved having a bedroom of their own.",
+      likes: 29, comments: []
+    },
+    {
+      id: 'camayan-calm', kind: 'story', author: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '5d', visited: 'Oct 14',
+      place: 'camayan', cats: ['beaches', 'nature'], commentCount: 2,
+      photos: ['img/card-camayan.jpg', 'img/pass-subic-bay.jpg'],
+      caption: "Beach day with the kids. The water was calm and clear in the morning.",
+      likes: 36, comments: []
+    },
+    // SAMPLE member stories (made up, like every demo story), added by design/activity-fix/story-v2.mjs
+    {
+      id: 'ocean-dolphins', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '3d', visited: 'Oct 10',
+      place: 'ocean', cats: ['water-sports', 'nature'], commentCount: 3,
+      photos: ['img/pass-subic-bay.jpg', 'img/card-ocean.jpg'],
+      caption: 'Go for the first show, the stands are half empty and the kids got to sit up front.',
+      likes: 41, comments: []
+    },
+    {
+      id: 'ocean-lunch', kind: 'story', author: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '1w', visited: 'Oct 6',
+      place: 'ocean', cats: ['water-sports', 'nature'], commentCount: 2,
+      photos: ['img/card-ocean.jpg', 'img/pass-subic-bay.jpg'],
+      caption: 'Bring water shoes and a dry bag. The day pass covers more than we could do in one visit.',
+      likes: 29, comments: []
+    },
     {
       id: 'ocean-snorkel', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '1d', visited: 'Oct 12',
       place: 'ocean', cats: ['water-sports', 'nature'], commentCount: 6,
@@ -360,9 +488,9 @@
     {
       id: 'camayan-rooms', title: '10% off rooms', place: 'camayan', cats: ['hotels', 'beaches'],
       photo: 'img/card-camayan.jpg', tier: 'Prestige · 10% off', valid: '31 Dec 2026',
-      applies: 'Cottages and villas', bookable: true,
+      applies: 'Rooms and the residence', bookable: true,
       terms: [
-        'Applies to Garden Cottage and Family Villa rates.',
+        'Applies to Deluxe Room and Adventure Cove Residence rates.',
         'Show your Prestige card at check-in.',
         'Subject to availability.'
       ]

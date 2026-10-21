@@ -106,7 +106,6 @@
   box-shadow: 0 6px 16px -8px rgb(0 0 0 / 0.35);
 }
 
-
 /* Sticky action bar: no slab, the button floats over a soft fade of the backdrop. */
 .c-bottombar {
   border-top: 0;
@@ -129,8 +128,6 @@
 
 /* ---------- tiles ---------- */
 /* Photo cards show the photo itself, no frame. Social posts sit on a white tile. */
-
-
 
 /* Lists are inset groups: consecutive rows join into one white tile, split by hairlines that start
    after the thumbnail (iOS inset grouped). Only the outer corners round. */
@@ -202,7 +199,6 @@
 }
 .c-mcard.is-portrait .c-mcard__back { background: #1E1D1B; }
 .c-mcard.is-portrait .c-mcard__back .c-mcard__number { color: rgb(255 255 255 / 0.8); }
-
 
 /* Tabs: active = orange outline icon on a soft capsule, never a filled blob. */
 .c-tabbar__tab.is-active .c-tabbar__icon { font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 24; }
@@ -303,7 +299,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 }
 .c-offer-title { font-weight: 800; }
 .c-osec { margin-top: 32px; }
-
 
 /* Booking price summary on a tile. */
 
@@ -577,12 +572,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 /* Concierge: Mika with quick asks; the trip is a timeline per day that only calls out what needs attention. */
 
 /* Ideas from Mika: photo-first, like Explore. */
-
-
-
-
-
-
 
 /* Read by screen readers, not shown. */
 .u-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -1054,8 +1043,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 /* Pass 8: phone and code entry */
 .c-auth { color: var(--on-wall); }
 .c-auth .c-navbar__back { color: var(--on-wall); }
-.c-auth__nav { align-items: center; }
-.c-auth__mark { justify-self: center; font-size: 22px; color: var(--on-wall); }
 .c-auth__head {
   position: relative;
   z-index: 1;
@@ -1117,22 +1104,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
   color: var(--text);
 }
 .c-auth__flag { display: block; width: 24px; height: 16px; border-radius: 2px; }
-.c-auth__value {
-  display: flex;
-  align-items: center;
-  min-width: 0;
-  font: 700 26px/1 var(--font);
-  font-variant-numeric: tabular-nums;
-  color: var(--text);
-  white-space: nowrap;
-}
-.c-auth__caret {
-  width: 2px;
-  height: 30px;
-  margin-left: 2px;
-  background: var(--accent);
-  animation: c-auth-blink 1s steps(1) infinite;
-}
 @keyframes c-auth-blink { 50% { opacity: 0; } }
 .c-auth__cta { margin-top: auto; padding-top: 16px; }
 .c-auth__otp {
@@ -1159,48 +1130,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
   text-align: center;
   color: #5F6670;
 }
-.c-auth__pad {
-  position: relative;
-  z-index: 1;
-  flex: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  padding: 8px 6px 34px;
-  background: #D9D5CF;
-}
-.c-auth__key {
-  appearance: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 44px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 1px 0 rgb(30 30 30 / 0.28);
-  font-family: var(--font);
-  color: #121212;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.c-auth__key:active { background: #ECE9E4; }
-.c-auth__key.is-blank,
-.c-auth__key.is-del { background: transparent; box-shadow: none; }
-.c-auth__key.is-blank { cursor: default; }
-.c-auth__key.is-del:active { background: rgb(255 255 255 / 0.4); }
-.c-auth__digit { font: 400 26px/1 var(--font); color: #121212; }
-.c-auth__letters {
-  height: 10px;
-  margin-top: 2px;
-  font: 600 10px/10px var(--font);
-  letter-spacing: 2px;
-  color: #1E1D1B;
-}
-.c-auth__key.is-del .material-symbols-outlined { font-size: 26px; color: #121212; }
 
 /* =====================================================================================
    Pass 9: night look is the default. Every in-scope page carries .theme-night, which takes the
@@ -1246,29 +1175,11 @@ a.c-list-row { text-decoration: none; color: inherit; }
 
 .phone.theme-night.c-welcome .c-welcome__photo { filter: brightness(0.6) saturate(0.85); }
 
-/* Choose your card: the ground is the night backdrop for every pass; the pass card keeps its own colour. */
-.phone.theme-night.c-tiers,
-.phone.theme-night.c-tiers[data-tier] {
-  background: var(--backdrop);
-  --tier-ground: var(--backdrop);
-  --tier-ink: var(--text);
-  --tier-ink-2: var(--text-2);
-  --tier-seg: rgb(255 255 255 / 0.08);
-}
-
 /* Sign-in and sign-up: fields and code cells are dark tiles with a hairline; the keypad is iOS dark. */
 .phone.theme-night .c-auth__field,
 .phone.theme-night .c-auth__cell { background: var(--tile); }
 
 .phone.theme-night .c-auth__cc { border-right-color: rgb(255 255 255 / 0.12); }
-
-
-.phone.theme-night .c-auth__key { color: #F5F5F4; }
-
-
-.phone.theme-night .c-auth__key.is-del:active { background: rgb(255 255 255 / 0.12); }
-
-
 
 /* Tab bar: no highlight behind the selected tab */
 .c-tabbar__tab.is-active,
@@ -1278,36 +1189,10 @@ a.c-list-row { text-decoration: none; color: inherit; }
 /* Pass 11: code entry on the night look.
    One continuous night surface: a single gold glow behind the heading, no hard-edged sheet,
    the keypad tray fades into the same black, dark glass keys and cells, gold focus and button. */
-.phone.theme-night.c-auth:has(.c-auth__otp) {
-  --wall:
-    radial-gradient(60% 34% at 22% 14%, rgb(214 170 90 / 0.30), rgb(214 170 90 / 0) 100%),
-    radial-gradient(80% 40% at 100% 46%, rgb(70 92 110 / 0.28), rgb(70 92 110 / 0) 100%),
-    linear-gradient(180deg, #16181B 0%, #0B0B0C 62%);
-  --cta-fill: #C9A227;
-  --cta-press: #B08D1F;
-  --on-cta: #0B0B0C;
-}
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__head { padding-bottom: 36px; }
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sheet {
-  background: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding-top: 8px;
-}
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__cta { margin-top: auto; }
 
 .phone.theme-night .c-auth__cell {
   height: 60px;
 }
-
-
-
-.phone.theme-night .c-auth__pad { padding-top: 10px; }
-
-
-
-
-
 
 /* Pass 11b: warm graphite instead of translucent white, so keys and cells separate from the tray
    without glare and pick up the gold rather than reading as neutral grey. */
@@ -1320,33 +1205,11 @@ a.c-list-row { text-decoration: none; color: inherit; }
   background: #26211A;
 }
 .phone.theme-night .c-auth__resend { color: #B9B0A1; }
-.phone.theme-night .c-auth__pad { background: #13110E; box-shadow: inset 0 1px 0 rgb(255 236 200 / 0.05); }
-.phone.theme-night .c-auth__key {
-  background: #2E2A24;
-  box-shadow: inset 0 1px 0 rgb(255 236 200 / 0.09), 0 1px 0 rgb(0 0 0 / 0.6);
-}
-.phone.theme-night .c-auth__key:active { background: #474036; }
-.phone.theme-night .c-auth__key.is-blank,
-.phone.theme-night .c-auth__key.is-del { background: transparent; box-shadow: none; }
-.phone.theme-night .c-auth__digit,
-.phone.theme-night .c-auth__key.is-del .material-symbols-outlined { color: #FAF6EE; }
-.phone.theme-night .c-auth__letters { color: #BDB4A4; }
 /* Pass 11c: detector fixes. Key letters to the 11px floor; active cell keeps a solid gold ring, no glow halo. */
-.phone.theme-night .c-auth__letters { font-size: 11px; }
 .phone.theme-night .c-auth__cell.is-active { box-shadow: inset 0 0 0 2px #D4AF37; }
 
 /* Pass 12: code entry recoloured. Midnight ink instead of warm black, no glow anywhere,
    cool slate keys and cells, one muted champagne accent for focus and the button. */
-.phone.theme-night.c-auth:has(.c-auth__otp) {
-  --wall: linear-gradient(180deg, #121A28 0%, #0A0F18 55%, #070A10 100%);
-  --cta-fill: #D8BE7A;
-  --cta-press: #C4A962;
-  --on-cta: #111317;
-}
-.phone.theme-night.c-auth:has(.c-auth__otp)::before { opacity: 0; }
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-btn { box-shadow: none; }
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sub { color: #A9B3C4; }
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__edit { color: #D8BE7A; }
 .phone.theme-night .c-auth__cell {
   background: #141C2A;
   box-shadow: inset 0 0 0 1px #2A3446;
@@ -1357,117 +1220,22 @@ a.c-list-row { text-decoration: none; color: inherit; }
   box-shadow: inset 0 0 0 2px #D8BE7A;
 }
 .phone.theme-night .c-auth__resend { color: #8E99AC; }
-.phone.theme-night .c-auth__pad { background: #070A10; box-shadow: none; }
-.phone.theme-night .c-auth__key {
-  background: #1A2232;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
-}
-.phone.theme-night .c-auth__key:active { background: #2A3448; }
-.phone.theme-night .c-auth__key.is-blank,
-.phone.theme-night .c-auth__key.is-del { background: transparent; box-shadow: none; }
-.phone.theme-night .c-auth__digit,
-.phone.theme-night .c-auth__key.is-del .material-symbols-outlined { color: #EEF1F6; }
-.phone.theme-night .c-auth__letters { color: #8E99AC; }
 
 /* Pass 12b: more saturation. Richer navy, bluer keys and cells, a true gold accent. Still no glow. */
-.phone.theme-night.c-auth:has(.c-auth__otp) {
-  --wall: linear-gradient(180deg, #0F2147 0%, #0A1631 55%, #060D1F 100%);
-  --cta-fill: #F2B92E;
-  --cta-press: #DBA215;
-  --on-cta: #10131A;
-}
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sub { color: #B4C3E2; }
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__edit { color: #F2B92E; }
 .phone.theme-night .c-auth__cell { background: #12244B; box-shadow: inset 0 0 0 1px #2C4378; color: #F2F5FB; }
 .phone.theme-night .c-auth__cell.is-active { background: #162B58; box-shadow: inset 0 0 0 2px #F2B92E; }
 .phone.theme-night .c-auth__resend { color: #9AAAD0; }
-.phone.theme-night .c-auth__pad { background: #060D1F; }
-.phone.theme-night .c-auth__key { background: #17295A; }
-.phone.theme-night .c-auth__key:active { background: #26407E; }
-.phone.theme-night .c-auth__key.is-blank,
-.phone.theme-night .c-auth__key.is-del { background: transparent; }
-.phone.theme-night .c-auth__letters { color: #9AAAD0; }
 
 /* Pass 13: code entry in the Bistro BFF style. A blurred bay-at-dusk wash (teal into terracotta),
    frosted white glass, solid filled code boxes, a solid black button. Text goes dark on the glass. */
-.phone.theme-night.c-auth:has(.c-auth__otp) {
-  --wall:
-    radial-gradient(90% 55% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(80% 50% at 100% 70%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #4F8796 0%, #7FAEB6 40%, #B7C9C4 70%, #D9B39A 100%);
-  --cta-fill: #111214;
-  --cta-press: #2A2B2E;
-  --on-cta: #FFFFFF;
-}
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sub { color: rgb(255 255 255 / 0.9); }
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__edit { color: #FFFFFF; text-decoration: underline; text-underline-offset: 3px; }
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sheet {
-  margin: 0 12px;
-  padding: 20px 16px 18px;
-  flex: 0 0 auto;
-  background: rgb(255 255 255 / 0.62);
-  border-radius: 24px;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.7), 0 12px 30px -18px rgb(30 50 60 / 0.5);
-  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-}
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__cta { margin-top: 18px; padding-top: 0; }
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__pad { margin-top: auto; }
 .phone.theme-night .c-auth__cell { background: #FFFFFF; box-shadow: inset 0 0 0 1px rgb(17 18 20 / 0.08); color: #111214; }
 .phone.theme-night .c-auth__cell.is-active { background: #FFFFFF; box-shadow: inset 0 0 0 2px #111214; }
 .phone.theme-night .c-auth__resend { color: #3D4A50; }
-.phone.theme-night .c-auth__pad {
-  background: rgb(255 255 255 / 0.55);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.8);
-}
-.phone.theme-night .c-auth__key { background: #FFFFFF; box-shadow: 0 1px 0 rgb(17 18 20 / 0.18); }
-.phone.theme-night .c-auth__key:active { background: #E4E7E8; }
-.phone.theme-night .c-auth__key.is-blank,
-.phone.theme-night .c-auth__key.is-del { background: transparent; box-shadow: none; }
-.phone.theme-night .c-auth__digit,
-.phone.theme-night .c-auth__key.is-del .material-symbols-outlined { color: #111214; }
-.phone.theme-night .c-auth__letters { color: #4A5358; }
-/* Pass 13b: deeper teal behind the white heading so it reads clearly. */
-.phone.theme-night.c-auth:has(.c-auth__otp) {
-  --wall:
-    radial-gradient(90% 55% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(80% 50% at 100% 70%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #24505E 0%, #3C7584 32%, #8DB3B8 62%, #D9B39A 100%);
-}
-/* Pass 13c: no glass card behind the code; boxes and button sit straight on the wash. */
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__sheet {
-  background: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
-  margin: 0; padding: 8px var(--gutter) 0;
-}
-.phone.theme-night.c-auth:has(.c-auth__otp) .c-auth__resend { color: rgb(255 255 255 / 0.92); }
 
 /* Pass 14: the reference look (code screen, Pass 13) on every keypad step:
    sign-in number, sign-in code, sign-up number, sign-up code. */
-.phone.theme-night.c-auth:has(.c-auth__pad) {
-  --wall:
-    radial-gradient(90% 55% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(80% 50% at 100% 70%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #24505E 0%, #3C7584 32%, #8DB3B8 62%, #D9B39A 100%);
-  --cta-fill: #111214;
-  --cta-press: #2A2B2E;
-  --on-cta: #FFFFFF;
-}
-.phone.theme-night.c-auth:has(.c-auth__pad)::before { opacity: 0; }
-.phone.theme-night.c-auth:has(.c-auth__pad) .c-btn { box-shadow: none; }
-.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__head { padding-bottom: 36px; }
-.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__sub { color: rgb(255 255 255 / 0.9); }
-.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__edit { color: #FFFFFF; text-decoration: underline; text-underline-offset: 3px; }
-.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__sheet {
-  flex: 0 0 auto; margin: 0; padding: 8px var(--gutter) 0;
-  background: none; border-radius: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
-}
-.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__cta { margin-top: 18px; padding-top: 0; }
-.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__pad { margin-top: auto; }
-.phone.theme-night.c-auth:has(.c-auth__pad) .c-auth__resend { color: rgb(255 255 255 / 0.92); }
 .phone.theme-night .c-auth__field { background: #FFFFFF; box-shadow: inset 0 0 0 2px #111214; }
 .phone.theme-night .c-auth__cc { color: #111214; border-right-color: rgb(17 18 20 / 0.14); }
-.phone.theme-night .c-auth__value { color: #111214; }
-.phone.theme-night .c-auth__caret { background: #111214; }
 
 /* Pass 15: Get started in the reference look. The bay photo stays at full colour up top and melts
    into the teal-to-terracotta wash behind the text; black main button, solid white secondary. */
@@ -1487,76 +1255,11 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .phone.theme-night.c-welcome .c-btn.plain { background: #FFFFFF; color: #111214; margin-top: 10px; }
 .phone.theme-night.c-welcome { background: #24505E; }
 
-/* Pass 16: sign-up steps (name, choose card, pay, card ready) in the reference look.
-   Same wash as the keypad steps, white text, solid white fields, black main button,
-   no dark panels: content sits straight on the wash. */
-.phone.theme-night.is-onboard {
-  --wall:
-    radial-gradient(90% 45% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(80% 40% at 100% 80%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #24505E 0%, #3C7584 32%, #8DB3B8 62%, #D9B39A 100%);
-  background: var(--wall);
-  --cta-fill: #111214; --cta-press: #2A2B2E; --on-cta: #FFFFFF;
-  --text: #FFFFFF; --text-2: rgb(255 255 255 / 0.9); --hairline: rgb(255 255 255 / 0.3);
-  color: #FFFFFF;
-}
-.phone.theme-night.is-onboard::before { opacity: 0; }
-.phone.theme-night.is-onboard .screen-scroll,
-.phone.theme-night.is-onboard .c-navbar,
-.phone.theme-night.is-onboard .c-tiers__sheet { background: transparent; box-shadow: none; border: 0; }
-.phone.theme-night.is-onboard .c-statusbar,
-.phone.theme-night.is-onboard .c-navbar,
-.phone.theme-night.is-onboard .c-navbar__back,
-.phone.theme-night.is-onboard .c-navbar__title,
-.phone.theme-night.is-onboard .c-section-title { color: #FFFFFF; }
-.phone.theme-night.is-onboard .c-section-title.is-caption,
-.phone.theme-night.is-onboard .c-group__sub,
-.phone.theme-night.is-onboard .c-tiers__note,
-.phone.theme-night.is-onboard .c-tiers__perks-head { color: rgb(255 255 255 / 0.9); }
-.phone.theme-night.is-onboard .c-btn { box-shadow: none; }
-.phone.theme-night.is-onboard .c-btn.plain { background: #FFFFFF; color: #111214; }
-
-/* Fields: solid white, dark text */
-.phone.theme-night.is-onboard .c-field__input {
-  background: #FFFFFF; color: #111214; border: 0; box-shadow: inset 0 0 0 1px rgb(17 18 20 / 0.08);
-}
-.phone.theme-night.is-onboard .c-field__input:focus { box-shadow: inset 0 0 0 2px #111214; outline: none; }
-
-/* Choose card: white segmented control with a black thumb, white perks with white ticks */
-.phone.theme-night.is-onboard .c-tiers__perk { color: #FFFFFF; }
-.phone.theme-night.is-onboard .c-tiers__perk .material-symbols-outlined { color: #FFFFFF; }
-.phone.theme-night.is-onboard .c-tiers__bar { background: transparent; box-shadow: none; }
-
-/* Pay: receipt rows on the wash with light hairlines */
-.phone.theme-night.is-onboard .c-receipt { background: transparent; box-shadow: none; }
-.phone.theme-night.is-onboard .c-receipt__row { color: #FFFFFF; border-color: rgb(255 255 255 / 0.3); }
-/* Pass 16b: the night wall rule outranked --wall; set the wash directly. Fields: the white sits on .c-field. */
-:root .phone.theme-night.is-onboard {
-  background:
-    radial-gradient(90% 45% at 0% 100%, #C9775A 0%, rgb(201 119 90 / 0) 70%),
-    radial-gradient(80% 40% at 100% 80%, #E2A57E 0%, rgb(226 165 126 / 0) 70%),
-    linear-gradient(180deg, #24505E 0%, #3C7584 32%, #8DB3B8 62%, #D9B39A 100%);
-}
-.phone.theme-night.is-onboard .c-field { background: #FFFFFF; border: 0; box-shadow: inset 0 0 0 1px rgb(17 18 20 / 0.08); }
-.phone.theme-night.is-onboard .c-field:focus-within { box-shadow: inset 0 0 0 2px #111214; }
-.phone.theme-night.is-onboard .c-field__input,
-.phone.theme-night.is-onboard .c-field__input:focus { background: transparent; box-shadow: none; color: #111214; }
-/* Pass 16c: dark text in fields, black segment thumb, wash stays teal longer so white text holds to the bottom. */
-.phone.theme-night.is-onboard .c-field__input { color: #111214 !important; -webkit-text-fill-color: #111214; caret-color: #111214; }
-:root .phone.theme-night.is-onboard {
-  background:
-    radial-gradient(70% 22% at 0% 100%, rgb(201 119 90 / 0.9) 0%, rgb(201 119 90 / 0) 70%),
-    linear-gradient(180deg, #24505E 0%, #33697A 40%, #4F8592 72%, #9A8A7C 100%);
-}
-/* Pass 16d: card switcher rebuilt in the reference look: a roomy solid white pill track,
-   a black pill thumb, dark labels, white on the selected one, breathing room under the title. */
-:root .phone.theme-night.is-onboard { background-color: #2C5F6E; }
 /* Pass 16e: switcher and big price removed; the card's name sits under it and follows the swipe. */
 .c-tiers__name { margin: 0; text-align: center; font: 700 28px/1.1 var(--font); letter-spacing: var(--track-tight); color: #FFFFFF; }
 
 /* Logo: the traced brochure logo (img/logo.svg, white) replaces the typed wordmark. */
 img.c-logo { display: block; width: auto; height: 34px; }
-.c-auth__mark.c-logo { height: 30px; justify-self: center; }
 .c-welcome__mark.c-logo { height: 52px; }
 img.c-logo.is-ink { filter: invert(1) brightness(0.25); }
 
@@ -3047,3 +2750,231 @@ button.c-bkchange { padding: 0; border: 0; background: none; cursor: pointer; }
 /* hotel-room */
 .c-mcal .c-bkday.is-end::before { width: 40px; height: 40px; }
 .c-tixsheet .c-bksheet__title:focus { outline: none; }
+
+/* story-ask: after a visit, Me's parts only; the Stories pill is the way in, Skip sits in the header */
+.c-sask .c-sask__img { border-radius: 12px; }
+.c-sask__title { margin: 32px 20px 0; font: 700 22px/28px var(--font); letter-spacing: -0.01em; color: #111214; }
+.c-sask__sub { margin: 4px 20px 0; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-sask .c-dcompose { width: auto; margin: 16px 20px 0; text-decoration: none; color: inherit; }
+.c-sask .c-dcompose:active { opacity: 0.6; }
+.c-sask__more { margin-top: 24px; }
+
+/* story-ask v2: the place's photo as the header, member stories as the place page's swipe row */
+.c-sask__place { display: block; margin: 12px 20px 0; color: #111214; text-decoration: none; }
+.c-sask__place:active { opacity: 0.7; }
+.c-sask__hero { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; }
+.c-sask__name { display: block; margin-top: 14px; font: 700 22px/28px var(--font); letter-spacing: -0.01em; }
+.c-sask__when { display: block; margin-top: 2px; font: 400 15px/20px var(--font); color: #5F6670; }
+.c-sask .c-sask__title { margin-top: 28px; font-size: 17px; line-height: 22px; }
+.c-sask .c-plhead { padding: 0 20px; }
+.c-sask .c-plhead .c-section-title { margin: 0; }
+.c-sask__row { margin-top: 12px; padding-bottom: 24px; }
+
+/* booking-qr */
+.c-bkqr { margin: 8px 20px 4px; text-align: center; }
+/* No tile (user: "remove the card component behind the qr"): a plain white quiet zone keeps the contour lines out of it. */
+.c-bkqr__svg { display: inline-block; padding: 12px; background: #FFFFFF; color: #111214; }
+.c-bkqr__svg svg { display: block; }
+.c-bkqr__code { margin: 4px 0 0; font: 500 17px/22px var(--font); letter-spacing: 0.14em; font-variant-numeric: tabular-nums; color: #111214; }
+.c-bkinfo { margin-top: 20px; }
+/* After the user's look ("the title is out of place"): one heading, not two. The page title says Booking, the place
+   row reads like Me's person row (photo left, 22px name) with a Confirmed pill, the QR is the one centred object, and the
+   saving moves into the rows. The tick block only comes back for the cancelled state. */
+.c-bkdone { display: none; }
+.c-bkplace { padding-top: 24px; }
+.c-bkplace__name { font-size: 22px; line-height: 28px; }
+.c-bkplace .c-cgstop__status { align-self: flex-start; margin-top: 8px; }
+.c-bkqr { margin-top: 28px; }
+.c-merow__value.c-bksave { color: #15803D; }
+
+/* booking-head d: Ticketmaster's ticket */
+.c-bkplace { display: none; }
+.c-dhead--push .c-dhead__title { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.c-dhead__name { max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 600 17px/22px var(--font); color: #111214; }
+.c-dhead__when { max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 400 13px/16px var(--font); color: #5F6670; }
+.c-bkqr { margin-top: 36px; }
+
+/* booking-receipt */
+.c-rcpt { margin: 0 20px; padding: 4px 0 0; font-variant-numeric: tabular-nums; }
+.c-rcpt__line { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; font: 400 15px/20px var(--font); color: #111214; }
+.c-rcpt__line > span:last-child { flex: none; }
+.c-rcpt__line.is-off { color: #15803D; }
+.c-rcpt__rule { margin: 8px 0; border-top: 1px dashed rgb(17 18 20 / 0.24); }
+.c-rcpt__line.is-total { font: 700 17px/22px var(--font); }
+.c-rcpt__meta { margin: 4px 0 0; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-rcpt + .c-bkacts, .c-rcpt ~ .c-cgcal { margin-top: 24px; }
+
+/* fact-icons (2026-10-21): the rating star in brand orange; distance and time icons in the palette grey */
+.c-bigcard__icon.is-gold { color: #E8590C; }
+.c-bigcard__icon.is-blue, .c-bigcard__icon.is-indigo { color: #5F6670; }
+
+/* fact-icons stars (2026-10-21): the small rating star on place cards in brand orange */
+.c-star { color: #E8590C; }
+
+/* room-gallery (2026-10-21): the room sheet's photo as a swipe gallery, same size and corners as the single photo */
+.c-rmgal { position: relative; margin: 8px 20px 0; border-radius: 14px; overflow: hidden; }
+.c-rmgal__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.c-rmgal__track::-webkit-scrollbar { display: none; }
+.c-rmgal__track img { flex: none; width: 100%; height: 190px; object-fit: cover; scroll-snap-align: start; }
+.c-rmgal .c-rmgal__count { right: 10px; bottom: 10px; }
+
+/* welcome-video (2026-10-21): the card's logo large in the top half; a muted loop of partners' clips behind it */
+.c-welcome__video { background: #24505E; }
+.c-welcome__mark.c-logo.c-welcome__mark--big { height: 71px; align-self: center; margin-top: 18vh; filter: drop-shadow(0 2px 12px rgb(0 0 0 / 0.35));
+  opacity: 0; transition: opacity 1.8s ease-out; }
+.c-welcome__mark.c-logo.c-welcome__mark--big.is-in { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .c-welcome__mark--big { transition: none; } }
+
+/* welcome-video look D (2026-10-21): full-colour clips, light dark tint top and bottom, white logo and title */
+.phone.theme-night.c-welcome { background: #111214; --cta-fill: #E8590C; --cta-press: #C94A08; --on-cta: #FFFFFF; }
+.phone.theme-night.c-welcome .c-welcome__wash {
+  background: radial-gradient(ellipse 70% 22% at 50% 34%, rgb(17 18 20 / 0.28), rgb(17 18 20 / 0) 100%),
+    linear-gradient(180deg, rgb(17 18 20 / 0.25) 0%, rgb(17 18 20 / 0) 30%, rgb(17 18 20 / 0) 55%, rgb(17 18 20 / 0.55) 100%);
+}
+.phone.theme-night.c-welcome > .c-statusbar { color: #FFFFFF; }
+.c-welcome__mark.c-logo.c-welcome__mark--big { filter: drop-shadow(0 2px 14px rgb(0 0 0 / 0.40)); }
+.phone.theme-night.c-welcome .c-welcome__title { color: #FFFFFF; font-weight: 600; font-size: 26px; text-align: center; }
+.phone.theme-night.c-welcome .c-btn.primary { background: #E8590C; color: #FFFFFF; box-shadow: none; }
+.phone.theme-night.c-welcome .c-btn.plain { background: #FFFFFF; color: #111214; border: 0; }
+
+/* welcome-video title (2026-10-21): big place name over a small spaced-caps line; account link tucked under */
+.phone.theme-night.c-welcome .c-welcome__title { margin-bottom: 24px; text-align: center; color: #FFFFFF; }
+.phone.theme-night.c-welcome .c-welcome__place { display: block; font-size: 34px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.phone.theme-night.c-welcome .c-welcome__for { display: block; margin-top: 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; opacity: 0.9; }
+.phone.theme-night.c-welcome .c-btn.plain { margin-top: 0; height: 44px; min-height: 44px; }
+/* welcome-video caps title (2026-10-21): same font as the line under it, spaced capitals */
+.phone.theme-night.c-welcome .c-welcome__place { font-weight: 600; font-size: 24px; letter-spacing: 0.24em; text-transform: uppercase; line-height: 1.1; }
+/* welcome-video buttons (2026-10-21): white Get started, plain white text for I have an account */
+.phone.theme-night.c-welcome .c-welcome__wash {
+  background: radial-gradient(ellipse 70% 22% at 50% 34%, rgb(17 18 20 / 0.28), rgb(17 18 20 / 0) 100%),
+    linear-gradient(180deg, rgb(17 18 20 / 0.25) 0%, rgb(17 18 20 / 0) 30%, rgb(17 18 20 / 0) 50%, rgb(17 18 20 / 0.68) 100%);
+}
+.phone.theme-night.c-welcome .c-btn.primary { background: #FFFFFF; color: #111214; box-shadow: none; }
+.phone.theme-night.c-welcome .c-btn.plain { background: none; color: #FFFFFF; border: 0; font-weight: 600; text-shadow: 0 1px 8px rgb(0 0 0 / 0.45); }
+
+/* join-white (2026-10-21): Join Subic.Life on the white standard */
+.phone.c-auth--white { color: #111214; }
+.phone.c-auth--white .c-auth__inklogo { height: 30px; flex: 0 0 auto; margin: 0 auto; }
+.phone.c-auth--white .c-auth__head { padding: 84px 20px 0; } /* the push header floats (absolute, 48px) */
+.phone.c-auth--white .c-auth__title { color: #111214; font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; text-shadow: none; }
+.phone.c-auth--white .c-auth__sub { color: #5F6670; font-size: 15px; margin-top: 8px; text-shadow: none; }
+.phone.c-auth--white .c-auth__sheet { flex: 0 0 auto; margin: 0; padding: 32px 20px 0; background: none; border-radius: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.phone.c-auth--white .c-auth__field { background: none; border: 0; border-radius: 0; box-shadow: none; height: auto; padding: 0; color: #111214; gap: 14px; justify-content: center; }
+.phone.c-auth--white .c-auth__cc { color: #111214; font-size: 22px; font-weight: 600; border: 0; padding: 0; }
+.phone.c-auth--white .c-auth__input { flex: 0 0 auto; field-sizing: content; min-width: 2ch; border: 0; outline: 0; background: none; padding: 0; font: 600 22px/1.2 var(--font); letter-spacing: 0.02em; color: #111214; caret-color: #E8590C; }
+.phone.c-auth--white .c-auth__cta { margin-top: 36px; text-align: center; }
+.phone.c-auth--white .c-auth__send { display: inline-block; padding: 12px 24px; color: #111214; font-size: 17px; font-weight: 600; text-decoration: none; }
+
+/* join-white code (2026-10-21): six digits on short lines, one real field over them */
+.phone.c-auth--white .c-auth__otp { position: relative; display: flex; justify-content: center; gap: 12px; padding: 0; background: none; }
+.phone.c-auth--white .c-auth__codein { position: absolute; inset: 0; width: 100%; opacity: 0; border: 0; font-size: 16px; caret-color: transparent; }
+.phone.c-auth--white .c-auth__cell { width: 40px; height: 56px; display: flex; align-items: center; justify-content: center;
+  background: none; border: 0; border-radius: 0; box-shadow: none; border-bottom: 2px solid rgb(17 18 20 / 0.15);
+  color: #111214; font: 600 28px/1 var(--font); }
+.phone.c-auth--white .c-auth__cell.is-active { border-bottom-color: #111214; }
+.phone.c-auth--white .c-auth__edit { color: #E8590C; text-decoration: none; font-weight: 600; margin-left: 0; }
+.phone.c-auth--white .c-auth__resend { color: #5F6670; font-size: 13px; text-align: center; margin-top: 20px; }
+.phone.c-auth--white .c-auth__cta:has(.c-auth__send) { margin-top: 24px; }
+
+/* join-white details (2026-10-21): labels over hairline underlines, no boxes */
+.phone.c-auth--form .screen-scroll { padding-top: 0; }
+.phone.c-auth--form .c-auth__head { padding-top: 34px; } /* screen-scroll already starts under the header */
+.phone.c-auth--form .c-auth__sub { max-width: none; }
+.phone.c-auth--form .c-namegrid { margin-top: 28px; row-gap: 22px; column-gap: 20px; }
+.phone.c-auth--form .c-section-title.is-caption { color: #5F6670; font-size: 13px; font-weight: 500; margin: 0 0 4px; text-shadow: none; }
+.phone.c-auth--form .c-optional { color: #9AA0A6; font-weight: 400; }
+.phone.c-auth--form .c-field { background: none; border: 0; border-bottom: 1px solid rgb(17 18 20 / 0.15); border-radius: 0; box-shadow: none; padding: 0; height: auto; }
+.phone.c-auth--form .c-field:focus-within { border-bottom-color: #111214; }
+.phone.c-auth--form .c-field__input { background: none; border: 0; padding: 8px 0 10px; font: 400 17px/1.3 var(--font); color: #111214; caret-color: #E8590C; }
+.phone.c-auth--form .c-field__input::placeholder { color: #B4B9BF; }
+.phone.c-auth--form .c-group__sub { color: #5F6670; font-size: 13px; margin-top: 8px; text-shadow: none; }
+.phone.c-auth--form .c-auth__cta { margin-top: 36px; text-align: center; }
+
+/* join-white outline (2026-10-21): full-width pill outline, no fill */
+.phone.c-auth--white .c-auth__send { display: flex; align-items: center; justify-content: center; width: 100%; height: 48px; padding: 0;
+  box-sizing: border-box; border: 1px solid rgb(17 18 20 / 0.25); border-radius: 999px; background: none; color: #111214; }
+.phone.c-auth--form .c-auth__cta { padding: 0 20px; }
+.phone.c-auth--white .c-auth__field:has(.c-auth__input) { padding-bottom: 12px; border-bottom: 1px solid rgb(17 18 20 / 0.15); }
+.phone.c-auth--white .c-auth__field:has(.c-auth__input:focus) { border-bottom-color: #111214; }
+.phone.c-auth--white .c-auth__send:active { background: rgb(17 18 20 / 0.04); }
+
+/* join-white selfie (2026-10-21): hairline circle, thin face icon */
+.phone.c-auth--form .c-selfie { width: 200px; height: 200px; margin: 0 auto; border-radius: 50%; background: none; box-shadow: none;
+  border: 1px solid rgb(17 18 20 / 0.15); color: #111214; display: flex; align-items: center; justify-content: center; }
+.phone.c-auth--form .c-selfie i { font-size: 88px; }
+.phone.c-auth--white .c-auth__sub { text-wrap: pretty; } /* balance broke it into two short lines on every sign-up screen */
+
+/* tier-white (2026-10-21): Choose your card on the white sign-up look */
+.phone.c-tw .screen-scroll { padding-bottom: 120px; }
+.phone.c-tw .c-auth__head { padding-bottom: 8px; }
+.c-tw__perks[hidden] { display: none; }
+.c-tw__foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; padding: 12px 20px 34px; background: #FFFFFF; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-tw .c-mcard.is-portrait { width: 150px; height: 238px; max-width: none; margin: 0 auto; box-shadow: 0 18px 28px -18px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(17 18 20 / 0.06); cursor: default; }
+/* a: swipe */
+.c-tw__row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 24px 0 28px; }
+.c-tw__row::-webkit-scrollbar { display: none; }
+.c-tw__slide { flex: 0 0 100%; scroll-snap-align: center; }
+.c-tw__dots { display: flex; justify-content: center; gap: 6px; }
+.c-tw__dots span { width: 6px; height: 6px; border-radius: 50%; background: rgb(17 18 20 / 0.15); }
+.c-tw[data-tier="premium"] [data-dot="premium"], .c-tw[data-tier="prestige"] [data-dot="prestige"], .c-tw[data-tier="elite"] [data-dot="elite"] { background: #111214; }
+.c-tw__who { display: flex; flex-direction: column; align-items: center; margin-top: 16px; }
+.c-tw__name { font: 700 22px/28px var(--font); color: #111214; }
+.c-tw__price { font: 400 14px/20px var(--font); color: #5F6670; }
+/* b: rows with a radio */
+.c-tw__list { margin-top: 20px; }
+.c-tw__opt { width: 100%; border: 0; background: none; font: inherit; text-align: left; cursor: pointer; }
+.c-tw__opt .c-minicard { width: 26px; height: 40px; box-shadow: none; }
+.c-minicard.is-elite { background: radial-gradient(130% 70% at 100% 0%, #26221B, #0C0C0D 62%); }
+.c-minicard.is-elite::before { background: #D8B46A; }
+.c-minicard.is-premium { background: #EFE8DD; box-shadow: inset 0 0 0 1px rgb(120 100 70 / 0.25); }
+.c-minicard.is-premium::before { background: #2A2621; }
+.c-tw__radio { flex: none; width: 22px; height: 22px; margin-left: auto; border-radius: 50%; border: 1px solid rgb(17 18 20 / 0.25); box-sizing: border-box; }
+.c-tw__opt[aria-checked="true"] .c-tw__radio { border: 7px solid #111214; }
+.c-tw__inc { margin: 36px 20px 0; font: 700 22px/28px var(--font); color: #111214; }
+.c-tw--b .c-tw__perks > .c-mehead:first-child { margin-top: 12px; }
+/* c: one card + segmented control */
+.c-tw__stage { display: grid; padding: 24px 0; }
+.c-tw__stage > .c-mcard { grid-area: 1 / 1; transition: opacity .25s; }
+.c-tw[data-tier="premium"] .c-tw__stage > :not([data-face="premium"]), .c-tw[data-tier="prestige"] .c-tw__stage > :not([data-face="prestige"]), .c-tw[data-tier="elite"] .c-tw__stage > :not([data-face="elite"]) { opacity: 0; }
+.c-tw__seg { display: flex; margin: 0 20px; padding: 3px; border: 1px solid rgb(17 18 20 / 0.12); border-radius: 999px; }
+.c-tw__seg button { flex: 1; height: 36px; border: 0; border-radius: 999px; background: none; font: 600 14px var(--font); color: #5F6670; cursor: pointer; }
+.c-tw__seg button[aria-selected="true"] { background: #111214; color: #FFFFFF; }
+.c-tw__price--c { text-align: center; margin-top: 12px; }
+.c-tw__perks.is-in .c-mehead, .c-tw__perks.is-in .c-merow { animation: c-tw-in 1.3s ease-out both; animation-delay: calc(var(--i, 0) * 140ms); }
+@keyframes c-tw-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .c-tw__stage > .c-mcard { transition: none; } .c-tw__perks.is-in .c-mehead, .c-tw__perks.is-in .c-merow { animation: none; } }
+
+/* ready-white (2026-10-21): Your card is ready on the white sign-up look */
+.phone.c-cr .screen-scroll { padding-bottom: 120px; }
+.phone.c-cr .c-auth__head { padding-bottom: 0; }
+.c-cr__stage { display: flex; flex-direction: column; align-items: center; padding: 28px 20px 0; }
+.c-cr .c-mcard.is-portrait { width: 200px; height: 317px; max-width: none; margin: 0; box-shadow: 0 22px 32px -20px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(17 18 20 / 0.06);
+  animation: c-cr-in 1.1s cubic-bezier(.2, .7, .2, 1) .15s both; }
+@keyframes c-cr-in { from { opacity: 0; transform: translateY(28px) scale(.96); } to { opacity: 1; transform: none; } }
+.c-cr__hint { margin-top: 14px; font: 400 13px/18px var(--font); color: #5F6670; animation: c-cr-fade .8s ease-out 1s both; }
+@keyframes c-cr-fade { from { opacity: 0; } to { opacity: 1; } }
+.c-cr__foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; padding: 12px 20px 34px; background: #FFFFFF; }
+.c-cr__actions { margin: 24px 20px 0; animation: c-cr-fade .8s ease-out 1.1s both; }
+.c-cr--c .c-mehead, .c-cr__list { animation: c-cr-fade .8s ease-out 1.1s both; }
+@media (prefers-reduced-motion: reduce) { .c-cr .c-mcard.is-portrait, .c-cr__hint, .c-cr__actions, .c-cr--c .c-mehead, .c-cr__list { animation: none; } }
+
+/* signin-white (2026-10-22): the quiet second action under the white auth pill */
+.phone.c-auth--white .c-auth__alt { display: block; margin-top: 14px; padding: 10px 0; text-align: center; font: 600 15px/20px var(--font); color: #111214; text-decoration: none; }
+
+/* join-options (2026-10-22): Apple / Google / Facebook on Join and Sign in; email + password sign in */
+.c-auth__or { display: flex; align-items: center; gap: 12px; margin: 22px 0 18px; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-auth__or::before, .c-auth__or::after { content: ""; flex: 1; height: 1px; background: rgb(17 18 20 / 0.12); }
+.c-auth__social { display: grid; gap: 10px; }
+.c-auth__soc { position: relative; display: flex; align-items: center; justify-content: center; height: 48px; box-sizing: border-box;
+  border: 1px solid rgb(17 18 20 / 0.25); border-radius: 999px; color: #111214; font: 600 16px/20px var(--font); text-decoration: none; }
+.c-auth__soc svg { position: absolute; left: 18px; width: 20px; height: 20px; }
+.c-auth__soc:active { background: rgb(17 18 20 / 0.04); }
+.phone.c-auth--social .c-auth__sheet { padding-top: 28px; }
+.phone.c-auth--social .c-auth__or + .c-auth__cta { margin-top: 0; }
+.phone.c-auth--social .c-auth__cta .c-auth__alt { margin-top: 10px; }
+.c-auth__line { display: block; padding: 14px 0 10px; border-bottom: 1px solid rgb(17 18 20 / 0.15); }
+.c-auth__line:focus-within { border-bottom-color: #111214; }
+.c-auth__line + .c-auth__line { margin-top: 8px; }
+.c-auth__label { display: block; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-auth__lineinput { display: block; width: 100%; margin-top: 4px; padding: 0; border: 0; outline: 0; background: none; font: 500 17px/24px var(--font); color: #111214; }
+.c-auth__login .c-auth__cta { margin-top: 28px; }

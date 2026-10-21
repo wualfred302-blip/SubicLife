@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Your visit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/thin/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-discover c-mepage">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-dhead c-dhead--push">
+    <span class="c-dhead__spacer c-bkdone__gap" aria-hidden="true"></span>
+    <h1 class="c-dhead__title">Your visit</h1>
+    <a class="c-bkdone__done" data-skip href="me-bookings.html">Skip</a>
+  </div>
+
+  <main class="screen-scroll c-sask">
+
+    <a class="c-sask__place" data-place href="place.html?p=ocean">
+      <img class="c-sask__hero" data-thumb src="img/card-ocean.jpg" alt="">
+      <span class="c-sask__name" data-name></span>
+      <span class="c-sask__when" data-when></span>
+    </a>
+
+    <h2 class="c-sask__title">How was it?</h2>
+    <p class="c-sask__sub" data-sub></p>
+
+    <a class="c-dcompose" data-go href="story-new.html">
+      <span class="c-dcompose__face"><img src="img/avatar.jpg" alt=""></span>
+      <span class="c-dcompose__field">Share a story from your visit<i class="ph-light ph-image" aria-hidden="true"></i></span>
+    </a>
+
+    <section class="c-osec c-sask__more">
+      <div class="c-plhead"><h2 class="c-section-title">Stories from members</h2><a class="c-cgsec__link" data-stories href="place-stories.html">See all</a></div>
+      <p class="c-cgsec__sub" data-count></p>
+      <div class="c-plstory-row c-sask__row" data-row data-snap></div>
+    </section>
+
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var p = placeFor(queryParam('p') || 'ocean');
+  var when = queryParam('v') || 'Today', what = queryParam('w');
+  var from = queryParam('from') || 'me-bookings.html';
+  var soon = queryParam('soon') === '1';
+  var n = ((window.FEED && FEED.stories) || []).filter(function (v) { return v.place === p.id; }).length;
+  $('[data-thumb]').src = p.hero || p.thumb;
+  $('[data-place]').href = 'place.html?p=' + p.id;
+  $('[data-name]').textContent = p.name;
+  $('[data-when]').textContent = soon ? what : (what ? what + ' · ' : '') + 'Visited ' + when;
+  var word = { stay: 'stay', trip: 'trip' }[queryParam('k')] || 'day';
+  $('[data-sub]').textContent = soon ? 'Post a photo and a tip from your ' + word + '. It helps other members plan theirs.'
+    : 'A photo and a tip help other members plan their day.';
+  if (soon) $('.c-sask__title').textContent = 'Share your ' + word;
+  $('[data-go]').href = 'story-new.html?p=' + p.id + '&v=' + encodeURIComponent(when) + '&from=' + encodeURIComponent(from);
+  $('[data-skip]').href = from;
+  if (n) {
+    $('[data-stories]').href = 'place-stories.html?p=' + p.id;
+    $('[data-count]').textContent = n + (n === 1 ? ' story about ' : ' stories about ') + p.name;
+    $('[data-row]').innerHTML = FEED.stories.filter(function (v) { return v.place === p.id; }).map(storyCard).join('');
+  } else $('.c-sask__more').hidden = true;
+})();
+</script>
+</body>
+</html>

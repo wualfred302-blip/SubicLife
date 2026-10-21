@@ -220,8 +220,8 @@
       '<span class="c-bigcard__name">' + esc(place.name) + '</span>' +
       '<span class="c-bigcard__meta">' + esc(place.category) + ' · ' + esc(place.area) + '</span></span>' +
       '<span class="c-bigcard__offer"><span class="c-perkmark" aria-hidden="true"></span>' + esc(p.offer || place.offerShort) + '</span></span>' +
-      '<span class="c-bigcard__stats">' + stat('ph-light ph-navigation-arrow', 'blue', place.distance, 'Away') + stat('ph-fill ph-star', 'gold', place.rating, 'Rating') +
-      stat('ph-light ph-clock', 'indigo', place.closes.replace('closes ', ''), 'Closes') + '</span>' +
+      '<span class="c-bigcard__stats">' + stat('ph-light ph-car-simple', 'blue', place.distance, 'Away') + stat('ph-fill ph-star', 'gold', place.rating, 'Rating') +
+      stat('ph-light ph-clock-afternoon', 'indigo', place.closes.replace('closes ', ''), 'Closes') + '</span>' +
       '</a>' + saveBtn(place) + '</div>';
   }
   document.getElementById('near-row').innerHTML = NEAR.map(nearCard).join('');

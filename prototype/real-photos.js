@@ -25,7 +25,15 @@
     p.hero = r.photos[0];
     p.thumb = r.thumb || r.photos[0];
     if (r.video) { p.video = r.video; p.poster = r.poster || r.photos[0]; p.videoFirst = !!r.lead; }
-    (p.rooms || []).forEach(function (room) { if (r.rooms && r.rooms[room.name]) room.photo = r.rooms[room.name]; });
+    (p.rooms || []).forEach(function (room) {
+      if (r.rooms && r.rooms[room.name]) room.photo = r.rooms[room.name];
+      // More photos of the same room type for the room sheet's gallery.
+      if (r.roomsMore && r.roomsMore[room.name]) {
+        var own = r.rooms && r.rooms[room.name];
+        room.photos = (own ? [room.photo] : []).concat(r.roomsMore[room.name]);
+        if (!own) room.photo = room.photos[0];
+      }
+    });
   });
 
   var F = window.FEED;

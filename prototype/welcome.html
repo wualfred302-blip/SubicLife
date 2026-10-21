@@ -20,6 +20,8 @@
 <div class="phone theme-night c-welcome">
 
   <img class="c-welcome__photo" src="img/pass-subic-bay.jpg" alt="">
+  <video class="c-welcome__photo c-welcome__video" src="img/real/welcome-montage.mp4" autoplay muted loop playsinline
+    aria-hidden="true" onerror="this.remove()"></video>
   <div class="c-welcome__wash" aria-hidden="true"></div>
 
   <header class="c-statusbar c-statusbar--clear">
@@ -32,13 +34,12 @@
   </header>
 
   <div class="c-welcome__body">
-    <img class="c-wordmark c-logo c-welcome__mark" src="img/logo.svg" alt="Subic.Life">
+    <img class="c-wordmark c-logo c-welcome__mark c-welcome__mark--big" src="img/logo.svg" alt="Subic.Life">
 
     <div>
-      <h1 class="c-welcome__title">Subic Bay, for members</h1>
-      <p class="c-welcome__sub">One card. 17 places to stay, eat and play.</p>
+      <h1 class="c-welcome__title"><span class="c-welcome__place">Subic Bay</span><span class="c-welcome__for">For Exclusive Members</span></h1>
       <div class="c-welcome__actions">
-        <a class="c-btn primary" href="signup.html">Get started</a>
+        <a class="c-btn primary" href="join.html">Get started</a>
         <a class="c-btn plain" href="signin.html">I have an account</a>
       </div>
     </div>
@@ -48,6 +49,11 @@
 
 </div>
 <script src="app.js"></script>
+<script>
+  window.addEventListener('load', function () {
+    setTimeout(function () { document.querySelector('.c-welcome__mark--big').classList.add('is-in'); }, 300);
+  });
+</script>
 <script src="img/real/manifest.js"></script>
 <script src="real-photos.js"></script>
 </body>

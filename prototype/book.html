@@ -217,7 +217,7 @@
         $('[data-bar-total]').textContent = fmtPeso(total);
         $('[data-bar-nights]').textContent = tf.day(s.checkIn) + at;
         $('[data-pay]').textContent = 'Pay';
-        $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i + q;
+        $('[data-pay]').href = 'book-done.html?p=' + p.id + '&room=' + i + q + '&new=1';
         $('[data-tixchange]').href = 'place.html?p=' + p.id + q + '&room=' + i + '#tickets';
       };
       renderTix();

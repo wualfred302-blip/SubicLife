@@ -31,7 +31,7 @@
 
   <div class="c-dhead c-dhead--push">
     <span class="c-dhead__spacer c-bkdone__gap" aria-hidden="true"></span>
-    <span class="c-dhead__title" aria-hidden="true"></span>
+    <span class="c-dhead__title" data-navtitle>Booking</span>
     <a class="c-bkdone__done" href="explore.html">Done</a>
   </div>
 
@@ -45,7 +45,15 @@
 
     <div class="c-bkplace">
       <img class="c-bkplace__img" data-thumb src="img/card-lighthouse.jpg" alt="">
-      <span class="c-bkplace__text"><span class="c-bkplace__name" data-name></span><span class="c-bkplace__sub" data-sub></span></span>
+      <span class="c-bkplace__text"><span class="c-bkplace__name" data-name></span><span class="c-bkplace__sub" data-sub></span><span class="c-cgstop__status" data-status>Confirmed</span></span>
+    </div>
+
+    <div class="c-bkqr" data-qr>
+      <span class="c-bkqr__svg" data-qrsvg></span>
+      <p class="c-bkqr__code" data-qrcode></p>
+    </div>
+    <div class="c-melist c-bkinfo" data-qrinfo>
+      <div class="c-merow"><span class="c-merow__lead"><i class="ph-light ph-info" aria-hidden="true"></i></span><span class="c-merow__main" data-qrhint></span></div>
     </div>
 
     <div class="c-melist c-cgform" data-rows></div>
@@ -63,6 +71,7 @@
   <span class="c-homeindicator"></span>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="data-a.js"></script>
 <script src="img/real/manifest.js"></script>
 <script src="real-photos.js"></script>
@@ -94,6 +103,7 @@
     var nights = checkIn && checkOut ? Math.round((checkOut - checkIn) / 864e5) : 1;
     var adults = Number(queryParam('a')) || 2, kids = Number(queryParam('c')) || 0;
     var day = tix && (parse(queryParam('d')) || new Date(2026, 9, 18));
+    var unit = r;
     if (tix) {
       // A ticket's price is for the party: adults at the adult rate, children at the child rate where there is one.
       var kid = r.child || r.rate, per = r.per || p.per, cut = function (x) { return Math.round(x * p.discount / 100); };
@@ -122,13 +132,26 @@
         (tm ? row('Time', fmtClock(tm) + ' to ' + fmtClock(tm, hrs), 'c-bkval') : '') +
         (per ? row(per[2], plural(adults, per[0], per[1]), 'c-bkval')
           : row('Guests', plural(adults, 'adult', 'adults') + (kids ? ', ' + plural(kids, 'child', 'children') : ''), 'c-bkval')) +
-        row('Booking code', p.code, 'c-bkval c-bkcode') +
-        row('Paid with GCash', fmtPeso(total), 'c-bkval')
+        ''
       : row(trip ? p.dates[0] : p.dates[0] + '<span class="c-merow__sub">From 2 PM</span>', checkIn ? dayName(checkIn) : p.dates[2], 'c-bkval') +
       row(trip ? p.dates[1] : p.dates[1] + '<span class="c-merow__sub">By 12 PM</span>', checkOut ? dayName(checkOut) : p.dates[3], 'c-bkval') +
       (free ? row('Free night', 'Used', 'c-bkval') : '') +
-      row('Booking code', p.code, 'c-bkval c-bkcode') +
-      (total > 0 ? row('Paid with GCash', fmtPeso(total), 'c-bkval') : '');
+      '';
+
+    // booking-receipt: full price per line, minus lines, a dashed rule, the total, then how it was paid.
+    var line = function (label, value, cls) {
+      return '<div class="c-rcpt__line' + (cls ? ' ' + cls : '') + '"><span>' + label + '</span><span>' + value + '</span></div>';
+    };
+    var lines = tix
+      ? line(unit.name + ' × ' + (per ? plural(adults, per[0], per[1]) : plural(adults, 'adult', 'adults')), fmtPeso(unit.rate * adults)) +
+        (kids ? line(unit.name + ' × ' + plural(kids, 'child', 'children'), fmtPeso((unit.child || unit.rate) * kids)) : '')
+      : line(r.name + ' × ' + plural(nights, 'night', 'nights'), fmtPeso(r.rate * nights));
+    $('[data-rows]').insertAdjacentHTML('afterend', '<p class="c-mehead">Receipt</p><div class="c-rcpt">' + lines +
+      (off ? line('Member discount, ' + p.discount + '%', '−' + fmtPeso(off), 'is-off') : '') +
+      (free ? line('Free night', '−' + fmtPeso(free), 'is-off') : '') +
+      '<div class="c-rcpt__rule"></div>' +
+      line('Total', fmtPeso(total), 'is-total') +
+      '<p class="c-rcpt__meta">' + (total > 0 ? 'Paid with GCash on Sat, 17 Oct 2026' : 'Nothing was charged') + '</p></div>');
 
     var ics = [
       'BEGIN:VCALENDAR',
@@ -146,11 +169,35 @@
     var req = (queryParam('req') || '').trim();
     if (req && !trip) { $('[data-req-text]').textContent = req; $('[data-req-block]').hidden = false; }
 
-    if (tix) $('.c-bkdone__note').textContent = 'Show your card QR at ' + meet + '.';
+    // The booking's own QR, drawn as one SVG path like the card's (no seams between modules).
+    if (typeof qrcode === 'function') {
+      var qr = qrcode(0, 'M');
+      qr.addData('SUBICLIFE-BOOKING:' + p.code + ':' + p.id + ':' + (tix ? queryParam('d') : queryParam('in') || ''));
+      qr.make();
+      var qn = qr.getModuleCount(), qd = '';
+      for (var qy = 0; qy < qn; qy++) for (var qx = 0; qx < qn; qx++) if (qr.isDark(qy, qx)) qd += 'M' + qx + ' ' + qy + 'h1v1h-1z';
+      $('[data-qrsvg]').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="184" height="184" viewBox="0 0 ' + qn + ' ' + qn +
+        '" role="img" aria-label="Booking QR code"><path fill="currentColor" d="' + qd + '"/></svg>';
+    }
+    $('[data-qrcode]').textContent = p.code;
+    // Title by what was bought (Your ticket, lesson, ride, cruise, stay), and a word on keeping the code private.
+    var what = tix ? (p.tixWord ? p.tixWord[1].toLowerCase() : 'ticket') : trip ? 'trip' : 'stay';
+    $('[data-navtitle]').textContent = 'Your ' + what;
+    // booking-head d: the place and the day go in the top bar; the QR is the first thing on the page.
+    var when = tix ? r.name + ' · ' + dayName(day) + (tm ? ', ' + fmtClock(tm) : '') : $('[data-sub]').textContent.split(' · ').slice(0, 2).join(' · ');
+    $('[data-navtitle]').innerHTML = '<span class="c-dhead__name"></span><span class="c-dhead__when"></span>';
+    $('.c-dhead__name').textContent = p.name;
+    $('.c-dhead__when').textContent = when;
+    // after-pay: a new booking goes on to the story prompt; Skip there returns to Explore.
+    if (queryParam('new') === '1') $('.c-bkdone__done').href = 'story-ask.html?p=' + p.id + '&soon=1&k=' + what + '&w=' + encodeURIComponent(when) +
+      '&from=explore.html';
+    $('[data-qrhint]').innerHTML = 'Show this only at ' + (tix ? meet : trip ? 'boarding' : 'check-in') +
+      '<span class="c-merow__sub">Anyone with this code can use your ' + (what === 'stay' ? 'booking' : what) + '. Don’t share it or post it.</span>';
+    $('.c-bkdone__note').style.display = 'none';
     // A way to reach the place after booking: a text where it takes messages (the phone's own app), a call for hotels.
     // It sits beside Add to calendar, so the booked screen stays one screen tall.
     var reach = p.chat ? ['sms:' + p.chat[0], 'chat-circle-text', p.chat[1]]
-      : !tix && !trip && p.phone ? ['tel:' + p.phone.replace(/\s/g, ''), 'phone', 'Call'] : null;
+      : !trip && p.phone ? ['tel:' + p.phone.replace(/\s/g, ''), 'phone', 'Call'] : null;
     if (reach) {
       var acts = document.createElement('div'), cal = $('[data-ics]');
       acts.className = 'c-bkacts';
@@ -183,8 +230,22 @@
           $('.c-bkdone__tick').className = 'ph-light ph-x-circle c-bkdone__tick';
           $('.c-bkdone__title').textContent = 'Booking cancelled';
           $('[data-saved]').textContent = total > 0 ? fmtPeso(total) + ' goes back to GCash' : 'Nothing was charged';
-          ['.c-bkacts', '[data-ics]', '.c-bkdone__note', '[data-cancel]'].forEach(function (s) { var el = $(s); if (el) el.style.display = 'none'; });
+          ['.c-bkacts', '[data-ics]', '.c-bkdone__note', '[data-cancel]', '[data-qr]', '[data-qrinfo]'].forEach(function (s) { var el = $(s); if (el) el.style.display = 'none'; });
+          $('.c-bkdone').style.display = 'flex';
+          $('[data-status]').textContent = 'Cancelled';
+          if (total > 0) $('.c-rcpt__meta').insertAdjacentHTML('beforebegin', line('Refunded to GCash', '−' + fmtPeso(total), 'is-off'));
+          var sv = $('.c-bksave');
+          if (sv) sv.closest('.c-merow').style.display = 'none';
         });
+      }
+    }
+    // activity-fix: a ticket or lesson paid for just now goes into Me > Bookings too (this browser only).
+    if (tix && queryParam('new') === '1') {
+      var tkey = p.id + '-' + queryParam('d') + '-' + i + '-' + (tm || ''), tlist = load('sl-bookings');
+      if (!tlist.some(function (b) { return b.key === tkey; })) {
+        tlist.push({ key: tkey, name: p.name, sub: r.name + ' · ' + dayName(day) + (tm ? ', ' + fmtClock(tm) : '') + ' · Code ' + p.code, thumb: p.thumb,
+          href: 'book-done.html' + location.search.replace('&new=1', '') });
+        keep('sl-bookings', tlist);
       }
     }
     var icsLink = $('[data-ics]');

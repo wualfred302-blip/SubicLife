@@ -153,15 +153,15 @@
       var lo = Math.min.apply(null, p.rooms.map(function (r) { return r.rate; }));
       $('[data-meta]').insertAdjacentHTML('afterend', '<p class="c-plede">From <b>' + fmtPeso(lo - Math.round(lo * p.discount / 100)) + '</b> / ' + p.per[0] + (p.lede ? ' · ' + p.lede : '') + '</p>');
     }
-    // The same three facts as Discover's Popular cards: blue distance, gold rating, indigo closing time.
+    // The same three facts as Discover's Popular cards: grey distance and time, an orange star for the rating.
     var fact = function (icon, tone, value, label) {
       return '<span class="c-bigcard__stat"><i class="' + icon + ' c-bigcard__icon is-' + tone + '" aria-hidden="true"></i>' +
         '<span class="c-bigcard__text"><span class="c-bigcard__value">' + value + '</span><span class="c-bigcard__label">' + label + '</span></span></span>';
     };
     var checkin = p.unit === 'night' && /(\d+(?::\d\d)? ?[AP]M)/.exec(p.hours || '');
-    $('[data-facts]').innerHTML = fact('ph-light ph-navigation-arrow', 'blue', p.distance, 'Away') + fact('ph-fill ph-star', 'gold', p.rating, 'Rating') +
-      (checkin ? fact('ph-light ph-sign-in', 'indigo', checkin[1], 'Check-in')
-        : fact('ph-light ph-clock', 'indigo', p.closes.replace('closes ', ''), 'Closes'));
+    $('[data-facts]').innerHTML = fact('ph-light ph-car-simple', 'blue', p.distance, 'Away') + fact('ph-fill ph-star', 'gold', p.rating, 'Rating') +
+      (checkin ? fact('ph-light ph-key', 'indigo', checkin[1], 'Check-in')
+        : fact('ph-light ph-clock-afternoon', 'indigo', p.closes.replace('closes ', ''), 'Closes'));
 
     // The member offer gets its own row under the name; the price waits in the bottom bar beside
     // the action, so each fact shows once.
@@ -433,9 +433,16 @@
         var facts = r.sub.split(' · ').filter(function (x) { return !/sleeps|up to/.test(x); }).slice(0, 2)
           .map(function (x) { return [rfact(x), x.charAt(0).toUpperCase() + x.slice(1)]; })
           .concat([['users', 'Up to ' + cap + ' guests']]);
-        var body = $('[data-roombody]'), top0 = body.scrollTop;
+        var body = $('[data-roombody]'), top0 = body.scrollTop, gal0 = body.querySelector('[data-rmgal]');
+        var galX = gal0 ? gal0.scrollLeft : 0;
         body.innerHTML =
-          '<img class="c-rmsheet__img" src="' + (r.photo || p.hero) + '" alt="">' +
+          (function (ph) {
+            // A swipe gallery when the room has more than one photo, with the listing's own count pill.
+            if (ph.length < 2) return '<img class="c-rmsheet__img" src="' + ph[0] + '" alt="">';
+            return '<div class="c-rmgal"><div class="c-rmgal__track" data-rmgal data-snap>' + ph.map(function (src, k) {
+              return '<img src="' + src + '" alt="' + r.name + ', photo ' + (k + 1) + '"' + (k ? ' loading="lazy"' : '') + '>';
+            }).join('') + '</div><span class="c-placehero__count c-rmgal__count" data-rmcount>1 / ' + ph.length + '</span></div>';
+          })(r.photos || [r.photo || p.hero]) +
           '<div class="c-bksheet__head"><h2 class="c-bksheet__title" id="room-title" tabindex="-1">' + r.name + '</h2><p class="c-bksheet__sub">' + p.name + '</p></div>' +
           '<ul class="c-tixfacts" style="grid-template-columns: repeat(' + facts.length + ', 1fr)">' + facts.map(function (x) {
             return '<li><i class="ph-light ph-' + x[0] + '" aria-hidden="true"></i>' + x[1] + '</li>';
@@ -451,6 +458,15 @@
           '</div>' +
           '<p class="c-rmsheet__note">This room sleeps up to ' + cap + '.</p>';
         body.scrollTop = top0;
+        var gal = body.querySelector('[data-rmgal]');
+        if (gal) {
+          var pill = body.querySelector('[data-rmcount]'), total = gal.children.length;
+          gal.scrollLeft = body.dataset.room === String(ri) ? galX : 0;
+          var sync = function () { pill.textContent = (gal.clientWidth ? Math.round(gal.scrollLeft / gal.clientWidth) + 1 : 1) + ' / ' + total; };
+          gal.addEventListener('scroll', sync, { passive: true });
+          sync();
+        }
+        body.dataset.room = ri;
         paint();
         $('[data-roomfoot]').innerHTML =
           '<span class="c-bkbar__sum"><b>' + fmtPeso(pay(r, nn)) + '<s>' + fmtPeso(r.rate * (nn || 1)) + '</s></b><span>' +

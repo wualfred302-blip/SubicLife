@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="components-c.css">
@@ -17,8 +18,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone theme-night is-onboard c-push c-tiers" data-tier="prestige">
-
+<div class="phone c-discover c-auth c-auth--white c-auth--form c-tw c-tw--a" data-tier="prestige">
   <header class="c-statusbar">
     <span>9:41</span>
     <span class="c-statusbar__icons">
@@ -27,178 +27,179 @@
       <span class="material-symbols-outlined">battery_full</span>
     </span>
   </header>
-
-  <nav class="c-navbar">
-    <a class="c-navbar__back" href="signup-selfie.html" aria-label="Back to photo" data-back>
-      <svg class="c-navbar__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
-    </a>
-    <h1 class="c-navbar__title">Choose your card</h1>
-    <span></span>
-  </nav>
-
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" data-back href="signup-selfie.html" aria-label="Back to photo"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <img class="c-auth__inklogo" src="img/logo-ink.svg" alt="Subic.Life">
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
   <main class="screen-scroll">
+    <div class="c-auth__head">
+      <h1 class="c-auth__title">Choose your card</h1>
+      <p class="c-auth__sub">Paid once a year. Renews yearly, cancel anytime.</p>
+    </div>
 
-    <div class="c-tiers__row" data-snap role="group" aria-label="Membership cards">
-      <div class="c-tiers__slide" role="button" tabindex="0" data-tier="premium" aria-label="Premium card">
-        <div class="c-mcard is-premium is-portrait">
-          <div class="c-mcard__flipper">
-            <div class="c-mcard__face c-mcard__front">
-              <span class="c-mcard__sheen" aria-hidden="true"></span>
-              <span class="c-mcard__ghost" aria-hidden="true"><span>Su</span><span>bic</span></span>
-              <span class="c-mcard__brand">Subic.Life</span>
-              <span class="c-mcard__foot">Premium member</span>
-            </div>
-            <div class="c-mcard__face c-mcard__back" aria-hidden="true">
-              <span class="c-mcard__sheen"></span>
-              <div class="c-mcard__qrtile"><span class="c-qr is-card"></span></div>
-              <p class="c-mcard__number">0042 1187</p>
-            </div>
-          </div>
+    <div class="c-tw__row" role="group" aria-label="Membership cards">
+      <div class="c-tw__slide" data-tier="premium" role="button" tabindex="0" aria-label="Premium card"><div class="c-mcard is-premium is-portrait"><div class="c-mcard__flipper"><div class="c-mcard__face c-mcard__front">
+          <span class="c-mcard__sheen" aria-hidden="true"></span>
+          <span class="c-mcard__ghost" aria-hidden="true"><span>Su</span><span>bic</span></span>
+          <img class="c-mcard__logo" src="img/logo-ink.svg" alt="">
+          <span class="c-mcard__foot">Premium member</span>
+        </div></div></div></div>
+      <div class="c-tw__slide" data-tier="prestige" role="button" tabindex="0" aria-label="Prestige card"><div class="c-mcard is-prestige is-portrait"><div class="c-mcard__flipper"><div class="c-mcard__face c-mcard__front">
+          <span class="c-mcard__sheen" aria-hidden="true"></span>
+          <span class="c-mcard__ghost" aria-hidden="true"><span>Su</span><span>bic</span></span>
+          <img class="c-mcard__logo" src="img/logo.svg" alt="">
+          <span class="c-mcard__foot">Prestige member</span>
+        </div></div></div></div>
+      <div class="c-tw__slide" data-tier="elite" role="button" tabindex="0" aria-label="Elite card"><div class="c-mcard is-elite is-portrait"><div class="c-mcard__flipper"><div class="c-mcard__face c-mcard__front">
+          <span class="c-mcard__sheen" aria-hidden="true"></span>
+          <span class="c-mcard__ghost" aria-hidden="true"><span>Su</span><span>bic</span></span>
+          <img class="c-mcard__logo" src="img/logo.svg" alt="">
+          <span class="c-mcard__foot">Elite member</span>
+        </div></div></div></div>
+    </div>
+    <div class="c-tw__dots" aria-hidden="true"><span data-dot="premium"></span><span data-dot="prestige"></span><span data-dot="elite"></span></div>
+    <div class="c-tw__who"><span class="c-tw__name" data-name aria-live="polite">Prestige</span><span class="c-tw__price" data-price>₱12,000 a year</span></div>
+
+    <div class="c-tw__perks" data-perks="premium">
+      <h2 class="c-mehead">Every visit</h2>
+      <div class="c-melist">
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-tag" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Discounts at partner places</span></span>
         </div>
       </div>
-
-      <div class="c-tiers__slide" role="button" tabindex="0" data-tier="prestige" aria-label="Prestige card">
-        <div class="c-mcard is-prestige is-portrait">
-          <div class="c-mcard__flipper">
-            <div class="c-mcard__face c-mcard__front">
-              <span class="c-mcard__sheen" aria-hidden="true"></span>
-              <span class="c-mcard__ghost" aria-hidden="true"><span>Su</span><span>bic</span></span>
-              <span class="c-mcard__brand">Subic.Life</span>
-              <span class="c-mcard__foot">Prestige member</span>
-            </div>
-            <div class="c-mcard__face c-mcard__back" aria-hidden="true">
-              <span class="c-mcard__sheen"></span>
-              <div class="c-mcard__qrtile"><span class="c-qr is-card"></span></div>
-              <p class="c-mcard__number">0042 1187</p>
-            </div>
-          </div>
+      <h2 class="c-mehead">Cover</h2>
+      <div class="c-melist">
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-shield-check" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Accident insurance</span><span class="c-merow__sub">₱100,000 by Standard&nbsp;Insurance</span></span>
         </div>
-      </div>
-
-      <div class="c-tiers__slide" role="button" tabindex="0" data-tier="elite" aria-label="Elite card">
-        <div class="c-mcard is-elite is-portrait">
-          <div class="c-mcard__flipper">
-            <div class="c-mcard__face c-mcard__front">
-              <span class="c-mcard__sheen" aria-hidden="true"></span>
-              <span class="c-mcard__ghost" aria-hidden="true"><span>Su</span><span>bic</span></span>
-              <span class="c-mcard__brand">Subic.Life</span>
-              <span class="c-mcard__foot">Elite member</span>
-            </div>
-            <div class="c-mcard__face c-mcard__back" aria-hidden="true">
-              <span class="c-mcard__sheen"></span>
-              <div class="c-mcard__qrtile"><span class="c-qr is-card"></span></div>
-              <p class="c-mcard__number">0042 1187</p>
-            </div>
-          </div>
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-lifebuoy" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Travel emergency help</span><span class="c-merow__sub">By Assist&nbsp;America</span></span>
         </div>
       </div>
     </div>
-
-    <div class="c-tiers__offer">
-      <h2 class="c-tiers__name" id="tier-name" aria-live="polite">Prestige</h2>
-    </div>
-
-    <section class="c-tiers__sheet">
-      <h2 class="c-tiers__perks-head">Included</h2>
-      <div class="c-tiers__perk-stack">
-      <ul class="c-tiers__perks" data-perks="premium">
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Accident insurance ₱100,000 by Standard&nbsp;Insurance</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Discounts at partner merchants</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Travel emergency help by Assist&nbsp;America</li>
-      </ul>
-      <ul class="c-tiers__perks" data-perks="prestige">
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Accident insurance ₱500,000 by Standard&nbsp;Insurance</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Discounts at partner merchants</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Travel emergency help by Assist&nbsp;America</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>One free hotel night</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Subic Bay concierge</li>
-      </ul>
-      <ul class="c-tiers__perks" data-perks="elite">
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Accident insurance ₱1,000,000 by Standard&nbsp;Insurance</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Discounts at partner merchants</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Travel emergency help by Assist&nbsp;America</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>One free night</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>Concierge</li>
-        <li class="c-tiers__perk"><span class="material-symbols-outlined" aria-hidden="true">check</span>2-hour yacht cruise for 20 people</li>
-      </ul>
+    <div class="c-tw__perks" data-perks="prestige">
+      <h2 class="c-mehead">Every visit</h2>
+      <div class="c-melist">
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-tag" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Discounts at partner places</span></span>
+        </div>
       </div>
-    </section>
-
+      <h2 class="c-mehead">Extras</h2>
+      <div class="c-melist">
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-bed" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">One free hotel night</span></span>
+        </div>
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-headset" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Concierge</span></span>
+        </div>
+      </div>
+      <h2 class="c-mehead">Cover</h2>
+      <div class="c-melist">
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-shield-check" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Accident insurance</span><span class="c-merow__sub">₱500,000 by Standard&nbsp;Insurance</span></span>
+        </div>
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-lifebuoy" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Travel emergency help</span><span class="c-merow__sub">By Assist&nbsp;America</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="c-tw__perks" data-perks="elite">
+      <h2 class="c-mehead">Every visit</h2>
+      <div class="c-melist">
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-tag" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Discounts at partner places</span></span>
+        </div>
+      </div>
+      <h2 class="c-mehead">Extras</h2>
+      <div class="c-melist">
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-bed" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">One free hotel night</span></span>
+        </div>
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-headset" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Concierge</span></span>
+        </div>
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-sailboat" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">2-hour yacht cruise</span><span class="c-merow__sub">For up to 20 people</span></span>
+        </div>
+      </div>
+      <h2 class="c-mehead">Cover</h2>
+      <div class="c-melist">
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-shield-check" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Accident insurance</span><span class="c-merow__sub">₱1,000,000 by Standard&nbsp;Insurance</span></span>
+        </div>
+        <div class="c-merow">
+          <span class="c-merow__lead"><i class="ph-light ph-lifebuoy" aria-hidden="true"></i></span>
+          <span class="c-merow__main"><span class="c-pkname">Travel emergency help</span><span class="c-merow__sub">By Assist&nbsp;America</span></span>
+        </div>
+      </div>
+    </div>
   </main>
-
-  <footer class="c-tiers__bar">
-    <a class="c-btn primary" id="go" href="card-ready.html?tier=prestige">Continue with Prestige</a>
-    <p class="c-tiers__note">₱12,000 a year. Renews yearly, cancel anytime.</p>
+  <footer class="c-tw__foot">
+    <a class="c-auth__send" id="go" href="card-ready.html?tier=prestige">Continue with Prestige</a>
   </footer>
-
   <span class="c-homeindicator"></span>
-
 </div>
 <script>
 (function () {
-  var phone = document.querySelector('.c-tiers');
-  var row = document.querySelector('.c-tiers__row');
-  var slides = Array.prototype.slice.call(document.querySelectorAll('.c-tiers__slide'));
-  var radios = Array.prototype.slice.call(document.querySelectorAll('input[name="tier"]'));
-  var perkLists = Array.prototype.slice.call(document.querySelectorAll('[data-perks]'));
-  var nameEl = document.getElementById('tier-name');
-  var cta = document.getElementById('go');
-  var note = document.querySelector('.c-tiers__note');
-  if (!row || !slides.length) return;
-
+  var phone = document.querySelector('.c-tw');
   var tiers = ['premium', 'prestige', 'elite'];
   var names = { premium: 'Premium', prestige: 'Prestige', elite: 'Elite' };
   var prices = { premium: '₱5,000', prestige: '₱12,000', elite: '₱25,000' };
-
-  var requested = new URLSearchParams(window.location.search).get('tier');
-  var current = tiers.indexOf(requested) !== -1 ? requested : 'prestige';
-
-  // While the row is scrolling on our behalf, ignore its scroll events so the selection does not flicker.
-  var busy = false;
-  var lockTimer = 0;
-  function lock() {
-    busy = true;
-    clearTimeout(lockTimer);
-    lockTimer = setTimeout(function () { busy = false; }, 600);
-  }
-
-  function centreOn(tier, smooth) {
-    var left = tiers.indexOf(tier) * row.clientWidth;
-    if (smooth) { lock(); row.scrollTo({ left: left, behavior: 'smooth' }); }
-    else row.scrollLeft = left;
-  }
+  var row = document.querySelector('.c-tw__row');
+  var cta = document.getElementById('go');
+  var q = new URLSearchParams(location.search).get('tier');
+  var current = tiers.indexOf(q) !== -1 ? q : 'prestige';
+  var busy = false, t = 0;
+  var stateAttr = { button: 'aria-pressed', tab: 'aria-selected', radio: 'aria-checked' };
 
   function select(tier, scroll) {
     current = tier;
     phone.setAttribute('data-tier', tier);
-    radios.forEach(function (r) { r.checked = r.value === tier; });
-    nameEl.textContent = names[tier];
-    perkLists.forEach(function (list) {
-      list.classList.toggle('is-on', list.getAttribute('data-perks') === tier);
+    document.querySelectorAll('[data-name]').forEach(function (e) { e.textContent = names[tier]; });
+    document.querySelectorAll('[data-price]').forEach(function (e) { e.textContent = prices[tier] + ' a year'; });
+    document.querySelectorAll('[data-perks]').forEach(function (e) { e.hidden = e.getAttribute('data-perks') !== tier; });
+    // The name and price change at once; the perks cascade in, heading by row, each time the card changes.
+    document.querySelectorAll('[data-perks]:not([hidden])').forEach(function (e) {
+      e.classList.remove('is-in'); void e.offsetWidth; e.classList.add('is-in');
+    });
+    document.querySelectorAll('[data-tier][role]').forEach(function (e) {
+      e.setAttribute(stateAttr[e.getAttribute('role')], e.getAttribute('data-tier') === tier);
     });
     cta.textContent = 'Continue with ' + names[tier];
     cta.setAttribute('href', 'card-ready.html?tier=' + tier);
-    note.textContent = prices[tier] + ' a year. Renews yearly, cancel anytime.';
-    if (scroll) centreOn(tier, true);
+    // The swipe row follows a tap; a swipe calls select() without scroll.
+    if (row && scroll !== undefined) {
+      var left = tiers.indexOf(tier) * row.clientWidth;
+      if (scroll) { busy = true; clearTimeout(t); t = setTimeout(function () { busy = false; }, 600); row.scrollTo({ left: left, behavior: 'smooth' }); }
+      else row.scrollLeft = left;
+    }
   }
-
-  // Swiping the row selects the card that lands in view.
-  var raf = 0;
-  row.addEventListener('scroll', function () {
-    if (busy) return;
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(function () {
-      var i = Math.round(row.scrollLeft / row.clientWidth);
-      if (tiers[i] && tiers[i] !== current) select(tiers[i], false);
-    });
-  }, { passive: true });
-
-  radios.forEach(function (r) {
-    r.addEventListener('change', function () { if (r.checked) select(r.value, true); });
+  document.querySelectorAll('[data-perks]').forEach(function (list) {
+    list.querySelectorAll('.c-mehead, .c-merow').forEach(function (e, i) { e.style.setProperty('--i', i); });
   });
-
+  document.querySelectorAll('[data-tier][role]').forEach(function (e) {
+    e.addEventListener('click', function () { select(e.getAttribute('data-tier'), true); });
+  });
+  if (row) row.addEventListener('scroll', function () {
+    if (busy) return;
+    var i = Math.round(row.scrollLeft / row.clientWidth);
+    if (tiers[i] && tiers[i] !== current) select(tiers[i]);
+  }, { passive: true });
   select(current, false);
-  centreOn(current, false);
 })();
 </script>
 <script src="app.js"></script>
