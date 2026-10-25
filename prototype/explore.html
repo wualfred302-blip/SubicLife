@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#F6F3EE">
-  <title>Subic.Life - Discover</title>
+  <title>Subic.Life - Discover</title><link rel="icon" href="img/icon.svg" type="image/svg+xml"><link rel="icon" href="img/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="img/apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,6 +21,21 @@
   <link rel="stylesheet" href="shell.css">
   <link rel="stylesheet" href="theme.css">
   <script src="shell.js"></script>
+<style>
+/* Loading: shapes match the real cards; a soft light sweeps across them. */
+.c-skel { background: #EEF0F2; border-radius: 8px; position: relative; overflow: hidden; }
+.c-skel::after { content: ''; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.7), transparent); animation: c-skel 1.3s ease-in-out infinite; }
+@keyframes c-skel { to { transform: translateX(100%); } }
+.c-skel--photo { aspect-ratio: 1; border-radius: 16px; margin-bottom: 8px; }
+.c-skel--big { aspect-ratio: 4 / 3; border-radius: 16px; }
+.c-skel--line { height: 12px; margin: 5px 0; }
+.c-skelrow { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; }
+.c-skelstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-top: 14px; }
+.is-in { animation: c-fadein .35s ease-out both; }
+@keyframes c-fadein { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .c-skel::after, .is-in { animation: none; } }
+</style>
 </head>
 <body>
 <div class="phone c-discover">
@@ -224,10 +239,21 @@
       stat('ph-light ph-clock-afternoon', 'indigo', place.closes.replace('closes ', ''), 'Closes') + '</span>' +
       '</a>' + saveBtn(place) + '</div>';
   }
-  document.getElementById('near-row').innerHTML = NEAR.map(nearCard).join('');
-  document.getElementById('feed-popular').innerHTML = F.popular.map(popularCard).join('');
+  var nearRow = document.getElementById('near-row'), popRow = document.getElementById('feed-popular');
+  nearRow.innerHTML = Array(3).fill('<div class="c-lcard" aria-hidden="true"><div class="c-skel c-skel--photo"></div><div class="c-skel c-skel--line" style="width:80%"></div><div class="c-skel c-skel--line" style="width:60%"></div><div class="c-skel c-skel--line" style="width:70%"></div></div>').join('');
+  popRow.innerHTML = Array(2).fill('<div class="c-bigcard" aria-hidden="true"><div class="c-skel c-skel--big"></div><div class="c-skelrow"><div style="flex:1"><div class="c-skel c-skel--line" style="width:55%;height:14px"></div><div class="c-skel c-skel--line" style="width:40%"></div></div><div class="c-skel" style="width:86px;height:30px;border-radius:999px"></div></div><div class="c-skelstats"><div class="c-skel c-skel--line"></div><div class="c-skel c-skel--line"></div><div class="c-skel c-skel--line"></div></div></div>').join('');
+  nearRow.setAttribute('aria-busy', 'true'); popRow.setAttribute('aria-busy', 'true');
+  // Demo: real cards arrive after 1.2 s (?hold keeps the skeleton).
+  if (!/[?&]hold/.test(location.search)) setTimeout(function () {
+    nearRow.innerHTML = NEAR.map(nearCard).join('');
+    popRow.innerHTML = F.popular.map(popularCard).join('');
+    nearRow.removeAttribute('aria-busy'); popRow.removeAttribute('aria-busy');
+    nearRow.classList.add('is-in'); popRow.classList.add('is-in');
+    if (window.onPlacesLoaded) window.onPlacesLoaded();
+  }, 1200);
 
   // Swiping a large card's photos moves its dots; the bookmark saves without opening the place.
+  window.onPlacesLoaded = function () {
   document.querySelectorAll('.c-bigcard__gallery').forEach(function (g) {
     var dots = g.parentNode.querySelectorAll('.c-bigcard__dot');
     g.addEventListener('scroll', function () {
@@ -246,6 +272,7 @@
       SLSaved.note(on);
     });
   });
+  };
 
   // Ana's visits that have no story yet, as rows in the "Share a story" sheet.
   function visitRow(v) {

@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          ".planning/design/map-search/search.js"
+        ],
+        "createdAt": "2026-10-17T20:46:43.773Z",
+        "reason": "Claude: img src is set on the next line from it.photo before insertion"
+      }
+    ]
+  }
+}
