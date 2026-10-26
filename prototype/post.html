@@ -114,7 +114,7 @@
     : '<div class="c-post__author">' +
         '<span class="c-post__avatar">' + avatarOf(s) + '</span>' +
         '<span class="c-post__who"><span class="c-post__name">' + esc(s.author) + '</span>' +
-        '<span class="c-post__where">' + esc(place.name) + ' · ' + esc(s.ago) + '</span></span>' +
+        '<span class="c-post__where">' + esc(place.name) + ' · ' + esc(s.ago) + '</span>' + window.starsHTML(s.rating) + '</span>' +
       '</div>';
 
   var info = isEvent

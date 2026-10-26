@@ -108,7 +108,7 @@
       '<div class="c-placehero__bar">' +
         '<a class="c-circle-btn" data-back href="explore.html" aria-label="Back to Explore"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>' +
         '<div class="c-placehero__right">' +
-          '<button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save offer" data-save><i class="ph-light ph-bookmark-simple" aria-hidden="true"></i></button>' +
+          '<button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save offer" data-save><i class="ph-light ph-heart" aria-hidden="true"></i></button>' +
         '</div>' +
       '</div>' +
     '</div>' +
@@ -161,7 +161,7 @@
   function paint(on) {
     save.classList.toggle('is-on', on);
     save.setAttribute('aria-pressed', on ? 'true' : 'false');
-    save.firstChild.className = (on ? 'ph-fill' : 'ph-light') + ' ph-bookmark-simple';
+    save.firstChild.className = (on ? 'ph-fill' : 'ph-light') + ' ph-heart';
   }
   paint(SLSaved.has('offer', o.id));
   save.addEventListener('click', function () {

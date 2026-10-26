@@ -2978,3 +2978,277 @@ button.c-bkchange { padding: 0; border: 0; background: none; cursor: pointer; }
 .c-auth__label { display: block; font: 400 13px/18px var(--font); color: #5F6670; }
 .c-auth__lineinput { display: block; width: 100%; margin-top: 4px; padding: 0; border: 0; outline: 0; background: none; font: 500 17px/24px var(--font); color: #111214; }
 .c-auth__login .c-auth__cta { margin-top: 28px; }
+
+/* ===== Discover: loading placeholders, search head (moved from explore.html 2026-10-25) ===== */
+/* Loading: shapes match the real cards; a soft light sweeps across them. */
+.c-skel { background: #EEF0F2; border-radius: 8px; position: relative; overflow: hidden; }
+.c-skel::after { content: ''; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.7), transparent); animation: c-skel 1.3s ease-in-out infinite; }
+@keyframes c-skel { to { transform: translateX(100%); } }
+.c-skel--photo { aspect-ratio: 1; border-radius: 16px; margin-bottom: 8px; }
+.c-skel--big { aspect-ratio: 4 / 3; border-radius: 16px; }
+.c-skel--line { height: 12px; margin: 5px 0; }
+.c-skelrow { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; }
+.c-skelstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-top: 14px; }
+.is-in { animation: c-fadein .35s ease-out both; }
+@keyframes c-fadein { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .c-skel::after, .is-in { animation: none; } }
+/* Discover head (2026-10-25): search, Saved, Concierge on top; category photos; tabs that stick. */
+html .phone.c-discover .c-dhead { height: 64px; align-items: flex-end; padding-bottom: 6px !important; gap: 4px; padding: 0 8px 0 16px; border-bottom: 0; }
+.phone:has(> .c-dhead) .screen-scroll { margin-top: 64px; }
+.c-dsearch { flex: 1; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 12px; background: #F1F2F4; }
+.c-dsearch i { font-size: 20px; color: #5F6670; }
+.c-dsearch input { flex: 1; min-width: 0; border: 0; background: none; outline: none; font: 400 16px/20px var(--font); color: #111214; }
+.c-dsearch input::placeholder { color: #8A9099; }
+.c-dicon { display: grid; place-items: center; width: 44px; height: 44px; color: #111214; font-size: 26px; text-decoration: none; }
+.c-dcats { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; padding: 8px 16px 6px; scroll-snap-type: x proximity; scroll-padding-inline: 16px; }
+.c-dcats::-webkit-scrollbar { display: none; }
+.c-dcat { flex: 0 0 84px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0; border: 0; background: none; cursor: pointer; scroll-snap-align: start; }
+.c-dcat__img { width: 84px; height: 84px; border-radius: 24px; object-fit: cover; display: block; box-shadow: 0 0 0 2px transparent; transition: box-shadow .2s; }
+.c-dcat__label { font: 400 13px/16px var(--font); color: #111214; text-align: center; }
+.c-dcat.is-selected .c-dcat__img { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #111214; }
+.c-dcat.is-selected .c-dcat__label { font-weight: 600; }
+.c-dtabbar { position: sticky; top: 0; z-index: 5; display: flex; height: 44px; padding: 0 20px; background: #FFFFFF; border-bottom: 1px solid rgb(17 18 20 / 0.08); }
+.c-dtabbar .c-dtabs { align-items: stretch; }
+.c-discover #panel-places > section:first-of-type .c-section-head { margin-top: 16px; }
+
+/* ===== Discover fixes (2026-10-25) =====
+   Perk as a line under the price (card mark + offer), like Popular. Bookmark a thin white outline in a 44px tap area.
+   The tabs bar has no band of its own until it sticks; then it turns white so cards don't show through. */
+.c-lcard__perk { display: flex; align-items: center; gap: 6px; margin-top: 2px; font: 600 13px/18px var(--font); color: #15803D; }
+.c-lcard__perk .c-perkmark { width: 9px; height: 13px; border-radius: 2px; }
+html .phone.c-discover .c-savebtn { top: 0; right: 0; width: 44px; height: 44px; }
+html .phone.c-discover .c-savebtn .c-savebtn__fill { color: transparent; }
+html .phone.c-discover .c-savebtn.is-on .c-savebtn__fill { color: #E8590C; }
+html .phone.c-discover .c-savebtn .c-savebtn__line, html .phone.c-discover .c-savebtn .c-savebtn__fill { font-size: 22px; }
+html .phone.c-discover .c-savebtn .c-savebtn__line { filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.45)); }
+.c-dtabbar { background: transparent; border-bottom-color: transparent; transition: background-color .2s, border-color .2s; }
+.c-dtabbar.is-stuck { background: #FFFFFF; border-bottom-color: rgb(17 18 20 / 0.08); }
+.c-dcat:focus-visible { outline: none; }
+.c-dcat:focus-visible .c-dcat__img { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #E8590C; }
+
+/* ===== Discover: Sharp photos and perk (2026-10-25, option b) =====
+   Near you and Popular photos have square corners (the placeholders too). */
+.c-discover .c-lcard__photo, .c-discover .c-bigcard__media, .c-discover .c-skel--photo, .c-discover .c-skel--big { border-radius: 0; }
+/* Perk as a black square tag on the photo's bottom-left corner. */
+.c-lcard__perk, .c-bigcard__offer .c-perkmark { }
+.c-lcard__perk .c-perkmark, .c-bigcard__offer .c-perkmark { display: none; }
+.c-lcard__perk { position: absolute; top: 120px; left: 0; z-index: 1; margin: 0; padding: 4px 8px;
+  background: #111214; color: #FFFFFF; font: 600 11px/16px var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
+.c-discover .c-bigcard { container-type: inline-size; }
+html .phone.c-discover .c-bigcard__offer { position: absolute; top: calc(75cqw - 28px); left: 0; z-index: 1; padding: 6px 10px; border: 0; border-radius: 0;
+  background: #111214; color: #FFFFFF; font: 600 12px/16px var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ===== Card tab: big card (2026-10-25) =====
+   The card takes most of the screen; Show QR, Perks, Savings and Wallet sit under it as bare icons with small labels. */
+.c-cardbig .screen-scroll { display: flex; flex-direction: column; }
+.c-cardbig .c-hero { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 8px 0 0; }
+html .phone.c-cardbig .c-hero .c-mcard.is-portrait { width: min(316px, calc(100% - 56px)); margin: 0 auto; border-radius: 22px; }
+.c-cbtns { display: flex; justify-content: center; gap: 4px; margin: 28px 16px 8px; }
+.c-cbtn { flex: 1; max-width: 84px; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0;
+  border: 0; background: none; color: #111214; font: 500 12px/16px var(--font); text-decoration: none; cursor: pointer; }
+.c-cbtn i { font-size: 26px; }
+.c-cbtn:active { opacity: 0.6; }
+
+/* ===== Emergency help screen (2026-10-25) =====
+   One black call button, the member number large enough to read out, hairline rows for what they help with. */
+.c-sos__lead { margin: 8px 20px 20px; font: 400 15px/22px var(--font); color: #5F6670; }
+.c-sos__call { display: flex; align-items: center; justify-content: center; gap: 10px; height: 56px; margin: 0 20px;
+  background: #111214; color: #FFFFFF; font: 600 17px/22px var(--font); text-decoration: none; }
+.c-sos__call i { font-size: 22px; }
+.c-sos__sample { margin: 8px 20px 0; font: 400 12px/16px var(--font); color: #8A9099; text-align: center; }
+.c-sos__id { display: flex; flex-direction: column; gap: 4px; margin: 24px 20px 0; padding: 16px; border: 1px solid rgb(17 18 20 / 0.12); }
+.c-sos__id span { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-sos__id b { font: 700 26px/32px var(--font); letter-spacing: 0.04em; color: #111214; }
+
+/* ===== Card format c: one action (2026-10-25) ===== big card, one black button, quiet text links. */
+.c-cfc__main { display: flex; align-items: center; justify-content: center; gap: 10px; height: 52px; margin: 28px 24px 0;
+  background: #111214; color: #FFFFFF; font: 600 16px/22px var(--font); text-decoration: none; }
+.c-cfc__main i { font-size: 22px; }
+.c-cfc__links { display: flex; justify-content: center; gap: 28px; margin: 20px 16px 16px; }
+.c-cfc__links a { color: #5F6670; font: 500 14px/20px var(--font); text-decoration: none; }
+
+/* ===== Listing page: Discover's clean look (2026-10-26) ===== style only; content unchanged. */
+html .phone.c-placeclean, html .phone.c-placeclean .c-offerbody { background-image: none; }
+.c-placeclean .c-offerbody { margin-top: 0; border-radius: 0; }
+.c-placeclean .c-placehero__count { bottom: 16px; right: 16px; padding: 3px 7px; border-radius: 0; background: #111214;
+  color: #FFFFFF; font: 700 11px/14px var(--font); letter-spacing: 0.02em; }
+.c-placeclean .c-placehero__bar .c-circle-btn { background: none; border: 0; box-shadow: none; backdrop-filter: none; color: #FFFFFF; }
+.c-placeclean .c-placehero__bar .c-circle-btn i { font-size: 26px; filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.6)) drop-shadow(0 1px 6px rgb(0 0 0 / 0.5)); }
+.c-placeclean .c-placehero__bar .c-circle-btn.is-on { color: #E8590C; }
+.c-placeclean .c-offer-title { font-size: 26px; line-height: 32px; }
+.c-placeclean .c-plfacts { border-top: 0; padding-top: 4px; }
+.c-placeclean .c-pperk .c-minicard { display: none; }
+.c-placeclean .c-pperk { margin: 0 20px; padding: 14px 0; border-top: 1px solid rgb(17 18 20 / 0.08); border-bottom: 1px solid rgb(17 18 20 / 0.08); }
+.c-placeclean .c-pperk__title { align-self: flex-start; padding: 3px 7px; background: #111214; color: #FFFFFF;
+  font: 700 11px/14px var(--font); letter-spacing: 0.02em; text-transform: uppercase; }
+.c-placeclean .c-pperk__text { display: flex; flex-direction: column; gap: 6px; }
+.c-placeclean .c-pperk__sub { font: 400 14px/20px var(--font); color: #5F6670; }
+.c-placeclean .c-bkroom__img, .c-placeclean .c-plstory__img, .c-placeclean .c-pmap { border-radius: 0; }
+
+/* ===== Listing page: colour by importance (2026-10-26) ===== after Carousell: price first, orange for the offer and Book only. */
+.c-placeclean .c-offer-head .c-offer-tier { margin-top: 4px; color: #5F6670; }
+.c-plprice { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 6px; margin: 10px 0 0; color: #5F6670; font: 400 15px/22px var(--font); }
+.c-plprice b { color: #15803D; font: 700 28px/34px var(--font); letter-spacing: -0.01em; }
+.c-plprice s { margin-left: 4px; color: #8A9099; }
+.c-plprice em { align-self: center; margin-left: 6px; padding: 3px 7px; background: #E8590C; color: #FFFFFF; font: 700 11px/14px var(--font);
+  font-style: normal; letter-spacing: 0.02em; text-transform: uppercase; }
+.c-placeclean .c-plfacts { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgb(17 18 20 / 0.08); }
+.c-placeclean .c-plfacts .c-bigcard__icon.is-blue, .c-placeclean .c-plfacts .c-bigcard__icon.is-indigo { color: #8A9099; }
+.c-placeclean .c-plfacts .c-bigcard__icon.is-gold { color: #E8590C; }
+.c-placeclean .c-pperk__title { background: #E8590C; }
+.c-placeclean .c-pperk__sub { color: #111214; }
+.c-placeclean .c-section-title { font-size: 20px; line-height: 26px; }
+.c-placeclean .c-bkroom__name { font-weight: 600; }
+.c-placeclean .c-bkroom__price { color: #15803D; font-weight: 700; }
+.c-placeclean .c-bottombar .c-btn.primary { background: #E8590C; color: #FFFFFF; }
+
+/* ===== Listing top, a: Immersive (2026-10-26) ===== */
+.c-pwa.c-offerx .c-placehero { height: 500px; }
+.c-pwa .c-placehero::after { content: ''; position: absolute; inset: auto 0 0 0; height: 60%; pointer-events: none;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.72), rgb(0 0 0 / 0)); }
+.c-pwa__over { position: absolute; left: 20px; right: 72px; bottom: 20px; z-index: 2; color: #FFFFFF; pointer-events: none; }
+.c-pwa__over .c-offer-title { margin: 0; color: #FFFFFF; font: 700 30px/36px var(--font); letter-spacing: -0.01em; }
+.c-pwa__over .c-offer-tier { margin: 4px 0 0; color: rgb(255 255 255 / 0.85); }
+.c-pwa__over .c-plprice { margin-top: 12px; color: rgb(255 255 255 / 0.85); }
+.c-pwa__over .c-plprice b { color: #FFFFFF; }
+.c-pwa__over .c-plprice s { color: rgb(255 255 255 / 0.6); }
+.c-pwa .c-placehero__count { z-index: 3; bottom: 24px; }
+.c-pwa .c-offer-head { padding-top: 4px; }
+.c-pwa .c-plfacts { gap: 8px; border: 0; margin-top: 16px; padding: 0; }
+.c-pwa .c-plfacts .c-bigcard__stat { flex: 1; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px; background: #F4F5F7; border: 0; }
+.c-pwa .c-plfacts .c-bigcard__stat::before, .c-pwa .c-plfacts .c-bigcard__stat + .c-bigcard__stat { border: 0; }
+.c-pwa .c-plfacts .c-bigcard__value { font-size: 17px; font-weight: 700; }
+.c-pwa .c-pperk { margin: 16px 0 0; padding: 16px 20px; border: 0; background: #E8590C; color: #FFFFFF; }
+.c-pwa .c-pperk__title { background: #FFFFFF; color: #E8590C; }
+.c-pwa .c-pperk__sub, .c-pwa .c-pperk__chev { color: #FFFFFF; }
+.c-pwa .c-plhas { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.c-pwa .c-plhas .c-merow { flex-direction: column; align-items: flex-start; gap: 10px; min-height: 0; padding: 14px 12px; background: #F4F5F7; }
+.c-pwa .c-plhas .c-merow::before, .c-pwa .c-plhas .c-merow::after { display: none; }
+.c-pwa .c-plhas .c-merow__lead { width: auto; color: #E8590C; }
+.c-pwa .c-plhas .c-merow__lead i { font-size: 24px; }
+.c-pwa .c-plhas .c-merow__main { font: 500 14px/19px var(--font); }
+/* Audit fixes (user: give the photo room so it never fights the words; the icons were mixed shapes and sizes, stacked over the text).
+   The words sit on a calm dark band, a soft shade under the top icons, roomier tiles, no icons in the facts, What's here icons beside the text. */
+.c-pwa .c-placehero::after { height: 50%; background: linear-gradient(to top, rgb(0 0 0 / 0.82) 0%, rgb(0 0 0 / 0.55) 45%, rgb(0 0 0 / 0) 100%); }
+.c-pwa .c-placehero::before { content: ''; position: absolute; inset: 0 0 auto 0; z-index: 1; height: 120px; pointer-events: none;
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0.4), rgb(0 0 0 / 0)); }
+.c-pwa .c-placehero__bar { z-index: 3; }
+.c-pwa__over { left: 24px; right: 72px; bottom: 24px; } /* right edge clears the 1 / 9 counter */
+.c-pwa .c-placehero__count { bottom: 28px; right: 24px; }
+.c-pwa .c-placehero__bar .c-circle-btn i { -webkit-text-stroke: 0.8px #FFFFFF; }
+html .phone.c-pwa .c-offer-head + .c-pperk { margin-top: 20px; }
+.c-pwa .c-offer-head { padding-top: 20px; }
+.c-pwa .c-plfacts { gap: 10px; margin-top: 0; }
+.c-pwa .c-plfacts .c-bigcard__icon { display: none; }
+.c-pwa .c-plfacts .c-bigcard__stat { gap: 2px; padding: 14px 16px; }
+.c-pwa .c-plfacts .c-bigcard__stat:nth-child(2) .c-bigcard__value::before { content: '\2605\00a0'; color: #E8590C; }
+.c-pwa .c-pperk { margin-top: 20px; padding: 18px 24px; }
+.c-pwa .c-plhas { gap: 10px; margin-top: 12px; }
+.c-pwa .c-plhas .c-merow { flex-direction: row; align-items: flex-start; gap: 12px; padding: 16px 14px; }
+.c-pwa .c-plhas .c-merow__lead { flex: none; display: grid; place-items: center; width: 22px; height: 20px; }
+.c-pwa .c-plhas .c-merow__lead i { font-size: 22px; line-height: 1; }
+.c-pwa .c-plhas .c-merow__main { padding: 0; }
+/* Compact pass (user: keep the banner, rework the facts and What's here, "compact minimalism").
+   Facts become one quiet line split by hairlines; What's here becomes a tight two-column list, no tiles. */
+html .phone.c-pwa .c-plfacts { display: flex; gap: 0; margin: 0; padding: 0; background: none; }
+html .phone.c-pwa .c-plfacts .c-bigcard__stat { flex: none; flex-direction: row; align-items: baseline; gap: 4px; padding: 0 12px; background: none; }
+html .phone.c-pwa .c-plfacts .c-bigcard__stat:first-child { padding-left: 0; }
+html .phone.c-pwa .c-plfacts .c-bigcard__stat + .c-bigcard__stat { border-left: 1px solid rgb(17 18 20 / 0.12); }
+html .phone.c-pwa .c-plfacts .c-bigcard__text { display: flex; flex-direction: row; align-items: baseline; gap: 4px; white-space: nowrap; }
+html .phone.c-pwa .c-plfacts .c-bigcard__value { font: 600 14px/20px var(--font); }
+html .phone.c-pwa .c-plfacts .c-bigcard__label { font: 400 14px/20px var(--font); color: #5F6670; text-transform: lowercase; }
+html .phone.c-pwa .c-plfacts .is-lead .c-bigcard__label { order: -1; }
+html .phone.c-pwa .c-plfacts .c-bigcard__label.is-open { color: #15803D; font-weight: 600; text-transform: none; }
+html .phone.c-pwa .c-plfacts .c-bigcard__label.is-shut { color: #C2410C; font-weight: 600; text-transform: none; }
+html .phone.c-pwa .c-plfacts .c-bigcard__label.is-shut::after { content: ' \00b7'; color: #5F6670; font-weight: 400; }
+html .phone.c-pwa .c-plfacts .is-lead .c-bigcard__value { font-weight: 400; }
+html .phone.c-pwa .c-pwa__over .c-plede { margin: 12px 0 0; color: rgb(255 255 255 / 0.85); font: 400 15px/22px var(--font); }
+html .phone.c-pwa .c-pwa__over .c-plede b { color: #FFFFFF; font: 700 28px/34px var(--font); letter-spacing: -0.01em; }
+/* Restaurant bar: square buttons like the rest of the page; orange "Use 10% off" with a QR icon, outlined Reserve. */
+html .phone.c-pwa .c-bottombar.is-two { gap: 10px; padding-top: 10px; }
+html .phone.c-pwa .c-bottombar.is-two .c-btn { flex: 1; min-width: 0; height: 52px; padding: 0 12px; border-radius: 0; font: 600 16px/20px var(--font); box-shadow: none; }
+html .phone.c-pwa .c-bottombar.is-two .c-btn.primary { flex: 0 0 34%; background: #FFFFFF; color: #111214; border: 1px solid #111214; }
+html .phone.c-pwa .c-bottombar.is-two .c-tblcard { gap: 8px; background: #E8590C; color: #FFFFFF; border: 0; }
+html .phone.c-pwa .c-bottombar.is-two .c-tblcard i { font-size: 20px; }
+/* Restaurant details (to-do 3): menu pages as a sideways row of 3:4 tiles, Good to know as the compact What's here list. */
+.c-pwsample { margin-left: 8px; padding: 2px 6px; vertical-align: 4px; background: #F4F5F7; color: #8A9099; font: 700 10px/14px var(--font); letter-spacing: 0.04em; }
+.c-pwmenu__row { display: flex; gap: 8px; margin: 12px -20px 0; padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
+.c-pwmenu__row::-webkit-scrollbar { display: none; }
+.c-pwmenu__page { flex: none; width: 120px; aspect-ratio: 3 / 4; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  background: #F4F5F7; color: #8A9099; font: 500 13px/18px var(--font); }
+.c-pwmenu__page i { font-size: 28px; }
+/* What's here spacing (user): one column so long lines don't wrap into ragged pairs; even 12px rows, icon on the first line. */
+html .phone.c-pwa .c-plhas { grid-template-columns: 1fr; gap: 12px; margin-top: 12px; }
+html .phone.c-pwa .c-plhas .c-merow { align-items: flex-start; gap: 12px; padding: 0; background: none; }
+html .phone.c-pwa .c-plhas .c-merow__lead { color: #111214; width: 20px; height: 20px; }
+/* Photo viewer: black, full screen inside the phone, one photo per swipe. */
+.c-pview { position: absolute; inset: 0; z-index: 60; display: flex; flex-direction: column; background: #000000; }
+.c-pview[hidden] { display: none; }
+.c-pview__bar { display: flex; align-items: center; justify-content: space-between; padding: 52px 12px 8px; color: #FFFFFF; }
+.c-pview__btn { display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: none; color: #FFFFFF; cursor: pointer; }
+.c-pview__btn i { font-size: 24px; }
+.c-pview__count { font: 600 15px/20px var(--font); }
+.c-pview__track { flex: 1; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.c-pview__track::-webkit-scrollbar { display: none; }
+.c-pview__slide { flex: none; width: 100%; display: grid; place-items: center; scroll-snap-align: start; }
+.c-pview__slide img, .c-pview__slide video { max-width: 100%; max-height: 100%; object-fit: contain; }
+.c-pview__arrow { position: absolute; top: 50%; display: grid; place-items: center; width: 44px; height: 44px; margin-top: -22px; border: 0;
+  background: rgb(0 0 0 / 0.35); color: #FFFFFF; cursor: pointer; }
+.c-pview__arrow[hidden] { display: none; }
+.c-pview__arrow i { font-size: 22px; }
+.c-pview__arrow.is-prev { left: 8px; }
+.c-pview__arrow.is-next { right: 8px; }
+.c-pview__btn:focus-visible, .c-pview__arrow:focus-visible { outline: 2px solid #FFFFFF; outline-offset: -2px; }
+html .phone.c-pwa .c-plhas .c-merow__lead i { font-size: 20px; }
+html .phone.c-pwa .c-plhas .c-merow__main { font: 400 14px/20px var(--font); color: #111214; }
+
+/* ===== Ratings from stories (2026-10-26) ===== orange stars on every story, the 5-star ask on New story. */
+.c-rstars { display: block; margin-top: 2px; color: #E8590C; font: 400 12px/14px var(--font); letter-spacing: 1px; }
+.c-plstory .c-rstars { margin: 6px 0 0; }
+.c-plrate { color: inherit; text-decoration: none; }
+html .phone.c-pwa .c-plfacts .c-plrate .c-bigcard__label { text-transform: none; text-decoration: underline; text-underline-offset: 3px; }
+.c-crate { margin: 16px 0 0; } /* lines up with the visit row and photo above and below */
+.c-crate__q { margin: 0; font: 600 17px/22px var(--font); color: #111214; }
+.c-crate__stars { display: flex; gap: 4px; margin-top: 8px; }
+.c-crate__stars button { width: 44px; height: 44px; padding: 0; border: 0; background: none; color: #C4C8CE; font: 400 34px/44px var(--font); cursor: pointer; }
+.c-crate__stars button.is-on { color: #E8590C; }
+.c-crate__stars button:focus-visible { outline: 2px solid #111214; outline-offset: -2px; }
+
+/* ===== Concierge layout experiments (2026-10-25, option b) ===== */
+html .phone.c-cx .c-dhead { height: 64px; align-items: flex-end; gap: 4px; padding: 0 8px 6px 20px; border-bottom: 0; }
+.phone.c-cx:has(> .c-dhead) .screen-scroll { margin-top: 64px; }
+.c-cx .c-dhead__title { flex: 1; align-self: flex-end; padding-bottom: 6px; font: 700 28px/34px var(--font); letter-spacing: -0.01em; }
+.c-cx__h { margin: 28px 20px 4px; font: 700 20px/26px var(--font); color: #111214; }
+.c-cx__h span { display: block; font: 400 13px/18px var(--font); color: #5F6670; }
+.c-cx__day { margin: 20px 20px 4px; font: 500 13px/18px var(--font); color: #5F6670; }
+.c-cx__stop { display: flex; gap: 14px; padding: 12px 20px; color: #111214; text-decoration: none; border-bottom: 1px solid rgb(17 18 20 / 0.08); }
+.c-cx__time { flex: 0 0 64px; font: 600 14px/20px var(--font); }
+.c-cx__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.c-cx__name { font: 500 15px/20px var(--font); }
+.c-cx__sub { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-cx__img { flex: none; width: 64px; height: 64px; object-fit: cover; }
+.c-cx__tag { align-self: flex-start; margin-top: 8px; padding: 2px 6px; border: 1px solid rgb(17 18 20 / 0.16); font: 600 10px/14px var(--font); letter-spacing: 0.06em; text-transform: uppercase; color: #5F6670; }
+.c-cx__tag.is-live { background: #111214; border-color: #111214; color: #FFFFFF; }
+.c-cxb__sos { display: flex; align-items: center; gap: 12px; margin: 12px 20px 0; padding: 12px 16px; border: 1px solid rgb(17 18 20 / 0.12); color: #111214; text-decoration: none; }
+.c-cxb__sos > i:first-child { font-size: 24px; color: #B42318; }
+.c-cxb__sos > span { flex: 1; }
+.c-cxb__sos b { display: block; font: 600 15px/20px var(--font); }
+.c-cxb__sos span span { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-cxb__sos + .c-cxb__trip { margin-top: 8px; }
+.c-cxb__trip { display: flex; align-items: center; justify-content: space-between; margin: 12px 20px 0; padding: 14px 16px; background: #F1F2F4; color: #111214; text-decoration: none; }
+.c-cxb__trip b { display: block; font: 600 15px/20px var(--font); }
+.c-cxb__trip span span { font: 400 13px/18px var(--font); color: #5F6670; }
+.c-cxb__feed { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 12px; padding: 12px 20px 96px; }
+.c-cxb__card { display: flex; flex-direction: column; gap: 8px; color: #111214; text-decoration: none; }
+.c-cxb__card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.c-cxb__title { font: 600 15px/20px var(--font); }
+.c-cxb__make { position: absolute; left: 20px; right: 20px; bottom: calc(var(--size-tabbar-h, 64px) + 34px); z-index: 20; display: grid; place-items: center; height: 48px;
+  background: #111214; color: #FFFFFF; font: 600 15px/20px var(--font); text-decoration: none; }
+
+/* ===== Concierge: ready message from a photo (2026-10-25) =====
+   The send button is orange while a ready message waits, so it reads as "tap to send". */
+.c-composer.is-draft .c-composer__send:not(:disabled) { background: #E8590C; color: #FFFFFF; }
+
+/* ===== No contour lines (2026-10-26) ===== Discover, Concierge and Me: plain white behind the page and its header. */
+html .phone.c-nolines, html .phone.c-nolines .c-dhead { background-image: none; }

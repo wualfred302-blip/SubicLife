@@ -20,7 +20,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone is-pushed has-bottombar c-offerx c-offerwhite c-placewhite">
+<div class="phone is-pushed has-bottombar c-offerx c-offerwhite c-placewhite c-placeclean c-pwa">
 
   <header class="c-statusbar is-overlay">
     <span>9:41</span>
@@ -41,7 +41,7 @@
       <div class="c-placehero__bar">
         <a class="c-circle-btn" href="explore.html" data-back aria-label="Back to Explore"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
         <div class="c-placehero__right">
-          <button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save place" data-save><i class="ph-light ph-bookmark-simple" aria-hidden="true"></i></button>
+          <button class="c-circle-btn" type="button" aria-pressed="false" aria-label="Save place" data-save><i class="ph-light ph-heart" aria-hidden="true"></i></button>
           <a class="c-circle-btn" data-share href="mailto:" aria-label="Share place"><i class="ph-light ph-export" aria-hidden="true"></i></a>
         </div>
       </div>
@@ -152,6 +152,12 @@
     if (p.per) {
       var lo = Math.min.apply(null, p.rooms.map(function (r) { return r.rate; }));
       $('[data-meta]').insertAdjacentHTML('afterend', '<p class="c-plede">From <b>' + fmtPeso(lo - Math.round(lo * p.discount / 100)) + '</b> / ' + p.per[0] + (p.lede ? ' · ' + p.lede : '') + '</p>');
+    }
+    // Carousell-style: the price is the boldest line after the name. Lowest room after the member discount.
+    if (!p.per && p.rooms && p.rooms.length) {
+      var lr = Math.min.apply(null, p.rooms.map(function (r) { return r.rate; }));
+      $('[data-meta]').insertAdjacentHTML('afterend', '<p class="c-plprice"><b>' + fmtPeso(lr - Math.round(lr * (p.discount || 0) / 100)) + '</b>' +
+        '<span> / ' + (p.unit || 'night') + '</span>' + (p.discount ? '<s>' + fmtPeso(lr) + '</s>' : '') + '</p>');
     }
     // The same three facts as Discover's Popular cards: grey distance and time, an orange star for the rating.
     var fact = function (icon, tone, value, label) {
@@ -651,13 +657,124 @@
     function paint(on) {
       save.classList.toggle('is-on', on);
       save.setAttribute('aria-pressed', on ? 'true' : 'false');
-      save.firstChild.className = (on ? 'ph-fill' : 'ph-light') + ' ph-bookmark-simple';
+      save.firstChild.className = (on ? 'ph-fill' : 'ph-light') + ' ph-heart';
     }
     paint(SLSaved.has('place', p.id));
     save.addEventListener('click', function () {
       var on = SLSaved.toggle('place', p.id);
       paint(on);
       SLSaved.note(on);
+    });
+  })();
+</script>
+<script>
+  // Immersive: the name, area and price sit on the photo.
+  (function () {
+    var hero = document.querySelector('.c-placehero'), over = document.createElement('div');
+    over.className = 'c-pwa__over';
+    // Same for every listing: tours and charters price with "From ₱… / yacht" (.c-plede), stays and tickets with .c-plprice.
+    ['.c-offer-title', '.c-plprice', '.c-plede'].forEach(function (s) { var n = document.querySelector(s); if (n) over.appendChild(n); });
+    var tier = document.querySelector('.c-offer-tier'); if (tier) tier.remove(); // user: drop "Hotel · Moonbay Marina"
+    hero.appendChild(over);
+    var p = placeFor(queryParam('p') || 'lighthouse');
+    // The facts line reads as a phrase: "closes 5 PM", and "open 24 hours" rather than "24 hours closes".
+    Array.prototype.forEach.call(document.querySelectorAll('.c-plfacts .c-bigcard__stat'), function (s) {
+      var lab = s.querySelector('.c-bigcard__label'), val = s.querySelector('.c-bigcard__value');
+      if (lab && lab.textContent === 'Rating' && /new/i.test(val.textContent)) { lab.remove(); return; } // "★ New", not "★ New rating"
+      if (lab && lab.textContent === 'Rating') {
+        // Ratings come from members' stories: say how many, and open them on tap.
+        lab.textContent = '\u00b7 ' + p.ratingCount + (p.ratingCount === 1 ? ' story' : ' stories');
+        var link = document.createElement('a');
+        link.className = s.className + ' c-plrate'; link.href = 'place-stories.html?p=' + p.id; link.innerHTML = s.innerHTML;
+        s.replaceWith(link);
+        return;
+      }
+      if (!lab || lab.textContent !== 'Closes') return;
+      if (/24 ?h/i.test(val.textContent)) { val.textContent = 'Open 24 hours'; lab.remove(); }
+      else if (/^closed$/i.test(val.textContent.trim())) { val.textContent = 'Temporarily closed'; lab.remove(); } // Teppan 101, moving
+      else {
+        // Hours, not just closing time (user: "I have no clue when it opens"): "Open · 9 AM–5 PM" or "Closed · opens 9 AM", from the phone's clock.
+        var m = /(\d{1,2})(?::(\d\d))? ?([AP]M) to (\d{1,2})(?::(\d\d))? ?([AP]M)/.exec(p.hours || '');
+        if (!m) { s.classList.add('is-lead'); return; }
+        var mins = function (hh, mm, ap) { return (Number(hh) % 12 + (ap === 'PM' ? 12 : 0)) * 60 + Number(mm || 0); };
+        var short = function (hh, mm, ap) { return hh + (mm && mm !== '00' ? ':' + mm : '') + ' ' + ap; };
+        var o = mins(m[1], m[2], m[3]), cl = mins(m[4], m[5], m[6]), d = new Date(), now = d.getHours() * 60 + d.getMinutes();
+        var open = now >= o && now < cl;
+        lab.textContent = open ? 'Open' : 'Closed';
+        lab.classList.add(open ? 'is-open' : 'is-shut');
+        val.textContent = open ? short(m[1], m[2], m[3]) + '–' + short(m[4], m[5], m[6]) : 'opens ' + short(m[1], m[2], m[3]);
+        s.classList.add('is-lead');
+      }
+    });
+  })();
+  // Restaurant bar, after The Entertainer (user 2026-10-26): the perk is the main action, Reserve the second.
+  // "Show my card" becomes "Use 10% off", which opens the card's QR for staff; Reserve keeps its table sheet.
+  (function () {
+    var card = document.querySelector('.c-tblcard'), deal = document.querySelector('[data-otitle]');
+    // Temporarily closed (Teppan 101): nothing to reserve or use, so no bar.
+    if (placeFor(queryParam('p') || 'lighthouse').closes === 'Closed') { document.querySelector('.c-bottombar').style.display = 'none'; return; }
+    if (!card) return;
+    var m = /^(\d+% off|free \w+)/i.exec(deal ? deal.textContent : '');
+    card.href = 'card-staff.html';
+    card.innerHTML = '<i class="ph-light ph-qr-code" aria-hidden="true"></i>Use ' + (m ? m[1].toLowerCase() : 'perk');
+    card.parentNode.appendChild(card); // primary goes on the right
+    var res = card.parentNode.querySelector('[data-action]');
+    if (res) res.textContent = 'Reserve';
+  })();
+  // Restaurant details (to-do 3): a Menu row and a Good to know list under About, for places that serve food.
+  // SAMPLE: every value below is a placeholder until partners send their menu and details (partner form, not built yet).
+  (function () {
+    var p = placeFor(queryParam('p') || 'lighthouse');
+    if (p.bookable || (p.categories || []).indexOf('food') < 0) return;
+    var about = document.querySelector('[data-about]').closest('.c-osec');
+    var row = function (icon, text) {
+      return '<div class="c-merow"><span class="c-merow__lead"><i class="ph-light ph-' + icon + '" aria-hidden="true"></i></span><span class="c-merow__main">' + text + '</span></div>';
+    };
+    about.insertAdjacentHTML('afterend',
+      '<section class="c-osec c-pwmenu"><h2 class="c-section-title">Menu<span class="c-pwsample">SAMPLE</span></h2>' +
+      '<div class="c-pwmenu__row">' + [1, 2, 3, 4].map(function (n) {
+        return '<div class="c-pwmenu__page" role="img" aria-label="Menu page ' + n + ', not added yet"><i class="ph-light ph-book-open-text" aria-hidden="true"></i><span>Page ' + n + '</span></div>';
+      }).join('') + '</div></section>' +
+      '<section class="c-osec"><h2 class="c-section-title">Good to know<span class="c-pwsample">SAMPLE</span></h2>' +
+      '<div class="c-melist c-plhas">' +
+      row('fork-knife', p.category) +
+      row('currency-circle-dollar', '₱₱ · about ₱600 a person') +
+      row('leaf', 'Vegetarian options · vegan on request') +
+      row('moon-stars', 'Halal: not certified') +
+      row('calendar-check', 'Book ahead on weekends') +
+      row('baby', 'Kid-friendly, high chairs') +
+      row('credit-card', 'Cash, cards and GCash') +
+      '</div></section>');
+  })();
+  // Photo viewer: tap the photo to open every photo full screen; swipe, arrows or arrow keys move, X or Esc closes.
+  (function () {
+    var phone = document.querySelector('.phone'), gal = document.querySelector('[data-gallery]');
+    var items = Array.prototype.slice.call(gal.children);
+    if (!items.length) return;
+    var v = document.createElement('div');
+    v.className = 'c-pview'; v.hidden = true; v.setAttribute('role', 'dialog'); v.setAttribute('aria-modal', 'true'); v.setAttribute('aria-label', 'Photos');
+    v.innerHTML = '<div class="c-pview__bar"><button class="c-pview__btn" type="button" data-x aria-label="Close"><i class="ph-light ph-x" aria-hidden="true"></i></button>' +
+      '<span class="c-pview__count" data-n></span><span class="c-pview__btn" aria-hidden="true"></span></div>' +
+      '<div class="c-pview__track" data-t>' + items.map(function (m) {
+        return '<div class="c-pview__slide">' + (m.tagName === 'VIDEO' ? '<video src="' + m.src + '" poster="' + m.poster + '" controls playsinline></video>' : '<img src="' + m.src + '" alt="' + m.alt + '">') + '</div>';
+      }).join('') + '</div>' +
+      '<button class="c-pview__arrow is-prev" type="button" data-p aria-label="Previous photo"><i class="ph-light ph-caret-left" aria-hidden="true"></i></button>' +
+      '<button class="c-pview__arrow is-next" type="button" data-nx aria-label="Next photo"><i class="ph-light ph-caret-right" aria-hidden="true"></i></button>';
+    phone.appendChild(v);
+    var t = v.querySelector('[data-t]'), n = v.querySelector('[data-n]'), last = null;
+    var at = function () { return Math.round(t.scrollLeft / t.clientWidth); };
+    var sync = function () { var k = at(); n.textContent = (k + 1) + ' / ' + items.length; v.querySelector('[data-p]').hidden = k === 0; v.querySelector('[data-nx]').hidden = k === items.length - 1; };
+    var go = function (k, smooth) { t.scrollTo({ left: Math.max(0, Math.min(items.length - 1, k)) * t.clientWidth, behavior: smooth ? 'smooth' : 'auto' }); };
+    var open = function () { last = document.activeElement; v.hidden = false; go(Math.round(gal.scrollLeft / gal.clientWidth)); sync(); v.querySelector('[data-x]').focus(); };
+    var close = function () { v.hidden = true; t.querySelectorAll('video').forEach(function (x) { x.pause(); }); gal.scrollLeft = at() * gal.clientWidth; gal.dispatchEvent(new Event('scroll')); if (last) last.focus(); };
+    gal.addEventListener('click', open); gal.style.cursor = 'zoom-in';
+    t.addEventListener('scroll', sync, { passive: true });
+    v.querySelector('[data-x]').addEventListener('click', close);
+    v.querySelector('[data-p]').addEventListener('click', function () { go(at() - 1, true); });
+    v.querySelector('[data-nx]').addEventListener('click', function () { go(at() + 1, true); });
+    document.addEventListener('keydown', function (e) {
+      if (v.hidden) return;
+      if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') go(at() - 1, true); else if (e.key === 'ArrowRight') go(at() + 1, true);
     });
   })();
 </script>

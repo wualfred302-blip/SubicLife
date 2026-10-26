@@ -21,24 +21,9 @@
   <link rel="stylesheet" href="shell.css">
   <link rel="stylesheet" href="theme.css">
   <script src="shell.js"></script>
-<style>
-/* Loading: shapes match the real cards; a soft light sweeps across them. */
-.c-skel { background: #EEF0F2; border-radius: 8px; position: relative; overflow: hidden; }
-.c-skel::after { content: ''; position: absolute; inset: 0; transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.7), transparent); animation: c-skel 1.3s ease-in-out infinite; }
-@keyframes c-skel { to { transform: translateX(100%); } }
-.c-skel--photo { aspect-ratio: 1; border-radius: 16px; margin-bottom: 8px; }
-.c-skel--big { aspect-ratio: 4 / 3; border-radius: 16px; }
-.c-skel--line { height: 12px; margin: 5px 0; }
-.c-skelrow { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; }
-.c-skelstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-top: 14px; }
-.is-in { animation: c-fadein .35s ease-out both; }
-@keyframes c-fadein { from { opacity: 0; } to { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .c-skel::after, .is-in { animation: none; } }
-</style>
 </head>
 <body>
-<div class="phone c-discover">
+<div class="phone c-discover c-nolines">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -50,15 +35,21 @@
   </header>
 
   <div class="c-dhead">
-    <div class="c-dtabs" role="tablist" aria-label="Discover">
-      <button class="c-dtabs__tab" type="button" role="tab" id="tab-places" aria-controls="panel-places" data-tab="places">Places</button>
-      <button class="c-dtabs__tab" type="button" role="tab" id="tab-stories" aria-controls="panel-stories" data-tab="stories">Stories</button>
-      <button class="c-dtabs__tab" type="button" role="tab" id="tab-events" aria-controls="panel-events" data-tab="events">Events</button>
-    </div>
+    <label class="c-dsearch"><i class="ph-light ph-magnifying-glass" aria-hidden="true"></i><input type="search" placeholder="Search Subic.Life" aria-label="Search places" data-search></label>
+    <a class="c-dicon" href="saved.html" aria-label="Saved"><i class="ph-light ph-heart" aria-hidden="true"></i></a>
+    <a class="c-dicon" href="concierge-chat.html" aria-label="Concierge chat"><i class="ph-light ph-chat-circle" aria-hidden="true"></i></a>
   </div>
 
   <main class="screen-scroll">
     <h1 class="u-sr-only">Discover</h1>
+    <div class="c-dcats" role="group" aria-label="Categories" data-cats-row></div>
+    <div class="c-dtabbar">
+      <div class="c-dtabs" role="tablist" aria-label="Discover">
+        <button class="c-dtabs__tab" type="button" role="tab" id="tab-places" aria-controls="panel-places" data-tab="places">Places</button>
+        <button class="c-dtabs__tab" type="button" role="tab" id="tab-stories" aria-controls="panel-stories" data-tab="stories">Stories</button>
+        <button class="c-dtabs__tab" type="button" role="tab" id="tab-events" aria-controls="panel-events" data-tab="events">Events</button>
+      </div>
+    </div>
 
     <section class="c-dpanel" id="panel-stories" role="tabpanel" aria-labelledby="tab-stories">
       <button class="c-dcompose" type="button" data-add-story>
@@ -69,15 +60,6 @@
     </section>
 
     <section class="c-dpanel" id="panel-places" role="tabpanel" aria-labelledby="tab-places" hidden>
-      <div class="c-chiprow" role="group" aria-label="Filter places">
-        <button class="c-chip is-selected" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="c-chip" type="button" data-filter="hotels" aria-pressed="false"><i class="ph-light ph-bed c-chip__icon" aria-hidden="true"></i>Hotels</button>
-        <button class="c-chip" type="button" data-filter="food" aria-pressed="false"><i class="ph-light ph-fork-knife c-chip__icon" aria-hidden="true"></i>Food</button>
-        <button class="c-chip" type="button" data-filter="beaches" aria-pressed="false"><i class="ph-light ph-sun-horizon c-chip__icon" aria-hidden="true"></i>Beaches</button>
-        <button class="c-chip" type="button" data-filter="water-sports" aria-pressed="false"><i class="ph-light ph-waves c-chip__icon" aria-hidden="true"></i>Water sports</button>
-        <button class="c-chip" type="button" data-filter="nature" aria-pressed="false"><i class="ph-light ph-leaf c-chip__icon" aria-hidden="true"></i>Nature</button>
-        <button class="c-chip" type="button" data-filter="nightlife" aria-pressed="false"><i class="ph-light ph-moon c-chip__icon" aria-hidden="true"></i>Nightlife</button>
-      </div>
 
       <section data-section="near">
         <div class="c-section-head">
@@ -206,17 +188,18 @@
   function saveBtn(place) {
     var on = SLSaved.has('place', place.id);
     return '<button class="c-savebtn' + (on ? ' is-on' : '') + '" type="button" aria-pressed="' + on + '" aria-label="Save ' + esc(place.name) + '" data-place="' + place.id + '">' +
-      '<i class="ph-fill ph-bookmark-simple c-savebtn__fill" aria-hidden="true"></i><i class="ph ph-bookmark-simple c-savebtn__line" aria-hidden="true"></i></button>';
+      '<i class="ph-fill ph-heart c-savebtn__fill" aria-hidden="true"></i><i class="ph-light ph-heart c-savebtn__line" aria-hidden="true"></i></button>';
   }
   function nearCard(n) {
     var place = PLACES[n.place];
     return '<div class="c-lcard" data-cats="' + tags(n.cats) + '">' +
       '<a class="c-lcard__link" href="place.html?p=' + n.place + '">' +
-      '<span class="c-lcard__photo"><img src="' + place.thumb + '" alt=""><span class="c-xbadge">' + esc(place.offerShort) + '</span></span>' +
+      '<span class="c-lcard__photo"><img src="' + place.thumb + '" alt="" width="144" height="144" loading="lazy" decoding="async"></span>' +
       '<span class="c-lcard__name">' + esc(place.name) + '</span>' +
       '<span class="c-lcard__meta">' + esc(place.category) + ' · ' + esc(place.distance) + '</span>' +
       '<span class="c-lcard__meta">' + (place.bookable ? '<b>' + peso(fromPrice(place)) + '</b> ' + (place.per ? place.per[0] : place.unit) + ' · ' : '') +
         '<i class="ph-fill ph-star c-star" aria-hidden="true"></i> ' + esc(place.rating) + '</span>' +
+      '<span class="c-lcard__perk"><span class="c-perkmark" aria-hidden="true"></span>' + esc(place.offerShort) + '</span>' +
       '</a>' + saveBtn(place) + '</div>';
   }
   function stat(icon, tone, value, label) {
@@ -225,7 +208,7 @@
   }
   function popularCard(p) {
     var place = PLACES[p.place];
-    var photos = place.photos.map(function (src) { return '<img src="' + src + '" alt="">'; }).join('');
+    var photos = place.photos.map(function (src) { return '<img src="' + src + '" alt="" width="400" height="300" loading="lazy" decoding="async">'; }).join('');
     var dots = place.photos.map(function (src, i) { return '<span class="c-bigcard__dot' + (i ? '' : ' is-on') + '"></span>'; }).join('');
     return '<div class="c-bigcard" data-cats="' + tags(p.cats) + '">' +
       '<a class="c-bigcard__link" href="place.html?p=' + p.place + '">' +
@@ -240,7 +223,7 @@
       '</a>' + saveBtn(place) + '</div>';
   }
   var nearRow = document.getElementById('near-row'), popRow = document.getElementById('feed-popular');
-  nearRow.innerHTML = Array(3).fill('<div class="c-lcard" aria-hidden="true"><div class="c-skel c-skel--photo"></div><div class="c-skel c-skel--line" style="width:80%"></div><div class="c-skel c-skel--line" style="width:60%"></div><div class="c-skel c-skel--line" style="width:70%"></div></div>').join('');
+  nearRow.innerHTML = Array(3).fill('<div class="c-lcard" aria-hidden="true"><div class="c-skel c-skel--photo"></div><div class="c-skel c-skel--line" style="width:80%"></div><div class="c-skel c-skel--line" style="width:60%"></div><div class="c-skel c-skel--line" style="width:70%"></div><div class="c-skel c-skel--line" style="width:45%"></div></div>').join('');
   popRow.innerHTML = Array(2).fill('<div class="c-bigcard" aria-hidden="true"><div class="c-skel c-skel--big"></div><div class="c-skelrow"><div style="flex:1"><div class="c-skel c-skel--line" style="width:55%;height:14px"></div><div class="c-skel c-skel--line" style="width:40%"></div></div><div class="c-skel" style="width:86px;height:30px;border-radius:999px"></div></div><div class="c-skelstats"><div class="c-skel c-skel--line"></div><div class="c-skel c-skel--line"></div><div class="c-skel c-skel--line"></div></div></div>').join('');
   nearRow.setAttribute('aria-busy', 'true'); popRow.setAttribute('aria-busy', 'true');
   // Demo: real cards arrive after 1.2 s (?hold keeps the skeleton).
@@ -335,14 +318,26 @@
     setTimeout(function () { toast.classList.add('is-gone'); }, 2400);
   }
 
-  // Places filter: each chip shows only the places tagged with it. A section with nothing left hides.
+  // Category photos filter Places (tap again to show all); search matches place names. Both open Places.
   var panel = document.getElementById('panel-places');
-  var chips = panel.querySelectorAll('[data-filter]');
   var empty = panel.querySelector('[data-places-empty]');
+  var search = document.querySelector('[data-search]');
+  var CATS = [['hotels', 'Hotels'], ['food', 'Food'], ['beaches', 'Beaches'], ['water-sports', 'Water sports'], ['nature', 'Nature'], ['nightlife', 'Nightlife']];
+  var row = document.querySelector('[data-cats-row]');
+  row.innerHTML = CATS.map(function (c) {
+    var hit = NEAR.filter(function (n) { return n.cats.indexOf(c[0]) >= 0 && PLACES[n.place].thumb; })[0];
+    if (!hit) return '';
+    return '<button class="c-dcat" type="button" data-filter="' + c[0] + '" aria-pressed="false">' +
+      '<img class="c-dcat__img" src="' + PLACES[hit.place].thumb + '" alt="" width="84" height="84" decoding="async"><span class="c-dcat__label">' + c[1] + '</span></button>';
+  }).join('');
+  var chips = row.querySelectorAll('[data-filter]');
+  var filter = 'all';
 
-  function applyFilter(f) {
+  function applyFilter() {
+    var q = search.value.trim().toLowerCase();
     panel.querySelectorAll('[data-cats]').forEach(function (el) {
-      el.hidden = !(f === 'all' || el.getAttribute('data-cats').split(' ').indexOf(f) >= 0);
+      var name = (el.querySelector('.c-lcard__name, .c-bigcard__name') || el).textContent.toLowerCase();
+      el.hidden = !((filter === 'all' || el.getAttribute('data-cats').split(' ').indexOf(filter) >= 0) && (!q || name.indexOf(q) >= 0));
     });
     var any = false;
     panel.querySelectorAll('[data-section]').forEach(function (sec) {
@@ -350,17 +345,29 @@
       if (!sec.hidden) any = true;
     });
     empty.hidden = any;
+    empty.textContent = q ? 'No places match \u201C' + search.value.trim() + '\u201D.' : 'No partners match. Try another category.';
   }
+  var tabbar = document.querySelector('.c-dtabbar');
+  new IntersectionObserver(function (e) { tabbar.classList.toggle('is-stuck', !e[0].isIntersecting); },
+    { root: scroller, threshold: 0 }).observe(row);
+  var placesLoaded = window.onPlacesLoaded;
+  window.onPlacesLoaded = function () { if (placesLoaded) placesLoaded(); applyFilter(); };
 
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
+      filter = filter === chip.getAttribute('data-filter') ? 'all' : chip.getAttribute('data-filter');
       chips.forEach(function (c) {
-        var on = c === chip;
+        var on = c.getAttribute('data-filter') === filter;
         c.classList.toggle('is-selected', on);
         c.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
-      applyFilter(chip.getAttribute('data-filter'));
+      if (current !== 'places') show('places');
+      applyFilter();
     });
+  });
+  search.addEventListener('input', function () {
+    if (current !== 'places') show('places');
+    applyFilter();
   });
 })();
 </script>

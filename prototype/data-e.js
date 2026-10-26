@@ -549,7 +549,7 @@
     return list.map(function (s) {
       return { id: s.id, kind: 'story', mine: true, author: 'Ana Reyes', avatar: 'img/avatar.jpg', ago: ago(s.at),
         visited: s.visited, place: s.place, cats: (window.PLACES && PLACES[s.place] && PLACES[s.place].categories) || [],
-        photos: s.photos, caption: s.caption, likes: 0, comments: [] };
+        photos: s.photos, caption: s.caption, rating: s.rating, likes: 0, comments: [] };
     });
   };
   window.saveStory = function (s) {
@@ -600,7 +600,7 @@
     return '<article class="c-spost">' +
       '<a class="c-spost__head" href="' + href + '"><span class="c-spost__face">' + face + '</span>' +
         '<span class="c-spost__who"><span class="c-spost__name">' + escT(s.mine ? 'You' : s.author) + '</span>' +
-        '<span class="c-spost__meta">' + escT(meta || PLACES[s.place].name + ' · ' + s.ago) + '</span></span></a>' +
+        '<span class="c-spost__meta">' + escT(meta || PLACES[s.place].name + ' · ' + s.ago) + '</span>' + window.starsHTML(s.rating) + '</span></a>' +
       '<a class="c-spost__body" href="' + href + '">' +
         (s.caption ? '<p class="c-spost__text">' + escT(s.caption) + '</p>' : '') +
         (shots.length ? '<span class="c-spost__photos is-' + shots.length + '">' +
@@ -633,6 +633,7 @@
       '<img class="c-plstory__img" src="' + s.photos[0] + '" alt="">' +
       '<span class="c-plstory__who"><span class="c-plstory__face">' + face + '</span>' +
         '<span class="c-plstory__name">' + escT(s.mine ? 'You' : s.author) + '</span><span class="c-plstory__ago">' + escT(s.ago) + '</span></span>' +
+      window.starsHTML(s.rating) +
       (s.caption ? '<span class="c-plstory__text">' + escT(s.caption) + '</span>' : '') +
       '<span class="c-plstory__meta"><i class="ph-fill ph-heart" aria-hidden="true"></i>' + (s.likes || 0) + ' · ' + talk + (talk === 1 ? ' comment' : ' comments') + '</span>' +
     '</a>';
@@ -664,4 +665,31 @@
     for (var i = 0; i < OFFERS.length; i++) if (OFFERS[i].id === id) return OFFERS[i];
     return null;
   };
+})();
+
+// Ratings come from members' stories: each story carries 1 to 5 stars, a place's rating is their average.
+(function () {
+  // SAMPLE: the demo stories have no real ratings yet; seed 3 to 5 stars from the story id so each one stays the same.
+  FEED.stories.forEach(function (s) {
+    if (s.rating != null || s.mine) return;
+    var n = 0; String(s.id).split('').forEach(function (c) { n += c.charCodeAt(0); });
+    s.rating = [5, 4, 5, 4, 3, 5, 4][n % 7];
+  });
+  window.starsHTML = function (r) {
+    if (!r) return '';
+    var out = ''; for (var i = 1; i <= 5; i++) out += i <= r ? '\u2605' : '\u2606';
+    return '<span class="c-rstars" role="img" aria-label="Rated ' + r + ' out of 5">' + out + '</span>';
+  };
+  window.placeRating = function (id) {
+    var rated = window.myStories().concat(FEED.stories.filter(function (s) { return !s.mine; }))
+      .filter(function (s) { return s.place === id && s.rating; });
+    var sum = rated.reduce(function (t, s) { return t + s.rating; }, 0);
+    return { n: rated.length, avg: rated.length ? sum / rated.length : 0 };
+  };
+  // Every page that shows p.rating (Discover, Saved, the listing) now shows the stories' average.
+  Object.keys(PLACES).forEach(function (id) {
+    var r = window.placeRating(id);
+    PLACES[id].rating = r.n ? r.avg.toFixed(1) : 'New';
+    PLACES[id].ratingCount = r.n;
+  });
 })();

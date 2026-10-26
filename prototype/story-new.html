@@ -47,6 +47,13 @@
       </span>
     </div>
 
+    <div class="c-crate">
+      <p class="c-crate__q" id="rate-q">How was it?</p>
+      <div class="c-crate__stars" role="radiogroup" aria-labelledby="rate-q" data-rate>
+        <button type="button" role="radio" aria-checked="false" aria-label="1 star" data-r="1">☆</button><button type="button" role="radio" aria-checked="false" aria-label="2 stars" data-r="2">☆</button><button type="button" role="radio" aria-checked="false" aria-label="3 stars" data-r="3">☆</button><button type="button" role="radio" aria-checked="false" aria-label="4 stars" data-r="4">☆</button><button type="button" role="radio" aria-checked="false" aria-label="5 stars" data-r="5">☆</button>
+      </div>
+    </div>
+
     <label class="c-cphoto" for="photo-file" data-preview>
       <span class="c-cphoto__empty">
         <i class="ph-light ph-camera" aria-hidden="true"></i>
@@ -102,7 +109,20 @@
         '<img src="' + src + '" alt=""><span class="c-croll__check"><i class="ph ph-check" aria-hidden="true"></i></span></button>';
     }).join('');
 
-  var photo = null;
+  var photo = null, rating = 0;
+  // Stars: tap one to rate; Share waits for a photo and a rating.
+  $('[data-rate]').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-r]');
+    if (!b) return;
+    rating = Number(b.getAttribute('data-r'));
+    this.querySelectorAll('[data-r]').forEach(function (x) {
+      var on = Number(x.getAttribute('data-r')) <= rating;
+      x.textContent = on ? '\u2605' : '\u2606';
+      x.classList.toggle('is-on', on);
+      x.setAttribute('aria-checked', x === b ? 'true' : 'false');
+    });
+    share.disabled = !(photo && rating);
+  });
   var preview = $('[data-preview]'), share = $('[data-share]');
   function pick(src, btn) {
     photo = src;
@@ -111,7 +131,7 @@
       b.classList.toggle('is-on', b === btn);
       b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
     });
-    share.disabled = false;
+    share.disabled = !(photo && rating);
   }
   rollEl.addEventListener('click', function (e) {
     var b = e.target.closest('[data-src]');
@@ -141,8 +161,8 @@
   // Share: save it and go back where you came from, like Instagram (no success screen).
   // Discover then opens on Stories, with yours first and a short "Story shared" note.
   share.addEventListener('click', function () {
-    if (!photo) return;
-    var s = { id: 'mine-' + Date.now(), at: Date.now(), place: p.id, visited: when, photos: [photo], caption: tip.value.trim() };
+    if (!photo || !rating) return;
+    var s = { id: 'mine-' + Date.now(), at: Date.now(), place: p.id, visited: when, photos: [photo], caption: tip.value.trim(), rating: rating };
     if (saveStory(s)) { try { sessionStorage.setItem('sl-shared', '1'); } catch (e) {} }
     window.subicNav(from, 'back');
   });

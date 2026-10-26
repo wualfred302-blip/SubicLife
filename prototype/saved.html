@@ -46,7 +46,7 @@
     </div>
     <div class="c-svgrid" data-grid></div>
     <div class="c-svempty" data-empty hidden>
-      <i class="ph-thin ph-bookmark-simple" aria-hidden="true"></i>
+      <i class="ph-thin ph-heart" aria-hidden="true"></i>
       <p class="c-svempty__title" data-empty-title></p>
       <p class="c-svempty__text">Tap the bookmark on a place or an offer and it shows up here.</p>
       <a class="c-svempty__link" href="explore.html">Go to Discover</a>
@@ -90,7 +90,7 @@
     }
     function mark(k, id, name) {
       return '<button class="c-savebtn is-on" type="button" aria-pressed="true" aria-label="Remove ' + esc(name) + ' from Saved" data-kind="' + k + '" data-id="' + id + '">' +
-        '<i class="ph-fill ph-bookmark-simple c-savebtn__fill" aria-hidden="true"></i><i class="ph ph-bookmark-simple c-savebtn__line" aria-hidden="true"></i></button>';
+        '<i class="ph-fill ph-heart c-savebtn__fill" aria-hidden="true"></i><i class="ph ph-heart c-savebtn__line" aria-hidden="true"></i></button>';
     }
     function placeCard(id) {
       var p = PLACES[id];

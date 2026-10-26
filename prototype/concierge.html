@@ -23,7 +23,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-discover c-cgpage">
+<div class="c-cx c-cx--b phone c-discover c-cgpage c-nolines">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -34,32 +34,12 @@
     </span>
   </header>
 
-  <div class="c-dhead">
-    <h1 class="c-dhead__title">Concierge</h1>
-  </div>
-
   <main class="screen-scroll">
-
-    <div class="c-meprof c-cgmika">
-      <span class="c-cgav" aria-hidden="true">MK</span>
-      <span class="c-meprof__text"><span class="c-meprof__name">Mika</span><span class="c-meprof__sub">Online · replies in ~5 min</span></span>
-      <a class="c-cgcall" href="tel:+63472520800" aria-label="Call Mika"><i class="ph-thin ph-phone" aria-hidden="true"></i></a>
-    </div>
-
-    <a class="c-cgask" href="concierge-chat.html?topic=other" aria-label="Ask Mika for anything">
-      <span class="c-cgask__text" aria-hidden="true">Ask Mika for <span class="c-cgask__roll">anything</span></span>
-      <i class="ph-light ph-arrow-up" aria-hidden="true"></i>
-    </a>
-
-    <section aria-labelledby="trip-title">
-      <div class="c-cgsec">
-        <h2 class="c-cgsec__title" id="trip-title">Your trip</h2>
-        <a class="c-cgsec__link" href="concierge-trip.html">Itinerary</a>
-      </div>
-      <p class="c-cgsec__sub" id="trip-dates"></p>
-      <div id="trip-days"></div>
-    </section>
-
+    <a class="c-cxb__sos" href="emergency.html"><i class="ph-light ph-first-aid" aria-hidden="true"></i><span><b>Travel emergency help, 24/7</b><span>By Assist&nbsp;America · included with your card</span></span><i class="ph-light ph-caret-right" aria-hidden="true"></i></a>
+    <a class="c-cxb__trip" href="concierge-trip.html"><span><b>Your trip</b><span id="dates"></span></span><i class="ph-light ph-caret-right" aria-hidden="true"></i></a>
+    <h2 class="c-cx__h">What we can arrange</h2>
+    <div class="c-cxb__feed" id="ideas"></div>
+    <a class="c-cxb__make" href="concierge-chat.html?topic=other">Make a request</a>
   </main>
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
     <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
@@ -74,58 +54,48 @@
 <script src="data-g.js"></script>
 <script>
 (function () {
-  var C = window.CONCIERGE;
-
-  // The ask bar rolls through what Mika arranges; the chat opens with the same services as chips.
-  // Kept still for people who turn motion off.
-  var roll = document.querySelector('.c-cgask__roll');
-  var asks = ['anything', 'a table tonight', 'a ride from Clark', 'a yacht charter', 'island hopping', 'a tee time', 'a spa day'];
-  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (roll && !still) {
-    var at = 0;
-    setInterval(function () {
-      roll.classList.add('is-out');
-      setTimeout(function () {
-        at = (at + 1) % asks.length;
-        roll.textContent = asks[at];
-        roll.classList.remove('is-out');
-        roll.classList.add('is-in');
-        void roll.offsetWidth;
-        roll.classList.remove('is-in');
-      }, 250);
-    }, 2800);
+  var C = window.CONCIERGE, X = C.EXPERIENCES, all = [];
+  C.TRIP.days.forEach(function (d) { d.items.forEach(function (i) { all.push({ day: d.label, i: i }); }); });
+  var dates = document.getElementById('dates');
+  if (dates) dates.textContent = C.TRIP.dates + ' · ' + all.length + ' plans';
+  function tag(i) { return '<span class="c-cx__tag' + (i.status === 'progress' ? ' is-live' : '') + '">' + (i.status === 'progress' ? 'Arranging' : 'Confirmed') + '</span>'; }
+  var plan = document.getElementById('plan');
+  if (plan) {
+    var last = '';
+    plan.innerHTML = all.map(function (r) {
+      var head = r.day !== last ? '<h3 class="c-cx__day">' + r.day + '</h3>' : ''; last = r.day;
+      return head + '<a class="c-cx__stop" href="' + r.i.href + '"><span class="c-cx__time">' + r.i.time + '</span>' +
+        '<span class="c-cx__main"><span class="c-cx__name">' + r.i.title + '</span><span class="c-cx__sub">' + r.i.sub + '</span>' + tag(r.i) + '</span>' +
+        (r.i.photo === false || false ? '' : '<img class="c-cx__img" src="' + r.i.img + '" alt="" width="64" height="64" loading="lazy">') + '</a>';
+    }).join('');
   }
-
-  // The whole trip, one hairline list per day. Only a stop Mika is still arranging is called out in words.
-  // Tapping a stop opens it.
-  var days = document.getElementById('trip-days');
-  var count = 0;
-  C.TRIP.days.forEach(function (d) {
-    var day = document.createElement('div');
-    day.className = 'c-cgday';
-    day.innerHTML = '<h3 class="c-mehead">' + d.label + '</h3>';
-    var list = document.createElement('div');
-    list.className = 'c-melist';
-    d.items.forEach(function (i) {
-      var r = document.createElement('a');
-      r.className = 'c-merow c-cgstop';
-      r.href = i.href;
-      r.innerHTML =
-        '<span class="c-cgstop__clock"><span class="c-cgstop__hm">' + i.time.split(' ')[0] + '</span>' +
-        '<span class="c-cgstop__ampm">' + (i.time.split(' ')[1] || '') + '</span></span>' +
-        '<span class="c-merow__main">' +
-        '<span class="c-cgstop__name">' + i.title + '</span>' +
-        '<span class="c-merow__sub">' + i.sub + (i.status === 'confirmed' ? '<span class="u-sr"> · Confirmed</span>' : '') + '</span>' +
-        (i.status === 'progress' ? '<span class="c-cgstop__status">Mika is on it</span>' : '') +
-        '</span>' +
-        (i.photo === false ? '' : '<img class="c-cgstop__thumb" alt="" src="' + i.img + '">');
-      list.appendChild(r);
-      count++;
-    });
-    day.appendChild(list);
-    days.appendChild(day);
-  });
-  document.getElementById('trip-dates').textContent = C.TRIP.dates + ' · ' + count + ' plans';
+  var next = document.getElementById('next');
+  if (next) {
+    var first = all[0], pic = first.i.photo !== false;
+    next.href = first.i.href;
+    if (!pic) next.classList.add('is-text');
+    next.innerHTML = (pic ? '<img src="' + first.i.img + '" alt="">' : '') +
+      '<span class="c-cxa__cap"><span class="c-cxa__when">Next · ' + first.day + ', ' + first.i.time + '</span>' +
+      '<span class="c-cxa__what">' + first.i.title + '</span>' + tag(first.i) + '</span>';
+  }
+  // The message each photo puts in the chat box, ready to send.
+  var DRAFTS = {
+    yacht: 'I\u2019d like to charter a yacht.',
+    dining: 'I\u2019d like to book a private dinner.',
+    island: 'I\u2019d like to go island hopping.',
+    golf: 'I\u2019d like to book a round of golf.',
+    spa: 'I\u2019d like to book a spa day.',
+    transfer: 'I need a car to or from the airport.'
+  };
+  var ideas = document.getElementById('ideas');
+  if (ideas) ideas.innerHTML = Object.keys(X).map(function (k) {
+    return '<a class="c-cxb__card" href="concierge-chat.html?topic=' + k + '&draft=' + encodeURIComponent(DRAFTS[k] || 'I\u2019d like help with ' + X[k].title.toLowerCase() + '.') + '"><img src="' + X[k].img + '" alt="" loading="lazy">' +
+      '<span class="c-cxb__title">' + X[k].title + '</span></a>';
+  }).join('');
+  var chips = document.getElementById('chips');
+  if (chips) chips.innerHTML = Object.keys(X).map(function (k) {
+    return '<a class="c-cxc__chip" href="concierge-request.html?type=' + k + '">' + X[k].title + '</a>';
+  }).join('');
 })();
 </script>
 <script src="app.js"></script>

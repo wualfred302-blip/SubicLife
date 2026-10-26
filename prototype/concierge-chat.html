@@ -38,7 +38,7 @@
     <div class="c-navbar__titles">
       <span class="c-chat-nav__av" aria-hidden="true">MK</span>
       <h1 class="c-navbar__title">Mika</h1>
-      <p class="c-navbar__sub" id="nav-sub">Online</p>
+      <p class="c-navbar__sub" id="nav-sub">Subic.Life concierge</p>
     </div>
     <span></span>
   </nav>
@@ -77,6 +77,7 @@
   var date = params.get('date') || '2026-10-17';
   var time = params.get('time') || (exp ? exp.time : '10:00');
   var note = (params.get('note') || '').trim();
+  var draft = (params.get('draft') || '').trim();
 
   var thread = document.getElementById('thread');
   var repliesEl = document.getElementById('replies');
@@ -278,6 +279,13 @@
     bubble('out', summary, false);
     markSent(false);
     enqueue(exp.reply);
+  } else if (draft) {
+    // Came from a photo on Concierge: the message waits in the box until the member taps Send.
+    input.value = draft;
+    send.disabled = false;
+    form.classList.add('is-draft');
+    input.focus();
+    input.setSelectionRange(draft.length, draft.length);
   } else if (topic.history) {
     topic.history.forEach(function (it) {
       if (it.k === 'book') bookCard(it, false);

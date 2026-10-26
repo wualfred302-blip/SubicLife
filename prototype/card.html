@@ -21,7 +21,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-cardtab c-cardwhite">
+<div class="phone c-cardtab c-cardwhite c-cardbig c-cfc">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -32,9 +32,6 @@
     </span>
   </header>
 
-  <div class="c-dhead">
-    <h1 class="c-dhead__title">Card</h1>
-  </div>
 
   <main class="screen-scroll">
 
@@ -57,38 +54,12 @@
         </div>
       </div>
       </section>
-      <nav class="c-actions" aria-label="Card actions">
-        <a class="c-action is-primary" href="card-staff.html"><span class="c-action__btn"><i class="ph-thin ph-qr-code" aria-hidden="true"></i></span>Show QR</a>
-        <a class="c-action" href="card-benefits.html"><span class="c-action__btn"><i class="ph-thin ph-tag" aria-hidden="true"></i></span>Perks</a>
-        <button class="c-action" type="button"><span class="c-action__btn"><i class="ph-thin ph-wallet" aria-hidden="true"></i></span>Add to Wallet</button>
+      <a class="c-cfc__main" href="card-staff.html"><i class="ph-light ph-qr-code" aria-hidden="true"></i>Show QR to staff</a>
+      <nav class="c-cfc__links" aria-label="Card">
+        <a href="card-benefits.html">Perks</a><a href="card-savings.html">Savings</a><a href="emergency.html">Emergency help</a>
       </nav>
     </header>
 
-    <div class="c-surface">
-      <section>
-      <div class="c-section-head">
-        <h2 class="c-section-head__title">Recent visits</h2>
-        <a class="c-section-head__link" href="card-savings.html">See all</a>
-      </div>
-      <div class="u-gutter c-ledger">
-        <a class="c-list-row" href="card-savings.html">
-          <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-meat-plus.jpg" alt=""></div></div>
-          <div class="c-list-row__main"><p class="c-list-row__title">Meat Plus Cafe</p><p class="c-list-row__sub">Today · Dinner</p></div>
-          <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱480</span><span class="c-visit__lbl">saved</span></div>
-        </a>
-        <a class="c-list-row" href="card-savings.html">
-          <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-lighthouse-oct.jpg" alt=""></div></div>
-          <div class="c-list-row__main"><p class="c-list-row__title">Lighthouse Marina Resort</p><p class="c-list-row__sub">Oct 10 · Hotel dining</p></div>
-          <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱1,840</span><span class="c-visit__lbl">saved</span></div>
-        </a>
-        <a class="c-list-row" href="card-savings.html">
-          <div class="c-list-row__lead"><div class="c-list-row__thumb"><img src="img/hist-sailing-club.jpg" alt=""></div></div>
-          <div class="c-list-row__main"><p class="c-list-row__title">Subic Bay Yacht Club</p><p class="c-list-row__sub">Oct 5 · Sunset charter</p></div>
-          <div class="c-list-row__trail c-visit__amt"><span class="c-visit__save">₱1,200</span><span class="c-visit__lbl">saved</span></div>
-        </a>
-      </div>
-      </section>
-    </div>
   </main>
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
     <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
