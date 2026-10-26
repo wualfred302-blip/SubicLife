@@ -25,6 +25,7 @@
     p.hero = r.photos[0];
     p.thumb = r.thumb || r.photos[0];
     if (r.video) { p.video = r.video; p.poster = r.poster || r.photos[0]; p.videoFirst = !!r.lead; }
+    if (r.menu) p.menu = r.menu;
     (p.rooms || []).forEach(function (room) {
       if (r.rooms && r.rooms[room.name]) room.photo = r.rooms[room.name];
       // More photos of the same room type for the room sheet's gallery.
