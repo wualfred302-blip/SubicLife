@@ -18,7 +18,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-push c-discover c-cgpage c-bkpage">
+<div class="phone c-push c-discover c-cgpage c-bkpage c-bkv-b">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -85,6 +85,7 @@
     var $ = function (s) { return document.querySelector(s); };
     var i = Number(queryParam('room') || 0);
     var r = p.rooms[i] || p.rooms[0];
+    if (r.perHour) { charterFor(r, queryParam('h')); r.name += ' · ' + r.hours + ' hours'; }
     var trip = p.unit === 'trip';
     var tix = p.kind === 'tickets';
     var tm = tix && queryParam('t'), hrs = r.hours, meet = p.meet || 'the gate';
@@ -108,6 +109,7 @@
       // A ticket's price is for the party: adults at the adult rate, children at the child rate where there is one.
       var kid = r.child || r.rate, per = r.per || p.per, cut = function (x) { return Math.round(x * p.discount / 100); };
       r = { name: r.name, rate: r.rate * adults + kid * kids, saved: cut(r.rate) * adults + cut(kid) * kids };
+      if (unit.flat) r = { name: unit.name, rate: unit.rate, saved: cut(unit.rate) };
     }
     var off = tix ? r.saved : Math.round(r.rate * p.discount / 100) * nights;
     var free = !trip && queryParam('free') === '1' ? r.rate - Math.round(r.rate * p.discount / 100) : 0;
@@ -143,7 +145,7 @@
       return '<div class="c-rcpt__line' + (cls ? ' ' + cls : '') + '"><span>' + label + '</span><span>' + value + '</span></div>';
     };
     var lines = tix
-      ? line(unit.name + ' × ' + (per ? plural(adults, per[0], per[1]) : plural(adults, 'adult', 'adults')), fmtPeso(unit.rate * adults)) +
+      ? unit.flat ? line(unit.name, fmtPeso(unit.rate)) : line(unit.name + ' × ' + (per ? plural(adults, per[0], per[1]) : plural(adults, 'adult', 'adults')), fmtPeso(unit.rate * adults)) +
         (kids ? line(unit.name + ' × ' + plural(kids, 'child', 'children'), fmtPeso((unit.child || unit.rate) * kids)) : '')
       : line(r.name + ' × ' + plural(nights, 'night', 'nights'), fmtPeso(r.rate * nights));
     $('[data-rows]').insertAdjacentHTML('afterend', '<p class="c-mehead">Receipt</p><div class="c-rcpt">' + lines +

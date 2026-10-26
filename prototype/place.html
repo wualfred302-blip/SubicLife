@@ -20,7 +20,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone is-pushed has-bottombar c-offerx c-offerwhite c-placewhite c-placeclean c-pwa">
+<div class="phone is-pushed has-bottombar c-offerx c-offerwhite c-placewhite c-placeclean c-pwa c-bkv-b">
 
   <header class="c-statusbar is-overlay">
     <span>9:41</span>
@@ -151,7 +151,10 @@
     $('[data-meta]').textContent = p.category + ' · ' + p.area;
     if (p.per) {
       var lo = Math.min.apply(null, p.rooms.map(function (r) { return r.rate; }));
-      $('[data-meta]').insertAdjacentHTML('afterend', '<p class="c-plede">From <b>' + fmtPeso(lo - Math.round(lo * p.discount / 100)) + '</b> / ' + p.per[0] + (p.lede ? ' · ' + p.lede : '') + '</p>');
+      // Charters by the hour quote the cheapest hour.
+      var hourly = p.rooms.filter(function (r) { return r.perHour; });
+      if (hourly.length) lo = Math.min.apply(null, hourly.map(function (r) { return r.perHour; }));
+      $('[data-meta]').insertAdjacentHTML('afterend', '<p class="c-plede">From <b>' + fmtPeso(lo - Math.round(lo * p.discount / 100)) + '</b> / ' + (hourly.length ? 'hour' : p.per[0]) + (p.lede ? ' · ' + p.lede : '') + '</p>');
     }
     // Carousell-style: the price is the boldest line after the name. Lowest room after the member discount.
     if (!p.per && p.rooms && p.rooms.length) {
@@ -186,7 +189,7 @@
       // A day pass is like a zoo ticket: open daily, never sold out, so nothing to check. The listing lists the
       // tickets at member prices; tapping one opens what it includes, a row of days and how many, then Book.
       var tix = p.rooms, tf = SLStay.fmt, tsec = $('[data-rooms-sec]');
-      var tstate = { day: tf.parse(queryParam('d')), time: queryParam('t') || '', adults: Number(queryParam('a')) || (p.per ? 1 : 2), kids: Number(queryParam('c')) || 0 };
+      var tstate = { day: tf.parse(queryParam('d')), time: queryParam('t') || '', adults: Number(queryParam('a')) || (p.per && !(tix[0] || {}).flat ? 1 : 2), kids: Number(queryParam('c')) || 0, hours: Number(queryParam('h')) || 0 };
       // A ticket can be priced by something other than people (Zoobic's family package is priced a package of 5), so its
       // own per wins. People and packages keep separate counts, so 2 adults don't turn into 2 packages.
       var perOf = function (t) { return t.per || p.per; }, kindOf = function (t) { return perOf(t) ? perOf(t)[0] : ''; };
@@ -197,6 +200,9 @@
       tsec.id = 'tickets';
       $('[data-rooms-title]').textContent = p.tixWord ? p.tixWord[0] : 'Tickets';
       var tprice = function (t) {
+        // A charter is one price for the boat: by the hour (with its minimum) or for the night.
+        if (t.perHour) return fmtPeso(member(t.perHour)) + '<span class="c-plroom__unit"> / hour · ' + t.minH + ' hours min</span> <s>' + fmtPeso(t.perHour) + '</s>';
+        if (t.flat) return fmtPeso(member(t.rate)) + '<span class="c-plroom__unit"> / ' + (t.unit || 'trip') + '</span> <s>' + fmtPeso(t.rate) + '</s>';
         return t.child
           ? fmtPeso(member(t.rate)) + '<span class="c-plroom__unit"> adult · </span>' + fmtPeso(member(t.child)) + '<span class="c-plroom__unit"> child</span>'
           : fmtPeso(member(t.rate)) + '<span class="c-plroom__unit"> / ' + (perOf(t) ? perOf(t)[0] : 'person') + '</span> <s>' + fmtPeso(t.rate) + '</s>';
@@ -222,11 +228,11 @@
           return '<div class="c-merow">' + tlead(r[0]) + '<span class="c-merow__main">' + r[1] + '</span></div>';
         }).join('') + '</div>' : '';
       };
-      var tstep = function (key, label, sub, value, min) {
+      var tstep = function (key, label, sub, value, min, max) {
         return '<div class="c-merow"><span class="c-merow__main">' + label + '<span class="c-merow__sub">' + sub + '</span></span>' +
           '<span class="c-cgstep"><button class="c-cgstep__btn" type="button" data-tstep="' + key + '-1" aria-label="One fewer"' + (value <= min ? ' disabled' : '') + '><i class="ph-light ph-minus" aria-hidden="true"></i></button>' +
           '<span class="c-cgstep__value" aria-live="polite">' + value + '</span>' +
-          '<button class="c-cgstep__btn" type="button" data-tstep="' + key + '1" aria-label="One more"' + (tstate.adults + tstate.kids >= (tix[topen].max || 20) ? ' disabled' : '') + '><i class="ph-light ph-plus" aria-hidden="true"></i></button></span></div>';
+          '<button class="c-cgstep__btn" type="button" data-tstep="' + key + '1" aria-label="One more"' + ((max != null ? value >= max : tstate.adults + tstate.kids >= (tix[topen].max || 20)) ? ' disabled' : '') + '><i class="ph-light ph-plus" aria-hidden="true"></i></button></span></div>';
       };
       // The day comes from one month at a time (SLStay.month), opening on the picked day's month.
       var monthOf = function (x) { return new Date(x.getFullYear(), x.getMonth(), 1); };
@@ -238,8 +244,11 @@
         if (d && d < from) s.day = d = null;
         // Lessons with start times ask for one before Book.
         var sl = t.slots, tm = sl && sl.indexOf(s.time) > -1 ? s.time : '';
+        // A charter by the hour: from the boat's minimum up to the 6 PM return (p.gate[1]) after the start picked.
+        var back = Number(p.gate[1]), hmax = t.perHour ? back - Number((tm || sl[0]).slice(0, 2)) : 0;
+        if (t.perHour) charterFor(t, s.hours = Math.min(hmax, Math.max(t.minH, s.hours || t.minH)));
         if (t.max && ppl > t.max) { s.adults = ppl = t.max; s.kids = 0; }
-        var total = t.child ? member(t.rate) * s.adults + member(t.child) * s.kids : member(t.rate) * ppl;
+        var total = t.flat ? member(t.rate) : t.child ? member(t.rate) * s.adults + member(t.child) * s.kids : member(t.rate) * ppl;
         // Redrawing keeps the sheet's scroll and the day row's scroll where they were.
         var body = $('[data-tixbody]'), top0 = body.scrollTop;
         body.innerHTML =
@@ -252,18 +261,20 @@
           '<p class="c-mehead">When are you going?</p><div class="c-tixcal">' + SLStay.month(tview, d, from) + '</div>' +
           (sl ? '<p class="c-mehead">What time?</p><div class="c-tixslots">' + sl.map(function (x) {
               return '<button class="c-tixslot" type="button" data-slot="' + x + '" aria-pressed="' + (x === tm) + '">' +
-                fmtClock(x) + '<span>to ' + fmtClock(x, t.hours) + '</span></button>';
+                fmtClock(x) + '<span>to ' + fmtClock(x, t.perHour ? Math.min(t.hours, back - Number(x.slice(0, 2))) : t.hours) + '</span></button>';
             }).join('') + '</div>' : '') +
+          (t.perHour ? '<p class="c-mehead">How long?</p><div class="c-melist c-cgform">' +
+            tstep('h', 'Hours', t.minH + ' hours minimum, back by ' + fmtClock(p.gate[1] + '00'), s.hours, t.minH, hmax) + '</div>' : '') +
           '<p class="c-mehead">How many?</p><div class="c-melist c-cgform">' +
             (t.child
               ? tstep('a', 'Adults', p.ages[0], s.adults, 1) + tstep('c', 'Children', p.ages[1], s.kids, 0)
               : tstep('g', per ? per[2] : 'Guests', t.who || 'Per person', ppl, 1)) +
           '</div>';
         body.scrollTop = top0;
-        var who = t.child ? tf.party(s.adults, s.kids) : tf.plural(ppl, per ? per[0] : 'guest', per ? per[1] : 'guests');
+        var who = (t.perHour ? tf.plural(s.hours, 'hour', 'hours') + ' · ' : '') + (t.child ? tf.party(s.adults, s.kids) : tf.plural(ppl, per ? per[0] : 'guest', per ? per[1] : 'guests'));
         var ready = d && (!sl || tm);
         var go = ready ? 'book.html?p=' + p.id + '&room=' + topen + '&d=' + tf.iso(d) + '&a=' + (t.child ? s.adults : ppl) + '&c=' + (t.child ? s.kids : 0) +
-          (tm ? '&t=' + tm : '') : '';
+          (tm ? '&t=' + tm : '') + (t.perHour ? '&h=' + s.hours : '') : '';
         $('[data-tixfoot]').innerHTML =
           '<span class="c-bkbar__sum"><b>' + fmtPeso(total) + '</b><span>' + (d ? tf.day(d) + (tm ? ', ' + fmtClock(tm) : '') + ' · ' : '') + who + '</span></span>' +
           (ready ? '<a class="c-btn primary" href="' + go.replace(/&/g, '&amp;') + '">Book</a>'
@@ -277,7 +288,7 @@
         var k = kindOf(tix[topen]);
         if (k !== tkind) {
           tcounts[tkind] = [tstate.adults, tstate.kids];
-          var c = tcounts[k] || [k ? 1 : 2, 0];
+          var c = tcounts[k] || [k && k !== 'person' ? 1 : 2, 0];
           tstate.adults = c[0]; tstate.kids = c[1]; tkind = k;
         }
         drawSheet();
@@ -312,7 +323,8 @@
         var st = e.target.closest('[data-tstep]');
         if (st) {
           var k = st.dataset.tstep[0], step = st.dataset.tstep.slice(1) === '1' ? 1 : -1;
-          if (k === 'a') tstate.adults += step;
+          if (k === 'h') tstate.hours += step;
+          else if (k === 'a') tstate.adults += step;
           else if (k === 'c') tstate.kids += step;
           else { tstate.adults = tstate.adults + tstate.kids + step; tstate.kids = 0; }
           drawSheet();

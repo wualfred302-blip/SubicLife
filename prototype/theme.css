@@ -3257,3 +3257,34 @@ html .phone.c-nolines, html .phone.c-nolines .c-dhead { background-image: none; 
 html .phone.c-pwa button.c-pwmenu__page { padding: 0; border: 1px solid rgb(17 18 20 / 0.08); overflow: hidden; cursor: zoom-in; background: #FFFFFF; }
 html .phone.c-pwa button.c-pwmenu__page img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 html .phone.c-pwa button.c-pwmenu__page:focus-visible { outline: 2px solid #111214; outline-offset: 2px; }
+
+/* ===== Booking flow in the listing look (booking-std, 2026-10-26) ===== sheet, Confirm and pay, Booked. a = quiet ink, b = listing titles + orange picks. */
+/* Both: plain white, square corners, the 52px square orange action, one-line facts, compact lists. */
+html .phone:is(.c-bkv-a, .c-bkv-b).c-bkpage, html .phone:is(.c-bkv-a, .c-bkv-b).c-bkpage .c-dhead { background-image: none; }
+html .phone:is(.c-bkv-a, .c-bkv-b) :is(.c-sheet__panel, .c-tixslot, .c-cgstep, .c-bkplace__img, .c-bkroom__img, .c-rcpt, .c-rmgal, .c-rmsheet__img) { border-radius: 0; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-bkday.is-start::before, html .phone:is(.c-bkv-a, .c-bkv-b) .c-bkday.is-end::before { border-radius: 0; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-bksheet__foot .c-btn, html .phone:is(.c-bkv-a, .c-bkv-b).c-bkpage .c-req-bar .c-btn.primary { height: 52px; padding: 0 28px; border-radius: 0; box-shadow: none; font: 600 16px/20px var(--font); }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-bksheet__foot .c-btn.primary, html .phone:is(.c-bkv-a, .c-bkv-b).c-bkpage .c-req-bar .c-btn.primary { background: #E8590C; color: #FFFFFF; }
+html .phone:is(.c-bkv-a, .c-bkv-b) :is(.c-bksheet__foot, .c-req-bar) .c-btn.primary[aria-disabled="true"] { background: #F4F5F7; color: #8A9099; }
+html .phone:is(.c-bkv-a, .c-bkv-b).c-bkpage .c-cgcal { border-radius: 0; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixfacts { display: flex; flex-wrap: wrap; gap: 4px 0; margin: 14px 20px 0; padding: 0; border: 0; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixfacts li { flex-direction: row; align-items: baseline; padding: 0; font: 400 13px/20px var(--font); color: #111214; text-align: left; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixfacts li + li { border: 0; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixfacts li:not(:last-child)::after { content: '\00b7'; margin: 0 8px; color: #8A9099; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixfacts i { display: none; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixsheet .c-melist:not(.c-cgform) .c-merow { min-height: 0; padding: 6px 0; align-items: flex-start; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixsheet .c-melist:not(.c-cgform) .c-merow::after { display: none; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixsheet .c-melist:not(.c-cgform) .c-merow__lead { width: 22px; margin-right: 12px; color: #111214; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-tixsheet .c-melist:not(.c-cgform) .c-merow__main { font: 400 15px/21px var(--font); }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-cgstep { height: 40px; }
+html .phone:is(.c-bkv-a, .c-bkv-b) .c-bkchange { color: #E8590C; font-weight: 600; }
+
+/* a: Quiet. Grey group heads stay; picks in ink. */
+html .phone.c-bkv-a .c-tixslot[aria-pressed="true"] { background: #111214; border-color: #111214; }
+
+/* b: Listing. Section titles like the listing's; picks in orange; prices in green. */
+html .phone.c-bkv-b .c-tixsheet .c-mehead, html .phone.c-bkv-b.c-bkpage .c-mehead { margin-top: 28px; font: 700 20px/26px var(--font); color: #111214; }
+html .phone.c-bkv-b .c-bksheet__title { font: 700 24px/30px var(--font); }
+html .phone.c-bkv-b .c-tixslot[aria-pressed="true"] { background: #E8590C; border-color: #E8590C; color: #FFFFFF; }
+html .phone.c-bkv-b .c-bkday.is-start::before, html .phone.c-bkv-b .c-bkday.is-end::before { background: #E8590C; }
+html .phone.c-bkv-b .c-bkbar__sum b { color: #15803D; font-size: 22px; line-height: 28px; }

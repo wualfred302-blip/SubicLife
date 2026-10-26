@@ -19,7 +19,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-push c-discover c-cgpage c-bkpage">
+<div class="phone c-push c-discover c-cgpage c-bkpage c-bkv-b">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -149,6 +149,8 @@
 
     // Each room with its photo and the member price, the same price the partner page quotes. A tick marks the pick.
     var pick = Math.min(Number(queryParam('room')) || 0, p.rooms.length - 1);
+    // A charter by the hour carries the hours picked on the listing (&h=) into its price and name.
+    if (p.rooms[pick].perHour) { charterFor(p.rooms[pick], queryParam('h')); p.rooms[pick].name += ' · ' + p.rooms[pick].hours + ' hours'; }
     var sleeps = p.rooms.map(function (r) { var m = /sleeps (\d+)/.exec(r.sub); return r.sleeps || (m ? Number(m[1]) : 2); });
     $('[data-rooms]').innerHTML = p.rooms.map(function (r, i) {
       return '<label class="c-merow c-bkroom">' +
@@ -174,7 +176,7 @@
         var t = p.rooms[i];
         el.innerHTML = t.child
           ? fmtPeso(member(t.rate)) + ' adult · ' + fmtPeso(member(t.child)) + ' child'
-          : fmtPeso(member(t.rate)) + ' / ' + (t.per || p.per || ['person'])[0] + ' <s>' + fmtPeso(t.rate) + '</s>';
+          : fmtPeso(member(t.rate)) + (t.flat ? '' : ' / ' + (t.per || p.per || ['person'])[0]) + ' <s>' + fmtPeso(t.rate) + '</s>';
       });
       $$('.c-bkroom__img, .c-bkroom__tick').forEach(function (x) { x.remove(); });
       $$('.c-bkroom').forEach(function (row, i) { row.hidden = i !== pick; });
@@ -199,14 +201,15 @@
       var renderTix = function () {
         var s = tk.state, i = room(), t = p.rooms[i], kid = t.child || t.rate;
         var full = t.rate * s.adults + kid * s.kids, total = member(t.rate) * s.adults + member(kid) * s.kids;
+        if (t.flat) { full = t.rate; total = member(t.rate); }
         var tm = queryParam('t') || '', at = tm ? ', ' + fmtClock(tm) : '';
-        var q = '&d=' + tf.iso(s.checkIn) + '&a=' + s.adults + '&c=' + s.kids + (tm ? '&t=' + tm : '');
+        var q = '&d=' + tf.iso(s.checkIn) + '&a=' + s.adults + '&c=' + s.kids + (tm ? '&t=' + tm : '') + (t.perHour ? '&h=' + t.hours : '');
         $('[data-range]').textContent = tf.day(s.checkIn) + at;
         $('[data-nights]').hidden = true;
         var who = gper ? tf.plural(s.adults, gper[0], gper[1]) : tf.party(s.adults, s.kids);
         $('[data-party]').textContent = who;
-        $('[data-line]').textContent = fmtPeso(t.rate) + ' × ' + (gper ? who : tf.plural(s.adults, 'adult', 'adults'));
-        $('[data-rack]').textContent = fmtPeso(t.rate * s.adults);
+        $('[data-line]').textContent = t.flat ? t.name : fmtPeso(t.rate) + ' × ' + (gper ? who : tf.plural(s.adults, 'adult', 'adults'));
+        $('[data-rack]').textContent = fmtPeso(t.flat ? t.rate : t.rate * s.adults);
         $('[data-kidline]').hidden = !s.kids;
         $('[data-kidlabel]').textContent = fmtPeso(kid) + ' × ' + tf.plural(s.kids, 'child', 'children');
         $('[data-kidamt]').textContent = fmtPeso(kid * s.kids);
