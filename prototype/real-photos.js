@@ -48,7 +48,8 @@
 
   (function walk(o) {
     if (!o || typeof o !== 'object') return;
-    if (typeof o.img === 'string') {
+    if (typeof o.realImg === 'string') o.img = o.realImg;
+    else if (typeof o.img === 'string') {
       var m = /[?&]p=([a-z]+)/.exec(o.href || '');
       o.img = (m && has(m[1]) && (R[m[1]].thumb || nth(m[1], 0))) || bySrc(o.img);
     }
@@ -61,5 +62,8 @@
       var src = bySrc(img.getAttribute('src'));
       if (src !== img.getAttribute('src')) img.src = src;
     });
+    // Photos drawn before this file ran name the real photo they want: a partner's (data-place), or their own (data-real) first.
+    document.querySelectorAll('img[data-place]').forEach(function (img) { var id = img.dataset.place; if (has(id)) img.src = R[id].thumb || nth(id, 0); });
+    document.querySelectorAll('img[data-real]').forEach(function (img) { img.src = img.dataset.real; });
   });
 })();

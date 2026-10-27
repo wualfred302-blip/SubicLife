@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Member</title><link rel="icon" href="img/icon.svg" type="image/svg+xml"><link rel="icon" href="img/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="img/apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-push c-discover c-cgpage c-nolines c-dmpage">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" data-back href="explore.html" aria-label="Back"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title"></h1>
+    <button class="c-dhead__more" type="button" data-more aria-label="More"><i class="ph-light ph-dots-three" aria-hidden="true"></i></button>
+  </div>
+
+  <main class="screen-scroll c-ig">
+    <div class="c-ig__top">
+      <img class="c-ig__face" data-face src="" alt="">
+      <div class="c-ig__nums" data-nums></div>
+    </div>
+    <p class="c-ig__name" data-name></p>
+    <p class="c-ig__sub">Subic.Life member</p>
+    <div class="c-ig__btns">
+      <a class="c-ig__msg" data-msg href="#">Message</a>
+      <button class="c-ig__share" type="button" data-share aria-label="Share profile"><i class="ph-light ph-share-network" aria-hidden="true"></i></button>
+    </div>
+    <div class="c-ig__hl" data-hl></div>
+    <div class="c-ig__grid" data-grid></div>
+    <div class="c-ig__blocked" data-blocked hidden><p data-blocked-text></p><button class="c-ig__unblock" type="button" data-unblock>Unblock</button></div>
+  </main>
+
+  <div class="c-dmsheet" data-sheet hidden>
+    <button class="c-dmsheet__veil" type="button" data-close aria-label="Close"></button>
+    <div class="c-dmsheet__panel" data-panel></div>
+  </div>
+
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
+<script src="members.js"></script>
+<script>
+(function () {
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return '&#' + c.charCodeAt(0) + ';'; }); }
+  var id = new URLSearchParams(location.search).get('m');
+  if (!MEMBERS[id]) id = 'marco';
+  var m = MEMBERS[id];
+  var mine = FEED.stories.filter(function (s) { return s.author === m.name && !s.mine; });
+  var places = [], seen = {}, likes = 0;
+  mine.forEach(function (s) { likes += s.likes || 0; if (!seen[s.place]) { seen[s.place] = []; places.push(s.place); } seen[s.place].push(s); });
+  document.title = 'Subic.Life - ' + m.name;
+  document.querySelector('[data-face]').src = m.avatar;
+  document.querySelector('[data-name]').textContent = m.name;
+  document.querySelector('[data-msg]').href = 'message.html?m=' + id;
+  document.querySelector('[data-nums]').innerHTML = [[mine.length, mine.length === 1 ? 'story' : 'stories'], [places.length, places.length === 1 ? 'place' : 'places'], [likes.toLocaleString('en-US'), 'likes']].map(function (x) {
+    return '<span class="c-ig__num"><b>' + x[0] + '</b>' + x[1] + '</span>'; }).join('');
+  var short = function (n) { return (function (w) { return w[0].length < 5 && w[1] ? w[0] + ' ' + w[1] : w[0]; })(n.split(' ')).replace(/'s$/, ''); };
+  document.querySelector('[data-hl]').innerHTML = places.map(function (p) {
+    return '<a class="c-ig__hlitem" href="place.html?p=' + p + '"><span class="c-ig__ring"><img src="' + seen[p][0].photos[0] + '" alt=""></span><span class="c-ig__hlname">' + esc(short(PLACES[p].name)) + '</span></a>';
+  }).join('');
+  document.querySelector('[data-grid]').innerHTML = mine.map(function (s) {
+    return '<a class="c-ig__cell" href="post.html?id=' + encodeURIComponent(s.id) + '"><img src="' + s.photos[0] + '" alt="' + esc(PLACES[s.place].name) + '">' +
+      (s.photos.length > 1 ? '<i class="ph-fill ph-copy c-ig__stack" aria-hidden="true"></i>' : '') + '</a>';
+  }).join('');
+  var sheetEl = document.querySelector('[data-sheet]'), panel = document.querySelector('[data-panel]');
+  function openSheet(html) { panel.innerHTML = html; sheetEl.hidden = false; }
+  function closeSheet() { sheetEl.hidden = true; }
+  sheetEl.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) closeSheet(); });
+  var first = m.name.split(' ')[0];
+  function menu() {
+    openSheet('<button class="c-dmsheet__opt" type="button" data-act="report">Report</button>' +
+      '<button class="c-dmsheet__opt is-red" type="button" data-act="block">' + (memberBlocked(id) ? 'Unblock' : 'Block') + '</button>' +
+      '<button class="c-dmsheet__opt is-quiet" type="button" data-close>Cancel</button>');
+  }
+  panel.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    var act = b.dataset.act;
+    if (act === 'report') openSheet('<p class="c-dmsheet__title">Why are you reporting ' + esc(first) + '?</p>' +
+      ['Spam', 'Harassment or hate', 'Fake profile', 'Something else'].map(function (r) { return '<button class="c-dmsheet__opt is-row" type="button" data-act="why" data-why="' + r + '">' + r + '<i class="ph-light ph-caret-right" aria-hidden="true"></i></button>'; }).join('') +
+      '<button class="c-dmsheet__opt is-quiet" type="button" data-close>Cancel</button>');
+    if (act === 'why') { memberReport(id, b.dataset.why); openSheet('<p class="c-dmsheet__title">Thanks for telling us</p><p class="c-dmsheet__text">Our team will look at ' + esc(first) + '\'s profile and messages. ' + esc(first) + ' won\'t know you reported them.</p>' +
+      (memberBlocked(id) ? '' : '<button class="c-dmsheet__opt is-red" type="button" data-act="block">Block ' + esc(first) + '</button>') + '<button class="c-dmsheet__opt is-quiet" type="button" data-close>Done</button>'); }
+    if (act === 'block') {
+      if (memberBlocked(id)) { memberSetBlocked(id, false); closeSheet(); paint(); return; }
+      openSheet('<p class="c-dmsheet__title">Block ' + esc(first) + '?</p><p class="c-dmsheet__text">' + esc(first) + ' won\'t be able to message you, and you won\'t see their stories. They won\'t be told.</p>' +
+        '<button class="c-dmsheet__opt is-red" type="button" data-act="confirm">Block</button><button class="c-dmsheet__opt is-quiet" type="button" data-close>Cancel</button>');
+    }
+    if (act === 'confirm') { memberSetBlocked(id, true); closeSheet(); paint(); }
+  });
+  function paint() {
+    var off = memberBlocked(id);
+    ['[data-hl]', '[data-grid]', '.c-ig__btns'].forEach(function (q) { document.querySelector(q).hidden = off; });
+    document.querySelector('[data-blocked]').hidden = !off;
+    document.querySelector('[data-blocked-text]').textContent = 'You blocked ' + first + '. You won\'t see their stories, and they can\'t message you.';
+  }
+  paint();
+  document.querySelector('[data-more]').addEventListener('click', menu);
+  document.querySelector('[data-unblock]').addEventListener('click', function () { memberSetBlocked(id, false); paint(); });
+  document.querySelector('[data-share]').addEventListener('click', function () {
+    if (navigator.share) navigator.share({ title: m.name + ' on Subic.Life', url: location.href }).catch(function () {});
+  });
+})();
+</script>
+</body>
+</html>

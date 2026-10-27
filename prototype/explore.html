@@ -37,7 +37,7 @@
   <div class="c-dhead">
     <label class="c-dsearch"><i class="ph-light ph-magnifying-glass" aria-hidden="true"></i><input type="search" placeholder="Search Subic.Life" aria-label="Search places" data-search></label>
     <a class="c-dicon" href="saved.html" aria-label="Saved"><i class="ph-light ph-heart" aria-hidden="true"></i></a>
-    <a class="c-dicon" href="concierge-chat.html" aria-label="Concierge chat"><i class="ph-light ph-chat-circle" aria-hidden="true"></i></a>
+    <a class="c-dicon" href="messages.html" aria-label="Messages"><i class="ph-light ph-chat-circle" aria-hidden="true"></i></a>
   </div>
 
   <main class="screen-scroll">
@@ -111,6 +111,7 @@
 </div>
 <script src="data-a.js"></script>
 <script src="data-e.js"></script>
+<script src="members.js"></script>
 <script src="saved.js"></script>
 <script src="app.js"></script>
 <script src="img/real/manifest.js"></script>
@@ -135,7 +136,7 @@
     var photos = (s.photos || []).slice(0, 2);
     var talk = s.commentCount != null ? s.commentCount : (s.comments || []).length;
     return '<article class="c-spost">' +
-      '<a class="c-spost__head" href="' + href + '"><span class="c-spost__face">' + face + '</span>' +
+      '<a class="c-spost__head" href="' + (!s.mine && window.memberId && window.memberId(s.author) ? 'member.html?m=' + window.memberId(s.author) : href) + '"><span class="c-spost__face">' + face + '</span>' +
         '<span class="c-spost__who"><span class="c-spost__name">' + esc(s.mine ? 'You' : s.author) + '</span>' +
         '<span class="c-spost__meta">' + esc(PLACES[s.place].name) + ' · ' + esc(s.ago) + '</span></span></a>' +
       '<a class="c-spost__body" href="' + href + '">' +

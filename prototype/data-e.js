@@ -598,7 +598,7 @@
     var shots = (s.photos || []).slice(0, 2);
     var talk = s.commentCount != null ? s.commentCount : (s.comments || []).length;
     return '<article class="c-spost">' +
-      '<a class="c-spost__head" href="' + href + '"><span class="c-spost__face">' + face + '</span>' +
+      '<a class="c-spost__head" href="' + (!s.mine && window.memberId && window.memberId(s.author) ? 'member.html?m=' + window.memberId(s.author) : href) + '"><span class="c-spost__face">' + face + '</span>' +
         '<span class="c-spost__who"><span class="c-spost__name">' + escT(s.mine ? 'You' : s.author) + '</span>' +
         '<span class="c-spost__meta">' + escT(meta || PLACES[s.place].name + ' · ' + s.ago) + '</span>' + window.starsHTML(s.rating) + '</span></a>' +
       '<a class="c-spost__body" href="' + href + '">' +

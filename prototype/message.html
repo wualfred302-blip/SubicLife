@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Message</title><link rel="icon" href="img/icon.svg" type="image/svg+xml"><link rel="icon" href="img/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="img/apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-push c-discover c-cgpage c-nolines c-dmpage c-dmchat">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" data-back href="messages.html" aria-label="Back to Messages"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <a class="c-dmhead" data-prof href="#"><img class="c-dmhead__face" data-face src="" alt=""><span class="c-dmhead__name" data-name></span></a>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
+
+  <main class="screen-scroll" data-scroll>
+    <div class="c-dmthread" data-thread></div>
+  </main>
+  <form class="c-dmcompose" data-form>
+    <input class="c-dmcompose__in" data-in type="text" placeholder="Message" autocomplete="off" aria-label="Message">
+    <button class="c-dmcompose__send" type="submit" aria-label="Send"><i class="ph-light ph-paper-plane-right" aria-hidden="true"></i></button>
+  </form>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
+<script src="members.js"></script>
+<script>
+(function () {
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return '&#' + c.charCodeAt(0) + ';'; }); }
+  var id = new URLSearchParams(location.search).get('m');
+  if (!MEMBERS[id]) id = 'jen';
+  var m = MEMBERS[id];
+  document.title = 'Subic.Life - ' + m.name;
+  document.querySelector('[data-face]').src = m.avatar;
+  document.querySelector('[data-name]').textContent = m.name;
+  document.querySelector('[data-prof]').href = 'member.html?m=' + id;
+  function draw() {
+    var last = '';
+    document.querySelector('[data-thread]').innerHTML = memberThread(id).map(function (x) {
+      var day = x.t !== last ? '<p class="c-dmthread__when">' + esc(x.t) + '</p>' : ''; last = x.t;
+      return day + '<p class="c-dmbub' + (x.me ? ' is-me' : '') + '">' + esc(x.text) + '</p>';
+    }).join('');
+    var sc = document.querySelector('[data-scroll]'); sc.scrollTop = sc.scrollHeight;
+  }
+  draw();
+  memberMarkRead(id);
+  if (memberBlocked(id)) document.querySelector('[data-form]').outerHTML = '<a class="c-dmblocked" href="member.html?m=' + id + '">You blocked ' + esc(m.name.split(' ')[0]) + '. Tap to unblock.</a>';
+  else document.querySelector('[data-form]').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var inp = document.querySelector('[data-in]'), t = inp.value.trim();
+    if (!t) return;
+    memberSend(id, t); inp.value = ''; draw();
+  });
+})();
+</script>
+</body>
+</html>

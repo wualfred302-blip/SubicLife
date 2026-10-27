@@ -85,11 +85,15 @@
     island: 'I\u2019d like to go island hopping.',
     golf: 'I\u2019d like to book a round of golf.',
     spa: 'I\u2019d like to book a spa day.',
-    transfer: 'I need a car to or from the airport.'
+    transfer: 'I need a car to or from the airport.',
+    cruise: 'I\u2019d like the Yacht Club\u2019s bay cruise.',
+    hotel: 'I\u2019d like to book a hotel.',
+    parks: 'I\u2019d like theme park tickets.',
+    jetski: 'I\u2019d like to rent a jet ski.'
   };
   var ideas = document.getElementById('ideas');
-  if (ideas) ideas.innerHTML = Object.keys(X).map(function (k) {
-    return '<a class="c-cxb__card" href="concierge-chat.html?topic=' + k + '&draft=' + encodeURIComponent(DRAFTS[k] || 'I\u2019d like help with ' + X[k].title.toLowerCase() + '.') + '"><img src="' + X[k].img + '" alt="" loading="lazy">' +
+  if (ideas) ideas.innerHTML = C.ORDER.map(function (k) {
+    return '<a class="c-cxb__card" href="concierge-chat.html?topic=' + k + '&draft=' + encodeURIComponent(DRAFTS[k] || 'I\u2019d like help with ' + X[k].title.toLowerCase() + '.') + '"><img src="' + X[k].img + '" alt="" loading="lazy"' + (function (s) { return (s.realImg ? ' data-real="' + s.realImg + '"' : '') + (/[?&]p=([a-z]+)/.test(s.href || '') ? ' data-place="' + /[?&]p=([a-z]+)/.exec(s.href)[1] + '"' : ''); })(X[k]) + '>' +
       '<span class="c-cxb__title">' + X[k].title + '</span></a>';
   }).join('');
   var chips = document.getElementById('chips');

@@ -16,14 +16,14 @@ var byClass = function (big, other) { return ['match', ['get', 'class'], BIG, bi
       else if (id === 'water') p['fill-color'] = SEA;
       else if (/^waterway/.test(id) && l.type === 'line') p['line-color'] = SEA;
       else if (id === 'building') { p['fill-color'] = '#DEDBD4'; p['fill-outline-color'] = '#D3D0C8'; }
-      else if (/(motorway|trunk_primary)(_link)?_casing$/.test(id)) p['line-color'] = /trunk_primary/.test(id) ? byClass('#C94A08', '#D8D5CE') : '#C94A08';
+      else if (/(motorway|trunk_primary)(_link)?_casing$/.test(id)) p['line-color'] = '#C9C5BC';
       else if (/_casing$/.test(id)) p['line-color'] = '#D8D5CE';
-      else if (/(motorway|trunk_primary)(_link)?$/.test(id) && l.type === 'line') p['line-color'] = /trunk_primary/.test(id) ? byClass(ORANGE, '#FFFFFF') : ORANGE;
+      else if (/(motorway|trunk_primary)(_link)?$/.test(id) && l.type === 'line') p['line-color'] = '#FFFFFF';
       else if (/(minor|secondary_tertiary|service_track|link|street|path_pedestrian)$/.test(id) && l.type === 'line') p['line-color'] = '#FFFFFF';
       if (l.type === 'symbol' && l.layout && l.layout['text-field']) {
         var big = /^highway-name/.test(id);
-        p['text-color'] = big ? ['match', ['get', 'class'], BIG, '#FFFFFF', INK] : INK;
-        p['text-halo-color'] = big ? ['match', ['get', 'class'], BIG, ORANGE, '#FFFFFF'] : (/water/.test(id) ? SEA : '#FFFFFF');
+        p['text-color'] = INK;
+        p['text-halo-color'] = /water/.test(id) ? SEA : '#FFFFFF';
         p['text-halo-width'] = 1.2;
         if (/water/.test(id)) p['text-color'] = '#3C6E8F';
       }

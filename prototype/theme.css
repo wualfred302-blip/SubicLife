@@ -3288,3 +3288,304 @@ html .phone.c-bkv-b .c-bksheet__title { font: 700 24px/30px var(--font); }
 html .phone.c-bkv-b .c-tixslot[aria-pressed="true"] { background: #E8590C; border-color: #E8590C; color: #FFFFFF; }
 html .phone.c-bkv-b .c-bkday.is-start::before, html .phone.c-bkv-b .c-bkday.is-end::before { background: #E8590C; }
 html .phone.c-bkv-b .c-bkbar__sum b { color: #15803D; font-size: 22px; line-height: 28px; }
+
+/* ===== Fresh concierge chat (chat-fresh, 2026-10-26) ===== no stamp; the service on top; square, hairline parts. a = boxed messages, b = Mika as plain text. */
+.c-chat-topic { display: flex; align-items: center; gap: 12px; margin: 0 -16px 20px; padding: 12px 20px; border-bottom: 1px solid rgb(17 18 20 / 0.08); }
+.c-chat-topic img { flex: none; width: 48px; height: 48px; object-fit: cover; }
+.c-chat-topic__name { font: 600 17px/22px var(--font); color: #111214; }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) :is(.c-bubble, .c-reply, .c-composer__field, .c-chat-card, .c-chat-place, .c-chat-place__photo, .c-receipt) { border-radius: 0; }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-chat-card .c-btn.primary { height: 52px; border-radius: 0; box-shadow: none; background: #E8590C; color: #FFFFFF; font: 600 16px/20px var(--font); }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-reply { border: 1px solid rgb(17 18 20 / 0.12); background: #FFFFFF; color: #111214; font: 500 14px/20px var(--font); }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-composer__field { height: 44px; }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-composer__input:focus, html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-composer__input:focus-visible { outline: none; }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-composer__field:focus-within { border-color: #111214; }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-composer.is-draft .c-composer__send:not(:disabled) { background: none; color: #E8590C; }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-composer__send:not(:disabled) { color: #E8590C; }
+html .phone.c-cgchat:is(.c-chv-a, .c-chv-b) .c-composer__send i { font-size: 26px; }
+
+/* a: Messages. Boxes as now, squared; the MK mark beside Mika's last line. */
+html .phone.c-cgchat.c-chv-a .c-bubble.is-in { border-color: rgb(17 18 20 / 0.12); }
+
+/* b: Assistant. Mika's words are plain text across the thread; your messages stay black boxes; chips scroll in one row. */
+html .phone.c-cgchat.c-chv-b .c-msg.is-in .c-msg__av { display: none; }
+html .phone.c-cgchat.c-chv-b .c-msg.is-in.is-first::before { content: 'Mika'; display: block; margin-bottom: 4px; font: 600 13px/18px var(--font); color: #5F6670; }
+html .phone.c-cgchat.c-chv-b .c-msg.is-in { flex-direction: column; align-items: stretch; }
+html .phone.c-cgchat.c-chv-b .c-msg.is-in.is-first { margin-top: 20px; }
+html .phone.c-cgchat.c-chv-b .c-bubble.is-in { max-width: none; padding: 0; border: 0; background: none; font: 400 16px/24px var(--font); }
+html .phone.c-cgchat.c-chv-b .c-replies { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+html .phone.c-cgchat.c-chv-b .c-replies::-webkit-scrollbar { display: none; }
+html .phone.c-cgchat.c-chv-b .c-reply { flex: none; }
+
+/* Chat header (chat-fresh c, 2026-10-26): the logo centred with "Concierge" under it, one hairline below. */
+html .phone.c-cgchat .c-chat-nav { height: 60px; min-height: 0; padding: 0 8px; border-bottom: 1px solid rgb(17 18 20 / 0.08); }
+html .phone.c-cgchat .c-chat-nav .c-navbar__titles { gap: 4px; }
+.c-chat-nav__logo { display: block; width: 128px; height: 30px; object-fit: contain; }
+html .phone.c-cgchat .c-chat-nav .c-navbar__sub { margin: 0; font: 400 12px/16px var(--font); color: #5F6670; }
+
+/* ===== Map preview card (map-card a, 2026-10-26) ===== square like the listing; black offer tag; orange offer line. */
+html .phone.c-mapx .c-fcard { border-radius: 0; border: 1px solid rgb(17 18 20 / 0.08); box-shadow: 0 8px 24px -14px rgb(17 18 20 / 0.45); }
+html .phone.c-mapx .c-fcard__photo { height: 160px; }
+html .phone.c-mapx .c-fcard__tag { left: 0; top: 0; padding: 6px 10px; border-radius: 0; background: #111214; color: #FFFFFF; box-shadow: none; font: 700 11px/14px var(--font); letter-spacing: 0.04em; text-transform: uppercase; }
+html .phone.c-mapx .c-fcard__dir { right: 0; top: 0; width: 40px; height: 40px; border-radius: 0; box-shadow: none; background: #FFFFFF; color: #111214; }
+html .phone.c-mapx .c-fcard__info { padding: 12px 14px 14px; }
+html .phone.c-mapx .c-fcard__name { font: 600 17px/22px var(--font); }
+html .phone.c-mapx .c-fcard__meta { font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone.c-mapx .c-fcard__offer { margin-top: 6px; color: #E8590C; font: 600 14px/20px var(--font); }
+
+/* ===== Map minimal (map-card b, 2026-10-26) ===== offer once; square search, filters and buttons. */
+html .phone.c-mapx .c-fcard__tag { display: none; }
+html .phone.c-mapx .c-fcard__offer { margin-top: 8px; }
+html .phone.c-mapx .c-msearch-btn { border-radius: 0; border: 1px solid rgb(17 18 20 / 0.10); box-shadow: 0 6px 18px -12px rgb(17 18 20 / 0.40); }
+html .phone.c-mapx .c-chip, html .phone.c-mapx .c-chip:not(.is-selected) { border-radius: 0; border: 1px solid rgb(17 18 20 / 0.10); background: #FFFFFF; color: #111214; box-shadow: none; padding: 0 14px; font: 500 13px/16px var(--font); }
+html .phone.c-mapx .c-chip.is-selected { border-color: #E8590C; background: #E8590C; color: #FFFFFF; }
+html .phone.c-mapx .c-chip .c-chip__icon { display: none; }
+html .phone.c-mapx .c-map-controls { border-radius: 0; box-shadow: none; }
+html .phone.c-mapx .c-map-controls__btn { border-radius: 0; border: 1px solid rgb(17 18 20 / 0.10); background: #FFFFFF; box-shadow: none; }
+/* Dots orange too (user: "make the dots orange"); the tapped dot grows with an orange halo so it still stands out,
+   and the tapped offer bubble after a filter is orange instead of black. */
+html .phone.c-mapx.is-calm .c-fpin__badge { background: #E8590C; }
+html .phone.c-mapx.is-calm .c-fpin.is-selected .c-fpin__badge { background: #E8590C; transform: scale(1.5); box-shadow: 0 0 0 4px rgb(232 89 12 / 0.28), 0 2px 8px rgb(17 18 20 / 0.25); }
+html .phone.c-mapx:not(.is-calm) .c-fpin.is-selected .c-fpin__badge { background: #E8590C; color: #FFFFFF; }
+
+/* ===== Map dots only (map-card c, 2026-10-26) ===== same orange dots in every view, no words on the map. */
+html .phone.c-mapx .c-fpin__badge { display: block; width: 14px; height: 14px; padding: 0; font-size: 0; border: 2.5px solid #FFFFFF; border-radius: 999px; background: #E8590C; color: transparent; box-shadow: 0 1px 4px rgb(17 18 20 / 0.30); }
+html .phone.c-mapx .c-fpin.is-selected .c-fpin__badge { background: #E8590C; transform: scale(1.5); box-shadow: 0 0 0 4px rgb(232 89 12 / 0.28), 0 2px 8px rgb(17 18 20 / 0.25); }
+html .phone.c-mapx .c-fpin__offer, html .phone.c-mapx .c-fpin__name { display: none; }
+
+/* ===== Card savings + perks (card-pages, 2026-10-26) ===== white, square, one orange amount per row. */
+html .phone.c-svpage { background: #FFFFFF; }
+html .phone.c-svpage .screen-scroll, html .phone.c-svpage .c-navbar, html .phone.c-svpage .c-statusbar { background: #FFFFFF; }
+html .phone.c-svpage .c-hero-amount { text-align: left; padding: 0; }
+html .phone.c-svpage .c-hero-amount__value { font: 700 40px/46px var(--font); letter-spacing: -0.02em; color: #111214; }
+html .phone.c-svpage .c-hero-amount__caption { margin-top: 4px; font: 400 14px/20px var(--font); color: #5F6670; }
+html .phone.c-svpage .c-section-title.is-caption { margin: 0 0 4px; font: 600 13px/18px var(--font); letter-spacing: 0; text-transform: none; color: #5F6670; }
+html .phone.c-svpage .c-list-row { padding: 12px 0; border: 0; gap: 14px; }
+html .phone.c-svpage .c-list-row__thumb, html .phone.c-svpage .c-list-row__thumb img { width: 52px; height: 52px; border-radius: 0; }
+html .phone.c-svpage .c-list-row__title { font: 600 15px/20px var(--font); color: #111214; }
+html .phone.c-svpage .c-list-row__sub { font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone.c-svpage .c-visit__save { font: 600 15px/20px var(--font); color: #E8590C; }
+html .phone.c-svpage .c-visit__lbl { display: none; }
+html .phone.c-pkpage .c-pkbtn { border-radius: 0; border: 1px solid rgb(17 18 20 / 0.16); background: #FFFFFF; color: #111214; box-shadow: none; font: 600 13px/16px var(--font); padding: 8px 14px; }
+html .phone.c-pkpage .c-pkbtn.is-primary { border-color: #E8590C; background: #E8590C; color: #FFFFFF; }
+html .phone.c-pkpage .c-minicard { border-radius: 0; }
+
+/* ===== Card savings b (card-pages, 2026-10-26) ===== big total, "paid for itself" box, bold month heads with totals, photo rows that open the place. */
+html .phone.c-svpage .c-svtop { padding: 16px 20px 8px; }
+html .phone.c-svpage .c-svtop__amt { margin: 0; font: 700 44px/50px var(--font); letter-spacing: -0.02em; color: #111214; }
+html .phone.c-svpage .c-svtop__sub { margin: 2px 0 0; font: 400 14px/20px var(--font); color: #5F6670; }
+html .phone.c-svpage .c-svworth { margin-top: 20px; padding: 14px 16px 16px; background: #F2F3F5; }
+html .phone.c-svpage .c-svworth__title { margin: 0; font: 600 15px/20px var(--font); color: #111214; }
+html .phone.c-svpage .c-svworth__bar { display: block; height: 6px; margin: 10px 0; background: #DDE0E4; }
+html .phone.c-svpage .c-svworth__bar span { display: block; height: 100%; background: #E8590C; }
+html .phone.c-svpage .c-svworth__sub { margin: 0; font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone.c-svpage .c-svmonth { padding: 24px 20px 0; }
+html .phone.c-svpage .c-svmonth__head { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 4px; font: 700 19px/24px var(--font); color: #111214; }
+html .phone.c-svpage .c-svmonth__sum { font: 500 14px/20px var(--font); color: #5F6670; }
+html .phone.c-svpage .c-svrow { display: flex; align-items: center; gap: 14px; padding: 12px 0; color: inherit; text-decoration: none; }
+html .phone.c-svpage .c-svrow + .c-svrow { border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone.c-svpage .c-svrow:active { opacity: 0.6; }
+html .phone.c-svpage .c-svrow__img { flex: none; width: 56px; height: 56px; object-fit: cover; }
+html .phone.c-svpage .c-svrow__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+html .phone.c-svpage .c-svrow__name { font: 600 15px/20px var(--font); color: #111214; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+html .phone.c-svpage .c-svrow__sub { margin-top: 2px; font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone.c-svpage .c-svrow__amt { flex: none; font: 600 15px/20px var(--font); color: #E8590C; }
+
+/* ===== Card savings c (card-pages, 2026-10-26) ===== variant c. */
+html .phone.c-svpage .c-svx { padding-bottom: 32px; }
+html .phone.c-svpage .c-svx__top { padding: 16px 20px 4px; }
+html .phone.c-svpage .c-svx__amt { margin: 0; font: 700 44px/50px var(--font); letter-spacing: -0.02em; color: #111214; }
+html .phone.c-svpage .c-svx__cap { margin: 2px 0 0; font: 400 14px/20px var(--font); color: #5F6670; }
+html .phone.c-svpage .c-svx__worth { margin: 12px 0 0; font: 500 14px/20px var(--font); color: #E8590C; }
+html .phone.c-svpage .c-svx__month { padding: 28px 20px 0; }
+html .phone.c-svpage .c-svx__head { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 12px; font: 700 19px/24px var(--font); color: #111214; }
+html .phone.c-svpage .c-svx__sum { font: 500 14px/20px var(--font); color: #5F6670; }
+html .phone.c-svpage .c-svx a { color: inherit; text-decoration: none; }
+html .phone.c-svpage .c-svx a:active { opacity: 0.6; }
+html .phone.c-svpage .c-svx__name { display: block; font: 600 15px/20px var(--font); color: #111214; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+html .phone.c-svpage .c-svx__sub { display: block; font: 400 13px/18px var(--font); color: #5F6670; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* a: photo grid */
+html .phone.c-svpage .c-svx__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 8px; }
+html .phone.c-svpage .c-svx__tile { display: block; min-width: 0; }
+html .phone.c-svpage .c-svx__tile img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+html .phone.c-svpage .c-svx__save { display: block; margin-top: 8px; font: 700 15px/20px var(--font); color: #E8590C; }
+/* b: big photo cards */
+html .phone.c-svpage .c-svx__card { position: relative; display: block; margin-bottom: 20px; }
+html .phone.c-svpage .c-svx__card img { display: block; width: 100%; height: 180px; object-fit: cover; }
+html .phone.c-svpage .c-svx__tag { position: absolute; left: 0; top: 0; padding: 6px 10px; background: #E8590C; color: #FFFFFF; font: 700 13px/16px var(--font); }
+html .phone.c-svpage .c-svx__card .c-svx__name { margin-top: 10px; font-size: 17px; line-height: 22px; }
+/* c: statement */
+html .phone.c-svpage .c-svx.is-c .c-svx__top { margin: 8px 20px 0; padding: 20px; background: #E8590C; }
+html .phone.c-svpage .c-svx.is-c .c-svx__amt, html .phone.c-svpage .c-svx.is-c .c-svx__worth { color: #FFFFFF; }
+html .phone.c-svpage .c-svx.is-c .c-svx__cap { color: rgb(255 255 255 / 0.85); }
+html .phone.c-svpage .c-svx.is-c .c-svx__worth { padding-top: 12px; border-top: 1px solid rgb(255 255 255 / 0.3); }
+html .phone.c-svpage .c-svx__line { display: flex; align-items: center; gap: 16px; padding: 12px 0; }
+html .phone.c-svpage .c-svx__line + .c-svx__line { border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone.c-svpage .c-svx__day { flex: none; width: 44px; display: flex; flex-direction: column; align-items: center; font: 500 11px/14px var(--font); color: #5F6670; text-transform: uppercase; letter-spacing: 0.04em; }
+html .phone.c-svpage .c-svx__day b { font: 700 22px/26px var(--font); color: #111214; letter-spacing: 0; }
+html .phone.c-svpage .c-svx__main { flex: 1; min-width: 0; }
+html .phone.c-svpage .c-svx__amt2 { flex: none; font: 600 15px/20px var(--font); color: #E8590C; }
+
+/* ===== Welcome button square (welcome-btn, 2026-10-26) ===== */
+html .phone.c-welcome .c-btn.primary { border-radius: 0; }
+
+/* ===== Me redesign (me-page, 2026-10-26) ===== variant a. */
+html .phone .c-mex { padding-bottom: 24px; }
+html .phone .c-mex a { color: inherit; text-decoration: none; }
+html .phone .c-mex a:active { opacity: 0.6; }
+html .phone .c-mex__prof { display: flex; align-items: center; gap: 14px; padding: 16px 20px 0; }
+html .phone .c-mex__face { flex: none; width: 64px; height: 64px; border-radius: 999px; object-fit: cover; }
+html .phone .c-mex__name { display: block; font: 700 22px/28px var(--font); color: #111214; }
+html .phone .c-mex__sub { display: block; font: 400 14px/20px var(--font); color: #5F6670; }
+html .phone .c-mex__head { margin: 28px 20px 4px; font: 700 19px/24px var(--font); color: #111214; }
+html .phone .c-mex__list { padding: 0 20px; }
+html .phone .c-mex__row { display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 10px 0; }
+html .phone .c-mex__row + .c-mex__row { border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone .c-mex__ico { flex: none; width: 24px; font-size: 22px; color: #111214; text-align: center; }
+html .phone .c-mex__label { flex: 1; min-width: 0; font: 500 16px/22px var(--font); color: #111214; }
+html .phone .c-mex__rowsub { display: block; font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone .c-mex__val { font: 400 15px/20px var(--font); color: #5F6670; }
+html .phone .c-mex__chev { flex: none; font-size: 16px; color: #9AA0A8; }
+html .phone .c-mex__out { display: block; margin: 28px 20px 0; padding: 14px; border: 1px solid rgb(17 18 20 / 0.12); text-align: center; font: 600 15px/20px var(--font); color: #111214 !important; }
+html .phone .c-mex .c-minicard { flex: none; border-radius: 0; }
+/* shortcut tiles */
+html .phone .c-mex__tiles { display: grid; gap: 8px; padding: 20px 20px 0; }
+html .phone .c-mex__tiles.is-row { grid-template-columns: repeat(4, 1fr); }
+html .phone .c-mex__tiles.is-grid { grid-template-columns: 1fr 1fr; }
+html .phone .c-mex__tile { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 4px; background: #F2F3F5; font: 500 13px/16px var(--font); color: #111214; }
+html .phone .c-mex__tiles.is-grid .c-mex__tile { flex-direction: row; justify-content: flex-start; gap: 12px; padding: 18px 16px; font-size: 15px; }
+html .phone .c-mex__tile i { font-size: 24px; }
+/* a: ink membership block */
+html .phone .c-mex__card { margin: 20px 20px 0; padding: 18px; background: #111214; color: #FFFFFF; }
+html .phone .c-mex__cardtop { display: flex; align-items: center; gap: 12px; }
+html .phone .c-mex__cardname { display: block; font: 700 18px/22px var(--font); }
+html .phone .c-mex__cardsub { display: block; font: 400 13px/18px var(--font); color: rgb(255 255 255 / 0.7); }
+html .phone .c-mex__saved { margin: 16px 0 0; font: 400 14px/20px var(--font); color: rgb(255 255 255 / 0.8); }
+html .phone .c-mex__saved b { display: block; font: 700 32px/38px var(--font); color: #FF7A2F; letter-spacing: -0.02em; }
+html .phone .c-mex__cardlinks { display: flex; gap: 18px; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgb(255 255 255 / 0.18); }
+html .phone .c-mex__cardlinks a { font: 600 14px/20px var(--font); color: #FFFFFF !important; }
+/* b: orange top */
+html .phone .c-mex__hero { display: flex; flex-direction: column; align-items: center; margin: 8px 20px 12px; padding: 24px 20px 20px; background: #E8590C; text-align: center; }
+html .phone .c-mex__hero .c-mex__face { width: 72px; height: 72px; border: 3px solid #FFFFFF; }
+html .phone .c-mex__hero .c-mex__name { margin-top: 10px; color: #FFFFFF; }
+html .phone .c-mex__hero .c-mex__sub { color: rgb(255 255 255 / 0.85); }
+html .phone .c-mex__heroamt { margin-top: 16px; padding-top: 14px; width: 100%; border-top: 1px solid rgb(255 255 255 / 0.3); font: 400 14px/20px var(--font); color: #FFFFFF !important; }
+html .phone .c-mex__heroamt b { font-weight: 700; font-size: 18px; }
+
+/* ===== Me card icon (me-page, 2026-10-27) ===== variant d. */
+html .phone .c-mex__cardtop.is-logo { flex-direction: column; align-items: flex-start; gap: 14px; }
+html .phone .c-mex__logo { display: block; height: 22px; width: auto; }
+html .phone .c-mex__cardtop.is-right { flex-direction: row-reverse; justify-content: space-between; align-items: flex-start; }
+html .phone .c-mex__card:has(.is-foot) { position: relative; }
+html .phone .c-mex__logo.is-foot { position: absolute; right: 18px; bottom: 18px; height: 20px; }
+html .phone .c-mex__badge { flex: none; display: grid; place-items: center; width: 40px; height: 40px; background: #E8590C; color: #FFFFFF; font-size: 22px; }
+
+/* ===== Me card swap (me-page, 2026-10-27) ===== the saving top left beside the logo, the tier line under it. */
+html .phone .c-mex__card .c-mex__cardtop.is-right { align-items: flex-start; }
+html .phone .c-mex__card .c-mex__cardtop .c-mex__saved { margin: 0; }
+html .phone .c-mex__card .c-mex__cardtop .c-mex__logo { margin-top: 10px; }
+html .phone .c-mex__under { display: block; margin-top: 16px; }
+html .phone .c-mex__under .c-mex__tier { display: block; }
+
+/* ===== Me card minimal (me-page, 2026-10-27) ===== one bold thing, quiet tier line, no rule, lighter links. */
+html .phone .c-mex__card.is-min { padding: 20px; }
+html .phone .c-mex__card.is-min .c-mex__saved { color: rgb(255 255 255 / 0.6); }
+html .phone .c-mex__card.is-min .c-mex__saved b { font-size: 26px; line-height: 32px; }
+html .phone .c-mex__card.is-min .c-mex__under { margin-top: 20px; font: 400 14px/20px var(--font); color: rgb(255 255 255 / 0.85); }
+html .phone .c-mex__card.is-min .c-mex__cardlinks { margin-top: 20px; padding-top: 0; border-top: 0; gap: 20px; }
+html .phone .c-mex__card.is-min .c-mex__cardlinks a { font-weight: 500; color: rgb(255 255 255 / 0.6) !important; }
+
+/* ===== Member messages + profiles (messages, 2026-10-27) ===== square, white, hairline rows; theirs grey, yours black; Message and Send orange. */
+html .phone.c-dmpage a { color: inherit; text-decoration: none; }
+html .phone.c-dmpage a:active { opacity: 0.6; }
+html .phone .c-post__author { color: inherit; text-decoration: none; }
+/* profile */
+html .phone .c-dmprof { display: flex; align-items: center; gap: 14px; padding: 8px 20px 0; }
+html .phone .c-dmprof__face { flex: none; width: 72px; height: 72px; border-radius: 999px; object-fit: cover; }
+html .phone .c-dmprof__name { display: block; font: 700 22px/28px var(--font); color: #111214; }
+html .phone .c-dmprof__sub { display: block; font: 400 14px/20px var(--font); color: #5F6670; }
+html .phone .c-dmprof__msg { display: block; margin: 18px 20px 8px; padding: 13px; background: #E8590C; text-align: center; font: 600 15px/20px var(--font); color: #FFFFFF !important; }
+/* inbox */
+html .phone .c-dminbox { padding: 4px 20px 24px; }
+html .phone .c-dmrow { display: flex; align-items: center; gap: 14px; padding: 12px 0; }
+html .phone .c-dmrow + .c-dmrow { border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone .c-dmrow__face { flex: none; width: 52px; height: 52px; border-radius: 999px; object-fit: cover; }
+html .phone .c-dmrow__logo { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 999px; background: #111214; }
+html .phone .c-dmrow__logo img { width: 38px; height: auto; }
+html .phone .c-dmrow__main { flex: 1; min-width: 0; }
+html .phone .c-dmrow__top { display: flex; justify-content: space-between; gap: 8px; }
+html .phone .c-dmrow__name { font: 600 16px/22px var(--font); color: #111214; }
+html .phone .c-dmrow__time { flex: none; font: 400 13px/22px var(--font); color: #9AA0A8; }
+html .phone .c-dmrow__last { display: block; font: 400 14px/20px var(--font); color: #5F6670; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* chat */
+html .phone .c-dmhead { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; }
+html .phone .c-dmhead__face { width: 30px; height: 30px; border-radius: 999px; object-fit: cover; }
+html .phone .c-dmhead__name { font: 600 16px/22px var(--font); color: #111214; }
+html .phone .c-dmthread { display: flex; flex-direction: column; gap: 6px; padding: 8px 20px 16px; }
+html .phone .c-dmthread__when { align-self: center; margin: 10px 0 4px; font: 500 12px/16px var(--font); color: #9AA0A8; }
+html .phone .c-dmbub { align-self: flex-start; max-width: 78%; margin: 0; padding: 10px 14px; background: #F2F3F5; font: 400 15px/21px var(--font); color: #111214; }
+html .phone .c-dmbub.is-me { align-self: flex-end; background: #111214; color: #FFFFFF; }
+html .phone .c-dmcompose { display: flex; gap: 8px; padding: 10px 20px 30px; background: #FFFFFF; border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone .c-dmcompose__in { flex: 1; min-width: 0; height: 44px; padding: 0 14px; border: 1px solid rgb(17 18 20 / 0.16); border-radius: 0; font: 400 15px var(--font); color: #111214; background: #FFFFFF; outline: none; }
+html .phone .c-dmcompose__send { flex: none; width: 44px; height: 44px; border: 0; border-radius: 0; background: #E8590C; color: #FFFFFF; font-size: 20px; }
+
+/* ===== Member profile, Instagram-style (messages, 2026-10-27) ===== counts beside the face, place highlights, grid / places switch. */
+html .phone .c-ig { padding-bottom: 24px; }
+html .phone .c-ig a { color: inherit; text-decoration: none; }
+html .phone .c-ig__top { display: flex; align-items: center; gap: 24px; padding: 6px 20px 0; }
+html .phone .c-ig__face { flex: none; width: 86px; height: 86px; border-radius: 999px; object-fit: cover; }
+html .phone .c-ig__nums { flex: 1; display: flex; justify-content: space-around; }
+html .phone .c-ig__num { display: flex; flex-direction: column; align-items: center; font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone .c-ig__num b { font: 700 18px/24px var(--font); color: #111214; }
+html .phone .c-ig__name { margin: 12px 20px 0; font: 700 16px/22px var(--font); color: #111214; }
+html .phone .c-ig__sub { margin: 0 20px; font: 400 14px/20px var(--font); color: #5F6670; }
+html .phone .c-ig__btns { display: flex; gap: 8px; margin: 14px 20px 0; }
+html .phone .c-ig__msg { flex: 1; padding: 9px; background: #E8590C; text-align: center; font: 600 14px/20px var(--font); color: #FFFFFF !important; }
+html .phone .c-ig__share { flex: none; width: 40px; border: 0; border-radius: 0; background: #F2F3F5; color: #111214; font-size: 18px; }
+html .phone .c-ig__hl { display: flex; gap: 14px; overflow-x: auto; padding: 18px 20px 4px; scrollbar-width: none; }
+html .phone .c-ig__hl::-webkit-scrollbar { display: none; }
+html .phone .c-ig__hlitem { flex: none; width: 66px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+html .phone .c-ig__ring { display: block; width: 66px; height: 66px; padding: 3px; border: 1px solid rgb(17 18 20 / 0.16); border-radius: 999px; }
+html .phone .c-ig__ring img { display: block; width: 100%; height: 100%; border-radius: 999px; object-fit: cover; }
+html .phone .c-ig__hlname { width: 100%; font: 400 12px/16px var(--font); color: #111214; text-align: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+html .phone .c-ig__hl + .c-ig__grid { margin-top: 14px; }
+html .phone .c-ig__tabs { display: flex; margin-top: 14px; border-bottom: 1px solid rgb(17 18 20 / 0.08); }
+html .phone .c-ig__tab { flex: 1; height: 44px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; color: #9AA0A8; font-size: 24px; }
+html .phone .c-ig__tab.is-on { border-bottom-color: #111214; color: #111214; }
+html .phone .c-ig__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding-top: 2px; }
+html .phone .c-ig__cell { position: relative; display: block; }
+html .phone .c-ig__cell img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+html .phone .c-ig__stack { position: absolute; top: 6px; right: 6px; font-size: 16px; color: #FFFFFF; filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.4)); }
+html .phone .c-ig__places { padding: 0 20px; }
+html .phone .c-ig__prow { display: flex; align-items: center; gap: 14px; padding: 10px 0; }
+html .phone .c-ig__prow + .c-ig__prow { border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone .c-ig__prow img { flex: none; width: 52px; height: 52px; object-fit: cover; }
+html .phone .c-ig__pmain { flex: 1; min-width: 0; }
+html .phone .c-ig__pname { display: block; font: 600 15px/20px var(--font); color: #111214; }
+html .phone .c-ig__psub { display: block; font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone .c-ig__prow i { color: #9AA0A8; }
+
+/* ===== Messages: block, report, unread (messages, 2026-10-27) ===== */
+html .phone .c-ig [hidden] { display: none !important; }
+html .phone .c-dicon[href="messages.html"] { position: relative; }
+html .phone .c-dicon.has-dot::after { content: ''; position: absolute; top: 9px; right: 8px; width: 9px; height: 9px; border: 2px solid #FFFFFF; border-radius: 999px; background: #E8590C; }
+html .phone .c-dmrow.is-unread .c-dmrow__name, html .phone .c-dmrow.is-unread .c-dmrow__last { font-weight: 700; color: #111214; }
+html .phone .c-dmrow__dot { flex: none; width: 10px; height: 10px; border-radius: 999px; background: #E8590C; }
+html .phone .c-dhead__more { display: grid; place-items: center; width: 44px; height: 44px; border: 0; background: none; color: #111214; font-size: 26px; }
+html .phone .c-comment__who, html .phone a.c-comment__avatar { color: inherit; text-decoration: none; }
+html .phone .c-ig__blocked { margin: 28px 20px 0; padding: 18px; background: #F2F3F5; }
+html .phone .c-ig__blocked p { margin: 0 0 12px; font: 400 14px/20px var(--font); color: #5F6670; }
+html .phone .c-ig__unblock { padding: 9px 18px; border: 1px solid rgb(17 18 20 / 0.16); border-radius: 0; background: #FFFFFF; font: 600 14px/20px var(--font); color: #111214; }
+html .phone .c-dmblocked { display: block; padding: 16px 20px 32px; border-top: 1px solid rgb(17 18 20 / 0.08); text-align: center; font: 400 14px/20px var(--font); color: #5F6670 !important; text-decoration: none; }
+/* sheet */
+html .phone .c-dmsheet { position: absolute; inset: 0; z-index: 50; }
+html .phone .c-dmsheet[hidden] { display: none; }
+html .phone .c-dmsheet__veil { position: absolute; inset: 0; border: 0; background: rgb(17 18 20 / 0.4); }
+html .phone .c-dmsheet__panel { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 20px 34px; background: #FFFFFF; }
+html .phone .c-dmsheet__title { margin: 8px 0 4px; font: 700 18px/24px var(--font); color: #111214; }
+html .phone .c-dmsheet__text { margin: 0 0 8px; font: 400 14px/20px var(--font); color: #5F6670; }
+html .phone .c-dmsheet__opt { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 50px; border: 0; border-radius: 0; background: none; font: 600 16px/22px var(--font); color: #111214; }
+html .phone .c-dmsheet__opt + .c-dmsheet__opt { border-top: 1px solid rgb(17 18 20 / 0.08); }
+html .phone .c-dmsheet__opt.is-red { color: #D92D20; }
+html .phone .c-dmsheet__opt.is-quiet { font-weight: 400; color: #5F6670; }
+html .phone .c-dmsheet__opt.is-row { justify-content: space-between; font-weight: 400; }
+html .phone .c-dmsheet__opt.is-row i { color: #9AA0A8; }

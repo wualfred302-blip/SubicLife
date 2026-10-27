@@ -20,7 +20,7 @@
   <script src="shell.js"></script>
 </head>
 <body>
-<div class="phone c-push c-cgchat">
+<div class="phone c-push c-cgchat c-chv-b">
 
   <header class="c-statusbar">
     <span>9:41</span>
@@ -36,16 +36,13 @@
       <i class="ph-light ph-caret-left" aria-hidden="true"></i>
     </a>
     <div class="c-navbar__titles">
-      <span class="c-chat-nav__av" aria-hidden="true">MK</span>
-      <h1 class="c-navbar__title">Mika</h1>
-      <p class="c-navbar__sub" id="nav-sub">Subic.Life concierge</p>
+      <img class="c-chat-nav__logo" src="img/logo-ink.svg" alt="Subic.Life">
+      <h1 class="c-navbar__sub" id="nav-sub">Concierge</h1>
     </div>
     <span></span>
   </nav>
 
   <main class="c-chat" id="thread" aria-live="polite">
-    <p class="c-chat__stamp">Today 9:12 AM</p>
-    <p class="c-chat__from">Mika</p>
   </main>
 
   <div class="c-replies" id="replies" role="group" aria-label="Quick replies"></div>
@@ -77,7 +74,7 @@
   var date = params.get('date') || '2026-10-17';
   var time = params.get('time') || (exp ? exp.time : '10:00');
   var note = (params.get('note') || '').trim();
-  var draft = (params.get('draft') || '').trim();
+  var draft = (params.get('draft') || '').trim(), asked = false;
 
   var thread = document.getElementById('thread');
   var repliesEl = document.getElementById('replies');
@@ -151,11 +148,11 @@
     s.appendChild(el('p', 'c-chat-card__title', b.title));
     s.appendChild(el('p', 'c-chat-card__sub', b.sub));
     var rec = el('div', 'c-receipt');
-    b.lines.forEach(function (l) { rec.appendChild(receiptRow(l[0], C.peso(l[1]), false)); });
+    b.lines.forEach(function (l) { rec.appendChild(receiptRow(l[0], l[1] < 0 ? '\u2212' + C.peso(-l[1]) : C.peso(l[1]), false)); });
     rec.appendChild(receiptRow('Total', C.peso(b.total), true));
     s.appendChild(rec);
     var pay = el('a', 'c-btn primary', 'Pay ' + C.peso(b.total));
-    pay.href = 'book-done.html';
+    pay.href = b.href || 'book-done.html';
     s.appendChild(pay);
     r.appendChild(s);
     scroll();
@@ -188,6 +185,7 @@
 
   function setReplies(labels) {
     repliesEl.innerHTML = '';
+    repliesEl.scrollLeft = 0;
     (labels || []).forEach(function (label) {
       var b = el('button', 'c-reply', label);
       b.type = 'button';
@@ -196,6 +194,7 @@
     });
     // The chip row takes height from the thread, so keep the newest message in view.
     scroll();
+    requestAnimationFrame(function () { repliesEl.scrollLeft = 0; });
   }
 
   function showTyping() {
@@ -222,6 +221,7 @@
   function emit(step) {
     if (step.t) bubble('in', fill(step.t), true);
     if (step.card && exp) bookCard(C.bookingFor(key, guests, date, time), true);
+    if (step.book) bookCard(step.book, true);
     if (step.place) placeCard(step.place, true);
     setReplies(step.quick || []);
   }
@@ -260,7 +260,9 @@
     markSent(true);
     input.value = '';
     send.disabled = true;
-    enqueue(pickSteps(text));
+    var svcAsk = draft && !asked && C.EXPERIENCES[key];
+    asked = true;
+    enqueue(svcAsk ? [{ t: C.EXPERIENCES[key].opener, quick: (C.CHAT_TOPICS[key] || {}).quick }] : pickSteps(text));
   }
 
   input.addEventListener('input', function () {
@@ -270,6 +272,14 @@
     e.preventDefault();
     say(input.value);
   });
+
+  // What the chat is about, when it opened from a service: its photo and name head the thread.
+  var svc = C.EXPERIENCES[key];
+  if (svc) {
+    var about = el('div', 'c-chat-topic');
+    about.innerHTML = '<img src="' + svc.img + '" alt=""' + (function (s) { return (s.realImg ? ' data-real="' + s.realImg + '"' : '') + (/[?&]p=([a-z]+)/.test(s.href || '') ? ' data-place="' + /[?&]p=([a-z]+)/.exec(s.href)[1] + '"' : ''); })(svc) + '><span class="c-chat-topic__name">' + svc.title + '</span>';
+    thread.appendChild(about);
+  }
 
   // Start of the thread.
   if (fromRequest) {

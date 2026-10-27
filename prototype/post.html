@@ -74,6 +74,7 @@
 </div>
 <script src="data-a.js"></script>
 <script src="data-e.js"></script>
+<script src="members.js"></script>
 <script src="img/real/manifest.js"></script>
 <script src="real-photos.js"></script>
 <script>
@@ -94,10 +95,11 @@
   }
   function avatarOf(c) { return c.avatar ? '<img src="' + c.avatar + '" alt="">' : '<span class="c-mono" style="background:' + monoColour(c.initials) + '">' + esc(c.initials) + '</span>'; }
   function commentRow(c) {
+    var mid = window.memberId && window.memberId(c.who), to = mid ? 'member.html?m=' + mid : '';
     return '<div class="c-comment">' +
-      '<span class="c-comment__avatar">' + avatarOf(c) + '</span>' +
+      (to ? '<a class="c-comment__avatar" href="' + to + '">' + avatarOf(c) + '</a>' : '<span class="c-comment__avatar">' + avatarOf(c) + '</span>') +
       '<div class="c-comment__body">' +
-        '<p class="c-comment__line"><strong>' + esc(c.who) + '</strong> ' + esc(c.text) + '</p>' +
+        '<p class="c-comment__line">' + (to ? '<a class="c-comment__who" href="' + to + '"><strong>' + esc(c.who) + '</strong></a>' : '<strong>' + esc(c.who) + '</strong>') + ' ' + esc(c.text) + '</p>' +
         '<p class="c-comment__ago">' + esc(c.ago) + '</p>' +
       '</div></div>';
   }
@@ -111,11 +113,11 @@
 
   var head = isEvent
     ? '<h1 class="c-post-title">' + esc(s.title) + '</h1>'
-    : '<div class="c-post__author">' +
+    : '<a class="c-post__author" href="' + (window.memberId && window.memberId(s.author) ? 'member.html?m=' + window.memberId(s.author) : '#') + '">' +
         '<span class="c-post__avatar">' + avatarOf(s) + '</span>' +
         '<span class="c-post__who"><span class="c-post__name">' + esc(s.author) + '</span>' +
         '<span class="c-post__where">' + esc(place.name) + ' · ' + esc(s.ago) + '</span>' + window.starsHTML(s.rating) + '</span>' +
-      '</div>';
+      '</a>';
 
   var info = isEvent
     ? '<div class="c-info-group c-post-info">' +

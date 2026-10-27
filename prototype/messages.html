@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Subic.Life - Messages</title><link rel="icon" href="img/icon.svg" type="image/svg+xml"><link rel="icon" href="img/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="img/apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="components-c.css">
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shell.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="shell.js"></script>
+</head>
+<body>
+<div class="phone c-push c-discover c-cgpage c-nolines c-dmpage">
+
+  <header class="c-statusbar">
+    <span>9:41</span>
+    <span class="c-statusbar__icons">
+      <span class="material-symbols-outlined">signal_cellular_alt</span>
+      <span class="material-symbols-outlined">wifi</span>
+      <span class="material-symbols-outlined">battery_full</span>
+    </span>
+  </header>
+
+  <div class="c-dhead c-dhead--push">
+    <a class="c-dhead__back" data-back href="explore.html" aria-label="Back to Discover"><i class="ph-light ph-caret-left" aria-hidden="true"></i></a>
+    <h1 class="c-dhead__title">Messages</h1>
+    <span class="c-dhead__spacer" aria-hidden="true"></span>
+  </div>
+
+  <main class="screen-scroll">
+    <div class="c-dminbox" data-inbox></div>
+  </main>
+
+  <span class="c-homeindicator"></span>
+
+</div>
+<script src="data-a.js"></script>
+<script src="data-e.js"></script>
+<script src="img/real/manifest.js"></script>
+<script src="real-photos.js"></script>
+<script src="members.js"></script>
+<script>
+(function () {
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return '&#' + c.charCodeAt(0) + ';'; }); }
+  var rows = '<a class="c-dmrow" href="concierge-chat.html?topic=other">' +
+    '<span class="c-dmrow__logo"><img src="img/logo.svg" alt=""></span>' +
+    '<span class="c-dmrow__main"><span class="c-dmrow__top"><span class="c-dmrow__name">Subic.Life concierge</span></span>' +
+    '<span class="c-dmrow__last">Bookings, tables and requests</span></span></a>';
+  rows += memberChats().map(function (c) {
+    var m = MEMBERS[c.id];
+    return '<a class="c-dmrow' + (c.unread ? ' is-unread' : '') + '" href="message.html?m=' + c.id + '">' +
+      '<img class="c-dmrow__face" src="' + m.avatar + '" alt="">' +
+      '<span class="c-dmrow__main"><span class="c-dmrow__top"><span class="c-dmrow__name">' + esc(m.name) + '</span><span class="c-dmrow__time">' + esc(c.last.t) + '</span></span>' +
+      '<span class="c-dmrow__last">' + (c.last.me ? 'You: ' : '') + esc(c.last.text) + '</span></span>' + (c.unread ? '<span class="c-dmrow__dot" aria-label="Unread"></span>' : '') + '</a>';
+  }).join('');
+  document.querySelector('[data-inbox]').innerHTML = rows;
+})();
+</script>
+</body>
+</html>
