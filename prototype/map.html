@@ -292,6 +292,7 @@
     b.innerHTML =
       '<span class="c-fpin__dot"><span class="material-symbols-outlined" aria-hidden="true"></span></span>' +
       '<span class="c-fpin__badge"></span>' +
+      '<span class="c-fpin__pic" aria-hidden="true"><i class="ph-fill ph-' + ({ hotel: 'bed', restaurant: 'fork-knife', beach_access: 'umbrella-simple', sailing: 'sailboat', forest: 'tree', local_bar: 'martini' }[it.icon] || 'map-pin') + '"></i></span>' +
       '<span class="c-fpin__offer"><span class="material-symbols-outlined" aria-hidden="true"></span><span class="c-fpin__text"></span></span>' +
       '<span class="c-fpin__name" aria-hidden="true"></span>';
     b.querySelector('.c-fpin__dot .material-symbols-outlined').textContent = it.icon;
@@ -327,6 +328,14 @@
     card.querySelector('.c-fcard__link').textContent = it.name;
     card.querySelector('.c-fcard__tag').textContent = it.tag;
     card.querySelector('.c-fcard__offer').textContent = it.offer;
+    // Tag icon before the offer; the line shrinks (12.5px down to 11px) until it fits on one line.
+    var offerEl = card.querySelector('.c-fcard__offer');
+    offerEl.insertAdjacentHTML('afterbegin', '<i class="ph-fill ph-tag" aria-hidden="true"></i>');
+    new ResizeObserver(function () {
+      if (!offerEl.clientWidth) return;
+      var f = 12.5; offerEl.style.fontSize = f + 'px';
+      while (offerEl.scrollWidth > offerEl.clientWidth + 1 && f > 11) { f -= 0.5; offerEl.style.fontSize = f + 'px'; }
+    }).observe(offerEl);
     card.querySelector('.c-fcard__meta').textContent = it.category + ' · ' + it.area + ' · ' + it.dist;
     card.querySelector('.c-fcard__dir').setAttribute('aria-label', 'Directions to ' + it.name);
     track.appendChild(card);

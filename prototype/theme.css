@@ -1037,9 +1037,6 @@ a.c-list-row { text-decoration: none; color: inherit; }
 .phone.theme-elite .c-list-row::after,
 .phone.theme-night .c-list-row::after { background: rgba(255, 255, 255, 0.1); }
 
-/* Card back: the quiet staff-scan link under the QR, light text on the dark back face. */
-.c-mcard__sim { position: relative; z-index: 2; margin-top: 4px; color: rgb(255 255 255 / 0.72); }
-
 /* Pass 8: phone and code entry */
 .c-auth { color: var(--on-wall); }
 .c-auth .c-navbar__back { color: var(--on-wall); }
@@ -2293,11 +2290,6 @@ html .phone.c-bkpage .c-req-bar .c-btn.primary { box-shadow: none; }
   font: 500 11px/14px var(--font); letter-spacing: 0.24em;
   color: rgb(255 255 255 / 0.56);
   text-shadow: 0 -1px 0 rgb(0 0 0 / 0.75), 0 1px 0 rgb(255 255 255 / 0.14);
-}
-.c-cardwhite .c-mcard__sim {
-  position: absolute; left: 0; right: 0; bottom: 16px; margin: 0; text-align: center;
-  font: 400 11px/14px var(--font); color: rgb(255 255 255 / 0.4);
-  text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.2); text-underline-offset: 3px;
 }
 .c-cardwhite .c-ledger .c-list-row__thumb { border-radius: 10px; }
 .c-cardwhite .c-ledger .c-list-row::after { background: rgb(17 18 20 / 0.08); }
@@ -3589,3 +3581,17 @@ html .phone .c-dmsheet__opt.is-red { color: #D92D20; }
 html .phone .c-dmsheet__opt.is-quiet { font-weight: 400; color: #5F6670; }
 html .phone .c-dmsheet__opt.is-row { justify-content: space-between; font-weight: 400; }
 html .phone .c-dmsheet__opt.is-row i { color: #9AA0A8; }
+
+/* welcome-video-fade: hide the video (and Android's grey play-button placeholder) until it plays */
+.c-welcome__video { background: transparent; opacity: 0; transition: opacity .4s ease; }
+.c-welcome__video.is-playing { opacity: 1; }
+
+/* ===== map-pin-icons (2026-11-04) ===== each place is a soft orange circle with a white ring and its category icon. */
+html .phone.c-mapx .c-fpin__badge, html .phone.c-mapx .c-fpin.is-selected .c-fpin__badge, html .phone.c-mapx.is-calm .c-fpin.is-selected .c-fpin__badge { display: none; }
+.c-fpin__pic { display: none; }
+html .phone.c-mapx .c-fpin__pic { display: flex; align-items: center; justify-content: center; width: 25.5px; height: 25.5px; border-radius: 999px; background: #EE7D43; border: 2px solid #FFFFFF; box-shadow: 0 2px 6px rgb(17 18 20 / 0.18); color: #FFFFFF; font-size: 14px; transition: transform 160ms ease; }
+html .phone.c-mapx .c-fpin.is-selected .c-fpin__pic { background: #E8590C; transform: scale(1.25); box-shadow: 0 2px 6px rgb(17 18 20 / 0.18); }
+
+/* ===== map-offer-tag (2026-11-04) ===== price-tag icon before the card offer; one line (map.html shrinks long ones). */
+html .phone.c-mapx .c-fcard__offer { display: flex; align-items: center; gap: 4px; font-size: 12.5px; white-space: nowrap; overflow: hidden; }
+html .phone.c-mapx .c-fcard__offer i { font-size: 13px; flex: none; }
