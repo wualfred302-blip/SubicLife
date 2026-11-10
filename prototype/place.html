@@ -52,18 +52,24 @@
       <div class="u-gutter c-offer-head">
         <h1 class="c-offer-title" data-name>Partner</h1>
         <p class="c-offer-tier" data-meta></p>
-        <div class="c-bigcard__stats c-plfacts" data-facts></div>
       </div>
 
-      <a class="c-pperk" data-deal href="offer.html">
+      <div class="c-pperk" data-deal>
         <span class="c-minicard" aria-hidden="true"></span>
         <span class="c-pperk__text"><span class="c-pperk__title" data-otitle></span><span class="c-pperk__sub" data-osub></span></span>
-        <i class="ph-light ph-caret-right c-pperk__chev" aria-hidden="true"></i>
-      </a>
+      </div>
 
       <section class="c-osec">
         <h2 class="c-section-title">About</h2>
         <p class="c-pabout" data-about></p>
+      </section>
+
+      <section class="c-osec">
+        <h2 class="c-section-title">Hours and location</h2>
+        <a class="c-pmap" data-maplink href="map.html" aria-label="Show this place on the map">
+          <span class="c-mapthumb__live" id="minimap"></span>
+        </a>
+        <div class="c-melist c-plinfo" data-info></div>
       </section>
 
       <section class="c-osec" data-has-sec hidden>
@@ -90,17 +96,9 @@
 
       <section class="c-osec" data-stories-sec hidden>
         <div class="c-plhead"><h2 class="c-section-title">Stories from members</h2><a class="c-cgsec__link" data-stories-all href="place-stories.html" hidden>See all</a></div>
+        <p class="c-plrating" data-rating></p>
         <div class="c-plstories" data-stories></div>
       </section>
-
-      <section class="c-osec">
-        <h2 class="c-section-title">Hours and location</h2>
-        <a class="c-pmap" data-maplink href="map.html" aria-label="Show this place on the map">
-          <span class="c-mapthumb__live" id="minimap"></span>
-        </a>
-        <div class="c-melist c-plinfo" data-info></div>
-      </section>
-
     </div>
 
   </main>
@@ -163,22 +161,11 @@
       $('[data-meta]').insertAdjacentHTML('afterend', '<p class="c-plprice"><b>' + fmtPeso(lr - Math.round(lr * (p.discount || 0) / 100)) + '</b>' +
         '<span> / ' + (p.unit || 'night') + '</span>' + (p.discount ? '<s>' + fmtPeso(lr) + '</s>' : '') + '</p>');
     }
-    // The same three facts as Discover's Popular cards: grey distance and time, an orange star for the rating.
-    var fact = function (icon, tone, value, label) {
-      return '<span class="c-bigcard__stat"><i class="' + icon + ' c-bigcard__icon is-' + tone + '" aria-hidden="true"></i>' +
-        '<span class="c-bigcard__text"><span class="c-bigcard__value">' + value + '</span><span class="c-bigcard__label">' + label + '</span></span></span>';
-    };
-    var checkin = p.unit === 'night' && /(\d+(?::\d\d)? ?[AP]M)/.exec(p.hours || '');
-    $('[data-facts]').innerHTML = fact('ph-light ph-car-simple', 'blue', p.distance, 'Away') + fact('ph-fill ph-star', 'gold', p.rating, 'Rating') +
-      (checkin ? fact('ph-light ph-key', 'indigo', checkin[1], 'Check-in')
-        : fact('ph-light ph-clock-afternoon', 'indigo', p.closes.replace('closes ', ''), 'Closes'));
-
     // The member offer gets its own row under the name; the price waits in the bottom bar beside
     // the action, so each fact shows once.
     var offer = ((window.FEED && FEED.offers) || []).filter(function (o) { return o.place === p.id; })[0];
     var deal = $('[data-deal]');
     if (offer) {
-      deal.href = 'offer.html?id=' + offer.id;
       $('[data-otitle]').textContent = offer.title;
       $('[data-osub]').textContent = 'Prestige perk · ' + (p.unit === 'night' ? 'includes 1 free night' : p.bookable ? 'applied when you book' : p.discount ? 'show your card to pay' : 'with any bill');
     } else {
@@ -550,13 +537,21 @@
       }).join('');
     }
     $('[data-about]').textContent = p.about || '';
+    // What it's famous for, under About: orange icons, one line each (only places that have it).
+    if (p.known) $('[data-about]').insertAdjacentHTML('afterend', '<h3 class="c-plknown__title">Known for</h3><ul class="c-plknown">' +
+      p.known.map(function (k) { return '<li><i class="ph-light ph-' + k[0] + '" aria-hidden="true"></i>' + k[1] + '</li>'; }).join('') + '</ul>');
 
+    var ICON_STAR = '<svg class="c-cstar" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.6l1.95 3.95 4.35.63-3.15 3.07.74 4.33L8 11.53l-3.89 2.05.74-4.33L1.7 6.18l4.35-.63z" fill="#E8590C" stroke="#E8590C" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 1.6l1.95 3.95L8 6.75z" fill="#F5A06A"/></svg>';
     // Stories from members who paid here with the card: a swipe row of cards (newest first), "See all" opening
     // every story for this place as Discover posts. A visit of yours without a story puts the share field on top.
     var stories = FEED.stories.filter(function (s) { return s.place === p.id; });
     var visit = visitsToShare().filter(function (v) { return v.place === p.id; })[0];
     if (stories.length || visit) {
       $('[data-stories-sec]').hidden = false;
+      // The rating comes from these stories, so it is said here in full.
+      $('[data-rating]').innerHTML = p.ratingCount
+        ? '<b>' + ICON_STAR + p.rating + '</b> average from ' + p.ratingCount + ' member ' + (p.ratingCount === 1 ? 'story' : 'stories')
+        : 'No ratings yet. Members rate a place when they share a story.';
       var all = $('[data-stories-all]');
       all.hidden = !stories.length;
       all.href = 'place-stories.html?p=' + p.id;
@@ -591,13 +586,28 @@
     var lead = function (icon) { return '<span class="c-merow__lead"><i class="ph-light ph-' + icon + '" aria-hidden="true"></i></span>'; };
     var chev = '<i class="ph-light ph-caret-right c-merow__chev" aria-hidden="true"></i>';
     var cut = p.address.indexOf(', ');
-    $('[data-info]').innerHTML = p.hours.split(' · ').map(function (h) {
+    // Hours lead with the state, from the phone's clock: "Open now · until 11 PM" or "Closed now · opens 10 AM",
+    // with the full hours underneath. A hotel's check-in and check-out stay as they are.
+    var hoursRow = function (h) {
       h = h.charAt(0).toUpperCase() + h.slice(1);
-      return '<div class="c-merow">' + lead(/^Check-in/.test(h) ? 'sign-in' : /^Check-out/.test(h) ? 'sign-out' : 'clock') +
-        '<span class="c-merow__main">' + h + '</span></div>';
-    }).join('') +
+      if (/^Check-(in|out)/.test(h)) return '<div class="c-merow">' + lead(/^Check-in/.test(h) ? 'sign-in' : 'sign-out') + '<span class="c-merow__main">' + h + '</span></div>';
+      var state = function (open, rest) { return '<span class="c-plstate ' + (open ? 'is-open' : 'is-shut') + '">' + (open ? 'Open now' : 'Closed now') + '</span>' + (rest ? ' · ' + rest : ''); };
+      var main, sub = h.replace(/:00/g, '').replace(/ daily,/, ' every day,').replace(/^Open every day, /, 'Every day, ').replace(/^Open today, /, 'Today, ');
+      var m = /(\d{1,2})(?::(\d\d))? ?([AP]M) to (\d{1,2})(?::(\d\d))? ?([AP]M)/.exec(h);
+      if (/24 hours/.test(h)) main = state(true, '');
+      else if (/^Temporarily closed/.test(h)) { main = '<span class="c-plstate is-shut">Closed for now</span>'; }
+      else if (m) {
+        var mins = function (hh, mm, ap) { return (Number(hh) % 12 + (ap === 'PM' ? 12 : 0)) * 60 + Number(mm || 0); };
+        var short = function (hh, mm, ap) { return hh + (mm && mm !== '00' ? ':' + mm : '') + ' ' + ap; };
+        var o = mins(m[1], m[2], m[3]), cl = mins(m[4], m[5], m[6]), d = new Date(), now = d.getHours() * 60 + d.getMinutes();
+        main = now >= o && now < cl ? state(true, 'until ' + short(m[4], m[5], m[6]))
+          : state(false, 'opens ' + short(m[1], m[2], m[3]) + (now >= cl ? ' tomorrow' : ''));
+      } else return '<div class="c-merow">' + lead('clock') + '<span class="c-merow__main">' + h + '</span></div>';
+      return '<div class="c-merow">' + lead('clock') + '<span class="c-merow__main"><span>' + main + '</span><span class="c-merow__sub">' + sub + '</span></span></div>';
+    };
+    $('[data-info]').innerHTML = p.hours.split(' · ').map(hoursRow).join('') +
       '<a class="c-merow" href="' + mapsUrl(p) + '" target="_blank" rel="noopener" aria-label="Directions to ' + p.address + '">' + lead('map-pin') +
-      '<span class="c-merow__main">' + (cut > 0 ? p.address.slice(0, cut) + '<span class="c-merow__sub">' + p.address.slice(cut + 2) + '</span>' : p.address) + '</span>' + chev + '</a>' +
+      '<span class="c-merow__main">' + (cut > 0 ? p.address.slice(0, cut) : p.address) + '<span class="c-merow__sub">' + p.distance + ' from you' + (cut > 0 ? ' · ' + p.address.slice(cut + 2) : '') + '</span>' + '</span>' + chev + '</a>' +
       '<a class="c-merow" href="tel:' + p.phone.replace(/\s/g, '') + '" aria-label="Call ' + p.name + ', ' + p.phone + '">' + lead('phone') +
       '<span class="c-merow__main">' + p.phone + '</span>' + chev + '</a>';
     $('[data-maplink]').href = 'map.html?p=' + p.id;
@@ -689,36 +699,6 @@
     ['.c-offer-title', '.c-plprice', '.c-plede'].forEach(function (s) { var n = document.querySelector(s); if (n) over.appendChild(n); });
     var tier = document.querySelector('.c-offer-tier'); if (tier) tier.remove(); // user: drop "Hotel · Moonbay Marina"
     hero.appendChild(over);
-    var p = placeFor(queryParam('p') || 'lighthouse');
-    // The facts line reads as a phrase: "closes 5 PM", and "open 24 hours" rather than "24 hours closes".
-    Array.prototype.forEach.call(document.querySelectorAll('.c-plfacts .c-bigcard__stat'), function (s) {
-      var lab = s.querySelector('.c-bigcard__label'), val = s.querySelector('.c-bigcard__value');
-      if (lab && lab.textContent === 'Rating' && /new/i.test(val.textContent)) { lab.remove(); return; } // "★ New", not "★ New rating"
-      if (lab && lab.textContent === 'Rating') {
-        // Ratings come from members' stories: say how many, and open them on tap.
-        lab.textContent = '\u00b7 ' + p.ratingCount + (p.ratingCount === 1 ? ' story' : ' stories');
-        var link = document.createElement('a');
-        link.className = s.className + ' c-plrate'; link.href = 'place-stories.html?p=' + p.id; link.innerHTML = s.innerHTML;
-        s.replaceWith(link);
-        return;
-      }
-      if (!lab || lab.textContent !== 'Closes') return;
-      if (/24 ?h/i.test(val.textContent)) { val.textContent = 'Open 24 hours'; lab.remove(); }
-      else if (/^closed$/i.test(val.textContent.trim())) { val.textContent = 'Temporarily closed'; lab.remove(); } // Teppan 101, moving
-      else {
-        // Hours, not just closing time (user: "I have no clue when it opens"): "Open · 9 AM–5 PM" or "Closed · opens 9 AM", from the phone's clock.
-        var m = /(\d{1,2})(?::(\d\d))? ?([AP]M) to (\d{1,2})(?::(\d\d))? ?([AP]M)/.exec(p.hours || '');
-        if (!m) { s.classList.add('is-lead'); return; }
-        var mins = function (hh, mm, ap) { return (Number(hh) % 12 + (ap === 'PM' ? 12 : 0)) * 60 + Number(mm || 0); };
-        var short = function (hh, mm, ap) { return hh + (mm && mm !== '00' ? ':' + mm : '') + ' ' + ap; };
-        var o = mins(m[1], m[2], m[3]), cl = mins(m[4], m[5], m[6]), d = new Date(), now = d.getHours() * 60 + d.getMinutes();
-        var open = now >= o && now < cl;
-        lab.textContent = open ? 'Open' : 'Closed';
-        lab.classList.add(open ? 'is-open' : 'is-shut');
-        val.textContent = open ? short(m[1], m[2], m[3]) + '–' + short(m[4], m[5], m[6]) : 'opens ' + short(m[1], m[2], m[3]);
-        s.classList.add('is-lead');
-      }
-    });
   })();
   // Restaurant bar, after The Entertainer (user 2026-10-26): the perk is the main action, Reserve the second.
   // "Show my card" becomes "Use 10% off", which opens the card's QR for staff; Reserve keeps its table sheet.
@@ -734,13 +714,14 @@
     var res = card.parentNode.querySelector('[data-action]');
     if (res) res.textContent = 'Reserve';
   })();
-  // Restaurant details (to-do 3): a Menu row and a Good to know list under About, for places that serve food.
+  // Restaurant details (to-do 3): a Menu row and a Good to know list under Hours and location, for places that serve food.
   // SAMPLE: every value below is a placeholder until partners send their menu and details (partner form, not built yet).
   // The Menu shows real menu photos when img/real has them (p.menu, reference only); otherwise SAMPLE page tiles.
   (function () {
     var p = placeFor(queryParam('p') || 'lighthouse');
     if (p.bookable || (p.categories || []).indexOf('food') < 0) return;
-    var about = document.querySelector('[data-about]').closest('.c-osec');
+    // After Hours and location, which sits right under About.
+    var about = document.querySelector('[data-info]').closest('.c-osec');
     var row = function (icon, text) {
       return '<div class="c-merow"><span class="c-merow__lead"><i class="ph-light ph-' + icon + '" aria-hidden="true"></i></span><span class="c-merow__main">' + text + '</span></div>';
     };
@@ -751,15 +732,17 @@
       }) : [1, 2, 3, 4].map(function (n) {
         return '<div class="c-pwmenu__page" role="img" aria-label="Menu page ' + n + ', not added yet"><i class="ph-light ph-book-open-text" aria-hidden="true"></i><span>Page ' + n + '</span></div>';
       })).join('') + '</div></section>' +
-      '<section class="c-osec"><h2 class="c-section-title">Good to know<span class="c-pwsample">SAMPLE</span></h2>' +
+      // A place's own researched list (p.good) replaces the SAMPLE placeholders.
+      '<section class="c-osec"><h2 class="c-section-title">Good to know' + (p.good ? '' : '<span class="c-pwsample">SAMPLE</span>') + '</h2>' +
       '<div class="c-melist c-plhas">' +
+      (p.good ? p.good.map(function (g) { return row(g[0], g[1]); }).join('') : (
       row('fork-knife', p.category) +
       row('currency-circle-dollar', '₱₱ · about ₱600 a person') +
       row('leaf', 'Vegetarian options · vegan on request') +
       row('moon-stars', 'Halal: not certified') +
       row('calendar-check', 'Book ahead on weekends') +
       row('baby', 'Kid-friendly, high chairs') +
-      row('credit-card', 'Cash, cards and GCash') +
+      row('credit-card', 'Cash, cards and GCash'))) +
       '</div></section>');
   })();
   // Photo viewer: full screen inside the phone; swipe, arrows or arrow keys move, X or Esc closes.
@@ -805,6 +788,180 @@
     if (!pages.length) return;
     var open = viewer(pages.map(function (b) { return b.innerHTML; }), 'Menu');
     pages.forEach(function (b, k) { b.addEventListener('click', function () { open(k); }); });
+  })();
+</script>
+<!-- place-v2 patch, generated by .planning/design/place-facts/build-v2.cjs -->
+<style>
+  /* Known for: one column, a small orange square per line, no icons or boxes. */
+  .c-pv2__list { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }
+  .c-pv2__list li { position: relative; padding-left: 16px; font: 400 15px/20px var(--font); color: #111214; }
+  .c-pv2__list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; background: #E8590C; }
+
+  /* Rooms: large photo cards in a swipe row (the photo sells the room), same tap as before. Tickets with photos get the same cards; without photos they stay a list with a rule between each. */
+  .c-pv2--rooms .c-plrooms { display: flex; gap: 12px; margin: 12px -20px 0; padding: 0 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 20px; scrollbar-width: none; }
+  .c-pv2--rooms .c-plrooms::-webkit-scrollbar { display: none; }
+  .c-pv2--rooms .c-plrooms .c-plroom { flex: none; width: 280px; display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0; min-height: 0; scroll-snap-align: start; }
+  .c-pv2--rooms .c-plrooms .c-plroom::before, .c-pv2--rooms .c-plrooms .c-plroom::after { display: none; }
+  .c-pv2--rooms .c-plrooms .c-bkroom__img { width: 100%; height: 210px; border-radius: 0; }
+  .c-pv2--rooms .c-plrooms .c-merow__main { padding: 12px 0 0; }
+  .c-pv2--rooms .c-plrooms .c-merow__chev { display: none; }
+  .c-pv2--rooms .c-plrooms .c-bkroom__name { font: 600 17px/22px var(--font); letter-spacing: -0.01em; }
+  .c-pv2--rooms .c-plrooms .c-merow__sub { margin-top: 2px; font: 400 14px/20px var(--font); }
+  .c-pv2--rooms .c-plrooms .c-bkroom__price { margin-top: 6px; font: 600 16px/22px var(--font); }
+
+  /* Card price like Discover: the offer is an orange tag on the photo's bottom-left corner; the price is plain ink, no green, no crossed-out price. */
+  .c-pv2--rooms .c-plrooms .c-plroom { position: relative; }
+  .c-pv2__tag { position: absolute; top: 182px; left: 0; padding: 6px 10px; background: #E8590C; color: #FFFFFF; font: 600 12px/16px var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
+  .c-pv2--rooms .c-plrooms .c-bkroom__price, .c-pv2--rooms .c-plrooms .c-bkroom__price * { color: #111214; }
+  .c-pv2--rooms .c-plrooms .c-bkroom__price s { display: none; }
+  .c-pv2--rooms .c-plrooms .c-plroom__unit { color: #5F6670; font-weight: 400; }
+  /* Every card (rooms and tickets) ends with one row: the price on the left, an orange View button on the right. */
+  .c-pv2__act { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 10px; }
+  /* Cards in a row line up: a two-line description pushes nothing, the price row sits at the bottom of every card. */
+  .c-pv2--rooms .c-plrooms .c-merow__main { flex: 1; display: flex; flex-direction: column; }
+  .c-pv2--rooms .c-plrooms .c-pv2__act .c-bkroom__price { margin-top: 0; white-space: nowrap; font-size: 15px; }
+  .c-pv2__view { flex: none; padding: 8px 16px; background: #E8590C; color: #FFFFFF; font: 600 14px/18px var(--font); }
+  /* Adult and child prices: same "price / unit" form as every card, split by a thin rule instead of a dot. */
+  .c-pv2__sep { display: inline-block; width: 1px; height: 14px; margin: 0 8px; background: #D9DCE0; vertical-align: -2px; }
+
+  /* Ticket sheet: opens on the card's own photo, tag and price, then one short list, so the calendar sits near the top. */
+  .c-pv2__shero { position: relative; margin: 0 0 14px; }
+  .c-pv2__shero img { display: block; width: 100%; height: 200px; object-fit: cover; }
+  .c-pv2__shero .c-pv2__tag { top: 172px; }
+  .c-pv2__shead { padding: 0 20px; margin: 0 0 8px; }
+  .c-pv2__shead h2 { margin: 0; font: 600 22px/28px var(--font); letter-spacing: -0.01em; color: #111214; }
+  .c-pv2__shead .c-bkroom__price { display: block; margin: 2px 0 0; font: 600 15px/20px var(--font); color: #111214; }
+  .c-pv2__shead .c-bkroom__price * { color: inherit; }
+  .c-pv2__shead .c-plroom__unit { color: #5F6670; font-weight: 400; }
+  .c-pv2__shead s { display: none; }
+  .c-pv2__sheet .c-merow__main { font-size: 15px; }
+  /* Room sheet: same as the ticket sheet. Photo edge to edge with the tag, name, price, one grey line of room facts, one list. */
+  .c-pv2__rsheet .c-rmgal, .c-pv2__rsheet .c-rmsheet__img { position: relative; margin: 0 0 14px; border-radius: 0; }
+  .c-pv2__rsheet .c-rmgal__track img, .c-pv2__rsheet .c-rmsheet__img { height: 200px; }
+  .c-pv2__rsheet .c-rmgal .c-pv2__tag { top: 172px; z-index: 1; }
+  .c-pv2__rfacts { margin: 6px 0 0; font: 400 14px/20px var(--font); color: #5F6670; }
+  /* Reserve sheet: same photo-led top, the place's own first photo with its offer tag. */
+  .c-pv2__tsheet .c-pv2__shero { margin: 0 0 14px; }
+
+  /* Check-in and check-out are one fact: one row, two halves. */
+  .c-pv2__inout { display: grid; grid-template-columns: 1fr 1fr; padding: 14px 0; }
+  .c-pv2__inout > span { display: flex; align-items: center; gap: 12px; font: 400 16px/22px var(--font); color: #111214; }
+  .c-pv2__inout > span + span { padding-left: 16px; border-left: 1px solid #ECEDEF; }
+  .c-pv2__inout i { font-size: 24px; }
+  .c-pv2__inout small { display: block; font: 400 13px/18px var(--font); color: #5F6670; }
+
+  /* Share box: square and grey like the Me tiles, not a rounded pill. */
+  .c-pv2 .c-dcompose__field { border: 0; border-radius: 0; background: #F2F3F5; }
+</style>
+<script>
+  (function () {
+    var p = placeFor(queryParam('p') || 'lighthouse');
+    var phone = document.querySelector('.phone');
+    phone.classList.add('c-pv2');
+    // Tickets become the same photo cards as rooms when every ticket has a photo.
+    var TIX = {"ocean":["ocean-02","ocean-10","ocean-06","ocean-03","ocean-04"],"zoobic":["zoobic-05","zoobic-09"],"sailing":["sailing-08","sailing-02"],"networx":["networx-07","networx-08"],"labanca":["labanca-06","labanca-07","labanca-03","labanca-05","labanca-08","labanca-01"]}, tix = document.querySelectorAll('.c-pltix'), shots = TIX[p.id];
+    if (tix.length && shots && shots.length === tix.length) tix.forEach(function (b, i) {
+      b.insertAdjacentHTML('afterbegin', '<img class="c-bkroom__img" src="img/real/' + p.id + '/' + shots[i] + '.jpg" alt="">');
+    });
+    if (!tix.length || (shots && shots.length === tix.length)) phone.classList.add('c-pv2--rooms');
+    var esc = function (t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+    var list = document.querySelector('.c-plknown');
+    if (list && p.known) list.outerHTML = '<ul class="c-pv2__list">' + p.known.map(function (k) { return '<li>' + esc(k[1]) + '</li>'; }).join('') + '</ul>';
+    // Check-in and check-out on one row.
+    var rows = document.querySelectorAll('[data-info] > .c-merow');
+    if (rows.length > 1 && /Check-in/.test(rows[0].textContent) && /Check-out/.test(rows[1].textContent)) {
+      var half = function (icon, label, text) { return '<span><i class="ph-light ph-' + icon + '" aria-hidden="true"></i><span><small>' + label + '</small>' + text + '</span></span>'; };
+      rows[0].outerHTML = '<div class="c-pv2__inout">' + half('sign-in', 'Check-in', rows[0].textContent.trim().replace(/^Check-in f/, 'F')) +
+        half('sign-out', 'Check-out', rows[1].textContent.trim().replace(/^Check-out b/, 'B')) + '</div>';
+      rows[1].remove();
+    }
+    // "₱807 adult · ₱646 child" becomes "₱807 / adult | ₱646 / child".
+    document.querySelectorAll('.c-plrooms .c-bkroom__price').forEach(function (el) {
+      el.innerHTML = el.innerHTML.replace('<span class="c-plroom__unit"> adult · </span>', '<span class="c-plroom__unit"> / adult</span><span class="c-pv2__sep" aria-hidden="true"></span>')
+        .replace('<span class="c-plroom__unit"> child</span>', '<span class="c-plroom__unit"> / child</span>');
+    });
+    // Each card ends with the price and a View button on one row (a span: the whole card is already the button).
+    if (phone.classList.contains('c-pv2--rooms')) document.querySelectorAll('.c-plrooms .c-plroom .c-bkroom__price').forEach(function (pr) {
+      var act = document.createElement('span');
+      act.className = 'c-pv2__act';
+      pr.parentNode.insertBefore(act, pr);
+      act.appendChild(pr);
+      act.insertAdjacentHTML('beforeend', '<span class="c-pv2__view">View</span>');
+    });
+    // Each time the ticket sheet draws, lead with the tapped card's photo, tag and price; drop the subtitle, the facts
+    // line and the two list headings so Includes and Good to know read as one short list.
+    var sbody = document.querySelector('[data-tixbody]');
+    if (sbody) new MutationObserver(function () {
+      if (sbody.querySelector('.c-pv2__shero')) return;
+      var title = sbody.querySelector('.c-bksheet__title');
+      if (!title) return;
+      var card = [].find.call(document.querySelectorAll('.c-plrooms .c-pltix'), function (c) {
+        var n = c.querySelector('.c-bkroom__name');
+        return n && n.textContent === title.textContent;
+      });
+      var img = card && card.querySelector('.c-bkroom__img');
+      if (!img) return;
+      var tag = card.querySelector('.c-pv2__tag'), price = card.querySelector('.c-bkroom__price');
+      var head = sbody.querySelector('.c-bksheet__head');
+      head.outerHTML = '<div class="c-pv2__shero"><img src="' + img.getAttribute('src') + '" alt="">' + (tag ? tag.outerHTML : '') + '</div>' +
+        '<div class="c-pv2__shead"><h2 class="c-bksheet__title" id="tix-title">' + esc(title.textContent) + '</h2>' + (price ? price.outerHTML : '') + '</div>';
+      var facts = sbody.querySelector('.c-tixfacts');
+      if (facts) facts.remove();
+      var heads = [].filter.call(sbody.querySelectorAll('.c-mehead'), function (h) { return /^(Includes|Good to know)$/.test(h.textContent); });
+      var lists = heads.map(function (h) { return h.nextElementSibling; });
+      heads.forEach(function (h) { h.remove(); });
+      if (lists.length > 1) [].slice.call(lists[1].children).forEach(function (r) { lists[0].appendChild(r); }), lists[1].remove();
+      sbody.closest('.c-sheet').classList.add('c-pv2__sheet');
+    }).observe(sbody, { childList: true });
+    // Same for the room sheet: tag on the photo, name + card price, the room facts as one grey line, no hotel name, no list heading.
+    var rbody = document.querySelector('[data-roombody]');
+    if (rbody) new MutationObserver(function () {
+      if (rbody.querySelector('.c-pv2__shead')) return;
+      var title = rbody.querySelector('.c-bksheet__title');
+      if (!title) return;
+      var card = [].find.call(document.querySelectorAll('.c-plrooms .c-plroom'), function (c) {
+        var n = c.querySelector('.c-bkroom__name');
+        return n && n.textContent === title.textContent;
+      });
+      var price = card && card.querySelector('.c-bkroom__price');
+      var gal = rbody.querySelector('.c-rmgal');
+      if (gal && p.offerShort) gal.insertAdjacentHTML('beforeend', '<span class="c-pv2__tag">' + esc(p.offerShort) + '</span>');
+      var facts = rbody.querySelector('.c-tixfacts');
+      var line = facts ? [].map.call(facts.querySelectorAll('li'), function (li) { return li.textContent.trim(); }).join(' · ') : '';
+      if (facts) facts.remove();
+      rbody.querySelector('.c-bksheet__head').outerHTML = '<div class="c-pv2__shead"><h2 class="c-bksheet__title" id="room-title" tabindex="-1">' + esc(title.textContent) + '</h2>' +
+        (price ? price.outerHTML : '') + (line ? '<p class="c-pv2__rfacts">' + esc(line) + '</p>' : '') + '</div>';
+      [].forEach.call(rbody.querySelectorAll('.c-mehead'), function (h) { if (h.textContent === 'In every room') h.remove(); });
+      rbody.closest('.c-sheet').classList.add('c-pv2__sheet', 'c-pv2__rsheet');
+    }).observe(rbody, { childList: true });
+    // Reserve a table: lead with the place's first photo and offer tag, then the place name and "Reserve a table · area".
+    var tbody = document.querySelector('[data-tblbody]');
+    if (tbody) new MutationObserver(function () {
+      if (tbody.querySelector('.c-pv2__shero')) return;
+      var head = tbody.querySelector('.c-bksheet__head');
+      if (!head) return;
+      var real = window.REAL && window.REAL[p.id], src = (real && real.photos && real.photos[0]) || p.hero;
+      var sub = head.querySelector('.c-bksheet__sub');
+      var area = sub ? sub.textContent.split(' · ').slice(1).join(' · ') : '';
+      head.outerHTML = '<div class="c-pv2__shero"><img src="' + src + '" alt="">' + (p.offerShort ? '<span class="c-pv2__tag">' + esc(p.offerShort) + '</span>' : '') + '</div>' +
+        '<div class="c-pv2__shead"><h2 class="c-bksheet__title" id="tbl-title">' + esc(p.name) + '</h2><p class="c-pv2__rfacts">Reserve a table' + (area ? ' · ' + esc(area) : '') + '</p></div>';
+      tbody.closest('.c-sheet').classList.add('c-pv2__sheet', 'c-pv2__tsheet');
+    }).observe(tbody, { childList: true });
+    // Reserve bar: when the big line on the left says the same as the button ("Pick a day" twice), show the party size there instead.
+    var tfoot = tbody && tbody.closest('.c-sheet').querySelector('.c-bksheet__foot');
+    if (tfoot) {
+      var fixFoot = function () {
+        var btn = tfoot.querySelector('.c-btn'), left = tfoot.querySelector('.c-bkbar__sum');
+        var big = left && left.firstElementChild, small = big && big.nextElementSibling;
+        if (!btn || !big || big === btn || !small) return;
+        if (big.textContent.trim() === btn.textContent.trim() && big.textContent !== small.textContent) { big.textContent = small.textContent; small.textContent = ''; }
+      };
+      new MutationObserver(fixFoot).observe(tfoot, { childList: true, subtree: true, characterData: true });
+    }
+    // The member offer as an orange tag on each card photo, same as the Discover cards.
+    if (p.offerShort && phone.classList.contains('c-pv2--rooms')) document.querySelectorAll('.c-plrooms .c-plroom').forEach(function (c) {
+      if (c.querySelector('.c-bkroom__img')) c.insertAdjacentHTML('beforeend', '<span class="c-pv2__tag">' + esc(p.offerShort) + '</span>');
+    });
   })();
 </script>
 </body>

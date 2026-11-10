@@ -9,9 +9,9 @@
     you: { lat: 14.8215, lng: 120.2790 },    // fake "you are here", beside Harbor Point
     places: [
       { id: 'lighthouse', partner: true, lat: 14.8208, lng: 120.2745, cats: ['hotels'] },        // Lighthouse Marina Resort, Moonbay
-      { id: 'meatplus', partner: true, lat: 14.8235, lng: 120.2830, cats: ['food'] },            // Harbor Point
+      { id: 'meatplus', partner: true, lat: 14.8181, lng: 120.2837, cats: ['food'] },            // 65 Sampson Rd (Plus Code R79M+6F)
       { id: 'ramas', partner: true, lat: 14.8195, lng: 120.2800, cats: ['food'] },               // Waterfront Rd
-      { id: 'yacht', partner: true, lat: 14.8214, lng: 120.2754, cats: ['food', 'water-sports'] }, // Subic Bay Yacht Club
+      { id: 'yacht', partner: true, lat: 14.8236, lng: 120.2873, cats: ['food', 'water-sports'] }, // Subic Bay Yacht Club
       { id: 'camayan', partner: true, lat: 14.7729, lng: 120.2285, cats: ['hotels', 'beaches'] }, // Camayan Beach
       { id: 'ocean', partner: true, lat: 14.7739, lng: 120.2295, cats: ['water-sports'] },       // Ocean Adventure, Camayan Wharf
       { id: 'sailing', partner: true, lat: 14.8214, lng: 120.2719, cats: ['water-sports'] },     // Subic Sailing, Lighthouse Marina

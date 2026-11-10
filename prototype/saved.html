@@ -40,15 +40,15 @@
   </div>
 
   <main class="screen-scroll">
-    <div class="c-chiprow" role="tablist" aria-label="Saved type">
-      <button class="c-chip is-selected" type="button" role="tab" aria-selected="true" data-seg="place">Places<span class="c-chip__n" data-n="place"></span></button>
-      <button class="c-chip" type="button" role="tab" aria-selected="false" data-seg="offer">Offers<span class="c-chip__n" data-n="offer"></span></button>
-    </div>
+    <div class="c-dtabbar"><div class="c-dtabs" role="tablist" aria-label="Saved type">
+      <button class="c-dtabs__tab" type="button" role="tab" aria-selected="true" data-seg="place">Places<span class="c-dtabs__n" data-n="place"></span></button>
+      <button class="c-dtabs__tab" type="button" role="tab" aria-selected="false" data-seg="offer">Offers<span class="c-dtabs__n" data-n="offer"></span></button>
+    </div></div>
     <div class="c-svgrid" data-grid></div>
     <div class="c-svempty" data-empty hidden>
       <i class="ph-thin ph-heart" aria-hidden="true"></i>
       <p class="c-svempty__title" data-empty-title></p>
-      <p class="c-svempty__text">Tap the bookmark on a place or an offer and it shows up here.</p>
+      <p class="c-svempty__text">Tap the heart on a place or an offer to keep it here.</p>
       <a class="c-svempty__link" href="explore.html">Go to Discover</a>
     </div>
   </main>
@@ -56,9 +56,9 @@
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
     <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
     <a class="c-tabbar__tab" href="explore.html"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
-    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
-    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
-    <a class="c-tabbar__tab is-active" href="me.html" aria-current="page"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
+    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-identification-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle-dots c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab is-active" href="me.html" aria-current="page"><i class="ph-thin ph-user c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 
@@ -82,12 +82,7 @@
         return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
       });
     }
-    function peso(n) { return '₱' + n.toLocaleString('en-US'); }
-    function fromPrice(place) {
-      var rooms = place.rooms || [];
-      var low = rooms.reduce(function (m, r) { return r.rate < m.rate ? r : m; }, rooms[0] || { rate: place.rackPrice });
-      return Math.round(low.rate * (100 - place.discount) / 100);
-    }
+    var ICON_STAR = '<svg class="c-cstar" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.6l1.95 3.95 4.35.63-3.15 3.07.74 4.33L8 11.53l-3.89 2.05.74-4.33L1.7 6.18l4.35-.63z" fill="#E8590C" stroke="#E8590C" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 1.6l1.95 3.95L8 6.75z" fill="#F5A06A"/></svg>';
     function mark(k, id, name) {
       return '<button class="c-savebtn is-on" type="button" aria-pressed="true" aria-label="Remove ' + esc(name) + ' from Saved" data-kind="' + k + '" data-id="' + id + '">' +
         '<i class="ph-fill ph-heart c-savebtn__fill" aria-hidden="true"></i><i class="ph ph-heart c-savebtn__line" aria-hidden="true"></i></button>';
@@ -95,14 +90,14 @@
     function placeCard(id) {
       var p = PLACES[id];
       if (!p) return '';
-      // Price only for stays and tours (as on Discover); restaurants show the rating alone.
-      var price = p.bookable && p.rackPrice ? '<b>' + peso(fromPrice(p)) + '</b> ' + p.unit + ' · ' : '';
+      // Same text as the Discover cards: name, type in grey, rating on the right. No price or distance (2026-11-09).
+      var type = p.category.charAt(0) + p.category.slice(1).toLowerCase();
       return '<div class="c-lcard">' +
         '<a class="c-lcard__link" href="place.html?p=' + id + '">' +
-        '<span class="c-lcard__photo"><img src="' + p.thumb + '" alt=""><span class="c-xbadge">' + esc(p.offerShort) + '</span></span>' +
-        '<span class="c-lcard__name">' + esc(p.name) + '</span>' +
-        '<span class="c-lcard__meta">' + esc(p.category) + ' · ' + esc(p.distance) + '</span>' +
-        '<span class="c-lcard__meta">' + price + '<i class="ph-fill ph-star c-star" aria-hidden="true"></i> ' + esc(p.rating) + '</span>' +
+        '<span class="c-lcard__photo"><img src="' + p.thumb + '" alt=""><span class="c-lcard__perk">' + esc(p.offerShort) + '</span></span>' +
+        '<span class="c-ctext"><span class="c-ctext__title"><span class="c-lcard__name">' + esc(p.name) + '</span></span>' +
+        '<span class="c-lcard__meta">' + esc(type) + '</span>' +
+        '<span class="c-crating">' + ICON_STAR + '<span class="u-sr-only">Rated </span>' + esc(p.rating) + '</span></span>' +
         '</a>' + mark('place', id, p.name) + '</div>';
     }
     function offerCard(id) {
@@ -110,11 +105,11 @@
       if (!o) return '';
       var p = PLACES[o.place];
       return '<div class="c-lcard">' +
-        '<a class="c-lcard__link" href="offer.html?id=' + id + '">' +
-        '<span class="c-lcard__photo"><img src="' + o.photo + '" alt=""><span class="c-xbadge">' + esc(p.offerShort) + '</span></span>' +
-        '<span class="c-lcard__name">' + esc(o.title) + '</span>' +
-        '<span class="c-lcard__meta">' + esc(p.name) + '</span>' +
-        '<span class="c-lcard__meta">Until ' + esc(o.valid) + '</span>' +
+        '<a class="c-lcard__link" href="place.html?p=' + o.place + '">' +
+        '<span class="c-lcard__photo"><img src="' + o.photo + '" alt=""><span class="c-lcard__perk">' + esc(o.title) + '</span></span>' +
+        // Same layout as the place cards: the offer as the orange tag, then the place's name and how long it runs.
+        '<span class="c-ctext"><span class="c-ctext__title"><span class="c-lcard__name">' + esc(p.name) + '</span></span>' +
+        '<span class="c-lcard__meta">Until ' + esc(o.valid) + '</span></span>' +
         '</a>' + mark('offer', id, o.title) + '</div>';
     }
 
@@ -134,7 +129,6 @@
         kind = chip.getAttribute('data-seg');
         chips.forEach(function (c) {
           var on = c === chip;
-          c.classList.toggle('is-selected', on);
           c.setAttribute('aria-selected', on ? 'true' : 'false');
         });
         render();

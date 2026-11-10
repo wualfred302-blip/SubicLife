@@ -1,5 +1,5 @@
 // data-e.js - Explore feed records for Agent E: events, member stories, member offers and the popular list.
-// Read by explore.html, post.html and offer.html. Places are keys from data-a.js (PLACES). Photos are the
+// Read by explore.html, post.html, place.html and saved.html. Places are keys from data-a.js (PLACES). Photos are the
 // img/ set already in the project. Names, times, prices and comments are placeholder demo values.
 // cats are the feed filter tags (hotels, food, beaches, water-sports, nature, nightlife).
 (function () {
@@ -61,8 +61,8 @@
     {
       id: 'meatplus-steak', kind: 'story', author: 'Bea Lim', initials: 'BL', avatar: 'img/avatar-bea.jpg', ago: '5h', visited: 'Today',
       place: 'meatplus', cats: ['food'], commentCount: 9,
-      photos: ['img/hist-lighthouse-sep.jpg', 'img/hist-meat-plus.jpg'],
-      caption: 'Window table just as the boats came in. Book ahead on weekends, the terrace fills up fast.',
+      photos: ['img/hist-meat-plus.jpg', 'img/thumb-meat-plus.jpg'], real: ['img/real/meatplus/meatplus-03.jpg', 'img/real/meatplus/meatplus-05.jpg'],
+      caption: 'Picked my rib-eye straight from the freezer and watched it go on the grill. Get there before 7, the line builds fast.',
       likes: 132,
       comments: [
         { who: 'Paolo Cruz', initials: 'PC', avatar: 'img/avatar-paolo.jpg', ago: '3h', text: 'Which steak did you get?' }
@@ -227,8 +227,8 @@
     {
       id: 'meatplus-burger', kind: 'story', author: 'Jen Santos', initials: 'JS', avatar: 'img/avatar-jen.jpg', ago: '4d', visited: 'Oct 9',
       place: 'meatplus', cats: ['food'], commentCount: 2,
-      photos: ['img/thumb-meat-plus.jpg', 'img/hist-meat-plus.jpg'],
-      caption: 'Big portions. One grill plate fed both kids, and they had crayons at the table.',
+      photos: ['img/thumb-meat-plus.jpg', 'img/hist-meat-plus.jpg'], real: ['img/real/meatplus/meatplus-04.jpg', 'img/real/meatplus/meatplus-01.jpg'],
+      caption: 'Burgers with grilled onion and fries for the kids, rib-eye for us. Big car park out front, easy in and out.',
       likes: 58,
       comments: []
     },
@@ -655,7 +655,7 @@
     return hues[n % hues.length];
   };
 
-  // Look up an event or story by id (post.html), or an offer by id (offer.html).
+  // Look up an event or story by id (post.html), or an offer by id (saved.html).
   window.storyFor = function (id) {
     var all = EVENTS.concat(window.myStories(), STORIES);
     for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i];

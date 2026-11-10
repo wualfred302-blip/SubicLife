@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap");
+/* Figtree has no ₱: Manrope draws just that sign (text= subset), so prices don't fall back to Arial. */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&text=%E2%82%B1&display=swap");
 /* theme.css - the Subic.Life look. Loaded after shell.css on every page.
    One family (Figtree, heavy for titles), a soft bay-at-golden-hour backdrop behind every screen,
    content on white tiles, secondary actions on frosted glass, a floating glass tab bar. */
 
 :root {
-  --font: "Figtree", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --font: "Figtree", "Manrope", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --font-display: "Figtree", -apple-system, sans-serif;
   --text: #121212;
   --text-2: #5F6670;
@@ -1546,6 +1548,8 @@ html .phone.c-discover .c-lcard .c-xbadge {
   padding: 12px 0; border-bottom: 1px solid rgb(17 18 20 / 0.08);
 }
 .c-bigcard__title { display: flex; flex-direction: column; min-width: 0; }
+/* Discover: name and two grey lines, no divider. */
+.c-discover .c-bigcard__head { padding-bottom: 0; border-bottom: 0; }
 .c-bigcard__name { font: 600 17px/22px var(--font); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .c-bigcard__meta { font: 400 15px/20px var(--font); color: #5F6670; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .c-bigcard__offer {
@@ -1566,7 +1570,7 @@ html .phone.c-discover .c-lcard .c-xbadge {
 /* ===== Listing cards: colour (2026-10-17) =====
    Green = the member deal (prices and offers), gold = ratings. The three facts on large cards get coloured
    icon squares, the same as the settings rows on Me. */
-.c-lcard__meta b { color: #15803D; }
+.c-lcard__meta b, .c-bigcard__meta b { font-weight: 600; color: #15803D; }
 .c-star { color: #E3A008; }
 html .phone.c-discover .c-lcard .c-xbadge { color: #15803D; }
 .c-bigcard__offer { color: #15803D; }
@@ -1870,10 +1874,7 @@ html .phone.c-mapx .c-chip.is-selected { border-color: #111214; background: #111
 .c-dhead--push .c-dhead__title { flex: 1; text-align: center; }
 .c-dhead__spacer { width: 40px; }
 
-/* Saved: chips for Places / Offers with a count, then listing cards two to a row. */
-.c-savedpage .c-chiprow { padding-top: 16px; padding-bottom: 4px; margin-bottom: 0; }
-.c-chip__n { margin-left: 6px; font-weight: 400; color: #5F6670; }
-.c-chip.is-selected .c-chip__n { color: rgb(255 255 255 / 0.7); }
+/* Saved: Discover-style tabs for Places / Offers with a count, then listing cards two to a row. */
 .c-svgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; padding: 16px 20px 24px; }
 .c-svgrid .c-lcard { flex: none; width: auto; min-width: 0; }
 .c-svgrid[hidden], .c-svempty[hidden] { display: none; }
@@ -2588,9 +2589,7 @@ html.is-device .phone.c-mapx .c-map-controls { top: calc(env(safe-area-inset-top
    room prices, the price in the bar), gold = the rating, and the same three facts with coloured icons as the
    Popular cards (Away, Rating, Closes). Stories are the same posts as Discover → Stories, with the same share field
    when you have a visit to share. Room prices on Book turn green too, so the two pages match. */
-.c-plfacts { margin-top: 16px; padding: 14px 0; border-top: 1px solid rgb(17 18 20 / 0.08); }
-.c-plfacts .c-bigcard__value { color: #111214; }
-.c-offerwhite .c-plfacts + .c-pperk, .c-offerwhite .c-offer-head + .c-pperk { margin-top: 0; }
+.c-offerwhite .c-offer-head + .c-pperk { margin-top: 0; }
 .c-offerwhite .c-pperk__title { font: 600 16px/22px var(--font); color: #15803D; }
 .c-bkroom__price { color: #15803D; }
 .c-bkroom__price s, .c-plroom__unit { color: #5F6670; }
@@ -2836,12 +2835,12 @@ button.c-bkchange { padding: 0; border: 0; background: none; cursor: pointer; }
 .phone.theme-night.c-welcome .c-btn.plain { margin-top: 0; height: 44px; min-height: 44px; }
 /* welcome-video caps title (2026-10-21): same font as the line under it, spaced capitals */
 .phone.theme-night.c-welcome .c-welcome__place { font-weight: 600; font-size: 24px; letter-spacing: 0.24em; text-transform: uppercase; line-height: 1.1; }
-/* welcome-video buttons (2026-10-21): white Get started, plain white text for I have an account */
+/* welcome-video buttons (2026-10-21; orange 2026-11-08): orange Get started, plain white text for I have an account */
 .phone.theme-night.c-welcome .c-welcome__wash {
   background: radial-gradient(ellipse 70% 22% at 50% 34%, rgb(17 18 20 / 0.28), rgb(17 18 20 / 0) 100%),
     linear-gradient(180deg, rgb(17 18 20 / 0.25) 0%, rgb(17 18 20 / 0) 30%, rgb(17 18 20 / 0) 50%, rgb(17 18 20 / 0.68) 100%);
 }
-.phone.theme-night.c-welcome .c-btn.primary { background: #FFFFFF; color: #111214; box-shadow: none; }
+.phone.theme-night.c-welcome .c-btn.primary { background: #E8590C; color: #FFFFFF; box-shadow: none; }
 .phone.theme-night.c-welcome .c-btn.plain { background: none; color: #FFFFFF; border: 0; font-weight: 600; text-shadow: 0 1px 8px rgb(0 0 0 / 0.45); }
 
 /* join-white (2026-10-21): Join Subic.Life on the white standard */
@@ -2940,15 +2939,14 @@ button.c-bkchange { padding: 0; border: 0; background: none; cursor: pointer; }
 .phone.c-cr .screen-scroll { padding-bottom: 120px; }
 .phone.c-cr .c-auth__head { padding-bottom: 0; }
 .c-cr__stage { display: flex; flex-direction: column; align-items: center; padding: 28px 20px 0; }
-.c-cr .c-mcard.is-portrait { width: 200px; height: 317px; max-width: none; margin: 0; box-shadow: 0 22px 32px -20px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(17 18 20 / 0.06);
+.c-cr .c-mcard.is-portrait { width: 200px; height: 317px; max-width: none; margin: 0; box-shadow: none;
   animation: c-cr-in 1.1s cubic-bezier(.2, .7, .2, 1) .15s both; }
 @keyframes c-cr-in { from { opacity: 0; transform: translateY(28px) scale(.96); } to { opacity: 1; transform: none; } }
-.c-cr__hint { margin-top: 14px; font: 400 13px/18px var(--font); color: #5F6670; animation: c-cr-fade .8s ease-out 1s both; }
 @keyframes c-cr-fade { from { opacity: 0; } to { opacity: 1; } }
 .c-cr__foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; padding: 12px 20px 34px; background: #FFFFFF; }
 .c-cr__actions { margin: 24px 20px 0; animation: c-cr-fade .8s ease-out 1.1s both; }
 .c-cr--c .c-mehead, .c-cr__list { animation: c-cr-fade .8s ease-out 1.1s both; }
-@media (prefers-reduced-motion: reduce) { .c-cr .c-mcard.is-portrait, .c-cr__hint, .c-cr__actions, .c-cr--c .c-mehead, .c-cr__list { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .c-cr .c-mcard.is-portrait, .c-cr__actions, .c-cr--c .c-mehead, .c-cr__list { animation: none; } }
 
 /* signin-white (2026-10-22): the quiet second action under the white auth pill */
 .phone.c-auth--white .c-auth__alt { display: block; margin-top: 14px; padding: 10px 0; text-align: center; font: 600 15px/20px var(--font); color: #111214; text-decoration: none; }
@@ -2988,18 +2986,20 @@ button.c-bkchange { padding: 0; border: 0; background: none; cursor: pointer; }
 /* Discover head (2026-10-25): search, Saved, Concierge on top; category photos; tabs that stick. */
 html .phone.c-discover .c-dhead { height: 64px; align-items: flex-end; padding-bottom: 6px !important; gap: 4px; padding: 0 8px 0 16px; border-bottom: 0; }
 .phone:has(> .c-dhead) .screen-scroll { margin-top: 64px; }
-.c-dsearch { flex: 1; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 12px; background: #F1F2F4; }
+.c-dsearch { flex: 1; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 0; background: #F1F2F4; }
 .c-dsearch i { font-size: 20px; color: #5F6670; }
 .c-dsearch input { flex: 1; min-width: 0; border: 0; background: none; outline: none; font: 400 16px/20px var(--font); color: #111214; }
 .c-dsearch input::placeholder { color: #8A9099; }
 .c-dicon { display: grid; place-items: center; width: 44px; height: 44px; color: #111214; font-size: 26px; text-decoration: none; }
 .c-dcats { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; padding: 8px 16px 6px; scroll-snap-type: x proximity; scroll-padding-inline: 16px; }
 .c-dcats::-webkit-scrollbar { display: none; }
-.c-dcat { flex: 0 0 84px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0; border: 0; background: none; cursor: pointer; scroll-snap-align: start; }
-.c-dcat__img { width: 84px; height: 84px; border-radius: 24px; object-fit: cover; display: block; box-shadow: 0 0 0 2px transparent; transition: box-shadow .2s; }
-.c-dcat__label { font: 400 13px/16px var(--font); color: #111214; text-align: center; }
-.c-dcat.is-selected .c-dcat__img { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #111214; }
-.c-dcat.is-selected .c-dcat__label { font-weight: 600; }
+.c-dcat { flex: 0 0 auto; min-width: 72px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0; border: 0; background: none; cursor: pointer; scroll-snap-align: start; }
+/* Category icon: a Carousell-like flat illustration (several colours, pastel blob); the selected one grows 8% and its label turns bold orange, like the selected tab. */
+.c-dcat__disc { width: 68px; height: 68px; display: block; transition: transform .2s; }
+.c-dcat__disc svg { display: block; width: 100%; height: 100%; }
+.c-dcat.is-selected .c-dcat__disc { transform: scale(1.08); }
+.c-dcat__label { font: 400 13px/16px var(--font); color: #111214; text-align: center; white-space: nowrap; }
+.c-dcat.is-selected .c-dcat__label { font-weight: 600; color: #E8590C; }
 .c-dtabbar { position: sticky; top: 0; z-index: 5; display: flex; height: 44px; padding: 0 20px; background: #FFFFFF; border-bottom: 1px solid rgb(17 18 20 / 0.08); }
 .c-dtabbar .c-dtabs { align-items: stretch; }
 .c-discover #panel-places > section:first-of-type .c-section-head { margin-top: 16px; }
@@ -3010,26 +3010,26 @@ html .phone.c-discover .c-dhead { height: 64px; align-items: flex-end; padding-b
 .c-lcard__perk { display: flex; align-items: center; gap: 6px; margin-top: 2px; font: 600 13px/18px var(--font); color: #15803D; }
 .c-lcard__perk .c-perkmark { width: 9px; height: 13px; border-radius: 2px; }
 html .phone.c-discover .c-savebtn { top: 0; right: 0; width: 44px; height: 44px; }
-html .phone.c-discover .c-savebtn .c-savebtn__fill { color: transparent; }
+/* A see-through dark fill inside the white heart (Airbnb), so it stays visible on bright sky and water (2026-11-08). */
+html .phone.c-discover .c-savebtn .c-savebtn__fill { color: rgb(17 18 20 / 0.32); }
 html .phone.c-discover .c-savebtn.is-on .c-savebtn__fill { color: #E8590C; }
 html .phone.c-discover .c-savebtn .c-savebtn__line, html .phone.c-discover .c-savebtn .c-savebtn__fill { font-size: 22px; }
 html .phone.c-discover .c-savebtn .c-savebtn__line { filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.45)); }
 .c-dtabbar { background: transparent; border-bottom-color: transparent; transition: background-color .2s, border-color .2s; }
 .c-dtabbar.is-stuck { background: #FFFFFF; border-bottom-color: rgb(17 18 20 / 0.08); }
 .c-dcat:focus-visible { outline: none; }
-.c-dcat:focus-visible .c-dcat__img { box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #E8590C; }
+.c-dcat:focus-visible .c-dcat__disc { border-radius: 50%; box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #E8590C; }
 
 /* ===== Discover: Sharp photos and perk (2026-10-25, option b) =====
    Near you and Popular photos have square corners (the placeholders too). */
 .c-discover .c-lcard__photo, .c-discover .c-bigcard__media, .c-discover .c-skel--photo, .c-discover .c-skel--big { border-radius: 0; }
-/* Perk as a black square tag on the photo's bottom-left corner. */
-.c-lcard__perk, .c-bigcard__offer .c-perkmark { }
+/* Perk as an orange square tag on the photo's bottom-left corner, the same as the map card. */
 .c-lcard__perk .c-perkmark, .c-bigcard__offer .c-perkmark { display: none; }
 .c-lcard__perk { position: absolute; top: 120px; left: 0; z-index: 1; margin: 0; padding: 4px 8px;
-  background: #111214; color: #FFFFFF; font: 600 11px/16px var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
+  background: #E8590C; color: #FFFFFF; font: 600 11px/16px var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
 .c-discover .c-bigcard { container-type: inline-size; }
 html .phone.c-discover .c-bigcard__offer { position: absolute; top: calc(75cqw - 28px); left: 0; z-index: 1; padding: 6px 10px; border: 0; border-radius: 0;
-  background: #111214; color: #FFFFFF; font: 600 12px/16px var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
+  background: #E8590C; color: #FFFFFF; font: 600 12px/16px var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
 
 /* ===== Card tab: big card (2026-10-25) =====
    The card takes most of the screen; Show QR, Perks, Savings and Wallet sit under it as bare icons with small labels. */
@@ -3069,7 +3069,6 @@ html .phone.c-placeclean, html .phone.c-placeclean .c-offerbody { background-ima
 .c-placeclean .c-placehero__bar .c-circle-btn i { font-size: 26px; filter: drop-shadow(0 0 1px rgb(0 0 0 / 0.6)) drop-shadow(0 1px 6px rgb(0 0 0 / 0.5)); }
 .c-placeclean .c-placehero__bar .c-circle-btn.is-on { color: #E8590C; }
 .c-placeclean .c-offer-title { font-size: 26px; line-height: 32px; }
-.c-placeclean .c-plfacts { border-top: 0; padding-top: 4px; }
 .c-placeclean .c-pperk .c-minicard { display: none; }
 .c-placeclean .c-pperk { margin: 0 20px; padding: 14px 0; border-top: 1px solid rgb(17 18 20 / 0.08); border-bottom: 1px solid rgb(17 18 20 / 0.08); }
 .c-placeclean .c-pperk__title { align-self: flex-start; padding: 3px 7px; background: #111214; color: #FFFFFF;
@@ -3085,9 +3084,6 @@ html .phone.c-placeclean, html .phone.c-placeclean .c-offerbody { background-ima
 .c-plprice s { margin-left: 4px; color: #8A9099; }
 .c-plprice em { align-self: center; margin-left: 6px; padding: 3px 7px; background: #E8590C; color: #FFFFFF; font: 700 11px/14px var(--font);
   font-style: normal; letter-spacing: 0.02em; text-transform: uppercase; }
-.c-placeclean .c-plfacts { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgb(17 18 20 / 0.08); }
-.c-placeclean .c-plfacts .c-bigcard__icon.is-blue, .c-placeclean .c-plfacts .c-bigcard__icon.is-indigo { color: #8A9099; }
-.c-placeclean .c-plfacts .c-bigcard__icon.is-gold { color: #E8590C; }
 .c-placeclean .c-pperk__title { background: #E8590C; }
 .c-placeclean .c-pperk__sub { color: #111214; }
 .c-placeclean .c-section-title { font-size: 20px; line-height: 26px; }
@@ -3107,10 +3103,6 @@ html .phone.c-placeclean, html .phone.c-placeclean .c-offerbody { background-ima
 .c-pwa__over .c-plprice s { color: rgb(255 255 255 / 0.6); }
 .c-pwa .c-placehero__count { z-index: 3; bottom: 24px; }
 .c-pwa .c-offer-head { padding-top: 4px; }
-.c-pwa .c-plfacts { gap: 8px; border: 0; margin-top: 16px; padding: 0; }
-.c-pwa .c-plfacts .c-bigcard__stat { flex: 1; flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px; background: #F4F5F7; border: 0; }
-.c-pwa .c-plfacts .c-bigcard__stat::before, .c-pwa .c-plfacts .c-bigcard__stat + .c-bigcard__stat { border: 0; }
-.c-pwa .c-plfacts .c-bigcard__value { font-size: 17px; font-weight: 700; }
 .c-pwa .c-pperk { margin: 16px 0 0; padding: 16px 20px; border: 0; background: #E8590C; color: #FFFFFF; }
 .c-pwa .c-pperk__title { background: #FFFFFF; color: #E8590C; }
 .c-pwa .c-pperk__sub, .c-pwa .c-pperk__chev { color: #FFFFFF; }
@@ -3131,10 +3123,6 @@ html .phone.c-placeclean, html .phone.c-placeclean .c-offerbody { background-ima
 .c-pwa .c-placehero__bar .c-circle-btn i { -webkit-text-stroke: 0.8px #FFFFFF; }
 html .phone.c-pwa .c-offer-head + .c-pperk { margin-top: 20px; }
 .c-pwa .c-offer-head { padding-top: 20px; }
-.c-pwa .c-plfacts { gap: 10px; margin-top: 0; }
-.c-pwa .c-plfacts .c-bigcard__icon { display: none; }
-.c-pwa .c-plfacts .c-bigcard__stat { gap: 2px; padding: 14px 16px; }
-.c-pwa .c-plfacts .c-bigcard__stat:nth-child(2) .c-bigcard__value::before { content: '\2605\00a0'; color: #E8590C; }
 .c-pwa .c-pperk { margin-top: 20px; padding: 18px 24px; }
 .c-pwa .c-plhas { gap: 10px; margin-top: 12px; }
 .c-pwa .c-plhas .c-merow { flex-direction: row; align-items: flex-start; gap: 12px; padding: 16px 14px; }
@@ -3142,19 +3130,7 @@ html .phone.c-pwa .c-offer-head + .c-pperk { margin-top: 20px; }
 .c-pwa .c-plhas .c-merow__lead i { font-size: 22px; line-height: 1; }
 .c-pwa .c-plhas .c-merow__main { padding: 0; }
 /* Compact pass (user: keep the banner, rework the facts and What's here, "compact minimalism").
-   Facts become one quiet line split by hairlines; What's here becomes a tight two-column list, no tiles. */
-html .phone.c-pwa .c-plfacts { display: flex; gap: 0; margin: 0; padding: 0; background: none; }
-html .phone.c-pwa .c-plfacts .c-bigcard__stat { flex: none; flex-direction: row; align-items: baseline; gap: 4px; padding: 0 12px; background: none; }
-html .phone.c-pwa .c-plfacts .c-bigcard__stat:first-child { padding-left: 0; }
-html .phone.c-pwa .c-plfacts .c-bigcard__stat + .c-bigcard__stat { border-left: 1px solid rgb(17 18 20 / 0.12); }
-html .phone.c-pwa .c-plfacts .c-bigcard__text { display: flex; flex-direction: row; align-items: baseline; gap: 4px; white-space: nowrap; }
-html .phone.c-pwa .c-plfacts .c-bigcard__value { font: 600 14px/20px var(--font); }
-html .phone.c-pwa .c-plfacts .c-bigcard__label { font: 400 14px/20px var(--font); color: #5F6670; text-transform: lowercase; }
-html .phone.c-pwa .c-plfacts .is-lead .c-bigcard__label { order: -1; }
-html .phone.c-pwa .c-plfacts .c-bigcard__label.is-open { color: #15803D; font-weight: 600; text-transform: none; }
-html .phone.c-pwa .c-plfacts .c-bigcard__label.is-shut { color: #C2410C; font-weight: 600; text-transform: none; }
-html .phone.c-pwa .c-plfacts .c-bigcard__label.is-shut::after { content: ' \00b7'; color: #5F6670; font-weight: 400; }
-html .phone.c-pwa .c-plfacts .is-lead .c-bigcard__value { font-weight: 400; }
+   What's here becomes a tight two-column list, no tiles. */
 html .phone.c-pwa .c-pwa__over .c-plede { margin: 12px 0 0; color: rgb(255 255 255 / 0.85); font: 400 15px/22px var(--font); }
 html .phone.c-pwa .c-pwa__over .c-plede b { color: #FFFFFF; font: 700 28px/34px var(--font); letter-spacing: -0.01em; }
 /* Restaurant bar: square buttons like the rest of the page; orange "Use 10% off" with a QR icon, outlined Reserve. */
@@ -3198,8 +3174,6 @@ html .phone.c-pwa .c-plhas .c-merow__main { font: 400 14px/20px var(--font); col
 /* ===== Ratings from stories (2026-10-26) ===== orange stars on every story, the 5-star ask on New story. */
 .c-rstars { display: block; margin-top: 2px; color: #E8590C; font: 400 12px/14px var(--font); letter-spacing: 1px; }
 .c-plstory .c-rstars { margin: 6px 0 0; }
-.c-plrate { color: inherit; text-decoration: none; }
-html .phone.c-pwa .c-plfacts .c-plrate .c-bigcard__label { text-transform: none; text-decoration: underline; text-underline-offset: 3px; }
 .c-crate { margin: 16px 0 0; } /* lines up with the visit row and photo above and below */
 .c-crate__q { margin: 0; font: 600 17px/22px var(--font); color: #111214; }
 .c-crate__stars { display: flex; gap: 4px; margin-top: 8px; }
@@ -3317,15 +3291,20 @@ html .phone.c-cgchat .c-chat-nav .c-navbar__sub { margin: 0; font: 400 12px/16px
 /* ===== Map preview card (map-card a, 2026-10-26) ===== square like the listing; black offer tag; orange offer line. */
 html .phone.c-mapx .c-fcard { border-radius: 0; border: 1px solid rgb(17 18 20 / 0.08); box-shadow: 0 8px 24px -14px rgb(17 18 20 / 0.45); }
 html .phone.c-mapx .c-fcard__photo { height: 160px; }
-html .phone.c-mapx .c-fcard__tag { left: 0; top: 0; padding: 6px 10px; border-radius: 0; background: #111214; color: #FFFFFF; box-shadow: none; font: 700 11px/14px var(--font); letter-spacing: 0.04em; text-transform: uppercase; }
+/* Offer tag on the photo's bottom-left corner, just above the name: the same orange square tag as Discover's cards. */
+html .phone.c-mapx .c-fcard__tag { top: auto; bottom: 0; left: 0; padding: 6px 10px; border-radius: 0; background: #E8590C; color: #FFFFFF; box-shadow: none; font: 600 12px/16px var(--font); letter-spacing: 0.06em; text-transform: uppercase; }
+/* The tag carries the offer, so the offer line under the name (with its "· Prestige" label) is dropped. */
+html .phone.c-mapx .c-fcard .c-fcard__offer { display: none; }
 html .phone.c-mapx .c-fcard__dir { right: 0; top: 0; width: 40px; height: 40px; border-radius: 0; box-shadow: none; background: #FFFFFF; color: #111214; }
 html .phone.c-mapx .c-fcard__info { padding: 12px 14px 14px; }
 html .phone.c-mapx .c-fcard__name { font: 600 17px/22px var(--font); }
-html .phone.c-mapx .c-fcard__meta { font: 400 13px/18px var(--font); color: #5F6670; }
+html .phone.c-mapx .c-fcard__meta { margin-top: 2px; font: 500 14px/20px var(--font); color: #4A5058; }
+/* Distance after an orange pin, in ink so it reads as the key number (user 2026-11-09). */
+html .phone.c-mapx .c-fcard__dist { margin-left: 10px; color: #111214; font-weight: 600; font-variant-numeric: tabular-nums; }
+html .phone.c-mapx .c-fcard__dist .ph-map-pin { margin-right: 3px; font-size: 15px; vertical-align: -2px; color: #E8590C; }
 html .phone.c-mapx .c-fcard__offer { margin-top: 6px; color: #E8590C; font: 600 14px/20px var(--font); }
 
-/* ===== Map minimal (map-card b, 2026-10-26) ===== offer once; square search, filters and buttons. */
-html .phone.c-mapx .c-fcard__tag { display: none; }
+/* ===== Map minimal (map-card b, 2026-10-26) ===== square search, filters and buttons. */
 html .phone.c-mapx .c-fcard__offer { margin-top: 8px; }
 html .phone.c-mapx .c-msearch-btn { border-radius: 0; border: 1px solid rgb(17 18 20 / 0.10); box-shadow: 0 6px 18px -12px rgb(17 18 20 / 0.40); }
 html .phone.c-mapx .c-chip, html .phone.c-mapx .c-chip:not(.is-selected) { border-radius: 0; border: 1px solid rgb(17 18 20 / 0.10); background: #FFFFFF; color: #111214; box-shadow: none; padding: 0 14px; font: 500 13px/16px var(--font); }
@@ -3595,3 +3574,76 @@ html .phone.c-mapx .c-fpin.is-selected .c-fpin__pic { background: #E8590C; trans
 /* ===== map-offer-tag (2026-11-04) ===== price-tag icon before the card offer; one line (map.html shrinks long ones). */
 html .phone.c-mapx .c-fcard__offer { display: flex; align-items: center; gap: 4px; font-size: 12.5px; white-space: nowrap; overflow: hidden; }
 html .phone.c-mapx .c-fcard__offer i { font-size: 13px; flex: none; }
+
+/* ===== no-statusbar (2026-11-05) ===== hide the fake clock, signal, wifi and battery; keep the bar height so layouts do not shift. */
+.c-statusbar > * { visibility: hidden !important; }
+
+/* ===== Sign-up flow on the Me/Concierge standard (2026-11-08) =====
+   Plain white (no contour lines), grey square tiles like Me, one solid black main button like Concierge's "Make a request". */
+html .phone.c-auth--white, html .phone.c-auth--white .c-dhead { background-image: none; }
+html .phone .c-auth__soc { justify-content: flex-start; gap: 12px; height: 56px; padding: 0 16px; border: 0; border-radius: 0; background: #F2F3F5; font: 500 15px/20px var(--font); }
+html .phone .c-auth__soc svg { position: static; width: 22px; height: 22px; }
+html .phone .c-auth__soc:active { background: #E7E8EB; }
+html .phone.c-auth--white .c-auth__send { border: 0; border-radius: 0; background: #111214; color: #FFFFFF; font: 600 15px/20px var(--font); }
+html .phone.c-auth--white .c-auth__send:active { background: #22262A; }
+
+/* ===== Tab bar icons (sample 2026-11-09) =====
+   Phosphor light icons (map, compass, ID card, chat with dots, person); the selected tab's icon is filled orange, no
+   background (grey pill removed 2026-11-09). Old icons and CSS: map-tag/backup-tabicons/. */
+html .phone .c-tabbar--flat .c-tabbar__icon.ph-thin { font-family: "Phosphor-Light" !important; font-size: 26px; display: block; width: 56px; height: 32px; padding: 3px 0; box-sizing: border-box; border-radius: 16px; text-align: center; }
+html .phone .c-tabbar--flat .c-tabbar__tab.is-active .c-tabbar__icon.ph-thin { font-family: "Phosphor-Fill" !important; }
+html .phone .c-tabbar--flat .c-tabbar__tab { gap: 2px; font: 500 11px/14px var(--font); }
+
+/* ===== Discover card text (sample 2026-11-09) =====
+   The name (large cards add the place type in grey) and the filter categories in grey, with the rating (orange star,
+   "4.7") on the right, centred on those two lines. No distance or price on cards (user 2026-11-09). */
+.c-lcard__photo { margin-bottom: 10px; }
+.c-discover .c-bigcard__head { padding-top: 12px; }
+.c-bigcard .c-bigcard__title { flex: 1; min-width: 0; }
+.c-ctext__title { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 6px; overflow: hidden; }
+.c-lcard .c-ctext__title { height: 20px; }
+.c-bigcard .c-ctext__title { height: 22px; }
+.c-ctext__title > .c-lcard__name, .c-ctext__title > .c-bigcard__name { flex: 0 1 auto; min-width: 0; }
+.c-bigcard .c-bigcard__name { font: 600 17px/22px var(--font); letter-spacing: -0.01em; }
+.c-ptype { flex: none; white-space: nowrap; font: 400 15px/22px var(--font); color: #5F6670; }
+.c-lcard .c-lcard__meta { margin-top: 2px; font: 400 13px/18px var(--font); }
+.c-bigcard .c-bigcard__meta { margin-top: 4px; font: 400 15px/20px var(--font); color: #5F6670; }
+.c-ctext { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; }
+.c-ctext > :not(.c-crating) { grid-column: 1; }
+.c-crating { grid-column: 2; grid-row: 1 / span 2; align-self: center; white-space: nowrap; font: 400 13px/18px var(--font); color: #111214; font-variant-numeric: tabular-nums; }
+.c-bigcard .c-crating { font-size: 15px; line-height: 20px; }
+.c-cstar { display: inline-block; width: 0.92em; height: 0.92em; margin-right: 3px; vertical-align: -0.1em; }
+
+/* ===== Discover tabs underline (2026-11-09) =====
+   The selected tab (Places / Stories / Events) is marked by a grey dotted line instead of a solid black one (user). */
+.c-dtabs__tab[aria-selected="true"]::after { height: 3px; border-radius: 0; background: radial-gradient(circle, #9AA0A6 1.5px, transparent 1.6px) 0 50% / 6px 3px; background-repeat: round no-repeat; }
+
+/* ===== Saved, standardised (2026-11-09) =====
+   Plain white like Me (no contour lines), the same Places / Offers tabs as Discover with a grey count, and the place's offer
+   as the orange tag on the photo. Offer cards have no tag: their title already says the offer. */
+html .phone.c-savedpage, html .phone.c-savedpage .c-dhead { background: #FFFFFF; }
+.c-savedpage .c-dtabbar { background: #FFFFFF; }
+.c-dtabs__n { margin-left: 6px; font-weight: 400; color: #5F6670; font-variant-numeric: tabular-nums; }
+.c-svgrid .c-lcard__photo { position: relative; }
+.c-svgrid .c-lcard__perk { top: auto; bottom: 0; }
+
+
+/* ===== Place facts as descriptions (2026-11-09) =====
+   No facts row under the name (user: "confusing, deserve descriptions of their own"). The perk band sits right under
+   the photo; Hours and location says "Open now · until 11 PM" (green / red state) and the distance; Stories from
+   members opens with the rating in a full sentence. */
+html .phone.c-pwa .c-offer-head { display: none; }
+html .phone.c-pwa .c-offer-head + .c-pperk { margin-top: 0; }
+.c-plstate { font-weight: 600; }
+.c-plstate.is-open { color: #15803D; }
+.c-plstate.is-shut { color: #B42318; }
+.c-plrating { margin: -4px 0 14px; font: 400 15px/20px var(--font); color: #5F6670; }
+.c-plrating b { font-weight: 600; color: #111214; }
+.c-plrating .c-cstar { width: 15px; height: 15px; margin-right: 4px; vertical-align: -2px; }
+
+/* ===== Known for (2026-11-10) =====
+   Under About: what the place is famous for, as Me-style grey tiles two to a row, an orange icon over a short line. */
+.c-plknown__title { margin: 24px 0 12px; font: 600 17px/22px var(--font); color: #111214; }
+.c-plknown { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.c-plknown li { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 12px; background: #F2F3F5; font: 500 14px/19px var(--font); color: #111214; }
+.c-plknown i { font-size: 24px; color: #E8590C; }
