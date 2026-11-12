@@ -35,9 +35,9 @@
   </header>
 
   <div class="c-dhead">
-    <label class="c-dsearch"><i class="ph-light ph-magnifying-glass" aria-hidden="true"></i><input type="search" placeholder="Search Subic.Life" aria-label="Search places" data-search></label>
-    <a class="c-dicon" href="saved.html" aria-label="Saved"><i class="ph-light ph-heart" aria-hidden="true"></i></a>
-    <a class="c-dicon" href="messages.html" aria-label="Messages"><i class="ph-light ph-chat-circle" aria-hidden="true"></i></a>
+    <label class="c-dsearch"><i class="ph-light ph-magnifying-glass" aria-hidden="true"></i><input type="search" placeholder="Search places and offers" aria-label="Search places" data-search></label>
+    <a class="c-dicon" href="saved.html" aria-label="Saved"><i class="ph ph-heart" aria-hidden="true"></i></a>
+    <a class="c-dicon" href="messages.html" aria-label="Messages"><i class="ph ph-chat-circle" aria-hidden="true"></i></a>
   </div>
 
   <main class="screen-scroll">
@@ -102,9 +102,9 @@
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
     <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
     <a class="c-tabbar__tab is-active" href="explore.html" aria-current="page"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
-    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
-    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
-    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
+    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-identification-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle-dots c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 
@@ -127,6 +127,25 @@
     });
   }
   function tags(list) { return list.join(' '); }
+  // Sample 2026-11-08. A place's filter categories, in the same words as the icon row (Water sports · Nature).
+  function catLabels(list) { return list.map(function (k) { var c = CATS.filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : ''; }).filter(Boolean).join(' · '); }
+  // The place's own type, small and grey after the name on large cards, unless the category line already says it
+  // (Hotel / Hotels, Restaurant & Bar / Restaurants · Bars). CSS shows it only when it fits whole.
+  function typeLabel(place, cats) {
+    var first = place.category.split(/[ &]/)[0].toLowerCase();
+    var type = place.category.charAt(0) + place.category.slice(1).toLowerCase();
+    return catLabels(cats).toLowerCase().indexOf(first) === -1 ? '<span class="c-ptype">' + esc(type) + '</span>' : '';
+  }
+  // The orange star for the rating, in the category icons' colours (drawn, so it looks the same on every phone).
+  var ICON_STAR = '<svg class="c-cstar" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.6l1.95 3.95 4.35.63-3.15 3.07.74 4.33L8 11.53l-3.89 2.05.74-4.33L1.7 6.18l4.35-.63z" fill="#E8590C" stroke="#E8590C" stroke-width="1.3" stroke-linejoin="round"/><path d="M8 1.6l1.95 3.95L8 6.75z" fill="#F5A06A"/></svg>';
+  // The text under a card's photo (k = 'lcard' or 'bigcard'): the name, then the filter categories in grey, with the rating on the right, centred on those two lines.
+  // No distance or price on cards (user 2026-11-09).
+  function cardText(place, cats, k) {
+    var big = k === 'bigcard';
+    var rating = '<span class="c-crating">' + ICON_STAR + '<span class="u-sr-only">Rated </span>' + esc(place.rating) + '</span>';
+    return '<span class="c-ctext"><span class="c-ctext__title"><span class="c-' + k + '__name">' + esc(place.name) + '</span>' + (big ? typeLabel(place, cats) : '') + '</span>' +
+      '<span class="c-' + k + '__meta">' + esc(catLabels(big ? cats : cats.slice(0, 1))) + '</span>' + rating + '</span>';
+  }
 
   // Stories: one column of Facebook-style posts. Who and where on top, then the tip, the photos, the counts,
   // and Like / Comment. Like toggles in place (as on the Story page); everything else opens the story.
@@ -176,16 +195,9 @@
   document.getElementById('feed-events').innerHTML = F.events.map(eventRow).join('');
 
   // Places: Near you is a row of small cards, Popular with members a column of large ones (both like Airbnb).
-  // Prices match the place page: the cheapest room or tour at the member rate.
   // Every partner, nearest first, so each one can be found here as well as on the map.
   var NEAR = Object.keys(PLACES).map(function (id) { return { place: id, cats: PLACES[id].categories }; })
     .sort(function (a, b) { return parseFloat(PLACES[a.place].distance) - parseFloat(PLACES[b.place].distance); });
-  function peso(n) { return '₱' + n.toLocaleString('en-US'); }
-  function fromPrice(place) {
-    var rooms = place.rooms || [];
-    var low = rooms.reduce(function (m, r) { return r.rate < m.rate ? r : m; }, rooms[0] || { rate: place.rackPrice });
-    return Math.round(low.rate * (100 - place.discount) / 100);
-  }
   function saveBtn(place) {
     var on = SLSaved.has('place', place.id);
     return '<button class="c-savebtn' + (on ? ' is-on' : '') + '" type="button" aria-pressed="' + on + '" aria-label="Save ' + esc(place.name) + '" data-place="' + place.id + '">' +
@@ -196,16 +208,9 @@
     return '<div class="c-lcard" data-cats="' + tags(n.cats) + '">' +
       '<a class="c-lcard__link" href="place.html?p=' + n.place + '">' +
       '<span class="c-lcard__photo"><img src="' + place.thumb + '" alt="" width="144" height="144" loading="lazy" decoding="async"></span>' +
-      '<span class="c-lcard__name">' + esc(place.name) + '</span>' +
-      '<span class="c-lcard__meta">' + esc(place.category) + ' · ' + esc(place.distance) + '</span>' +
-      '<span class="c-lcard__meta">' + (place.bookable ? '<b>' + peso(fromPrice(place)) + '</b> ' + (place.per ? place.per[0] : place.unit) + ' · ' : '') +
-        '<i class="ph-fill ph-star c-star" aria-hidden="true"></i> ' + esc(place.rating) + '</span>' +
+      cardText(place, n.cats, 'lcard') +
       '<span class="c-lcard__perk"><span class="c-perkmark" aria-hidden="true"></span>' + esc(place.offerShort) + '</span>' +
       '</a>' + saveBtn(place) + '</div>';
-  }
-  function stat(icon, tone, value, label) {
-    return '<span class="c-bigcard__stat"><i class="' + icon + ' c-bigcard__icon is-' + tone + '" aria-hidden="true"></i>' +
-      '<span class="c-bigcard__text"><span class="c-bigcard__value">' + esc(value) + '</span><span class="c-bigcard__label">' + label + '</span></span></span>';
   }
   function popularCard(p) {
     var place = PLACES[p.place];
@@ -216,11 +221,8 @@
       '<span class="c-bigcard__media"><span class="c-bigcard__gallery">' + photos + '</span>' +
       '<span class="c-bigcard__dots" aria-hidden="true">' + dots + '</span></span>' +
       '<span class="c-bigcard__head"><span class="c-bigcard__title">' +
-      '<span class="c-bigcard__name">' + esc(place.name) + '</span>' +
-      '<span class="c-bigcard__meta">' + esc(place.category) + ' · ' + esc(place.area) + '</span></span>' +
+      cardText(place, p.cats, 'bigcard') + '</span>' +
       '<span class="c-bigcard__offer"><span class="c-perkmark" aria-hidden="true"></span>' + esc(p.offer || place.offerShort) + '</span></span>' +
-      '<span class="c-bigcard__stats">' + stat('ph-light ph-car-simple', 'blue', place.distance, 'Away') + stat('ph-fill ph-star', 'gold', place.rating, 'Rating') +
-      stat('ph-light ph-clock-afternoon', 'indigo', place.closes.replace('closes ', ''), 'Closes') + '</span>' +
       '</a>' + saveBtn(place) + '</div>';
   }
   var nearRow = document.getElementById('near-row'), popRow = document.getElementById('feed-popular');
@@ -323,13 +325,15 @@
   var panel = document.getElementById('panel-places');
   var empty = panel.querySelector('[data-places-empty]');
   var search = document.querySelector('[data-search]');
-  var CATS = [['hotels', 'Hotels'], ['food', 'Food'], ['beaches', 'Beaches'], ['water-sports', 'Water sports'], ['nature', 'Nature'], ['nightlife', 'Nightlife']];
+  // Carousell-like category icons (scripts/cat-carousell.cjs): flat, several colours each, on a pastel blob.
+  var CAT_ART = {"hotels":"<svg viewBox=\"0 0 24 24\" width=\"68\" height=\"68\" aria-hidden=\"true\"><path d=\"M14.6 1.8c4.3.3 7.6 3.9 7.2 8.2-.3 3.5-2.5 5.2-2.3 8.2.2 2.9-2.7 4.8-5.7 3.8-2.4-.8-3.4-2.6-6.3-2.8-3.3-.2-5.8-2.4-5.2-5.9.5-3.1 3.4-3.6 4.6-6.3 1.4-3.2 3.8-5.4 7.7-5.2z\" fill=\"#F2F3F5\" transform=\"rotate(0 12 12)\"/><rect x=\"3\" y=\"6.5\" width=\"3\" height=\"12.5\" rx=\"1.2\" fill=\"#B9450A\"/><rect x=\"5\" y=\"12.6\" width=\"16\" height=\"3.6\" rx=\"1\" fill=\"#FFFFFF\"/><rect x=\"6.6\" y=\"9.6\" width=\"4.8\" height=\"3.2\" rx=\"1.6\" fill=\"#FFFFFF\"/><path d=\"M10.6 11.2h8.9a1.6 1.6 0 011.6 1.6v3.4H10.6z\" fill=\"#E8590C\"/><path d=\"M10.6 11.2h8.9a1.6 1.6 0 011.6 1.6v.6H10.6z\" fill=\"#F5A06A\"/><rect x=\"3\" y=\"16\" width=\"18.1\" height=\"1.7\" rx=\".8\" fill=\"#22262A\"/><rect x=\"19.4\" y=\"16\" width=\"1.7\" height=\"3.4\" rx=\".8\" fill=\"#22262A\"/></svg>","food":"<svg viewBox=\"0 0 24 24\" width=\"68\" height=\"68\" aria-hidden=\"true\"><path d=\"M14.6 1.8c4.3.3 7.6 3.9 7.2 8.2-.3 3.5-2.5 5.2-2.3 8.2.2 2.9-2.7 4.8-5.7 3.8-2.4-.8-3.4-2.6-6.3-2.8-3.3-.2-5.8-2.4-5.2-5.9.5-3.1 3.4-3.6 4.6-6.3 1.4-3.2 3.8-5.4 7.7-5.2z\" fill=\"#F2F3F5\" transform=\"rotate(60 12 12)\"/><path d=\"M13 10.6l5.8-7.4M15.2 11l5.2-6.1\" stroke=\"#22262A\" stroke-width=\"1.1\" stroke-linecap=\"round\" fill=\"none\"/><ellipse cx=\"12\" cy=\"11.4\" rx=\"8.3\" ry=\"1.9\" fill=\"#F5A06A\"/><circle cx=\"8.6\" cy=\"10.5\" r=\"2\" fill=\"#FFFFFF\"/><circle cx=\"8.6\" cy=\"10.5\" r=\"1\" fill=\"#E8590C\"/><path d=\"M12.6 10.6c.6-1.3 1.8-1.7 2.8-1.2-.5 1.1-1.6 1.6-2.8 1.2z\" fill=\"#B9450A\"/><path d=\"M3.5 11.6h17a8.5 7.4 0 01-17 0z\" fill=\"#E8590C\"/><path d=\"M6 14.6c1.2.8 2.4.8 3.6 0s2.4-.8 3.6 0 2.4.8 3.6 0\" stroke=\"#FFFFFF\" stroke-width=\".9\" stroke-linecap=\"round\" fill=\"none\" opacity=\".85\"/><rect x=\"9\" y=\"18.4\" width=\"6\" height=\"1.7\" rx=\".85\" fill=\"#B9450A\"/></svg>","beaches":"<svg viewBox=\"0 0 24 24\" width=\"68\" height=\"68\" aria-hidden=\"true\"><path d=\"M14.6 1.8c4.3.3 7.6 3.9 7.2 8.2-.3 3.5-2.5 5.2-2.3 8.2.2 2.9-2.7 4.8-5.7 3.8-2.4-.8-3.4-2.6-6.3-2.8-3.3-.2-5.8-2.4-5.2-5.9.5-3.1 3.4-3.6 4.6-6.3 1.4-3.2 3.8-5.4 7.7-5.2z\" fill=\"#F2F3F5\" transform=\"rotate(120 12 12)\"/><path d=\"M2.5 20.6c3-2.6 6.2-3.6 9.5-3.6s6.5 1 9.5 3.6z\" fill=\"#F5A06A\"/><path d=\"M12.4 9.6l1.2 9\" stroke=\"#22262A\" stroke-width=\"1.3\" stroke-linecap=\"round\"/><path d=\"M3.4 10.4a8.6 7 0 0117.2 0z\" fill=\"#E8590C\"/><path d=\"M12 3.4c-1.9 1.7-2.6 4.3-2.6 7h5.2c0-2.7-.7-5.3-2.6-7z\" fill=\"#FFFFFF\"/></svg>","water-sports":"<svg viewBox=\"0 0 24 24\" width=\"68\" height=\"68\" aria-hidden=\"true\"><path d=\"M14.6 1.8c4.3.3 7.6 3.9 7.2 8.2-.3 3.5-2.5 5.2-2.3 8.2.2 2.9-2.7 4.8-5.7 3.8-2.4-.8-3.4-2.6-6.3-2.8-3.3-.2-5.8-2.4-5.2-5.9.5-3.1 3.4-3.6 4.6-6.3 1.4-3.2 3.8-5.4 7.7-5.2z\" fill=\"#F2F3F5\" transform=\"rotate(180 12 12)\"/><rect x=\"11.3\" y=\"2.6\" width=\"1\" height=\"13\" rx=\".5\" fill=\"#22262A\"/><path d=\"M11.3 3.4V15H4.6z\" fill=\"#E8590C\"/><path d=\"M11.3 10.4H7.4l-.9 1.6h4.8z\" fill=\"#FFFFFF\"/><path d=\"M12.8 5.6V15h5.8z\" fill=\"#F5A06A\"/><path d=\"M3.6 15.8h16.8l-2.4 3.3H6z\" fill=\"#22262A\"/><path d=\"M2.5 20.8c1-.9 2-.9 3 0s2 .9 3 0 2-.9 3 0 2 .9 3 0 2-.9 3 0 2 .9 3 0\" stroke=\"#E8590C\" stroke-width=\"1.2\" stroke-linecap=\"round\" fill=\"none\"/></svg>","nature":"<svg viewBox=\"0 0 24 24\" width=\"68\" height=\"68\" aria-hidden=\"true\"><path d=\"M14.6 1.8c4.3.3 7.6 3.9 7.2 8.2-.3 3.5-2.5 5.2-2.3 8.2.2 2.9-2.7 4.8-5.7 3.8-2.4-.8-3.4-2.6-6.3-2.8-3.3-.2-5.8-2.4-5.2-5.9.5-3.1 3.4-3.6 4.6-6.3 1.4-3.2 3.8-5.4 7.7-5.2z\" fill=\"#F2F3F5\" transform=\"rotate(240 12 12)\"/><path d=\"M16.6 4.6l3.4 5h-1.5l3 5.4h-9.8l3-5.4h-1.5z\" fill=\"#B9450A\"/><rect x=\"16.1\" y=\"14.6\" width=\"1\" height=\"4.8\" fill=\"#22262A\"/><rect x=\"9.4\" y=\"12.6\" width=\"1.5\" height=\"6.8\" rx=\".6\" fill=\"#22262A\"/><circle cx=\"10.1\" cy=\"8.6\" r=\"4.6\" fill=\"#E8590C\"/><circle cx=\"6.6\" cy=\"11.4\" r=\"3.4\" fill=\"#E8590C\"/><circle cx=\"13.6\" cy=\"11.4\" r=\"3.4\" fill=\"#E8590C\"/><circle cx=\"8.6\" cy=\"7.2\" r=\"1.7\" fill=\"#F5A06A\"/><rect x=\"3\" y=\"19.1\" width=\"18\" height=\"1.7\" rx=\".85\" fill=\"#22262A\"/></svg>","nightlife":"<svg viewBox=\"0 0 24 24\" width=\"68\" height=\"68\" aria-hidden=\"true\"><path d=\"M14.6 1.8c4.3.3 7.6 3.9 7.2 8.2-.3 3.5-2.5 5.2-2.3 8.2.2 2.9-2.7 4.8-5.7 3.8-2.4-.8-3.4-2.6-6.3-2.8-3.3-.2-5.8-2.4-5.2-5.9.5-3.1 3.4-3.6 4.6-6.3 1.4-3.2 3.8-5.4 7.7-5.2z\" fill=\"#F2F3F5\" transform=\"rotate(270 12 12)\"/><path d=\"M8.6 2.6l3.2 6.6\" stroke=\"#22262A\" stroke-width=\"1.1\" stroke-linecap=\"round\"/><path d=\"M4.6 5h14.8L12 12.8z\" fill=\"#FFFFFF\"/><path d=\"M6.4 6.6h11.2L12 12.2z\" fill=\"#E8590C\"/><rect x=\"11.4\" y=\"12.2\" width=\"1.2\" height=\"6.4\" fill=\"#22262A\"/><rect x=\"8.4\" y=\"18.2\" width=\"7.2\" height=\"1.7\" rx=\".85\" fill=\"#22262A\"/><path d=\"M18.5 3.1c.3-1.2 1.1-1.9 2.3-2.2\" stroke=\"#22262A\" stroke-width=\".7\" stroke-linecap=\"round\" fill=\"none\"/><circle cx=\"18.2\" cy=\"4.7\" r=\"2\" fill=\"#B9450A\"/><circle cx=\"17.5\" cy=\"4\" r=\".55\" fill=\"#FFFFFF\" opacity=\".85\"/></svg>"};
+  var CATS = [['hotels', 'Hotels'], ['food', 'Restaurants'], ['beaches', 'Beaches'], ['water-sports', 'Water sports'], ['nature', 'Nature'], ['nightlife', 'Bars']];
   var row = document.querySelector('[data-cats-row]');
   row.innerHTML = CATS.map(function (c) {
     var hit = NEAR.filter(function (n) { return n.cats.indexOf(c[0]) >= 0 && PLACES[n.place].thumb; })[0];
     if (!hit) return '';
     return '<button class="c-dcat" type="button" data-filter="' + c[0] + '" aria-pressed="false">' +
-      '<img class="c-dcat__img" src="' + PLACES[hit.place].thumb + '" alt="" width="84" height="84" decoding="async"><span class="c-dcat__label">' + c[1] + '</span></button>';
+      '<span class="c-dcat__disc">' + CAT_ART[c[0]] + '</span><span class="c-dcat__label">' + c[1] + '</span></button>';
   }).join('');
   var chips = row.querySelectorAll('[data-filter]');
   var filter = 'all';

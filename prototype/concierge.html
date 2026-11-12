@@ -44,9 +44,9 @@
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
     <a class="c-tabbar__tab" href="map.html"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
     <a class="c-tabbar__tab" href="explore.html"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
-    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
-    <a class="c-tabbar__tab is-active" href="concierge.html" aria-current="page"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
-    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
+    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-identification-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab is-active" href="concierge.html" aria-current="page"><i class="ph-thin ph-chat-circle-dots c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 
@@ -95,10 +95,6 @@
   if (ideas) ideas.innerHTML = C.ORDER.map(function (k) {
     return '<a class="c-cxb__card" href="concierge-chat.html?topic=' + k + '&draft=' + encodeURIComponent(DRAFTS[k] || 'I\u2019d like help with ' + X[k].title.toLowerCase() + '.') + '"><img src="' + X[k].img + '" alt="" loading="lazy"' + (function (s) { return (s.realImg ? ' data-real="' + s.realImg + '"' : '') + (/[?&]p=([a-z]+)/.test(s.href || '') ? ' data-place="' + /[?&]p=([a-z]+)/.exec(s.href)[1] + '"' : ''); })(X[k]) + '>' +
       '<span class="c-cxb__title">' + X[k].title + '</span></a>';
-  }).join('');
-  var chips = document.getElementById('chips');
-  if (chips) chips.innerHTML = Object.keys(X).map(function (k) {
-    return '<a class="c-cxc__chip" href="concierge-request.html?type=' + k + '">' + X[k].title + '</a>';
   }).join('');
 })();
 </script>

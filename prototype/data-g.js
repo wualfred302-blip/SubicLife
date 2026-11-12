@@ -1,4 +1,4 @@
-// data-g.js - concierge data for the prototype. Read by concierge, concierge-request, concierge-chat and
+// data-g.js - concierge data for the prototype. Read by concierge, concierge-chat and
 // concierge-trip. Prices are demo pesos. Partner names and member prices match data-a.js where a partner is named.
 (function () {
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

@@ -171,12 +171,12 @@
     <button class="c-msearch-btn" type="button" data-msearch aria-label="Search places"><i class="ph-light ph-magnifying-glass" aria-hidden="true"></i><span>Search places and offers</span></button>
     <div class="c-chiprow c-chiprow--compact" role="group" aria-label="Filter by category">
       <button class="c-chip" type="button" data-cat="all">All</button>
-      <button class="c-chip" type="button" data-cat="hotels"><i class="ph-light ph-bed c-chip__icon" aria-hidden="true"></i>Hotels</button>
-      <button class="c-chip" type="button" data-cat="food"><i class="ph-light ph-fork-knife c-chip__icon" aria-hidden="true"></i>Food</button>
-      <button class="c-chip" type="button" data-cat="beaches"><i class="ph-light ph-sun-horizon c-chip__icon" aria-hidden="true"></i>Beaches</button>
-      <button class="c-chip" type="button" data-cat="water-sports"><i class="ph-light ph-waves c-chip__icon" aria-hidden="true"></i>Water sports</button>
-      <button class="c-chip" type="button" data-cat="nature"><i class="ph-light ph-leaf c-chip__icon" aria-hidden="true"></i>Nature</button>
-      <button class="c-chip" type="button" data-cat="nightlife"><i class="ph-light ph-moon c-chip__icon" aria-hidden="true"></i>Nightlife</button>
+      <button class="c-chip" type="button" data-cat="hotels">Hotels</button>
+      <button class="c-chip" type="button" data-cat="food">Restaurants</button>
+      <button class="c-chip" type="button" data-cat="beaches">Beaches</button>
+      <button class="c-chip" type="button" data-cat="water-sports">Water sports</button>
+      <button class="c-chip" type="button" data-cat="nature">Nature</button>
+      <button class="c-chip" type="button" data-cat="nightlife">Bars</button>
     </div>
   </div>
   <div class="c-msearch" hidden>
@@ -190,9 +190,9 @@
   <nav class="c-tabbar c-tabbar--flat" aria-label="Sections">
     <a class="c-tabbar__tab is-active" href="map.html" aria-current="page"><i class="ph-thin ph-map-trifold c-tabbar__icon" aria-hidden="true"></i>Map</a>
     <a class="c-tabbar__tab" href="explore.html"><i class="ph-thin ph-compass c-tabbar__icon" aria-hidden="true"></i>Discover</a>
-    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-credit-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
-    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
-    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user-circle c-tabbar__icon" aria-hidden="true"></i>Me</a>
+    <a class="c-tabbar__tab" href="card.html"><i class="ph-thin ph-identification-card c-tabbar__icon" aria-hidden="true"></i>Card</a>
+    <a class="c-tabbar__tab" href="concierge.html"><i class="ph-thin ph-chat-circle-dots c-tabbar__icon" aria-hidden="true"></i>Concierge</a>
+    <a class="c-tabbar__tab" href="me.html"><i class="ph-thin ph-user c-tabbar__icon" aria-hidden="true"></i>Me</a>
   </nav>
   <span class="c-homeindicator"></span>
 
@@ -245,7 +245,8 @@
       Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
     return 2 * R * Math.asin(Math.sqrt(h));
   }
-  function fmtDist(k) { return k < 1 ? Math.round(k * 1000) + ' m' : k.toFixed(1) + ' km'; }
+  // Always km with one decimal, so every card reads the same (0.3 km, not 258 m; user 2026-11-09).
+  function fmtDist(k) { return Math.max(k, 0.1).toFixed(1) + ' km'; }
   function dirUrl(p) { return 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng; }
 
   // Items: partners take name, photo and offer from data-a.js; extras carry their own and link to the nearest partner page.
@@ -267,6 +268,7 @@
       offer: p ? p.offer : m.offer,
       badge: discount ? discount + '%' : 'Free',
       tag: p ? (discount ? discount + '%' : p.offerShort) : (discount ? discount + '%' : m.offerShort),
+      short: (p ? p.offerShort : m.offerShort) || (discount ? discount + '% off' : ''),
       photo: p ? p.thumb : m.photo,
       video: p && p.videoFirst && p.video, poster: p && (p.poster || p.thumb),
       href: 'place.html?p=' + (p ? m.id : nearestPartnerId(m)),
@@ -326,7 +328,7 @@
       '</div>';
     // Airbnb-style: the whole card opens the place (stretched link); directions sits on the photo.
     card.querySelector('.c-fcard__link').textContent = it.name;
-    card.querySelector('.c-fcard__tag').textContent = it.tag;
+    card.querySelector('.c-fcard__tag').textContent = it.short;
     card.querySelector('.c-fcard__offer').textContent = it.offer;
     // Tag icon before the offer; the line shrinks (12.5px down to 11px) until it fits on one line.
     var offerEl = card.querySelector('.c-fcard__offer');
@@ -336,7 +338,11 @@
       var f = 12.5; offerEl.style.fontSize = f + 'px';
       while (offerEl.scrollWidth > offerEl.clientWidth + 1 && f > 11) { f -= 0.5; offerEl.style.fontSize = f + 'px'; }
     }).observe(offerEl);
-    card.querySelector('.c-fcard__meta').textContent = it.category + ' · ' + it.area + ' · ' + it.dist;
+    // What and where, then the distance after a pin (user 2026-11-09).
+    var metaEl = card.querySelector('.c-fcard__meta');
+    metaEl.textContent = it.category + ' · ' + it.area;
+    metaEl.insertAdjacentHTML('beforeend', '<span class="c-fcard__dist"><i class="ph-fill ph-map-pin" aria-hidden="true"></i></span>');
+    metaEl.lastChild.append(it.dist + ' away');
     card.querySelector('.c-fcard__dir').setAttribute('aria-label', 'Directions to ' + it.name);
     track.appendChild(card);
     it.card = card;

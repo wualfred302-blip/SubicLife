@@ -66,14 +66,11 @@
   var C = window.CONCIERGE;
   var params = new URLSearchParams(window.location.search);
   var key = params.get('topic') || '';
-  var fromRequest = params.get('from') === 'request' && !!C.EXPERIENCES[key];
-  var exp = fromRequest ? C.EXPERIENCES[key] : null;
   var topic = C.topicFor(key);
 
-  var guests = parseInt(params.get('guests'), 10) || (exp ? exp.guests : 1);
+  var guests = parseInt(params.get('guests'), 10) || 1;
   var date = params.get('date') || '2026-10-17';
-  var time = params.get('time') || (exp ? exp.time : '10:00');
-  var note = (params.get('note') || '').trim();
+  var time = params.get('time') || '10:00';
   var draft = (params.get('draft') || '').trim(), asked = false;
 
   var thread = document.getElementById('thread');
@@ -81,9 +78,6 @@
   var form = document.getElementById('composer');
   var input = document.getElementById('msg');
   var send = document.getElementById('send');
-  var back = document.querySelector('[data-back]');
-
-  if (fromRequest) back.setAttribute('href', 'concierge-request.html?type=' + key);
 
   var lastKind = null;   // 'in' or 'out'; a new sender starts a new group
   var typing = null;     // the typing row while Mika is typing
@@ -220,7 +214,6 @@
 
   function emit(step) {
     if (step.t) bubble('in', fill(step.t), true);
-    if (step.card && exp) bookCard(C.bookingFor(key, guests, date, time), true);
     if (step.book) bookCard(step.book, true);
     if (step.place) placeCard(step.place, true);
     setReplies(step.quick || []);
@@ -282,14 +275,7 @@
   }
 
   // Start of the thread.
-  if (fromRequest) {
-    bubble('in', 'Hi Ana, Mika here. Thanks for the request. I am checking it now.', false);
-    var summary = exp.title + ', ' + C.guestsWord(guests) + ', ' + C.fmtDate(date) + ' at ' + C.fmtTime(time) + '.' +
-      (note ? ' ' + note : '');
-    bubble('out', summary, false);
-    markSent(false);
-    enqueue(exp.reply);
-  } else if (draft) {
+  if (draft) {
     // Came from a photo on Concierge: the message waits in the box until the member taps Send.
     input.value = draft;
     send.disabled = false;
