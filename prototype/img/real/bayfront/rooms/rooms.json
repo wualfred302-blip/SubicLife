@@ -1,0 +1,60 @@
+{
+  "Superior Room": [
+    {
+      "file": "superior-room-01.jpg",
+      "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2025/11/5V6H89M2.jpg",
+      "page_url": "https://bayfronthotelsubicbay.com/",
+      "what_it_shows": "Queen bed with red bedspread, curtained window, wood TV console",
+      "width": 1600,
+      "height": 1200,
+      "notes": "From the hotel's own 'Rooms & Rates' carousel on its homepage (labelled by room type there); full-size original."
+    },
+    {
+      "file": "superior-room-02.jpg",
+      "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2025/10/IMG_5543.jpg",
+      "page_url": "https://bayfronthotelsubicbay.com/",
+      "what_it_shows": "Two single beds with teal bedspreads, wood TV console and armchair",
+      "width": 1600,
+      "height": 1200,
+      "notes": "From the hotel's own 'Rooms & Rates' carousel on its homepage (labelled by room type there); full-size original."
+    },
+    {
+      "file": "superior-room-03.jpg",
+      "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2023/02/bf-superior-hover-scaled.jpg",
+      "page_url": "https://bayfronthotelsubicbay.com/room/superior-room/",
+      "what_it_shows": "Two beds with green bedspreads, curtains and balcony door",
+      "width": 1600,
+      "height": 1200,
+      "notes": "WordPress media file named 'bf-superior-hover' (2023 upload) on the hotel's site. The carousel's other Superior photos (640 px) were too small to use."
+    }
+  ],
+  "Deluxe Room": [
+    {
+      "file": "deluxe-room-01.jpg",
+      "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2025/11/IMG_6137.jpg",
+      "page_url": "https://bayfronthotelsubicbay.com/",
+      "what_it_shows": "Queen bed with teal bedspread and sliding balcony door",
+      "width": 1600,
+      "height": 1200,
+      "notes": "From the hotel's own 'Rooms & Rates' carousel on its homepage (labelled by room type there); full-size original. Shown as 'Deluxe Room' on the site's room list (queen bed, per the room page)."
+    },
+    {
+      "file": "deluxe-room-02.jpg",
+      "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2025/10/IMG_5517.jpg",
+      "page_url": "https://bayfronthotelsubicbay.com/",
+      "what_it_shows": "Two beds with teal bedspreads, wood dresser with TV and armchair",
+      "width": 1600,
+      "height": 1200,
+      "notes": "From the hotel's own 'Rooms & Rates' carousel on its homepage (labelled by room type there); full-size original."
+    },
+    {
+      "file": "deluxe-room-03.jpg",
+      "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2025/10/IMG_5522.jpg",
+      "page_url": "https://bayfronthotelsubicbay.com/",
+      "what_it_shows": "Queen bed with teal bedspread, balcony door with palm view, armchair",
+      "width": 1600,
+      "height": 1200,
+      "notes": "From the hotel's own 'Rooms & Rates' carousel on its homepage (labelled by room type there); full-size original."
+    }
+  ]
+}

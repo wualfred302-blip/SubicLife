@@ -1,0 +1,82 @@
+[
+  {
+    "file": "meatplus-01.jpg",
+    "source_url": "https://primer.com.ph/food/wp-content/uploads/sites/4/2018/06/meat-plus-cafe-front.jpg",
+    "page_url": "https://primer.com.ph/food/location/philippines/subic/meat-plus-cafe-a-must-visit-for-everyone-visiting-subic/",
+    "what_it_shows": "Exterior of Meat Plus Cafe: the \"MEAT PLUS cafe\" sign and red-awning storefront on the street",
+    "width": 1024,
+    "height": 588,
+    "is_hero_candidate": true,
+    "notes": "Primer article photo (2018). Bottom 14% cropped to remove small \"primer\" watermark. 1024px wide, under the 1200px ideal for a hero."
+  },
+  {
+    "file": "meatplus-02.jpg",
+    "source_url": "https://primer.com.ph/food/wp-content/uploads/sites/4/2018/06/meat-plus-cafe-inside.jpg",
+    "page_url": "https://primer.com.ph/food/location/philippines/subic/meat-plus-cafe-a-must-visit-for-everyone-visiting-subic/",
+    "what_it_shows": "Dining room interior: booth seating and small tables by a window",
+    "width": 1024,
+    "height": 588,
+    "is_hero_candidate": false,
+    "notes": "Primer article photo (2018). Bottom 14% cropped to remove watermark."
+  },
+  {
+    "file": "meatplus-03.jpg",
+    "source_url": "https://primer.com.ph/food/wp-content/uploads/sites/4/2018/06/meat-plus-cafe-US-rib-eye-770.jpg",
+    "page_url": "https://primer.com.ph/food/location/philippines/subic/meat-plus-cafe-a-must-visit-for-everyone-visiting-subic/",
+    "what_it_shows": "US rib-eye steak with carrots, corn and potato on a dark blue plate, with rice",
+    "width": 1024,
+    "height": 588,
+    "is_hero_candidate": false,
+    "notes": "Primer article photo; article gives the price as PHP 770 (2018, may be out of date). Watermark cropped."
+  },
+  {
+    "file": "meatplus-04.jpg",
+    "source_url": "https://primer.com.ph/food/wp-content/uploads/sites/4/2018/06/meat-plus-cafe-burger-255.jpg",
+    "page_url": "https://primer.com.ph/food/location/philippines/subic/meat-plus-cafe-a-must-visit-for-everyone-visiting-subic/",
+    "what_it_shows": "Cheeseburger on a bun with tomato, served with french fries",
+    "width": 1024,
+    "height": 588,
+    "is_hero_candidate": false,
+    "notes": "Primer article photo (2018). Watermark cropped."
+  },
+  {
+    "file": "meatplus-05.jpg",
+    "source_url": "https://primer.com.ph/food/wp-content/uploads/sites/4/2018/06/meat-plus-cafe-oven-roasted-beef-belly-295.jpg",
+    "page_url": "https://primer.com.ph/food/location/philippines/subic/meat-plus-cafe-a-must-visit-for-everyone-visiting-subic/",
+    "what_it_shows": "Oven-roasted beef belly slices with gravy in a boat and rice",
+    "width": 1024,
+    "height": 588,
+    "is_hero_candidate": false,
+    "notes": "Primer article photo (2018). Watermark cropped."
+  },
+  {
+    "file": "meatplus-06.jpg",
+    "source_url": "https://primer.com.ph/food/wp-content/uploads/sites/4/2018/06/meat-plus-cafe-salmon-steak-365.jpg",
+    "page_url": "https://primer.com.ph/food/location/philippines/subic/meat-plus-cafe-a-must-visit-for-everyone-visiting-subic/",
+    "what_it_shows": "Grilled salmon steak with a tomato-style sauce and rice on a white plate",
+    "width": 1024,
+    "height": 588,
+    "is_hero_candidate": false,
+    "notes": "Primer article photo (2018). Watermark cropped."
+  },
+  {
+    "file": "meatplus-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=CzU1oO1SSyU",
+    "page_url": "https://www.youtube.com/watch?v=CzU1oO1SSyU",
+    "what_it_shows": "Clip from 2s to 9s: the Meat Plus storefront and sign, then customers queuing at the ordering counter",
+    "width": 720,
+    "height": 406,
+    "is_hero_candidate": false,
+    "notes": "Public YouTube upload titled \"MEAT PLUS CAFE SUBIC\" (about 4.6 years old per search). Uploader not verified. Muted, 720px wide, re-encoded."
+  },
+  {
+    "file": "meatplus-v1-poster.jpg",
+    "source_url": "https://www.youtube.com/watch?v=CzU1oO1SSyU",
+    "page_url": "https://www.youtube.com/watch?v=CzU1oO1SSyU",
+    "what_it_shows": "Frame at 4s from the clip showing the \"MEAT PLUS cafe\" storefront sign",
+    "width": 720,
+    "height": 406,
+    "is_hero_candidate": false,
+    "notes": "Poster frame from meatplus-v1.mp4."
+  }
+]

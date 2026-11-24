@@ -1,0 +1,82 @@
+[
+  {
+    "file": "bayfront-01.jpg",
+    "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2023/02/274092506_10162313326573868_7971709022012611690_n.jpg",
+    "page_url": "https://bayfronthotelsubicbay.com/",
+    "what_it_shows": "Exterior: the hotel building facade with palm trees out front (hotel-published media, 1722x966 original)",
+    "width": 1600,
+    "height": 898,
+    "is_hero_candidate": true,
+    "notes": "Best hero: landscape, exterior of this hotel, from its own WordPress media library."
+  },
+  {
+    "file": "bayfront-02.jpg",
+    "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2023/02/bayfront-47-scaled.jpg",
+    "page_url": "https://bayfronthotelsubicbay.com/",
+    "what_it_shows": "Pool: outdoor swimming pool in the courtyard, surrounded by palms and the balcony walkway",
+    "width": 1600,
+    "height": 1200,
+    "is_hero_candidate": true,
+    "notes": "Alternative hero (4:3 landscape). Pool photo from hotel media library."
+  },
+  {
+    "file": "bayfront-03.jpg",
+    "source_url": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/533409674.jpg?k=48f66bc275d66cc9314d3e0454c8188b27f5f683e9ac89929e7d3c91e7b39eb8&o=",
+    "page_url": "https://www.booking.com/hotel/ph/po-bayfront-hotel-subic.html",
+    "what_it_shows": "Lobby: reception desk with glass wall and front-desk counter",
+    "width": 1024,
+    "height": 768,
+    "is_hero_candidate": false,
+    "notes": "Booking.com hotel photo (signed CDN URL, 1024 px). Lobby confirmed visually."
+  },
+  {
+    "file": "bayfront-04.jpg",
+    "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2023/02/bf-superior-scaled.jpg",
+    "page_url": "https://bayfronthotelsubicbay.com/room/superior-room/",
+    "what_it_shows": "Room type: Superior Room, one queen bed with grey-green bedspread, curtained window",
+    "width": 1600,
+    "height": 1200,
+    "is_hero_candidate": false,
+    "notes": "Room type name taken from the hotel room page title (\"Superior Room\"); site lists one queen-sized bed for it."
+  },
+  {
+    "file": "bayfront-05.jpg",
+    "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2023/02/bf-deluxe-twin-scaled.jpg",
+    "page_url": "https://bayfronthotelsubicbay.com/room/deluxe-twin-room/",
+    "what_it_shows": "Room type: Deluxe Twin Room, two beds with green bedspreads, wood furniture and wardrobe",
+    "width": 1600,
+    "height": 1200,
+    "is_hero_candidate": false,
+    "notes": "Room type name from the site URL /room/deluxe-twin-room/ (that page now returns 404 as of this run, so the name comes from the URL and the photo filename)."
+  },
+  {
+    "file": "bayfront-06.jpg",
+    "source_url": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/904748693.jpg?k=4187d102a3a8eb64b542337e880069ac660ee1a96227a8a7dcf7afd9dc4bf1cd&o=",
+    "page_url": "https://www.booking.com/hotel/ph/po-bayfront-hotel-subic.html",
+    "what_it_shows": "Room type: twin room with two beds and red bedspreads, wood-look floor (newer renovated rooms)",
+    "width": 1024,
+    "height": 768,
+    "is_hero_candidate": false,
+    "notes": "Booking.com hotel photo. Room type name not printed on the photo; matches the 2025 room photos on the hotel site."
+  },
+  {
+    "file": "bayfront-07.jpg",
+    "source_url": "https://bayfronthotelsubicbay.com/wp-content/uploads/2025/10/IMG_6168.jpg",
+    "page_url": "https://bayfronthotelsubicbay.com/",
+    "what_it_shows": "The view: room with balcony door and window showing a sunset over palms and the sea",
+    "width": 1600,
+    "height": 1200,
+    "is_hero_candidate": false,
+    "notes": "Hotel-published 2025 photo, cropped to 4:3 scale. Shows a room view through the window."
+  },
+  {
+    "file": "bayfront-08.jpg",
+    "source_url": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/533409668.jpg?k=016b39314e9005c27179ac2250b8fee336b5d7124000b3ed4fe47d07508722e8&o=",
+    "page_url": "https://www.booking.com/hotel/ph/po-bayfront-hotel-subic.html",
+    "what_it_shows": "Restaurant: dining room with wooden tables and chairs, large windows onto the garden",
+    "width": 1024,
+    "height": 768,
+    "is_hero_candidate": false,
+    "notes": "Booking.com hotel photo (signed CDN URL, 1024 px)."
+  }
+]

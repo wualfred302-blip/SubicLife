@@ -1,0 +1,122 @@
+[
+  {
+    "file": "ocean-01.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2024/03/Hart-scaled.jpg",
+    "page_url": "https://oceanadventure.ph/",
+    "what_it_shows": "Rough-toothed dolphin 'Hart' swimming near the surface; Ocean Adventure news photo about the dolphin transfer to Subic",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": true,
+    "notes": "Official oceanadventure.ph news item; wide 2560px original"
+  },
+  {
+    "file": "ocean-02.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2022/08/ocean-adventure-dolphin-show-1.jpg",
+    "page_url": "https://oceanadventure.ph/",
+    "what_it_shows": "Several dolphins leaping out of the water during the Ocean Adventure show",
+    "width": 925,
+    "height": 598,
+    "is_hero_candidate": false,
+    "notes": "Official site dolphin show image"
+  },
+  {
+    "file": "ocean-03.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2022/08/Exclusive-Dolphin-Experience-slider.jpg",
+    "page_url": "https://oceanadventure.ph/",
+    "what_it_shows": "Family in pink and blue rash guards and life vests standing with a dolphin in shallow bay water",
+    "width": 634,
+    "height": 412,
+    "is_hero_candidate": false,
+    "notes": "Official site, dolphin experience slider (634px)"
+  },
+  {
+    "file": "ocean-04.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2022/08/swim-with-dolphins-subic-bay-slider.jpg",
+    "page_url": "https://oceanadventure.ph/",
+    "what_it_shows": "Young girl in a pink shirt with arms around a dolphin in the water",
+    "width": 634,
+    "height": 412,
+    "is_hero_candidate": false,
+    "notes": "Official site swim-with-dolphins slider (634px)"
+  },
+  {
+    "file": "ocean-05.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2022/09/dive-with-dolphins-subic-bay-slider.jpg",
+    "page_url": "https://oceanadventure.ph/",
+    "what_it_shows": "Diver swimming beside two dolphins in blue water",
+    "width": 634,
+    "height": 412,
+    "is_hero_candidate": false,
+    "notes": "Official site dive-with-dolphins slider (634px)"
+  },
+  {
+    "file": "ocean-06.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2022/08/feeding-sea-turtles-in-subic-bay-slider.jpg",
+    "page_url": "https://oceanadventure.ph/",
+    "what_it_shows": "Guests at a net pen feeding a shark/ray-type animal in the water (title says sea turtles)",
+    "width": 634,
+    "height": 412,
+    "is_hero_candidate": false,
+    "notes": "Official site; animal identification uncertain from photo, filename says sea turtles"
+  },
+  {
+    "file": "ocean-07.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2023/07/4.jpg",
+    "page_url": "https://oceanadventure.ph/",
+    "what_it_shows": "Girl painting on a canvas held up next to a sea lion at the sea lion show",
+    "width": 640,
+    "height": 428,
+    "is_hero_candidate": false,
+    "notes": "Official site 640px; sea lion show"
+  },
+  {
+    "file": "ocean-08.jpg",
+    "source_url": "https://adventuroj.com/wp-content/uploads/2012/05/ocean-adventure-park-3.jpg",
+    "page_url": "https://adventuroj.com/2012/05/26/fun-in-the-sun-at-subics-ocean-adventure-park/",
+    "what_it_shows": "Ocean Adventure entrance: the stone wall with the Ocean Adventure dolphin logo, topiary and planters in front of the gate building",
+    "width": 1024,
+    "height": 686,
+    "is_hero_candidate": false,
+    "notes": "Adventure Journal blog post 'Fun in the Sun at Subic's Ocean Adventure Park' (2012). Photo is from 2012, so the entrance may have changed since. Resized from 1024px."
+  },
+  {
+    "file": "ocean-09.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2023/07/925x598-4.jpg",
+    "page_url": "https://oceanadventure.ph/",
+    "what_it_shows": "Sea lion show pool under the arena roof: trainers on the platform with a sea lion, a 'Sea Lion Headquarters' sign and seated audience at the rail",
+    "width": 925,
+    "height": 598,
+    "is_hero_candidate": false,
+    "notes": "Official oceanadventure.ph image (2023 upload, file '925x598-4'). Resized to 925px wide, no upscale."
+  },
+  {
+    "file": "ocean-10.jpg",
+    "source_url": "https://i.ytimg.com/vi/bDf6yikCp2k/maxresdefault.jpg",
+    "page_url": "https://www.youtube.com/watch?v=bDf6yikCp2k",
+    "what_it_shows": "Wide view of the Ocean Adventure dolphin show area: dolphins in the show water with the sea pens behind, and spectators on the stands at the lower right",
+    "width": 1280,
+    "height": 720,
+    "is_hero_candidate": false,
+    "notes": "YouTube thumbnail of 'Dolphin Show 3 @ Ocean Adventure Subic' (uploader not checked). Used as a still from the uploader's own thumbnail. No overlay text in the frame."
+  },
+  {
+    "file": "ocean-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=xPT1hNC8x7A",
+    "page_url": "https://www.youtube.com/watch?v=xPT1hNC8x7A",
+    "what_it_shows": "Muted 7 s loop from 7:53 to 8:00 of the Ocean Adventure dolphin show: the show stage in the sea pen area, with the seated audience along the bottom edge",
+    "width": 720,
+    "height": 344,
+    "is_hero_candidate": false,
+    "notes": "YouTube 'Ocean Adventure Dolphin Show Subic Bay' by ChuffedBunny (27 min). Downloaded only the 470-490 s section at 720p (yt-dlp --download-sections), cut with ffmpeg (-an, crf 28), top 110 px cropped to remove the small corner logo. 476 KB."
+  },
+  {
+    "file": "ocean-v1-poster.jpg",
+    "source_url": "https://www.youtube.com/watch?v=xPT1hNC8x7A",
+    "page_url": "https://www.youtube.com/watch?v=xPT1hNC8x7A",
+    "what_it_shows": "Frame at 7:56 from ocean-v1.mp4: the sea pens and show stage, with the seated audience along the bottom edge",
+    "width": 1280,
+    "height": 610,
+    "is_hero_candidate": false,
+    "notes": "Frame from the same YouTube show video, used as the poster image only. Top corner logo cropped out."
+  }
+]

@@ -1,0 +1,87 @@
+{
+  "Executive Villa": [
+    {
+      "file": "executive-villa-01.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0224312000k8hwkg6CB61.jpg",
+      "page_url": "https://us.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-8415289/segara-villas-olongapo/",
+      "what_it_shows": "Trip.com gallery photo labelled \"Executive Villa\" (Executive Villa).",
+      "width": 1600,
+      "height": 1066,
+      "notes": ""
+    },
+    {
+      "file": "executive-villa-02.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0222612000k8hwml5DFC4.jpg",
+      "page_url": "https://us.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-8415289/segara-villas-olongapo/",
+      "what_it_shows": "Trip.com gallery photo labelled \"Executive Villa\" (Executive Villa).",
+      "width": 1600,
+      "height": 1066,
+      "notes": ""
+    },
+    {
+      "file": "executive-villa-03.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0223p12000k8hx1ymC21A.jpg",
+      "page_url": "https://us.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-8415289/segara-villas-olongapo/",
+      "what_it_shows": "Trip.com gallery photo labelled \"Executive Villa\" (Executive Villa).",
+      "width": 1600,
+      "height": 1200,
+      "notes": ""
+    },
+    {
+      "file": "executive-villa-04.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0220912000dnkninn47AD.jpg",
+      "page_url": "https://us.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-8415289/segara-villas-olongapo/",
+      "what_it_shows": "Trip.com gallery photo labelled \"Executive Villa\" (Executive Villa).",
+      "width": 1248,
+      "height": 940,
+      "notes": ""
+    },
+    {
+      "file": "executive-villa-05.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0225d12000k8hws422E09.jpg",
+      "page_url": "https://us.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-8415289/segara-villas-olongapo/",
+      "what_it_shows": "Trip.com gallery photo labelled \"Executive Villa\" (Executive Villa).",
+      "width": 1600,
+      "height": 1600,
+      "notes": ""
+    }
+  ],
+  "Junior Villa": [
+    {
+      "file": "junior-villa-01.jpg",
+      "source_url": "https://images.trvl-media.com/lodging/13000000/12330000/12322000/12321923/0034ee61.jpg",
+      "page_url": "https://www.expedia.com/Olongapo-Hotels-Segara-Villas.h12321923.Hotel-Information",
+      "what_it_shows": "Junior Villa bedroom: large bed with wooden headboard, window, nightstand",
+      "width": 1500,
+      "height": 2000,
+      "notes": "Expedia room carousel labelled \"Junior Villa\" (\"View all photos for Junior Villa\")"
+    },
+    {
+      "file": "junior-villa-02.jpg",
+      "source_url": "https://images.trvl-media.com/lodging/13000000/12330000/12322000/12321923/fedab875.jpg",
+      "page_url": "https://www.expedia.com/Olongapo-Hotels-Segara-Villas.h12321923.Hotel-Information",
+      "what_it_shows": "Junior Villa: bed, sofa, coffee table and curtains",
+      "width": 1600,
+      "height": 1064,
+      "notes": "Expedia room carousel labelled \"Junior Villa\" (\"View all photos for Junior Villa\")"
+    },
+    {
+      "file": "junior-villa-03.jpg",
+      "source_url": "https://images.trvl-media.com/lodging/13000000/12330000/12322000/12321923/988046c5.jpg",
+      "page_url": "https://www.expedia.com/Olongapo-Hotels-Segara-Villas.h12321923.Hotel-Information",
+      "what_it_shows": "Junior Villa: bed, two red sofas, coffee table, TV",
+      "width": 1600,
+      "height": 1068,
+      "notes": "Expedia room carousel labelled \"Junior Villa\" (\"View all photos for Junior Villa\")"
+    },
+    {
+      "file": "junior-villa-04.jpg",
+      "source_url": "https://images.trvl-media.com/lodging/13000000/12330000/12322000/12321923/5e9b8e4e.jpg",
+      "page_url": "https://www.expedia.com/Olongapo-Hotels-Segara-Villas.h12321923.Hotel-Information",
+      "what_it_shows": "Junior Villa bathroom: glass-enclosed shower, toilet, vanity",
+      "width": 1600,
+      "height": 1200,
+      "notes": "Expedia room carousel labelled \"Junior Villa\" (\"View all photos for Junior Villa\"); same bathroom photo also appears in the Executive Villa carousel"
+    }
+  ]
+}

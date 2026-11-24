@@ -1,0 +1,82 @@
+[
+  {
+    "file": "teppan-01.jpg",
+    "source_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/32/25/d7/chef-pouring-on-some.jpg?w=1600&h=1000&s=1",
+    "page_url": "https://www.tripadvisor.com/Restaurant_Review-g4751237-d9807775-Reviews-Teppan_101-Subic_Bay_Freeport_Zone_Bataan_Province_Central_Luzon_Region_Luzon.html",
+    "what_it_shows": "Teppan chef working the grill, with the TEPPAN sign behind him.",
+    "width": 1600,
+    "height": 1000,
+    "is_hero_candidate": true,
+    "notes": "Tripadvisor listing photo. The TEPPAN sign is visible, so this one is verified. Address (Tripadvisor and Wanderlog listings): G/F La Terraza Building, 1131 Palm St., Subic Bay Freeport Zone (same building as Le Charme Suites). The domain teppan101.com did not resolve. Listed hours are from an old Restaurant Guru page and may be out of date."
+  },
+  {
+    "file": "teppan-02.jpg",
+    "source_url": "https://www.youtube.com/watch?v=AGxW2tUXYCc&t=101s",
+    "page_url": "https://www.tripadvisor.com/Restaurant_Review-g4751237-d9807775-Reviews-Teppan_101-Subic_Bay_Freeport_Zone_Bataan_Province_Central_Luzon_Region_Luzon.html",
+    "what_it_shows": "Raw steaks cooking on the teppan griddle, with the chef's spatula in frame.",
+    "width": 1280,
+    "height": 720,
+    "is_hero_candidate": true,
+    "notes": "Frame grab at 1:41 from the raincheckblog video \"A Teppan 101 Subic Experience\"."
+  },
+  {
+    "file": "teppan-03.jpg",
+    "source_url": "https://www.youtube.com/watch?v=AGxW2tUXYCc&t=168s",
+    "page_url": "https://www.tripadvisor.com/Restaurant_Review-g4751237-d9807775-Reviews-Teppan_101-Subic_Bay_Freeport_Zone_Bataan_Province_Central_Luzon_Region_Luzon.html",
+    "what_it_shows": "Plated grilled prawns and sliced steak with vegetables and sauce.",
+    "width": 1280,
+    "height": 720,
+    "is_hero_candidate": false,
+    "notes": "Frame grab at 2:48 from the same raincheckblog video."
+  },
+  {
+    "file": "teppan-04.jpg",
+    "source_url": "https://www.youtube.com/watch?v=mqef1n3FA-o&t=39s",
+    "page_url": "https://www.tripadvisor.com/Restaurant_Review-g4751237-d9807775-Reviews-Teppan_101-Subic_Bay_Freeport_Zone_Bataan_Province_Central_Luzon_Region_Luzon.html",
+    "what_it_shows": "Chef in a black uniform at the teppan counter, with framed peacock artwork on the wall.",
+    "width": 854,
+    "height": 480,
+    "is_hero_candidate": false,
+    "notes": "Frame grab at 0:39 from the \"Teppan 101\" vlog by Joy Mendiola. A guest is partly in frame; no names shown."
+  },
+  {
+    "file": "teppan-05.jpg",
+    "source_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/b4/c6/a8/teppan-101.jpg?w=1600&h=1000&s=1",
+    "page_url": "https://www.tripadvisor.com/Restaurant_Review-g4751237-d9807775-Reviews-Teppan_101-Subic_Bay_Freeport_Zone_Bataan_Province_Central_Luzon_Region_Luzon.html",
+    "what_it_shows": "Private dining room with teal chairs, a wood table and framed blue bird artwork.",
+    "width": 1280,
+    "height": 960,
+    "is_hero_candidate": false,
+    "notes": "Tripadvisor listing photo. The framed artwork matches the peacock wall in the vlog (teppan-04)."
+  },
+  {
+    "file": "teppan-06.jpg",
+    "source_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/a9/70/7f/bar-snack-chicken-wings.jpg?w=960&h=1000&s=1",
+    "page_url": "https://www.tripadvisor.com/Restaurant_Review-g4751237-d9807775-Reviews-Teppan_101-Subic_Bay_Freeport_Zone_Bataan_Province_Central_Luzon_Region_Luzon.html",
+    "what_it_shows": "Chicken wings served in a martini glass on a bamboo mat.",
+    "width": 960,
+    "height": 1000,
+    "is_hero_candidate": false,
+    "notes": "Dish from the Teppan 101 Tripadvisor listing. Not sign-verified."
+  },
+  {
+    "file": "teppan-v1-poster.jpg",
+    "source_url": "https://www.youtube.com/watch?v=AGxW2tUXYCc&t=99s",
+    "page_url": "https://www.tripadvisor.com/Restaurant_Review-g4751237-d9807775-Reviews-Teppan_101-Subic_Bay_Freeport_Zone_Bataan_Province_Central_Luzon_Region_Luzon.html",
+    "what_it_shows": "Poster frame from the grill clip.",
+    "width": 720,
+    "height": 406,
+    "is_hero_candidate": false,
+    "notes": "Frame at 1:39 of the raincheckblog video."
+  },
+  {
+    "file": "teppan-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=AGxW2tUXYCc&t=96s",
+    "page_url": "https://www.tripadvisor.com/Restaurant_Review-g4751237-d9807775-Reviews-Teppan_101-Subic_Bay_Freeport_Zone_Bataan_Province_Central_Luzon_Region_Luzon.html",
+    "what_it_shows": "Teppan grill clip: steaks cooking on the griddle, 7 s muted loop, no captions.",
+    "width": 720,
+    "height": 406,
+    "is_hero_candidate": false,
+    "notes": "Cut from 1:36 to 1:43 of the raincheckblog video, scaled to 720 px. The map overlay near the end of the video is outside this clip."
+  }
+]

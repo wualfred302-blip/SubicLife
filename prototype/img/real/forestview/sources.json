@@ -1,0 +1,82 @@
+[
+  {
+    "file": "forestview-01.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0224b120009zulq38B81C_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2879911/forest-view-leisure-residences/",
+    "what_it_shows": "Exterior: blue-and-white building with the \"FOREST VIEW\" sign on the facade",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel photo, 960 px. Sign is part of the real building, not an overlay."
+  },
+  {
+    "file": "forestview-02.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0580x12000sz8yitu9C73_Z_1280_853_R50_Q90.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2879911/forest-view-leisure-residences/",
+    "what_it_shows": "Pool: round outdoor pool surrounded by palm trees and garden",
+    "width": 1137,
+    "height": 853,
+    "is_hero_candidate": true,
+    "notes": "Best hero: landscape 1137 px, outdoor pool (Trip.com \"Outdoor swimming pool\" group). Resized to 1137 wide; under 1200 but above the 800 minimum."
+  },
+  {
+    "file": "forestview-03.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0222y12000dmw0y0m2323_Z_1280_853_R50_Q90.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2879911/forest-view-leisure-residences/",
+    "what_it_shows": "Pool area: pool with palm trees and blue-topped round tables on the lawn",
+    "width": 1137,
+    "height": 853,
+    "is_hero_candidate": true,
+    "notes": "Alternative hero, landscape 1137 px, pool deck with palms."
+  },
+  {
+    "file": "forestview-04.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0224p12000f8795ag6D35_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2879911/forest-view-leisure-residences/",
+    "what_it_shows": "Apartment living room: sofa, coffee table and wall-mounted TV cabinet",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel photo, 960 px. Unit room type not named on this photo."
+  },
+  {
+    "file": "forestview-05.jpg",
+    "source_url": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/854119249.jpg?k=2515dc747b7b0bd9c2ff7d4117bee0e117f63154c496e89cc4cf0b4e1b3aaf79&o=",
+    "page_url": "https://www.booking.com/hotel/ph/forest-view-leisure-residences.en-gb.html",
+    "what_it_shows": "Apartment kitchen: kitchen counter, fridge and stove in the unit",
+    "width": 1024,
+    "height": 768,
+    "is_hero_candidate": false,
+    "notes": "Booking.com hotel photo, signed CDN URL (key included in source_url), 1024 px."
+  },
+  {
+    "file": "forestview-06.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0225r12000nztm8x2CAFC_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2879911/forest-view-leisure-residences/",
+    "what_it_shows": "Bedroom: two single beds with green bedspreads, wall air-conditioner and curtains",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel photo, 960 px. Booking.com names Deluxe Apartment (2 single beds) and Suite, but Trip.com does not tie this photo to either, so the room type is not confirmed."
+  },
+  {
+    "file": "forestview-07.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0222s120009zyxl8q3C53_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2879911/forest-view-leisure-residences/",
+    "what_it_shows": "Exterior: low houses of the residence with palm trees and a lawn in front",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel photo, 960 px. Shows the apartment blocks."
+  },
+  {
+    "file": "forestview-08.jpg",
+    "source_url": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/854681317.jpg?k=72fc0fb4edb36a8a62a25c630a1601e6ae7a7ed4dc60e73898c0013368ce0cde&o=",
+    "page_url": "https://www.booking.com/hotel/ph/forest-view-leisure-residences.en-gb.html",
+    "what_it_shows": "Gym: gym room with cardio machines and weights on green flooring",
+    "width": 1024,
+    "height": 768,
+    "is_hero_candidate": false,
+    "notes": "Booking.com hotel photo, signed CDN URL (key included), 1024 px. Facility photo, not a room."
+  }
+]

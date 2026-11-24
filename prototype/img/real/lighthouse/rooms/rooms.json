@@ -1,0 +1,89 @@
+{
+  "Garden Room": [
+    {
+      "file": "garden-room-01.jpg",
+      "source_url": "https://dimg04.tripcdn.com/images/0234c224x9awc855k61A8.jpg",
+      "page_url": "https://ph.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2881735/the-lighthouse-marina-resort/photo.html",
+      "what_it_shows": "Room with two beds with yellow-green bedding, wood floor and blue walls",
+      "width": 1600,
+      "height": 2134,
+      "notes": "Closest real type: Aqua Terrace (no Garden Room exists). Trip.com guest review photo tagged \"Aqua Terrace\" by the site. Portrait orientation."
+    },
+    {
+      "file": "garden-room-02.jpg",
+      "source_url": "https://dimg04.tripcdn.com/images/0235d224x9awcvcaxDFBA.jpg",
+      "page_url": "https://ph.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2881735/the-lighthouse-marina-resort/photo.html",
+      "what_it_shows": "Wood desk with TV and bedside items, bed with yellow-green runner",
+      "width": 1600,
+      "height": 2134,
+      "notes": "Closest real type: Aqua Terrace. Trip.com guest review photo tagged \"Aqua Terrace\" by the site. Portrait orientation."
+    },
+    {
+      "file": "garden-room-03.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0221n12000j5xg4c07BF1.jpg",
+      "page_url": "https://ph.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2881735/the-lighthouse-marina-resort/",
+      "what_it_shows": "Wide room with two beds with olive throws, wall TV, desk, balcony door, white ceiling cove",
+      "width": 1600,
+      "height": 1068,
+      "notes": "Closest real type: Aqua Terrace. Trip.com room JSON for room id 335853185 \"Aqua Terrace\" lists this photo."
+    }
+  ],
+  "Deluxe Bay View": [
+    {
+      "file": "deluxe-bay-view-01.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0224k120009ztbv9uB0BE.jpg",
+      "page_url": "https://ph.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2881735/the-lighthouse-marina-resort/",
+      "what_it_shows": "King bed with green bedding, wall TV, desk with chair and balcony door to the view",
+      "width": 1600,
+      "height": 1200,
+      "notes": "Closest real type: Aqua Veranda. Verified: Trip.com room JSON for room id 335853186 \"Aqua Veranda\" lists this photo. Previous -01 (Lighthouse site photo) removed: the site labels it AQUA ROOM, not Veranda."
+    }
+  ],
+  "Lighthouse Suite": [
+    {
+      "file": "lighthouse-suite-01.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0222o12000kwr9te91A9C.jpg",
+      "page_url": "https://ph.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2881735/the-lighthouse-marina-resort/",
+      "what_it_shows": "Bed with green runner and bolsters, glass-walled bathroom with freestanding tub behind",
+      "width": 1600,
+      "height": 1072,
+      "notes": "Closest real type: Aqua Spa Suite (no Lighthouse Suite exists). Trip.com room JSON for room id 335853183 \"Aqua Spa Suite\" lists this photo. "
+    },
+    {
+      "file": "lighthouse-suite-02.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0222512000kwr9wf20CEC.jpg",
+      "page_url": "https://ph.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2881735/the-lighthouse-marina-resort/",
+      "what_it_shows": "Bed with green throw, bedside lamp, glass bathroom with tub, wood floor",
+      "width": 1600,
+      "height": 1224,
+      "notes": "Closest real type: Aqua Spa Suite (no Lighthouse Suite exists). Trip.com room JSON for room id 335853183 \"Aqua Spa Suite\" lists this photo. "
+    },
+    {
+      "file": "lighthouse-suite-03.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0582w12000swlhxep98CA.jpg",
+      "page_url": "https://ph.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2881735/the-lighthouse-marina-resort/",
+      "what_it_shows": "Bed with olive-brown throw, glass-walled bathroom and vanity, sitting chair",
+      "width": 1280,
+      "height": 830,
+      "notes": "Closest real type: Aqua Spa Suite (no Lighthouse Suite exists). Trip.com room JSON for room id 335853183 \"Aqua Spa Suite\" lists this photo. "
+    },
+    {
+      "file": "lighthouse-suite-04.jpg",
+      "source_url": "https://static.wixstatic.com/media/7c5eba_76c6457e2fcd44c999fe4c28d0fbd92d~mv2_d_2048_1364_s_2.jpg",
+      "page_url": "https://www.lighthousesubic.com/roomsandrates",
+      "what_it_shows": "Bed with green throw and the jacuzzi tub visible through the glass wall; two models",
+      "width": 1600,
+      "height": 1066,
+      "notes": "Lighthouse official Rooms and Rates page: image sits directly under the \"AQUA SPA SUITE\" heading (checked by position in page source). Models in frame."
+    },
+    {
+      "file": "lighthouse-suite-05.jpg",
+      "source_url": "https://aw-d.tripcdn.com/images/0222e12000kwr9g26304C.jpg",
+      "page_url": "https://ph.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-2881735/the-lighthouse-marina-resort/",
+      "what_it_shows": "Freestanding jacuzzi-style tub with white curtains and the bed behind, rose petals",
+      "width": 1600,
+      "height": 1164,
+      "notes": "Closest real type: Aqua Spa Suite (no Lighthouse Suite exists). Trip.com room JSON for room id 335853183 \"Aqua Spa Suite\" lists this photo. Bathroom/tub shot (site describes a bubble jacuzzi tub). Model in frame."
+    }
+  ]
+}

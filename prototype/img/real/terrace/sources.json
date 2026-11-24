@@ -1,0 +1,102 @@
+[
+  {
+    "file": "terrace-01.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0226d120009t4zfmyE65D_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-6056497/terrace-hotel/",
+    "what_it_shows": "Exterior: hotel building facade with palm trees and paved entrance plaza",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel photo, 960 px (largest size available for this image)."
+  },
+  {
+    "file": "terrace-02.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0584112000klswghhDAAE_Z_1280_853_R50_Q90.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-6056497/terrace-hotel/",
+    "what_it_shows": "Pool: rooftop swimming pool with a view of the bay and mountains",
+    "width": 1163,
+    "height": 854,
+    "is_hero_candidate": true,
+    "notes": "Best hero: landscape pool with bay view. Rooftop pool per Wanderlog listing; photo from Trip.com Outdoor swimming pool group."
+  },
+  {
+    "file": "terrace-03.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0585u12000svsmzx53709_Z_1280_853_R50_Q90.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-6056497/terrace-hotel/",
+    "what_it_shows": "Pool: infinity-edge pool with blue sky and distant hills",
+    "width": 1137,
+    "height": 854,
+    "is_hero_candidate": false,
+    "notes": "Trip.com Outdoor swimming pool group, infinity-edge pool with sky and distant hills."
+  },
+  {
+    "file": "terrace-04.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0226712000l0x26lqCE16_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-6056497/terrace-hotel/",
+    "what_it_shows": "The view: rooftop terrace with dining tables and chairs looking out over the bay",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel photo, 960 px."
+  },
+  {
+    "file": "terrace-05.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0227312000ai32acqCCB1_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-6056497/terrace-hotel/",
+    "what_it_shows": "Lobby: lounge area with white ceiling, lights and seating",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel photo, 960 px. Lobby/lounge identified from the picture; no caption."
+  },
+  {
+    "file": "terrace-06.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0224l12000j4lavvw8FD9_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-6056497/terrace-hotel/",
+    "what_it_shows": "Room type: Executive Room with Terrace, green feature wall, one bed with white linen, wood headboard",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Room type name taken from Trip.com room list (\"Executive Room with Terrace\", the only room type that site lists). Booking/Klook room names not checked in this run."
+  },
+  {
+    "file": "terrace-07.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0221612000kzyk1zyEFBD_R_960_660_R5_D.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-6056497/terrace-hotel/",
+    "what_it_shows": "Room type: Executive Room with Terrace, green wall room with a window and balcony view of palms and the bay",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Same room type as terrace-06. Window and balcony view visible."
+  },
+  {
+    "file": "terrace-08.jpg",
+    "source_url": "https://aw-d.tripcdn.com/images/0221p12000kzyjwfs1563.jpg",
+    "page_url": "https://www.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-6056497/terrace-hotel/",
+    "what_it_shows": "Room type: Executive Room with Terrace, twin beds with green feature wall",
+    "width": 1600,
+    "height": 954,
+    "is_hero_candidate": false,
+    "notes": "Same room type as terrace-06 (Trip.com room photo, larger copy on the aw-d CDN host)."
+  },
+  {
+    "file": "terrace-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=AArZeQZsSHE",
+    "page_url": "https://www.youtube.com/watch?v=AArZeQZsSHE",
+    "what_it_shows": "Rooftop pool with the bay and hills behind (7 s muted loop, from 0:56 of the 2:21 video)",
+    "width": 640,
+    "height": 400,
+    "is_hero_candidate": false,
+    "notes": "Video title: Terrace Hotel Subic Bay 2021 (vlogger channel, public). Cropped left 28 percent to remove the vlogger avatar and a promo sticker, cropped to 80 percent height; no audio. Video shows the same pool as terrace-02."
+  },
+  {
+    "file": "terrace-v1-poster.jpg",
+    "source_url": "https://www.youtube.com/watch?v=AArZeQZsSHE",
+    "page_url": "https://www.youtube.com/watch?v=AArZeQZsSHE",
+    "what_it_shows": "Poster frame of the rooftop pool loop: pool, bay sky, building under construction behind",
+    "width": 640,
+    "height": 400,
+    "is_hero_candidate": false,
+    "notes": "Frame at 1.5 s into the loop, same crop as terrace-v1.mp4."
+  }
+]

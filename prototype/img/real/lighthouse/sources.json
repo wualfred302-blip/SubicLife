@@ -1,0 +1,112 @@
+[
+  {
+    "file": "lighthouse-01.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_2463982130ac4768be64bcfd85b80150~mv2_d_2762_2100_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/",
+    "what_it_shows": "Aerial of the hotel building, pool deck and palm gardens beside the bay",
+    "width": 1600,
+    "height": 1216,
+    "is_hero_candidate": false,
+    "notes": "Official Lighthouse Marina Resort website (Wix media)"
+  },
+  {
+    "file": "lighthouse-02.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_96ae215af8d8435882b79184045cce09~mv2_d_3360_2100_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/",
+    "what_it_shows": "Wide aerial of the lighthouse tower, resort buildings and colourful boats in the bay",
+    "width": 1600,
+    "height": 1000,
+    "is_hero_candidate": true,
+    "notes": "Official Lighthouse Marina Resort website (Wix media); widest official shot"
+  },
+  {
+    "file": "lighthouse-03.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_c4fab4331550479fa7891bf653cf6d10%7Emv2_d_2798_2100_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/",
+    "what_it_shows": "Aerial of the resort on the sandy shore with the lighthouse tower and turquoise water",
+    "width": 1600,
+    "height": 1200,
+    "is_hero_candidate": false,
+    "notes": "Official Lighthouse Marina Resort website (Wix media)"
+  },
+  {
+    "file": "lighthouse-04.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_2c5b7dfc1b0e46e486e0c5c6f489453a~mv2_d_2048_1360_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/",
+    "what_it_shows": "Two women and a staff member walking on the pier beside the lighthouse tower",
+    "width": 1600,
+    "height": 1062,
+    "is_hero_candidate": false,
+    "notes": "Official Lighthouse Marina Resort website (Wix media)"
+  },
+  {
+    "file": "lighthouse-06.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_7fc572e76fca4c7993e67d49c2c1dc10~mv2_d_2048_1365_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/",
+    "what_it_shows": "Guest room with a king bed, yellow-green striped throw pillows and wood headboard",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": false,
+    "notes": "Official Lighthouse Marina Resort website (Wix media); room type name not labelled (Deluxe Bay View/Garden Room not confirmed)"
+  },
+  {
+    "file": "lighthouse-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=bmMuAKrTwhc",
+    "page_url": "https://www.youtube.com/watch?v=bmMuAKrTwhc",
+    "what_it_shows": "Hotel interior and courtyard walkways with garden and pool views at The Lighthouse Marina Resort",
+    "width": 720,
+    "height": 0,
+    "is_hero_candidate": false,
+    "notes": "7 s muted 720px clip cut from 2023 4K YouTube walkthrough by Paseo V (channel), 80-87 s; not official channel"
+  },
+  {
+    "file": "lighthouse-07.jpg",
+    "source_url": "https://pix8.agoda.net/hotelImages/255534/0/d90f6133e28f0723ee7f2154e1c771d4.jpeg",
+    "page_url": "https://www.agoda.com/en-gb/the-lighthouse-marina-resort/hotel/subic-zambales-ph.html",
+    "what_it_shows": "Lobby of The Lighthouse Marina Resort: reception desk on the left, lounge seating and coffee tables under arched windows",
+    "width": 1600,
+    "height": 908,
+    "is_hero_candidate": false,
+    "notes": "Agoda property gallery, photo captioned 'Lobby'. Resized from 1600px. Public guest-facing listing photo."
+  },
+  {
+    "file": "lighthouse-08.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_f5e5e9c4d2714289863848e5526f33e2~mv2_d_3360_1400_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/",
+    "what_it_shows": "Resort pool deck with a guest lounging in a chair beside the pool, lighthouse tower behind the pool area",
+    "width": 1600,
+    "height": 666,
+    "is_hero_candidate": true,
+    "notes": "Official Lighthouse Marina Resort website (Wix media), resized from 3360px. Wide 2.4:1 pool hero candidate."
+  },
+  {
+    "file": "lighthouse-09.jpg",
+    "source_url": "https://pix8.agoda.net/hotelImages/255534/3289580/3da25ca1abd1da328c619757c9d3ebd1.jpeg",
+    "page_url": "https://www.agoda.com/en-gb/the-lighthouse-marina-resort/hotel/subic-zambales-ph.html",
+    "what_it_shows": "Aqua Veranda room: king bed, wall TV, balcony door open to the view outside. Closest real type to the requested Deluxe Bay View",
+    "width": 1600,
+    "height": 1200,
+    "is_hero_candidate": false,
+    "notes": "Agoda gallery, captioned 'Aqua Veranda - Balcony/terrace'. Requested name 'Deluxe Bay View' does not exist on the resort's site; the official Rooms & Rates page lists AQUA ROOM, AQUA TERRACE, AQUA VERANDA, AQUA SPA SUITE, AQUA VERANDA SUITE."
+  },
+  {
+    "file": "lighthouse-10.jpg",
+    "source_url": "https://pix8.agoda.net/hotelImages/255534/3289583/78a144a7be83e18b1648066f66c07c18.jpeg",
+    "page_url": "https://www.agoda.com/en-gb/the-lighthouse-marina-resort/hotel/subic-zambales-ph.html",
+    "what_it_shows": "Aqua Spa Suite: king bed with green throw and cushions beside a glass-walled bathroom. Closest real type to the requested Lighthouse Suite",
+    "width": 1600,
+    "height": 1062,
+    "is_hero_candidate": false,
+    "notes": "Agoda gallery, captioned 'Aqua Spa Suite - Bed'. Requested name 'Lighthouse Suite' does not exist on the resort's site."
+  },
+  {
+    "file": "lighthouse-11.jpg",
+    "source_url": "https://pix8.agoda.net/hotelImages/255534/3289581/92bd046f8cb1c795860da86fdd09577b.jpeg",
+    "page_url": "https://www.agoda.com/en-gb/the-lighthouse-marina-resort/hotel/subic-zambales-ph.html",
+    "what_it_shows": "Aqua Terrace room: two single beds with green covers, wall TV, desk and window. Closest standard room to the requested Garden Room",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Agoda gallery, captioned 'Aqua Terrace - View'. Requested name 'Garden Room' does not exist on the resort's site; no garden room in the official list."
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "file": "camayan-01.jpg",
+    "source_url": "https://camayanbeachresort.ph/wp-content/uploads/2024/06/TN-Walkway.webp",
+    "page_url": "https://camayanbeachresort.ph/",
+    "what_it_shows": "Resort buildings and walkway along the beachfront with palms and sea behind",
+    "width": 1600,
+    "height": 854,
+    "is_hero_candidate": true,
+    "notes": "Official Camayan Beach Resort website (camayanbeachresort.ph) homepage media. Note: camayanbeachandresort.com NOT used - possible imitation domain"
+  },
+  {
+    "file": "camayan-02.jpg",
+    "source_url": "https://camayanbeachresort.ph/wp-content/uploads/2024/06/CBR-Facade.webp",
+    "page_url": "https://camayanbeachresort.ph/",
+    "what_it_shows": "Front facade of the Camayan Beach Resort hotel building",
+    "width": 1600,
+    "height": 854,
+    "is_hero_candidate": false,
+    "notes": "Official camayanbeachresort.ph media"
+  },
+  {
+    "file": "camayan-03.jpg",
+    "source_url": "https://camayanbeachresort.ph/wp-content/uploads/2023/08/Homepage-Captain.jpg",
+    "page_url": "https://camayanbeachresort.ph/",
+    "what_it_shows": "Captain room with a double bed, bedside lamps and towel swan on the bed",
+    "width": 1600,
+    "height": 854,
+    "is_hero_candidate": false,
+    "notes": "Official site; room category name from file name only ('Captain')"
+  },
+  {
+    "file": "camayan-04.jpg",
+    "source_url": "https://camayanbeachresort.ph/wp-content/uploads/2024/06/Homepage-Deluxe.webp",
+    "page_url": "https://camayanbeachresort.ph/",
+    "what_it_shows": "Deluxe room with two twin beds, wood floor and garden door",
+    "width": 1600,
+    "height": 854,
+    "is_hero_candidate": false,
+    "notes": "Official site; room category from file name 'Deluxe'"
+  },
+  {
+    "file": "camayan-05.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2022/09/Camayan-beach-resort-pool.jpg",
+    "page_url": "https://oceanadventure.ph/visit-camayan-beach-resort/",
+    "what_it_shows": "Swimming pool with umbrellas and loungers beside the bay, guests swimming",
+    "width": 1216,
+    "height": 782,
+    "is_hero_candidate": false,
+    "notes": "Photo hosted on Ocean Adventure site (sister property, same area); Camayan pool"
+  },
+  {
+    "file": "camayan-06.jpg",
+    "source_url": "https://oceanadventure.ph/wp-content/uploads/2022/09/Camayan-room2.jpg",
+    "page_url": "https://oceanadventure.ph/visit-camayan-beach-resort/",
+    "what_it_shows": "Hotel room with bed, wall lamps and wood-slat accents",
+    "width": 1330,
+    "height": 600,
+    "is_hero_candidate": false,
+    "notes": "Photo hosted on Ocean Adventure site, labelled Camayan room"
+  },
+  {
+    "file": "camayan-07.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Camayan_beach_cottages_-_panoramio.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Camayan_beach_cottages_-_panoramio.jpg",
+    "what_it_shows": "Beach cottages with thatched roofs and parked boats, sandy shore, trees behind",
+    "width": 1600,
+    "height": 1062,
+    "is_hero_candidate": false,
+    "notes": "Wikimedia Commons, CC BY 3.0, Panoramio photo titled Camayan beach cottages"
+  },
+  {
+    "file": "camayan-08.jpg",
+    "source_url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Camayan_beach_resort_-_panoramio.jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Camayan_beach_resort_-_panoramio.jpg",
+    "what_it_shows": "Waterfront restaurant and pier building with a flagpole beside the beach, boats on the water",
+    "width": 1600,
+    "height": 1062,
+    "is_hero_candidate": false,
+    "notes": "Wikimedia Commons, CC BY 3.0, Panoramio photo titled Camayan beach resort"
+  },
+  {
+    "file": "camayan-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=kDTm_hOCkVg",
+    "page_url": "https://www.youtube.com/watch?v=kDTm_hOCkVg",
+    "what_it_shows": "Clip from 806s to 813s of a Camayan day-tour video: people wading and swimming in the shallow bay water, headland behind",
+    "width": 720,
+    "height": 406,
+    "is_hero_candidate": false,
+    "notes": "Public YouTube upload titled \"Camayan Beach Resort, Subic\" (about 6 months old per search). Uploader not verified. Muted, 720px wide, re-encoded from a 1280x720 source."
+  },
+  {
+    "file": "camayan-v1-poster.jpg",
+    "source_url": "https://www.youtube.com/watch?v=kDTm_hOCkVg",
+    "page_url": "https://www.youtube.com/watch?v=kDTm_hOCkVg",
+    "what_it_shows": "Frame at 815s: Camayan beach shallows with swimmers and a headland behind",
+    "width": 720,
+    "height": 406,
+    "is_hero_candidate": false,
+    "notes": "Poster frame from camayan-v1.mp4."
+  }
+]

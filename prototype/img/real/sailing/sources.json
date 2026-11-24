@@ -1,0 +1,92 @@
+[
+  {
+    "file": "sailing-01.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_ba968c6f116b46f39cce87a2c139f18e~mv2_d_2721_1806_s_2.jpg",
+    "page_url": "https://subicsailing.com/",
+    "what_it_shows": "Sailboats up on stands in the boatyard, with a powerboat alongside. Club's own homepage image.",
+    "width": 1600,
+    "height": 1062,
+    "is_hero_candidate": false,
+    "notes": "Official site image. Resized from 2721px."
+  },
+  {
+    "file": "sailing-02.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_db249c94c37c428e84720de2d76354da~mv2_d_2398_1800_s_2.jpg",
+    "page_url": "https://subicsailing.com/",
+    "what_it_shows": "Club instructor and two students at the helm and deck of a sailboat during a sailing lesson.",
+    "width": 1600,
+    "height": 1202,
+    "is_hero_candidate": false,
+    "notes": "Official site image. Shows the sailing school side of the club."
+  },
+  {
+    "file": "sailing-03.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_f7481af82bd6490bae3e1fc888c25d96~mv2_d_1646_1800_s_2.jpg",
+    "page_url": "https://subicsailing.com/",
+    "what_it_shows": "Crew member on the foredeck of a sailboat, with LIGHTHOUSE lettering on the sail.",
+    "width": 1600,
+    "height": 1750,
+    "is_hero_candidate": false,
+    "notes": "Official site image. Portrait crop. The LIGHTHOUSE sail suggests the resort-linked fleet."
+  },
+  {
+    "file": "sailing-05.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_f7db8b920cbe48ada5895960151cf12f~mv2_d_4608_3072_s_4_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/",
+    "what_it_shows": "White sailboat under sail on blue bay water, with the Lighthouse tower on shore in the background.",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": false,
+    "notes": "Resort site image. Boat ownership not confirmed."
+  },
+  {
+    "file": "sailing-06.jpg",
+    "source_url": "https://www.youtube.com/watch?v=n3X081b5sjo",
+    "page_url": "https://www.youtube.com/watch?v=n3X081b5sjo",
+    "what_it_shows": "Frame at 0:15 from the Subic Sailing Club teaser video: several white-sailed boats racing across the bay.",
+    "width": 1280,
+    "height": 546,
+    "is_hero_candidate": false,
+    "notes": "Still taken from the club's official YouTube channel (Subic Sailing Club). Used as a frame, not as a standalone photo."
+  },
+  {
+    "file": "sailing-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=n3X081b5sjo",
+    "page_url": "https://www.youtube.com/watch?v=n3X081b5sjo",
+    "what_it_shows": "Clip 0:15 to 0:22 of the Subic Sailing Club teaser: racing boats on the bay. Muted.",
+    "width": 720,
+    "height": 308,
+    "is_hero_candidate": false,
+    "notes": "Official channel: Subic Sailing Club, 2019-05-23, 139s original. Compressed, 720px wide, under 1 MB."
+  },
+  {
+    "file": "sailing-v1-poster.jpg",
+    "source_url": "https://www.youtube.com/watch?v=n3X081b5sjo",
+    "page_url": "https://www.youtube.com/watch?v=n3X081b5sjo",
+    "what_it_shows": "Poster frame at 0:15.5 for sailing-v1.mp4.",
+    "width": 1280,
+    "height": 546,
+    "is_hero_candidate": false,
+    "notes": "Same frame as sailing-06.jpg."
+  },
+  {
+    "file": "sailing-07.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_72060684d8c247daa854b5561d820771~mv2.jpg",
+    "page_url": "https://www.subicsailing.com/post/bpi-subic-regatta-china-sea-2026",
+    "what_it_shows": "Race yachts with dark sails heeling on the bay during the BPI Subic Bay Regatta, with a race official in a white shirt waving a flag from the committee boat in the foreground",
+    "width": 1600,
+    "height": 900,
+    "is_hero_candidate": true,
+    "notes": "Subic Sailing Club post on the BPI Subic Bay Regatta. The image came up in Bing image results under that post. It was not in the saved HTML of the post, so the page link is inferred from the post URL. Resized from 2400px. Wide 16:9 hero candidate. Sponsor logos on shirts are incidental, not overlays."
+  },
+  {
+    "file": "sailing-08.jpg",
+    "source_url": "https://scontent.fcrk3-3.fna.fbcdn.net/v/t39.30808-6/481473664_1216385713826884_3536935636241396709_n.jpg",
+    "page_url": "https://www.facebook.com/subicsailing/photos",
+    "what_it_shows": "Small dinghies racing on the bay, with sails numbered and wooded hills behind the shoreline",
+    "width": 960,
+    "height": 395,
+    "is_hero_candidate": false,
+    "notes": "Public photo on the Subic Sailing Club Facebook page. Signed query string dropped from source_url, so the link may not load later. Facebook served it at 960px wide (the original is 1927x792)."
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "file": "bestwestern-01.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Outside-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/photo-gallery/",
+    "what_it_shows": "Exterior of Best Western Plus Hotel Subic at street level, the hotel's main building facade with entrance",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": true,
+    "notes": "Hotel's own WordPress media library. 2560x1707 original."
+  },
+  {
+    "file": "bestwestern-02.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Lobby-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/accommodation/",
+    "what_it_shows": "Main lobby: high coffered ceiling with ring light, marble floor, reception and lounge seating",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Hotel's own media library."
+  },
+  {
+    "file": "bestwestern-03.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2023/05/POOL-BAR.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/wp-json/wp/v2/media/1043",
+    "what_it_shows": "Rooftop swimming pool with blue tile, pool loungers and city skyline behind it (the Sky Oasis pool area)",
+    "width": 1600,
+    "height": 1200,
+    "is_hero_candidate": true,
+    "notes": "Hotel's own media library, found via WP media API; not shown on a public page."
+  },
+  {
+    "file": "bestwestern-04.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Deluxe-King-2-1-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/deluxe-king-2/",
+    "what_it_shows": "Deluxe King room: one king bed with red runner and white bedding, desk chair, window with sheer curtains",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Room type: Deluxe King."
+  },
+  {
+    "file": "bestwestern-05.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Deluxe-Queen-1-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/deluxe-queen/",
+    "what_it_shows": "Deluxe Queen room: queen bed with red runner, TV cabinet and a window with hills outside",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Room type: Deluxe Queen."
+  },
+  {
+    "file": "bestwestern-06.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Deluxe-Twin-1-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/deluxe-twin-2-3/",
+    "what_it_shows": "Deluxe Twin room: two single beds with red runners and matching cushions, desk and window",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Room type: Deluxe Twin."
+  },
+  {
+    "file": "bestwestern-07.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Superior-King-1-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/wp-json/wp/v2/media/1834",
+    "what_it_shows": "Superior King room: king bed with headboard lamps, armchair and desk",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Room type: Superior King. Page is the WP media record; the Superior King room page did not show this image in the saved HTML."
+  },
+  {
+    "file": "bestwestern-08.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Executive-Suite-1-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/wp-json/wp/v2/media/1768",
+    "what_it_shows": "Executive Suite bedroom: king bed with red runner and wood wall panel, with a separate living area of red and grey armchairs beyond",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Room type: Executive Suite. Page is the WP media record."
+  },
+  {
+    "file": "bestwestern-09.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Presidential-Suite-1-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/wp-json/wp/v2/media/1849",
+    "what_it_shows": "Presidential Suite kitchen: wood cabinets, large fridge, counter and kitchen island",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Room type: Presidential Suite. Page is the WP media record."
+  },
+  {
+    "file": "bestwestern-10.jpg",
+    "source_url": "https://bestwesternplushotelsubic.com/wp-content/uploads/2025/07/Gym-4-scaled.jpg",
+    "page_url": "https://bestwesternplushotelsubic.com/facilities/",
+    "what_it_shows": "View: fitness centre floor-to-ceiling windows looking out over the green hills and trees around Subic",
+    "width": 1600,
+    "height": 1068,
+    "is_hero_candidate": false,
+    "notes": "Used as the view shot. It is the hotel's own photo of the view through the gym windows, not a room balcony view."
+  },
+  {
+    "file": "bestwestern-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=kjOWpNeH8yk",
+    "page_url": "https://www.youtube.com/watch?v=kjOWpNeH8yk",
+    "what_it_shows": "Pool with palm trees and hills behind it, from a 2016 promo video of the hotel",
+    "width": 720,
+    "height": 406,
+    "is_hero_candidate": false,
+    "notes": "YouTube 'BEST WESTERN PLUS Luxury Hotel Subic Bay Philippines' (travelindex, 2016, 84 s). Clip 40-47 s (pool at about 42 s) is clean of logos and captions; the overlays are only at the start and end. Poster: bestwestern-v1-poster.jpg. Size 0.18 MB."
+  }
+]

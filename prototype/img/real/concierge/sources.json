@@ -1,0 +1,102 @@
+[
+  {
+    "file": "golf-01.jpg",
+    "source_url": "https://www.subicgolf.com/wp/wp-content/themes/subic/images/page/img-course01.jpg",
+    "page_url": "https://www.subicgolf.com/course/",
+    "what_it_shows": "Elevated view down a manicured green fairway from the tee, with bunkers on the right, a lake and hills behind. Subic International Golf Club, Binictican",
+    "width": 922,
+    "height": 1090,
+    "is_hero_candidate": false,
+    "notes": "Official site of Subic International Golf Club (Wikipedia gives its location as Binictican Drive, Olongapo). No club called Subic Bay Golf Club turned up. Portrait, so the square crop will cut the sides."
+  },
+  {
+    "file": "golf-02.jpg",
+    "source_url": "https://www.subicgolf.com/wp/wp-content/themes/subic/images/page/img-about01.jpg",
+    "page_url": "https://www.subicgolf.com/about/",
+    "what_it_shows": "A single large tree standing on a fairway lawn with a bunker to the right and green forest behind",
+    "width": 940,
+    "height": 760,
+    "is_hero_candidate": false,
+    "notes": "Official site. Short side 760 px, under the 800 px minimum. Kept as the second option."
+  },
+  {
+    "file": "spa-01.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Spasify%20Massage%20%26%20Spa%20(Greenwoods%20Park,%20Subic%20Bay,%20Philippines).jpg",
+    "page_url": "https://commons.wikimedia.org/wiki/File:Spasify_Massage_%26_Spa_(Greenwoods_Park,_Subic_Bay,_Philippines).jpg",
+    "what_it_shows": "Massage room with four treatment beds under a ceiling rail with hanging robes and curtains, wooden screens and brick wall, no people",
+    "width": 1600,
+    "height": 766,
+    "is_hero_candidate": false,
+    "notes": "Spasify Massage and Spa in Greenwoods Park, Subic Bay. It is a standalone spa, not a resort spa. Camayan's spa photo on oceanadventure.ph was rejected: 522 px wide and red-tinted. Wikimedia Commons, CC BY-SA 4.0."
+  },
+  {
+    "file": "transfer-01.jpg",
+    "source_url": "https://www.lxvcars.com/wp-content/uploads/2025/01/Clark-Airport-Transfer-to-Manila-by-LXV.jpg",
+    "page_url": "https://www.lxvcars.com/clark-airport-transfers-manila/",
+    "what_it_shows": "Silver Mercedes-style van with the rear door open, luggage lined up on the pavement beside it, outside a glass building",
+    "width": 1260,
+    "height": 630,
+    "is_hero_candidate": false,
+    "notes": "LXV Cars, Clark airport transfer service. The photo does not show Clark airport itself. Short side 630 px, under the 800 px minimum. Only transfer candidate found."
+  },
+  {
+    "file": "island-01.jpg",
+    "source_url": "https://thepinaysolobackpacker.com/wp-content/uploads/2018/01/anawangin-6-1.jpg",
+    "page_url": "https://thepinaysolobackpacker.com/anawangin-cove-zambales-travel-guide-itinerary-budget-blog/",
+    "what_it_shows": "Turquoise cove seen from a hill, with white surf on the sand, green hills above and pine trees on the left edge",
+    "width": 2048,
+    "height": 1367,
+    "is_hero_candidate": true,
+    "notes": "Travel blog The Pinay Solo Backpacker, Anawangin Cove guide. Clean, no text or people. Best island shot."
+  },
+  {
+    "file": "island-02.jpg",
+    "source_url": "https://thepinaysolobackpacker.com/wp-content/uploads/2018/02/NAGSASA-BLOG-15.jpg",
+    "page_url": "https://thepinaysolobackpacker.com/nagsasa-cove/",
+    "what_it_shows": "Wide beach with a curve of surf and golden-brown hills rising behind it",
+    "width": 2048,
+    "height": 1367,
+    "is_hero_candidate": false,
+    "notes": "Travel blog The Pinay Solo Backpacker, Nagsasa Cove guide. No text. Hills are dry and brown, so the colour is warmer than Anawangin."
+  },
+  {
+    "file": "island-03.jpg",
+    "source_url": "https://thepinaysolobackpacker.com/wp-content/uploads/2018/01/anawangin-9-1.jpg",
+    "page_url": "https://thepinaysolobackpacker.com/anawangin-cove-zambales-travel-guide-itinerary-budget-blog/",
+    "what_it_shows": "Green forested hills dropping to a sandy beach with breaking waves and turquoise water",
+    "width": 2048,
+    "height": 1367,
+    "is_hero_candidate": false,
+    "notes": "Same Anawangin blog post as island-01. No text or people."
+  },
+  {
+    "file": "cruise-01.jpg",
+    "source_url": "https://subicbayyachtclub.ph/wp-content/uploads/2025/06/cruise-3.jpg",
+    "page_url": "https://subicbayyachtclub.ph/yacht-cruise/",
+    "what_it_shows": "White motor yacht's upper deck with a group of five guests in white raising their arms, blue sky and sea",
+    "width": 1620,
+    "height": 1080,
+    "is_hero_candidate": false,
+    "notes": "Subic Bay Yacht Club's own yacht cruise page. The photo itself does not confirm Subic Bay. Best bright group-on-deck shot."
+  },
+  {
+    "file": "cruise-02.jpg",
+    "source_url": "https://subicbayyachtclub.ph/wp-content/uploads/2025/06/cruise-4.jpg",
+    "page_url": "https://subicbayyachtclub.ph/yacht-cruise/",
+    "what_it_shows": "Four guests with drinks on a yacht deck at sunset, green island and calm sea behind them",
+    "width": 1620,
+    "height": 1080,
+    "is_hero_candidate": false,
+    "notes": "Subic Bay Yacht Club yacht cruise page. Sunset with a group on deck, as the brief asked. Location not confirmed from the photo."
+  },
+  {
+    "file": "cruise-03.jpg",
+    "source_url": "https://subicbayyachtclub.ph/wp-content/uploads/2025/06/cruise-1.jpg",
+    "page_url": "https://subicbayyachtclub.ph/yacht-cruise/",
+    "what_it_shows": "Bow of a white yacht with a couple and two guests in white, with a railing and turquoise sea",
+    "width": 1620,
+    "height": 1080,
+    "is_hero_candidate": false,
+    "notes": "Subic Bay Yacht Club yacht cruise page. Location not confirmed from the photo."
+  }
+]

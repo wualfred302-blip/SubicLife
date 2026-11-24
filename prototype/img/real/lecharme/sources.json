@@ -1,0 +1,112 @@
+[
+  {
+    "file": "lecharme-01.jpg",
+    "source_url": "https://lecharmehotels.com/img/about.jpg",
+    "page_url": "https://lecharmehotels.com/",
+    "what_it_shows": "Exterior entrance of Le Charme Suites: white building with glass canopy over the doorway and the Le Charme sign, palm and shrubs at the side",
+    "width": 1268,
+    "height": 842,
+    "is_hero_candidate": false,
+    "notes": "Hotel's own site (about image, 1268x841). Hotel is on the 2nd floor of La Terraza, 1131 Palm St."
+  },
+  {
+    "file": "lecharme-02.jpg",
+    "source_url": "https://lecharmehotels.com/img/slider/slide_68d1660059bd0_1.jpg",
+    "page_url": "https://lecharmehotels.com/",
+    "what_it_shows": "Rooftop pool: blue pool with palm trees, lifeguard tower, and wooded hills and sea behind it",
+    "width": 1400,
+    "height": 688,
+    "is_hero_candidate": true,
+    "notes": "Hotel's own site homepage slider, 1400x687. Hero candidate and view shot."
+  },
+  {
+    "file": "lecharme-03.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/0223o12000l3ozaif1E45_R_960_660_R5_D.jpg",
+    "page_url": "https://us.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-10633610/le-charme-suites-subic/",
+    "what_it_shows": "Aerial view of the rooftop infinity pool with the Charme name in blue tile and potted palms at the corners",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel listing photo, 960x660."
+  },
+  {
+    "file": "lecharme-04.jpg",
+    "source_url": "https://ak-d.tripcdn.com/images/1mc5v12000j1twx781580_R_960_660_R5_D.jpg",
+    "page_url": "https://us.trip.com/hotels/subic-bay-freeport-zone-hotel-detail-10633610/le-charme-suites-subic/",
+    "what_it_shows": "Lobby lounge: cream and tan sofas, dark ceiling with pendant light, marble floor and a coffee table",
+    "width": 960,
+    "height": 660,
+    "is_hero_candidate": false,
+    "notes": "Trip.com hotel listing photo, 960x660. Listing photo, not confirmed by the hotel as the lobby."
+  },
+  {
+    "file": "lecharme-05.jpg",
+    "source_url": "https://lecharmehotels.com/img/rooms/room_4_1758184002_0.png",
+    "page_url": "https://lecharmehotels.com/room-details.php?id=4",
+    "what_it_shows": "Standard Room: one bed with white bedding and bedside lamps, cream and grey walls, dark wardrobe door",
+    "width": 1536,
+    "height": 1024,
+    "is_hero_candidate": false,
+    "notes": "Room type: Standard Room (28 sqm, sleeps 2)."
+  },
+  {
+    "file": "lecharme-06.jpg",
+    "source_url": "https://lecharmehotels.com/img/rooms/room_2_1758183690_0.png",
+    "page_url": "https://lecharmehotels.com/room-details.php?id=2",
+    "what_it_shows": "Deluxe King room: king bed with white bedding and upholstered headboard, two grey armchairs and a framed tree print",
+    "width": 1536,
+    "height": 1024,
+    "is_hero_candidate": false,
+    "notes": "Room type: Deluxe King (45 sqm, 1 bed)."
+  },
+  {
+    "file": "lecharme-07.jpg",
+    "source_url": "https://lecharmehotels.com/img/rooms/room_5_1758183771_0.jpg",
+    "page_url": "https://lecharmehotels.com/room-details.php?id=5",
+    "what_it_shows": "Deluxe Twin room: two beds with grey headboards and green and white bedding, dark-wood cabinet",
+    "width": 1536,
+    "height": 1024,
+    "is_hero_candidate": false,
+    "notes": "Room type: Deluxe Twin (45 sqm, 2 beds)."
+  },
+  {
+    "file": "lecharme-08.jpg",
+    "source_url": "https://lecharmehotels.com/img/rooms/room_1_1758183558_0.png",
+    "page_url": "https://lecharmehotels.com/room-details.php?id=1",
+    "what_it_shows": "Charme Suite: separate sitting area with blue sofa, striped cushions and patterned screen beside the bed",
+    "width": 1536,
+    "height": 1024,
+    "is_hero_candidate": false,
+    "notes": "Room type: Charme Suite (55 sqm, 1 bed, receiving area)."
+  },
+  {
+    "file": "lecharme-09.jpg",
+    "source_url": "https://lecharmehotels.com/img/rooms/room_3_1758183924_0.png",
+    "page_url": "https://lecharmehotels.com/room-details.php?id=3",
+    "what_it_shows": "Family Room: bed with white bedding, wall-mounted TV and a desk with chair (listing: 65 sqm, up to 7 guests, 3 beds)",
+    "width": 1536,
+    "height": 1024,
+    "is_hero_candidate": false,
+    "notes": "Room type: Family Room (65 sqm, 3 beds, up to 7 guests)."
+  },
+  {
+    "file": "lecharme-10.jpg",
+    "source_url": "https://lecharmehotels.com/img/amenities/amenity_12_1758260513.jpg",
+    "page_url": "https://lecharmehotels.com/amenity-details.php?id=12&slug=le-charm-caf",
+    "what_it_shows": "Le Charme Cafe: barista pouring coffee at a wood counter with yellow shelves of books behind",
+    "width": 1600,
+    "height": 1200,
+    "is_hero_candidate": false,
+    "notes": "Hotel's own site amenity page."
+  },
+  {
+    "file": "lecharme-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=w957sQ58zVk",
+    "page_url": "https://www.youtube.com/watch?v=w957sQ58zVk",
+    "what_it_shows": "Rooftop pool walkthrough: blue-tiled pool with palm trees, loungers and wooded hills, camera moving along the pool edge",
+    "width": 720,
+    "height": 406,
+    "is_hero_candidate": false,
+    "notes": "YouTube 'E6: LE CHARME SUITES - SUBIC! ROOM Tour and Review! Pool Party!' by R&R Travels (2020, 679 s). Clip 536-543 s has no captions. A person walks through the frame; the pool and view are the subject. Poster: lecharme-v1-poster.jpg. Size 0.44 MB."
+  }
+]

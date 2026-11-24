@@ -32,6 +32,6 @@ SubiclifeClone/
 # GSD planning docs stay local (commit_docs: false)
 .planning/
 
-# real partner photos/videos for the investor demo (not licensed, never commit)
-/prototype/img/real/
+# full-length source videos are too big for git (100 MB limit); re-download with img/real/welcome-src/RESTORE.md
+/prototype/img/real/welcome-src/*.mp4
 graphify-out/

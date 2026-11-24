@@ -1,0 +1,102 @@
+[
+  {
+    "file": "labanca-01.jpg",
+    "source_url": "https://labancacruisessubicbay.com/wp-content/uploads/2026/03/y4-1.webp",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "Four boats moored together in clear green water, with guests on deck.",
+    "width": 1600,
+    "height": 900,
+    "is_hero_candidate": true,
+    "notes": "Official La Banca Cruises site (WordPress upload). Hero candidate, 2016x1134. Address (labancacruises.com): WV Docks, Rizal Highway corner Burgos St, Subic Bay Freeport Zone. Two La Banca sites are listed: labancacruises.com (Wix) and labancacruisessubicbay.com (WordPress). Rates on the sites differ and need confirming."
+  },
+  {
+    "file": "labanca-02.jpg",
+    "source_url": "https://labancacruisessubicbay.com/wp-content/uploads/2026/03/AIDA-2.webp",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "Wheelhouse of the AIDA yacht: helm chair, instrument console and windows over the bow.",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": true,
+    "notes": "Official La Banca Cruises site (WordPress upload). AIDA is one of their named yachts."
+  },
+  {
+    "file": "labanca-03.jpg",
+    "source_url": "https://labancacruisessubicbay.com/wp-content/uploads/2026/03/y1-1.webp",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "Group of guests posing on the upper deck of a yacht with the sea behind them.",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": false,
+    "notes": "Official La Banca Cruises site (WordPress upload). People on board."
+  },
+  {
+    "file": "labanca-04.jpg",
+    "source_url": "https://labancacruisessubicbay.com/wp-content/uploads/2026/03/w9.webp",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "Group of guests at the edge of a yacht over blue water.",
+    "width": 960,
+    "height": 640,
+    "is_hero_candidate": false,
+    "notes": "Official La Banca Cruises site (WordPress upload). People on board."
+  },
+  {
+    "file": "labanca-05.jpg",
+    "source_url": "https://labancacruisessubicbay.com/wp-content/uploads/2026/03/w10.webp",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "Dinner table set with white flowers, plates and cutlery on a yacht deck.",
+    "width": 720,
+    "height": 960,
+    "is_hero_candidate": false,
+    "notes": "Portrait, 720 px wide (under the 800 px minimum, not a hero). Official site."
+  },
+  {
+    "file": "labanca-06.jpg",
+    "source_url": "https://labancacruisessubicbay.com/wp-content/uploads/2026/03/Barry-1.jpg",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "White yacht cruising on green water near the coast.",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": false,
+    "notes": "Official La Banca Cruises site (WordPress upload). The boat."
+  },
+  {
+    "file": "labanca-07.jpg",
+    "source_url": "https://labancacruisessubicbay.com/wp-content/uploads/2022/04/ASUNCION.webp",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "White yacht on blue water with guests standing on the upper deck.",
+    "width": 1020,
+    "height": 550,
+    "is_hero_candidate": false,
+    "notes": "Official La Banca Cruises site, named yacht ASUNCION."
+  },
+  {
+    "file": "labanca-08.jpg",
+    "source_url": "https://labancacruisessubicbay.com/wp-content/uploads/2026/03/4.jpeg",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "Passenger yacht against an orange sunset sky over the water.",
+    "width": 768,
+    "height": 1024,
+    "is_hero_candidate": false,
+    "notes": "Portrait, 768 px wide (under the 800 px minimum). Official site. Sunset view."
+  },
+  {
+    "file": "labanca-v1-poster.jpg",
+    "source_url": "https://www.youtube.com/watch?v=D9Eds1coiJ4&t=66s",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "Poster frame of the sunset deck.",
+    "width": 720,
+    "height": 358,
+    "is_hero_candidate": false,
+    "notes": "Frame at 1:06 of the same video, same crop."
+  },
+  {
+    "file": "labanca-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=D9Eds1coiJ4&t=64s",
+    "page_url": "https://labancacruisessubicbay.com/",
+    "what_it_shows": "Yacht deck at sunset, 7 s muted loop (3.5 s clip played forward and back), no captions.",
+    "width": 720,
+    "height": 358,
+    "is_hero_candidate": false,
+    "notes": "Cut from 1:04 to 1:08 of the La Banca Cruises channel video \"A sunset cruise with Andi Eigenmann\". The top banner is cropped. The video is a TV episode with a host, and the clip has no host in frame."
+  }
+]

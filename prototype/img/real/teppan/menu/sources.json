@@ -1,0 +1,82 @@
+[
+  {
+    "file": "menu-01.jpg",
+    "source_url": "https://menu02.restaurantguru.com/m7/menu-Restaurant-Teppan-101-1.jpg",
+    "page_url": "https://restaurantguru.com/Teppan-101-Subic-Bay-Freeport-Zone/menu",
+    "what_it_shows": "Salad and appetizer page with prices (seaweed, spicy tuna, edamame, gyoza, okonomiyaki).",
+    "width": 1132,
+    "height": 1600,
+    "year": "undated (site lists other versions as 2 to 9 years old, so likely 2023 to 2024)",
+    "notes": "Restaurant Guru user-added menu page, printed red-header style, prices incl. 12% VAT. Order: starters first."
+  },
+  {
+    "file": "menu-02.jpg",
+    "source_url": "https://menu02.restaurantguru.com/m7/menu-Teppan-101-Restaurant-1.jpg",
+    "page_url": "https://restaurantguru.com/Teppan-101-Subic-Bay-Freeport-Zone/menu",
+    "what_it_shows": "Teppanyaki page with prices (surf and turf P1,200, salmon, tiger prawn, beef yakiniku) and side dishes (chahan, fried rice, miso soup).",
+    "width": 1132,
+    "height": 1600,
+    "year": "undated (site lists other versions as 2 to 9 years old, so likely 2023 to 2024)",
+    "notes": "Restaurant Guru user-added menu page. This is the core teppanyaki menu."
+  },
+  {
+    "file": "menu-03.jpg",
+    "source_url": "https://menu02.restaurantguru.com/m7/menu-Subic-Bay-Freeport-Zone-Teppan-101.jpg",
+    "page_url": "https://restaurantguru.com/Teppan-101-Subic-Bay-Freeport-Zone/menu",
+    "what_it_shows": "Ramen page with prices (Volcano, Seafood, Shoyu, Tonkatsu, Miso, Tantanmen ramen).",
+    "width": 1132,
+    "height": 1600,
+    "year": "undated (site lists other versions as 2 to 9 years old, so likely 2023 to 2024)",
+    "notes": "Restaurant Guru user-added menu page."
+  },
+  {
+    "file": "menu-04.jpg",
+    "source_url": "https://menu02.restaurantguru.com/m7/menu-Restaurant-Teppan-101-h7e-2.jpg",
+    "page_url": "https://restaurantguru.com/Teppan-101-Subic-Bay-Freeport-Zone/menu",
+    "what_it_shows": "Bento page with prices (chicken teriyaki, sushi bento, pork tonkatsu, mangouche, beef yakiniku, chicken karaage bento).",
+    "width": 1132,
+    "height": 1600,
+    "year": "undated (site lists other versions as 2 to 9 years old, so likely 2023 to 2024)",
+    "notes": "Restaurant Guru user-added menu page."
+  },
+  {
+    "file": "menu-05.jpg",
+    "source_url": "https://menu02.restaurantguru.com/m7/Teppan-101-menu.jpg",
+    "page_url": "https://restaurantguru.com/Teppan-101-Subic-Bay-Freeport-Zone/menu",
+    "what_it_shows": "Sashimi page with prices (tuna P420, salmon P630, ika, ebi, lapu-lapu, shimesaba, unagi).",
+    "width": 1132,
+    "height": 1600,
+    "year": "undated (site lists other versions as 2 to 9 years old, so likely 2023 to 2024)",
+    "notes": "Restaurant Guru user-added menu page."
+  },
+  {
+    "file": "menu-06.jpg",
+    "source_url": "https://menu02.restaurantguru.com/m7/Teppan-101-Subic-Bay-Freeport-Zone-menu-1.jpg",
+    "page_url": "https://restaurantguru.com/Teppan-101-Subic-Bay-Freeport-Zone/menu",
+    "what_it_shows": "Nigiri page with prices (salmon P270, tuna P200, ebi, unagi, tamago, kani).",
+    "width": 1132,
+    "height": 1600,
+    "year": "undated (site lists other versions as 2 to 9 years old, so likely 2023 to 2024)",
+    "notes": "Restaurant Guru user-added menu page."
+  },
+  {
+    "file": "menu-07.jpg",
+    "source_url": "https://menu02.restaurantguru.com/m7/Teppan-101-Subic-Bay-Freeport-Zone-menu.jpg",
+    "page_url": "https://restaurantguru.com/Teppan-101-Subic-Bay-Freeport-Zone/menu",
+    "what_it_shows": "Maki roll page with prices (salmon maki P260, tuna maki P249, spicy salmon, California, futo maki).",
+    "width": 1132,
+    "height": 1600,
+    "year": "undated (site lists other versions as 2 to 9 years old, so likely 2023 to 2024)",
+    "notes": "Restaurant Guru user-added menu page."
+  },
+  {
+    "file": "menu-08.jpg",
+    "source_url": "https://menu02.restaurantguru.com/m7/menu-Teppan-101-Subic-Bay-Freeport-Zone.jpg",
+    "page_url": "https://restaurantguru.com/Teppan-101-Subic-Bay-Freeport-Zone/menu",
+    "what_it_shows": "Drinks page with prices (sake, cocktails, bottled water, sodas, beer in can, beer bottle, shakes).",
+    "width": 1132,
+    "height": 1600,
+    "year": "undated (site lists other versions as 2 to 9 years old, so likely 2023 to 2024)",
+    "notes": "Restaurant Guru user-added menu page. Final page of the menu."
+  }
+]

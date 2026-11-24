@@ -1,0 +1,102 @@
+[
+  {
+    "file": "sands-01.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_e67a599337d64dcba80dac186aaee551~mv2_d_2048_1365_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Wide view of the Sands Resto Grill dining room with white-clothed round tables and wooden chairs.",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": true,
+    "notes": "Official Lighthouse Marina Resort dining page (Wix media). The restaurant is on the ground floor of the resort. Address (Yelp and Tripadvisor listings, and the official Lighthouse dining page): inside The Lighthouse Marina Resort, Block 4 Lot 1, Waterfront Road, Moonbay Marina Complex, Subic Bay Freeport Zone. Postal code differs by listing (2209 vs 2222). Phone +63 47 252 5000."
+  },
+  {
+    "file": "sands-02.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_1e8fe39353f24025a9d06ab6f2caabff~mv2_d_2048_1365_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Four Sands staff in blue uniforms standing in the dining room, the Sands sign behind them.",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": false,
+    "notes": "Official Lighthouse dining page (Wix media)."
+  },
+  {
+    "file": "sands-03.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_66d9e2c6b2f043efba3693c2384345d1~mv2_d_2048_1365_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Waiter in a blue shirt setting a table, the lit Sands Resto Grill sign behind him.",
+    "width": 1600,
+    "height": 1066,
+    "is_hero_candidate": false,
+    "notes": "Official Lighthouse dining page (Wix media)."
+  },
+  {
+    "file": "sands-04.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_84de5371e9a644c0a37a74bb6eea6c48~mv2_d_1360_2048_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Waitress in a blue uniform carrying a tray, with the Sands wall sign behind her.",
+    "width": 1360,
+    "height": 2048,
+    "is_hero_candidate": false,
+    "notes": "Portrait image. Official Lighthouse dining page (Wix media)."
+  },
+  {
+    "file": "sands-05.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_2a81f4a2b9e54ce2a4621c7ac9d1f0fa~mv2_d_3360_1804_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Grilled meat skewers with onion, bell pepper and lemon on a white platter.",
+    "width": 1600,
+    "height": 860,
+    "is_hero_candidate": false,
+    "notes": "Dish from the official Lighthouse dining page (Wix media)."
+  },
+  {
+    "file": "sands-06.jpg",
+    "source_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/3f/75/d1/sands-resto-grill.jpg?w=1600&h=1000&s=1",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Tall stack of grilled skewers with salad and dips on a wooden table.",
+    "width": 1125,
+    "height": 1000,
+    "is_hero_candidate": false,
+    "notes": "Tripadvisor listing photo for Sands Resto Grill. Dish is not sign-verified."
+  },
+  {
+    "file": "sands-07.jpg",
+    "source_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/5c/3a/da/view-from-the-restaurant.jpg?w=1600&h=1000&s=1",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "View from the restaurant: tables and chairs under palm trees, looking over the marina water.",
+    "width": 1600,
+    "height": 1000,
+    "is_hero_candidate": true,
+    "notes": "Tripadvisor listing photo titled \"view from the restaurant\". The view shot."
+  },
+  {
+    "file": "sands-08.jpg",
+    "source_url": "https://static.wixstatic.com/media/7c5eba_2463982130ac4768be64bcfd85b80150~mv2_d_2762_2100_s_2.jpg",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Aerial view of The Lighthouse Marina Resort: the hotel building, pool and lighthouse tower on the waterfront.",
+    "width": 1600,
+    "height": 1216,
+    "is_hero_candidate": false,
+    "notes": "Building exterior, not the restaurant entrance. Sands Resto Grill is on the ground floor of this resort. A real storefront photo is still missing."
+  },
+  {
+    "file": "sands-v1-poster.jpg",
+    "source_url": "https://www.youtube.com/watch?v=zQt80qMAJCE&t=33s",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Poster frame from the buffet clip.",
+    "width": 720,
+    "height": 422,
+    "is_hero_candidate": false,
+    "notes": "Frame at 0:33 of the 2015 TV feature, same crop as the clip."
+  },
+  {
+    "file": "sands-v1.mp4",
+    "source_url": "https://www.youtube.com/watch?v=zQt80qMAJCE&t=31s",
+    "page_url": "https://www.lighthousesubic.com/dining",
+    "what_it_shows": "Buffet counter under the Sands sign, 7 s muted loop (3.5 s clip played forward and back).",
+    "width": 720,
+    "height": 422,
+    "is_hero_candidate": false,
+    "notes": "Cut from 0:31 to 0:34.5 of a 2015 TV feature on the Lighthouse Marina Resort Sands buffet. Top banner cropped and the bottom-left TV logo removed with delogo."
+  }
+]
